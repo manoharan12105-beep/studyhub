@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "categories.schema.json",
+  "title": "StudyHub category registry",
+  "description": "metadata/categories.json — the list of top-level categories the app shows. Adding a category = adding an entry here plus its catalog file.",
+  "type": "object",
+  "required": ["schemaVersion", "categories"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "categories": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/category" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "kebab-case identifier; also the folder name under content/."
+    },
+    "category": {
+      "type": "object",
+      "required": ["id", "title", "description", "order", "catalog", "subcategories"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "order": { "type": "integer", "minimum": 1, "description": "Display order on the dashboard." },
+        "icon": {
+          "type": ["string", "null"],
+          "description": "Relative path to an icon under assets/icons/, or null for the app default."
+        },
+        "catalog": {
+          "type": "string",
+          "pattern": "^metadata/topics/[a-z0-9-]+\\.json$",
+          "description": "Relative path (from the repo root) to this category's topic catalog."
+        },
+        "subcategories": {
+          "type": "array",
+          "description": "Optional grouping level. Empty array = topics sit directly under content/<category>/.",
+          "items": { "$ref": "#/$defs/subcategory" }
+        },
+        "studyModes": {
+          "type": "array",
+          "description": "Optional category-level study modes shown next to 'Learn' (which is always the topic list). Each mode combines several Markdown source files into one user-facing view.",
+          "items": { "$ref": "#/$defs/studyMode" }
+        }
+      }
+    },
+    "studyMode": {
+      "type": "object",
+      "required": ["id", "title", "description", "sources"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1, "description": "User-facing name, e.g. 'Revision'." },
+        "description": { "type": "string", "minLength": 1 },
+        "estimatedMinutes": { "type": "integer", "minimum": 1 },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Markdown files shown as sections of this mode, in this order.",
+          "items": {
+            "type": "object",
+            "required": ["path", "title"],
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^content/[a-z0-9-]+/revision/[a-z0-9-]+\\.md$",
+                "description": "Relative path from the repo root. Lives in the category's reserved revision/ folder."
+              },
+              "title": { "type": "string", "minLength": 1, "description": "Section title shown in the app (tab/anchor label)." }
+            }
+          }
+        }
+      }
+    },
+    "subcategory": {
+      "type": "object",
+      "required": ["id", "title", "order"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "order": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

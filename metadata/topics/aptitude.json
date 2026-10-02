@@ -1,0 +1,1708 @@
+{
+  "$schema": "../schemas/topics.schema.json",
+  "schemaVersion": 1,
+  "category": "aptitude",
+  "topics": [
+    {
+      "id": "number-system",
+      "slug": "number-system",
+      "title": "Number System",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Types of numbers, divisibility rules, factors and multiples, HCF and LCM, remainders and unit digits.",
+      "difficulty": "intermediate",
+      "tags": [
+        "number-system",
+        "divisibility",
+        "factors",
+        "hcf-lcm",
+        "remainders",
+        "unit-digit"
+      ],
+      "estimatedMinutes": 120,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "mathematical-shortcuts",
+        "algebra"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "unit-digit-cycles",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "percentages",
+      "slug": "percentages",
+      "title": "Percentages",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Percentage of a number, percentage change, successive changes, growth, depreciation and expenditure problems.",
+      "difficulty": "beginner",
+      "tags": [
+        "percentages",
+        "percentage-change",
+        "successive-change"
+      ],
+      "estimatedMinutes": 75,
+      "order": 2,
+      "prerequisites": [],
+      "relatedTopics": [
+        "profit-loss-discount",
+        "simple-interest",
+        "compound-interest",
+        "data-interpretation"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "percentage-bar-model",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "profit-loss-discount",
+      "slug": "profit-loss-discount",
+      "title": "Profit, Loss and Discount",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Cost, selling and marked prices, profit and loss percentages, discounts, markups and dishonest dealers.",
+      "difficulty": "beginner",
+      "tags": [
+        "profit-loss",
+        "discount",
+        "markup"
+      ],
+      "estimatedMinutes": 75,
+      "order": 3,
+      "prerequisites": [
+        "percentages"
+      ],
+      "relatedTopics": [
+        "mixtures-and-alligation"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "ratio-and-proportion",
+      "slug": "ratio-and-proportion",
+      "title": "Ratio and Proportion",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Ratios, combining ratios, proportions, direct and inverse proportion, and ratio word problems.",
+      "difficulty": "beginner",
+      "tags": [
+        "ratio",
+        "proportion"
+      ],
+      "estimatedMinutes": 60,
+      "order": 4,
+      "prerequisites": [],
+      "relatedTopics": [
+        "problems-on-ages",
+        "mixtures-and-alligation",
+        "averages"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "ratio-bar-model",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "averages",
+      "slug": "averages",
+      "title": "Averages",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Averages, weighted averages, and the effect of adding, removing or replacing items.",
+      "difficulty": "beginner",
+      "tags": [
+        "averages",
+        "weighted-average"
+      ],
+      "estimatedMinutes": 50,
+      "order": 5,
+      "prerequisites": [],
+      "relatedTopics": [
+        "mixtures-and-alligation",
+        "ratio-and-proportion"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "problems-on-ages",
+      "slug": "problems-on-ages",
+      "title": "Problems on Ages",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Age relationships across time solved with equations, ratios and constant age differences.",
+      "difficulty": "beginner",
+      "tags": [
+        "ages",
+        "linear-equations"
+      ],
+      "estimatedMinutes": 45,
+      "order": 6,
+      "prerequisites": [
+        "ratio-and-proportion"
+      ],
+      "relatedTopics": [
+        "algebra",
+        "averages"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "mixtures-and-alligation",
+      "slug": "mixtures-and-alligation",
+      "title": "Mixtures and Alligation",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Mixing ingredients, the alligation rule, mixtures of mixtures and repeated replacement.",
+      "difficulty": "intermediate",
+      "tags": [
+        "mixtures",
+        "alligation",
+        "weighted-average"
+      ],
+      "estimatedMinutes": 60,
+      "order": 7,
+      "prerequisites": [
+        "averages",
+        "ratio-and-proportion"
+      ],
+      "relatedTopics": [
+        "profit-loss-discount",
+        "simple-interest"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "alligation-cross",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "simple-interest",
+      "slug": "simple-interest",
+      "title": "Simple Interest",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Simple interest and amount, finding principal, rate and time, and sums lent at different rates.",
+      "difficulty": "beginner",
+      "tags": [
+        "simple-interest",
+        "interest"
+      ],
+      "estimatedMinutes": 45,
+      "order": 8,
+      "prerequisites": [
+        "percentages"
+      ],
+      "relatedTopics": [
+        "compound-interest"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "interest-growth-chart",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "compound-interest",
+      "slug": "compound-interest",
+      "title": "Compound Interest",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Compound interest, compounding periods, the CI–SI difference, growth multiples and instalments.",
+      "difficulty": "intermediate",
+      "tags": [
+        "compound-interest",
+        "interest",
+        "growth"
+      ],
+      "estimatedMinutes": 60,
+      "order": 9,
+      "prerequisites": [
+        "simple-interest",
+        "percentages"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "interest-growth-chart",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "time-and-work",
+      "slug": "time-and-work",
+      "title": "Time and Work",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Work rates and efficiency, man-days, pipes and cisterns, and sharing wages by work done.",
+      "difficulty": "intermediate",
+      "tags": [
+        "time-and-work",
+        "efficiency",
+        "pipes-and-cisterns",
+        "work-and-wages"
+      ],
+      "estimatedMinutes": 90,
+      "order": 10,
+      "prerequisites": [
+        "ratio-and-proportion"
+      ],
+      "relatedTopics": [
+        "time-speed-distance"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "work-units-timeline",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "time-speed-distance",
+      "slug": "time-speed-distance",
+      "title": "Time, Speed and Distance",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Speed and average speed, relative speed, trains, boats and streams, and races.",
+      "difficulty": "intermediate",
+      "tags": [
+        "speed",
+        "relative-speed",
+        "trains",
+        "boats-and-streams",
+        "races"
+      ],
+      "estimatedMinutes": 120,
+      "order": 11,
+      "prerequisites": [
+        "ratio-and-proportion"
+      ],
+      "relatedTopics": [
+        "time-and-work",
+        "clocks"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "relative-motion-track",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "permutation-and-combination",
+      "slug": "permutation-and-combination",
+      "title": "Permutation and Combination",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Counting principles, arrangements, selections, circular arrangements and restrictions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "permutation",
+        "combination",
+        "counting"
+      ],
+      "estimatedMinutes": 90,
+      "order": 12,
+      "prerequisites": [],
+      "relatedTopics": [
+        "probability"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "arrangement-builder",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "probability",
+      "slug": "probability",
+      "title": "Probability",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Probability with coins, dice, cards and selections using the addition, multiplication and complement rules.",
+      "difficulty": "intermediate",
+      "tags": [
+        "probability"
+      ],
+      "estimatedMinutes": 75,
+      "order": 13,
+      "prerequisites": [
+        "permutation-and-combination"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "sample-space-explorer",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "algebra",
+      "slug": "algebra",
+      "title": "Algebra",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Linear equations, quadratic equations, algebraic identities and inequalities.",
+      "difficulty": "intermediate",
+      "tags": [
+        "algebra",
+        "linear-equations",
+        "quadratic-equations",
+        "identities",
+        "inequalities"
+      ],
+      "estimatedMinutes": 120,
+      "order": 14,
+      "prerequisites": [],
+      "relatedTopics": [
+        "problems-on-ages",
+        "mathematical-shortcuts"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "geometry",
+      "slug": "geometry",
+      "title": "Geometry",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Lines and angles, triangles, polygons, quadrilaterals, circles and coordinate geometry basics.",
+      "difficulty": "intermediate",
+      "tags": [
+        "geometry",
+        "triangles",
+        "circles",
+        "polygons"
+      ],
+      "estimatedMinutes": 90,
+      "order": 15,
+      "prerequisites": [],
+      "relatedTopics": [
+        "mensuration"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "mensuration",
+      "slug": "mensuration",
+      "title": "Mensuration",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Perimeter and area of 2D shapes; surface area and volume of 3D solids.",
+      "difficulty": "intermediate",
+      "tags": [
+        "mensuration",
+        "area",
+        "volume"
+      ],
+      "estimatedMinutes": 90,
+      "order": 16,
+      "prerequisites": [
+        "geometry"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "data-interpretation",
+      "slug": "data-interpretation",
+      "title": "Data Interpretation",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Reading and calculating from tables, bar graphs, line graphs, pie charts and caselets.",
+      "difficulty": "intermediate",
+      "tags": [
+        "data-interpretation",
+        "charts",
+        "tables",
+        "caselet"
+      ],
+      "estimatedMinutes": 90,
+      "order": 17,
+      "prerequisites": [
+        "percentages",
+        "ratio-and-proportion",
+        "averages"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "di-chart-explorer",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "mathematical-shortcuts",
+      "slug": "mathematical-shortcuts",
+      "title": "Mathematical Shortcuts",
+      "category": "aptitude",
+      "subcategory": "quantitative-aptitude",
+      "type": "aptitude",
+      "description": "Fast multiplication, squaring, square roots, simplification, digit-sum checks and approximation.",
+      "difficulty": "beginner",
+      "tags": [
+        "shortcuts",
+        "mental-math",
+        "simplification",
+        "approximation"
+      ],
+      "estimatedMinutes": 60,
+      "order": 18,
+      "prerequisites": [],
+      "relatedTopics": [
+        "number-system",
+        "algebra"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "number-series",
+      "slug": "number-series",
+      "title": "Number Series",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Finding the rule in number sequences: differences, ratios, powers, alternating and wrong-term series.",
+      "difficulty": "beginner",
+      "tags": [
+        "series",
+        "number-series"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "alphabet-series",
+        "alphanumeric-series"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "alphabet-series",
+      "slug": "alphabet-series",
+      "title": "Alphabet Series",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Letter sequences based on alphabet positions, gaps, letter groups and reversals.",
+      "difficulty": "beginner",
+      "tags": [
+        "series",
+        "alphabet-series"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [],
+      "relatedTopics": [
+        "number-series",
+        "coding-decoding"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "alphanumeric-series",
+      "slug": "alphanumeric-series",
+      "title": "Alphanumeric Series",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Combined letter–number series, and position and counting questions on mixed arrangements.",
+      "difficulty": "intermediate",
+      "tags": [
+        "series",
+        "alphanumeric"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "alphabet-series",
+        "number-series"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "coding-decoding",
+      "slug": "coding-decoding",
+      "title": "Coding-Decoding",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Letter shifts, reversals, opposite letters, substitution codes and sentence coding.",
+      "difficulty": "intermediate",
+      "tags": [
+        "coding-decoding"
+      ],
+      "estimatedMinutes": 50,
+      "order": 4,
+      "prerequisites": [
+        "alphabet-series"
+      ],
+      "relatedTopics": [
+        "analogy"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "blood-relations",
+      "slug": "blood-relations",
+      "title": "Blood Relations",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Family relationships from statements, photographs and coded symbols.",
+      "difficulty": "intermediate",
+      "tags": [
+        "blood-relations",
+        "family-tree"
+      ],
+      "estimatedMinutes": 50,
+      "order": 5,
+      "prerequisites": [],
+      "relatedTopics": [
+        "puzzles"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "family-tree-builder",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "direction-sense",
+      "slug": "direction-sense",
+      "title": "Direction Sense",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Paths, turns, angles, distance from the start and shadow-based direction questions.",
+      "difficulty": "beginner",
+      "tags": [
+        "directions"
+      ],
+      "estimatedMinutes": 40,
+      "order": 6,
+      "prerequisites": [],
+      "relatedTopics": [
+        "seating-arrangement"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "direction-tracer",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "ranking-and-order",
+      "slug": "ranking-and-order",
+      "title": "Ranking and Order",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Positions from both ends, people between, swaps, minimum totals and comparison chains.",
+      "difficulty": "beginner",
+      "tags": [
+        "ranking",
+        "order",
+        "comparison"
+      ],
+      "estimatedMinutes": 40,
+      "order": 7,
+      "prerequisites": [],
+      "relatedTopics": [
+        "seating-arrangement",
+        "puzzles"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "analogy",
+      "slug": "analogy",
+      "title": "Analogy",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Word, number and letter analogies based on precise relationships.",
+      "difficulty": "beginner",
+      "tags": [
+        "analogy"
+      ],
+      "estimatedMinutes": 35,
+      "order": 8,
+      "prerequisites": [],
+      "relatedTopics": [
+        "classification",
+        "odd-one-out"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "classification",
+      "slug": "classification",
+      "title": "Classification",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Grouping words, numbers and letters by their most specific shared property.",
+      "difficulty": "beginner",
+      "tags": [
+        "classification"
+      ],
+      "estimatedMinutes": 30,
+      "order": 9,
+      "prerequisites": [],
+      "relatedTopics": [
+        "odd-one-out",
+        "analogy"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "odd-one-out",
+      "slug": "odd-one-out",
+      "title": "Odd One Out",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Finding the item that breaks the property shared by all the others.",
+      "difficulty": "beginner",
+      "tags": [
+        "odd-one-out",
+        "classification"
+      ],
+      "estimatedMinutes": 30,
+      "order": 10,
+      "prerequisites": [],
+      "relatedTopics": [
+        "classification",
+        "analogy"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "syllogisms",
+      "slug": "syllogisms",
+      "title": "Syllogisms",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Deductive conclusions from 'all', 'some' and 'no' statements using Venn diagrams.",
+      "difficulty": "intermediate",
+      "tags": [
+        "syllogisms",
+        "deduction",
+        "venn-diagrams"
+      ],
+      "estimatedMinutes": 75,
+      "order": 11,
+      "prerequisites": [],
+      "relatedTopics": [
+        "logical-venn-diagrams",
+        "statement-and-conclusion"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "venn-builder",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "statement-and-conclusion",
+      "slug": "statement-and-conclusion",
+      "title": "Statement and Conclusion",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Deciding which conclusions follow logically from a given statement.",
+      "difficulty": "intermediate",
+      "tags": [
+        "critical-reasoning",
+        "conclusions"
+      ],
+      "estimatedMinutes": 45,
+      "order": 12,
+      "prerequisites": [],
+      "relatedTopics": [
+        "statement-and-assumption",
+        "syllogisms"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "statement-and-assumption",
+      "slug": "statement-and-assumption",
+      "title": "Statement and Assumption",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Identifying the unstated assumptions that a statement takes for granted.",
+      "difficulty": "intermediate",
+      "tags": [
+        "critical-reasoning",
+        "assumptions"
+      ],
+      "estimatedMinutes": 45,
+      "order": 13,
+      "prerequisites": [],
+      "relatedTopics": [
+        "statement-and-conclusion",
+        "cause-and-effect"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "cause-and-effect",
+      "slug": "cause-and-effect",
+      "title": "Cause and Effect",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Deciding whether two events are cause and effect, effects of a common cause, or unrelated.",
+      "difficulty": "intermediate",
+      "tags": [
+        "critical-reasoning",
+        "cause-and-effect"
+      ],
+      "estimatedMinutes": 35,
+      "order": 14,
+      "prerequisites": [],
+      "relatedTopics": [
+        "statement-and-assumption"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "seating-arrangement",
+      "slug": "seating-arrangement",
+      "title": "Seating Arrangement",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Linear and circular seating puzzles with left–right rules for different facing directions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "seating-arrangement",
+        "linear",
+        "circular",
+        "arrangement"
+      ],
+      "estimatedMinutes": 75,
+      "order": 15,
+      "prerequisites": [],
+      "relatedTopics": [
+        "puzzles",
+        "ranking-and-order",
+        "direction-sense"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "seating-arrangement-builder",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "puzzles",
+      "slug": "puzzles",
+      "title": "Puzzles",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Floor, scheduling and attribute-matching puzzles solved with grids and elimination.",
+      "difficulty": "advanced",
+      "tags": [
+        "puzzles",
+        "arrangement",
+        "elimination-grid"
+      ],
+      "estimatedMinutes": 90,
+      "order": 16,
+      "prerequisites": [
+        "seating-arrangement"
+      ],
+      "relatedTopics": [
+        "blood-relations",
+        "ranking-and-order"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "puzzle-elimination-grid",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "data-sufficiency",
+      "slug": "data-sufficiency",
+      "title": "Data Sufficiency",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Deciding whether the given statements are enough to answer a question.",
+      "difficulty": "intermediate",
+      "tags": [
+        "data-sufficiency"
+      ],
+      "estimatedMinutes": 50,
+      "order": 17,
+      "prerequisites": [],
+      "relatedTopics": [
+        "algebra"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "clocks",
+      "slug": "clocks",
+      "title": "Clocks",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Angles between clock hands, coinciding and opposite hands, mirror images and fast or slow clocks.",
+      "difficulty": "intermediate",
+      "tags": [
+        "clocks",
+        "angles"
+      ],
+      "estimatedMinutes": 50,
+      "order": 18,
+      "prerequisites": [],
+      "relatedTopics": [
+        "calendars",
+        "time-speed-distance"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "clock-angle",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "calendars",
+      "slug": "calendars",
+      "title": "Calendars",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Odd days, leap years, the day of the week for any date and repeating calendars.",
+      "difficulty": "intermediate",
+      "tags": [
+        "calendars",
+        "odd-days"
+      ],
+      "estimatedMinutes": 50,
+      "order": 19,
+      "prerequisites": [],
+      "relatedTopics": [
+        "clocks"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "logical-venn-diagrams",
+      "slug": "logical-venn-diagrams",
+      "title": "Logical Venn Diagrams",
+      "category": "aptitude",
+      "subcategory": "logical-reasoning",
+      "type": "aptitude",
+      "description": "Representing relationships between classes and counting regions in Venn diagrams.",
+      "difficulty": "intermediate",
+      "tags": [
+        "venn-diagrams",
+        "sets"
+      ],
+      "estimatedMinutes": 45,
+      "order": 20,
+      "prerequisites": [],
+      "relatedTopics": [
+        "syllogisms"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": "venn-builder",
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "parts-of-speech",
+      "slug": "parts-of-speech",
+      "title": "Parts of Speech",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "The eight parts of speech and how a word's role in the sentence decides its type.",
+      "difficulty": "beginner",
+      "tags": [
+        "grammar",
+        "parts-of-speech"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "sentence-correction"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "subject-verb-agreement",
+      "slug": "subject-verb-agreement",
+      "title": "Subject-Verb Agreement",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Matching verbs to their subjects, including compound subjects, indefinite pronouns and collective nouns.",
+      "difficulty": "beginner",
+      "tags": [
+        "grammar",
+        "agreement"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "parts-of-speech"
+      ],
+      "relatedTopics": [
+        "error-spotting",
+        "sentence-correction"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "tenses",
+      "slug": "tenses",
+      "title": "Tenses",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "The twelve tenses, time signals, stative verbs, future time clauses and conditionals.",
+      "difficulty": "intermediate",
+      "tags": [
+        "grammar",
+        "tenses",
+        "conditionals"
+      ],
+      "estimatedMinutes": 60,
+      "order": 3,
+      "prerequisites": [],
+      "relatedTopics": [
+        "direct-and-indirect-speech",
+        "active-and-passive-voice"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "articles",
+      "slug": "articles",
+      "title": "Articles",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Choosing a, an, the or no article by sound, specificity and fixed usage.",
+      "difficulty": "beginner",
+      "tags": [
+        "grammar",
+        "articles"
+      ],
+      "estimatedMinutes": 35,
+      "order": 4,
+      "prerequisites": [],
+      "relatedTopics": [
+        "error-spotting"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "prepositions",
+      "slug": "prepositions",
+      "title": "Prepositions",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Time and place prepositions, confused pairs and fixed prepositions with common words.",
+      "difficulty": "intermediate",
+      "tags": [
+        "grammar",
+        "prepositions"
+      ],
+      "estimatedMinutes": 45,
+      "order": 5,
+      "prerequisites": [],
+      "relatedTopics": [
+        "error-spotting"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "pronouns",
+      "slug": "pronouns",
+      "title": "Pronouns",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Pronoun case, who and whom, agreement with antecedents and reflexive pronouns.",
+      "difficulty": "intermediate",
+      "tags": [
+        "grammar",
+        "pronouns"
+      ],
+      "estimatedMinutes": 40,
+      "order": 6,
+      "prerequisites": [],
+      "relatedTopics": [
+        "subject-verb-agreement",
+        "error-spotting"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "conjunctions",
+      "slug": "conjunctions",
+      "title": "Conjunctions",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Choosing conjunctions by logic, correlative pairs and avoiding doubled conjunctions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "grammar",
+        "conjunctions"
+      ],
+      "estimatedMinutes": 40,
+      "order": 7,
+      "prerequisites": [],
+      "relatedTopics": [
+        "sentence-completion",
+        "error-spotting"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "active-and-passive-voice",
+      "slug": "active-and-passive-voice",
+      "title": "Active and Passive Voice",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Converting between active and passive voice across tenses, questions and commands.",
+      "difficulty": "intermediate",
+      "tags": [
+        "grammar",
+        "voice"
+      ],
+      "estimatedMinutes": 45,
+      "order": 8,
+      "prerequisites": [
+        "tenses"
+      ],
+      "relatedTopics": [
+        "direct-and-indirect-speech"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "direct-and-indirect-speech",
+      "slug": "direct-and-indirect-speech",
+      "title": "Direct and Indirect Speech",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Reporting statements, questions, commands and requests with tense, pronoun and time-word changes.",
+      "difficulty": "intermediate",
+      "tags": [
+        "grammar",
+        "reported-speech"
+      ],
+      "estimatedMinutes": 50,
+      "order": 9,
+      "prerequisites": [
+        "tenses"
+      ],
+      "relatedTopics": [
+        "active-and-passive-voice"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "sentence-correction",
+      "slug": "sentence-correction",
+      "title": "Sentence Correction",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Choosing the best correction for a highlighted part using the common error types.",
+      "difficulty": "intermediate",
+      "tags": [
+        "usage",
+        "sentence-correction"
+      ],
+      "estimatedMinutes": 50,
+      "order": 10,
+      "prerequisites": [
+        "subject-verb-agreement",
+        "tenses"
+      ],
+      "relatedTopics": [
+        "error-spotting"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "error-spotting",
+      "slug": "error-spotting",
+      "title": "Error Spotting",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Finding the erroneous part of a sentence with a fixed grammar checklist.",
+      "difficulty": "intermediate",
+      "tags": [
+        "usage",
+        "error-spotting"
+      ],
+      "estimatedMinutes": 50,
+      "order": 11,
+      "prerequisites": [
+        "subject-verb-agreement",
+        "tenses",
+        "articles",
+        "prepositions"
+      ],
+      "relatedTopics": [
+        "sentence-correction"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "fill-in-the-blanks",
+      "slug": "fill-in-the-blanks",
+      "title": "Fill in the Blanks",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Choosing words that fit context clues of contrast, cause, support and degree.",
+      "difficulty": "beginner",
+      "tags": [
+        "vocabulary",
+        "context"
+      ],
+      "estimatedMinutes": 35,
+      "order": 12,
+      "prerequisites": [],
+      "relatedTopics": [
+        "sentence-completion",
+        "vocabulary-building"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "sentence-completion",
+      "slug": "sentence-completion",
+      "title": "Sentence Completion",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Completing sentences logically and grammatically from connectives and fixed patterns.",
+      "difficulty": "intermediate",
+      "tags": [
+        "usage",
+        "logic"
+      ],
+      "estimatedMinutes": 35,
+      "order": 13,
+      "prerequisites": [
+        "conjunctions"
+      ],
+      "relatedTopics": [
+        "fill-in-the-blanks"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "synonyms",
+      "slug": "synonyms",
+      "title": "Synonyms",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Finding words closest in meaning using definitions, roots and context.",
+      "difficulty": "beginner",
+      "tags": [
+        "vocabulary",
+        "synonyms"
+      ],
+      "estimatedMinutes": 35,
+      "order": 14,
+      "prerequisites": [],
+      "relatedTopics": [
+        "antonyms",
+        "vocabulary-building"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "antonyms",
+      "slug": "antonyms",
+      "title": "Antonyms",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Finding words opposite in meaning while avoiding synonym traps.",
+      "difficulty": "beginner",
+      "tags": [
+        "vocabulary",
+        "antonyms"
+      ],
+      "estimatedMinutes": 35,
+      "order": 15,
+      "prerequisites": [],
+      "relatedTopics": [
+        "synonyms",
+        "vocabulary-building"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "one-word-substitution",
+      "slug": "one-word-substitution",
+      "title": "One Word Substitution",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Replacing descriptions with precise single words using common roots.",
+      "difficulty": "intermediate",
+      "tags": [
+        "vocabulary",
+        "one-word-substitution"
+      ],
+      "estimatedMinutes": 40,
+      "order": 16,
+      "prerequisites": [],
+      "relatedTopics": [
+        "vocabulary-building"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "idioms-and-phrases",
+      "slug": "idioms-and-phrases",
+      "title": "Idioms and Phrases",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Meanings of common idioms and how to read unfamiliar ones from context.",
+      "difficulty": "intermediate",
+      "tags": [
+        "vocabulary",
+        "idioms"
+      ],
+      "estimatedMinutes": 40,
+      "order": 17,
+      "prerequisites": [],
+      "relatedTopics": [
+        "vocabulary-building"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "para-jumbles",
+      "slug": "para-jumbles",
+      "title": "Para Jumbles",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Ordering sentences into coherent paragraphs using openings and mandatory pairs.",
+      "difficulty": "intermediate",
+      "tags": [
+        "para-jumbles",
+        "reading"
+      ],
+      "estimatedMinutes": 45,
+      "order": 18,
+      "prerequisites": [],
+      "relatedTopics": [
+        "reading-comprehension"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "reading-comprehension",
+      "slug": "reading-comprehension",
+      "title": "Reading Comprehension",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Answering main idea, detail, inference, vocabulary, tone and title questions from passages.",
+      "difficulty": "intermediate",
+      "tags": [
+        "reading-comprehension",
+        "reading"
+      ],
+      "estimatedMinutes": 75,
+      "order": 19,
+      "prerequisites": [],
+      "relatedTopics": [
+        "para-jumbles",
+        "vocabulary-building"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    },
+    {
+      "id": "vocabulary-building",
+      "slug": "vocabulary-building",
+      "title": "Vocabulary Building",
+      "category": "aptitude",
+      "subcategory": "verbal-ability",
+      "type": "aptitude",
+      "description": "Building vocabulary with roots, context, spaced review and commonly confused words.",
+      "difficulty": "beginner",
+      "tags": [
+        "vocabulary",
+        "roots",
+        "confusing-words"
+      ],
+      "estimatedMinutes": 45,
+      "order": 20,
+      "prerequisites": [],
+      "relatedTopics": [
+        "synonyms",
+        "antonyms",
+        "one-word-substitution"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-02"
+    }
+  ]
+}

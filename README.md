@@ -1,0 +1,135 @@
+# StudyHub
+
+A personal study and interview-preparation platform for aptitude, data structures, algorithms, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
+
+> **Project status: Phase 2A — Aptitude content complete.**
+> The Aptitude section (58 topics plus Revision and Quick Revision material) is written in Markdown with metadata.
+> DSA and CS Concepts content has not been written yet, and **the application has not been built yet** — `index.html` is still a placeholder page. Until then, the content can be read directly on GitHub.
+
+| Phase | Scope | Status |
+|-------|-------|--------|
+| 1 | Repository architecture, rules, templates, schemas | Done |
+| 2A | Aptitude content | Done |
+| 2 (other) | DSA, CS Concepts and later categories | Not started |
+| 3 | Static web application | Not started |
+
+## Goals
+
+- Learn a topic from scratch, then reuse the same material for fast interview revision.
+- Cover concepts, problem solving, Java implementations, interview questions and practice in one place.
+- Stay simple: plain files, no backend, no build step, free hosting on GitHub Pages.
+
+## Repository structure
+
+```text
+StudyHub/
+├── index.html                  App entry point (placeholder until Phase 3) — must stay at the root
+├── .nojekyll                   Tells GitHub Pages to serve files as-is
+├── assets/                     App-level icons and images (later: vendored libraries)
+├── content/                    Study material (Markdown)
+│   ├── aptitude/
+│   │   ├── quantitative-aptitude/   18 topics
+│   │   ├── logical-reasoning/       20 topics
+│   │   ├── verbal-ability/          20 topics
+│   │   └── revision/                Revision and Quick Revision sources
+│   ├── dsa/
+│   │   ├── data-structures/
+│   │   └── algorithms/
+│   └── cs-concepts/
+├── metadata/                   Machine-readable index of the content (JSON)
+│   ├── categories.json         Categories and subcategories
+│   ├── topics/                 One topic catalog per category
+│   └── schemas/                JSON Schemas for the files above
+├── templates/                  Starting files for new topics and metadata entries
+├── docs/
+│   ├── content-guide.md        How content and metadata are written (authoritative)
+│   ├── architecture.md         Planned design of the static app
+│   └── visualizers.md          Planned interactive visualizations (candidates)
+├── .claude/skills/             Claude skills: study-content, dsa, ui-ux
+├── CLAUDE.md                   Project rules for Claude
+└── README.md
+```
+
+Later, the application adds `styles.css`, `app.js` and (if needed) `js/` at the root.
+
+## Content architecture
+
+Content and application code are separate. Each topic is a folder of Markdown files:
+
+```text
+content/<category>/[<subcategory>/]<topic-slug>/
+├── content.md                 the lesson (required)
+├── examples.md                worked examples         (optional)
+├── interview-questions.md     interview Q&A           (optional)
+├── practice.md                self-test questions     (optional)
+├── revision.md                quick-revision sheet    (optional)
+└── images/                    diagrams for this topic (optional)
+```
+
+Each topic `type` has its own lesson template, so DSA, theory, command-reference and aptitude topics each get the sections they need:
+
+| Type | For |
+|------|-----|
+| `data-structure` | Structures and their operations |
+| `algorithm` | Procedures, complexity, dry runs |
+| `concept` | Theory subjects (OS, networks, DBMS, …) |
+| `aptitude` | Formulas, shortcuts, problem patterns |
+| `reference` | Commands, tools and syntax |
+
+Programming examples are written in **Java**. Answers to questions are hidden in collapsible `<details>` blocks, so files work as self-tests on GitHub as well as in the app.
+
+### Study modes (Aptitude)
+
+The Aptitude section offers three ways to study:
+
+| Mode | What it is | Source files |
+|------|------------|--------------|
+| **Learn** | The full topics: explanations, formulas, shortcuts, solved examples and practice | `content/aptitude/<subcategory>/<topic>/` |
+| **Revision** | Comprehensive revision across all of Aptitude, on one page | `content/aptitude/revision/general-formula-sheet.md`, `general-concept-revision.md`, `important-shortcuts.md`, `common-tricks-and-patterns.md`, `common-mistakes.md` |
+| **Quick Revision** | The essentials to scan in the last half hour before a test, on one page | `content/aptitude/revision/30-min-formula-sheet.md`, `30-min-concept-revision.md`, `30-min-tricks-and-traps.md` |
+
+The modes are declared in `metadata/categories.json` (`studyModes`); the app will combine each mode's source files into one view. Any category can add study modes the same way.
+
+## How metadata works
+
+The browser can't list folders on GitHub Pages, so the app discovers content through JSON:
+
+1. `metadata/categories.json` lists categories, their subcategories, and where each category's catalog is.
+2. `metadata/topics/<category>.json` lists every topic in that category: title, type, difficulty, tags, estimated time, prerequisites, related topics, which files exist, and draft/published status.
+
+The topic `id` is permanent — it identifies the topic in URLs, progress tracking and bookmarks. Field-by-field reference: [docs/content-guide.md §6](docs/content-guide.md#6-metadata-reference).
+
+## Adding a topic
+
+1. Create `content/<category>/[<subcategory>/]<slug>/`.
+2. Copy the lesson template for the topic's type from [templates/lesson/](templates/lesson/) to `content.md`, plus any [companion templates](templates/companion/) you want.
+3. Write the content and remove the template's guidance comments.
+4. Add an entry to `metadata/topics/<category>.json` using [templates/metadata/topic.json](templates/metadata/topic.json).
+
+Adding a **category** means adding one entry to `metadata/categories.json`, one catalog file, and one `content/` folder. No application code changes are needed for either. Full steps: [docs/content-guide.md §7](docs/content-guide.md#7-adding-things).
+
+## Development rules
+
+- HTML, CSS and vanilla JavaScript only — no frameworks, no build step, no backend.
+- Everything the site needs is committed to this repository (no CDNs); all paths are relative.
+- `index.html` stays at the repository root.
+- Content is Markdown, metadata is JSON; no MDX.
+- Accessibility (keyboard, contrast, screen readers) and light/dark themes are requirements, not extras.
+
+Complete rules: [CLAUDE.md](CLAUDE.md).
+
+## Deployment (GitHub Pages)
+
+The site is designed to deploy straight from the repository root with no build:
+
+**Settings → Pages → Build and deployment → Source: Deploy from a branch → `main` / `(root)`.**
+
+To preview locally (needed once the app exists, because browsers block `fetch()` on `file://`), run a static server from the repository root, e.g. `npx http-server -c-1 .` or the VS Code Live Server extension.
+
+## Planned application
+
+Phase 3 will build a static single-page app (see [docs/architecture.md](docs/architecture.md)) with:
+
+dashboard · category and topic navigation · breadcrumbs · search and filters · study progress · bookmarks · practice and interview modes · quick revision · Java code blocks with copy buttons · related topics · interactive DSA visualizations where useful · light/dark mode · responsive layout · full keyboard accessibility.
+
+Progress and bookmarks will be stored in the browser's `localStorage` — there are no accounts and no server.

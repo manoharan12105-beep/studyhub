@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "topics.schema.json",
+  "title": "StudyHub topic catalog",
+  "description": "metadata/topics/<category>.json — every topic in one category. The app fetches these to build navigation, search, filters and progress tracking.",
+  "type": "object",
+  "required": ["schemaVersion", "category", "topics"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "category": {
+      "type": "string",
+      "description": "Must equal the category id this file is registered under in metadata/categories.json."
+    },
+    "topics": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/topic" }
+    }
+  },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "topic": {
+      "type": "object",
+      "required": ["id", "slug", "title", "category", "type", "description", "difficulty", "files", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/slug",
+          "description": "Globally unique, PERMANENT identifier. Used for URLs, progress and bookmarks. Never change it once published."
+        },
+        "slug": {
+          "$ref": "#/$defs/slug",
+          "description": "Folder name of the topic. Folder path = content/<category>/[<subcategory>/]<slug>/."
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "category": {
+          "type": "string",
+          "description": "Category id from metadata/categories.json."
+        },
+        "subcategory": {
+          "type": ["string", "null"],
+          "description": "Subcategory id declared under the category, or null if the category has none."
+        },
+        "type": {
+          "enum": ["data-structure", "algorithm", "concept", "aptitude", "reference"],
+          "description": "Selects the lesson template and how the app presents the topic."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "One or two sentences. Shown on cards and used by search."
+        },
+        "difficulty": { "enum": ["beginner", "intermediate", "advanced"] },
+        "tags": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/slug" },
+          "uniqueItems": true,
+          "description": "kebab-case search/filter keywords."
+        },
+        "estimatedMinutes": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Approximate time to study content.md once."
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Position within its subcategory (or category). Suggested learning order."
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/slug" },
+          "uniqueItems": true,
+          "description": "Topic ids to study first."
+        },
+        "relatedTopics": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/slug" },
+          "uniqueItems": true,
+          "description": "Topic ids shown as 'Related topics'."
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "enum": ["content.md", "examples.md", "interview-questions.md", "practice.md", "revision.md"]
+          },
+          "uniqueItems": true,
+          "contains": { "const": "content.md" },
+          "description": "Which markdown files exist in the topic folder. The app only requests files listed here."
+        },
+        "visualizer": {
+          "type": ["string", "null"],
+          "description": "Id of an interactive visualizer for this topic, or null. Setting it marks the topic as an interactive-visualization candidate; ids are registered in docs/visualizers.md. The app shows a visualizer only once a module with this id exists."
+        },
+        "status": {
+          "enum": ["draft", "published"],
+          "description": "Drafts stay hidden in the app."
+        },
+        "updated": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "description": "Date of the last meaningful content change (YYYY-MM-DD)."
+        }
+      }
+    }
+  }
+}

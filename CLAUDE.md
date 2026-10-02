@@ -1,0 +1,108 @@
+# CLAUDE.md
+
+Instructions for Claude when working in this repository. This file holds the rules; details live in:
+
+- [docs/content-guide.md](docs/content-guide.md) — content structure, Markdown conventions, metadata fields, adding/changing topics. **Authoritative for content.**
+- [docs/architecture.md](docs/architecture.md) — planned static application design. **Authoritative for the app.**
+- [templates/](templates/) — starting files for topics and metadata entries.
+- [.claude/skills/](.claude/skills/) — task-specific guidance (see "Skills" below).
+
+If this file and a doc disagree, fix the disagreement rather than picking one silently.
+
+## Project
+
+StudyHub is a personal study and interview-preparation platform (aptitude, data structures, algorithms, CS concepts, and categories the owner adds later). The same material must teach a beginner and serve as fast interview revision.
+
+**Current phase: foundation only.** Do not build the application or write study content unless the owner asks for that phase.
+
+## Hard rules
+
+1. **Static GitHub Pages site.** HTML, CSS and vanilla JavaScript only. No backend, server, database, API, SSR, auth, or Node/Java runtime.
+2. **`index.html` stays at the repository root.** Never move the app into a subfolder (`frontend/`, `app/`, `src/`, `docs/`).
+3. **No frameworks or build step** (no React/Vue/Angular/Next/Tailwind/bundlers/TypeScript) unless the owner explicitly requests one.
+4. **Everything self-hosted.** No CDNs or external runtime requests; vendor libraries into `assets/vendor/`.
+5. **Relative paths only** (`metadata/categories.json`, never `/metadata/...`) — the site is served under `/<repo>/`.
+6. **Content and code are separate.** Content is Markdown in `content/`, metadata is JSON in `metadata/`, code is in the root app files, `js/` and `assets/`. Adding a topic or category must never require app code changes.
+7. **Java for programming examples** (Java 17, standard library only). No other languages unless the owner explicitly asks. The app's own code is JavaScript — this rule is about educational content.
+8. **Never invent curriculum.** Create only the categories, subcategories and topics the owner provides. Do not pad with extra topics or "suggested" folders.
+9. **Markdown + JSON only** for content and metadata. No MDX.
+
+## Repository layout
+
+```text
+index.html, styles.css, app.js, js/   application (styles.css/app.js/js/ arrive in Phase 3)
+assets/                               app icons, images, fonts, vendored libraries
+content/<category>/[<sub>/]<slug>/    topic Markdown (+ images/)
+content/<category>/revision/          sources for category study modes (reserved name)
+metadata/categories.json              category + subcategory registry, study modes
+metadata/topics/<category>.json       topic catalog per category
+metadata/schemas/                     JSON Schemas for the two metadata files
+templates/                            lesson, companion and metadata templates
+docs/                                 content guide, architecture, visualizer registry
+.claude/skills/                       Claude skills for this project
+.nojekyll                             serve files as-is on GitHub Pages
+```
+
+## Naming
+
+- ids, slugs, folders, tags, image files: **kebab-case** (`binary-search`).
+- Topic folders contain only: `content.md`, `examples.md`, `interview-questions.md`, `practice.md`, `revision.md`, `images/`.
+- Topic `id`s are unique across the whole site.
+- JS: `camelCase` variables/functions, `PascalCase` classes, `UPPER_SNAKE` constants. CSS: kebab-case classes, custom properties for all design tokens.
+
+## Content rules
+
+Follow [docs/content-guide.md](docs/content-guide.md). In short:
+
+- Start from the template for the topic's `type` (`data-structure`, `algorithm`, `concept`, `aptitude`, `reference`). Keep only sections that teach something for this topic; keep the names and order of the ones you keep.
+- One H1 per file; H2 sections; H3 subsections. Every code fence has a language.
+- Callouts via `> [!NOTE|TIP|IMPORTANT|WARNING|CAUTION]`. Answers in `<details>` — the only raw HTML allowed.
+- Questions/examples are numbered `Q1`/`P1`/`E1`, append-only, never renumbered.
+- Formulas in plain text/Unicode (no LaTeX). Diagrams as SVG in the topic's `images/` or ASCII in ```` ```text ````. No Mermaid, no external images.
+- Accuracy over volume: verify every complexity, formula and code sample. No filler.
+- A topic is visible to the app only when it has a metadata entry; `files` must match the folder exactly.
+- Subtopics are H2 sections of their topic, not separate folders.
+- Category study modes (e.g. Aptitude's **Learn · Revision · Quick Revision**) are declared in `categories.json` `studyModes`; each mode merges several source files from `content/<category>/revision/` into one view. User-facing names come from metadata, never file names.
+
+## Changing existing content (backwards compatibility)
+
+- Never change a topic `id` (it keys URLs, progress and bookmarks). Folders can move; ids cannot.
+- Never renumber question/example ids.
+- Schema changes are additive (new optional fields). Breaking changes bump `schemaVersion` and update all metadata and the app in one commit.
+- localStorage keys are versioned (`studyhub:v1:*`); migrate old data rather than discarding it.
+- Edit existing content in place; don't rewrite a whole file to change one section. Preserve the owner's own wording unless asked to rewrite it.
+
+## Application principles (Phase 3+)
+
+- Follow [docs/architecture.md](docs/architecture.md): hash routing, metadata-driven navigation, lazy-loaded Markdown, native ES modules.
+- Small, readable modules a student can follow. Plain functions over clever abstractions. Comments explain *why*.
+- No inline event handlers in HTML; no `innerHTML` with unsanitised input.
+- Handle failures visibly: a missing file shows a helpful message, never a blank page.
+- UI/UX and accessibility: see [.claude/skills/ui-ux/SKILL.md](.claude/skills/ui-ux/SKILL.md). Non-negotiables: WCAG 2.2 AA contrast, full keyboard access, visible focus, semantic HTML, `prefers-reduced-motion` respected, works at 320px width, light and dark themes.
+- Design goal: **beautiful + useful + easy to study.** Readability and hierarchy over decoration — no heavy gradients, glassmorphism or gratuitous animation.
+
+## Skills
+
+| Skill | Use when |
+|-------|----------|
+| [study-content](.claude/skills/study-content/SKILL.md) | Creating, editing or reviewing any topic content or metadata entry. |
+| [dsa](.claude/skills/dsa/SKILL.md) | Any data-structure or algorithm topic, Java implementation, complexity, dry run or DSA visualizer. Used together with study-content. |
+| [ui-ux](.claude/skills/ui-ux/SKILL.md) | Designing or building any part of the application interface. |
+
+## Testing and verification
+
+Before saying work is done:
+
+- **JSON:** every metadata file parses and matches its schema; the consistency rules in content-guide §6 hold (unique ids, references exist, `files` matches the folder, folder exists at the derived path).
+- **Java:** full programs compile and run with `javac`/`java` (a JDK is installed). Expected outputs shown in content match the actual output. Delete `.class` files afterwards.
+- **Markdown:** headings follow the template; links and image paths resolve; renders correctly on GitHub.
+- **App (Phase 3+):** test through a local static server (see architecture §9): every route, light/dark, keyboard-only navigation, a 320px-wide viewport, and the browser console free of errors.
+- Report what was verified and what was not. Never claim something works without having checked it.
+
+## Git and GitHub
+
+- Default branch `main`; GitHub Pages deploys from `main` / root.
+- Commit only when the owner asks. Small, focused commits; one topic or one feature per commit.
+- Message style: `<area>: <summary>` — e.g. `content(dsa): add <topic>`, `metadata: …`, `app: …`, `docs: …`, `templates: …`.
+- Never commit secrets, `node_modules/`, `.class` files or editor settings (see `.gitignore`).
+- Line endings are LF (`.gitattributes`).

@@ -1,0 +1,19 @@
+{
+  "id": "example-topic",
+  "slug": "example-topic",
+  "title": "Example Topic",
+  "category": "dsa",
+  "subcategory": "data-structures",
+  "type": "data-structure",
+  "description": "One or two sentences describing what the learner gets from this topic.",
+  "difficulty": "beginner",
+  "tags": ["example-tag"],
+  "estimatedMinutes": 30,
+  "order": 1,
+  "prerequisites": [],
+  "relatedTopics": [],
+  "files": ["content.md", "examples.md", "interview-questions.md", "practice.md", "revision.md"],
+  "visualizer": null,
+  "status": "draft",
+  "updated": "2026-01-01"
+}

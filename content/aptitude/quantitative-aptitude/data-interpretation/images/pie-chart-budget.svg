@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 290" width="480" height="290" role="img" aria-label="Pie chart of a family monthly budget of 50,000 rupees: Food 30%, Rent 25%, Education 15%, Transport 10%, Savings 12%, Others 8%" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+<title>Pie chart of a family monthly budget of 50,000 rupees: Food 30%, Rent 25%, Education 15%, Transport 10%, Savings 12%, Others 8%</title>
+<rect width="480" height="290" rx="8" fill="#ffffff"/>
+<text x="240" y="24" text-anchor="middle" font-size="15" font-weight="600" fill="#1f2937">Monthly budget of a family (total ₹50,000)</text>
+<path d="M150,160 L150.00,50.00 A110,110 0 0 1 254.62,193.99 Z" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<rect x="290" y="59" width="14" height="14" fill="#2563eb"/>
+<text x="312" y="70" font-size="13" fill="#1f2937">Food — 30% (108°)</text>
+<path d="M150,160 L254.62,193.99 A110,110 0 0 1 116.01,264.62 Z" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+<rect x="290" y="87" width="14" height="14" fill="#16a34a"/>
+<text x="312" y="98" font-size="13" fill="#1f2937">Rent — 25% (90°)</text>
+<path d="M150,160 L116.01,264.62 A110,110 0 0 1 45.38,193.99 Z" fill="#d97706" stroke="#ffffff" stroke-width="2"/>
+<rect x="290" y="115" width="14" height="14" fill="#d97706"/>
+<text x="312" y="126" font-size="13" fill="#1f2937">Education — 15% (54°)</text>
+<path d="M150,160 L45.38,193.99 A110,110 0 0 1 45.38,126.01 Z" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<rect x="290" y="143" width="14" height="14" fill="#dc2626"/>
+<text x="312" y="154" font-size="13" fill="#1f2937">Transport — 10% (36°)</text>
+<path d="M150,160 L45.38,126.01 A110,110 0 0 1 97.01,63.61 Z" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+<rect x="290" y="171" width="14" height="14" fill="#7c3aed"/>
+<text x="312" y="182" font-size="13" fill="#1f2937">Savings — 12% (43.2°)</text>
+<path d="M150,160 L97.01,63.61 A110,110 0 0 1 150.00,50.00 Z" fill="#0891b2" stroke="#ffffff" stroke-width="2"/>
+<rect x="290" y="199" width="14" height="14" fill="#0891b2"/>
+<text x="312" y="210" font-size="13" fill="#1f2937">Others — 8% (28.8°)</text>
+</svg>

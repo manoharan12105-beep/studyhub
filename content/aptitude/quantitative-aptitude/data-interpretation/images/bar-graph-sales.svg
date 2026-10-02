@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 280" width="480" height="280" role="img" aria-label="Bar graph of Company X sales in rupees crore: 2018 120, 2019 150, 2020 135, 2021 180, 2022 210" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+<title>Bar graph of Company X sales in rupees crore: 2018 120, 2019 150, 2020 135, 2021 180, 2022 210</title>
+<rect width="480" height="280" rx="8" fill="#ffffff"/>
+<text x="240" y="24" text-anchor="middle" font-size="15" font-weight="600" fill="#1f2937">Sales of Company X (₹ crore)</text>
+<line x1="60" y1="250" x2="460" y2="250" stroke="#d1d5db" stroke-width="1"/>
+<text x="52" y="254" text-anchor="end" font-size="12" fill="#1f2937">0</text>
+<line x1="60" y1="208" x2="460" y2="208" stroke="#d1d5db" stroke-width="1"/>
+<text x="52" y="212" text-anchor="end" font-size="12" fill="#1f2937">50</text>
+<line x1="60" y1="166" x2="460" y2="166" stroke="#d1d5db" stroke-width="1"/>
+<text x="52" y="170" text-anchor="end" font-size="12" fill="#1f2937">100</text>
+<line x1="60" y1="124" x2="460" y2="124" stroke="#d1d5db" stroke-width="1"/>
+<text x="52" y="128" text-anchor="end" font-size="12" fill="#1f2937">150</text>
+<line x1="60" y1="82" x2="460" y2="82" stroke="#d1d5db" stroke-width="1"/>
+<text x="52" y="86" text-anchor="end" font-size="12" fill="#1f2937">200</text>
+<line x1="60" y1="40" x2="460" y2="40" stroke="#d1d5db" stroke-width="1"/>
+<text x="52" y="44" text-anchor="end" font-size="12" fill="#1f2937">250</text>
+<rect x="78" y="149.2" width="44" height="100.8" fill="#2563eb"/>
+<text x="100" y="143.2" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2937">120</text>
+<text x="100" y="268" text-anchor="middle" font-size="12" fill="#1f2937">2018</text>
+<rect x="158" y="124.0" width="44" height="126.0" fill="#2563eb"/>
+<text x="180" y="118.0" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2937">150</text>
+<text x="180" y="268" text-anchor="middle" font-size="12" fill="#1f2937">2019</text>
+<rect x="238" y="136.6" width="44" height="113.4" fill="#2563eb"/>
+<text x="260" y="130.6" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2937">135</text>
+<text x="260" y="268" text-anchor="middle" font-size="12" fill="#1f2937">2020</text>
+<rect x="318" y="98.8" width="44" height="151.2" fill="#2563eb"/>
+<text x="340" y="92.8" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2937">180</text>
+<text x="340" y="268" text-anchor="middle" font-size="12" fill="#1f2937">2021</text>
+<rect x="398" y="73.6" width="44" height="176.4" fill="#2563eb"/>
+<text x="420" y="67.6" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2937">210</text>
+<text x="420" y="268" text-anchor="middle" font-size="12" fill="#1f2937">2022</text>
+<line x1="60" y1="250" x2="460" y2="250" stroke="#1f2937" stroke-width="1.5"/>
+</svg>

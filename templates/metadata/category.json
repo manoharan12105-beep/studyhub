@@ -1,0 +1,9 @@
+{
+  "id": "example-category",
+  "title": "Example Category",
+  "description": "One sentence describing the category.",
+  "order": 4,
+  "icon": null,
+  "catalog": "metadata/topics/example-category.json",
+  "subcategories": []
+}

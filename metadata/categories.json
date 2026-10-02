@@ -1,0 +1,90 @@
+{
+  "$schema": "./schemas/categories.schema.json",
+  "schemaVersion": 1,
+  "categories": [
+    {
+      "id": "aptitude",
+      "title": "Aptitude",
+      "description": "Quantitative, logical and verbal aptitude for placement tests.",
+      "order": 1,
+      "icon": null,
+      "catalog": "metadata/topics/aptitude.json",
+      "subcategories": [
+        {
+          "id": "quantitative-aptitude",
+          "title": "Quantitative Aptitude",
+          "description": "Arithmetic, algebra, geometry, mensuration and data interpretation.",
+          "order": 1
+        },
+        {
+          "id": "logical-reasoning",
+          "title": "Logical Reasoning",
+          "description": "Series, coding, relations, arrangements, puzzles and deductive reasoning.",
+          "order": 2
+        },
+        {
+          "id": "verbal-ability",
+          "title": "Verbal Ability",
+          "description": "Grammar, vocabulary, sentence skills and reading comprehension.",
+          "order": 3
+        }
+      ],
+      "studyModes": [
+        {
+          "id": "revision",
+          "title": "Revision",
+          "description": "Comprehensive revision of formulas, concepts, shortcuts, patterns and mistakes across all of Aptitude.",
+          "sources": [
+            { "path": "content/aptitude/revision/general-formula-sheet.md", "title": "Formula Sheet" },
+            { "path": "content/aptitude/revision/general-concept-revision.md", "title": "Concept Revision" },
+            { "path": "content/aptitude/revision/important-shortcuts.md", "title": "Important Shortcuts" },
+            { "path": "content/aptitude/revision/common-tricks-and-patterns.md", "title": "Tricks and Patterns" },
+            { "path": "content/aptitude/revision/common-mistakes.md", "title": "Common Mistakes" }
+          ]
+        },
+        {
+          "id": "quick-revision",
+          "title": "Quick Revision",
+          "description": "The high-signal essentials to scan in the last half hour before an aptitude test.",
+          "estimatedMinutes": 30,
+          "sources": [
+            { "path": "content/aptitude/revision/30-min-formula-sheet.md", "title": "Formulas" },
+            { "path": "content/aptitude/revision/30-min-concept-revision.md", "title": "Concepts" },
+            { "path": "content/aptitude/revision/30-min-tricks-and-traps.md", "title": "Tricks and Traps" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dsa",
+      "title": "Data Structures & Algorithms",
+      "description": "Data structures, algorithms, complexity analysis and Java implementations.",
+      "order": 2,
+      "icon": null,
+      "catalog": "metadata/topics/dsa.json",
+      "subcategories": [
+        {
+          "id": "data-structures",
+          "title": "Data Structures",
+          "description": "How data is organised in memory and the operations each structure supports.",
+          "order": 1
+        },
+        {
+          "id": "algorithms",
+          "title": "Algorithms",
+          "description": "Step-by-step problem-solving techniques and their complexity.",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "cs-concepts",
+      "title": "Computer Science Concepts",
+      "description": "Core computer science subjects for technical interviews.",
+      "order": 3,
+      "icon": null,
+      "catalog": "metadata/topics/cs-concepts.json",
+      "subcategories": []
+    }
+  ]
+}
