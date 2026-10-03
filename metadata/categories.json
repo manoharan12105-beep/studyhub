@@ -64,16 +64,40 @@
       "catalog": "metadata/topics/dsa.json",
       "subcategories": [
         {
+          "id": "fundamentals",
+          "title": "Fundamentals",
+          "description": "Complexity analysis, core vocabulary and the Java toolkit used throughout DSA.",
+          "order": 1
+        },
+        {
           "id": "data-structures",
           "title": "Data Structures",
           "description": "How data is organised in memory and the operations each structure supports.",
-          "order": 1
+          "order": 2
         },
         {
           "id": "algorithms",
           "title": "Algorithms",
           "description": "Step-by-step problem-solving techniques and their complexity.",
-          "order": 2
+          "order": 3
+        },
+        {
+          "id": "patterns",
+          "title": "Problem-Solving Patterns",
+          "description": "Reusable techniques and the clues that reveal which one a problem needs.",
+          "order": 4
+        },
+        {
+          "id": "problem-solving",
+          "title": "Problem Solving",
+          "description": "A method for unknown problems: constraints, brute force, optimisation and testing.",
+          "order": 5
+        },
+        {
+          "id": "interview",
+          "title": "Interview Preparation",
+          "description": "Reasoning-based DSA interview questions by kind and level.",
+          "order": 6
         }
       ]
     },

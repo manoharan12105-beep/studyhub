@@ -46,7 +46,7 @@
           "description": "Subcategory id declared under the category, or null if the category has none."
         },
         "type": {
-          "enum": ["data-structure", "algorithm", "concept", "aptitude", "reference"],
+          "enum": ["data-structure", "algorithm", "pattern", "concept", "aptitude", "reference"],
           "description": "Selects the lesson template and how the app presents the topic."
         },
         "description": {

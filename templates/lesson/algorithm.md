@@ -75,6 +75,10 @@ public class {{ClassName}} {
 
 <!-- OPTIONAL: well-known variants and how they differ. -->
 
+## Comparison
+
+<!-- OPTIONAL: table against the alternative algorithms for the same problem, with the trade-off that decides between them. -->
+
 ## Edge Cases
 
 -
