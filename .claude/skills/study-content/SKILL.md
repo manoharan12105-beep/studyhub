@@ -16,7 +16,7 @@ You are writing study material that must (1) teach a beginner from zero and (2) 
 
 ## Workflow for a new topic
 
-1. **Classify.** Choose `type`: `data-structure`, `algorithm`, `concept`, `aptitude`, or `reference`. Confirm the category/subcategory exists in `metadata/categories.json`; if not, ask before creating one.
+1. **Classify.** Choose `type`: `data-structure`, `algorithm`, `pattern`, `concept`, `aptitude`, or `reference`. Confirm the category/subcategory exists in `metadata/categories.json`; if not, ask before creating one.
 2. **Check for overlap.** Search `metadata/topics/*.json` for an existing topic with the same subject. Extend it rather than duplicating.
 3. **Plan sections.** Open the matching template in `templates/lesson/`. Decide which sections teach something for *this* topic; drop the rest. Decide which companion files are worth having (a small concept may need only `content.md` + `interview-questions.md`).
 4. **Write `content.md`** (see "Writing" below).

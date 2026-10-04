@@ -2,7 +2,7 @@
 
 <!--
 TEMPLATE: interview-questions.md  (optional companion file; add "interview-questions.md" to the topic's "files")
-Group questions under the three H2 levels below (delete empty groups).
+Group questions under the three H2 groups below (delete empty groups), or — for topics organised by level — under ## Beginner / ## Intermediate / ## Advanced.
 Number questions Q1, Q2, ... across the whole file and only ever append; never renumber (numbers are stable ids).
 Answers go inside <details> so the reader can attempt the question first.
 Write answers the way you would say them in an interview: direct answer first, then justification, then an example or code if useful.

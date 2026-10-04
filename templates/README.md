@@ -10,9 +10,10 @@ The topic's `type` in metadata decides the template for its `content.md`:
 |------------------|---------------------------------------------------------|-------------------------------------------------------------|
 | `data-structure` | [lesson/data-structure.md](lesson/data-structure.md)   | Structures with operations (arrays, lists, trees, …)        |
 | `algorithm`      | [lesson/algorithm.md](lesson/algorithm.md)             | Procedures with steps and complexity (sorting, search, …)   |
+| `pattern`        | [lesson/pattern.md](lesson/pattern.md)                 | Problem-solving patterns (two pointers, sliding window, …)  |
 | `concept`        | [lesson/concept.md](lesson/concept.md)                 | Theory subjects (OS, networks, DBMS, OOP, …)                |
 | `aptitude`       | [lesson/aptitude.md](lesson/aptitude.md)               | Quantitative, logical and verbal aptitude topics            |
-| `reference`      | [lesson/reference.md](lesson/reference.md)             | Commands, tools and syntax (shell commands, SQL clauses, …) |
+| `reference`      | [lesson/reference.md](lesson/reference.md)             | Commands, tools, syntax and library references (shell commands, SQL clauses, Java collections, complexity tables, …) |
 
 ## Companion files (optional)
 

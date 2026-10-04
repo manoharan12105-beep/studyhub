@@ -2,15 +2,16 @@
 
 A personal study and interview-preparation platform for aptitude, data structures, algorithms, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
 
-> **Project status: Phase 2A — Aptitude content complete.**
-> The Aptitude section (58 topics plus Revision and Quick Revision material) is written in Markdown with metadata.
-> DSA and CS Concepts content has not been written yet, and **the application has not been built yet** — `index.html` is still a placeholder page. Until then, the content can be read directly on GitHub.
+> **Project status: Phase 2B — DSA content complete.**
+> Aptitude (58 topics) and Data Structures & Algorithms (113 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
+> CS Concepts content has not been written yet, and **the application has not been built yet** — `index.html` is still a placeholder page. Until then, the content can be read directly on GitHub.
 
 | Phase | Scope | Status |
 |-------|-------|--------|
 | 1 | Repository architecture, rules, templates, schemas | Done |
 | 2A | Aptitude content | Done |
-| 2 (other) | DSA, CS Concepts and later categories | Not started |
+| 2B | DSA content (Java) | Done |
+| 2 (other) | CS Concepts and later categories | Not started |
 | 3 | Static web application | Not started |
 
 ## Goals
@@ -33,8 +34,13 @@ StudyHub/
 │   │   ├── verbal-ability/          20 topics
 │   │   └── revision/                Revision and Quick Revision sources
 │   ├── dsa/
-│   │   ├── data-structures/
-│   │   └── algorithms/
+│   │   ├── fundamentals/            12 topics (complexity, Java toolkit)
+│   │   ├── data-structures/         20 topics
+│   │   ├── algorithms/              51 topics
+│   │   ├── patterns/                22 problem-solving patterns
+│   │   ├── problem-solving/          3 topics
+│   │   ├── interview/                5 interview-question topics
+│   │   └── revision/                Revision and Quick Revision sources
 │   └── cs-concepts/
 ├── metadata/                   Machine-readable index of the content (JSON)
 │   ├── categories.json         Categories and subcategories
@@ -72,21 +78,28 @@ Each topic `type` has its own lesson template, so DSA, theory, command-reference
 |------|-----|
 | `data-structure` | Structures and their operations |
 | `algorithm` | Procedures, complexity, dry runs |
+| `pattern` | Problem-solving patterns: recognition clues, templates, worked examples |
 | `concept` | Theory subjects (OS, networks, DBMS, …) |
 | `aptitude` | Formulas, shortcuts, problem patterns |
 | `reference` | Commands, tools and syntax |
 
 Programming examples are written in **Java**. Answers to questions are hidden in collapsible `<details>` blocks, so files work as self-tests on GitHub as well as in the app.
 
-### Study modes (Aptitude)
+### Study modes
 
-The Aptitude section offers three ways to study:
+Aptitude and DSA each offer three ways to study:
 
 | Mode | What it is | Source files |
 |------|------------|--------------|
 | **Learn** | The full topics: explanations, formulas, shortcuts, solved examples and practice | `content/aptitude/<subcategory>/<topic>/` |
 | **Revision** | Comprehensive revision across all of Aptitude, on one page | `content/aptitude/revision/general-formula-sheet.md`, `general-concept-revision.md`, `important-shortcuts.md`, `common-tricks-and-patterns.md`, `common-mistakes.md` |
 | **Quick Revision** | The essentials to scan in the last half hour before a test, on one page | `content/aptitude/revision/30-min-formula-sheet.md`, `30-min-concept-revision.md`, `30-min-tricks-and-traps.md` |
+
+| DSA mode | What it is | Source files |
+|----------|------------|--------------|
+| **Learn** | The full topics: intuition, Java implementations, dry runs, complexity, patterns, practice and interview questions | `content/dsa/<subcategory>/<topic>/` |
+| **Revision** | Core concepts, complexity tables, choosing an algorithm, pattern recognition, Java templates, common mistakes and interview traps | `content/dsa/revision/` (7 sources) |
+| **Quick Revision** | Complexities, definitions, pattern clues, a Java cheat sheet and last-minute traps — about 40 minutes | `content/dsa/revision/quick-*.md` (5 sources) |
 
 The modes are declared in `metadata/categories.json` (`studyModes`); the app will combine each mode's source files into one view. Any category can add study modes the same way.
 

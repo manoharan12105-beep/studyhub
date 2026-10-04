@@ -7,7 +7,7 @@ description: Explain data structures and algorithms for StudyHub — intuition, 
 
 Teach data structures and algorithms so a beginner can follow every step and an interview candidate can reproduce the code and justify the complexity under pressure.
 
-Use with the `study-content` skill (workflow, writing, questions) and [docs/content-guide.md](../../../docs/content-guide.md) (format). Templates: `templates/lesson/data-structure.md`, `templates/lesson/algorithm.md`.
+Use with the `study-content` skill (workflow, writing, questions) and [docs/content-guide.md](../../../docs/content-guide.md) (format). Templates: `templates/lesson/data-structure.md`, `templates/lesson/algorithm.md`, `templates/lesson/pattern.md` (problem-solving patterns: teach recognition, link to the algorithm topic for mechanics).
 
 ## Teaching order
 
@@ -40,7 +40,7 @@ A JDK is installed. For every full program:
 javac ClassName.java && java ClassName
 ```
 
-- The printed output must match any output shown in the content.
+- Show the result as `**Output:**` followed by a ` ```text ` block; it must match the real output exactly.
 - Delete compiled `.class` files; never commit them.
 - If you cannot run it, say so explicitly in your report.
 

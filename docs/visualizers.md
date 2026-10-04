@@ -29,3 +29,28 @@ Rules for every visualizer (see also `.claude/skills/ui-ux/SKILL.md`):
 | `puzzle-elimination-grid` | puzzles | Elimination grid (people × attributes) where each clue ticks or crosses cells. | clues |
 | `venn-builder` | syllogisms, logical-venn-diagrams | Draws the minimal diagrams for statements and tests each conclusion against all possible diagrams. | statements |
 | `clock-angle` | clocks | An analogue clock; hands move with time and the angle between them is shown with the 30H − 5.5M calculation. | time |
+
+## Data Structures & Algorithms
+
+| Id | Topics | What it shows | Custom input |
+|----|--------|---------------|--------------|
+| `array-operations` | arrays | Cells with indices; insert, delete and search animate the shifting of elements and count the moves, contrasting access O(1) with middle insertion O(n). | array, operation, index |
+| `two-pointer-scan` | two-pointers | Left and right pointers over a sorted array; each step shows the comparison with the target and which pointer moves and why. | array, target |
+| `sliding-window` | sliding-window | A highlighted window expanding and shrinking over an array or string, with the running summary (sum, counts) and the best window so far. | array or string, condition |
+| `linked-list-pointers` | linked-list, linked-list-techniques, fast-and-slow-pointers | Nodes and arrows; each step of insertion, deletion, reversal or fast/slow traversal redraws the changed pointers and highlights prev/curr/next. | values, operation |
+| `stack-operations` | stack | A vertical stack with push, pop and peek, and a bracket-matching or monotonic-stack trace that shows each push and pop. | operations or input array |
+| `queue-operations` | queue | A circular array with front and rear indices wrapping around, plus deque operations at both ends. | operations, capacity |
+| `binary-search-steps` | binary-search, binary-search-variations, binary-search-pattern | lo, mid and hi markers over a sorted array; the discarded half greys out each step until the boundary is found. | sorted array, target or predicate |
+| `sorting-visualizer` | bubble-sort, selection-sort, insertion-sort, merge-sort, quick-sort, heap-sort, counting-sort, radix-sort, bucket-sort | Bars for the array with the comparisons, swaps or writes of the chosen sort, step by step, with counters for comparisons and moves and a stability marker for equal keys. | array, algorithm |
+| `recursion-tree` | recursion | The call tree of a recursive function growing and returning, with the call stack beside it and repeated subcalls highlighted. | function, n |
+| `backtracking-tree` | backtracking, backtracking-problems, backtracking-pattern | The decision tree of choose/explore/unchoose with pruned branches marked, alongside the current partial solution (subset, permutation or board). | problem, size |
+| `tree-traversal` | tree-traversals | A binary tree with the visit order of preorder, inorder, postorder or level order, showing the stack or queue at each step. | tree values, traversal |
+| `bst-operations` | binary-search-tree | Search, insert and delete in a BST, highlighting the comparison path and the three deletion cases (leaf, one child, two children). | keys, operation |
+| `heap-operations` | heap | The heap as both a tree and an array; offer and poll show sift-up and sift-down swaps, and heapify works bottom-up. | values, operation |
+| `trie-builder` | trie | Words inserted character by character into a trie, end-of-word marks, and prefix search following edges. | words, query |
+| `graph-traversal` | bfs, dfs, bfs-pattern, dfs-pattern | A graph or grid explored by BFS (queue, distance layers) or DFS (stack, discovery order), with visited marks and the traversal tree. | graph, start, algorithm |
+| `dijkstra-steps` | dijkstra, shortest-path-pattern | Tentative distances, the priority queue and settled vertices; each relaxation updates a distance and the shortest-path tree. | weighted graph, source |
+| `mst-builder` | prims-algorithm, kruskals-algorithm | Kruskal (edges in sorted order, cycle check with components) or Prim (growing tree, cheapest crossing edge) building a minimum spanning tree. | weighted graph, algorithm |
+| `union-find-forest` | disjoint-set-union, union-find-pattern | The parent-pointer forest during union by rank and path compression, alongside the parent array. | elements, unions |
+| `topological-sort-steps` | topological-sort, topological-sort-pattern | In-degrees updating as Kahn's algorithm removes vertices, the queue of ready vertices and the growing order; cycles leave vertices behind. | DAG |
+| `dp-table` | dynamic-programming, dp-2d-grid, knapsack-dp, subsequence-dp, string-dp, dp-pattern | A DP table filled cell by cell, highlighting the cells each value depends on and the reconstructed optimal path at the end. | problem, inputs |

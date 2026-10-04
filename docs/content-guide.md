@@ -29,11 +29,13 @@ content/<category>/revision/*.md    ← optional category-level study-mode sourc
 |-------------|-----------------------------------|----------------------------------------|
 | Category    | `metadata/categories.json`        | `aptitude`, `dsa`, `cs-concepts`       |
 | Subcategory | inside its category entry         | `data-structures`, `algorithms`        |
-| Topic       | `metadata/topics/<category>.json` | (added by the owner in later phases)   |
+| Topic       | `metadata/topics/<category>.json` | `number-system`, `binary-search`       |
 
 Subcategories are optional. If a category has none, its topics live directly at `content/<category>/<slug>/` and use `"subcategory": null`. Nesting stops at subcategory — no deeper levels — so URLs, breadcrumbs and folders stay predictable.
 
 **Subtopics** (items the owner lists under a topic, e.g. "Number System → Remainders") are H2 sections inside that topic's `content.md`, not separate folders. See §3.
+
+A subject becomes **several topics** only when the owner lists the parts as separate items, or when one file could not be studied in a single sitting and the parts are independently useful (DSA splits dynamic programming into a foundation topic plus `dp-1d`, `knapsack-dp`, `string-dp`, …). Each such topic still keeps its own subtopics as H2 sections.
 
 ### 1.1 Study modes (category level)
 
@@ -82,6 +84,9 @@ Templates contain the full menu of sections for each topic type. Not every topic
 - An extra section is allowed when the subject genuinely needs it; give it a clear H2 name and place it where it reads naturally.
 - **Topics with subtopics:** one H2 per subtopic, named exactly as the owner named it, in the owner's order, between the opening section(s) and the closing sections (Common Mistakes / Key Takeaways). The aptitude template describes this.
 - Category-level study modes (§1.1) can replace per-topic `revision.md`; don't write both for the same category.
+- **Pattern topics** (`type: "pattern"`) teach how to *recognise* and apply a problem-solving technique. They link to the algorithm or data-structure topic for the mechanics instead of re-teaching them, and their example and practice problems must not repeat problems used elsewhere.
+- **Advanced topics** — beyond the core interview syllabus — open with a callout, directly under the H1:
+  `> [!NOTE]` / `> **Advanced topic.** …` stating why it is advanced and what to learn first. The metadata `difficulty` (`advanced`) is a separate, finer signal: a core topic can be hard without being optional.
 
 ---
 
@@ -100,6 +105,8 @@ The app renders standard Markdown plus the small set of extensions below. Anythi
 - Every fenced code block declares a language: `java`, `text` (dry runs, output, ASCII diagrams, formulas), `pseudocode`, `bash`, `sql`, `json`.
 - Programming examples are **Java** (Java 17, standard library only) unless the owner explicitly asks for another language. See `.claude/skills/dsa/SKILL.md`.
 - Code must be correct and, for full programs, compile as-is.
+- A **full program** (a `public class` with `main`) is followed by `**Output:**` and a `text` code block containing exactly what it prints. Snippets (methods or statements) have no output block but must compile inside a class.
+- Don't rely on evaluation details that differ between Java versions (for example, concatenating an object and mutating it in the same expression).
 
 ### Callouts
 
@@ -134,7 +141,9 @@ This is the **only** raw HTML allowed in content.
 
 - Each question/example is an `###` H3 starting with its stable id: `### Q3. …`, `### P7. …`, `### E2. …`.
 - Ids are numbered per file and **append-only**. Never renumber or reuse a number, even after deleting a question — future progress tracking may store these ids.
-- Put `**Difficulty:** Easy | Medium | Hard` on the line after the heading of practice questions and examples, and order items from easy to hard.
+- Put `**Difficulty:** Easy | Medium | Hard` on the line after the heading of practice questions and examples, and order items from easy to hard. DSA practice adds the technique: `**Difficulty:** Medium · **Pattern:** Sliding window`.
+- **Interview questions** are grouped under H2 headings. Use the template's `## Conceptual` / `## Applied` / `## Coding`, or — for topics organised by level, such as DSA's interview-preparation topics — `## Beginner` / `## Intermediate` / `## Advanced`. The H2 carries the level, so `Q` items need no Difficulty line.
+- Multiple-choice answers name the letter and the option text: `**Answer:** B) O(log n)`.
 - **Set-based questions** (several questions sharing one data table, passage, arrangement or puzzle — e.g. data interpretation, reading comprehension, seating, puzzles) are grouped under H2 headings such as `## Set 1: Table`, with the shared material directly below. Numbering stays continuous across sets; easy→hard ordering applies within each set.
 - **Standard answer keys:** formats with a fixed five-choice key (syllogisms, statement–conclusion/assumption, cause and effect, data sufficiency) use options A–E and state the key once at the top of the file.
 
@@ -198,7 +207,7 @@ Schemas: [`metadata/schemas/categories.schema.json`](../metadata/schemas/categor
 | `title`            | yes      | string                   | Display, search.                                             |
 | `category`         | yes      | category id              | Navigation, breadcrumbs, folder path.                        |
 | `subcategory`      | no       | subcategory id \| null   | Navigation, breadcrumbs, folder path.                        |
-| `type`             | yes      | enum                     | `data-structure`, `algorithm`, `concept`, `aptitude`, `reference`. |
+| `type`             | yes      | enum                     | `data-structure`, `algorithm`, `pattern`, `concept`, `aptitude`, `reference`. |
 | `description`      | yes      | ≤ 200 chars              | Cards, search results.                                       |
 | `difficulty`       | yes      | enum                     | `beginner`, `intermediate`, `advanced`. Filtering.           |
 | `tags`             | no       | kebab-case[]             | Search, filtering.                                           |

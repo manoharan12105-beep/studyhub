@@ -2,5 +2,3687 @@
   "$schema": "../schemas/topics.schema.json",
   "schemaVersion": 1,
   "category": "dsa",
-  "topics": []
+  "topics": [
+    {
+      "id": "dsa-introduction",
+      "slug": "dsa-introduction",
+      "title": "Introduction to Data Structures and Algorithms",
+      "category": "dsa",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "What data structures and algorithms are, how ADTs differ from implementations, and how to study DSA for interviews.",
+      "difficulty": "beginner",
+      "tags": [
+        "dsa",
+        "abstract-data-types",
+        "basics"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "time-complexity",
+        "heap",
+        "fenwick-tree",
+        "heap-applications"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "time-complexity",
+      "slug": "time-complexity",
+      "title": "Time Complexity",
+      "category": "dsa",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "Counting the work an algorithm does as input grows: loops, nested loops, logarithmic steps and best/average/worst cases.",
+      "difficulty": "beginner",
+      "tags": [
+        "time-complexity",
+        "big-o",
+        "analysis"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "dsa-introduction"
+      ],
+      "relatedTopics": [
+        "constraints-and-complexity",
+        "recurrence-relations",
+        "two-pointers",
+        "sliding-window"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "asymptotic-notation",
+      "slug": "asymptotic-notation",
+      "title": "Asymptotic Notation",
+      "category": "dsa",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "Big-O, Big-Omega and Big-Theta defined precisely, with growth-rate ordering and proofs using constants.",
+      "difficulty": "beginner",
+      "tags": [
+        "big-o",
+        "big-omega",
+        "big-theta",
+        "analysis"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "time-complexity"
+      ],
+      "relatedTopics": [
+        "algorithm-properties"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "space-complexity",
+      "slug": "space-complexity",
+      "title": "Space Complexity",
+      "category": "dsa",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "Auxiliary versus total space, recursion stack depth, and trading memory for time.",
+      "difficulty": "beginner",
+      "tags": [
+        "space-complexity",
+        "recursion-stack",
+        "analysis"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "time-complexity"
+      ],
+      "relatedTopics": [
+        "dynamic-programming"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "amortized-analysis",
+      "slug": "amortized-analysis",
+      "title": "Amortized Analysis",
+      "category": "dsa",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "Average cost per operation over a sequence: dynamic arrays, two-stack queues, monotonic stacks and the aggregate method.",
+      "difficulty": "intermediate",
+      "tags": [
+        "amortized-analysis",
+        "dynamic-array",
+        "analysis"
+      ],
+      "estimatedMinutes": 40,
+      "order": 5,
+      "prerequisites": [
+        "time-complexity"
+      ],
+      "relatedTopics": [
+        "monotonic-stack"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "recurrence-relations",
+      "slug": "recurrence-relations",
+      "title": "Recurrence Relations and the Master Theorem",
+      "category": "dsa",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "Writing recurrences for recursive code and solving them by unrolling, recursion trees and the Master Theorem.",
+      "difficulty": "intermediate",
+      "tags": [
+        "recurrence",
+        "master-theorem",
+        "recursion-tree"
+      ],
+      "estimatedMinutes": 45,
+      "order": 6,
+      "prerequisites": [
+        "time-complexity"
+      ],
+      "relatedTopics": [
+        "space-complexity"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "algorithm-properties",
+      "slug": "algorithm-properties",
+      "title": "Algorithm Properties: Stable, In-Place, Adaptive, Online",
+      "category": "dsa",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "What stable, in-place, adaptive and online mean, with examples of algorithms that have or lack each property.",
+      "difficulty": "beginner",
+      "tags": [
+        "stable-sort",
+        "in-place",
+        "adaptive",
+        "online-algorithm"
+      ],
+      "estimatedMinutes": 25,
+      "order": 7,
+      "prerequisites": [
+        "time-complexity"
+      ],
+      "relatedTopics": [
+        "space-complexity",
+        "bubble-sort",
+        "selection-sort",
+        "insertion-sort",
+        "merge-sort",
+        "quick-sort"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "complexity-reference",
+      "slug": "complexity-reference",
+      "title": "DSA Complexity Reference",
+      "category": "dsa",
+      "subcategory": "fundamentals",
+      "type": "reference",
+      "description": "One-page reference of time and space costs for data-structure operations, sorting, searching, graph, string and DP algorithms.",
+      "difficulty": "intermediate",
+      "tags": [
+        "complexity",
+        "cheat-sheet",
+        "big-o"
+      ],
+      "estimatedMinutes": 20,
+      "order": 8,
+      "prerequisites": [
+        "time-complexity",
+        "space-complexity"
+      ],
+      "relatedTopics": [
+        "amortized-analysis",
+        "arrays",
+        "linked-list",
+        "stack",
+        "queue",
+        "hashing"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "java-arrays-and-lists",
+      "slug": "java-arrays-and-lists",
+      "title": "Java Toolkit: Arrays, ArrayList and LinkedList",
+      "category": "dsa",
+      "subcategory": "fundamentals",
+      "type": "reference",
+      "description": "Java arrays, the Arrays utility class, ArrayList and LinkedList: internals, costs and interview traps.",
+      "difficulty": "beginner",
+      "tags": [
+        "java",
+        "arrays",
+        "arraylist",
+        "linkedlist"
+      ],
+      "estimatedMinutes": 35,
+      "order": 9,
+      "prerequisites": [
+        "dsa-introduction"
+      ],
+      "relatedTopics": [
+        "arrays",
+        "linked-list",
+        "amortized-analysis"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "java-stacks-and-queues",
+      "slug": "java-stacks-and-queues",
+      "title": "Java Toolkit: Stack, Queue, Deque and PriorityQueue",
+      "category": "dsa",
+      "subcategory": "fundamentals",
+      "type": "reference",
+      "description": "Stack, Queue, Deque and PriorityQueue in Java: which class to use, method pairs, internals and pitfalls.",
+      "difficulty": "beginner",
+      "tags": [
+        "java",
+        "arraydeque",
+        "priorityqueue",
+        "stack",
+        "queue"
+      ],
+      "estimatedMinutes": 30,
+      "order": 10,
+      "prerequisites": [
+        "java-arrays-and-lists"
+      ],
+      "relatedTopics": [
+        "stack",
+        "queue",
+        "heap",
+        "dijkstra",
+        "top-k-elements"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "java-maps-and-sets",
+      "slug": "java-maps-and-sets",
+      "title": "Java Toolkit: HashMap, HashSet, LinkedHashMap, TreeMap and TreeSet",
+      "category": "dsa",
+      "subcategory": "fundamentals",
+      "type": "reference",
+      "description": "HashMap, HashSet, LinkedHashMap, TreeMap and TreeSet: hashing internals, ordering, navigation methods and equals/hashCode rules.",
+      "difficulty": "beginner",
+      "tags": [
+        "java",
+        "hashmap",
+        "treemap",
+        "hashset",
+        "linkedhashmap"
+      ],
+      "estimatedMinutes": 35,
+      "order": 11,
+      "prerequisites": [
+        "java-arrays-and-lists"
+      ],
+      "relatedTopics": [
+        "hashing",
+        "binary-search-tree"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "java-sorting-and-comparators",
+      "slug": "java-sorting-and-comparators",
+      "title": "Java Toolkit: Sorting, Comparable and Comparator",
+      "category": "dsa",
+      "subcategory": "fundamentals",
+      "type": "reference",
+      "description": "Arrays.sort and Collections.sort internals, Comparable versus Comparator, multi-key ordering and comparator bugs.",
+      "difficulty": "beginner",
+      "tags": [
+        "java",
+        "sorting",
+        "comparator",
+        "comparable"
+      ],
+      "estimatedMinutes": 30,
+      "order": 12,
+      "prerequisites": [
+        "java-arrays-and-lists"
+      ],
+      "relatedTopics": [
+        "merge-sort"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "arrays",
+      "slug": "arrays",
+      "title": "Arrays",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "Contiguous storage, index arithmetic, insertion and deletion costs, and the core in-place array techniques.",
+      "difficulty": "beginner",
+      "tags": [
+        "arrays",
+        "two-pointers",
+        "prefix-sum"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "time-complexity"
+      ],
+      "relatedTopics": [
+        "amortized-analysis",
+        "matrices",
+        "linear-search",
+        "binary-search",
+        "prefix-sum",
+        "java-arrays-and-lists"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "array-operations",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "matrices",
+      "slug": "matrices",
+      "title": "2D Arrays and Matrices",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "Two-dimensional arrays: traversal orders, neighbours, transpose and rotation, spiral order and in-place tricks.",
+      "difficulty": "beginner",
+      "tags": [
+        "matrix",
+        "2d-array",
+        "grid"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "binary-search-variations"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "strings",
+      "slug": "strings",
+      "title": "Strings",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "Java strings and StringBuilder, immutability, character counting, palindromes, anagrams and parsing.",
+      "difficulty": "beginner",
+      "tags": [
+        "strings",
+        "stringbuilder",
+        "palindrome",
+        "anagram"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "kmp-algorithm",
+        "rabin-karp",
+        "z-algorithm"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "linked-list",
+      "slug": "linked-list",
+      "title": "Linked List",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "Singly and doubly linked lists: node structure, insertion, deletion, traversal and sentinel nodes.",
+      "difficulty": "beginner",
+      "tags": [
+        "linked-list",
+        "pointers",
+        "sentinel-node"
+      ],
+      "estimatedMinutes": 45,
+      "order": 4,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "java-arrays-and-lists",
+        "linked-list-techniques"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "linked-list-pointers",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "linked-list-techniques",
+      "slug": "linked-list-techniques",
+      "title": "Linked List Techniques",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "algorithm",
+      "description": "Reversing, finding the middle, detecting cycles, merging and reordering linked lists with pointer techniques.",
+      "difficulty": "intermediate",
+      "tags": [
+        "linked-list",
+        "reversal",
+        "fast-slow-pointers",
+        "merge"
+      ],
+      "estimatedMinutes": 45,
+      "order": 5,
+      "prerequisites": [
+        "linked-list"
+      ],
+      "relatedTopics": [
+        "fast-and-slow-pointers",
+        "heap-applications"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "linked-list-pointers",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "stack",
+      "slug": "stack",
+      "title": "Stack",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "LIFO stacks with array and linked-list implementations, bracket matching, expression evaluation and monotonic stacks.",
+      "difficulty": "beginner",
+      "tags": [
+        "stack",
+        "lifo",
+        "brackets",
+        "expression-evaluation"
+      ],
+      "estimatedMinutes": 35,
+      "order": 6,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "monotonic-stack",
+        "java-stacks-and-queues"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "stack-operations",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "queue",
+      "slug": "queue",
+      "title": "Queue",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "FIFO queues, circular arrays, deques, priority queues and monotonic queues, with BFS as the main application.",
+      "difficulty": "beginner",
+      "tags": [
+        "queue",
+        "fifo",
+        "circular-queue",
+        "deque"
+      ],
+      "estimatedMinutes": 35,
+      "order": 7,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "heap",
+        "monotonic-queue",
+        "java-stacks-and-queues",
+        "amortized-analysis"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "queue-operations",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "hashing",
+      "slug": "hashing",
+      "title": "Hashing",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "Hash functions, buckets, chaining and open addressing, load factor and resizing, and how Java's HashMap works.",
+      "difficulty": "intermediate",
+      "tags": [
+        "hashing",
+        "hash-table",
+        "collisions",
+        "load-factor"
+      ],
+      "estimatedMinutes": 45,
+      "order": 8,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "amortized-analysis",
+        "java-maps-and-sets",
+        "hashing-pattern"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "binary-tree",
+      "slug": "binary-tree",
+      "title": "Binary Tree",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "Binary tree terminology, types, node representation, height and size, and recursive thinking about trees.",
+      "difficulty": "beginner",
+      "tags": [
+        "binary-tree",
+        "tree",
+        "recursion"
+      ],
+      "estimatedMinutes": 40,
+      "order": 9,
+      "prerequisites": [
+        "recursion"
+      ],
+      "relatedTopics": [
+        "binary-search-tree",
+        "heap",
+        "trie"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "tree-traversals",
+      "slug": "tree-traversals",
+      "title": "Tree Traversals",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "algorithm",
+      "description": "Preorder, inorder, postorder and level-order traversal, recursively and iteratively, and when to use each.",
+      "difficulty": "beginner",
+      "tags": [
+        "tree-traversal",
+        "preorder",
+        "inorder",
+        "postorder",
+        "level-order"
+      ],
+      "estimatedMinutes": 40,
+      "order": 10,
+      "prerequisites": [
+        "binary-tree"
+      ],
+      "relatedTopics": [
+        "stack",
+        "queue",
+        "recursion",
+        "binary-tree-problems"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "tree-traversal",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "binary-tree-problems",
+      "slug": "binary-tree-problems",
+      "title": "Binary Tree Problems",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "algorithm",
+      "description": "Classic tree problems: height, diameter, balance, lowest common ancestor, path sums, views and serialisation.",
+      "difficulty": "intermediate",
+      "tags": [
+        "binary-tree",
+        "diameter",
+        "lowest-common-ancestor",
+        "path-sum"
+      ],
+      "estimatedMinutes": 50,
+      "order": 11,
+      "prerequisites": [
+        "tree-traversals"
+      ],
+      "relatedTopics": [
+        "tree-dp",
+        "binary-tree",
+        "binary-search-tree",
+        "prefix-sum"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "binary-search-tree",
+      "slug": "binary-search-tree",
+      "title": "Binary Search Tree",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "The BST ordering property, search, insertion, deletion, validation, successor queries and balance.",
+      "difficulty": "intermediate",
+      "tags": [
+        "bst",
+        "binary-search-tree",
+        "ordered-set"
+      ],
+      "estimatedMinutes": 45,
+      "order": 12,
+      "prerequisites": [
+        "binary-tree"
+      ],
+      "relatedTopics": [
+        "java-maps-and-sets"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "bst-operations",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "heap",
+      "slug": "heap",
+      "title": "Heap",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "Binary heaps stored in arrays: sift-up, sift-down, O(n) heapify and Java's PriorityQueue.",
+      "difficulty": "intermediate",
+      "tags": [
+        "heap",
+        "priority-queue",
+        "heapify"
+      ],
+      "estimatedMinutes": 45,
+      "order": 13,
+      "prerequisites": [
+        "binary-tree",
+        "arrays"
+      ],
+      "relatedTopics": [
+        "heap-sort",
+        "heap-applications",
+        "java-stacks-and-queues",
+        "greedy-algorithms",
+        "binary-search-on-answer"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "heap-operations",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "heap-applications",
+      "slug": "heap-applications",
+      "title": "Heap Applications",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "algorithm",
+      "description": "Using heaps for k-th largest, top-k, running median and merging k sorted lists.",
+      "difficulty": "intermediate",
+      "tags": [
+        "heap",
+        "top-k",
+        "median-stream",
+        "k-way-merge"
+      ],
+      "estimatedMinutes": 45,
+      "order": 14,
+      "prerequisites": [
+        "heap"
+      ],
+      "relatedTopics": [
+        "java-stacks-and-queues",
+        "top-k-elements"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "trie",
+      "slug": "trie",
+      "title": "Trie",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "Prefix trees for word insertion, search and prefix queries, with arrays or maps for children.",
+      "difficulty": "intermediate",
+      "tags": [
+        "trie",
+        "prefix-tree",
+        "autocomplete"
+      ],
+      "estimatedMinutes": 40,
+      "order": 15,
+      "prerequisites": [
+        "strings"
+      ],
+      "relatedTopics": [
+        "hashing",
+        "backtracking-problems",
+        "bit-manipulation-pattern"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "trie-builder",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "graph",
+      "slug": "graph",
+      "title": "Graph",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "Graph terminology, directed and weighted graphs, and adjacency matrix, adjacency list and edge list representations.",
+      "difficulty": "beginner",
+      "tags": [
+        "graph",
+        "adjacency-list",
+        "adjacency-matrix"
+      ],
+      "estimatedMinutes": 40,
+      "order": 16,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "bipartite-graph",
+        "kruskals-algorithm",
+        "bellman-ford",
+        "topological-sort",
+        "bfs",
+        "dfs"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "disjoint-set-union",
+      "slug": "disjoint-set-union",
+      "title": "Disjoint Set Union (Union-Find)",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "Union-find with union by rank and path compression for near-constant-time connectivity and cycle detection.",
+      "difficulty": "intermediate",
+      "tags": [
+        "union-find",
+        "disjoint-set",
+        "path-compression"
+      ],
+      "estimatedMinutes": 40,
+      "order": 17,
+      "prerequisites": [
+        "graph"
+      ],
+      "relatedTopics": [
+        "kruskals-algorithm"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "union-find-forest",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "segment-tree",
+      "slug": "segment-tree",
+      "title": "Segment Tree and Lazy Propagation",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "Range queries with point and range updates using segment trees and lazy propagation.",
+      "difficulty": "advanced",
+      "tags": [
+        "segment-tree",
+        "range-query",
+        "lazy-propagation"
+      ],
+      "estimatedMinutes": 60,
+      "order": 18,
+      "prerequisites": [
+        "binary-tree",
+        "recursion"
+      ],
+      "relatedTopics": [
+        "prefix-sum",
+        "fenwick-tree",
+        "sparse-table"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "fenwick-tree",
+      "slug": "fenwick-tree",
+      "title": "Fenwick Tree (Binary Indexed Tree)",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "Binary indexed trees for prefix sums with point updates in O(log n), and range-update variants.",
+      "difficulty": "advanced",
+      "tags": [
+        "fenwick-tree",
+        "binary-indexed-tree",
+        "prefix-sum",
+        "range-query"
+      ],
+      "estimatedMinutes": 45,
+      "order": 19,
+      "prerequisites": [
+        "bit-manipulation"
+      ],
+      "relatedTopics": [
+        "prefix-sum",
+        "difference-array"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "sparse-table",
+      "slug": "sparse-table",
+      "title": "Sparse Table and Range Minimum Query",
+      "category": "dsa",
+      "subcategory": "data-structures",
+      "type": "data-structure",
+      "description": "O(1) range minimum, maximum and gcd queries on static arrays after O(n log n) preprocessing.",
+      "difficulty": "advanced",
+      "tags": [
+        "sparse-table",
+        "range-minimum-query",
+        "range-query"
+      ],
+      "estimatedMinutes": 40,
+      "order": 20,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "prefix-sum",
+        "segment-tree",
+        "binary-tree-problems",
+        "monotonic-queue",
+        "euclidean-gcd"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "recursion",
+      "slug": "recursion",
+      "title": "Recursion",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Base cases, the call stack, recursion trees, tail recursion and converting recursion to iteration.",
+      "difficulty": "beginner",
+      "tags": [
+        "recursion",
+        "call-stack",
+        "base-case"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "time-complexity"
+      ],
+      "relatedTopics": [
+        "stack",
+        "recurrence-relations",
+        "dynamic-programming",
+        "backtracking"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "recursion-tree",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "linear-search",
+      "slug": "linear-search",
+      "title": "Linear Search",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Scanning elements one by one: variants, sentinels, best and worst cases, and when a linear scan is the right choice.",
+      "difficulty": "beginner",
+      "tags": [
+        "searching",
+        "linear-search"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "binary-search",
+        "hashing-pattern"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "binary-search",
+      "slug": "binary-search",
+      "title": "Binary Search",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Halving a sorted search space: iterative and recursive versions, invariants, overflow-safe midpoints and correctness.",
+      "difficulty": "beginner",
+      "tags": [
+        "searching",
+        "binary-search",
+        "divide-and-conquer"
+      ],
+      "estimatedMinutes": 40,
+      "order": 3,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "binary-search-pattern",
+        "binary-search-on-answer",
+        "time-complexity",
+        "recurrence-relations",
+        "binary-search-variations"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "binary-search-steps",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "binary-search-variations",
+      "slug": "binary-search-variations",
+      "title": "Binary Search Variations",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "First and last occurrence, lower and upper bounds, rotated arrays, peaks and 2D matrices.",
+      "difficulty": "intermediate",
+      "tags": [
+        "binary-search",
+        "lower-bound",
+        "rotated-array",
+        "peak-element"
+      ],
+      "estimatedMinutes": 45,
+      "order": 4,
+      "prerequisites": [
+        "binary-search"
+      ],
+      "relatedTopics": [
+        "matrices"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "binary-search-steps",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "bubble-sort",
+      "slug": "bubble-sort",
+      "title": "Bubble Sort",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Repeatedly swapping adjacent out-of-order pairs, with early exit; stable, in place, O(n²).",
+      "difficulty": "beginner",
+      "tags": [
+        "sorting",
+        "bubble-sort",
+        "stable-sort"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "algorithm-properties",
+        "insertion-sort",
+        "merge-sort",
+        "fenwick-tree"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "sorting-visualizer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "selection-sort",
+      "slug": "selection-sort",
+      "title": "Selection Sort",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Selecting the minimum of the unsorted part each pass; in place, not stable, minimal swaps, O(n²).",
+      "difficulty": "beginner",
+      "tags": [
+        "sorting",
+        "selection-sort"
+      ],
+      "estimatedMinutes": 25,
+      "order": 6,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "algorithm-properties",
+        "heap-sort",
+        "heap-applications"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "sorting-visualizer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "insertion-sort",
+      "slug": "insertion-sort",
+      "title": "Insertion Sort",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Growing a sorted prefix by inserting each element; stable, adaptive, fast on nearly sorted data.",
+      "difficulty": "beginner",
+      "tags": [
+        "sorting",
+        "insertion-sort",
+        "adaptive",
+        "stable-sort"
+      ],
+      "estimatedMinutes": 30,
+      "order": 7,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "algorithm-properties",
+        "merge-sort"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "sorting-visualizer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "merge-sort",
+      "slug": "merge-sort",
+      "title": "Merge Sort",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Divide, sort halves recursively and merge: stable O(n log n) in every case with O(n) extra space.",
+      "difficulty": "intermediate",
+      "tags": [
+        "sorting",
+        "merge-sort",
+        "divide-and-conquer",
+        "stable-sort"
+      ],
+      "estimatedMinutes": 45,
+      "order": 8,
+      "prerequisites": [
+        "recursion"
+      ],
+      "relatedTopics": [
+        "divide-and-conquer",
+        "recurrence-relations",
+        "linked-list-techniques"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "sorting-visualizer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "quick-sort",
+      "slug": "quick-sort",
+      "title": "Quick Sort",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Partitioning around a pivot (Lomuto and Hoare), pivot choice, O(n log n) expected and O(n²) worst case.",
+      "difficulty": "intermediate",
+      "tags": [
+        "sorting",
+        "quick-sort",
+        "partition",
+        "quickselect"
+      ],
+      "estimatedMinutes": 50,
+      "order": 9,
+      "prerequisites": [
+        "recursion"
+      ],
+      "relatedTopics": [
+        "divide-and-conquer",
+        "heap-applications"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "sorting-visualizer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "heap-sort",
+      "slug": "heap-sort",
+      "title": "Heap Sort",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Building a max-heap and repeatedly extracting the maximum: in place, O(n log n) guaranteed, not stable.",
+      "difficulty": "intermediate",
+      "tags": [
+        "sorting",
+        "heap-sort",
+        "heap"
+      ],
+      "estimatedMinutes": 35,
+      "order": 10,
+      "prerequisites": [
+        "heap"
+      ],
+      "relatedTopics": [
+        "selection-sort"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "sorting-visualizer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "counting-sort",
+      "slug": "counting-sort",
+      "title": "Counting Sort",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Sorting small integer keys by counting occurrences: O(n + k), stable with prefix sums.",
+      "difficulty": "intermediate",
+      "tags": [
+        "sorting",
+        "counting-sort",
+        "non-comparison-sort"
+      ],
+      "estimatedMinutes": 30,
+      "order": 11,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "algorithm-properties",
+        "radix-sort"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "sorting-visualizer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "radix-sort",
+      "slug": "radix-sort",
+      "title": "Radix Sort",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Sorting digit by digit with a stable counting sort: LSD and MSD variants, O(d(n + b)).",
+      "difficulty": "intermediate",
+      "tags": [
+        "sorting",
+        "radix-sort",
+        "non-comparison-sort"
+      ],
+      "estimatedMinutes": 35,
+      "order": 12,
+      "prerequisites": [
+        "counting-sort"
+      ],
+      "relatedTopics": [
+        "algorithm-properties"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "sorting-visualizer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "bucket-sort",
+      "slug": "bucket-sort",
+      "title": "Bucket Sort",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Distributing uniformly spread values into buckets and sorting each: O(n) average, O(n²) worst.",
+      "difficulty": "intermediate",
+      "tags": [
+        "sorting",
+        "bucket-sort",
+        "non-comparison-sort"
+      ],
+      "estimatedMinutes": 30,
+      "order": 13,
+      "prerequisites": [
+        "insertion-sort"
+      ],
+      "relatedTopics": [
+        "counting-sort"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "sorting-visualizer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "backtracking",
+      "slug": "backtracking",
+      "title": "Backtracking",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Choose, explore, unchoose: generating subsets, permutations and combinations with pruning.",
+      "difficulty": "intermediate",
+      "tags": [
+        "backtracking",
+        "subsets",
+        "permutations",
+        "combinations"
+      ],
+      "estimatedMinutes": 45,
+      "order": 14,
+      "prerequisites": [
+        "recursion"
+      ],
+      "relatedTopics": [
+        "backtracking-problems",
+        "knapsack-dp"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "backtracking-tree",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "backtracking-problems",
+      "slug": "backtracking-problems",
+      "title": "Backtracking Problems: N-Queens, Sudoku, Maze, Word Search",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Constraint-satisfaction search: N-Queens, Sudoku, mazes and word search with effective pruning.",
+      "difficulty": "advanced",
+      "tags": [
+        "backtracking",
+        "n-queens",
+        "sudoku",
+        "word-search"
+      ],
+      "estimatedMinutes": 55,
+      "order": 15,
+      "prerequisites": [
+        "backtracking"
+      ],
+      "relatedTopics": [
+        "matrices",
+        "bfs",
+        "trie",
+        "bit-manipulation"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "backtracking-tree",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "divide-and-conquer",
+      "slug": "divide-and-conquer",
+      "title": "Divide and Conquer",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Splitting into independent subproblems and combining results, analysed with recurrences.",
+      "difficulty": "intermediate",
+      "tags": [
+        "divide-and-conquer",
+        "recursion",
+        "master-theorem"
+      ],
+      "estimatedMinutes": 40,
+      "order": 16,
+      "prerequisites": [
+        "recursion",
+        "recurrence-relations"
+      ],
+      "relatedTopics": [
+        "merge-sort",
+        "quick-sort",
+        "binary-search",
+        "dynamic-programming",
+        "binary-tree-problems",
+        "brute-force-to-optimal"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "greedy-algorithms",
+      "slug": "greedy-algorithms",
+      "title": "Greedy Algorithms",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Locally optimal choices, the greedy-choice property, exchange arguments and classic greedy algorithms.",
+      "difficulty": "intermediate",
+      "tags": [
+        "greedy",
+        "exchange-argument",
+        "activity-selection"
+      ],
+      "estimatedMinutes": 45,
+      "order": 17,
+      "prerequisites": [
+        "algorithm-properties"
+      ],
+      "relatedTopics": [
+        "dynamic-programming",
+        "java-sorting-and-comparators",
+        "heap",
+        "knapsack-dp",
+        "disjoint-set-union",
+        "greedy-problems"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "greedy-problems",
+      "slug": "greedy-problems",
+      "title": "Greedy Problems: Intervals, Platforms, Gas Station, Jump Game",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Interval scheduling, minimum platforms, gas station and jump game solved greedily with proofs.",
+      "difficulty": "intermediate",
+      "tags": [
+        "greedy",
+        "intervals",
+        "jump-game",
+        "gas-station"
+      ],
+      "estimatedMinutes": 50,
+      "order": 18,
+      "prerequisites": [
+        "greedy-algorithms"
+      ],
+      "relatedTopics": [
+        "merge-intervals",
+        "difference-array"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "bfs",
+      "slug": "bfs",
+      "title": "Breadth-First Search (BFS)",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Breadth-first search with a queue: level order, unweighted shortest paths, multi-source and 0-1 BFS.",
+      "difficulty": "beginner",
+      "tags": [
+        "graph",
+        "bfs",
+        "shortest-path",
+        "queue"
+      ],
+      "estimatedMinutes": 40,
+      "order": 19,
+      "prerequisites": [
+        "graph",
+        "queue"
+      ],
+      "relatedTopics": [
+        "topological-sort",
+        "dijkstra",
+        "tree-traversals"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "graph-traversal",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dfs",
+      "slug": "dfs",
+      "title": "Depth-First Search (DFS)",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Depth-first search recursively and with a stack: visiting order, discovery and finish times, applications.",
+      "difficulty": "beginner",
+      "tags": [
+        "graph",
+        "dfs",
+        "recursion",
+        "traversal"
+      ],
+      "estimatedMinutes": 40,
+      "order": 20,
+      "prerequisites": [
+        "graph",
+        "recursion"
+      ],
+      "relatedTopics": [
+        "stack",
+        "cycle-detection",
+        "bridges-and-articulation-points",
+        "strongly-connected-components",
+        "graph-traversal-problems",
+        "topological-sort"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "graph-traversal",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "graph-traversal-problems",
+      "slug": "graph-traversal-problems",
+      "title": "Graph Traversal Problems: Components, Islands, Flood Fill, Clone Graph",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Connected components, islands, flood fill, clone graph and similar BFS/DFS applications.",
+      "difficulty": "intermediate",
+      "tags": [
+        "graph",
+        "connected-components",
+        "flood-fill",
+        "islands"
+      ],
+      "estimatedMinutes": 50,
+      "order": 21,
+      "prerequisites": [
+        "bfs",
+        "dfs"
+      ],
+      "relatedTopics": [
+        "matrices",
+        "disjoint-set-union"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "cycle-detection",
+      "slug": "cycle-detection",
+      "title": "Cycle Detection in Graphs",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Detecting cycles in undirected graphs (parent check, union-find) and directed graphs (three colours, Kahn).",
+      "difficulty": "intermediate",
+      "tags": [
+        "graph",
+        "cycle-detection",
+        "directed-graph"
+      ],
+      "estimatedMinutes": 40,
+      "order": 22,
+      "prerequisites": [
+        "dfs"
+      ],
+      "relatedTopics": [
+        "disjoint-set-union",
+        "topological-sort",
+        "bfs",
+        "fast-and-slow-pointers"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "bipartite-graph",
+      "slug": "bipartite-graph",
+      "title": "Bipartite Graph Check",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Two-colouring a graph with BFS or DFS, and why a graph is bipartite exactly when it has no odd cycle.",
+      "difficulty": "intermediate",
+      "tags": [
+        "graph",
+        "bipartite",
+        "graph-coloring"
+      ],
+      "estimatedMinutes": 30,
+      "order": 23,
+      "prerequisites": [
+        "bfs"
+      ],
+      "relatedTopics": [
+        "dfs",
+        "backtracking-problems"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dijkstra",
+      "slug": "dijkstra",
+      "title": "Dijkstra's Algorithm",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Single-source shortest paths with non-negative weights using a priority queue, and why negative edges break it.",
+      "difficulty": "intermediate",
+      "tags": [
+        "graph",
+        "shortest-path",
+        "dijkstra",
+        "priority-queue"
+      ],
+      "estimatedMinutes": 50,
+      "order": 24,
+      "prerequisites": [
+        "bfs",
+        "heap"
+      ],
+      "relatedTopics": [
+        "graph",
+        "bellman-ford",
+        "floyd-warshall"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "dijkstra-steps",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "bellman-ford",
+      "slug": "bellman-ford",
+      "title": "Bellman–Ford Algorithm",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Shortest paths with negative edges by repeated relaxation, negative-cycle detection and k-edge limits.",
+      "difficulty": "intermediate",
+      "tags": [
+        "graph",
+        "shortest-path",
+        "bellman-ford",
+        "negative-cycle"
+      ],
+      "estimatedMinutes": 40,
+      "order": 25,
+      "prerequisites": [
+        "dijkstra"
+      ],
+      "relatedTopics": [
+        "graph"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "floyd-warshall",
+      "slug": "floyd-warshall",
+      "title": "Floyd–Warshall Algorithm",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "All-pairs shortest paths by dynamic programming over intermediate vertices in O(V³).",
+      "difficulty": "intermediate",
+      "tags": [
+        "graph",
+        "all-pairs-shortest-path",
+        "floyd-warshall",
+        "dynamic-programming"
+      ],
+      "estimatedMinutes": 35,
+      "order": 26,
+      "prerequisites": [
+        "dijkstra"
+      ],
+      "relatedTopics": [
+        "graph",
+        "dynamic-programming"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "prims-algorithm",
+      "slug": "prims-algorithm",
+      "title": "Prim's Algorithm (Minimum Spanning Tree)",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Growing a minimum spanning tree from a vertex with a priority queue; the cut property.",
+      "difficulty": "intermediate",
+      "tags": [
+        "graph",
+        "minimum-spanning-tree",
+        "prims-algorithm"
+      ],
+      "estimatedMinutes": 40,
+      "order": 27,
+      "prerequisites": [
+        "graph",
+        "heap"
+      ],
+      "relatedTopics": [
+        "kruskals-algorithm",
+        "greedy-algorithms"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "mst-builder",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "kruskals-algorithm",
+      "slug": "kruskals-algorithm",
+      "title": "Kruskal's Algorithm (Minimum Spanning Tree)",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Building a minimum spanning tree by sorting edges and joining components with union-find.",
+      "difficulty": "intermediate",
+      "tags": [
+        "graph",
+        "minimum-spanning-tree",
+        "kruskals-algorithm",
+        "union-find"
+      ],
+      "estimatedMinutes": 40,
+      "order": 28,
+      "prerequisites": [
+        "disjoint-set-union"
+      ],
+      "relatedTopics": [
+        "prims-algorithm"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "mst-builder",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "topological-sort",
+      "slug": "topological-sort",
+      "title": "Topological Sort (DFS and Kahn's Algorithm)",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Ordering a DAG with DFS finishing times or Kahn's in-degree algorithm, and detecting cycles.",
+      "difficulty": "intermediate",
+      "tags": [
+        "graph",
+        "topological-sort",
+        "dag",
+        "kahn"
+      ],
+      "estimatedMinutes": 40,
+      "order": 29,
+      "prerequisites": [
+        "dfs",
+        "bfs"
+      ],
+      "relatedTopics": [
+        "cycle-detection"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "topological-sort-steps",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "strongly-connected-components",
+      "slug": "strongly-connected-components",
+      "title": "Strongly Connected Components (Kosaraju and Tarjan)",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Kosaraju's and Tarjan's algorithms for strongly connected components and the condensation DAG.",
+      "difficulty": "advanced",
+      "tags": [
+        "graph",
+        "scc",
+        "kosaraju",
+        "tarjan"
+      ],
+      "estimatedMinutes": 50,
+      "order": 30,
+      "prerequisites": [
+        "dfs",
+        "topological-sort"
+      ],
+      "relatedTopics": [
+        "bridges-and-articulation-points"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "bridges-and-articulation-points",
+      "slug": "bridges-and-articulation-points",
+      "title": "Bridges and Articulation Points",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Finding critical edges and vertices with DFS discovery times and low-link values.",
+      "difficulty": "advanced",
+      "tags": [
+        "graph",
+        "bridges",
+        "articulation-points",
+        "low-link"
+      ],
+      "estimatedMinutes": 45,
+      "order": 31,
+      "prerequisites": [
+        "dfs"
+      ],
+      "relatedTopics": [
+        "strongly-connected-components"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dynamic-programming",
+      "slug": "dynamic-programming",
+      "title": "Dynamic Programming",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Optimal substructure and overlapping subproblems, memoisation versus tabulation, and space optimisation.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dynamic-programming",
+        "memoization",
+        "tabulation"
+      ],
+      "estimatedMinutes": 50,
+      "order": 32,
+      "prerequisites": [
+        "recursion"
+      ],
+      "relatedTopics": [
+        "recurrence-relations",
+        "knapsack-dp",
+        "dp-1d",
+        "dp-2d-grid",
+        "subsequence-dp",
+        "string-dp"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "dp-table",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dp-1d",
+      "slug": "dp-1d",
+      "title": "1D Dynamic Programming",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "One-dimensional DP over prefixes: climbing stairs, house robber, decode ways, word break and LIS-style states.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dynamic-programming",
+        "1d-dp",
+        "house-robber",
+        "climbing-stairs"
+      ],
+      "estimatedMinutes": 50,
+      "order": 33,
+      "prerequisites": [
+        "dynamic-programming"
+      ],
+      "relatedTopics": [
+        "subsequence-dp",
+        "string-dp",
+        "knapsack-dp",
+        "brute-force-to-optimal"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dp-2d-grid",
+      "slug": "dp-2d-grid",
+      "title": "Grid and 2D Dynamic Programming",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "DP on grids and two-dimensional states: unique paths, minimum path sum, maximal square and rolling rows.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dynamic-programming",
+        "grid-dp",
+        "unique-paths"
+      ],
+      "estimatedMinutes": 45,
+      "order": 34,
+      "prerequisites": [
+        "dynamic-programming"
+      ],
+      "relatedTopics": [
+        "subsequence-dp",
+        "string-dp",
+        "matrices"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "dp-table",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "knapsack-dp",
+      "slug": "knapsack-dp",
+      "title": "Knapsack DP (0/1 and Unbounded)",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "0/1 and unbounded knapsack, subset sum and coin change, with the loop-direction rule for 1D tables.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dynamic-programming",
+        "knapsack",
+        "subset-sum",
+        "coin-change"
+      ],
+      "estimatedMinutes": 50,
+      "order": 35,
+      "prerequisites": [
+        "dynamic-programming"
+      ],
+      "relatedTopics": [
+        "greedy-algorithms"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "dp-table",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "subsequence-dp",
+      "slug": "subsequence-dp",
+      "title": "Subsequence DP (LIS and LCS)",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Longest increasing subsequence (O(n²) and O(n log n)) and longest common subsequence with reconstruction.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dynamic-programming",
+        "lis",
+        "lcs",
+        "subsequence"
+      ],
+      "estimatedMinutes": 50,
+      "order": 36,
+      "prerequisites": [
+        "dynamic-programming"
+      ],
+      "relatedTopics": [
+        "binary-search",
+        "strings",
+        "string-dp"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "dp-table",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "string-dp",
+      "slug": "string-dp",
+      "title": "String DP (Edit Distance, Palindromes, Word Break)",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Edit distance, palindromic substrings and subsequences, word break and pattern matching as DP over prefixes.",
+      "difficulty": "advanced",
+      "tags": [
+        "dynamic-programming",
+        "edit-distance",
+        "palindrome",
+        "word-break"
+      ],
+      "estimatedMinutes": 55,
+      "order": 37,
+      "prerequisites": [
+        "subsequence-dp"
+      ],
+      "relatedTopics": [
+        "strings"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "dp-table",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "partition-and-interval-dp",
+      "slug": "partition-and-interval-dp",
+      "title": "Partition and Interval DP",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Splitting sequences at cut points and solving dp[l][r] intervals: palindrome partitioning, matrix chain, burst balloons.",
+      "difficulty": "advanced",
+      "tags": [
+        "dynamic-programming",
+        "interval-dp",
+        "partition-dp",
+        "matrix-chain"
+      ],
+      "estimatedMinutes": 55,
+      "order": 38,
+      "prerequisites": [
+        "dp-1d",
+        "dp-2d-grid"
+      ],
+      "relatedTopics": [
+        "dynamic-programming",
+        "string-dp"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "stock-dp",
+      "slug": "stock-dp",
+      "title": "Stock Buy-and-Sell DP (State Machine DP)",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Buy-and-sell stock problems as state machines: one, unlimited and k transactions, cooldowns and fees.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dynamic-programming",
+        "state-machine",
+        "stock-problems"
+      ],
+      "estimatedMinutes": 40,
+      "order": 39,
+      "prerequisites": [
+        "dp-1d"
+      ],
+      "relatedTopics": [
+        "dynamic-programming"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "tree-dp",
+      "slug": "tree-dp",
+      "title": "Tree DP",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Postorder DP on trees with several states per node: house robber III, independent sets, subtree sizes, rerooting.",
+      "difficulty": "advanced",
+      "tags": [
+        "dynamic-programming",
+        "tree-dp",
+        "rerooting"
+      ],
+      "estimatedMinutes": 45,
+      "order": 40,
+      "prerequisites": [
+        "binary-tree-problems",
+        "dynamic-programming"
+      ],
+      "relatedTopics": [
+        "tree-traversals"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "bitmask-dp",
+      "slug": "bitmask-dp",
+      "title": "Bitmask DP",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "DP over subsets encoded as bitmasks for travelling salesman, assignment and partition problems with small n.",
+      "difficulty": "advanced",
+      "tags": [
+        "dynamic-programming",
+        "bitmask",
+        "tsp",
+        "assignment"
+      ],
+      "estimatedMinutes": 50,
+      "order": 41,
+      "prerequisites": [
+        "bit-manipulation",
+        "dynamic-programming"
+      ],
+      "relatedTopics": [
+        "backtracking",
+        "knapsack-dp"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "naive-pattern-matching",
+      "slug": "naive-pattern-matching",
+      "title": "Naive Pattern Matching",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Brute-force substring search: trying every alignment, its O(n × m) worst case and why faster methods exist.",
+      "difficulty": "beginner",
+      "tags": [
+        "strings",
+        "pattern-matching",
+        "brute-force"
+      ],
+      "estimatedMinutes": 25,
+      "order": 42,
+      "prerequisites": [
+        "strings"
+      ],
+      "relatedTopics": [
+        "kmp-algorithm",
+        "rabin-karp",
+        "z-algorithm",
+        "time-complexity"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "kmp-algorithm",
+      "slug": "kmp-algorithm",
+      "title": "KMP Algorithm",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Knuth–Morris–Pratt matching with the LPS failure array for guaranteed O(n + m) search, periods and borders.",
+      "difficulty": "advanced",
+      "tags": [
+        "strings",
+        "pattern-matching",
+        "kmp",
+        "lps-array"
+      ],
+      "estimatedMinutes": 50,
+      "order": 43,
+      "prerequisites": [
+        "naive-pattern-matching"
+      ],
+      "relatedTopics": [
+        "strings",
+        "amortized-analysis",
+        "rabin-karp",
+        "z-algorithm"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "rabin-karp",
+      "slug": "rabin-karp",
+      "title": "Rabin–Karp Algorithm",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Rolling hashes for substring search, collisions and verification, and prefix hashes for O(1) substring comparison.",
+      "difficulty": "intermediate",
+      "tags": [
+        "strings",
+        "pattern-matching",
+        "rolling-hash",
+        "hashing"
+      ],
+      "estimatedMinutes": 40,
+      "order": 44,
+      "prerequisites": [
+        "naive-pattern-matching",
+        "hashing"
+      ],
+      "relatedTopics": [
+        "modular-arithmetic",
+        "kmp-algorithm",
+        "binary-search-on-answer"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "z-algorithm",
+      "slug": "z-algorithm",
+      "title": "Z Algorithm",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Computing the Z-array in linear time with the Z-box, and using it for pattern matching and periods.",
+      "difficulty": "advanced",
+      "tags": [
+        "strings",
+        "pattern-matching",
+        "z-array"
+      ],
+      "estimatedMinutes": 40,
+      "order": 45,
+      "prerequisites": [
+        "naive-pattern-matching"
+      ],
+      "relatedTopics": [
+        "kmp-algorithm",
+        "strings"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "bit-manipulation",
+      "slug": "bit-manipulation",
+      "title": "Bit Manipulation",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Bitwise operators, two's complement, Java shift rules and core tricks such as clearing the lowest set bit.",
+      "difficulty": "intermediate",
+      "tags": [
+        "bit-manipulation",
+        "bitwise-operators",
+        "twos-complement",
+        "bitmask"
+      ],
+      "estimatedMinutes": 45,
+      "order": 46,
+      "prerequisites": [
+        "time-complexity"
+      ],
+      "relatedTopics": [
+        "bitmask-dp"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "euclidean-gcd",
+      "slug": "euclidean-gcd",
+      "title": "Euclidean GCD",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "GCD by repeated remainders in O(log min(a, b)), LCM, and the extended algorithm for Bézout coefficients.",
+      "difficulty": "beginner",
+      "tags": [
+        "math",
+        "gcd",
+        "lcm",
+        "extended-euclid"
+      ],
+      "estimatedMinutes": 30,
+      "order": 47,
+      "prerequisites": [
+        "recursion"
+      ],
+      "relatedTopics": [
+        "modular-arithmetic",
+        "time-complexity"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "sieve-of-eratosthenes",
+      "slug": "sieve-of-eratosthenes",
+      "title": "Sieve of Eratosthenes",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Finding all primes up to n in O(n log log n), with smallest-prime-factor and segmented variants.",
+      "difficulty": "beginner",
+      "tags": [
+        "math",
+        "primes",
+        "sieve"
+      ],
+      "estimatedMinutes": 30,
+      "order": 48,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "prime-factorization",
+        "time-complexity"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "prime-factorization",
+      "slug": "prime-factorization",
+      "title": "Prime Factorization",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Trial division in O(√n), smallest-prime-factor factorisation, and divisor counts, sums and Euler's totient.",
+      "difficulty": "intermediate",
+      "tags": [
+        "math",
+        "primes",
+        "factorization",
+        "divisors"
+      ],
+      "estimatedMinutes": 35,
+      "order": 49,
+      "prerequisites": [
+        "sieve-of-eratosthenes"
+      ],
+      "relatedTopics": [
+        "time-complexity",
+        "disjoint-set-union"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "modular-arithmetic",
+      "slug": "modular-arithmetic",
+      "title": "Modular Arithmetic",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Computing modulo 10⁹ + 7 safely: negative remainders, overflow, modular inverses and binomial coefficients.",
+      "difficulty": "intermediate",
+      "tags": [
+        "math",
+        "modular-arithmetic",
+        "modular-inverse",
+        "combinatorics"
+      ],
+      "estimatedMinutes": 40,
+      "order": 50,
+      "prerequisites": [
+        "euclidean-gcd",
+        "fast-exponentiation"
+      ],
+      "relatedTopics": [
+        "rabin-karp"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "fast-exponentiation",
+      "slug": "fast-exponentiation",
+      "title": "Fast Exponentiation",
+      "category": "dsa",
+      "subcategory": "algorithms",
+      "type": "algorithm",
+      "description": "Exponentiation by squaring in O(log e), modular powers and matrix exponentiation for linear recurrences.",
+      "difficulty": "intermediate",
+      "tags": [
+        "math",
+        "fast-exponentiation",
+        "matrix-exponentiation"
+      ],
+      "estimatedMinutes": 35,
+      "order": 51,
+      "prerequisites": [
+        "recursion",
+        "bit-manipulation"
+      ],
+      "relatedTopics": [
+        "modular-arithmetic",
+        "divide-and-conquer",
+        "recurrence-relations"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "two-pointers",
+      "slug": "two-pointers",
+      "title": "Two Pointers",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Opposite-end and same-direction pointers for pair sums, in-place filtering, partitioning and container problems.",
+      "difficulty": "beginner",
+      "tags": [
+        "two-pointers",
+        "arrays",
+        "sorted-array"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "merge-sort",
+        "fast-and-slow-pointers",
+        "sliding-window",
+        "amortized-analysis",
+        "hashing-pattern",
+        "prefix-sum"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "two-pointer-scan",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "sliding-window",
+      "slug": "sliding-window",
+      "title": "Sliding Window",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Fixed and variable windows over contiguous ranges, updated incrementally in O(n) total.",
+      "difficulty": "intermediate",
+      "tags": [
+        "sliding-window",
+        "subarray",
+        "substring"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "two-pointers"
+      ],
+      "relatedTopics": [
+        "amortized-analysis",
+        "prefix-sum",
+        "monotonic-queue",
+        "dp-pattern",
+        "segment-tree"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "sliding-window",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "fast-and-slow-pointers",
+      "slug": "fast-and-slow-pointers",
+      "title": "Fast and Slow Pointers",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Floyd's tortoise and hare for middles, cycles and cycle entrances in lists and implicit sequences.",
+      "difficulty": "intermediate",
+      "tags": [
+        "fast-slow-pointers",
+        "cycle-detection",
+        "linked-list"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "linked-list"
+      ],
+      "relatedTopics": [
+        "linked-list-techniques",
+        "cycle-detection"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "linked-list-pointers",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "prefix-sum",
+      "slug": "prefix-sum",
+      "title": "Prefix Sum",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Running totals for O(1) range sums and, with a hash map, counting subarrays with a target sum.",
+      "difficulty": "beginner",
+      "tags": [
+        "prefix-sum",
+        "range-sum",
+        "subarray-sum"
+      ],
+      "estimatedMinutes": 35,
+      "order": 4,
+      "prerequisites": [
+        "arrays"
+      ],
+      "relatedTopics": [
+        "sliding-window",
+        "fenwick-tree",
+        "segment-tree",
+        "difference-array",
+        "sparse-table"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "difference-array",
+      "slug": "difference-array",
+      "title": "Difference Array",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "O(1) range additions recorded as start and end markers, rebuilt with one prefix sum; 1D and 2D.",
+      "difficulty": "intermediate",
+      "tags": [
+        "difference-array",
+        "range-update",
+        "sweep-line"
+      ],
+      "estimatedMinutes": 30,
+      "order": 5,
+      "prerequisites": [
+        "prefix-sum"
+      ],
+      "relatedTopics": [
+        "fenwick-tree",
+        "segment-tree",
+        "greedy-problems",
+        "merge-intervals"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "hashing-pattern",
+      "slug": "hashing-pattern",
+      "title": "Hashing Pattern",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Replacing repeated searches with hash-map lookups: complements, counts, last indices and canonical keys.",
+      "difficulty": "beginner",
+      "tags": [
+        "hashing",
+        "hash-map",
+        "two-sum",
+        "frequency-count"
+      ],
+      "estimatedMinutes": 30,
+      "order": 6,
+      "prerequisites": [
+        "hashing"
+      ],
+      "relatedTopics": [
+        "java-maps-and-sets",
+        "two-pointers",
+        "prefix-sum",
+        "binary-search-tree"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "binary-search-pattern",
+      "slug": "binary-search-pattern",
+      "title": "Binary Search Pattern",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Recognising monotone yes/no questions and finding their boundary with one consistent binary search template.",
+      "difficulty": "intermediate",
+      "tags": [
+        "binary-search",
+        "monotonic-predicate",
+        "lower-bound"
+      ],
+      "estimatedMinutes": 35,
+      "order": 7,
+      "prerequisites": [
+        "binary-search"
+      ],
+      "relatedTopics": [
+        "binary-search-on-answer",
+        "binary-search-variations"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "binary-search-steps",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "binary-search-on-answer",
+      "slug": "binary-search-on-answer",
+      "title": "Binary Search on Answer",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Searching the range of possible answers with a monotone feasibility check for min-max and max-min problems.",
+      "difficulty": "intermediate",
+      "tags": [
+        "binary-search",
+        "parametric-search",
+        "min-max"
+      ],
+      "estimatedMinutes": 40,
+      "order": 8,
+      "prerequisites": [
+        "binary-search-pattern"
+      ],
+      "relatedTopics": [
+        "binary-search-variations",
+        "greedy-pattern"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "monotonic-stack",
+      "slug": "monotonic-stack",
+      "title": "Monotonic Stack",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Keeping a stack in monotone order to answer next/previous greater or smaller queries in O(n).",
+      "difficulty": "intermediate",
+      "tags": [
+        "monotonic-stack",
+        "next-greater-element",
+        "stack"
+      ],
+      "estimatedMinutes": 40,
+      "order": 9,
+      "prerequisites": [
+        "stack"
+      ],
+      "relatedTopics": [
+        "amortized-analysis",
+        "monotonic-queue",
+        "sparse-table"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "monotonic-queue",
+      "slug": "monotonic-queue",
+      "title": "Monotonic Queue",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "A deque of dominant candidates for sliding-window maxima and minima and window-limited DP.",
+      "difficulty": "advanced",
+      "tags": [
+        "monotonic-queue",
+        "sliding-window-maximum",
+        "deque"
+      ],
+      "estimatedMinutes": 35,
+      "order": 10,
+      "prerequisites": [
+        "queue",
+        "sliding-window"
+      ],
+      "relatedTopics": [
+        "monotonic-stack",
+        "sparse-table",
+        "segment-tree"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "merge-intervals",
+      "slug": "merge-intervals",
+      "title": "Merge Intervals",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Sorting intervals by start and sweeping once to merge, insert, intersect and find gaps.",
+      "difficulty": "intermediate",
+      "tags": [
+        "intervals",
+        "merge-intervals",
+        "sorting"
+      ],
+      "estimatedMinutes": 35,
+      "order": 11,
+      "prerequisites": [
+        "java-sorting-and-comparators"
+      ],
+      "relatedTopics": [
+        "greedy-problems",
+        "difference-array"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "top-k-elements",
+      "slug": "top-k-elements",
+      "title": "Top K Elements",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Size-k heaps and frontier heaps for the k largest, smallest, closest or most frequent items.",
+      "difficulty": "intermediate",
+      "tags": [
+        "heap",
+        "top-k",
+        "priority-queue"
+      ],
+      "estimatedMinutes": 35,
+      "order": 12,
+      "prerequisites": [
+        "heap"
+      ],
+      "relatedTopics": [
+        "heap-applications",
+        "quick-sort",
+        "binary-search-on-answer"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "greedy-pattern",
+      "slug": "greedy-pattern",
+      "title": "Greedy Pattern",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Recognising when a sort key or local rule is provably optimal, and when a counterexample demands DP.",
+      "difficulty": "intermediate",
+      "tags": [
+        "greedy",
+        "sorting",
+        "exchange-argument"
+      ],
+      "estimatedMinutes": 35,
+      "order": 13,
+      "prerequisites": [
+        "greedy-algorithms"
+      ],
+      "relatedTopics": [
+        "greedy-problems",
+        "dp-pattern",
+        "backtracking-pattern"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "backtracking-pattern",
+      "slug": "backtracking-pattern",
+      "title": "Backtracking Pattern",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "State, choices, goal and pruning: a reusable way to enumerate subsets, partitions and constrained arrangements.",
+      "difficulty": "intermediate",
+      "tags": [
+        "backtracking",
+        "recursion",
+        "pruning"
+      ],
+      "estimatedMinutes": 35,
+      "order": 14,
+      "prerequisites": [
+        "backtracking"
+      ],
+      "relatedTopics": [
+        "backtracking-problems",
+        "dp-pattern",
+        "partition-and-interval-dp"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "backtracking-tree",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "divide-and-conquer-pattern",
+      "slug": "divide-and-conquer-pattern",
+      "title": "Divide and Conquer Pattern",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Spotting split points that make subproblems independent, and combining their answers efficiently.",
+      "difficulty": "intermediate",
+      "tags": [
+        "divide-and-conquer",
+        "recursion",
+        "merge"
+      ],
+      "estimatedMinutes": 30,
+      "order": 15,
+      "prerequisites": [
+        "divide-and-conquer"
+      ],
+      "relatedTopics": [
+        "recurrence-relations",
+        "dp-pattern"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "bfs-pattern",
+      "slug": "bfs-pattern",
+      "title": "BFS Pattern",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Modelling states and moves for minimum-step problems, multi-source spreading and state-space BFS.",
+      "difficulty": "intermediate",
+      "tags": [
+        "bfs",
+        "shortest-path",
+        "state-space-search",
+        "multi-source-bfs"
+      ],
+      "estimatedMinutes": 40,
+      "order": 16,
+      "prerequisites": [
+        "bfs"
+      ],
+      "relatedTopics": [
+        "graph-traversal-problems",
+        "dijkstra",
+        "shortest-path-pattern"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "graph-traversal",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dfs-pattern",
+      "slug": "dfs-pattern",
+      "title": "DFS Pattern",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Reachability, region and component questions solved by DFS with results aggregated on the way back.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dfs",
+        "connected-components",
+        "flood-fill"
+      ],
+      "estimatedMinutes": 35,
+      "order": 17,
+      "prerequisites": [
+        "dfs"
+      ],
+      "relatedTopics": [
+        "graph-traversal-problems",
+        "cycle-detection",
+        "bfs-pattern",
+        "shortest-path-pattern",
+        "union-find-pattern"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "graph-traversal",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "topological-sort-pattern",
+      "slug": "topological-sort-pattern",
+      "title": "Topological Sort Pattern",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Dependency and ordering problems as DAGs: Kahn's algorithm, cycle checks, parallel rounds and critical paths.",
+      "difficulty": "intermediate",
+      "tags": [
+        "topological-sort",
+        "dependencies",
+        "dag"
+      ],
+      "estimatedMinutes": 35,
+      "order": 18,
+      "prerequisites": [
+        "topological-sort"
+      ],
+      "relatedTopics": [
+        "cycle-detection",
+        "strongly-connected-components",
+        "shortest-path-pattern"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "topological-sort-steps",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "union-find-pattern",
+      "slug": "union-find-pattern",
+      "title": "Union-Find Pattern",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Merge-only grouping, redundant links and equivalence constraints handled with disjoint sets.",
+      "difficulty": "intermediate",
+      "tags": [
+        "union-find",
+        "connectivity",
+        "grouping"
+      ],
+      "estimatedMinutes": 35,
+      "order": 19,
+      "prerequisites": [
+        "disjoint-set-union"
+      ],
+      "relatedTopics": [
+        "kruskals-algorithm"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "union-find-forest",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "shortest-path-pattern",
+      "slug": "shortest-path-pattern",
+      "title": "Shortest Path Pattern",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Choosing BFS, 0-1 BFS, Dijkstra, Bellman–Ford or Floyd–Warshall from edge costs, and modelling path objectives.",
+      "difficulty": "intermediate",
+      "tags": [
+        "shortest-path",
+        "dijkstra",
+        "graph-modelling"
+      ],
+      "estimatedMinutes": 40,
+      "order": 20,
+      "prerequisites": [
+        "dijkstra"
+      ],
+      "relatedTopics": [
+        "bfs-pattern",
+        "bellman-ford",
+        "floyd-warshall",
+        "topological-sort",
+        "kruskals-algorithm",
+        "prims-algorithm"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "dijkstra-steps",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dp-pattern",
+      "slug": "dp-pattern",
+      "title": "Dynamic Programming Pattern",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "Recognising DP problems and designing state, transition, base cases, order and answer; the DP families.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dynamic-programming",
+        "state-design",
+        "recurrence"
+      ],
+      "estimatedMinutes": 45,
+      "order": 21,
+      "prerequisites": [
+        "dynamic-programming"
+      ],
+      "relatedTopics": [
+        "dp-1d",
+        "dp-2d-grid",
+        "knapsack-dp",
+        "subsequence-dp",
+        "string-dp",
+        "partition-and-interval-dp"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": "dp-table",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "bit-manipulation-pattern",
+      "slug": "bit-manipulation-pattern",
+      "title": "Bit Manipulation Pattern",
+      "category": "dsa",
+      "subcategory": "patterns",
+      "type": "pattern",
+      "description": "XOR cancellation, per-bit counting, isolating a distinguishing bit and set masks for O(1)-space solutions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "bit-manipulation",
+        "xor",
+        "bitmask"
+      ],
+      "estimatedMinutes": 30,
+      "order": 22,
+      "prerequisites": [
+        "bit-manipulation"
+      ],
+      "relatedTopics": [
+        "bitmask-dp",
+        "trie",
+        "prefix-sum"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "problem-solving-framework",
+      "slug": "problem-solving-framework",
+      "title": "Problem-Solving Framework",
+      "category": "dsa",
+      "subcategory": "problem-solving",
+      "type": "concept",
+      "description": "A repeatable process for unfamiliar problems: understand, clarify, examples, brute force, optimise, plan, code, test, analyse.",
+      "difficulty": "beginner",
+      "tags": [
+        "problem-solving",
+        "interview-strategy",
+        "clarifying-questions"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "time-complexity"
+      ],
+      "relatedTopics": [
+        "constraints-and-complexity",
+        "hashing-pattern",
+        "prefix-sum",
+        "two-pointers",
+        "sliding-window",
+        "binary-search-pattern"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "constraints-and-complexity",
+      "slug": "constraints-and-complexity",
+      "title": "Constraints and Complexity",
+      "category": "dsa",
+      "subcategory": "problem-solving",
+      "type": "concept",
+      "description": "Reading input sizes, value ranges and memory limits to choose a target complexity and spot overflow risks.",
+      "difficulty": "beginner",
+      "tags": [
+        "constraints",
+        "complexity",
+        "overflow"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "time-complexity"
+      ],
+      "relatedTopics": [
+        "modular-arithmetic",
+        "asymptotic-notation",
+        "complexity-reference",
+        "prefix-sum",
+        "fenwick-tree"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "brute-force-to-optimal",
+      "slug": "brute-force-to-optimal",
+      "title": "Brute Force to Optimal",
+      "category": "dsa",
+      "subcategory": "problem-solving",
+      "type": "concept",
+      "description": "Improving a correct brute force step by step by removing repeated work, including Kadane's maximum subarray.",
+      "difficulty": "intermediate",
+      "tags": [
+        "optimization",
+        "kadane",
+        "problem-solving"
+      ],
+      "estimatedMinutes": 40,
+      "order": 3,
+      "prerequisites": [
+        "problem-solving-framework"
+      ],
+      "relatedTopics": [
+        "prefix-sum",
+        "hashing-pattern",
+        "two-pointers",
+        "sliding-window",
+        "dp-pattern",
+        "monotonic-stack"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dsa-conceptual-questions",
+      "slug": "dsa-conceptual-questions",
+      "title": "DSA Conceptual Questions",
+      "category": "dsa",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Explaining why structures and algorithms behave as they do, with model answers from beginner to advanced.",
+      "difficulty": "beginner",
+      "tags": [
+        "interview",
+        "conceptual-questions"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "dsa-introduction"
+      ],
+      "relatedTopics": [
+        "amortized-analysis",
+        "dsa-complexity-questions",
+        "dsa-output-based-questions",
+        "dsa-implementation-questions",
+        "dsa-pattern-recognition-questions",
+        "linked-list"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dsa-complexity-questions",
+      "slug": "dsa-complexity-questions",
+      "title": "DSA Complexity Questions",
+      "category": "dsa",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Justifying time and space costs with counting, halving, recurrences and amortized arguments.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "complexity",
+        "big-o"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "time-complexity"
+      ],
+      "relatedTopics": [
+        "constraints-and-complexity",
+        "recurrence-relations",
+        "amortized-analysis",
+        "asymptotic-notation",
+        "complexity-reference",
+        "binary-search"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dsa-output-based-questions",
+      "slug": "dsa-output-based-questions",
+      "title": "DSA Output-Based Questions",
+      "category": "dsa",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Predicting the exact output of short Java programs: references, overflow, strings, collections and evaluation order.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "output-prediction",
+        "java"
+      ],
+      "estimatedMinutes": 40,
+      "order": 3,
+      "prerequisites": [
+        "java-arrays-and-lists"
+      ],
+      "relatedTopics": [
+        "tree-traversals",
+        "heap",
+        "java-sorting-and-comparators"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dsa-implementation-questions",
+      "slug": "dsa-implementation-questions",
+      "title": "DSA Implementation Questions",
+      "category": "dsa",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Implementing data structures and APIs under interview conditions, from array rotation to LRU and LFU caches.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "implementation",
+        "design",
+        "lru-cache"
+      ],
+      "estimatedMinutes": 60,
+      "order": 4,
+      "prerequisites": [
+        "hashing",
+        "linked-list"
+      ],
+      "relatedTopics": [
+        "dsa-conceptual-questions",
+        "java-maps-and-sets",
+        "heap"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dsa-pattern-recognition-questions",
+      "slug": "dsa-pattern-recognition-questions",
+      "title": "DSA Pattern Recognition Questions",
+      "category": "dsa",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Mapping problem statements to the right pattern and justifying the choice against alternatives.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "pattern-recognition"
+      ],
+      "estimatedMinutes": 40,
+      "order": 5,
+      "prerequisites": [
+        "problem-solving-framework"
+      ],
+      "relatedTopics": [
+        "binary-search-pattern",
+        "two-pointers",
+        "merge-intervals",
+        "bfs-pattern",
+        "dfs-pattern",
+        "tree-dp"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    }
+  ]
 }

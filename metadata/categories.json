@@ -99,6 +99,35 @@
           "description": "Reasoning-based DSA interview questions by kind and level.",
           "order": 6
         }
+      ],
+      "studyModes": [
+        {
+          "id": "revision",
+          "title": "Revision",
+          "description": "Comprehensive DSA revision: core ideas, costs, how to choose an approach, patterns, Java templates, mistakes and interview traps.",
+          "sources": [
+            { "path": "content/dsa/revision/core-concepts.md", "title": "Core Concepts" },
+            { "path": "content/dsa/revision/complexity-tables.md", "title": "Complexity Tables" },
+            { "path": "content/dsa/revision/algorithm-selection.md", "title": "Choosing an Algorithm" },
+            { "path": "content/dsa/revision/pattern-recognition.md", "title": "Pattern Recognition" },
+            { "path": "content/dsa/revision/java-templates.md", "title": "Java Templates" },
+            { "path": "content/dsa/revision/common-mistakes.md", "title": "Common Mistakes" },
+            { "path": "content/dsa/revision/interview-traps.md", "title": "Interview Traps" }
+          ]
+        },
+        {
+          "id": "quick-revision",
+          "title": "Quick Revision",
+          "description": "The essentials to scan right before a DSA interview: complexities, definitions, pattern clues, Java calls and last-minute traps.",
+          "estimatedMinutes": 40,
+          "sources": [
+            { "path": "content/dsa/revision/quick-complexity.md", "title": "Complexities to Know" },
+            { "path": "content/dsa/revision/quick-definitions-and-properties.md", "title": "Definitions and Properties" },
+            { "path": "content/dsa/revision/quick-pattern-clues.md", "title": "Pattern Clues" },
+            { "path": "content/dsa/revision/quick-java-cheat-sheet.md", "title": "Java Cheat Sheet" },
+            { "path": "content/dsa/revision/quick-interview-traps.md", "title": "Last-Minute Traps" }
+          ]
+        }
       ]
     },
     {

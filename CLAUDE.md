@@ -13,7 +13,7 @@ If this file and a doc disagree, fix the disagreement rather than picking one si
 
 StudyHub is a personal study and interview-preparation platform (aptitude, data structures, algorithms, CS concepts, and categories the owner adds later). The same material must teach a beginner and serve as fast interview revision.
 
-**Current phase: foundation only.** Do not build the application or write study content unless the owner asks for that phase.
+**Current phase: content (Phases 2A Aptitude and 2B DSA done).** Do not build the application or write further study content unless the owner asks for that phase.
 
 ## Hard rules
 
@@ -54,7 +54,7 @@ docs/                                 content guide, architecture, visualizer re
 
 Follow [docs/content-guide.md](docs/content-guide.md). In short:
 
-- Start from the template for the topic's `type` (`data-structure`, `algorithm`, `concept`, `aptitude`, `reference`). Keep only sections that teach something for this topic; keep the names and order of the ones you keep.
+- Start from the template for the topic's `type` (`data-structure`, `algorithm`, `pattern`, `concept`, `aptitude`, `reference`). Keep only sections that teach something for this topic; keep the names and order of the ones you keep.
 - One H1 per file; H2 sections; H3 subsections. Every code fence has a language.
 - Callouts via `> [!NOTE|TIP|IMPORTANT|WARNING|CAUTION]`. Answers in `<details>` — the only raw HTML allowed.
 - Questions/examples are numbered `Q1`/`P1`/`E1`, append-only, never renumbered.
@@ -62,7 +62,7 @@ Follow [docs/content-guide.md](docs/content-guide.md). In short:
 - Accuracy over volume: verify every complexity, formula and code sample. No filler.
 - A topic is visible to the app only when it has a metadata entry; `files` must match the folder exactly.
 - Subtopics are H2 sections of their topic, not separate folders.
-- Category study modes (e.g. Aptitude's **Learn · Revision · Quick Revision**) are declared in `categories.json` `studyModes`; each mode merges several source files from `content/<category>/revision/` into one view. User-facing names come from metadata, never file names.
+- Category study modes (e.g. Aptitude's and DSA's **Learn · Revision · Quick Revision**) are declared in `categories.json` `studyModes`; each mode merges several source files from `content/<category>/revision/` into one view. User-facing names come from metadata, never file names.
 
 ## Changing existing content (backwards compatibility)
 
