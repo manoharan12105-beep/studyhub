@@ -1,0 +1,2987 @@
+{
+  "$schema": "../schemas/topics.schema.json",
+  "schemaVersion": 1,
+  "category": "spring-boot",
+  "topics": [
+    {
+      "id": "spring-introduction",
+      "slug": "spring-introduction",
+      "title": "What Is Spring?",
+      "category": "spring-boot",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "What the Spring Framework is, the problems it solves, its modules, and how it relates to Spring Boot.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring",
+        "framework",
+        "modules",
+        "spring-vs-spring-boot"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "spring-boot-introduction",
+        "spring-ioc-and-di",
+        "spring-container"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-container",
+      "slug": "spring-container",
+      "title": "Spring Container: BeanFactory and ApplicationContext",
+      "category": "spring-boot",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "The IoC container: BeanFactory vs ApplicationContext, bean definitions, the refresh process and eager singleton creation.",
+      "difficulty": "beginner",
+      "tags": [
+        "container",
+        "application-context",
+        "bean-factory",
+        "ioc"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "spring-introduction"
+      ],
+      "relatedTopics": [
+        "spring-beans",
+        "spring-bean-lifecycle",
+        "spring-ioc-and-di"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-beans",
+      "slug": "spring-beans",
+      "title": "Spring Beans and Bean Creation",
+      "category": "spring-boot",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "What a bean is, the ways to declare one, bean naming, overriding rules and why singleton beans must be stateless.",
+      "difficulty": "beginner",
+      "tags": [
+        "bean",
+        "bean-definition",
+        "bean-naming",
+        "singleton"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "spring-container"
+      ],
+      "relatedTopics": [
+        "component-scanning-and-stereotypes",
+        "configuration-and-bean-methods",
+        "spring-bean-scopes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-bean-lifecycle",
+      "slug": "spring-bean-lifecycle",
+      "title": "Bean Lifecycle",
+      "category": "spring-boot",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "Every lifecycle step from instantiation to destruction: Aware callbacks, BeanPostProcessors, @PostConstruct, init and destroy methods.",
+      "difficulty": "intermediate",
+      "tags": [
+        "bean-lifecycle",
+        "post-construct",
+        "pre-destroy",
+        "bean-post-processor"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "spring-beans"
+      ],
+      "relatedTopics": [
+        "spring-proxies",
+        "spring-bean-scopes",
+        "spring-container"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "spring-bean-lifecycle",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "component-scanning-and-stereotypes",
+      "slug": "component-scanning-and-stereotypes",
+      "title": "Component Scanning and Stereotype Annotations",
+      "category": "spring-boot",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "How component scanning finds beans, the stereotype annotations and their differences, and scan boundaries and filters.",
+      "difficulty": "beginner",
+      "tags": [
+        "component-scan",
+        "stereotypes",
+        "component",
+        "service",
+        "repository"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "spring-beans"
+      ],
+      "relatedTopics": [
+        "configuration-and-bean-methods",
+        "spring-boot-application-and-startup",
+        "debugging-beans-and-injection"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "configuration-and-bean-methods",
+      "slug": "configuration-and-bean-methods",
+      "title": "@Configuration and @Bean",
+      "category": "spring-boot",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "@Configuration and @Bean: registering third-party objects, full vs lite mode, inter-bean calls, static @Bean and destroy-method inference.",
+      "difficulty": "intermediate",
+      "tags": [
+        "configuration",
+        "bean-method",
+        "proxy-bean-methods",
+        "lite-mode"
+      ],
+      "estimatedMinutes": 25,
+      "order": 6,
+      "prerequisites": [
+        "spring-beans"
+      ],
+      "relatedTopics": [
+        "component-scanning-and-stereotypes",
+        "auto-configuration",
+        "spring-proxies"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-bean-scopes",
+      "slug": "spring-bean-scopes",
+      "title": "Bean Scopes",
+      "category": "spring-boot",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "Singleton, prototype, request and session scopes, prototype-in-singleton injection, scoped proxies and thread safety.",
+      "difficulty": "intermediate",
+      "tags": [
+        "scope",
+        "singleton",
+        "prototype",
+        "request-scope",
+        "scoped-proxy"
+      ],
+      "estimatedMinutes": 30,
+      "order": 7,
+      "prerequisites": [
+        "spring-beans"
+      ],
+      "relatedTopics": [
+        "spring-bean-lifecycle",
+        "spring-injection-types",
+        "spring-proxies"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-ioc-and-di",
+      "slug": "spring-ioc-and-di",
+      "title": "IoC and Dependency Injection in Spring",
+      "category": "spring-boot",
+      "subcategory": "dependency-injection",
+      "type": "concept",
+      "description": "Inversion of Control and Dependency Injection: what they mean, how Spring wires objects, and why DI makes code loosely coupled and testable.",
+      "difficulty": "beginner",
+      "tags": [
+        "ioc",
+        "dependency-injection",
+        "loose-coupling"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "spring-introduction"
+      ],
+      "relatedTopics": [
+        "spring-injection-types",
+        "autowiring-and-bean-resolution",
+        "spring-container"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "spring-di-wiring",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-injection-types",
+      "slug": "spring-injection-types",
+      "title": "Constructor, Setter and Field Injection",
+      "category": "spring-boot",
+      "subcategory": "dependency-injection",
+      "type": "concept",
+      "description": "Constructor, setter and field injection compared, why constructor injection is preferred, and optional and collection injection.",
+      "difficulty": "beginner",
+      "tags": [
+        "constructor-injection",
+        "setter-injection",
+        "field-injection"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "spring-ioc-and-di"
+      ],
+      "relatedTopics": [
+        "autowiring-and-bean-resolution",
+        "circular-dependencies"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "autowiring-and-bean-resolution",
+      "slug": "autowiring-and-bean-resolution",
+      "title": "@Autowired, @Qualifier and @Primary",
+      "category": "spring-boot",
+      "subcategory": "dependency-injection",
+      "type": "concept",
+      "description": "How Spring picks a bean by type, and how @Qualifier, @Primary and parameter names break ties between several candidates.",
+      "difficulty": "intermediate",
+      "tags": [
+        "autowired",
+        "qualifier",
+        "primary",
+        "no-unique-bean"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "spring-injection-types"
+      ],
+      "relatedTopics": [
+        "spring-ioc-and-di",
+        "debugging-beans-and-injection"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "spring-di-wiring",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "circular-dependencies",
+      "slug": "circular-dependencies",
+      "title": "Circular Dependencies",
+      "category": "spring-boot",
+      "subcategory": "dependency-injection",
+      "type": "concept",
+      "description": "Why circular dependencies fail, how Spring resolves some via early references, Spring Boot's default ban, and design fixes.",
+      "difficulty": "intermediate",
+      "tags": [
+        "circular-dependency",
+        "bean-currently-in-creation",
+        "lazy"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "spring-injection-types"
+      ],
+      "relatedTopics": [
+        "debugging-beans-and-injection",
+        "spring-events"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "spring-di-wiring",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-boot-introduction",
+      "slug": "spring-boot-introduction",
+      "title": "What Is Spring Boot?",
+      "category": "spring-boot",
+      "subcategory": "spring-boot-core",
+      "type": "concept",
+      "description": "What Spring Boot adds to Spring: auto-configuration, starters, embedded servers, externalized configuration and production features.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-boot",
+        "convention-over-configuration",
+        "embedded-server"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "spring-introduction"
+      ],
+      "relatedTopics": [
+        "spring-boot-starters-and-maven",
+        "auto-configuration",
+        "spring-boot-application-and-startup"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-boot-starters-and-maven",
+      "slug": "spring-boot-starters-and-maven",
+      "title": "Starters and Maven Dependency Management",
+      "category": "spring-boot",
+      "subcategory": "spring-boot-core",
+      "type": "concept",
+      "description": "Starters, the Spring Boot BOM and parent POM, Boot 4 starter names, the executable fat JAR, and resolving dependency conflicts.",
+      "difficulty": "beginner",
+      "tags": [
+        "starters",
+        "maven",
+        "bom",
+        "fat-jar"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "spring-boot-introduction"
+      ],
+      "relatedTopics": [
+        "auto-configuration",
+        "docker-deployment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "auto-configuration",
+      "slug": "auto-configuration",
+      "title": "Auto-Configuration",
+      "category": "spring-boot",
+      "subcategory": "spring-boot-core",
+      "type": "concept",
+      "description": "How auto-configuration works: candidate imports, @Conditional annotations, backing off for user beans, and the condition evaluation report.",
+      "difficulty": "intermediate",
+      "tags": [
+        "auto-configuration",
+        "conditional",
+        "conditional-on-missing-bean"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "spring-boot-introduction",
+        "configuration-and-bean-methods"
+      ],
+      "relatedTopics": [
+        "spring-boot-application-and-startup",
+        "debugging-startup-and-configuration"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "spring-boot-auto-configuration",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-boot-application-and-startup",
+      "slug": "spring-boot-application-and-startup",
+      "title": "@SpringBootApplication, Startup and Embedded Servers",
+      "category": "spring-boot",
+      "subcategory": "spring-boot-core",
+      "type": "concept",
+      "description": "@SpringBootApplication, the SpringApplication.run startup sequence, runners, embedded servers, failure analysis and graceful shutdown.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-boot-application",
+        "startup",
+        "command-line-runner",
+        "embedded-server"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "auto-configuration"
+      ],
+      "relatedTopics": [
+        "externalized-configuration",
+        "debugging-startup-and-configuration"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "externalized-configuration",
+      "slug": "externalized-configuration",
+      "title": "Externalized Configuration: Properties, YAML, @Value and @ConfigurationProperties",
+      "category": "spring-boot",
+      "subcategory": "spring-boot-core",
+      "type": "concept",
+      "description": "Properties and YAML, property source precedence, relaxed binding, @Value vs @ConfigurationProperties, and handling secrets.",
+      "difficulty": "intermediate",
+      "tags": [
+        "configuration",
+        "properties",
+        "yaml",
+        "configuration-properties",
+        "value"
+      ],
+      "estimatedMinutes": 30,
+      "order": 5,
+      "prerequisites": [
+        "spring-boot-application-and-startup"
+      ],
+      "relatedTopics": [
+        "spring-profiles",
+        "production-configuration"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-profiles",
+      "slug": "spring-profiles",
+      "title": "Profiles",
+      "category": "spring-boot",
+      "subcategory": "spring-boot-core",
+      "type": "concept",
+      "description": "Profiles: @Profile, profile-specific files, activation, the default profile, groups and expressions.",
+      "difficulty": "beginner",
+      "tags": [
+        "profiles",
+        "environments",
+        "profile-groups"
+      ],
+      "estimatedMinutes": 20,
+      "order": 6,
+      "prerequisites": [
+        "externalized-configuration"
+      ],
+      "relatedTopics": [
+        "production-configuration",
+        "debugging-startup-and-configuration"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-mvc-architecture",
+      "slug": "spring-mvc-architecture",
+      "title": "Spring MVC and the Layered Architecture",
+      "category": "spring-boot",
+      "subcategory": "spring-mvc",
+      "type": "concept",
+      "description": "The DispatcherServlet front controller, its collaborators, @Controller vs @RestController, and the controller-service-repository layers.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-mvc",
+        "dispatcher-servlet",
+        "rest-controller",
+        "layered-architecture"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "spring-boot-introduction"
+      ],
+      "relatedTopics": [
+        "spring-mvc-request-lifecycle",
+        "response-handling",
+        "spring-architecture-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "http-request-lifecycle",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-mvc-request-lifecycle",
+      "slug": "spring-mvc-request-lifecycle",
+      "title": "Request Lifecycle: DispatcherServlet to Response",
+      "category": "spring-boot",
+      "subcategory": "spring-mvc",
+      "type": "concept",
+      "description": "Step-by-step path of an HTTP request through filters, DispatcherServlet, handler mapping, argument resolution, controller and converters.",
+      "difficulty": "intermediate",
+      "tags": [
+        "request-lifecycle",
+        "handler-mapping",
+        "message-converter"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "spring-mvc-architecture"
+      ],
+      "relatedTopics": [
+        "filters-and-interceptors",
+        "request-data-binding",
+        "global-exception-handling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "spring-mvc-request-flow",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "filters-and-interceptors",
+      "slug": "filters-and-interceptors",
+      "title": "Filters and Interceptors",
+      "category": "spring-boot",
+      "subcategory": "spring-mvc",
+      "type": "concept",
+      "description": "Servlet filters vs HandlerInterceptors: where each runs, OncePerRequestFilter, ordering, registration and when to use which.",
+      "difficulty": "intermediate",
+      "tags": [
+        "filter",
+        "interceptor",
+        "once-per-request-filter"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "spring-mvc-request-lifecycle"
+      ],
+      "relatedTopics": [
+        "security-filter-chain",
+        "spring-aop"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "http-request-lifecycle",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "response-handling",
+      "slug": "response-handling",
+      "title": "Response Handling and ResponseEntity",
+      "category": "spring-boot",
+      "subcategory": "spring-mvc",
+      "type": "concept",
+      "description": "Returning DTOs, ResponseEntity, status codes, headers and Location, ProblemDetail, and Jackson 3 serialisation defaults.",
+      "difficulty": "beginner",
+      "tags": [
+        "response-entity",
+        "json",
+        "jackson",
+        "problem-detail"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "spring-mvc-architecture"
+      ],
+      "relatedTopics": [
+        "rest-http-status-codes",
+        "dto-pattern",
+        "global-exception-handling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "spring-mvc-request-flow",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "rest-principles",
+      "slug": "rest-principles",
+      "title": "REST Principles and Resource Design",
+      "category": "spring-boot",
+      "subcategory": "rest",
+      "type": "concept",
+      "description": "REST constraints, resources and representations, URI design, statelessness and what makes an API RESTful.",
+      "difficulty": "beginner",
+      "tags": [
+        "rest",
+        "resources",
+        "uri-design",
+        "stateless"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "spring-mvc-architecture"
+      ],
+      "relatedTopics": [
+        "rest-http-methods",
+        "rest-api-best-practices"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "rest-http-methods",
+      "slug": "rest-http-methods",
+      "title": "HTTP Methods and Idempotency",
+      "category": "spring-boot",
+      "subcategory": "rest",
+      "type": "concept",
+      "description": "GET, POST, PUT, PATCH and DELETE semantics, safety and idempotency, PUT vs PATCH, and idempotency keys.",
+      "difficulty": "beginner",
+      "tags": [
+        "http-methods",
+        "idempotency",
+        "put-vs-patch"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "rest-principles"
+      ],
+      "relatedTopics": [
+        "rest-http-status-codes",
+        "rest-api-best-practices"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "rest-http-status-codes",
+      "slug": "rest-http-status-codes",
+      "title": "HTTP Status Codes",
+      "category": "spring-boot",
+      "subcategory": "rest",
+      "type": "concept",
+      "description": "Choosing status codes: 2xx success, 4xx client errors including 400/401/403/404/409/422, 5xx server errors, and returning them in Spring.",
+      "difficulty": "beginner",
+      "tags": [
+        "status-codes",
+        "401-vs-403",
+        "http"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "rest-http-methods"
+      ],
+      "relatedTopics": [
+        "response-handling",
+        "global-exception-handling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "request-data-binding",
+      "slug": "request-data-binding",
+      "title": "Request Data: Headers, Body, Path Variables and Query Parameters",
+      "category": "spring-boot",
+      "subcategory": "rest",
+      "type": "concept",
+      "description": "Binding path variables, query parameters, headers, cookies and JSON bodies, content types, and binding errors.",
+      "difficulty": "beginner",
+      "tags": [
+        "path-variable",
+        "request-param",
+        "request-body",
+        "request-header"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "spring-mvc-request-lifecycle"
+      ],
+      "relatedTopics": [
+        "bean-validation",
+        "dto-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dto-pattern",
+      "slug": "dto-pattern",
+      "title": "DTOs: Entity vs DTO",
+      "category": "spring-boot",
+      "subcategory": "rest",
+      "type": "concept",
+      "description": "Entity vs DTO: why APIs should not expose entities, request and response DTOs with records, and mapping strategies.",
+      "difficulty": "beginner",
+      "tags": [
+        "dto",
+        "entity-vs-dto",
+        "mass-assignment",
+        "mapping"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "request-data-binding"
+      ],
+      "relatedTopics": [
+        "projections-pagination-specifications",
+        "bean-validation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "pagination-sorting-filtering",
+      "slug": "pagination-sorting-filtering",
+      "title": "Pagination, Sorting and Filtering",
+      "category": "spring-boot",
+      "subcategory": "rest",
+      "type": "concept",
+      "description": "Pageable, Page vs Slice, sorting and filtering parameters, page-size limits, stable page responses and keyset pagination.",
+      "difficulty": "intermediate",
+      "tags": [
+        "pagination",
+        "sorting",
+        "filtering",
+        "pageable"
+      ],
+      "estimatedMinutes": 25,
+      "order": 6,
+      "prerequisites": [
+        "dto-pattern"
+      ],
+      "relatedTopics": [
+        "projections-pagination-specifications",
+        "rest-api-best-practices"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "rest-api-best-practices",
+      "slug": "rest-api-best-practices",
+      "title": "API Versioning and REST API Best Practices",
+      "category": "spring-boot",
+      "subcategory": "rest",
+      "type": "concept",
+      "description": "API versioning (including Spring Framework 7 support), naming, error format, idempotency, caching, security and documentation practices.",
+      "difficulty": "intermediate",
+      "tags": [
+        "api-versioning",
+        "best-practices",
+        "api-design"
+      ],
+      "estimatedMinutes": 25,
+      "order": 7,
+      "prerequisites": [
+        "rest-http-status-codes"
+      ],
+      "relatedTopics": [
+        "openapi-documentation",
+        "global-exception-handling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "bean-validation",
+      "slug": "bean-validation",
+      "title": "Jakarta Bean Validation",
+      "category": "spring-boot",
+      "subcategory": "validation",
+      "type": "concept",
+      "description": "Jakarta Bean Validation on request DTOs: built-in constraints, @Valid, nested validation and the 400 response.",
+      "difficulty": "beginner",
+      "tags": [
+        "validation",
+        "valid",
+        "not-blank",
+        "constraints"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "request-data-binding"
+      ],
+      "relatedTopics": [
+        "advanced-validation",
+        "global-exception-handling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "advanced-validation",
+      "slug": "advanced-validation",
+      "title": "@Validated, Custom Validators and Validation Errors",
+      "category": "spring-boot",
+      "subcategory": "validation",
+      "type": "concept",
+      "description": "@Validated, validation groups, method validation, custom and cross-field constraints, and formatting validation errors.",
+      "difficulty": "intermediate",
+      "tags": [
+        "validated",
+        "custom-validator",
+        "validation-groups",
+        "method-validation"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "bean-validation"
+      ],
+      "relatedTopics": [
+        "global-exception-handling",
+        "debugging-web-layer"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-exception-basics",
+      "slug": "spring-exception-basics",
+      "title": "Exceptions in Spring Boot",
+      "category": "spring-boot",
+      "subcategory": "exception-handling",
+      "type": "concept",
+      "description": "Exceptions in a Spring Boot app: @ExceptionHandler, @ResponseStatus, ResponseStatusException, Boot's error page and rollback rules.",
+      "difficulty": "beginner",
+      "tags": [
+        "exceptions",
+        "exception-handler",
+        "response-status"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "spring-mvc-request-lifecycle"
+      ],
+      "relatedTopics": [
+        "global-exception-handling",
+        "transactional-annotation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "exception-resolution-flow",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "global-exception-handling",
+      "slug": "global-exception-handling",
+      "title": "Global Exception Handling with @RestControllerAdvice",
+      "category": "spring-boot",
+      "subcategory": "exception-handling",
+      "type": "concept",
+      "description": "@RestControllerAdvice with ProblemDetail: handler selection, mapping domain, validation and data exceptions, and what advice cannot catch.",
+      "difficulty": "intermediate",
+      "tags": [
+        "controller-advice",
+        "problem-detail",
+        "global-errors"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "spring-exception-basics"
+      ],
+      "relatedTopics": [
+        "bean-validation",
+        "security-filter-chain",
+        "debugging-web-layer"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "exception-resolution-flow",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "jpa-hibernate-spring-data",
+      "slug": "jpa-hibernate-spring-data",
+      "title": "JPA vs Hibernate vs Spring Data JPA",
+      "category": "spring-boot",
+      "subcategory": "jpa-hibernate",
+      "type": "concept",
+      "description": "How JPA, Hibernate and Spring Data JPA fit together, repositories, save() semantics, ddl-auto and SQL logging.",
+      "difficulty": "beginner",
+      "tags": [
+        "jpa",
+        "hibernate",
+        "spring-data-jpa",
+        "orm"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "spring-boot-introduction"
+      ],
+      "relatedTopics": [
+        "jpa-entities-and-ids",
+        "spring-data-jpa-queries"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "jpa-entities-and-ids",
+      "slug": "jpa-entities-and-ids",
+      "title": "Entities and ID Generation",
+      "category": "spring-boot",
+      "subcategory": "jpa-hibernate",
+      "type": "concept",
+      "description": "Mapping entities: @Entity, columns, enums, embeddables, ID generation strategies and entity equals/hashCode.",
+      "difficulty": "beginner",
+      "tags": [
+        "entity",
+        "id-generation",
+        "sequence",
+        "identity"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "jpa-hibernate-spring-data"
+      ],
+      "relatedTopics": [
+        "entity-lifecycle-and-persistence-context",
+        "jpa-relationships"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "entity-lifecycle-and-persistence-context",
+      "slug": "entity-lifecycle-and-persistence-context",
+      "title": "Entity Lifecycle and the Persistence Context",
+      "category": "spring-boot",
+      "subcategory": "jpa-hibernate",
+      "type": "concept",
+      "description": "Transient, managed, detached and removed states, the persistence context as first-level cache, persist vs merge, and detaching.",
+      "difficulty": "intermediate",
+      "tags": [
+        "entity-lifecycle",
+        "persistence-context",
+        "merge",
+        "first-level-cache"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "jpa-entities-and-ids"
+      ],
+      "relatedTopics": [
+        "dirty-checking-and-flush",
+        "fetching-and-lazy-loading"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "jpa-entity-lifecycle",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dirty-checking-and-flush",
+      "slug": "dirty-checking-and-flush",
+      "title": "Dirty Checking, Flush, save() and saveAndFlush()",
+      "category": "spring-boot",
+      "subcategory": "jpa-hibernate",
+      "type": "concept",
+      "description": "Automatic dirty checking, when Hibernate flushes, flush vs commit, save() vs saveAndFlush(), and bulk updates.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dirty-checking",
+        "flush",
+        "save-and-flush"
+      ],
+      "estimatedMinutes": 45,
+      "order": 4,
+      "prerequisites": [
+        "entity-lifecycle-and-persistence-context"
+      ],
+      "relatedTopics": [
+        "transactional-annotation",
+        "spring-data-jpa-queries"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "jpa-entity-lifecycle",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "jpa-relationships",
+      "slug": "jpa-relationships",
+      "title": "Entity Relationships, Owning Side and mappedBy",
+      "category": "spring-boot",
+      "subcategory": "jpa-hibernate",
+      "type": "concept",
+      "description": "One-to-one, many-to-one, one-to-many and many-to-many mappings, the owning side, mappedBy and keeping both sides in sync.",
+      "difficulty": "intermediate",
+      "tags": [
+        "relationships",
+        "owning-side",
+        "mapped-by",
+        "many-to-many"
+      ],
+      "estimatedMinutes": 35,
+      "order": 5,
+      "prerequisites": [
+        "jpa-entities-and-ids"
+      ],
+      "relatedTopics": [
+        "cascade-and-orphan-removal",
+        "fetching-and-lazy-loading"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "cascade-and-orphan-removal",
+      "slug": "cascade-and-orphan-removal",
+      "title": "Cascade and orphanRemoval",
+      "category": "spring-boot",
+      "subcategory": "jpa-hibernate",
+      "type": "concept",
+      "description": "Cascade types, orphanRemoval vs cascade REMOVE, aggregate boundaries and common cascade mistakes.",
+      "difficulty": "intermediate",
+      "tags": [
+        "cascade",
+        "orphan-removal",
+        "aggregate"
+      ],
+      "estimatedMinutes": 30,
+      "order": 6,
+      "prerequisites": [
+        "jpa-relationships"
+      ],
+      "relatedTopics": [
+        "entity-lifecycle-and-persistence-context"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "fetching-and-lazy-loading",
+      "slug": "fetching-and-lazy-loading",
+      "title": "Fetch Types, Lazy Loading and Proxies",
+      "category": "spring-boot",
+      "subcategory": "jpa-hibernate",
+      "type": "concept",
+      "description": "LAZY vs EAGER, lazy proxies, LazyInitializationException, fetch joins, entity graphs, batch fetching and Open Session in View.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lazy-loading",
+        "eager",
+        "lazy-initialization-exception",
+        "entity-graph"
+      ],
+      "estimatedMinutes": 35,
+      "order": 7,
+      "prerequisites": [
+        "jpa-relationships"
+      ],
+      "relatedTopics": [
+        "n-plus-one-problem",
+        "debugging-transactions-and-jpa"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "n-plus-one-queries",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-data-jpa-queries",
+      "slug": "spring-data-jpa-queries",
+      "title": "Derived Queries, JPQL, @Query and Native SQL",
+      "category": "spring-boot",
+      "subcategory": "jpa-hibernate",
+      "type": "concept",
+      "description": "Derived query methods, JPQL with @Query, native SQL, @Modifying updates, parameters and repository return types.",
+      "difficulty": "intermediate",
+      "tags": [
+        "derived-queries",
+        "jpql",
+        "native-query",
+        "query"
+      ],
+      "estimatedMinutes": 35,
+      "order": 8,
+      "prerequisites": [
+        "jpa-hibernate-spring-data"
+      ],
+      "relatedTopics": [
+        "projections-pagination-specifications",
+        "dirty-checking-and-flush"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "projections-pagination-specifications",
+      "slug": "projections-pagination-specifications",
+      "title": "Projections, Pagination, Sorting and Specifications",
+      "category": "spring-boot",
+      "subcategory": "jpa-hibernate",
+      "type": "concept",
+      "description": "Interface and DTO projections, paging and sorting repositories, count queries, Specifications and Query by Example.",
+      "difficulty": "intermediate",
+      "tags": [
+        "projections",
+        "pagination",
+        "specification",
+        "query-by-example"
+      ],
+      "estimatedMinutes": 30,
+      "order": 9,
+      "prerequisites": [
+        "spring-data-jpa-queries"
+      ],
+      "relatedTopics": [
+        "pagination-sorting-filtering",
+        "n-plus-one-problem"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "n-plus-one-problem",
+      "slug": "n-plus-one-problem",
+      "title": "The N+1 Problem: Fetch Join and EntityGraph",
+      "category": "spring-boot",
+      "subcategory": "jpa-hibernate",
+      "type": "concept",
+      "description": "Why N+1 queries happen, how to detect them, and fixes with fetch joins, entity graphs, batch fetching and projections.",
+      "difficulty": "intermediate",
+      "tags": [
+        "n-plus-one",
+        "fetch-join",
+        "entity-graph",
+        "batch-fetching"
+      ],
+      "estimatedMinutes": 40,
+      "order": 10,
+      "prerequisites": [
+        "fetching-and-lazy-loading"
+      ],
+      "relatedTopics": [
+        "projections-pagination-specifications",
+        "debugging-transactions-and-jpa"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "n-plus-one-queries",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "jpa-locking",
+      "slug": "jpa-locking",
+      "title": "Optimistic and Pessimistic Locking",
+      "category": "spring-boot",
+      "subcategory": "jpa-hibernate",
+      "type": "concept",
+      "description": "Lost updates, optimistic locking with @Version, pessimistic locks with SELECT FOR UPDATE, atomic updates and retry strategies.",
+      "difficulty": "advanced",
+      "tags": [
+        "locking",
+        "optimistic-locking",
+        "pessimistic-locking",
+        "version"
+      ],
+      "estimatedMinutes": 40,
+      "order": 11,
+      "prerequisites": [
+        "dirty-checking-and-flush",
+        "transactions-and-acid"
+      ],
+      "relatedTopics": [
+        "transaction-isolation",
+        "spring-project-based-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "transaction-isolation-anomalies",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "transactions-and-acid",
+      "slug": "transactions-and-acid",
+      "title": "Transactions and ACID",
+      "category": "spring-boot",
+      "subcategory": "transactions",
+      "type": "concept",
+      "description": "What a transaction is, the ACID properties, Spring's transaction abstraction and keeping transactions short.",
+      "difficulty": "beginner",
+      "tags": [
+        "transactions",
+        "acid",
+        "transaction-manager"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "jpa-hibernate-spring-data"
+      ],
+      "relatedTopics": [
+        "transactional-annotation",
+        "transaction-isolation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "transactional-annotation",
+      "slug": "transactional-annotation",
+      "title": "@Transactional: Boundaries, Rollback Rules and Proxies",
+      "category": "spring-boot",
+      "subcategory": "transactions",
+      "type": "concept",
+      "description": "How @Transactional works through proxies, transaction boundaries, rollback rules for checked and unchecked exceptions, and readOnly.",
+      "difficulty": "intermediate",
+      "tags": [
+        "transactional",
+        "rollback",
+        "read-only",
+        "proxy"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "transactions-and-acid"
+      ],
+      "relatedTopics": [
+        "transaction-propagation",
+        "transactional-pitfalls",
+        "spring-proxies"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "transaction-lifecycle",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "transaction-propagation",
+      "slug": "transaction-propagation",
+      "title": "Transaction Propagation",
+      "category": "spring-boot",
+      "subcategory": "transactions",
+      "type": "concept",
+      "description": "REQUIRED, REQUIRES_NEW, NESTED and the other propagation types, rollback-only marking and UnexpectedRollbackException.",
+      "difficulty": "advanced",
+      "tags": [
+        "propagation",
+        "requires-new",
+        "nested",
+        "unexpected-rollback"
+      ],
+      "estimatedMinutes": 40,
+      "order": 3,
+      "prerequisites": [
+        "transactional-annotation"
+      ],
+      "relatedTopics": [
+        "transactional-pitfalls",
+        "debugging-transactions-and-jpa"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "transaction-lifecycle",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "transaction-isolation",
+      "slug": "transaction-isolation",
+      "title": "Isolation Levels and Read Anomalies",
+      "category": "spring-boot",
+      "subcategory": "transactions",
+      "type": "concept",
+      "description": "Dirty, non-repeatable and phantom reads, the four isolation levels, database defaults and when to raise isolation.",
+      "difficulty": "advanced",
+      "tags": [
+        "isolation",
+        "dirty-read",
+        "phantom-read",
+        "repeatable-read"
+      ],
+      "estimatedMinutes": 35,
+      "order": 4,
+      "prerequisites": [
+        "transactions-and-acid"
+      ],
+      "relatedTopics": [
+        "jpa-locking",
+        "transactional-annotation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "transaction-isolation-anomalies",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "transactional-pitfalls",
+      "slug": "transactional-pitfalls",
+      "title": "Transactional Pitfalls and Self-Invocation",
+      "category": "spring-boot",
+      "subcategory": "transactions",
+      "type": "concept",
+      "description": "Why @Transactional silently fails: self-invocation, private methods, swallowed and checked exceptions, long transactions and fixes.",
+      "difficulty": "intermediate",
+      "tags": [
+        "self-invocation",
+        "transactional-pitfalls",
+        "proxy"
+      ],
+      "estimatedMinutes": 35,
+      "order": 5,
+      "prerequisites": [
+        "transactional-annotation"
+      ],
+      "relatedTopics": [
+        "spring-proxies",
+        "debugging-transactions-and-jpa"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "spring-proxy-call",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-security-introduction",
+      "slug": "spring-security-introduction",
+      "title": "Spring Security: Authentication and Authorization",
+      "category": "spring-boot",
+      "subcategory": "security",
+      "type": "concept",
+      "description": "Authentication vs authorization, what the security starter does by default, 401 vs 403, and the SecurityFilterChain bean.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-security",
+        "authentication",
+        "authorization",
+        "401-vs-403"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "spring-mvc-architecture"
+      ],
+      "relatedTopics": [
+        "security-filter-chain",
+        "authentication-architecture"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "security-filter-chain",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "security-filter-chain",
+      "slug": "security-filter-chain",
+      "title": "SecurityFilterChain, Filters and SecurityContext",
+      "category": "spring-boot",
+      "subcategory": "security",
+      "type": "concept",
+      "description": "DelegatingFilterProxy, FilterChainProxy, the main security filters and their order, SecurityContextHolder and multiple chains.",
+      "difficulty": "intermediate",
+      "tags": [
+        "security-filter-chain",
+        "security-context",
+        "filter-chain-proxy"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "spring-security-introduction",
+        "filters-and-interceptors"
+      ],
+      "relatedTopics": [
+        "jwt-authentication-flow",
+        "spring-cors",
+        "spring-csrf"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "security-filter-chain",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "authentication-architecture",
+      "slug": "authentication-architecture",
+      "title": "AuthenticationManager, AuthenticationProvider and UserDetailsService",
+      "category": "spring-boot",
+      "subcategory": "security",
+      "type": "concept",
+      "description": "AuthenticationManager, ProviderManager, DaoAuthenticationProvider, UserDetailsService and how a login is verified.",
+      "difficulty": "intermediate",
+      "tags": [
+        "authentication-manager",
+        "authentication-provider",
+        "user-details-service"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "security-filter-chain"
+      ],
+      "relatedTopics": [
+        "password-encoding-bcrypt",
+        "jwt-authentication-flow"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "security-filter-chain",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "password-encoding-bcrypt",
+      "slug": "password-encoding-bcrypt",
+      "title": "PasswordEncoder and BCrypt",
+      "category": "spring-boot",
+      "subcategory": "security",
+      "type": "concept",
+      "description": "Why passwords are hashed, how BCrypt salting and cost work, PasswordEncoder, DelegatingPasswordEncoder and migration.",
+      "difficulty": "beginner",
+      "tags": [
+        "password-encoder",
+        "bcrypt",
+        "hashing",
+        "salt"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "authentication-architecture"
+      ],
+      "relatedTopics": [
+        "authentication-architecture"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "authorization-and-method-security",
+      "slug": "authorization-and-method-security",
+      "title": "Roles, Authorities and Method Security",
+      "category": "spring-boot",
+      "subcategory": "security",
+      "type": "concept",
+      "description": "Roles vs authorities, URL authorization rules, @EnableMethodSecurity, @PreAuthorize and ownership checks.",
+      "difficulty": "intermediate",
+      "tags": [
+        "authorization",
+        "roles",
+        "pre-authorize",
+        "method-security"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "authentication-architecture"
+      ],
+      "relatedTopics": [
+        "spring-proxies",
+        "global-exception-handling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "session-vs-stateless-authentication",
+      "slug": "session-vs-stateless-authentication",
+      "title": "Session-Based vs Stateless Authentication",
+      "category": "spring-boot",
+      "subcategory": "security",
+      "type": "concept",
+      "description": "Session-based vs token-based authentication: state, scaling, revocation, CSRF implications and when to choose each.",
+      "difficulty": "intermediate",
+      "tags": [
+        "session",
+        "stateless",
+        "jwt",
+        "session-management"
+      ],
+      "estimatedMinutes": 25,
+      "order": 6,
+      "prerequisites": [
+        "spring-security-introduction"
+      ],
+      "relatedTopics": [
+        "jwt-fundamentals",
+        "spring-csrf",
+        "cookie-security"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "jwt-fundamentals",
+      "slug": "jwt-fundamentals",
+      "title": "JWT Structure: Header, Payload and Signature",
+      "category": "spring-boot",
+      "subcategory": "security",
+      "type": "concept",
+      "description": "JWT structure, standard claims, Base64URL encoding vs encryption, HS256 vs RS256, and validation rules.",
+      "difficulty": "beginner",
+      "tags": [
+        "jwt",
+        "claims",
+        "signature",
+        "hs256"
+      ],
+      "estimatedMinutes": 25,
+      "order": 7,
+      "prerequisites": [
+        "session-vs-stateless-authentication"
+      ],
+      "relatedTopics": [
+        "jwt-authentication-flow",
+        "access-and-refresh-tokens"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "jwt-authentication-flow",
+      "slug": "jwt-authentication-flow",
+      "title": "JWT Authentication Flow in Spring Security",
+      "category": "spring-boot",
+      "subcategory": "security",
+      "type": "concept",
+      "description": "End-to-end JWT login and request flow in Spring Security 7: login endpoint, token filter, stateless chain and 401/403 handling.",
+      "difficulty": "advanced",
+      "tags": [
+        "jwt",
+        "jwt-filter",
+        "stateless",
+        "bearer-token"
+      ],
+      "estimatedMinutes": 45,
+      "order": 8,
+      "prerequisites": [
+        "jwt-fundamentals",
+        "security-filter-chain"
+      ],
+      "relatedTopics": [
+        "access-and-refresh-tokens",
+        "debugging-security-and-cors"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "jwt-authentication-flow",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "access-and-refresh-tokens",
+      "slug": "access-and-refresh-tokens",
+      "title": "Access Tokens, Refresh Tokens and Expiration",
+      "category": "spring-boot",
+      "subcategory": "security",
+      "type": "concept",
+      "description": "Access vs refresh tokens, expiry, refresh-token rotation and reuse detection, storage in browsers and logout.",
+      "difficulty": "advanced",
+      "tags": [
+        "access-token",
+        "refresh-token",
+        "token-rotation",
+        "logout"
+      ],
+      "estimatedMinutes": 35,
+      "order": 9,
+      "prerequisites": [
+        "jwt-authentication-flow"
+      ],
+      "relatedTopics": [
+        "cookie-security",
+        "oauth2-awareness"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "jwt-authentication-flow",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "oauth2-awareness",
+      "slug": "oauth2-awareness",
+      "title": "OAuth2 and OpenID Connect Awareness",
+      "category": "spring-boot",
+      "subcategory": "security",
+      "type": "concept",
+      "description": "OAuth2 roles and grant types, OpenID Connect, and Spring's OAuth2 client, resource server and authorization server support.",
+      "difficulty": "intermediate",
+      "tags": [
+        "oauth2",
+        "openid-connect",
+        "resource-server",
+        "pkce"
+      ],
+      "estimatedMinutes": 20,
+      "order": 10,
+      "prerequisites": [
+        "jwt-fundamentals"
+      ],
+      "relatedTopics": [
+        "access-and-refresh-tokens",
+        "microservices-awareness"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-cors",
+      "slug": "spring-cors",
+      "title": "CORS, Same-Origin Policy and Preflight",
+      "category": "spring-boot",
+      "subcategory": "web-security",
+      "type": "concept",
+      "description": "Same-origin policy, CORS headers, preflight requests, configuring CORS with Spring Security, and common CORS errors.",
+      "difficulty": "intermediate",
+      "tags": [
+        "cors",
+        "same-origin-policy",
+        "preflight"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "security-filter-chain"
+      ],
+      "relatedTopics": [
+        "spring-csrf",
+        "debugging-security-and-cors"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "cors-preflight",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-csrf",
+      "slug": "spring-csrf",
+      "title": "CSRF and CSRF vs CORS",
+      "category": "spring-boot",
+      "subcategory": "web-security",
+      "type": "concept",
+      "description": "How CSRF attacks work, Spring's CSRF protection, SPA configuration, when CSRF can be disabled, and CSRF vs CORS.",
+      "difficulty": "intermediate",
+      "tags": [
+        "csrf",
+        "csrf-token",
+        "csrf-vs-cors"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "spring-cors",
+        "session-vs-stateless-authentication"
+      ],
+      "relatedTopics": [
+        "cookie-security",
+        "spring-cors"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "cookie-security",
+      "slug": "cookie-security",
+      "title": "Cookies, Sessions and Cookie Security",
+      "category": "spring-boot",
+      "subcategory": "web-security",
+      "type": "concept",
+      "description": "Session cookies and their attributes: HttpOnly, Secure, SameSite, Path, Domain, prefixes, and configuring them in Spring Boot.",
+      "difficulty": "intermediate",
+      "tags": [
+        "cookies",
+        "http-only",
+        "same-site",
+        "secure-cookie"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "session-vs-stateless-authentication"
+      ],
+      "relatedTopics": [
+        "spring-csrf",
+        "access-and-refresh-tokens"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-logging",
+      "slug": "spring-logging",
+      "title": "Logging with SLF4J and Logback",
+      "category": "spring-boot",
+      "subcategory": "production",
+      "type": "concept",
+      "description": "SLF4J and Logback, log levels and configuration, parameterised logging, structured JSON logs, MDC and what never to log.",
+      "difficulty": "beginner",
+      "tags": [
+        "logging",
+        "slf4j",
+        "logback",
+        "mdc"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "spring-boot-application-and-startup"
+      ],
+      "relatedTopics": [
+        "actuator-and-monitoring",
+        "production-configuration"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "actuator-and-monitoring",
+      "slug": "actuator-and-monitoring",
+      "title": "Actuator, Health Checks, Metrics and Monitoring",
+      "category": "spring-boot",
+      "subcategory": "production",
+      "type": "concept",
+      "description": "Actuator endpoints and exposure, health groups and Kubernetes probes, custom health indicators, Micrometer metrics and tracing.",
+      "difficulty": "intermediate",
+      "tags": [
+        "actuator",
+        "health-check",
+        "metrics",
+        "micrometer"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "spring-boot-application-and-startup"
+      ],
+      "relatedTopics": [
+        "spring-logging",
+        "docker-deployment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "production-configuration",
+      "slug": "production-configuration",
+      "title": "Production Configuration, Secrets and Graceful Shutdown",
+      "category": "spring-boot",
+      "subcategory": "production",
+      "type": "concept",
+      "description": "Production settings: secrets, database migrations, error details, timeouts, graceful shutdown, proxies and virtual threads.",
+      "difficulty": "intermediate",
+      "tags": [
+        "production",
+        "secrets",
+        "graceful-shutdown",
+        "flyway"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "externalized-configuration",
+        "spring-profiles"
+      ],
+      "relatedTopics": [
+        "docker-deployment",
+        "connection-pooling-hikaricp"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "connection-pooling-hikaricp",
+      "slug": "connection-pooling-hikaricp",
+      "title": "Connection Pooling and HikariCP",
+      "category": "spring-boot",
+      "subcategory": "production",
+      "type": "concept",
+      "description": "Why pooling matters, HikariCP settings and defaults, pool sizing, pool exhaustion and leak detection.",
+      "difficulty": "intermediate",
+      "tags": [
+        "connection-pool",
+        "hikaricp",
+        "pool-exhaustion"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "transactions-and-acid"
+      ],
+      "relatedTopics": [
+        "production-configuration",
+        "transactional-pitfalls"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "caching-and-redis",
+      "slug": "caching-and-redis",
+      "title": "Caching Strategies and Redis",
+      "category": "spring-boot",
+      "subcategory": "production",
+      "type": "concept",
+      "description": "Caching strategies, local vs distributed caches, Redis uses, TTLs and invalidation, stampede and stale data problems.",
+      "difficulty": "intermediate",
+      "tags": [
+        "caching",
+        "redis",
+        "cache-aside",
+        "ttl"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "spring-cache-abstraction"
+      ],
+      "relatedTopics": [
+        "spring-cache-abstraction",
+        "production-configuration"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "async-and-scheduling",
+      "slug": "async-and-scheduling",
+      "title": "@Async and @Scheduled",
+      "category": "spring-boot",
+      "subcategory": "production",
+      "type": "concept",
+      "description": "@Async with executors and CompletableFuture, @Scheduled fixed rate, delay and cron, thread pools, and multi-instance scheduling.",
+      "difficulty": "intermediate",
+      "tags": [
+        "async",
+        "scheduled",
+        "cron",
+        "executor"
+      ],
+      "estimatedMinutes": 30,
+      "order": 6,
+      "prerequisites": [
+        "spring-proxies"
+      ],
+      "relatedTopics": [
+        "spring-events",
+        "connection-pooling-hikaricp"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "file-upload-multipart",
+      "slug": "file-upload-multipart",
+      "title": "File Upload and Multipart Requests",
+      "category": "spring-boot",
+      "subcategory": "production",
+      "type": "concept",
+      "description": "Multipart uploads with MultipartFile and @RequestPart, size limits, safe file handling, storage choices and downloads.",
+      "difficulty": "intermediate",
+      "tags": [
+        "file-upload",
+        "multipart",
+        "multipart-file"
+      ],
+      "estimatedMinutes": 25,
+      "order": 7,
+      "prerequisites": [
+        "request-data-binding"
+      ],
+      "relatedTopics": [
+        "rest-api-best-practices",
+        "global-exception-handling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "openapi-documentation",
+      "slug": "openapi-documentation",
+      "title": "OpenAPI, Swagger and API Documentation",
+      "category": "spring-boot",
+      "subcategory": "production",
+      "type": "concept",
+      "description": "OpenAPI and Swagger UI with springdoc, documentation annotations, security schemes, and spec-first vs code-first.",
+      "difficulty": "beginner",
+      "tags": [
+        "openapi",
+        "swagger",
+        "springdoc",
+        "api-docs"
+      ],
+      "estimatedMinutes": 20,
+      "order": 8,
+      "prerequisites": [
+        "rest-api-best-practices"
+      ],
+      "relatedTopics": [
+        "dto-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "docker-deployment",
+      "slug": "docker-deployment",
+      "title": "Docker and Deploying Spring Boot",
+      "category": "spring-boot",
+      "subcategory": "production",
+      "type": "concept",
+      "description": "Containerising Spring Boot: Dockerfiles, Buildpacks, layered JARs, JVM memory in containers, probes and CI/CD deployment.",
+      "difficulty": "intermediate",
+      "tags": [
+        "docker",
+        "deployment",
+        "buildpacks",
+        "kubernetes"
+      ],
+      "estimatedMinutes": 20,
+      "order": 9,
+      "prerequisites": [
+        "spring-boot-starters-and-maven",
+        "production-configuration"
+      ],
+      "relatedTopics": [
+        "actuator-and-monitoring",
+        "microservices-awareness"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-aop",
+      "slug": "spring-aop",
+      "title": "Aspect-Oriented Programming",
+      "category": "spring-boot",
+      "subcategory": "advanced",
+      "type": "concept",
+      "description": "Aspect-oriented programming in Spring: aspects, advice types, pointcut expressions, @Around and Spring AOP vs AspectJ.",
+      "difficulty": "intermediate",
+      "tags": [
+        "aop",
+        "aspect",
+        "pointcut",
+        "advice"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "spring-bean-lifecycle"
+      ],
+      "relatedTopics": [
+        "spring-proxies",
+        "filters-and-interceptors"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "spring-proxy-call",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-proxies",
+      "slug": "spring-proxies",
+      "title": "Spring Proxies: JDK Dynamic Proxies and CGLIB",
+      "category": "spring-boot",
+      "subcategory": "advanced",
+      "type": "concept",
+      "description": "JDK dynamic proxies vs CGLIB, how proxies power @Transactional, @Async and @Cacheable, self-invocation, and proxy limitations.",
+      "difficulty": "advanced",
+      "tags": [
+        "proxy",
+        "cglib",
+        "jdk-dynamic-proxy",
+        "self-invocation"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "spring-aop"
+      ],
+      "relatedTopics": [
+        "transactional-pitfalls",
+        "spring-cache-abstraction",
+        "async-and-scheduling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "spring-proxy-call",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-events",
+      "slug": "spring-events",
+      "title": "Spring Events",
+      "category": "spring-boot",
+      "subcategory": "advanced",
+      "type": "concept",
+      "description": "Application events, @EventListener, synchronous vs async listeners, @TransactionalEventListener and lifecycle events.",
+      "difficulty": "intermediate",
+      "tags": [
+        "events",
+        "event-listener",
+        "transactional-event-listener"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "spring-ioc-and-di"
+      ],
+      "relatedTopics": [
+        "transactional-annotation",
+        "async-and-scheduling",
+        "microservices-awareness"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-cache-abstraction",
+      "slug": "spring-cache-abstraction",
+      "title": "Cache Abstraction: @Cacheable, @CachePut and @CacheEvict",
+      "category": "spring-boot",
+      "subcategory": "advanced",
+      "type": "concept",
+      "description": "@EnableCaching, @Cacheable, @CachePut and @CacheEvict, cache keys and conditions, providers and proxy limitations.",
+      "difficulty": "intermediate",
+      "tags": [
+        "cache",
+        "cacheable",
+        "cache-evict",
+        "cache-put"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "spring-proxies"
+      ],
+      "relatedTopics": [
+        "caching-and-redis"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "resilience-patterns",
+      "slug": "resilience-patterns",
+      "title": "Resilience: Retry, Circuit Breaker and Timeouts",
+      "category": "spring-boot",
+      "subcategory": "advanced",
+      "type": "concept",
+      "description": "Timeouts, retries with backoff, circuit breakers, bulkheads and rate limits, Spring Framework 7 @Retryable and Resilience4j.",
+      "difficulty": "advanced",
+      "tags": [
+        "resilience",
+        "retry",
+        "circuit-breaker",
+        "timeout"
+      ],
+      "estimatedMinutes": 30,
+      "order": 5,
+      "prerequisites": [
+        "spring-proxies"
+      ],
+      "relatedTopics": [
+        "microservices-awareness",
+        "production-configuration"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "microservices-awareness",
+      "slug": "microservices-awareness",
+      "title": "Microservices Awareness for Spring Boot Developers",
+      "category": "spring-boot",
+      "subcategory": "advanced",
+      "type": "concept",
+      "description": "Microservices vs monoliths, service communication, data ownership, sagas and outbox, Spring Cloud components and when to split.",
+      "difficulty": "intermediate",
+      "tags": [
+        "microservices",
+        "monolith",
+        "saga",
+        "spring-cloud"
+      ],
+      "estimatedMinutes": 20,
+      "order": 6,
+      "prerequisites": [
+        "rest-api-best-practices"
+      ],
+      "relatedTopics": [
+        "resilience-patterns",
+        "spring-architecture-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "debugging-beans-and-injection",
+      "slug": "debugging-beans-and-injection",
+      "title": "Debugging Beans and Dependency Injection",
+      "category": "spring-boot",
+      "subcategory": "debugging",
+      "type": "concept",
+      "description": "Debugging scenarios: null @Autowired fields, beans not detected, unexpected multiple beans and circular dependencies.",
+      "difficulty": "intermediate",
+      "tags": [
+        "debugging",
+        "autowired-null",
+        "no-such-bean",
+        "circular-dependency"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "autowiring-and-bean-resolution",
+        "component-scanning-and-stereotypes"
+      ],
+      "relatedTopics": [
+        "circular-dependencies",
+        "spring-scenario-debugging-questions"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "debugging-startup-and-configuration",
+      "slug": "debugging-startup-and-configuration",
+      "title": "Debugging Startup and Configuration",
+      "category": "spring-boot",
+      "subcategory": "debugging",
+      "type": "concept",
+      "description": "Debugging scenarios: startup failures, environment variables not applied and profiles not activating.",
+      "difficulty": "intermediate",
+      "tags": [
+        "debugging",
+        "startup-failure",
+        "environment-variables",
+        "profiles"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "externalized-configuration",
+        "spring-profiles"
+      ],
+      "relatedTopics": [
+        "auto-configuration",
+        "spring-scenario-debugging-questions"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "debugging-web-layer",
+      "slug": "debugging-web-layer",
+      "title": "Debugging Validation and Exception Handling",
+      "category": "spring-boot",
+      "subcategory": "debugging",
+      "type": "concept",
+      "description": "Debugging scenarios: validation not triggering and @ControllerAdvice not catching exceptions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "debugging",
+        "validation",
+        "controller-advice"
+      ],
+      "estimatedMinutes": 15,
+      "order": 3,
+      "prerequisites": [
+        "bean-validation",
+        "global-exception-handling"
+      ],
+      "relatedTopics": [
+        "advanced-validation",
+        "spring-scenario-debugging-questions"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "debugging-transactions-and-jpa",
+      "slug": "debugging-transactions-and-jpa",
+      "title": "Debugging Transactions and JPA",
+      "category": "spring-boot",
+      "subcategory": "debugging",
+      "type": "concept",
+      "description": "Debugging scenarios: @Transactional not working, unexpected rollbacks, LazyInitializationException, N+1 queries and slow queries.",
+      "difficulty": "advanced",
+      "tags": [
+        "debugging",
+        "transactional",
+        "lazy-initialization-exception",
+        "n-plus-one",
+        "slow-query"
+      ],
+      "estimatedMinutes": 35,
+      "order": 4,
+      "prerequisites": [
+        "transactional-pitfalls",
+        "n-plus-one-problem"
+      ],
+      "relatedTopics": [
+        "transaction-propagation",
+        "spring-scenario-debugging-questions"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "debugging-security-and-cors",
+      "slug": "debugging-security-and-cors",
+      "title": "Debugging Security, JWT and CORS",
+      "category": "spring-boot",
+      "subcategory": "debugging",
+      "type": "concept",
+      "description": "Debugging scenarios: CORS failures, JWT authentication failures and an empty SecurityContext.",
+      "difficulty": "advanced",
+      "tags": [
+        "debugging",
+        "cors",
+        "jwt",
+        "security-context"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "jwt-authentication-flow",
+        "spring-cors"
+      ],
+      "relatedTopics": [
+        "security-filter-chain",
+        "spring-scenario-debugging-questions"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-core-interview-questions",
+      "slug": "spring-core-interview-questions",
+      "title": "Spring Core Interview Questions",
+      "category": "spring-boot",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Spring core interview questions by level: container, beans, lifecycle, scopes, dependency injection and configuration.",
+      "difficulty": "beginner",
+      "tags": [
+        "interview",
+        "spring-core",
+        "beans",
+        "dependency-injection"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "spring-container",
+        "spring-ioc-and-di"
+      ],
+      "relatedTopics": [
+        "spring-tricky-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-boot-interview-questions",
+      "slug": "spring-boot-interview-questions",
+      "title": "Spring Boot Interview Questions",
+      "category": "spring-boot",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Spring Boot interview questions: auto-configuration, starters, startup, configuration, profiles, Actuator and deployment.",
+      "difficulty": "beginner",
+      "tags": [
+        "interview",
+        "spring-boot",
+        "auto-configuration"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "spring-boot-introduction",
+        "auto-configuration"
+      ],
+      "relatedTopics": [
+        "spring-core-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-rest-interview-questions",
+      "slug": "spring-rest-interview-questions",
+      "title": "REST API Interview Questions",
+      "category": "spring-boot",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "REST and Spring MVC interview questions: methods, status codes, binding, DTOs, validation, errors and API design.",
+      "difficulty": "beginner",
+      "tags": [
+        "interview",
+        "rest",
+        "spring-mvc"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "rest-principles",
+        "spring-mvc-request-lifecycle"
+      ],
+      "relatedTopics": [
+        "spring-boot-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-data-jpa-interview-questions",
+      "slug": "spring-data-jpa-interview-questions",
+      "title": "Spring Data JPA and Hibernate Interview Questions",
+      "category": "spring-boot",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "JPA, Hibernate and Spring Data interview questions: entity states, relationships, fetching, N+1, queries and locking.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "jpa",
+        "hibernate",
+        "spring-data-jpa"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "jpa-hibernate-spring-data",
+        "n-plus-one-problem"
+      ],
+      "relatedTopics": [
+        "spring-transaction-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-transaction-interview-questions",
+      "slug": "spring-transaction-interview-questions",
+      "title": "Transaction Interview Questions",
+      "category": "spring-boot",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Transaction interview questions: ACID, @Transactional rules, propagation, isolation, locking and pitfalls.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "transactions",
+        "transactional"
+      ],
+      "estimatedMinutes": 15,
+      "order": 5,
+      "prerequisites": [
+        "transactional-annotation"
+      ],
+      "relatedTopics": [
+        "spring-data-jpa-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-security-interview-questions",
+      "slug": "spring-security-interview-questions",
+      "title": "Spring Security and JWT Interview Questions",
+      "category": "spring-boot",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Spring Security interview questions: filter chain, authentication, BCrypt, authorization, JWT, refresh tokens, OAuth2, CORS and CSRF.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "spring-security",
+        "jwt",
+        "cors",
+        "csrf"
+      ],
+      "estimatedMinutes": 20,
+      "order": 6,
+      "prerequisites": [
+        "spring-security-introduction",
+        "jwt-authentication-flow"
+      ],
+      "relatedTopics": [
+        "spring-tricky-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-scenario-debugging-questions",
+      "slug": "spring-scenario-debugging-questions",
+      "title": "Spring Boot Scenario and Debugging Questions",
+      "category": "spring-boot",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Scenario and debugging interview questions: diagnosing startup, injection, web, transaction, JPA and security problems in running apps.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "debugging",
+        "scenarios"
+      ],
+      "estimatedMinutes": 20,
+      "order": 7,
+      "prerequisites": [
+        "debugging-transactions-and-jpa"
+      ],
+      "relatedTopics": [
+        "spring-tricky-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-architecture-questions",
+      "slug": "spring-architecture-questions",
+      "title": "Spring Boot Architecture Questions",
+      "category": "spring-boot",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Architecture interview questions: layering, packaging by feature, modular monoliths, scaling, consistency across services and read models.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "architecture",
+        "scalability",
+        "modular-monolith"
+      ],
+      "estimatedMinutes": 15,
+      "order": 8,
+      "prerequisites": [
+        "spring-mvc-architecture",
+        "microservices-awareness"
+      ],
+      "relatedTopics": [
+        "spring-project-based-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-tricky-questions",
+      "slug": "spring-tricky-questions",
+      "title": "Spring Boot Tricky and Behavior Questions",
+      "category": "spring-boot",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Tricky behaviour questions with verified answers: proxies, transactions, persistence context, bean resolution, security status codes.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "tricky-questions",
+        "behavior"
+      ],
+      "estimatedMinutes": 20,
+      "order": 9,
+      "prerequisites": [
+        "spring-proxies",
+        "transactional-annotation"
+      ],
+      "relatedTopics": [
+        "spring-scenario-debugging-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-project-based-questions",
+      "slug": "spring-project-based-questions",
+      "title": "Project-Based Spring Boot Questions",
+      "category": "spring-boot",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Project-based questions on an e-commerce backend: layering, DTOs, validation, JWT login, pagination, duplicate orders, stock and deployment.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "project",
+        "e-commerce",
+        "system-design"
+      ],
+      "estimatedMinutes": 30,
+      "order": 10,
+      "prerequisites": [
+        "dto-pattern",
+        "jpa-locking"
+      ],
+      "relatedTopics": [
+        "spring-architecture-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    }
+  ]
+}

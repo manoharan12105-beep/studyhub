@@ -242,6 +242,138 @@
           ]
         }
       ]
+    },
+    {
+      "id": "spring-boot",
+      "title": "Spring Boot",
+      "description": "Spring and Spring Boot for backend interviews: the container and DI, REST APIs, JPA and transactions, security and JWT, and production practice.",
+      "order": 5,
+      "icon": null,
+      "catalog": "metadata/topics/spring-boot.json",
+      "subcategories": [
+        {
+          "id": "fundamentals",
+          "title": "Spring Fundamentals",
+          "description": "The Spring Framework, the IoC container, beans, the bean lifecycle, component scanning, @Configuration and scopes.",
+          "order": 1
+        },
+        {
+          "id": "dependency-injection",
+          "title": "Dependency Injection",
+          "description": "IoC and DI, injection types, bean resolution with @Qualifier and @Primary, and circular dependencies.",
+          "order": 2
+        },
+        {
+          "id": "spring-boot-core",
+          "title": "Spring Boot Core",
+          "description": "Starters, auto-configuration, startup, externalized configuration and profiles.",
+          "order": 3
+        },
+        {
+          "id": "spring-mvc",
+          "title": "Spring MVC",
+          "description": "DispatcherServlet, the request lifecycle, filters and interceptors, and response handling.",
+          "order": 4
+        },
+        {
+          "id": "rest",
+          "title": "REST APIs",
+          "description": "REST principles, HTTP methods and status codes, request binding, DTOs, pagination and API best practices.",
+          "order": 5
+        },
+        {
+          "id": "validation",
+          "title": "Validation",
+          "description": "Jakarta Bean Validation, @Validated, groups, custom constraints and validation errors.",
+          "order": 6
+        },
+        {
+          "id": "exception-handling",
+          "title": "Exception Handling",
+          "description": "Exceptions in Spring Boot and global error handling with @RestControllerAdvice and ProblemDetail.",
+          "order": 7
+        },
+        {
+          "id": "jpa-hibernate",
+          "title": "JPA and Hibernate",
+          "description": "Entities, the persistence context, dirty checking, relationships, fetching, queries, N+1 and locking.",
+          "order": 8
+        },
+        {
+          "id": "transactions",
+          "title": "Transactions",
+          "description": "ACID, @Transactional, propagation, isolation levels and transactional pitfalls.",
+          "order": 9
+        },
+        {
+          "id": "security",
+          "title": "Spring Security and JWT",
+          "description": "The security filter chain, authentication, BCrypt, authorization, sessions vs tokens, JWT, refresh tokens and OAuth2.",
+          "order": 10
+        },
+        {
+          "id": "web-security",
+          "title": "CORS, CSRF and Cookies",
+          "description": "Same-origin policy and CORS, CSRF protection, and secure cookies.",
+          "order": 11
+        },
+        {
+          "id": "production",
+          "title": "Production Spring Boot",
+          "description": "Logging, Actuator, production configuration, connection pooling, caching, async work, uploads, OpenAPI and Docker.",
+          "order": 12
+        },
+        {
+          "id": "advanced",
+          "title": "Advanced Spring",
+          "description": "AOP, proxies, events, the cache abstraction, resilience patterns and microservices awareness.",
+          "order": 13
+        },
+        {
+          "id": "debugging",
+          "title": "Debugging",
+          "description": "Real Spring Boot problems as problem, cause, diagnosis, fix, prevention and interview explanation.",
+          "order": 14
+        },
+        {
+          "id": "interview",
+          "title": "Interview Preparation",
+          "description": "Interview question banks by area, scenario and debugging questions, architecture, tricky behaviour and project-based questions.",
+          "order": 15
+        }
+      ],
+      "studyModes": [
+        {
+          "id": "revision",
+          "title": "Revision",
+          "description": "Comprehensive Spring Boot revision: 5–10 points per topic, comparison tables, interview traps by module and a debugging checklist.",
+          "sources": [
+            { "path": "content/spring-boot/revision/core-and-boot.md", "title": "Spring Core and Boot" },
+            { "path": "content/spring-boot/revision/web-rest-validation.md", "title": "Web, REST and Validation" },
+            { "path": "content/spring-boot/revision/data-and-transactions.md", "title": "JPA and Transactions" },
+            { "path": "content/spring-boot/revision/security.md", "title": "Security and JWT" },
+            { "path": "content/spring-boot/revision/production-and-advanced.md", "title": "Production and Advanced" },
+            { "path": "content/spring-boot/revision/comparison-tables.md", "title": "Comparison Tables" },
+            { "path": "content/spring-boot/revision/common-interview-traps.md", "title": "Interview Traps" },
+            { "path": "content/spring-boot/revision/debugging-checklist.md", "title": "Debugging Checklist" }
+          ]
+        },
+        {
+          "id": "quick-revision",
+          "title": "Quick Revision",
+          "description": "One line per topic to scan before an interview, plus an annotation cheat sheet and last-minute traps.",
+          "estimatedMinutes": 30,
+          "sources": [
+            { "path": "content/spring-boot/revision/quick-core-and-boot.md", "title": "Core and Boot" },
+            { "path": "content/spring-boot/revision/quick-web-and-rest.md", "title": "Web and REST" },
+            { "path": "content/spring-boot/revision/quick-data-and-transactions.md", "title": "Data and Transactions" },
+            { "path": "content/spring-boot/revision/quick-security.md", "title": "Security" },
+            { "path": "content/spring-boot/revision/quick-production-and-advanced.md", "title": "Production and Advanced" },
+            { "path": "content/spring-boot/revision/quick-annotations.md", "title": "Annotations" },
+            { "path": "content/spring-boot/revision/quick-interview-traps.md", "title": "Last-Minute Traps" }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -13,7 +13,7 @@ If this file and a doc disagree, fix the disagreement rather than picking one si
 
 StudyHub is a personal study and interview-preparation platform (aptitude, data structures, algorithms, object-oriented programming, CS concepts, and categories the owner adds later). The same material must teach a beginner and serve as fast interview revision.
 
-**Current phase: content (Phases 2A Aptitude, 2B DSA and 2C OOP done).** Do not build the application or write further study content unless the owner asks for that phase.
+**Current phase: content (Phases 2A Aptitude, 2B DSA, 2C OOP and 2D Spring Boot done).** Do not build the application or write further study content unless the owner asks for that phase.
 
 ## Hard rules
 
@@ -23,7 +23,7 @@ StudyHub is a personal study and interview-preparation platform (aptitude, data 
 4. **Everything self-hosted.** No CDNs or external runtime requests; vendor libraries into `assets/vendor/`.
 5. **Relative paths only** (`metadata/categories.json`, never `/metadata/...`) — the site is served under `/<repo>/`.
 6. **Content and code are separate.** Content is Markdown in `content/`, metadata is JSON in `metadata/`, code is in the root app files, `js/` and `assets/`. Adding a topic or category must never require app code changes.
-7. **Java for programming examples** (Java 17, standard library only). No other languages unless the owner explicitly asks. The app's own code is JavaScript — this rule is about educational content.
+7. **Java for programming examples** (Java 17, standard library only). Exception: the `spring-boot` category uses JDK 21 with Spring Boot 4.1 libraries (see content-guide §4). No other languages unless the owner explicitly asks. The app's own code is JavaScript — this rule is about educational content.
 8. **Never invent curriculum.** Create only the categories, subcategories and topics the owner provides. Do not pad with extra topics or "suggested" folders.
 9. **Markdown + JSON only** for content and metadata. No MDX.
 
@@ -62,7 +62,7 @@ Follow [docs/content-guide.md](docs/content-guide.md). In short:
 - Accuracy over volume: verify every complexity, formula and code sample. No filler.
 - A topic is visible to the app only when it has a metadata entry; `files` must match the folder exactly.
 - Subtopics are H2 sections of their topic, not separate folders.
-- Category study modes (e.g. Aptitude's, DSA's and OOP's **Learn · Revision · Quick Revision**) are declared in `categories.json` `studyModes`; each mode merges several source files from `content/<category>/revision/` into one view. User-facing names come from metadata, never file names.
+- Category study modes (e.g. the **Learn · Revision · Quick Revision** modes of Aptitude, DSA, OOP and Spring Boot) are declared in `categories.json` `studyModes`; each mode merges several source files from `content/<category>/revision/` into one view. User-facing names come from metadata, never file names.
 
 ## Changing existing content (backwards compatibility)
 
