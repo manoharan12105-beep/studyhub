@@ -87,6 +87,8 @@ Templates contain the full menu of sections for each topic type. Not every topic
 - **Pattern topics** (`type: "pattern"`) teach how to *recognise* and apply a problem-solving technique. They link to the algorithm or data-structure topic for the mechanics instead of re-teaching them, and their example and practice problems must not repeat problems used elsewhere.
 - **Advanced topics** — beyond the core interview syllabus — open with a callout, directly under the H1:
   `> [!NOTE]` / `> **Advanced topic.** …` stating why it is advanced and what to learn first. The metadata `difficulty` (`advanced`) is a separate, finer signal: a core topic can be hard without being optional.
+- **Design-pattern topics** (OOP, `type: "concept"`) use this fixed section order instead of the concept template's: `Intent` · `The Problem` · `Why the Naive Solution Fails` · `The Pattern Idea` · `Structure` · `Java Implementation` · `Execution Flow` · `Real-World Examples` · `When to Use` · `When Not to Use` · `Advantages` · `Disadvantages` · `Related Patterns` · `SOLID Connection` · `Common Mistakes` · `Key Takeaways`. A line directly under the H1 states the GoF category and interview priority: `**Category:** Creational · **Interview priority:** Core` (or `Frequently useful`, `Advanced / awareness`).
+- **Design-problem topics** (OOP) use: `Requirements` · `Entities and Responsibilities` · `Relationships` · `Class Diagram` · `Design Decisions` · `Java Implementation` · `Extension Scenarios` (each as an H3 with the approach in `<details>`) · `Interview Discussion` · `Key Takeaways`. They have only `content.md`.
 
 ---
 
@@ -141,7 +143,8 @@ This is the **only** raw HTML allowed in content.
 
 - Each question/example is an `###` H3 starting with its stable id: `### Q3. …`, `### P7. …`, `### E2. …`.
 - Ids are numbered per file and **append-only**. Never renumber or reuse a number, even after deleting a question — future progress tracking may store these ids.
-- Put `**Difficulty:** Easy | Medium | Hard` on the line after the heading of practice questions and examples, and order items from easy to hard. DSA practice adds the technique: `**Difficulty:** Medium · **Pattern:** Sliding window`.
+- Put `**Difficulty:** Easy | Medium | Hard` on the line after the heading of practice questions and examples, and order items from easy to hard. DSA practice adds the technique: `**Difficulty:** Medium · **Pattern:** Sliding window`. OOP practice adds the question kind: `**Difficulty:** Medium · **Type:** Output-based` (MCQ, Conceptual, Output-based, Code analysis, Coding, Scenario, Design).
+- **Interview-preparation topics** may add a `**Style:**` line under each question naming the kind of interview it suits (e.g. `Placement-style · Java interview`). These labels describe question styles only; never claim that a specific company asks a question.
 - **Interview questions** are grouped under H2 headings. Use the template's `## Conceptual` / `## Applied` / `## Coding`, or — for topics organised by level, such as DSA's interview-preparation topics — `## Beginner` / `## Intermediate` / `## Advanced`. The H2 carries the level, so `Q` items need no Difficulty line.
 - Multiple-choice answers name the letter and the option text: `**Answer:** B) O(log n)`.
 - **Set-based questions** (several questions sharing one data table, passage, arrangement or puzzle — e.g. data interpretation, reading comprehension, seating, puzzles) are grouped under H2 headings such as `## Set 1: Table`, with the shared material directly below. Numbering stays continuous across sets; easy→hard ordering applies within each set.

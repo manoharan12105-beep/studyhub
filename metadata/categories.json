@@ -138,6 +138,110 @@
       "icon": null,
       "catalog": "metadata/topics/cs-concepts.json",
       "subcategories": []
+    },
+    {
+      "id": "oop",
+      "title": "Object-Oriented Programming",
+      "description": "Java OOP from objects and the four pillars to SOLID, design patterns and object-oriented design problems.",
+      "order": 4,
+      "icon": null,
+      "catalog": "metadata/topics/oop.json",
+      "subcategories": [
+        {
+          "id": "fundamentals",
+          "title": "OOP Fundamentals",
+          "description": "Objects, classes, references, constructors, static members and the object lifecycle.",
+          "order": 1
+        },
+        {
+          "id": "pillars",
+          "title": "The Four Pillars",
+          "description": "Encapsulation, inheritance, polymorphism and abstraction as Java implements them.",
+          "order": 2
+        },
+        {
+          "id": "relationships",
+          "title": "Object Relationships",
+          "description": "Association, aggregation and composition, and when to compose instead of inherit.",
+          "order": 3
+        },
+        {
+          "id": "java-oop",
+          "title": "Java Object Model and Language Features",
+          "description": "The Object class, equality, immutability, Java-specific OOP features and method resolution.",
+          "order": 4
+        },
+        {
+          "id": "applied-oop",
+          "title": "OOP in Practice",
+          "description": "OOP with collections, generics, exceptions, multithreading and testing.",
+          "order": 5
+        },
+        {
+          "id": "design-principles",
+          "title": "Design Principles",
+          "description": "SOLID, coupling and cohesion, and dependency injection.",
+          "order": 6
+        },
+        {
+          "id": "object-oriented-design",
+          "title": "Object-Oriented Design",
+          "description": "Turning requirements into classes, and UML class diagrams.",
+          "order": 7
+        },
+        {
+          "id": "code-quality",
+          "title": "Clean Code and Refactoring",
+          "description": "Clean-code principles, code smells, refactoring and OOP anti-patterns.",
+          "order": 8
+        },
+        {
+          "id": "design-patterns",
+          "title": "Design Patterns",
+          "description": "The 23 Gang of Four patterns: the problem each solves, Java implementations and trade-offs.",
+          "order": 9
+        },
+        {
+          "id": "design-problems",
+          "title": "Design Problems",
+          "description": "Object-oriented design of real systems, from requirements to Java code.",
+          "order": 10
+        },
+        {
+          "id": "interview",
+          "title": "Interview Preparation",
+          "description": "OOP interview questions by level, output-based and scenario questions, traps and why-questions.",
+          "order": 11
+        }
+      ],
+      "studyModes": [
+        {
+          "id": "revision",
+          "title": "Revision",
+          "description": "Comprehensive OOP revision: core concepts, comparison tables, Java rules, design principles, design patterns, UML and common mistakes.",
+          "sources": [
+            { "path": "content/oop/revision/core-concepts.md", "title": "Core Concepts" },
+            { "path": "content/oop/revision/comparison-tables.md", "title": "Comparison Tables" },
+            { "path": "content/oop/revision/java-oop-rules.md", "title": "Java Rules" },
+            { "path": "content/oop/revision/design-principles.md", "title": "SOLID and Design Principles" },
+            { "path": "content/oop/revision/design-patterns.md", "title": "Design Patterns" },
+            { "path": "content/oop/revision/uml-and-relationships.md", "title": "UML and Relationships" },
+            { "path": "content/oop/revision/common-mistakes.md", "title": "Common Mistakes" }
+          ]
+        },
+        {
+          "id": "quick-revision",
+          "title": "Quick Revision",
+          "description": "The high-signal OOP essentials to scan before an interview: core rules, Java syntax, SOLID and pattern clues, and last-minute traps.",
+          "estimatedMinutes": 30,
+          "sources": [
+            { "path": "content/oop/revision/quick-oop-essentials.md", "title": "OOP Essentials" },
+            { "path": "content/oop/revision/quick-java-syntax.md", "title": "Java OOP Syntax" },
+            { "path": "content/oop/revision/quick-solid-and-patterns.md", "title": "SOLID and Pattern Clues" },
+            { "path": "content/oop/revision/quick-interview-traps.md", "title": "Last-Minute Traps" }
+          ]
+        }
+      ]
     }
   ]
 }

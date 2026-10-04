@@ -1,0 +1,2649 @@
+{
+  "$schema": "../schemas/topics.schema.json",
+  "schemaVersion": 1,
+  "category": "oop",
+  "topics": [
+    {
+      "id": "oop-introduction",
+      "slug": "oop-introduction",
+      "title": "Introduction to Object-Oriented Programming",
+      "category": "oop",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "What OOP is and why it exists: objects with state, behaviour and identity, message passing, the four pillars, and how OOP differs from procedural code.",
+      "difficulty": "beginner",
+      "tags": [
+        "oop",
+        "objects",
+        "four-pillars",
+        "procedural-vs-oop"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "classes-and-objects",
+        "encapsulation",
+        "polymorphism",
+        "designing-classes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "classes-and-objects",
+      "slug": "classes-and-objects",
+      "title": "Classes and Objects",
+      "category": "oop",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "Class vs object vs reference, object creation, default values, aliasing, pass-by-value of references, the this keyword and anonymous objects.",
+      "difficulty": "beginner",
+      "tags": [
+        "class",
+        "object",
+        "reference",
+        "this",
+        "pass-by-value"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "oop-introduction"
+      ],
+      "relatedTopics": [
+        "object-lifecycle-and-memory",
+        "constructors-and-initialization",
+        "java-object-class"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "object-reference-model",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "constructors-and-initialization",
+      "slug": "constructors-and-initialization",
+      "title": "Constructors and Initialization",
+      "category": "oop",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "Constructor rules, default and copy constructors, this() and super() chaining, instance and static initializer blocks, and full initialization order.",
+      "difficulty": "beginner",
+      "tags": [
+        "constructor",
+        "constructor-chaining",
+        "initialization-order",
+        "static-block",
+        "super"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "classes-and-objects"
+      ],
+      "relatedTopics": [
+        "inheritance",
+        "static-members",
+        "method-overriding"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "constructor-chain",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "static-members",
+      "slug": "static-members",
+      "title": "Static Members",
+      "category": "oop",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "Static fields and methods, why static code has no this, static vs instance members, method hiding, static calls through null, and when to avoid static.",
+      "difficulty": "beginner",
+      "tags": [
+        "static",
+        "class-variable",
+        "static-method",
+        "method-hiding"
+      ],
+      "estimatedMinutes": 35,
+      "order": 4,
+      "prerequisites": [
+        "classes-and-objects"
+      ],
+      "relatedTopics": [
+        "java-specific-oop",
+        "method-overriding",
+        "binding-and-method-resolution",
+        "oop-anti-patterns"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "object-lifecycle-and-memory",
+      "slug": "object-lifecycle-and-memory",
+      "title": "Object Lifecycle and Memory",
+      "category": "oop",
+      "subcategory": "fundamentals",
+      "type": "concept",
+      "description": "The stack and heap model, GC roots and reachability, eligibility for garbage collection, finalize vs try-with-resources, and memory leaks in Java.",
+      "difficulty": "intermediate",
+      "tags": [
+        "stack",
+        "heap",
+        "garbage-collection",
+        "memory-leak",
+        "try-with-resources"
+      ],
+      "estimatedMinutes": 35,
+      "order": 5,
+      "prerequisites": [
+        "classes-and-objects"
+      ],
+      "relatedTopics": [
+        "constructors-and-initialization",
+        "object-relationships",
+        "oop-with-multithreading"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "object-reference-model",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "encapsulation",
+      "slug": "encapsulation",
+      "title": "Encapsulation",
+      "category": "oop",
+      "subcategory": "pillars",
+      "type": "concept",
+      "description": "Data hiding, the four access modifiers, getters and setters done right, validation, invariants, defensive copying, JavaBeans, and refactoring leaky classes.",
+      "difficulty": "beginner",
+      "tags": [
+        "encapsulation",
+        "access-modifiers",
+        "data-hiding",
+        "invariants",
+        "defensive-copying",
+        "javabeans"
+      ],
+      "estimatedMinutes": 50,
+      "order": 1,
+      "prerequisites": [
+        "classes-and-objects"
+      ],
+      "relatedTopics": [
+        "abstraction",
+        "immutability",
+        "clean-code-principles",
+        "code-smells-and-refactoring"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "inheritance",
+      "slug": "inheritance",
+      "title": "Inheritance",
+      "category": "oop",
+      "subcategory": "pillars",
+      "type": "concept",
+      "description": "extends and IS-A, inheritance types, why Java has no multiple class inheritance, super, field and method hiding, final, and the fragile base class problem.",
+      "difficulty": "beginner",
+      "tags": [
+        "inheritance",
+        "is-a",
+        "super",
+        "field-hiding",
+        "final",
+        "fragile-base-class"
+      ],
+      "estimatedMinutes": 55,
+      "order": 2,
+      "prerequisites": [
+        "constructors-and-initialization",
+        "encapsulation"
+      ],
+      "relatedTopics": [
+        "method-overriding",
+        "composition-over-inheritance",
+        "liskov-substitution-principle",
+        "object-relationships"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "class-hierarchy-explorer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "polymorphism",
+      "slug": "polymorphism",
+      "title": "Polymorphism",
+      "category": "oop",
+      "subcategory": "pillars",
+      "type": "concept",
+      "description": "Compile-time vs runtime polymorphism, dynamic method dispatch, static vs dynamic binding, and what the compiler knows versus what the runtime object is.",
+      "difficulty": "intermediate",
+      "tags": [
+        "polymorphism",
+        "dynamic-dispatch",
+        "static-binding",
+        "dynamic-binding",
+        "reference-type"
+      ],
+      "estimatedMinutes": 55,
+      "order": 3,
+      "prerequisites": [
+        "inheritance"
+      ],
+      "relatedTopics": [
+        "method-overloading",
+        "method-overriding",
+        "upcasting-and-downcasting",
+        "binding-and-method-resolution",
+        "strategy-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "dynamic-dispatch",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "method-overloading",
+      "slug": "method-overloading",
+      "title": "Method Overloading",
+      "category": "oop",
+      "subcategory": "pillars",
+      "type": "concept",
+      "description": "Valid overloads, how the compiler picks one (widening, boxing, varargs, most specific), null and ambiguous calls, and overloading across a class hierarchy.",
+      "difficulty": "intermediate",
+      "tags": [
+        "overloading",
+        "compile-time-polymorphism",
+        "autoboxing",
+        "varargs",
+        "method-signature"
+      ],
+      "estimatedMinutes": 45,
+      "order": 4,
+      "prerequisites": [
+        "polymorphism"
+      ],
+      "relatedTopics": [
+        "method-overriding",
+        "binding-and-method-resolution",
+        "oop-output-based-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "method-overriding",
+      "slug": "method-overriding",
+      "title": "Method Overriding",
+      "category": "oop",
+      "subcategory": "pillars",
+      "type": "concept",
+      "description": "Overriding rules for signature, covariant returns, access and checked exceptions; @Override; and why static, private and final methods are not overridden.",
+      "difficulty": "intermediate",
+      "tags": [
+        "overriding",
+        "runtime-polymorphism",
+        "covariant-return",
+        "override-annotation",
+        "method-hiding"
+      ],
+      "estimatedMinutes": 50,
+      "order": 5,
+      "prerequisites": [
+        "polymorphism",
+        "inheritance"
+      ],
+      "relatedTopics": [
+        "method-overloading",
+        "binding-and-method-resolution",
+        "oop-with-exceptions",
+        "equals-and-hashcode"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "dynamic-dispatch",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "upcasting-and-downcasting",
+      "slug": "upcasting-and-downcasting",
+      "title": "Upcasting and Downcasting",
+      "category": "oop",
+      "subcategory": "pillars",
+      "type": "concept",
+      "description": "Implicit upcasts, explicit downcasts, compile-time and runtime cast checks, instanceof and pattern matching, and array covariance vs generic invariance.",
+      "difficulty": "intermediate",
+      "tags": [
+        "upcasting",
+        "downcasting",
+        "instanceof",
+        "class-cast-exception",
+        "pattern-matching"
+      ],
+      "estimatedMinutes": 35,
+      "order": 6,
+      "prerequisites": [
+        "polymorphism"
+      ],
+      "relatedTopics": [
+        "modern-java-oop",
+        "oop-with-generics",
+        "equals-and-hashcode"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "reference-type-vs-object-type",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "abstraction",
+      "slug": "abstraction",
+      "title": "Abstraction",
+      "category": "oop",
+      "subcategory": "pillars",
+      "type": "concept",
+      "description": "Hiding implementation behind contracts: abstract classes and methods with their rules, levels of abstraction, and abstraction compared with encapsulation.",
+      "difficulty": "beginner",
+      "tags": [
+        "abstraction",
+        "abstract-class",
+        "abstract-method",
+        "encapsulation-vs-abstraction"
+      ],
+      "estimatedMinutes": 40,
+      "order": 7,
+      "prerequisites": [
+        "inheritance",
+        "encapsulation"
+      ],
+      "relatedTopics": [
+        "interfaces",
+        "template-method-pattern",
+        "dependency-inversion-principle"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "class-hierarchy-explorer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "interfaces",
+      "slug": "interfaces",
+      "title": "Interfaces",
+      "category": "oop",
+      "subcategory": "pillars",
+      "type": "concept",
+      "description": "Interface members by Java version, default-method conflict rules, static and private methods, functional and marker interfaces, and abstract class vs interface.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interface",
+        "default-methods",
+        "functional-interface",
+        "marker-interface",
+        "abstract-class-vs-interface"
+      ],
+      "estimatedMinutes": 55,
+      "order": 8,
+      "prerequisites": [
+        "abstraction"
+      ],
+      "relatedTopics": [
+        "interface-segregation-principle",
+        "dependency-inversion-principle",
+        "modern-java-oop",
+        "strategy-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "class-hierarchy-explorer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "object-relationships",
+      "slug": "object-relationships",
+      "title": "Association, Aggregation and Composition",
+      "category": "oop",
+      "subcategory": "relationships",
+      "type": "concept",
+      "description": "Association with multiplicity and navigability, aggregation vs composition by ownership and lifecycle, dependency, IS-A vs HAS-A, and UML notation.",
+      "difficulty": "intermediate",
+      "tags": [
+        "association",
+        "aggregation",
+        "composition",
+        "is-a-vs-has-a",
+        "multiplicity"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "classes-and-objects",
+        "inheritance"
+      ],
+      "relatedTopics": [
+        "composition-over-inheritance",
+        "uml-class-diagrams",
+        "designing-classes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "relationship-diagram",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "composition-over-inheritance",
+      "slug": "composition-over-inheritance",
+      "title": "Composition over Inheritance",
+      "category": "oop",
+      "subcategory": "relationships",
+      "type": "concept",
+      "description": "Why HAS-A plus delegation usually beats IS-A for reuse, refactoring a subclass hierarchy into composed policies, and when inheritance is still right.",
+      "difficulty": "intermediate",
+      "tags": [
+        "composition",
+        "delegation",
+        "inheritance",
+        "class-explosion"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "inheritance",
+        "object-relationships",
+        "interfaces"
+      ],
+      "relatedTopics": [
+        "strategy-pattern",
+        "decorator-pattern",
+        "bridge-pattern",
+        "oop-anti-patterns"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "relationship-diagram",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "java-object-class",
+      "slug": "java-object-class",
+      "title": "The Object Class",
+      "category": "oop",
+      "subcategory": "java-oop",
+      "type": "concept",
+      "description": "Methods every class inherits from Object, identity vs logical equality, == vs equals with strings and wrapper caching, toString, getClass, and clone pitfalls.",
+      "difficulty": "beginner",
+      "tags": [
+        "object-class",
+        "equality",
+        "identity",
+        "tostring",
+        "clone",
+        "string-pool"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "classes-and-objects"
+      ],
+      "relatedTopics": [
+        "equals-and-hashcode",
+        "immutability",
+        "prototype-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "object-reference-model",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "equals-and-hashcode",
+      "slug": "equals-and-hashcode",
+      "title": "equals() and hashCode()",
+      "category": "oop",
+      "subcategory": "java-oop",
+      "type": "concept",
+      "description": "The equals and hashCode contracts, how HashMap uses both, what breaks when one is missing, mutable keys, symmetry with subclasses, and compareTo consistency.",
+      "difficulty": "intermediate",
+      "tags": [
+        "equals",
+        "hashcode",
+        "hashmap",
+        "hashset",
+        "mutable-keys",
+        "contract"
+      ],
+      "estimatedMinutes": 50,
+      "order": 2,
+      "prerequisites": [
+        "java-object-class"
+      ],
+      "relatedTopics": [
+        "oop-with-collections",
+        "immutability",
+        "modern-java-oop",
+        "java-maps-and-sets"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "hash-bucket-explorer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "immutability",
+      "slug": "immutability",
+      "title": "Immutability",
+      "category": "oop",
+      "subcategory": "java-oop",
+      "type": "concept",
+      "description": "Why immutable objects matter, final reference vs immutable object, String and wrapper immutability, a step-by-step immutable class, unmodifiable vs immutable, records.",
+      "difficulty": "intermediate",
+      "tags": [
+        "immutability",
+        "final",
+        "string-immutability",
+        "defensive-copying",
+        "records",
+        "thread-safety"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "encapsulation",
+        "java-object-class"
+      ],
+      "relatedTopics": [
+        "equals-and-hashcode",
+        "modern-java-oop",
+        "oop-with-multithreading",
+        "builder-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "java-specific-oop",
+      "slug": "java-specific-oop",
+      "title": "Java-Specific OOP",
+      "category": "oop",
+      "subcategory": "java-oop",
+      "type": "concept",
+      "description": "Core OOP concepts mapped to Java mechanisms and rules: static, final and abstract, final vs finally vs finalize, this and super, and virtual-by-default methods.",
+      "difficulty": "intermediate",
+      "tags": [
+        "java",
+        "final",
+        "static",
+        "abstract",
+        "final-finally-finalize",
+        "core-vs-java"
+      ],
+      "estimatedMinutes": 35,
+      "order": 4,
+      "prerequisites": [
+        "inheritance",
+        "polymorphism"
+      ],
+      "relatedTopics": [
+        "static-members",
+        "nested-classes",
+        "modern-java-oop",
+        "binding-and-method-resolution"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "nested-classes",
+      "slug": "nested-classes",
+      "title": "Nested Classes",
+      "category": "oop",
+      "subcategory": "java-oop",
+      "type": "concept",
+      "description": "Static nested, inner, local and anonymous classes: how to create each, Outer.this, captured variables, anonymous classes vs lambdas, and inner-class leaks.",
+      "difficulty": "intermediate",
+      "tags": [
+        "nested-class",
+        "inner-class",
+        "anonymous-class",
+        "local-class",
+        "static-nested-class",
+        "lambda"
+      ],
+      "estimatedMinutes": 40,
+      "order": 5,
+      "prerequisites": [
+        "classes-and-objects",
+        "static-members"
+      ],
+      "relatedTopics": [
+        "interfaces",
+        "builder-pattern",
+        "iterator-pattern",
+        "object-lifecycle-and-memory"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "modern-java-oop",
+      "slug": "modern-java-oop",
+      "title": "Modern Java OOP Features: Enums, Records and Sealed Classes",
+      "category": "oop",
+      "subcategory": "java-oop",
+      "type": "concept",
+      "description": "Enums with fields and behaviour, records and compact constructors, sealed hierarchies with permits/final/non-sealed, and pattern matching for instanceof.",
+      "difficulty": "intermediate",
+      "tags": [
+        "enum",
+        "record",
+        "sealed-classes",
+        "pattern-matching",
+        "java-17"
+      ],
+      "estimatedMinutes": 50,
+      "order": 6,
+      "prerequisites": [
+        "interfaces",
+        "immutability"
+      ],
+      "relatedTopics": [
+        "upcasting-and-downcasting",
+        "state-pattern",
+        "visitor-pattern",
+        "singleton-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "binding-and-method-resolution",
+      "slug": "binding-and-method-resolution",
+      "title": "Binding and Method Resolution",
+      "category": "oop",
+      "subcategory": "java-oop",
+      "type": "concept",
+      "description": "How the compiler selects a method signature and the JVM finds its implementation: static vs dynamic binding, with ten progressively harder output examples.",
+      "difficulty": "advanced",
+      "tags": [
+        "method-resolution",
+        "static-binding",
+        "dynamic-binding",
+        "dispatch",
+        "output-prediction"
+      ],
+      "estimatedMinutes": 60,
+      "order": 7,
+      "prerequisites": [
+        "method-overloading",
+        "method-overriding",
+        "interfaces"
+      ],
+      "relatedTopics": [
+        "polymorphism",
+        "oop-output-based-questions",
+        "oop-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "dynamic-dispatch",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "oop-with-collections",
+      "slug": "oop-with-collections",
+      "title": "OOP with Collections",
+      "category": "oop",
+      "subcategory": "applied-oop",
+      "type": "concept",
+      "description": "How collections depend on equals, hashCode and compareTo; Comparable vs Comparator; TreeSet and TreeMap duplicate rules; and mutating objects inside collections.",
+      "difficulty": "intermediate",
+      "tags": [
+        "collections",
+        "comparable",
+        "comparator",
+        "treeset",
+        "hashmap",
+        "sorting"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "equals-and-hashcode",
+        "interfaces"
+      ],
+      "relatedTopics": [
+        "java-sorting-and-comparators",
+        "java-maps-and-sets",
+        "strategy-pattern",
+        "oop-with-generics"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "hash-bucket-explorer",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "oop-with-generics",
+      "slug": "oop-with-generics",
+      "title": "OOP with Generics",
+      "category": "oop",
+      "subcategory": "applied-oop",
+      "type": "concept",
+      "description": "Generic classes, interfaces and methods, bounded type parameters, wildcards and PECS, generic invariance, type erasure, and generics in OOP design.",
+      "difficulty": "intermediate",
+      "tags": [
+        "generics",
+        "bounded-types",
+        "wildcards",
+        "pecs",
+        "type-erasure"
+      ],
+      "estimatedMinutes": 50,
+      "order": 2,
+      "prerequisites": [
+        "interfaces",
+        "upcasting-and-downcasting"
+      ],
+      "relatedTopics": [
+        "oop-with-collections",
+        "dependency-inversion-principle",
+        "strategy-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "oop-with-exceptions",
+      "slug": "oop-with-exceptions",
+      "title": "OOP with Exceptions",
+      "category": "oop",
+      "subcategory": "applied-oop",
+      "type": "concept",
+      "description": "Exceptions as objects in a class hierarchy, checked vs unchecked, custom exception design, exception translation and chaining, and good vs bad handling.",
+      "difficulty": "intermediate",
+      "tags": [
+        "exceptions",
+        "checked-exceptions",
+        "custom-exceptions",
+        "exception-chaining",
+        "exception-design"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "inheritance",
+        "method-overriding"
+      ],
+      "relatedTopics": [
+        "encapsulation",
+        "abstraction",
+        "chain-of-responsibility-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "oop-with-multithreading",
+      "slug": "oop-with-multithreading",
+      "title": "OOP with Multithreading",
+      "category": "oop",
+      "subcategory": "applied-oop",
+      "type": "concept",
+      "description": "Designing thread-safe classes: shared mutable state, encapsulating locks, compound actions, immutable snapshots, composition pitfalls and deadlock-free design.",
+      "difficulty": "advanced",
+      "tags": [
+        "thread-safety",
+        "shared-state",
+        "synchronization",
+        "immutability",
+        "race-condition"
+      ],
+      "estimatedMinutes": 50,
+      "order": 4,
+      "prerequisites": [
+        "encapsulation",
+        "immutability"
+      ],
+      "relatedTopics": [
+        "object-lifecycle-and-memory",
+        "singleton-pattern",
+        "observer-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "oop-with-testing",
+      "slug": "oop-with-testing",
+      "title": "OOP with Testing",
+      "category": "oop",
+      "subcategory": "applied-oop",
+      "type": "concept",
+      "description": "What makes classes testable, arrange-act-assert, injecting collaborators and clocks, stubs, fakes, spies and mocks, and how SOLID supports testing.",
+      "difficulty": "intermediate",
+      "tags": [
+        "testability",
+        "unit-testing",
+        "test-doubles",
+        "mocking",
+        "dependency-injection"
+      ],
+      "estimatedMinutes": 40,
+      "order": 5,
+      "prerequisites": [
+        "interfaces",
+        "dependency-injection"
+      ],
+      "relatedTopics": [
+        "dependency-inversion-principle",
+        "solid-principles",
+        "immutability"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "solid-principles",
+      "slug": "solid-principles",
+      "title": "SOLID Principles",
+      "category": "oop",
+      "subcategory": "design-principles",
+      "type": "concept",
+      "description": "The five SOLID principles in one place: what each means, how they reinforce each other, how patterns apply them, and how to use them without overengineering.",
+      "difficulty": "intermediate",
+      "tags": [
+        "solid",
+        "design-principles",
+        "maintainability"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "interfaces",
+        "polymorphism"
+      ],
+      "relatedTopics": [
+        "single-responsibility-principle",
+        "open-closed-principle",
+        "liskov-substitution-principle",
+        "interface-segregation-principle",
+        "dependency-inversion-principle",
+        "design-patterns-introduction"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "single-responsibility-principle",
+      "slug": "single-responsibility-principle",
+      "title": "Single Responsibility Principle",
+      "category": "oop",
+      "subcategory": "design-principles",
+      "type": "concept",
+      "description": "One reason to change per class: spotting mixed responsibilities, splitting an invoice class by concern, and avoiding over-splitting and anaemic models.",
+      "difficulty": "intermediate",
+      "tags": [
+        "solid",
+        "srp",
+        "responsibility",
+        "cohesion"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "solid-principles"
+      ],
+      "relatedTopics": [
+        "coupling-and-cohesion",
+        "code-smells-and-refactoring",
+        "designing-classes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "solid-refactoring-stepper",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "open-closed-principle",
+      "slug": "open-closed-principle",
+      "title": "Open/Closed Principle",
+      "category": "oop",
+      "subcategory": "design-principles",
+      "type": "concept",
+      "description": "Open for extension, closed for modification: replacing type switches with abstractions, the ways Java achieves OCP, and avoiding speculative extension points.",
+      "difficulty": "intermediate",
+      "tags": [
+        "solid",
+        "ocp",
+        "extension",
+        "polymorphism"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "solid-principles",
+        "polymorphism"
+      ],
+      "relatedTopics": [
+        "strategy-pattern",
+        "decorator-pattern",
+        "liskov-substitution-principle"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "solid-refactoring-stepper",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "liskov-substitution-principle",
+      "slug": "liskov-substitution-principle",
+      "title": "Liskov Substitution Principle",
+      "category": "oop",
+      "subcategory": "design-principles",
+      "type": "concept",
+      "description": "Subtypes must honour the base contract: preconditions, postconditions, invariants, the Square-Rectangle problem, refused bequests and contract tests.",
+      "difficulty": "advanced",
+      "tags": [
+        "solid",
+        "lsp",
+        "substitutability",
+        "contracts",
+        "inheritance"
+      ],
+      "estimatedMinutes": 45,
+      "order": 4,
+      "prerequisites": [
+        "solid-principles",
+        "inheritance",
+        "method-overriding"
+      ],
+      "relatedTopics": [
+        "interface-segregation-principle",
+        "composition-over-inheritance",
+        "open-closed-principle"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "solid-refactoring-stepper",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "interface-segregation-principle",
+      "slug": "interface-segregation-principle",
+      "title": "Interface Segregation Principle",
+      "category": "oop",
+      "subcategory": "design-principles",
+      "type": "concept",
+      "description": "Clients should not depend on methods they do not use: splitting a fat payment interface into role interfaces, and splitting by client need without over-splitting.",
+      "difficulty": "intermediate",
+      "tags": [
+        "solid",
+        "isp",
+        "role-interfaces",
+        "fat-interface"
+      ],
+      "estimatedMinutes": 30,
+      "order": 5,
+      "prerequisites": [
+        "solid-principles",
+        "interfaces"
+      ],
+      "relatedTopics": [
+        "liskov-substitution-principle",
+        "adapter-pattern",
+        "facade-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "solid-refactoring-stepper",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dependency-inversion-principle",
+      "slug": "dependency-inversion-principle",
+      "title": "Dependency Inversion Principle",
+      "category": "oop",
+      "subcategory": "design-principles",
+      "type": "concept",
+      "description": "High-level policy and low-level details both depend on abstractions owned by the policy; DIP vs DI vs IoC; and where inversion pays off.",
+      "difficulty": "intermediate",
+      "tags": [
+        "solid",
+        "dip",
+        "abstractions",
+        "layered-architecture"
+      ],
+      "estimatedMinutes": 40,
+      "order": 6,
+      "prerequisites": [
+        "solid-principles",
+        "interfaces"
+      ],
+      "relatedTopics": [
+        "dependency-injection",
+        "coupling-and-cohesion",
+        "oop-with-testing",
+        "adapter-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "solid-refactoring-stepper",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "coupling-and-cohesion",
+      "slug": "coupling-and-cohesion",
+      "title": "Coupling and Cohesion",
+      "category": "oop",
+      "subcategory": "design-principles",
+      "type": "concept",
+      "description": "Kinds of coupling and cohesion, why low coupling and high cohesion go together, and how interfaces, injection and composition loosen tightly coupled code.",
+      "difficulty": "intermediate",
+      "tags": [
+        "coupling",
+        "cohesion",
+        "loose-coupling",
+        "modularity"
+      ],
+      "estimatedMinutes": 40,
+      "order": 7,
+      "prerequisites": [
+        "interfaces",
+        "single-responsibility-principle"
+      ],
+      "relatedTopics": [
+        "dependency-inversion-principle",
+        "dependency-injection",
+        "clean-code-principles"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "dependency-injection",
+      "slug": "dependency-injection",
+      "title": "Dependency Injection and Inversion of Control",
+      "category": "oop",
+      "subcategory": "design-principles",
+      "type": "concept",
+      "description": "Constructor, setter and field injection, why constructor injection is preferred, DI without a framework, IoC vs DI vs DIP, and how Spring fits in.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dependency-injection",
+        "ioc",
+        "constructor-injection",
+        "spring",
+        "composition-root"
+      ],
+      "estimatedMinutes": 45,
+      "order": 8,
+      "prerequisites": [
+        "dependency-inversion-principle"
+      ],
+      "relatedTopics": [
+        "oop-with-testing",
+        "coupling-and-cohesion",
+        "singleton-pattern",
+        "factory-method-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "designing-classes",
+      "slug": "designing-classes",
+      "title": "Designing Classes from Requirements",
+      "category": "oop",
+      "subcategory": "object-oriented-design",
+      "type": "concept",
+      "description": "A ten-step process for turning a problem statement into classes: requirements, entities, responsibilities, relationships, abstractions, checks and scenarios.",
+      "difficulty": "intermediate",
+      "tags": [
+        "object-oriented-design",
+        "low-level-design",
+        "responsibilities",
+        "crc-cards",
+        "requirements"
+      ],
+      "estimatedMinutes": 50,
+      "order": 1,
+      "prerequisites": [
+        "object-relationships",
+        "solid-principles"
+      ],
+      "relatedTopics": [
+        "uml-class-diagrams",
+        "parking-lot-design",
+        "library-management-design",
+        "oop-scenario-based-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "design-problem-class-diagram",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "uml-class-diagrams",
+      "slug": "uml-class-diagrams",
+      "title": "UML Class Diagrams",
+      "category": "oop",
+      "subcategory": "object-oriented-design",
+      "type": "concept",
+      "description": "Class boxes, visibility, association, aggregation, composition, inheritance, realization and dependency, multiplicity, object diagrams, and mapping UML to Java.",
+      "difficulty": "beginner",
+      "tags": [
+        "uml",
+        "class-diagram",
+        "object-diagram",
+        "multiplicity",
+        "visibility"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "object-relationships"
+      ],
+      "relatedTopics": [
+        "designing-classes",
+        "object-relationships",
+        "design-patterns-introduction"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "relationship-diagram",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "clean-code-principles",
+      "slug": "clean-code-principles",
+      "title": "Clean Code Principles for OOP",
+      "category": "oop",
+      "subcategory": "code-quality",
+      "type": "concept",
+      "description": "Names, small classes and methods, parameter objects, boolean flags, defensive programming, Tell Don't Ask, Law of Demeter, DRY, KISS and YAGNI as principles.",
+      "difficulty": "intermediate",
+      "tags": [
+        "clean-code",
+        "naming",
+        "tell-dont-ask",
+        "law-of-demeter",
+        "dry",
+        "kiss",
+        "yagni"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "encapsulation",
+        "single-responsibility-principle"
+      ],
+      "relatedTopics": [
+        "code-smells-and-refactoring",
+        "oop-anti-patterns",
+        "coupling-and-cohesion"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "code-smells-and-refactoring",
+      "slug": "code-smells-and-refactoring",
+      "title": "Code Smells and Refactoring",
+      "category": "oop",
+      "subcategory": "code-quality",
+      "type": "concept",
+      "description": "Thirteen common OOP smells with their causes, and step-by-step refactorings with Java before-and-after code: extract, move, value objects, polymorphism, delegation.",
+      "difficulty": "intermediate",
+      "tags": [
+        "code-smells",
+        "refactoring",
+        "feature-envy",
+        "primitive-obsession",
+        "shotgun-surgery"
+      ],
+      "estimatedMinutes": 55,
+      "order": 2,
+      "prerequisites": [
+        "clean-code-principles"
+      ],
+      "relatedTopics": [
+        "oop-anti-patterns",
+        "single-responsibility-principle",
+        "open-closed-principle",
+        "composition-over-inheritance"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "solid-refactoring-stepper",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "oop-anti-patterns",
+      "slug": "oop-anti-patterns",
+      "title": "OOP Anti-Patterns",
+      "category": "oop",
+      "subcategory": "code-quality",
+      "type": "concept",
+      "description": "Overused inheritance, deep hierarchies, singleton abuse, global state, anaemic models, god objects, excessive abstraction and premature or inappropriate patterns.",
+      "difficulty": "intermediate",
+      "tags": [
+        "anti-patterns",
+        "god-object",
+        "anemic-domain-model",
+        "singleton",
+        "overengineering"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "solid-principles",
+        "composition-over-inheritance"
+      ],
+      "relatedTopics": [
+        "code-smells-and-refactoring",
+        "singleton-pattern",
+        "design-patterns-introduction"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "design-patterns-introduction",
+      "slug": "design-patterns-introduction",
+      "title": "Introduction to Design Patterns",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "What design patterns are, the GoF creational/structural/behavioral categories, the principles behind them, interview priorities, and a problem-to-pattern map.",
+      "difficulty": "intermediate",
+      "tags": [
+        "design-patterns",
+        "gang-of-four",
+        "creational",
+        "structural",
+        "behavioral"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "interfaces",
+        "composition-over-inheritance"
+      ],
+      "relatedTopics": [
+        "solid-principles",
+        "design-pattern-comparisons",
+        "oop-anti-patterns"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "singleton-pattern",
+      "slug": "singleton-pattern",
+      "title": "Singleton",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "One instance with global access: eager, lazy, synchronized, double-checked locking with volatile, holder idiom and enum singletons, plus testability problems.",
+      "difficulty": "intermediate",
+      "tags": [
+        "singleton",
+        "creational",
+        "core-interview",
+        "double-checked-locking",
+        "enum-singleton"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "static-members",
+        "design-patterns-introduction"
+      ],
+      "relatedTopics": [
+        "dependency-injection",
+        "oop-anti-patterns",
+        "oop-with-multithreading"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "factory-method-pattern",
+      "slug": "factory-method-pattern",
+      "title": "Factory Method",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Let subclasses decide which product to create through an overridable creation method; compared with simple factories and static factory methods.",
+      "difficulty": "intermediate",
+      "tags": [
+        "factory-method",
+        "creational",
+        "core-interview",
+        "simple-factory",
+        "static-factory"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "abstraction",
+        "design-patterns-introduction"
+      ],
+      "relatedTopics": [
+        "abstract-factory-pattern",
+        "template-method-pattern",
+        "builder-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "abstract-factory-pattern",
+      "slug": "abstract-factory-pattern",
+      "title": "Abstract Factory",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Create consistent families of related objects through one factory interface, illustrated with country-specific tax and invoice components.",
+      "difficulty": "intermediate",
+      "tags": [
+        "abstract-factory",
+        "creational",
+        "core-interview",
+        "product-families"
+      ],
+      "estimatedMinutes": 35,
+      "order": 4,
+      "prerequisites": [
+        "factory-method-pattern"
+      ],
+      "relatedTopics": [
+        "factory-method-pattern",
+        "builder-pattern",
+        "dependency-inversion-principle"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "builder-pattern",
+      "slug": "builder-pattern",
+      "title": "Builder",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Assemble complex immutable objects step by step: telescoping constructors, the fluent static nested builder, validation in build(), and when not to use it.",
+      "difficulty": "intermediate",
+      "tags": [
+        "builder",
+        "creational",
+        "core-interview",
+        "immutability",
+        "fluent-interface"
+      ],
+      "estimatedMinutes": 35,
+      "order": 5,
+      "prerequisites": [
+        "immutability",
+        "nested-classes"
+      ],
+      "relatedTopics": [
+        "factory-method-pattern",
+        "prototype-pattern",
+        "clean-code-principles"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "prototype-pattern",
+      "slug": "prototype-pattern",
+      "title": "Prototype",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Create objects by copying configured prototypes through a copy method and registry, with shallow vs deep copying and why copy constructors beat clone().",
+      "difficulty": "advanced",
+      "tags": [
+        "prototype",
+        "creational",
+        "awareness",
+        "clone",
+        "copying"
+      ],
+      "estimatedMinutes": 25,
+      "order": 6,
+      "prerequisites": [
+        "java-object-class"
+      ],
+      "relatedTopics": [
+        "builder-pattern",
+        "memento-pattern",
+        "abstract-factory-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "adapter-pattern",
+      "slug": "adapter-pattern",
+      "title": "Adapter",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Make an incompatible existing class work through the interface your code expects, with object vs class adapters and wrapping vendor SDKs.",
+      "difficulty": "intermediate",
+      "tags": [
+        "adapter",
+        "structural",
+        "core-interview",
+        "wrapper",
+        "third-party-integration"
+      ],
+      "estimatedMinutes": 30,
+      "order": 7,
+      "prerequisites": [
+        "interfaces",
+        "design-patterns-introduction"
+      ],
+      "relatedTopics": [
+        "facade-pattern",
+        "decorator-pattern",
+        "dependency-inversion-principle"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "bridge-pattern",
+      "slug": "bridge-pattern",
+      "title": "Bridge",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Separate two independent dimensions of variation into two hierarchies joined by composition, avoiding subclass explosion.",
+      "difficulty": "advanced",
+      "tags": [
+        "bridge",
+        "structural",
+        "awareness",
+        "two-dimensions"
+      ],
+      "estimatedMinutes": 25,
+      "order": 8,
+      "prerequisites": [
+        "composition-over-inheritance"
+      ],
+      "relatedTopics": [
+        "strategy-pattern",
+        "adapter-pattern",
+        "composition-over-inheritance"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "composite-pattern",
+      "slug": "composite-pattern",
+      "title": "Composite",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Treat leaves and containers uniformly in part-whole trees, shown with nested product bundles, and where to declare child management.",
+      "difficulty": "intermediate",
+      "tags": [
+        "composite",
+        "structural",
+        "tree",
+        "part-whole"
+      ],
+      "estimatedMinutes": 30,
+      "order": 9,
+      "prerequisites": [
+        "interfaces",
+        "object-relationships"
+      ],
+      "relatedTopics": [
+        "decorator-pattern",
+        "iterator-pattern",
+        "visitor-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "decorator-pattern",
+      "slug": "decorator-pattern",
+      "title": "Decorator",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Add responsibilities dynamically by stacking same-interface wrappers: logging, caching and retry around a service, and java.io streams.",
+      "difficulty": "intermediate",
+      "tags": [
+        "decorator",
+        "structural",
+        "core-interview",
+        "wrapper",
+        "java-io"
+      ],
+      "estimatedMinutes": 35,
+      "order": 10,
+      "prerequisites": [
+        "interfaces",
+        "composition-over-inheritance"
+      ],
+      "relatedTopics": [
+        "proxy-pattern",
+        "adapter-pattern",
+        "open-closed-principle"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "facade-pattern",
+      "slug": "facade-pattern",
+      "title": "Facade",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "One simple entry point over a complex subsystem, shown with a checkout workflow, and how to keep a facade from becoming a god object.",
+      "difficulty": "intermediate",
+      "tags": [
+        "facade",
+        "structural",
+        "core-interview",
+        "subsystem",
+        "simplification"
+      ],
+      "estimatedMinutes": 30,
+      "order": 11,
+      "prerequisites": [
+        "coupling-and-cohesion"
+      ],
+      "relatedTopics": [
+        "adapter-pattern",
+        "mediator-pattern",
+        "interface-segregation-principle"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "flyweight-pattern",
+      "slug": "flyweight-pattern",
+      "title": "Flyweight",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Share immutable intrinsic state among huge numbers of objects, with a seat-map example and JDK caches such as Integer.valueOf and the string pool.",
+      "difficulty": "advanced",
+      "tags": [
+        "flyweight",
+        "structural",
+        "awareness",
+        "memory",
+        "caching"
+      ],
+      "estimatedMinutes": 25,
+      "order": 12,
+      "prerequisites": [
+        "immutability"
+      ],
+      "relatedTopics": [
+        "singleton-pattern",
+        "composite-pattern",
+        "java-object-class"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "proxy-pattern",
+      "slug": "proxy-pattern",
+      "title": "Proxy",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Control access to an object through a same-interface surrogate: virtual, protection, remote, caching proxies, JDK dynamic proxies and Spring.",
+      "difficulty": "intermediate",
+      "tags": [
+        "proxy",
+        "structural",
+        "core-interview",
+        "lazy-loading",
+        "dynamic-proxy"
+      ],
+      "estimatedMinutes": 40,
+      "order": 13,
+      "prerequisites": [
+        "interfaces",
+        "design-patterns-introduction"
+      ],
+      "relatedTopics": [
+        "decorator-pattern",
+        "adapter-pattern",
+        "dependency-injection"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "chain-of-responsibility-pattern",
+      "slug": "chain-of-responsibility-pattern",
+      "title": "Chain of Responsibility",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Pass a request along a configurable chain of handlers until one handles it, with expense approvals, servlet filters and pipeline variants.",
+      "difficulty": "intermediate",
+      "tags": [
+        "chain-of-responsibility",
+        "behavioral",
+        "handlers",
+        "filters"
+      ],
+      "estimatedMinutes": 30,
+      "order": 14,
+      "prerequisites": [
+        "polymorphism"
+      ],
+      "relatedTopics": [
+        "decorator-pattern",
+        "command-pattern",
+        "oop-with-exceptions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "command-pattern",
+      "slug": "command-pattern",
+      "title": "Command",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Encapsulate requests as objects for undo/redo, queuing and logging, with an inventory editor example and Runnable/Callable as JDK commands.",
+      "difficulty": "intermediate",
+      "tags": [
+        "command",
+        "behavioral",
+        "core-interview",
+        "undo-redo",
+        "runnable"
+      ],
+      "estimatedMinutes": 35,
+      "order": 15,
+      "prerequisites": [
+        "interfaces"
+      ],
+      "relatedTopics": [
+        "memento-pattern",
+        "strategy-pattern",
+        "chain-of-responsibility-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "interpreter-pattern",
+      "slug": "interpreter-pattern",
+      "title": "Interpreter",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Represent a small grammar as classes and evaluate rule trees recursively, shown with combinable coupon-eligibility rules.",
+      "difficulty": "advanced",
+      "tags": [
+        "interpreter",
+        "behavioral",
+        "awareness",
+        "grammar",
+        "expression-tree"
+      ],
+      "estimatedMinutes": 25,
+      "order": 16,
+      "prerequisites": [
+        "composite-pattern"
+      ],
+      "relatedTopics": [
+        "composite-pattern",
+        "visitor-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "iterator-pattern",
+      "slug": "iterator-pattern",
+      "title": "Iterator",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Traverse a collection without exposing its structure: Iterable and Iterator, a custom date-range iterator, fail-fast behaviour and safe removal.",
+      "difficulty": "intermediate",
+      "tags": [
+        "iterator",
+        "behavioral",
+        "iterable",
+        "fail-fast"
+      ],
+      "estimatedMinutes": 30,
+      "order": 17,
+      "prerequisites": [
+        "interfaces",
+        "nested-classes"
+      ],
+      "relatedTopics": [
+        "composite-pattern",
+        "factory-method-pattern",
+        "oop-with-collections"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "mediator-pattern",
+      "slug": "mediator-pattern",
+      "title": "Mediator",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Centralise how a group of objects interact so they no longer reference each other, shown with booking-screen components.",
+      "difficulty": "advanced",
+      "tags": [
+        "mediator",
+        "behavioral",
+        "awareness",
+        "coordination"
+      ],
+      "estimatedMinutes": 25,
+      "order": 18,
+      "prerequisites": [
+        "coupling-and-cohesion"
+      ],
+      "relatedTopics": [
+        "observer-pattern",
+        "facade-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "memento-pattern",
+      "slug": "memento-pattern",
+      "title": "Memento",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Save and restore an object's state through opaque snapshots without breaking encapsulation, with an exam answer-sheet checkpoint example.",
+      "difficulty": "advanced",
+      "tags": [
+        "memento",
+        "behavioral",
+        "awareness",
+        "undo",
+        "snapshot"
+      ],
+      "estimatedMinutes": 25,
+      "order": 19,
+      "prerequisites": [
+        "encapsulation",
+        "command-pattern"
+      ],
+      "relatedTopics": [
+        "command-pattern",
+        "prototype-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "observer-pattern",
+      "slug": "observer-pattern",
+      "title": "Observer",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Notify many observers when a subject changes: order events, push vs pull, sync vs async, failure isolation, unsubscription and Spring events.",
+      "difficulty": "intermediate",
+      "tags": [
+        "observer",
+        "behavioral",
+        "core-interview",
+        "events",
+        "listeners",
+        "publish-subscribe"
+      ],
+      "estimatedMinutes": 40,
+      "order": 20,
+      "prerequisites": [
+        "interfaces"
+      ],
+      "relatedTopics": [
+        "mediator-pattern",
+        "open-closed-principle",
+        "oop-with-multithreading"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "state-pattern",
+      "slug": "state-pattern",
+      "title": "State",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Change an object's behaviour as its internal state changes, with an order lifecycle, default rejections, an enum alternative, and State vs Strategy.",
+      "difficulty": "intermediate",
+      "tags": [
+        "state",
+        "behavioral",
+        "core-interview",
+        "state-machine",
+        "lifecycle"
+      ],
+      "estimatedMinutes": 40,
+      "order": 21,
+      "prerequisites": [
+        "polymorphism",
+        "interfaces"
+      ],
+      "relatedTopics": [
+        "strategy-pattern",
+        "modern-java-oop",
+        "atm-design"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "strategy-pattern",
+      "slug": "strategy-pattern",
+      "title": "Strategy",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Interchangeable algorithms behind one interface, chosen at runtime: delivery-fee rules, lambdas as strategies, and Comparator in the JDK.",
+      "difficulty": "intermediate",
+      "tags": [
+        "strategy",
+        "behavioral",
+        "core-interview",
+        "algorithms",
+        "comparator"
+      ],
+      "estimatedMinutes": 35,
+      "order": 22,
+      "prerequisites": [
+        "interfaces",
+        "polymorphism"
+      ],
+      "relatedTopics": [
+        "state-pattern",
+        "template-method-pattern",
+        "open-closed-principle",
+        "composition-over-inheritance"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "template-method-pattern",
+      "slug": "template-method-pattern",
+      "title": "Template Method",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Fix an algorithm's skeleton in a final method and let subclasses implement steps and hooks, shown with a data-import workflow.",
+      "difficulty": "intermediate",
+      "tags": [
+        "template-method",
+        "behavioral",
+        "core-interview",
+        "hooks",
+        "inheritance"
+      ],
+      "estimatedMinutes": 35,
+      "order": 23,
+      "prerequisites": [
+        "abstraction",
+        "inheritance"
+      ],
+      "relatedTopics": [
+        "strategy-pattern",
+        "factory-method-pattern",
+        "abstraction"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "pattern-structure",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "visitor-pattern",
+      "slug": "visitor-pattern",
+      "title": "Visitor",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Add operations to a stable class hierarchy with double dispatch, shown with GST and shipping-weight visitors, and its trade-off with sealed types.",
+      "difficulty": "advanced",
+      "tags": [
+        "visitor",
+        "behavioral",
+        "awareness",
+        "double-dispatch"
+      ],
+      "estimatedMinutes": 30,
+      "order": 24,
+      "prerequisites": [
+        "binding-and-method-resolution",
+        "composite-pattern"
+      ],
+      "relatedTopics": [
+        "composite-pattern",
+        "interpreter-pattern",
+        "modern-java-oop"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "design-pattern-comparisons",
+      "slug": "design-pattern-comparisons",
+      "title": "Design Pattern Comparisons",
+      "category": "oop",
+      "subcategory": "design-patterns",
+      "type": "concept",
+      "description": "Side-by-side comparisons of look-alike patterns and a guide for choosing the right one from a problem description.",
+      "difficulty": "advanced",
+      "tags": [
+        "design-patterns",
+        "comparisons",
+        "pattern-selection",
+        "interview"
+      ],
+      "estimatedMinutes": 40,
+      "order": 25,
+      "prerequisites": [
+        "design-patterns-introduction"
+      ],
+      "relatedTopics": [
+        "strategy-pattern",
+        "state-pattern",
+        "decorator-pattern",
+        "proxy-pattern",
+        "adapter-pattern",
+        "facade-pattern"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "parking-lot-design",
+      "slug": "parking-lot-design",
+      "title": "Parking Lot Design",
+      "category": "oop",
+      "subcategory": "design-problems",
+      "type": "concept",
+      "description": "Floors, typed spots, tickets and fees: fit rules in enums, allocation and pricing as strategies, and safe spot assignment under concurrency.",
+      "difficulty": "intermediate",
+      "tags": [
+        "low-level-design",
+        "parking-lot",
+        "strategy",
+        "enums"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "designing-classes"
+      ],
+      "relatedTopics": [
+        "strategy-pattern",
+        "vehicle-rental-design",
+        "oop-with-multithreading"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": "design-problem-class-diagram",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "library-management-design",
+      "slug": "library-management-design",
+      "title": "Library Management System Design",
+      "category": "oop",
+      "subcategory": "design-problems",
+      "type": "concept",
+      "description": "Books vs copies, members with loan limits, loans with due dates and fines, and a reservation queue that holds returned copies.",
+      "difficulty": "intermediate",
+      "tags": [
+        "low-level-design",
+        "library",
+        "reservations",
+        "fines"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "designing-classes"
+      ],
+      "relatedTopics": [
+        "object-relationships",
+        "observer-pattern",
+        "state-pattern"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": "design-problem-class-diagram",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "vehicle-rental-design",
+      "slug": "vehicle-rental-design",
+      "title": "Vehicle Rental System Design",
+      "category": "oop",
+      "subcategory": "design-problems",
+      "type": "concept",
+      "description": "Branches, vehicle types with pricing strategies, date-range availability and booking without double booking.",
+      "difficulty": "intermediate",
+      "tags": [
+        "low-level-design",
+        "rental",
+        "availability",
+        "pricing"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "designing-classes"
+      ],
+      "relatedTopics": [
+        "strategy-pattern",
+        "parking-lot-design",
+        "immutability"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": "design-problem-class-diagram",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "atm-design",
+      "slug": "atm-design",
+      "title": "ATM Design",
+      "category": "oop",
+      "subcategory": "design-problems",
+      "type": "concept",
+      "description": "An ATM session as a state machine, the bank behind an interface, and note planning that never debits before cash can be dispensed.",
+      "difficulty": "advanced",
+      "tags": [
+        "low-level-design",
+        "atm",
+        "state-pattern",
+        "cash-dispenser"
+      ],
+      "estimatedMinutes": 50,
+      "order": 4,
+      "prerequisites": [
+        "designing-classes"
+      ],
+      "relatedTopics": [
+        "state-pattern",
+        "dependency-inversion-principle",
+        "command-pattern"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": "design-problem-class-diagram",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "food-ordering-design",
+      "slug": "food-ordering-design",
+      "title": "Food Ordering System Design",
+      "category": "oop",
+      "subcategory": "design-problems",
+      "type": "concept",
+      "description": "Single-restaurant carts, frozen order prices, status transitions, delivery-fee and partner-assignment strategies, and event notifications.",
+      "difficulty": "advanced",
+      "tags": [
+        "low-level-design",
+        "food-delivery",
+        "order-lifecycle",
+        "observer"
+      ],
+      "estimatedMinutes": 50,
+      "order": 5,
+      "prerequisites": [
+        "designing-classes"
+      ],
+      "relatedTopics": [
+        "observer-pattern",
+        "strategy-pattern",
+        "state-pattern"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": "design-problem-class-diagram",
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "oop-interview-questions",
+      "slug": "oop-interview-questions",
+      "title": "OOP Interview Questions by Level",
+      "category": "oop",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Thirty Java OOP questions from beginner definitions to advanced design, each with a model answer and a question-style label.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "placement",
+        "java-interview",
+        "four-pillars"
+      ],
+      "estimatedMinutes": 60,
+      "order": 1,
+      "prerequisites": [
+        "oop-introduction"
+      ],
+      "relatedTopics": [
+        "oop-output-based-questions",
+        "oop-scenario-based-questions",
+        "oop-interview-traps",
+        "oop-why-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "oop-output-based-questions",
+      "slug": "oop-output-based-questions",
+      "title": "OOP Output-Based Questions",
+      "category": "oop",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Twenty verified Java programs testing constructor order, overloading, overriding, hiding, casting, defaults and equals/hashCode behaviour.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "output-prediction",
+        "java",
+        "polymorphism"
+      ],
+      "estimatedMinutes": 60,
+      "order": 2,
+      "prerequisites": [
+        "polymorphism",
+        "constructors-and-initialization"
+      ],
+      "relatedTopics": [
+        "binding-and-method-resolution",
+        "oop-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "oop-scenario-based-questions",
+      "slug": "oop-scenario-based-questions",
+      "title": "OOP Scenario-Based Questions",
+      "category": "oop",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Realistic design scenarios: who owns a responsibility, inheritance or composition, which pattern and why, with reasoned answers.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "scenario",
+        "design",
+        "backend"
+      ],
+      "estimatedMinutes": 50,
+      "order": 3,
+      "prerequisites": [
+        "designing-classes",
+        "solid-principles"
+      ],
+      "relatedTopics": [
+        "design-pattern-comparisons",
+        "parking-lot-design"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "oop-interview-traps",
+      "slug": "oop-interview-traps",
+      "title": "OOP Interview Traps",
+      "category": "oop",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Twenty-two statements that sound right but are wrong, from inherited constructors and overridden statics to final lists and singletons.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "traps",
+        "java-rules",
+        "misconceptions"
+      ],
+      "estimatedMinutes": 35,
+      "order": 4,
+      "prerequisites": [
+        "method-overriding",
+        "equals-and-hashcode"
+      ],
+      "relatedTopics": [
+        "oop-output-based-questions",
+        "oop-why-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    },
+    {
+      "id": "oop-why-questions",
+      "slug": "oop-why-questions",
+      "title": "\"Why?\" Questions in OOP",
+      "category": "oop",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Reasoning questions such as why no multiple class inheritance, why equals and hashCode must agree, and why patterns can overengineer.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "reasoning",
+        "design-principles"
+      ],
+      "estimatedMinutes": 40,
+      "order": 5,
+      "prerequisites": [
+        "oop-introduction",
+        "composition-over-inheritance"
+      ],
+      "relatedTopics": [
+        "oop-interview-traps",
+        "solid-principles"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-04"
+    }
+  ]
+}

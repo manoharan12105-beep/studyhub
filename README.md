@@ -1,9 +1,9 @@
 # StudyHub
 
-A personal study and interview-preparation platform for aptitude, data structures, algorithms, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
+A personal study and interview-preparation platform for aptitude, data structures, algorithms, object-oriented programming, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
 
-> **Project status: Phase 2B — DSA content complete.**
-> Aptitude (58 topics) and Data Structures & Algorithms (113 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
+> **Project status: Phase 2C — OOP content complete.**
+> Aptitude (58 topics), Data Structures & Algorithms (113 topics) and Object-Oriented Programming (75 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
 > CS Concepts content has not been written yet, and **the application has not been built yet** — `index.html` is still a placeholder page. Until then, the content can be read directly on GitHub.
 
 | Phase | Scope | Status |
@@ -11,6 +11,7 @@ A personal study and interview-preparation platform for aptitude, data structure
 | 1 | Repository architecture, rules, templates, schemas | Done |
 | 2A | Aptitude content | Done |
 | 2B | DSA content (Java) | Done |
+| 2C | OOP content (Java OOP, SOLID, design patterns, design problems) | Done |
 | 2 (other) | CS Concepts and later categories | Not started |
 | 3 | Static web application | Not started |
 
@@ -41,7 +42,20 @@ StudyHub/
 │   │   ├── problem-solving/          3 topics
 │   │   ├── interview/                5 interview-question topics
 │   │   └── revision/                Revision and Quick Revision sources
-│   └── cs-concepts/
+│   ├── cs-concepts/
+│   └── oop/
+│       ├── fundamentals/            5 topics (objects, constructors, static, memory)
+│       ├── pillars/                 8 topics (encapsulation … interfaces)
+│       ├── relationships/           2 topics
+│       ├── java-oop/                7 topics (Object, equality, immutability, modern Java, binding)
+│       ├── applied-oop/             5 topics (collections, generics, exceptions, threads, testing)
+│       ├── design-principles/       8 topics (SOLID, coupling/cohesion, DI)
+│       ├── object-oriented-design/  2 topics (designing classes, UML)
+│       ├── code-quality/            3 topics (clean code, smells, anti-patterns)
+│       ├── design-patterns/        25 topics (all 23 GoF patterns + intro + comparisons)
+│       ├── design-problems/         5 topics (parking lot, library, vehicle rental, ATM, food ordering)
+│       ├── interview/               5 topics (by level, output-based, scenarios, traps, why)
+│       └── revision/                Revision and Quick Revision sources
 ├── metadata/                   Machine-readable index of the content (JSON)
 │   ├── categories.json         Categories and subcategories
 │   ├── topics/                 One topic catalog per category
@@ -87,7 +101,7 @@ Programming examples are written in **Java**. Answers to questions are hidden in
 
 ### Study modes
 
-Aptitude and DSA each offer three ways to study:
+Aptitude, DSA and OOP each offer three ways to study:
 
 | Mode | What it is | Source files |
 |------|------------|--------------|
@@ -100,6 +114,12 @@ Aptitude and DSA each offer three ways to study:
 | **Learn** | The full topics: intuition, Java implementations, dry runs, complexity, patterns, practice and interview questions | `content/dsa/<subcategory>/<topic>/` |
 | **Revision** | Core concepts, complexity tables, choosing an algorithm, pattern recognition, Java templates, common mistakes and interview traps | `content/dsa/revision/` (7 sources) |
 | **Quick Revision** | Complexities, definitions, pattern clues, a Java cheat sheet and last-minute traps — about 40 minutes | `content/dsa/revision/quick-*.md` (5 sources) |
+
+| OOP mode | What it is | Source files |
+|----------|------------|--------------|
+| **Learn** | The full topics: concepts, Java rules, SOLID, design patterns, design problems, interview questions and practice | `content/oop/<subcategory>/<topic>/` |
+| **Revision** | Core concepts, comparison tables, Java rules, design principles, design patterns, UML and common mistakes | `content/oop/revision/` (7 sources) |
+| **Quick Revision** | OOP essentials, Java syntax, SOLID and pattern clues, last-minute traps — about 30 minutes | `content/oop/revision/quick-*.md` (4 sources) |
 
 The modes are declared in `metadata/categories.json` (`studyModes`); the app will combine each mode's source files into one view. Any category can add study modes the same way.
 
