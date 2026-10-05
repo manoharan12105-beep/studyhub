@@ -311,9 +311,12 @@ hr { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 0; }
 .stat dt { font-size: var(--text-sm); color: var(--text-muted); }
 .stat dd { margin: 0; }
 .stat-value { font-size: var(--text-xl); font-weight: 700; font-variant-numeric: tabular-nums; }
-.hero-visual { position: relative; min-height: 300px; height: 100%; }
-.hero-visual canvas { display: block; width: 100% !important; height: 100% !important; border-radius: var(--radius); }
-.map-legend { position: absolute; left: var(--space-3); bottom: var(--space-2); font-size: var(--text-xs); color: var(--text-muted); }
+.hero-visual { display: flex; flex-direction: column; gap: var(--space-3); min-height: 300px; height: 100%; }
+.map-stage { position: relative; flex: 1 1 auto; min-height: 300px; }
+.map-stage canvas { position: absolute; inset: 0; display: block; width: 100% !important; height: 100% !important; border-radius: var(--radius); }
+.map-stage canvas:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.map-legend { position: absolute; left: var(--space-3); right: var(--space-3); bottom: var(--space-2); margin: 0; font-size: var(--text-xs); color: var(--text-muted); pointer-events: none; }
+.map-reset { position: absolute; top: var(--space-2); right: var(--space-2); gap: var(--space-1); }
 
 .continue-card {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4);
@@ -832,7 +835,19 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 .flow-status.is-error { color: var(--danger); }
 
 /* 3D knowledge map overlay */
-.map-tooltip { position: absolute; pointer-events: none; padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); font-size: var(--text-xs); white-space: nowrap; transform: translate(-50%, -130%); }
+.map-tooltip { position: absolute; display: flex; flex-direction: column; pointer-events: none; padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); font-size: var(--text-xs); color: var(--text-muted); white-space: nowrap; transform: translate(-50%, -130%); }
+.map-tooltip strong { color: var(--text); }
+.map-panel { padding: var(--space-4); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); animation: map-panel-in var(--duration) ease-out; }
+.map-panel-title { font-size: var(--text-lg); margin: 0 0 var(--space-2); outline: none; }
+.map-panel .progress-bar { margin: var(--space-1) 0 var(--space-3); }
+.map-panel-facts { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-3); margin: 0 0 var(--space-3); font-size: var(--text-sm); }
+.map-panel-facts dt { font-size: var(--text-xs); color: var(--text-muted); }
+.map-panel-facts dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.map-panel-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+@keyframes map-panel-in { from { opacity: 0; transform: translateY(4px); } }
+.search-map { padding-left: var(--space-5); }
+.search-map .search-option-title { display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--text-sm); color: var(--accent-text); }
+.result-map { gap: var(--space-1); margin: calc(-1 * var(--space-2)) var(--space-3) var(--space-3); }
 
 /* Linux interactions: terminal-style output, permissions grid, state lane, find/sed/troubleshooting */
 .term-out { margin: 0 0 var(--space-3); max-height: 18rem; overflow: auto; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--code-bg); white-space: pre; }

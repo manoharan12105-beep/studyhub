@@ -1,12 +1,14 @@
 // Dashboard: progress, continue learning, subjects, recent, bookmarks, revision.
 
 import { el, icon, formatMinutes, timeAgo, percent } from '../util.js';
-import { index, isAvailable, loadInteractions } from '../content-loader.js';
+import { index, isAvailable, loadInteractions, getTopic } from '../content-loader.js';
 import { href } from '../router.js';
 import * as engine from '../study-engine.js';
 import * as progress from '../progress.js';
+import * as history from '../history.js';
 import { progressBar, statusBadge } from './common.js';
 import { track } from '../engagement/registry.js';
+import { mapSupported } from '../map-focus.js';
 
 export async function renderHome(main) {
   const overall = engine.overallStats();
@@ -14,7 +16,8 @@ export async function renderHome(main) {
   const upcoming = index.categories.filter((c) => !isAvailable(c));
   const totals = engine.questionTotals();
 
-  const mapHost = el('div', { class: 'hero-visual', 'aria-hidden': 'true' });
+  // Not aria-hidden: the map's canvas is keyboard-operable and its detail panel holds links.
+  const mapHost = el('div', { class: 'hero-visual' });
   const interactiveCount = el('span', { class: 'stat-value' }, '…');
 
   const hero = el('section', { class: 'hero', 'aria-labelledby': 'home-title' },
@@ -45,11 +48,13 @@ export async function renderHome(main) {
     activitySection(totals)));
 
   // Counts that need the interaction registries (small JSON files).
-  Promise.all(available.map((c) => loadInteractions(c.id))).then((all) => {
-    interactiveCount.textContent = String(all.reduce((n, r) => n + r.interactions.length, 0));
+  const interactionCounts = Promise.all(available.map((c) => loadInteractions(c.id)))
+    .then((all) => new Map(available.map((c, i) => [c.id, all[i].interactions.length])));
+  interactionCounts.then((counts) => {
+    interactiveCount.textContent = String([...counts.values()].reduce((a, b) => a + b, 0));
   });
 
-  mountKnowledgeMap(mapHost, available);
+  mountKnowledgeMap(mapHost, available, interactionCounts);
   return { title: 'Dashboard' };
 }
 
@@ -167,12 +172,9 @@ function activitySection(totals) {
  * The 3D knowledge map is an enhancement: only on wide screens with WebGL,
  * loaded after the dashboard is already usable, and never required.
  */
-function mountKnowledgeMap(host, categories) {
-  if (!window.matchMedia('(min-width: 1024px)').matches) return;
-  const canvas = document.createElement('canvas');
-  const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
-  if (!gl) return;
-  gl.getExtension('WEBGL_lose_context')?.loseContext();
+function mountKnowledgeMap(host, categories, interactionCounts) {
+  if (!mapSupported()) return;
+  const renderPanel = (subject) => mapPanel(categories.find((c) => c.id === subject.id), interactionCounts);
   import('../three/knowledge-map.js')
     .then((module) => {
       if (!document.body.contains(host)) return;
@@ -183,8 +185,47 @@ function mountKnowledgeMap(host, categories) {
           id: s.id, title: s.title, ...engine.stats(s.topics),
         })),
         ...engine.stats(c.topics),
-      }))));
+      })), { renderPanel }));
     })
     .catch((error) => console.warn('Knowledge map unavailable:', error));
+}
+
+/** Detail panel for the subject selected on the map — all values from progress, history and metadata. */
+function mapPanel(category, interactionCounts) {
+  const s = engine.stats(category.topics);
+  const current = currentTopic(category, s);
+  const exercises = el('dd', {}, '…');
+  interactionCounts.then((counts) => { exercises.textContent = String(counts.get(category.id) ?? 0); });
+  return el('div', { class: 'map-panel-body' },
+    el('h2', { class: 'map-panel-title', tabindex: -1 }, category.title),
+    el('div', { class: 'hero-progress-row small' },
+      el('span', {}, el('strong', {}, `${s.completed}`), ` / ${s.total} topics completed`),
+      el('span', { class: 'muted' }, `${s.percent}%`)),
+    progressBar(s.percent, `${category.title} progress`),
+    el('dl', { class: 'map-panel-facts' },
+      el('div', {}, el('dt', {}, current.label), el('dd', {}, current.topic ? current.topic.title : 'All topics completed')),
+      el('div', {}, el('dt', {}, 'Interactive exercises'), exercises)),
+    el('div', { class: 'map-panel-actions' },
+      current.topic ? el('a', { class: 'btn btn-primary btn-sm', href: current.href }, current.action, icon('chevronRight', 16)) : null,
+      el('a', { class: 'btn btn-secondary btn-sm', href: href(['c', category.id]) }, 'Open subject')));
+}
+
+/** The topic last opened in this subject and not finished yet, else the first unfinished one. */
+function currentTopic(category, s) {
+  const ids = new Set(category.topics.map((t) => t.id));
+  const recent = history.recentTopics(Infinity).find((e) => ids.has(e.id) && !progress.isComplete(e.id) && getTopic(e.id));
+  if (recent) {
+    return {
+      label: 'Current topic', topic: getTopic(recent.id), action: 'Continue learning',
+      href: recent.tab && recent.tab !== 'lesson' ? href(['t', recent.id, recent.tab]) : href(['t', recent.id]),
+    };
+  }
+  const next = engine.nextInCategory(category.id);
+  if (!next) return { label: 'Current topic', topic: null };
+  const started = s.completed || s.inProgress;
+  return {
+    label: started ? 'Next topic' : 'Start with', topic: next,
+    action: started ? 'Continue learning' : 'Start learning', href: href(['t', next.id]),
+  };
 }
 

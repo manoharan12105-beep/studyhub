@@ -1,6 +1,7 @@
 // Search results, bookmarks, history and the interactive lab.
 
-import { el, debounce, timeAgo } from '../util.js';
+import { el, debounce, timeAgo, icon } from '../util.js';
+import { mapSupported, focusOnMap } from '../map-focus.js';
 import { index, isAvailable, getTopic, getCategory, loadInteractions } from '../content-loader.js';
 import { href } from '../router.js';
 import { search, KIND_LABELS } from '../search.js';
@@ -39,12 +40,18 @@ export function renderSearch(main, { query }) {
         subject.value || difficulty.value ? 'No matches with these filters. Try “All subjects” and “Any difficulty”.' : 'No matches. Try a shorter word or a related term (for example “join”, “heap”, “percent”).')));
       return;
     }
+    const withMap = mapSupported();
     list.replaceChildren(...results.slice(0, 80).map(({ entry }) => el('li', { class: 'result' },
       el('a', { class: 'result-link', href: entry.href },
         el('span', { class: 'result-path' }, [...entry.path, KIND_LABELS[entry.kind]].join(' → ')),
         el('span', { class: 'result-title' }, highlightMatch(entry.title, q)),
         entry.topic ? el('span', { class: 'result-desc' }, entry.topic.description) : null,
-        entry.topic ? el('span', { class: 'topic-row-meta' }, statusBadge(entry.topic.id), difficultyBadge(entry.topic.difficulty)) : null))));
+        entry.topic ? el('span', { class: 'topic-row-meta' }, statusBadge(entry.topic.id), difficultyBadge(entry.topic.difficulty)) : null),
+      // Subjects are the nodes of the dashboard map; nothing else gets this action.
+      withMap && entry.kind === 'subject' ? el('button', {
+        type: 'button', class: 'btn btn-ghost btn-sm result-map',
+        onClick: () => focusOnMap(entry.categoryId),
+      }, icon('spark', 14), 'View in knowledge map', el('span', { class: 'sr-only' }, ` (${entry.title})`)) : null)));
   }
   const debounced = debounce(run, 80);
   input.addEventListener('input', debounced);

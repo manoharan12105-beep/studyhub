@@ -53,7 +53,9 @@ js/
     knowledge-check.js flashcards.js comparison.js   data-driven interaction types
   visualizers/<module>.js      one module per visualizer id
   simulators/<module>.js       one module per simulator id
-  three/knowledge-map.js       dashboard 3D map (Three.js, lazy)
+  three/knowledge-map.js       dashboard 3D map (Three.js, lazy): one node per available subject;
+                               click / arrow keys focus a subject and open its detail panel
+  map-focus.js                 search → map bridge ("View in knowledge map"); no Three.js import
   views/                       home, subject (+module), topic, toc, mode, session, lists, layout, common
 assets/
   vendor/                      marked 18.0.14, three 0.170.0 (see assets/vendor/README.md)
@@ -164,7 +166,7 @@ Vendored under `assets/vendor/<name>-<version>/` with licenses; recorded in `ass
 
 ## 9. Accessibility and UI
 
-Semantic landmarks, skip link, one `h1` per view with focus moved to it on navigation and a polite live-region announcement, visible `:focus-visible` rings, `aria-current` in navigation, the mobile drawer makes `main` inert and closes on Esc, `<dialog>` for shortcuts, all state shown with text (not colour only), WCAG AA token colours in both themes, `prefers-reduced-motion` honoured (no transitions; 3D map static), no horizontal page scroll at 320 px. Shortcuts: `/` search, `←`/`→` previous/next topic (or question inside a session), `?` help, `Esc` close.
+Semantic landmarks, skip link, one `h1` per view with focus moved to it on navigation and a polite live-region announcement, visible `:focus-visible` rings, `aria-current` in navigation, the mobile drawer makes `main` inert and closes on Esc, `<dialog>` for shortcuts, all state shown with text (not colour only), WCAG AA token colours in both themes, `prefers-reduced-motion` honoured (no transitions; 3D map static, camera jumps instead of flying), no horizontal page scroll at 320 px. The 3D map canvas is focusable: arrow keys / Home / End focus a subject, Esc resets the view. Shortcuts: `/` search, `←`/`→` previous/next topic (or question inside a session), `?` help, `Esc` close.
 
 ## 10. Local development
 

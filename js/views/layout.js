@@ -1,9 +1,10 @@
 // Persistent chrome: sidebar navigation, mobile drawer, header search box.
 
-import { el, debounce } from '../util.js';
+import { el, debounce, icon } from '../util.js';
 import { index, isAvailable } from '../content-loader.js';
 import { href, navigate } from '../router.js';
 import { search, KIND_LABELS } from '../search.js';
+import { mapSupported, focusOnMap } from '../map-focus.js';
 import * as progress from '../progress.js';
 
 // ---- Sidebar -----------------------------------------------------------------
@@ -132,15 +133,22 @@ export function initHeaderSearch() {
 
   function render(query) {
     if (!query) return close();
-    const options = results.map(({ entry }, i) => el('li', {
-      id: `sr-${i}`, role: 'option', class: 'search-option', 'aria-selected': 'false', 'data-href': entry.href,
-    },
-    el('span', { class: 'search-option-title' }, highlightMatch(entry.title, query)),
-    el('span', { class: 'search-option-path' }, [KIND_LABELS[entry.kind], ...entry.path].join(' · '))));
+    const withMap = mapSupported();
+    const options = results.flatMap(({ entry }) => [
+      el('li', { role: 'option', class: 'search-option', 'aria-selected': 'false', 'data-href': entry.href },
+        el('span', { class: 'search-option-title' }, highlightMatch(entry.title, query)),
+        el('span', { class: 'search-option-path' }, [KIND_LABELS[entry.kind], ...entry.path].join(' · '))),
+      // Only subjects have a node on the dashboard map; other results stay as they are.
+      withMap && entry.kind === 'subject' ? el('li', {
+        role: 'option', class: 'search-option search-map', 'aria-selected': 'false', 'data-map': entry.categoryId,
+      }, el('span', { class: 'search-option-title' }, icon('spark', 14), 'View in knowledge map'),
+      el('span', { class: 'search-option-path' }, `Dashboard · ${entry.title}`)) : null,
+    ].filter(Boolean));
     options.push(el('li', {
-      id: `sr-${results.length}`, role: 'option', class: 'search-option search-all', 'aria-selected': 'false',
+      role: 'option', class: 'search-option search-all', 'aria-selected': 'false',
       'data-href': href(['search'], { q: query }),
     }, results.length ? `See all results for “${query}”` : `No quick matches — search for “${query}”`));
+    options.forEach((option, i) => { option.id = `sr-${i}`; });
     list.replaceChildren(...options);
     list.hidden = false;
     input.setAttribute('aria-expanded', 'true');
@@ -162,11 +170,12 @@ export function initHeaderSearch() {
     options[active].scrollIntoView({ block: 'nearest' });
   }
 
-  function go(target) {
+  function choose(option) {
     close();
     input.value = '';
     input.blur();
-    navigate(target);
+    if (option.dataset.map) focusOnMap(option.dataset.map);
+    else navigate(option.dataset.href);
   }
 
   input.addEventListener('input', update);
@@ -179,7 +188,8 @@ export function initHeaderSearch() {
       const query = input.value.trim();
       if (!query) return;
       const option = active >= 0 ? list.children[active] : null;
-      go(option ? option.dataset.href : href(['search'], { q: query }));
+      if (option) choose(option);
+      else choose({ dataset: { href: href(['search'], { q: query }) } });
     } else if (event.key === 'Escape') {
       if (!list.hidden) { close(); event.stopPropagation(); } else { input.value = ''; input.blur(); }
     }
@@ -187,7 +197,7 @@ export function initHeaderSearch() {
   // mousedown (not click) so the input's blur doesn't close the list first.
   list.addEventListener('mousedown', (event) => {
     const option = event.target.closest('.search-option');
-    if (option) { event.preventDefault(); go(option.dataset.href); }
+    if (option) { event.preventDefault(); choose(option); }
   });
   input.addEventListener('blur', () => setTimeout(close, 120));
 }
