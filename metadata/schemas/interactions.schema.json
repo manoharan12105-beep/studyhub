@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "interactions.schema.json",
+  "title": "StudyHub interaction registry",
+  "description": "metadata/interactions/<category>.json — interactive learning experiences attached to topics of one category. Lessons stay plain Markdown; this file only references topics by id and says where in the lesson each interaction appears.",
+  "type": "object",
+  "required": ["schemaVersion", "category", "interactions"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "category": {
+      "type": "string",
+      "description": "Must equal the category id this file is registered under in metadata/categories.json."
+    },
+    "interactions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/interaction" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "placement": {
+      "type": "object",
+      "required": ["topic"],
+      "additionalProperties": false,
+      "properties": {
+        "topic": { "$ref": "#/$defs/id", "description": "Topic id (from a topic catalog)." },
+        "after": {
+          "type": "string",
+          "description": "Exact text of an H2 in the topic's content.md. The interaction is inserted at the end of that section. Missing or unmatched: inserted before 'Common Mistakes'/'Key Takeaways', else at the end of the lesson."
+        },
+        "options": {
+          "type": "object",
+          "description": "Per-topic settings passed to the module, e.g. { \"algorithm\": \"merge\" } for the shared sorting visualizer."
+        }
+      }
+    },
+    "question": {
+      "type": "object",
+      "required": ["prompt", "options", "answer", "explanation"],
+      "additionalProperties": false,
+      "properties": {
+        "prompt": { "type": "string", "minLength": 1, "description": "Question text. Inline Markdown allowed (`code`, **bold**)." },
+        "code": {
+          "type": "object",
+          "required": ["language", "source"],
+          "additionalProperties": false,
+          "description": "Optional code shown with the prompt — makes the question a predict-the-output check.",
+          "properties": {
+            "language": { "type": "string" },
+            "source": { "type": "string" }
+          }
+        },
+        "options": { "type": "array", "minItems": 2, "maxItems": 6, "items": { "type": "string" } },
+        "answer": { "type": "integer", "minimum": 0, "description": "Zero-based index of the correct option." },
+        "explanation": { "type": "string", "minLength": 1, "description": "Why the answer is right (and the trap in the wrong ones)." }
+      }
+    },
+    "card": {
+      "type": "object",
+      "required": ["front", "back"],
+      "additionalProperties": false,
+      "properties": {
+        "front": { "type": "string", "minLength": 1 },
+        "back": { "type": "string", "minLength": 1 }
+      }
+    },
+    "interaction": {
+      "type": "object",
+      "required": ["id", "type", "title", "topics"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id", "description": "Unique across all interaction files." },
+        "type": {
+          "enum": ["knowledge-check", "flashcards", "comparison", "visualizer", "simulator"],
+          "description": "knowledge-check / flashcards / comparison are data-driven (data lives here). visualizer loads js/visualizers/<module>.js; simulator loads js/simulators/<module>.js."
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "description": "One sentence shown under the title: what to try and what to notice." },
+        "module": {
+          "$ref": "#/$defs/id",
+          "description": "visualizer / simulator only: module file name without .js. Defaults to the interaction id. Usually equals a visualizer id from docs/visualizers.md."
+        },
+        "topics": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/placement" }
+        },
+        "questions": {
+          "type": "array",
+          "minItems": 1,
+          "description": "knowledge-check only.",
+          "items": { "$ref": "#/$defs/question" }
+        },
+        "cards": {
+          "type": "array",
+          "minItems": 1,
+          "description": "flashcards only.",
+          "items": { "$ref": "#/$defs/card" }
+        },
+        "columns": {
+          "type": "array",
+          "minItems": 2,
+          "description": "comparison only: the things being compared.",
+          "items": { "type": "string" }
+        },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "description": "comparison only: one aspect per row with one cell per column.",
+          "items": {
+            "type": "object",
+            "required": ["aspect", "cells"],
+            "additionalProperties": false,
+            "properties": {
+              "aspect": { "type": "string" },
+              "cells": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    }
+  }
+}

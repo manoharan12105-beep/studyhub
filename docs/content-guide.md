@@ -207,6 +207,7 @@ Schemas: [`metadata/schemas/categories.schema.json`](../metadata/schemas/categor
 | `order`         | integer ≥ 1    | Dashboard order.                                         |
 | `icon`          | path \| null   | Icon under `assets/icons/`, or null for the default.     |
 | `catalog`       | path           | `metadata/topics/<id>.json`.                             |
+| `interactions`  | path (opt.)    | `metadata/interactions/<id>.json` — the category's interaction registry (§6.1). |
 | `subcategories` | array          | `{ id, title, description?, order }`. May be empty.      |
 | `studyModes`    | array (opt.)   | `{ id, title, description, estimatedMinutes?, sources[{ path, title }] }` — see §1.1. |
 
@@ -243,6 +244,13 @@ Schemas: [`metadata/schemas/categories.schema.json`](../metadata/schemas/categor
 5. The folder at the derived path exists.
 6. Every `studyModes[].sources[].path` exists, and every file in a `revision/` folder is listed in some mode.
 7. Every non-null `visualizer` id is listed in [visualizers.md](visualizers.md).
+8. Interaction registries: ids are unique across all files, every `topics[].topic` exists in the same category, every `after` is an H2 of that topic's `content.md`, every visualizer/simulator module file exists, and every `answer` index is within `options`.
+
+### 6.1 Interaction registry (`metadata/interactions/<category>.json`)
+
+Interactive exercises are **not** written into lessons. The registry references topics by id and places each interaction at the end of an H2 section (`after`). Types: `knowledge-check`, `flashcards`, `comparison` (data in the JSON) and `visualizer`, `simulator` (a module in `js/visualizers/` or `js/simulators/`). Schema: [`metadata/schemas/interactions.schema.json`](../metadata/schemas/interactions.schema.json); details: [architecture.md §6](architecture.md#6-engagement-engine). Question answers and explanations follow the same accuracy rules as content (§5) — verify them.
+
+The topic `visualizer` field still marks a *candidate*; a visualizer is shown only once it is registered here.
 
 ---
 
@@ -267,6 +275,12 @@ Schemas: [`metadata/schemas/categories.schema.json`](../metadata/schemas/categor
 1. Add an entry (from `templates/metadata/category.json`) to `metadata/categories.json`.
 2. Create `metadata/topics/<id>.json` with `"$schema": "../schemas/topics.schema.json"`, `"schemaVersion": 1`, `"category": "<id>"`, `"topics": []`.
 3. Create `content/<id>/`.
+
+### A new interaction
+
+1. Add an entry (from `templates/metadata/interaction.json`) to `metadata/interactions/<category>.json`; create the file and set the category's `interactions` field if it is the first.
+2. For a visualizer or simulator, add the module — see [extending.md](extending.md).
+3. Check consistency rule 8.
 
 No application code changes are needed for any of these.
 

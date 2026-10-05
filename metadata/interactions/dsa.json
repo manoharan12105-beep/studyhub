@@ -1,0 +1,94 @@
+{
+  "$schema": "../schemas/interactions.schema.json",
+  "schemaVersion": 1,
+  "category": "dsa",
+  "interactions": [
+    {
+      "id": "binary-search-steps",
+      "type": "visualizer",
+      "title": "Binary search, one comparison at a time",
+      "description": "Watch lo, mid and hi close in on the answer. Switch to lower/upper bound to see the half-open template, or type your own array and target.",
+      "topics": [
+        { "topic": "binary-search", "after": "How It Works" },
+        { "topic": "binary-search-variations", "options": { "mode": "lower" } }
+      ]
+    },
+    {
+      "id": "binary-search-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: binary search",
+      "topics": [
+        { "topic": "binary-search", "after": "Complexity Analysis" }
+      ],
+      "questions": [
+        {
+          "prompt": "Why does the lesson write `mid = lo + (hi - lo) / 2` instead of `(lo + hi) / 2`?",
+          "options": ["It rounds toward the right half", "`lo + hi` can overflow `int` for large indices", "It is faster on most CPUs", "It handles duplicates correctly"],
+          "answer": 1,
+          "explanation": "When `lo + hi` exceeds `Integer.MAX_VALUE` the sum wraps to a negative number. `hi - lo` never overflows, so the midpoint stays correct."
+        },
+        {
+          "prompt": "At most how many comparisons does the classic binary search need on 1,000,000 sorted elements?",
+          "options": ["10", "20", "1,000", "500,000"],
+          "answer": 1,
+          "explanation": "Each comparison halves the range: ⌊log₂ 1,000,000⌋ + 1 = 19 + 1 = 20."
+        },
+        {
+          "prompt": "What is the lower bound (first index with `a[i] >= 6`) in `[1, 3, 5, 7, 9]`?",
+          "options": ["2", "3", "4", "−1"],
+          "answer": 1,
+          "explanation": "`a[3] = 7` is the first element ≥ 6. 6 is not present, and 3 is exactly where it would be inserted to keep the array sorted."
+        },
+        {
+          "prompt": "What does this print?",
+          "code": { "language": "java", "source": "int[] a = {1, 3, 5, 7};\nSystem.out.println(Arrays.binarySearch(a, 4));" },
+          "options": ["-1", "-2", "-3", "2"],
+          "answer": 2,
+          "explanation": "When the key is missing, `Arrays.binarySearch` returns `-(insertionPoint) - 1`. 4 would be inserted at index 2, so the result is −2 − 1 = −3."
+        }
+      ]
+    },
+    {
+      "id": "sorting-visualizer",
+      "type": "visualizer",
+      "title": "Sort it step by step",
+      "description": "Every comparison and move, with counters. Duplicates are lettered (5ᵃ, 5ᵇ) so you can see which algorithms are stable. Try a sorted or reversed array too.",
+      "topics": [
+        { "topic": "bubble-sort", "after": "How It Works", "options": { "algorithm": "bubble" } },
+        { "topic": "selection-sort", "after": "How It Works", "options": { "algorithm": "selection" } },
+        { "topic": "insertion-sort", "after": "How It Works", "options": { "algorithm": "insertion" } },
+        { "topic": "merge-sort", "after": "How It Works", "options": { "algorithm": "merge" } },
+        { "topic": "quick-sort", "after": "How It Works", "options": { "algorithm": "quick" } },
+        { "topic": "heap-sort", "after": "How It Works", "options": { "algorithm": "heap" } }
+      ]
+    },
+    {
+      "id": "sorting-complexity-cards",
+      "type": "flashcards",
+      "title": "Flashcards: sorting algorithms at a glance",
+      "description": "Say the time, space and stability out loud before flipping.",
+      "topics": [
+        { "topic": "bubble-sort", "after": "Comparison" },
+        { "topic": "heap-sort", "after": "Comparison" }
+      ],
+      "cards": [
+        { "front": "Bubble sort — time, space, stable?", "back": "Best O(n) with the early-exit check, average and worst O(n²). O(1) space. **Stable.**" },
+        { "front": "Selection sort — time, space, stable?", "back": "O(n²) comparisons in every case, but at most n − 1 swaps. O(1) space. **Not stable.**" },
+        { "front": "Insertion sort — time, space, stable?", "back": "Best O(n) on sorted input, worst O(n²). O(1) space. **Stable.** Excellent for small or nearly sorted arrays." },
+        { "front": "Merge sort — time, space, stable?", "back": "O(n log n) in every case. O(n) extra space for arrays. **Stable.**" },
+        { "front": "Quick sort — time, space, stable?", "back": "Average O(n log n), worst O(n²) (bad pivots). O(log n) stack on average. **Not stable.**" },
+        { "front": "Heap sort — time, space, stable?", "back": "O(n log n) in every case. O(1) extra space. **Not stable.**" },
+        { "front": "What does `Arrays.sort` use for `int[]` vs `Object[]`?", "back": "Primitives: dual-pivot quicksort (stability doesn't matter for primitives). Objects: TimSort, which is **stable**." }
+      ]
+    },
+    {
+      "id": "tree-traversal",
+      "type": "visualizer",
+      "title": "Traverse the tree yourself",
+      "description": "Preorder, inorder and postorder are the same recursion — only the moment of “output” changes. Level order swaps the call stack for a queue.",
+      "topics": [
+        { "topic": "tree-traversals", "after": "Visual Explanation" }
+      ]
+    }
+  ]
+}

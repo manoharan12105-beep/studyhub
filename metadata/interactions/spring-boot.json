@@ -1,0 +1,57 @@
+{
+  "$schema": "../schemas/interactions.schema.json",
+  "schemaVersion": 1,
+  "category": "spring-boot",
+  "interactions": [
+    {
+      "id": "http-request-lifecycle",
+      "type": "simulator",
+      "title": "Follow one request through Spring Boot",
+      "description": "Choose the authentication, the request body and what the service finds, then press “Next hop”. Each failure shows exactly which component turns it into 401, 403, 400 or 404.",
+      "topics": [
+        { "topic": "spring-mvc-architecture", "after": "Repository" },
+        { "topic": "filters-and-interceptors", "after": "How It Works" },
+        { "topic": "spring-mvc-request-lifecycle", "after": "Request Lifecycle" },
+        { "topic": "security-filter-chain", "options": { "auth": "none" } }
+      ]
+    },
+    {
+      "id": "filters-interceptors-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: who runs when?",
+      "topics": [
+        { "topic": "filters-and-interceptors", "after": "Comparison" }
+      ],
+      "questions": [
+        {
+          "prompt": "In what order does a successful request reach these components?",
+          "options": [
+            "Interceptor `preHandle` → Filter → DispatcherServlet → Controller",
+            "Filter → DispatcherServlet → Interceptor `preHandle` → Controller",
+            "DispatcherServlet → Filter → Interceptor `preHandle` → Controller",
+            "Filter → Interceptor `preHandle` → DispatcherServlet → Controller"
+          ],
+          "answer": 1,
+          "explanation": "Filters belong to the servlet container and run before Spring MVC. Interceptors are invoked by the DispatcherServlet once it has found the handler."
+        },
+        {
+          "prompt": "The controller method throws an exception. Which interceptor callbacks run?",
+          "options": ["`preHandle`, `postHandle` and `afterCompletion`", "`preHandle` and `afterCompletion`", "Only `preHandle`", "Only `afterCompletion`"],
+          "answer": 1,
+          "explanation": "`postHandle` runs only when the handler completes normally. `afterCompletion` always runs, which is why cleanup and timing go there."
+        },
+        {
+          "prompt": "A request without credentials hits an endpoint that requires authentication. What happens?",
+          "options": [
+            "The controller runs and returns 401",
+            "Spring Security returns 401 before the DispatcherServlet is reached",
+            "The interceptor's `preHandle` returns 403",
+            "The DispatcherServlet returns 404"
+          ],
+          "answer": 1,
+          "explanation": "The security filter chain runs before the DispatcherServlet. `ExceptionTranslationFilter` calls the `AuthenticationEntryPoint`, which sends 401 — no interceptor or controller runs."
+        }
+      ]
+    }
+  ]
+}

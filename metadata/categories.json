@@ -9,6 +9,7 @@
       "order": 1,
       "icon": null,
       "catalog": "metadata/topics/aptitude.json",
+      "interactions": "metadata/interactions/aptitude.json",
       "subcategories": [
         {
           "id": "quantitative-aptitude",
@@ -62,6 +63,7 @@
       "order": 2,
       "icon": null,
       "catalog": "metadata/topics/dsa.json",
+      "interactions": "metadata/interactions/dsa.json",
       "subcategories": [
         {
           "id": "fundamentals",
@@ -146,6 +148,7 @@
       "order": 4,
       "icon": null,
       "catalog": "metadata/topics/oop.json",
+      "interactions": "metadata/interactions/oop.json",
       "subcategories": [
         {
           "id": "fundamentals",
@@ -250,6 +253,7 @@
       "order": 5,
       "icon": null,
       "catalog": "metadata/topics/spring-boot.json",
+      "interactions": "metadata/interactions/spring-boot.json",
       "subcategories": [
         {
           "id": "fundamentals",
@@ -382,6 +386,7 @@
       "order": 6,
       "icon": null,
       "catalog": "metadata/topics/dbms-postgresql.json",
+      "interactions": "metadata/interactions/dbms-postgresql.json",
       "subcategories": [
         {
           "id": "dbms-fundamentals",
@@ -576,6 +581,33 @@
           ]
         }
       ]
+    },
+    {
+      "id": "linux",
+      "title": "Linux",
+      "description": "The Linux command line, filesystem, permissions, processes, pipes and shell scripting.",
+      "order": 7,
+      "icon": null,
+      "catalog": "metadata/topics/linux.json",
+      "subcategories": []
+    },
+    {
+      "id": "computer-networks",
+      "title": "Computer Networks",
+      "description": "Networking from the OSI and TCP/IP models to TCP, DNS, routing and subnetting.",
+      "order": 8,
+      "icon": null,
+      "catalog": "metadata/topics/computer-networks.json",
+      "subcategories": []
+    },
+    {
+      "id": "system-design",
+      "title": "System Design",
+      "description": "Designing scalable systems: load balancing, caching, replication, sharding, queues and trade-offs.",
+      "order": 9,
+      "icon": null,
+      "catalog": "metadata/topics/system-design.json",
+      "subcategories": []
     }
   ]
 }

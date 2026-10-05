@@ -38,6 +38,11 @@
           "pattern": "^metadata/topics/[a-z0-9-]+\\.json$",
           "description": "Relative path (from the repo root) to this category's topic catalog."
         },
+        "interactions": {
+          "type": "string",
+          "pattern": "^metadata/interactions/[a-z0-9-]+\\.json$",
+          "description": "Optional. Relative path to this category's interaction registry (quizzes, visualizers, simulators attached to topics). Omit when the category has none."
+        },
         "subcategories": {
           "type": "array",
           "description": "Optional grouping level. Empty array = topics sit directly under content/<category>/.",

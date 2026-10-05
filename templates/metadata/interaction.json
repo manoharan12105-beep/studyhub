@@ -1,0 +1,17 @@
+{
+  "id": "example-knowledge-check",
+  "type": "knowledge-check",
+  "title": "Check yourself: example",
+  "description": "One sentence: what to try and what to notice.",
+  "topics": [
+    { "topic": "example-topic", "after": "Core Concept" }
+  ],
+  "questions": [
+    {
+      "prompt": "Question text (inline Markdown allowed).",
+      "options": ["Option A", "Option B", "Option C", "Option D"],
+      "answer": 0,
+      "explanation": "Why A is right, and the trap in the others."
+    }
+  ]
+}

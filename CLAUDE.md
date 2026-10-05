@@ -3,7 +3,8 @@
 Instructions for Claude when working in this repository. This file holds the rules; details live in:
 
 - [docs/content-guide.md](docs/content-guide.md) — content structure, Markdown conventions, metadata fields, adding/changing topics. **Authoritative for content.**
-- [docs/architecture.md](docs/architecture.md) — planned static application design. **Authoritative for the app.**
+- [docs/architecture.md](docs/architecture.md) — how the static application works. **Authoritative for the app.**
+- [docs/extending.md](docs/extending.md) — adding subjects, topics, interactions, visualizers and simulators (the contract for future content phases).
 - [templates/](templates/) — starting files for topics and metadata entries.
 - [.claude/skills/](.claude/skills/) — task-specific guidance (see "Skills" below).
 
@@ -13,7 +14,7 @@ If this file and a doc disagree, fix the disagreement rather than picking one si
 
 StudyHub is a personal study and interview-preparation platform (aptitude, data structures, algorithms, object-oriented programming, CS concepts, and categories the owner adds later). The same material must teach a beginner and serve as fast interview revision.
 
-**Current phase: content (Phases 2A Aptitude, 2B DSA, 2C OOP, 2D Spring Boot and 2E DBMS + PostgreSQL done).** Do not build the application or write further study content unless the owner asks for that phase.
+**Current phase: Phase 3 application built** (content Phases 2A Aptitude, 2B DSA, 2C OOP, 2D Spring Boot, 2E DBMS + PostgreSQL done). Next planned content phases: 2F Linux, 2G Computer Networks, 2H System Design (registered as empty "Coming soon" categories). Do not write further study content unless the owner asks for that phase.
 
 ## Hard rules
 
@@ -30,13 +31,17 @@ StudyHub is a personal study and interview-preparation platform (aptitude, data 
 ## Repository layout
 
 ```text
-index.html, styles.css, app.js, js/   application (styles.css/app.js/js/ arrive in Phase 3)
-assets/                               app icons, images, fonts, vendored libraries
+index.html, styles.css, app.js        application shell, styles, entry module
+js/                                   engines (content-loader, markdown-renderer, search, storage,
+                                      progress, bookmarks, history, activity, study-engine),
+                                      engagement/, visualizers/, simulators/, three/, views/
+assets/                               icons, images, vendored libraries (assets/vendor/)
 content/<category>/[<sub>/]<slug>/    topic Markdown (+ images/)
 content/<category>/revision/          sources for category study modes (reserved name)
 metadata/categories.json              category + subcategory registry, study modes
 metadata/topics/<category>.json       topic catalog per category
-metadata/schemas/                     JSON Schemas for the two metadata files
+metadata/interactions/<category>.json interaction registry per category (optional)
+metadata/schemas/                     JSON Schemas for categories, topic catalogs, interactions
 templates/                            lesson, companion and metadata templates
 docs/                                 content guide, architecture, visualizer registry
 .claude/skills/                       Claude skills for this project
@@ -72,9 +77,17 @@ Follow [docs/content-guide.md](docs/content-guide.md). In short:
 - localStorage keys are versioned (`studyhub:v1:*`); migrate old data rather than discarding it.
 - Edit existing content in place; don't rewrite a whole file to change one section. Preserve the owner's own wording unless asked to rewrite it.
 
-## Application principles (Phase 3+)
+## Interactions
 
-- Follow [docs/architecture.md](docs/architecture.md): hash routing, metadata-driven navigation, lazy-loaded Markdown, native ES modules.
+- **Content ≠ interaction.** Never put quizzes, widgets or app markup into lesson Markdown. Interactions live in `metadata/interactions/<category>.json` and reference topics by id, with `after` = an H2 of the lesson.
+- Data-driven types (`knowledge-check`, `flashcards`, `comparison`) need no code. `visualizer` / `simulator` modules go in `js/visualizers/` / `js/simulators/`, export `mount(root, { interaction, options, topic })`, and use `js/engagement/stepper.js`.
+- Interaction answers, explanations and simulated behaviour are content: verify them (run the Java/SQL) like any lesson.
+- Add interactions only where they improve understanding, recall or experimentation — not on every topic.
+- Practice/interview sessions and flashcards are derived from existing files by `js/engagement/question-parser.js`; keep the `### P1.` / `- A)` / `<details>` / `**Answer:** C)` conventions so they keep parsing.
+
+## Application principles
+
+- Follow [docs/architecture.md](docs/architecture.md): hash routing, metadata-driven navigation, lazy-loaded Markdown, native ES modules. Adding subjects, topics or interactions must not require core app changes ([docs/extending.md](docs/extending.md)).
 - Small, readable modules a student can follow. Plain functions over clever abstractions. Comments explain *why*.
 - No inline event handlers in HTML; no `innerHTML` with unsanitised input.
 - Handle failures visibly: a missing file shows a helpful message, never a blank page.
@@ -97,7 +110,8 @@ Before saying work is done:
 - **Java:** full programs compile and run with `javac`/`java` (a JDK is installed). Expected outputs shown in content match the actual output. Delete `.class` files afterwards.
 - **SQL (DBMS category):** every non-illustrative `sql` block runs on PostgreSQL 17+ against the sample database, and every `**Output:**`/`**Expected output:**` block matches what `psql` prints.
 - **Markdown:** headings follow the template; links and image paths resolve; renders correctly on GitHub.
-- **App (Phase 3+):** test through a local static server (see architecture §9): every route, light/dark, keyboard-only navigation, a 320px-wide viewport, and the browser console free of errors.
+- **Interactions:** registry files match `metadata/schemas/interactions.schema.json` and content-guide §6 rule 8 (topics exist, `after` headings exist, modules exist, answer indexes valid); each new interaction steps from start to finish without errors.
+- **App:** test through a local static server (architecture §10): every route, light/dark, keyboard-only navigation, a 320px-wide viewport, and the browser console free of errors.
 - Report what was verified and what was not. Never claim something works without having checked it.
 
 ## Git and GitHub

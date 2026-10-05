@@ -1,0 +1,75 @@
+{
+  "$schema": "../schemas/interactions.schema.json",
+  "schemaVersion": 1,
+  "category": "aptitude",
+  "interactions": [
+    {
+      "id": "percentage-bar-model",
+      "type": "visualizer",
+      "title": "Successive percentage changes",
+      "description": "Each change applies to the new value, not the original. Try +20, −20 and see why they don't cancel; then try your own chain of changes.",
+      "topics": [
+        { "topic": "percentages", "after": "Formulas" }
+      ]
+    },
+    {
+      "id": "percentages-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: percentage traps",
+      "topics": [
+        { "topic": "percentages", "after": "Common Mistakes" }
+      ],
+      "questions": [
+        {
+          "prompt": "A number is increased by 10% and then decreased by 10%. The net change is:",
+          "options": ["0%", "1% increase", "1% decrease", "2% decrease"],
+          "answer": 2,
+          "explanation": "10 − 10 + (10 × −10)/100 = −1%. The decrease is taken on the larger, already-increased value."
+        },
+        {
+          "prompt": "The price of sugar rises by 25%. By what percent must a family cut consumption to keep spending the same?",
+          "options": ["20%", "25%", "30%", "33⅓%"],
+          "answer": 0,
+          "explanation": "Reduction = r / (100 + r) × 100 = 25 / 125 × 100 = 20%. Check: 1.25 × 0.8 = 1."
+        },
+        {
+          "prompt": "A's salary is 20% more than B's. By what percent is B's salary less than A's?",
+          "options": ["20%", "16⅔%", "25%", "18%"],
+          "answer": 1,
+          "explanation": "The base changes: 20 / 120 × 100 = 16⅔%. Take B = 100, A = 120: the gap 20 is 1/6 of A."
+        }
+      ]
+    },
+    {
+      "id": "fraction-percent-cards",
+      "type": "flashcards",
+      "title": "Flashcards: fraction ↔ percentage",
+      "description": "These conversions turn long calculations into one step. Aim to answer each in under three seconds.",
+      "topics": [
+        { "topic": "percentages", "after": "Shortcuts and Tricks" }
+      ],
+      "cards": [
+        { "front": "1/6 as a percentage", "back": "16⅔% (16.67%)" },
+        { "front": "1/7 as a percentage", "back": "14 2/7% (≈ 14.29%)" },
+        { "front": "1/8 as a percentage", "back": "12.5%" },
+        { "front": "1/9 as a percentage", "back": "11 1/9% (≈ 11.11%)" },
+        { "front": "1/11 as a percentage", "back": "9 1/11% (≈ 9.09%)" },
+        { "front": "1/12 as a percentage", "back": "8⅓% (8.33%)" },
+        { "front": "1/16 as a percentage", "back": "6.25%" },
+        { "front": "3/8 as a percentage", "back": "37.5%" },
+        { "front": "5/8 as a percentage", "back": "62.5%" },
+        { "front": "5/6 as a percentage", "back": "83⅓% (83.33%)" }
+      ]
+    },
+    {
+      "id": "interest-growth-chart",
+      "type": "visualizer",
+      "title": "Simple vs compound interest, year by year",
+      "description": "Same principal, same rate. Watch the gap between the two grow as interest starts earning interest — and change the compounding frequency.",
+      "topics": [
+        { "topic": "simple-interest", "after": "Formulas" },
+        { "topic": "compound-interest", "after": "Formulas" }
+      ]
+    }
+  ]
+}

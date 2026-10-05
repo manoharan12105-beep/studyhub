@@ -1,6 +1,8 @@
 # Visualizer Registry
 
-Interactive visualizations that topics are **candidates** for. A topic opts in by setting its metadata `visualizer` to one of these ids. Nothing here is implemented yet; the app (Phase 3+) shows a visualizer only once `js/visualizers/<id>.js` exists.
+Interactive visualizations that topics are **candidates** for. A topic opts in by setting its metadata `visualizer` to one of these ids. The app shows a visualizer once its module exists in `js/visualizers/<id>.js` (or `js/simulators/`) **and** it is registered in `metadata/interactions/<category>.json` — see [extending.md](extending.md).
+
+**Implemented (Phase 3):** `percentage-bar-model`, `interest-growth-chart`, `binary-search-steps`, `sorting-visualizer` (bubble, selection, insertion, merge, quick, heap), `tree-traversal`, `reference-type-vs-object-type`, `http-request-lifecycle` (simulator), `join-visualizer`, `ranking-functions-comparison`. All other ids below are still candidates.
 
 Rules for every visualizer (see also `.claude/skills/ui-ux/SKILL.md`):
 

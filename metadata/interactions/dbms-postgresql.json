@@ -1,0 +1,117 @@
+{
+  "$schema": "../schemas/interactions.schema.json",
+  "schemaVersion": 1,
+  "category": "dbms-postgresql",
+  "interactions": [
+    {
+      "id": "join-visualizer",
+      "type": "visualizer",
+      "title": "Watch a join build its result",
+      "description": "Step through each employee row, see which departments it matches, and where NULL-extended rows come from. Then move the filter from ON to WHERE and watch the LEFT JOIN turn into an INNER JOIN.",
+      "topics": [
+        { "topic": "sql-join-types", "after": "Core Concept" },
+        { "topic": "join-conditions-on-using-where", "after": "Core Concept", "options": { "join": "left", "extra": "where" } }
+      ]
+    },
+    {
+      "id": "ranking-functions-comparison",
+      "type": "visualizer",
+      "title": "ROW_NUMBER vs RANK vs DENSE_RANK",
+      "description": "The three functions numbered side by side, one row at a time. Add ties to your own data and watch where the gaps appear.",
+      "topics": [
+        { "topic": "ranking-window-functions", "after": "Core Concept" }
+      ]
+    },
+    {
+      "id": "ranking-functions-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: choosing a ranking function",
+      "topics": [
+        { "topic": "ranking-window-functions", "after": "Comparison" }
+      ],
+      "questions": [
+        {
+          "prompt": "You need the **second highest distinct salary**, even if several people share the top salary. Which filter is correct?",
+          "options": ["`row_number() OVER (ORDER BY salary DESC) = 2`", "`rank() OVER (ORDER BY salary DESC) = 2`", "`dense_rank() OVER (ORDER BY salary DESC) = 2`", "`ntile(2) OVER (ORDER BY salary DESC) = 2`"],
+          "answer": 2,
+          "explanation": "`dense_rank` gives the Nth *distinct* value. With a tie at the top, `rank` jumps from 1 to 3, so rank 2 does not exist; `row_number` would just return the second row, which may still be the top salary."
+        },
+        {
+          "prompt": "Salaries ordered high to low are 100, 90, 90, 80. What does `rank()` return for 80?",
+          "options": ["2", "3", "4", "5"],
+          "answer": 2,
+          "explanation": "The two 90s share rank 2, and the next rank skips to the row's position: 4. `dense_rank` would give 3."
+        },
+        {
+          "prompt": "Exactly **one** row per department — its highest-paid employee, ties broken by `emp_id`. Which function?",
+          "options": ["`rank()`", "`dense_rank()`", "`row_number()`", "`count(*)`"],
+          "answer": 2,
+          "explanation": "`row_number() OVER (PARTITION BY dept ORDER BY salary DESC, emp_id)` numbers rows uniquely, so `rn = 1` returns exactly one row per department. `rank`/`dense_rank` would return every tied row."
+        }
+      ]
+    },
+    {
+      "id": "null-logic-check",
+      "type": "knowledge-check",
+      "title": "Predict the result: NULL in conditions and aggregates",
+      "description": "Table t(x) has three rows: 5, 7 and NULL.",
+      "topics": [
+        { "topic": "null-and-three-valued-logic", "after": "Examples" }
+      ],
+      "questions": [
+        {
+          "prompt": "What does this return?",
+          "code": { "language": "sql", "source": "SELECT count(*) FROM t WHERE x <> 5;" },
+          "options": ["0", "1", "2", "3"],
+          "answer": 1,
+          "explanation": "Only 7 qualifies. For the NULL row, `NULL <> 5` is unknown, and `WHERE` keeps a row only when the condition is TRUE."
+        },
+        {
+          "prompt": "And this?",
+          "code": { "language": "sql", "source": "SELECT count(*) FROM t WHERE x NOT IN (5, NULL);" },
+          "options": ["0", "1", "2", "3"],
+          "answer": 0,
+          "explanation": "For x = 7: `7 <> 5 AND 7 <> NULL` is `TRUE AND unknown` = unknown, so even 7 is filtered out. A NULL in a `NOT IN` list makes it return no rows — use `NOT EXISTS` instead."
+        },
+        {
+          "prompt": "What are `count(*)`, `count(x)` and `avg(x)`?",
+          "code": { "language": "sql", "source": "SELECT count(*), count(x), avg(x) FROM t;" },
+          "options": ["3, 3, 4", "3, 2, 6", "2, 2, 6", "3, 2, 4"],
+          "answer": 1,
+          "explanation": "`count(*)` counts rows (3). `count(x)` and `avg(x)` skip NULLs: 2 values, average (5 + 7) / 2 = 6 — not 12 / 3."
+        },
+        {
+          "prompt": "What do these two expressions return?",
+          "code": { "language": "sql", "source": "SELECT NULL AND false, NULL OR true;" },
+          "options": ["NULL, NULL", "false, true", "NULL, true", "false, NULL"],
+          "answer": 1,
+          "explanation": "`false AND anything` is false and `true OR anything` is true, so the unknown does not matter. Only when the known side does not decide the result is the answer NULL."
+        },
+        {
+          "prompt": "Which condition also counts the NULL row as \"different from 5\"?",
+          "options": ["`x <> 5`", "`x != 5`", "`x IS DISTINCT FROM 5`", "`NOT (x = 5)`"],
+          "answer": 2,
+          "explanation": "`IS DISTINCT FROM` treats NULL as a comparable value: `NULL IS DISTINCT FROM 5` is TRUE, so it returns 2 rows. The other three all evaluate to unknown for NULL."
+        }
+      ]
+    },
+    {
+      "id": "where-vs-having",
+      "type": "comparison",
+      "title": "WHERE vs HAVING",
+      "description": "Press “Test yourself” to hide the answers, then recall each cell before revealing it.",
+      "topics": [
+        { "topic": "group-by-and-having", "after": "Comparison" }
+      ],
+      "columns": ["WHERE", "HAVING"],
+      "rows": [
+        { "aspect": "Filters", "cells": ["Individual rows", "Whole groups"] },
+        { "aspect": "Runs", "cells": ["Before `GROUP BY`", "After grouping and aggregation"] },
+        { "aspect": "Aggregates such as `count(*)`", "cells": ["Not allowed — *aggregate functions are not allowed in WHERE*", "Allowed — that is its purpose"] },
+        { "aspect": "SELECT-list alias", "cells": ["Not allowed in PostgreSQL", "Not allowed in PostgreSQL — repeat the expression"] },
+        { "aspect": "Without `GROUP BY`", "cells": ["Filters rows as usual", "Treats the whole result as one group"] },
+        { "aspect": "Use for", "cells": ["Conditions on plain columns — filter early, less to group", "Conditions on aggregates only"] }
+      ]
+    }
+  ]
+}

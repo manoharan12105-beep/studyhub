@@ -1,0 +1,68 @@
+{
+  "$schema": "../schemas/interactions.schema.json",
+  "schemaVersion": 1,
+  "category": "oop",
+  "interactions": [
+    {
+      "id": "reference-type-vs-object-type",
+      "type": "visualizer",
+      "title": "Compiler view vs runtime view",
+      "description": "Pick a reference type, an object and an action. The left panel is all the compiler knows; the right panel is what actually runs.",
+      "topics": [
+        { "topic": "upcasting-and-downcasting", "after": "`instanceof`", "options": { "reference": "Animal", "object": "Cat", "action": "castDog" } },
+        { "topic": "polymorphism", "after": "Reference Type vs Object Type", "options": { "reference": "Animal", "object": "Dog", "action": "speak" } }
+      ]
+    },
+    {
+      "id": "polymorphism-check",
+      "type": "knowledge-check",
+      "title": "Predict the output: what is polymorphic?",
+      "topics": [
+        { "topic": "polymorphism", "after": "Static Binding and Dynamic Binding" }
+      ],
+      "questions": [
+        {
+          "prompt": "What does this print?",
+          "code": { "language": "java", "source": "class A { String f = \"fA\"; String name() { return \"A\"; } static String s() { return \"sA\"; } }\nclass B extends A { String f = \"fB\"; @Override String name() { return \"B\"; } static String s() { return \"sB\"; } }\n\nA ref = new B();\nSystem.out.println(ref.name() + \" \" + ref.s() + \" \" + ref.f);" },
+          "options": ["B sB fB", "B sA fA", "A sA fA", "B sB fA"],
+          "answer": 1,
+          "explanation": "Only instance methods are dispatched on the object's class, so `name()` gives B. Static methods are hidden, not overridden, and fields are never polymorphic: both are chosen by the reference type A."
+        },
+        {
+          "prompt": "`Dog` adds a method `fetch()`. What happens?",
+          "code": { "language": "java", "source": "Animal a = new Dog();\na.fetch();" },
+          "options": ["It calls Dog.fetch()", "Compile error: cannot find symbol", "ClassCastException at run time", "NullPointerException"],
+          "answer": 1,
+          "explanation": "The compiler only looks at the declared type `Animal`, which has no `fetch()`. The object being a Dog doesn't matter until you downcast."
+        },
+        {
+          "prompt": "What happens here?",
+          "code": { "language": "java", "source": "Animal a = new Cat();\nDog d = (Dog) a;" },
+          "options": ["Compile error", "Compiles; d refers to the cat", "Compiles; ClassCastException at run time", "Compiles; d is null"],
+          "answer": 2,
+          "explanation": "An `Animal` reference *might* point to a Dog, so the cast compiles. At run time the JVM checks the actual object — a Cat — and throws `ClassCastException`."
+        }
+      ]
+    },
+    {
+      "id": "abstract-class-vs-interface",
+      "type": "comparison",
+      "title": "Abstract class vs interface (Java 17)",
+      "description": "Hide the answers and test your recall — this comparison is asked in almost every Java interview.",
+      "topics": [
+        { "topic": "interfaces", "after": "Abstract Class vs Interface" },
+        { "topic": "abstraction", "after": "Interfaces as Abstraction" }
+      ],
+      "columns": ["Abstract class", "Interface"],
+      "rows": [
+        { "aspect": "Create with `new`?", "cells": ["No", "No"] },
+        { "aspect": "Constructors", "cells": ["Yes — run through `super(...)` from subclasses", "No"] },
+        { "aspect": "Instance fields (state)", "cells": ["Yes, any kind", "No — only `public static final` constants"] },
+        { "aspect": "Method kinds", "cells": ["Abstract and concrete", "Abstract, `default`, `static` and `private` (Java 9+)"] },
+        { "aspect": "Member access", "cells": ["Any modifier", "Methods are `public` unless `private`; fields are `public static final`"] },
+        { "aspect": "How many per class", "cells": ["One (`extends`)", "Many (`implements`)"] },
+        { "aspect": "Choose it when", "cells": ["Related classes share state and code (an is-a family)", "Unrelated classes share a capability (a can-do contract)"] }
+      ]
+    }
+  ]
+}

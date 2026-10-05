@@ -2,9 +2,9 @@
 
 A personal study and interview-preparation platform for aptitude, data structures, algorithms, object-oriented programming, Spring Boot, DBMS and PostgreSQL, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
 
-> **Project status: Phase 2E — DBMS + PostgreSQL content complete.**
+> **Project status: Phase 3 — the interactive application is built.**
 > Aptitude (58 topics), Data Structures & Algorithms (113 topics), Object-Oriented Programming (75 topics), Spring Boot (91 topics) and DBMS + PostgreSQL (75 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
-> CS Concepts content has not been written yet, and **the application has not been built yet** — `index.html` is still a placeholder page. Until then, the content can be read directly on GitHub.
+> The static app (`index.html`) adds navigation, search, progress tracking, practice and interview sessions, flashcards and interactive visualizers around that content. Linux, Computer Networks, System Design and CS Concepts are registered and shown as **Coming soon**.
 
 | Phase | Scope | Status |
 |-------|-------|--------|
@@ -15,7 +15,8 @@ A personal study and interview-preparation platform for aptitude, data structure
 | 2D | Spring Boot content (core, REST, JPA, transactions, security, production, debugging, interview) | Done |
 | 2E | DBMS + PostgreSQL content (theory, SQL, PostgreSQL features, design, transactions, indexing, optimization, problem solving, interview, debugging) | Done |
 | 2 (other) | CS Concepts and later categories | Not started |
-| 3 | Static web application | Not started |
+| 3 | Static web application: content, engagement and study engines | Done |
+| 2F / 2G / 2H | Linux / Computer Networks / System Design content | Planned — see [docs/extending.md](docs/extending.md) |
 
 ## Goals
 
@@ -27,9 +28,11 @@ A personal study and interview-preparation platform for aptitude, data structure
 
 ```text
 StudyHub/
-├── index.html                  App entry point (placeholder until Phase 3) — must stay at the root
+├── index.html                  App shell — must stay at the root
+├── styles.css · app.js         Styles (design tokens, light/dark) and entry module
+├── js/                         Content, engagement and study engines, views, visualizers, simulators
 ├── .nojekyll                   Tells GitHub Pages to serve files as-is
-├── assets/                     App-level icons and images (later: vendored libraries)
+├── assets/                     Icons and vendored libraries (marked, three.js)
 ├── content/                    Study material (Markdown)
 │   ├── aptitude/
 │   │   ├── quantitative-aptitude/   18 topics
@@ -84,18 +87,19 @@ StudyHub/
 ├── metadata/                   Machine-readable index of the content (JSON)
 │   ├── categories.json         Categories and subcategories
 │   ├── topics/                 One topic catalog per category
+│   ├── interactions/           Interaction registry per category (quizzes, visualizers, simulators)
 │   └── schemas/                JSON Schemas for the files above
 ├── templates/                  Starting files for new topics and metadata entries
 ├── docs/
 │   ├── content-guide.md        How content and metadata are written (authoritative)
-│   ├── architecture.md         Planned design of the static app
-│   └── visualizers.md          Planned interactive visualizations (candidates)
+│   ├── architecture.md         How the app works (authoritative)
+│   ├── extending.md            Adding subjects, topics, interactions, visualizers, simulators
+│   └── visualizers.md          Visualizer ids: implemented and candidates
 ├── .claude/skills/             Claude skills: study-content, dsa, ui-ux
 ├── CLAUDE.md                   Project rules for Claude
 └── README.md
 ```
 
-Later, the application adds `styles.css`, `app.js` and (if needed) `js/` at the root.
 
 ## Content architecture
 
@@ -158,7 +162,7 @@ Aptitude, DSA, OOP, Spring Boot and DBMS + PostgreSQL each offer three ways to s
 | **Revision** | DBMS, SQL and PostgreSQL one-shots, nine cheat sheets and interview traps | `content/dbms-postgresql/revision/` (13 sources) |
 | **Quick Revision** | Five 30-minute blocks (concepts, SQL patterns, traps and questions, PostgreSQL features, optimization and indexes) plus a last-minute SQL sheet | `content/dbms-postgresql/revision/quick-*.md`, `last-minute-sql-revision.md` (6 sources) |
 
-The modes are declared in `metadata/categories.json` (`studyModes`); the app will combine each mode's source files into one view. Any category can add study modes the same way.
+The modes are declared in `metadata/categories.json` (`studyModes`); the app combines each mode's source files into one view. Any category can add study modes the same way.
 
 ## How metadata works
 
@@ -166,6 +170,7 @@ The browser can't list folders on GitHub Pages, so the app discovers content thr
 
 1. `metadata/categories.json` lists categories, their subcategories, and where each category's catalog is.
 2. `metadata/topics/<category>.json` lists every topic in that category: title, type, difficulty, tags, estimated time, prerequisites, related topics, which files exist, and draft/published status.
+3. `metadata/interactions/<category>.json` (optional) registers interactive exercises — knowledge checks, flashcards, comparisons, visualizers and simulators — and the lesson section each appears after. Lessons themselves stay plain Markdown.
 
 The topic `id` is permanent — it identifies the topic in URLs, progress tracking and bookmarks. Field-by-field reference: [docs/content-guide.md §6](docs/content-guide.md#6-metadata-reference).
 
@@ -177,6 +182,8 @@ The topic `id` is permanent — it identifies the topic in URLs, progress tracki
 4. Add an entry to `metadata/topics/<category>.json` using [templates/metadata/topic.json](templates/metadata/topic.json).
 
 Adding a **category** means adding one entry to `metadata/categories.json`, one catalog file, and one `content/` folder. No application code changes are needed for either. Full steps: [docs/content-guide.md §7](docs/content-guide.md#7-adding-things).
+
+Adding an **interaction**, **visualizer** or **simulator**: [docs/extending.md](docs/extending.md).
 
 ## Development rules
 
@@ -194,12 +201,28 @@ The site is designed to deploy straight from the repository root with no build:
 
 **Settings → Pages → Build and deployment → Source: Deploy from a branch → `main` / `(root)`.**
 
-To preview locally (needed once the app exists, because browsers block `fetch()` on `file://`), run a static server from the repository root, e.g. `npx http-server -c-1 .` or the VS Code Live Server extension.
+## Local development
 
-## Planned application
+Browsers block `fetch()` on `file://`, so open the app through any static server from the repository root:
 
-Phase 3 will build a static single-page app (see [docs/architecture.md](docs/architecture.md)) with:
+```bash
+npx http-server -c-1 .      # or: python -m http.server 8000, or VS Code Live Server
+```
 
-dashboard · category and topic navigation · breadcrumbs · search and filters · study progress · bookmarks · practice and interview modes · quick revision · Java code blocks with copy buttons · related topics · interactive DSA visualizations where useful · light/dark mode · responsive layout · full keyboard accessibility.
+There is nothing to install or build. Node or Python is only used for the local server.
 
-Progress and bookmarks will be stored in the browser's `localStorage` — there are no accounts and no server.
+## The application
+
+A static single-page app built from three layers (details: [docs/architecture.md](docs/architecture.md)):
+
+| Layer | What it does |
+|-------|--------------|
+| **Content engine** | Loads metadata, renders Markdown (callouts, highlighted Java/SQL with copy buttons, tables, answers in `<details>`), turns links between topics into in-app links, builds the search index |
+| **Engagement engine** | Places registered interactions inside lessons — knowledge checks, predict-the-output, flashcards, interactive comparisons, step-by-step visualizers and simulations — and turns every `practice.md` / `interview-questions.md` into one-question-at-a-time sessions with auto-checked multiple choice, hints, reveal and self-rating |
+| **Study engine** | Progress (not started / in progress / completed, reading position), bookmarks, recently studied, question results, continue learning — all in `localStorage` |
+
+Views: dashboard (progress, continue learning, subjects, recent, bookmarks, quick revision, 3D knowledge map on wide screens) · subject (modules, Learn · Revision · Quick Revision, practice/interview by module) · module · topic (Lesson · Examples · Interview · Practice · Revision · Flashcards tabs, table of contents, previous/next) · study modes · focused sessions · search · bookmarks · history · interactive lab (every interaction in one place).
+
+Keyboard: `/` search · `←`/`→` previous/next topic (or question in a session) · `?` shortcuts · `Esc` close. Light/dark theme follows the system and can be toggled.
+
+There are no accounts and no server: progress lives in this browser only.
