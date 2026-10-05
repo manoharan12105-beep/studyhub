@@ -585,11 +585,150 @@
     {
       "id": "linux",
       "title": "Linux",
-      "description": "The Linux command line, filesystem, permissions, processes, pipes and shell scripting.",
+      "description": "The Linux command line for developers: filesystem, text processing, permissions, processes, Bash scripting, networking, storage, services, SSH and troubleshooting.",
       "order": 7,
       "icon": null,
       "catalog": "metadata/topics/linux.json",
-      "subcategories": []
+      "interactions": "metadata/interactions/linux.json",
+      "subcategories": [
+        {
+          "id": "linux-fundamentals",
+          "title": "Linux Fundamentals",
+          "description": "What Linux is, kernel and user space, shell and terminal, and the practice lab used by every example.",
+          "order": 1
+        },
+        {
+          "id": "filesystem",
+          "title": "Filesystem and Navigation",
+          "description": "The directory hierarchy, absolute and relative paths, pwd, cd and ls.",
+          "order": 2
+        },
+        {
+          "id": "basic-commands",
+          "title": "Basic Commands",
+          "description": "Creating, copying, moving and deleting files, viewing files, and getting help.",
+          "order": 3
+        },
+        {
+          "id": "redirection-and-pipes",
+          "title": "Redirection and Pipes",
+          "description": "Standard streams, redirection operators, pipes, exit statuses and command chaining.",
+          "order": 4
+        },
+        {
+          "id": "text-processing",
+          "title": "Text Processing",
+          "description": "grep, sort, uniq, wc, cut, tr, paste, diff, comm, xargs and tee.",
+          "order": 5
+        },
+        {
+          "id": "permissions",
+          "title": "Permissions",
+          "description": "rwx permissions and chmod, ownership and umask, SUID, SGID and the sticky bit.",
+          "order": 6
+        },
+        {
+          "id": "users-and-groups",
+          "title": "Users and Groups",
+          "description": "Accounts, groups and their files, managing users, and su vs sudo.",
+          "order": 7
+        },
+        {
+          "id": "processes",
+          "title": "Processes and Signals",
+          "description": "The process lifecycle, monitoring with ps and top, job control, and signals.",
+          "order": 8
+        },
+        {
+          "id": "shell-and-bash",
+          "title": "Shell and Bash",
+          "description": "Variables and PATH, quoting and expansion, startup files and aliases.",
+          "order": 9
+        },
+        {
+          "id": "bash-scripting",
+          "title": "Bash Scripting",
+          "description": "Script basics, conditionals, loops, functions and complete practical scripts.",
+          "order": 10
+        },
+        {
+          "id": "find-sed-awk",
+          "title": "find, sed and awk",
+          "description": "Searching for files with find, editing streams with sed, and reports with awk.",
+          "order": 11
+        },
+        {
+          "id": "archives-and-packages",
+          "title": "Archives and Packages",
+          "description": "tar, gzip and zip, and package management with apt and dpkg.",
+          "order": 12
+        },
+        {
+          "id": "networking",
+          "title": "Networking Tools",
+          "description": "IP configuration, connectivity and DNS tools, ports, ss, curl and wget.",
+          "order": 13
+        },
+        {
+          "id": "storage",
+          "title": "Storage and Disks",
+          "description": "df and du, partitions and mounting, inodes, hard links and symbolic links.",
+          "order": 14
+        },
+        {
+          "id": "system-management",
+          "title": "Services, Logs and Scheduling",
+          "description": "systemd services, logs with journalctl and logrotate, and cron.",
+          "order": 15
+        },
+        {
+          "id": "remote-access",
+          "title": "SSH and Remote Access",
+          "description": "SSH keys, client configuration, scp, rsync and server hardening.",
+          "order": 16
+        },
+        {
+          "id": "troubleshooting",
+          "title": "Troubleshooting",
+          "description": "Step-by-step workflows for disk, file, process, service, port, network and DNS problems.",
+          "order": 17
+        },
+        {
+          "id": "interview",
+          "title": "Interview Preparation",
+          "description": "Interview banks by area, scenario-based questions and Linux interview traps.",
+          "order": 18
+        }
+      ],
+      "studyModes": [
+        {
+          "id": "revision",
+          "title": "Revision",
+          "description": "Cheat sheets for commands, filesystem, permissions, processes, networking and Bash, a grep/find/sed/awk reference, command differences and interview traps.",
+          "sources": [
+            { "path": "content/linux/revision/commands-cheat-sheet.md", "title": "Essential Commands" },
+            { "path": "content/linux/revision/filesystem-cheat-sheet.md", "title": "Filesystem and Storage" },
+            { "path": "content/linux/revision/permissions-cheat-sheet.md", "title": "Permissions and Users" },
+            { "path": "content/linux/revision/process-cheat-sheet.md", "title": "Processes and Services" },
+            { "path": "content/linux/revision/networking-cheat-sheet.md", "title": "Networking and SSH" },
+            { "path": "content/linux/revision/bash-cheat-sheet.md", "title": "Bash" },
+            { "path": "content/linux/revision/grep-find-sed-awk-reference.md", "title": "grep, find, sed and awk" },
+            { "path": "content/linux/revision/command-differences.md", "title": "Command Differences" },
+            { "path": "content/linux/revision/interview-traps.md", "title": "Interview Traps" }
+          ]
+        },
+        {
+          "id": "quick-revision",
+          "title": "Quick Revision",
+          "description": "Thirty minutes before the interview: essential commands, concepts and permissions, and processes, networking and troubleshooting workflows.",
+          "estimatedMinutes": 30,
+          "sources": [
+            { "path": "content/linux/revision/quick-essential-commands.md", "title": "Essential Commands" },
+            { "path": "content/linux/revision/quick-concepts-and-permissions.md", "title": "Concepts and Permissions" },
+            { "path": "content/linux/revision/quick-processes-networking-troubleshooting.md", "title": "Processes, Networking and Troubleshooting" }
+          ]
+        }
+      ]
     },
     {
       "id": "computer-networks",

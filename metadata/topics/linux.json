@@ -2,5 +2,1992 @@
   "$schema": "../schemas/topics.schema.json",
   "schemaVersion": 1,
   "category": "linux",
-  "topics": []
+  "topics": [
+    {
+      "id": "linux-introduction",
+      "slug": "linux-introduction",
+      "title": "What Is Linux?",
+      "category": "linux",
+      "subcategory": "linux-fundamentals",
+      "type": "concept",
+      "description": "What Linux is: kernel vs distribution, open source, distributions (Ubuntu, Debian, RHEL), where Linux runs and why developers need it.",
+      "difficulty": "beginner",
+      "tags": [
+        "linux",
+        "kernel",
+        "distribution",
+        "open-source",
+        "unix"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "linux-architecture",
+        "shell-and-terminal"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "linux-architecture",
+      "slug": "linux-architecture",
+      "title": "Linux Architecture",
+      "category": "linux",
+      "subcategory": "linux-fundamentals",
+      "type": "concept",
+      "description": "Hardware, kernel, system calls and user space; kernel responsibilities, the boot process, init and systemd, and kernel vs user mode.",
+      "difficulty": "beginner",
+      "tags": [
+        "kernel",
+        "system-calls",
+        "user-space",
+        "boot-process",
+        "systemd"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "linux-introduction"
+      ],
+      "relatedTopics": [
+        "linux-processes",
+        "filesystem-hierarchy"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "shell-and-terminal",
+      "slug": "shell-and-terminal",
+      "title": "Shell, Terminal and Bash",
+      "category": "linux",
+      "subcategory": "linux-fundamentals",
+      "type": "concept",
+      "description": "Terminal vs shell vs console, bash and other shells, the prompt, command syntax, history, tab completion and essential keyboard shortcuts.",
+      "difficulty": "beginner",
+      "tags": [
+        "shell",
+        "bash",
+        "terminal",
+        "command-syntax",
+        "history"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "linux-introduction"
+      ],
+      "relatedTopics": [
+        "shell-and-environment-variables",
+        "command-help-and-lookup"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "linux-practice-lab",
+      "slug": "linux-practice-lab",
+      "title": "Linux Practice Lab",
+      "category": "linux",
+      "subcategory": "linux-fundamentals",
+      "type": "reference",
+      "description": "Set up the safe ~/linux-lab practice folder with sample logs, CSV data and a Java project, used by every runnable example in the Linux topics.",
+      "difficulty": "beginner",
+      "tags": [
+        "practice-lab",
+        "setup",
+        "wsl",
+        "sample-files"
+      ],
+      "estimatedMinutes": 15,
+      "order": 4,
+      "prerequisites": [
+        "shell-and-terminal"
+      ],
+      "relatedTopics": [
+        "paths-and-navigation",
+        "file-and-directory-commands"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "filesystem-hierarchy",
+      "slug": "filesystem-hierarchy",
+      "title": "The Linux Filesystem Hierarchy",
+      "category": "linux",
+      "subcategory": "filesystem",
+      "type": "concept",
+      "description": "The single directory tree from /: /etc, /var, /home, /usr, /tmp, /dev, /proc and more, \"everything is a file\", and file types.",
+      "difficulty": "beginner",
+      "tags": [
+        "filesystem-hierarchy",
+        "fhs",
+        "directories",
+        "file-types"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "linux-architecture"
+      ],
+      "relatedTopics": [
+        "paths-and-navigation",
+        "partitions-and-mounting"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "paths-and-navigation",
+      "slug": "paths-and-navigation",
+      "title": "Paths and Navigation",
+      "category": "linux",
+      "subcategory": "filesystem",
+      "type": "concept",
+      "description": "Absolute and relative paths, ., .., ~ and -, how paths are resolved, pwd, cd, and ls with its key options and long-listing format.",
+      "difficulty": "beginner",
+      "tags": [
+        "paths",
+        "cd",
+        "ls",
+        "pwd",
+        "navigation"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "filesystem-hierarchy",
+        "linux-practice-lab"
+      ],
+      "relatedTopics": [
+        "file-and-directory-commands",
+        "quoting-and-expansion"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "file-and-directory-commands",
+      "slug": "file-and-directory-commands",
+      "title": "Creating, Copying, Moving and Deleting Files",
+      "category": "linux",
+      "subcategory": "basic-commands",
+      "type": "concept",
+      "description": "mkdir, touch, cp, mv, rm, rmdir and ln with their important options, safe deletion habits, and the dangers of rm -rf.",
+      "difficulty": "beginner",
+      "tags": [
+        "mkdir",
+        "cp",
+        "mv",
+        "rm",
+        "touch"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "paths-and-navigation"
+      ],
+      "relatedTopics": [
+        "viewing-files",
+        "inodes-and-links"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "viewing-files",
+      "slug": "viewing-files",
+      "title": "Viewing Files: cat, less, head, tail, file and stat",
+      "category": "linux",
+      "subcategory": "basic-commands",
+      "type": "concept",
+      "description": "cat, less, more, head, tail (and tail -f), file and stat: reading files of any size, following logs and inspecting metadata.",
+      "difficulty": "beginner",
+      "tags": [
+        "cat",
+        "less",
+        "head",
+        "tail",
+        "stat"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "file-and-directory-commands"
+      ],
+      "relatedTopics": [
+        "grep-command",
+        "logs-and-journalctl"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "command-help-and-lookup",
+      "slug": "command-help-and-lookup",
+      "title": "Getting Help and Finding Commands",
+      "category": "linux",
+      "subcategory": "basic-commands",
+      "type": "concept",
+      "description": "man pages and sections, --help, help, type, which, whereis, apropos and history: finding out what a command is and how to use it.",
+      "difficulty": "beginner",
+      "tags": [
+        "man",
+        "help",
+        "type",
+        "which",
+        "apropos"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "shell-and-terminal"
+      ],
+      "relatedTopics": [
+        "shell-and-environment-variables",
+        "shell-startup-files-and-aliases"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "standard-streams-and-redirection",
+      "slug": "standard-streams-and-redirection",
+      "title": "Standard Streams and Redirection",
+      "category": "linux",
+      "subcategory": "redirection-and-pipes",
+      "type": "concept",
+      "description": "stdin, stdout and stderr, file descriptors, >, >>, 2>, 2>&1, &>, /dev/null, input redirection, here-documents and noclobber.",
+      "difficulty": "beginner",
+      "tags": [
+        "redirection",
+        "stdout",
+        "stderr",
+        "file-descriptors",
+        "dev-null"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "viewing-files"
+      ],
+      "relatedTopics": [
+        "pipes-and-command-chaining",
+        "xargs-and-tee"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "pipes-and-command-chaining",
+      "slug": "pipes-and-command-chaining",
+      "title": "Pipes and Command Chaining",
+      "category": "linux",
+      "subcategory": "redirection-and-pipes",
+      "type": "concept",
+      "description": "Pipes and pipelines, exit statuses, &&, || and ;, subshells and grouping, command substitution, and PIPESTATUS/pipefail.",
+      "difficulty": "beginner",
+      "tags": [
+        "pipes",
+        "pipeline",
+        "exit-status",
+        "command-chaining",
+        "command-substitution"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "standard-streams-and-redirection"
+      ],
+      "relatedTopics": [
+        "grep-command",
+        "sort-uniq-and-wc"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "grep-command",
+      "slug": "grep-command",
+      "title": "grep: Searching Text",
+      "category": "linux",
+      "subcategory": "text-processing",
+      "type": "concept",
+      "description": "grep for searching text: -i, -v, -n, -c, -w, -o, -r, -l, context lines, basic vs extended regular expressions and fixed strings.",
+      "difficulty": "beginner",
+      "tags": [
+        "grep",
+        "regex",
+        "search",
+        "text-processing"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "pipes-and-command-chaining"
+      ],
+      "relatedTopics": [
+        "find-command",
+        "sed-command"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sort-uniq-and-wc",
+      "slug": "sort-uniq-and-wc",
+      "title": "sort, uniq and wc",
+      "category": "linux",
+      "subcategory": "text-processing",
+      "type": "concept",
+      "description": "sort (numeric, reverse, by key, unique, human sizes), uniq with counts and why it needs sorted input, and wc for counting.",
+      "difficulty": "beginner",
+      "tags": [
+        "sort",
+        "uniq",
+        "wc",
+        "counting",
+        "text-processing"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "pipes-and-command-chaining"
+      ],
+      "relatedTopics": [
+        "cut-tr-and-paste",
+        "awk-command"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "cut-tr-and-paste",
+      "slug": "cut-tr-and-paste",
+      "title": "cut, tr and paste",
+      "category": "linux",
+      "subcategory": "text-processing",
+      "type": "concept",
+      "description": "Extracting columns with cut, translating and deleting characters with tr, and joining files side by side with paste.",
+      "difficulty": "beginner",
+      "tags": [
+        "cut",
+        "tr",
+        "paste",
+        "columns",
+        "text-processing"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "sort-uniq-and-wc"
+      ],
+      "relatedTopics": [
+        "awk-command",
+        "sed-command"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "diff-and-comm",
+      "slug": "diff-and-comm",
+      "title": "Comparing Files: diff and comm",
+      "category": "linux",
+      "subcategory": "text-processing",
+      "type": "concept",
+      "description": "Comparing files with diff (normal and unified output), cmp, and comm for lines common to or unique in two sorted files.",
+      "difficulty": "intermediate",
+      "tags": [
+        "diff",
+        "comm",
+        "cmp",
+        "compare-files"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "sort-uniq-and-wc"
+      ],
+      "relatedTopics": [
+        "sed-command",
+        "bash-practical-scripts"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "xargs-and-tee",
+      "slug": "xargs-and-tee",
+      "title": "xargs and tee",
+      "category": "linux",
+      "subcategory": "text-processing",
+      "type": "concept",
+      "description": "xargs to turn input into arguments (-n, -I, -0 with find -print0) and tee to save a pipeline's output while passing it on.",
+      "difficulty": "intermediate",
+      "tags": [
+        "xargs",
+        "tee",
+        "find",
+        "pipelines"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "pipes-and-command-chaining"
+      ],
+      "relatedTopics": [
+        "find-command",
+        "su-and-sudo"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "file-permissions",
+      "slug": "file-permissions",
+      "title": "File Permissions and chmod",
+      "category": "linux",
+      "subcategory": "permissions",
+      "type": "concept",
+      "description": "Read, write and execute for owner, group and others; ls -l, octal and symbolic chmod, directory permissions and safe recursive changes.",
+      "difficulty": "beginner",
+      "tags": [
+        "permissions",
+        "chmod",
+        "octal",
+        "rwx",
+        "security"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "file-and-directory-commands"
+      ],
+      "relatedTopics": [
+        "ownership-and-umask",
+        "special-permissions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "ownership-and-umask",
+      "slug": "ownership-and-umask",
+      "title": "Ownership: chown, chgrp and umask",
+      "category": "linux",
+      "subcategory": "permissions",
+      "type": "concept",
+      "description": "File owners and groups, chown and chgrp, how umask sets default permissions for new files and directories, and the check order.",
+      "difficulty": "intermediate",
+      "tags": [
+        "chown",
+        "chgrp",
+        "umask",
+        "ownership"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "file-permissions"
+      ],
+      "relatedTopics": [
+        "users-and-groups-basics",
+        "special-permissions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "special-permissions",
+      "slug": "special-permissions",
+      "title": "Special Permissions: SUID, SGID and the Sticky Bit",
+      "category": "linux",
+      "subcategory": "permissions",
+      "type": "concept",
+      "description": "SUID, SGID and the sticky bit: what they do on files and directories, how they appear in ls -l, real examples and security risks.",
+      "difficulty": "intermediate",
+      "tags": [
+        "suid",
+        "sgid",
+        "sticky-bit",
+        "security",
+        "chmod"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "file-permissions",
+        "ownership-and-umask"
+      ],
+      "relatedTopics": [
+        "su-and-sudo",
+        "user-and-group-management"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "users-and-groups-basics",
+      "slug": "users-and-groups-basics",
+      "title": "Users, Groups and Account Files",
+      "category": "linux",
+      "subcategory": "users-and-groups",
+      "type": "concept",
+      "description": "Users, UIDs, groups, primary and supplementary groups, /etc/passwd, /etc/shadow and /etc/group, id, whoami and system accounts.",
+      "difficulty": "beginner",
+      "tags": [
+        "users",
+        "groups",
+        "uid",
+        "etc-passwd",
+        "etc-shadow"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "file-permissions"
+      ],
+      "relatedTopics": [
+        "user-and-group-management",
+        "su-and-sudo"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "user-and-group-management",
+      "slug": "user-and-group-management",
+      "title": "Managing Users and Groups",
+      "category": "linux",
+      "subcategory": "users-and-groups",
+      "type": "concept",
+      "description": "useradd, adduser, usermod -aG, passwd, chage, userdel, groupadd and gpasswd, with safe workflows for managing accounts.",
+      "difficulty": "intermediate",
+      "tags": [
+        "useradd",
+        "usermod",
+        "passwd",
+        "groupadd",
+        "user-management"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "users-and-groups-basics"
+      ],
+      "relatedTopics": [
+        "su-and-sudo",
+        "ownership-and-umask"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "su-and-sudo",
+      "slug": "su-and-sudo",
+      "title": "su and sudo",
+      "category": "linux",
+      "subcategory": "users-and-groups",
+      "type": "concept",
+      "description": "Becoming root safely: su vs sudo, sudo -i and -u, the sudoers file and visudo, least privilege, and redirection pitfalls with sudo.",
+      "difficulty": "beginner",
+      "tags": [
+        "sudo",
+        "su",
+        "root",
+        "sudoers",
+        "privilege"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "users-and-groups-basics"
+      ],
+      "relatedTopics": [
+        "user-and-group-management",
+        "special-permissions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "linux-processes",
+      "slug": "linux-processes",
+      "title": "Processes and the Process Lifecycle",
+      "category": "linux",
+      "subcategory": "processes",
+      "type": "concept",
+      "description": "Programs vs processes, PID and PPID, fork and exec, process states, zombies and orphans, daemons, and the /proc filesystem.",
+      "difficulty": "beginner",
+      "tags": [
+        "processes",
+        "pid",
+        "fork-exec",
+        "zombie",
+        "process-states"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "linux-architecture"
+      ],
+      "relatedTopics": [
+        "process-monitoring",
+        "linux-signals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "process-monitoring",
+      "slug": "process-monitoring",
+      "title": "Monitoring Processes: ps, top, htop, pgrep and pidof",
+      "category": "linux",
+      "subcategory": "processes",
+      "type": "concept",
+      "description": "ps aux and custom columns, top and htop, pgrep and pidof, load average, CPU and memory columns, and nice/renice priorities.",
+      "difficulty": "beginner",
+      "tags": [
+        "ps",
+        "top",
+        "htop",
+        "pgrep",
+        "load-average"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "linux-processes"
+      ],
+      "relatedTopics": [
+        "job-control",
+        "troubleshooting-processes-and-services"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "job-control",
+      "slug": "job-control",
+      "title": "Foreground, Background and Job Control",
+      "category": "linux",
+      "subcategory": "processes",
+      "type": "concept",
+      "description": "Foreground and background jobs, &, jobs, fg, bg, Ctrl+Z, Ctrl+C, nohup, disown and keeping work running after logout.",
+      "difficulty": "beginner",
+      "tags": [
+        "jobs",
+        "background",
+        "nohup",
+        "fg-bg",
+        "disown"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "process-monitoring"
+      ],
+      "relatedTopics": [
+        "linux-signals",
+        "systemd-and-services"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "linux-signals",
+      "slug": "linux-signals",
+      "title": "Signals: kill, killall and pkill",
+      "category": "linux",
+      "subcategory": "processes",
+      "type": "concept",
+      "description": "Signals and their defaults: SIGTERM vs SIGKILL, SIGHUP, SIGINT, SIGSTOP and SIGCONT; kill, killall, pkill and trap in scripts.",
+      "difficulty": "intermediate",
+      "tags": [
+        "signals",
+        "kill",
+        "sigterm",
+        "sigkill",
+        "trap"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "linux-processes",
+        "job-control"
+      ],
+      "relatedTopics": [
+        "systemd-and-services",
+        "bash-functions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "shell-and-environment-variables",
+      "slug": "shell-and-environment-variables",
+      "title": "Shell Variables, Environment Variables and PATH",
+      "category": "linux",
+      "subcategory": "shell-and-bash",
+      "type": "concept",
+      "description": "Shell vs environment variables, export, env and printenv, PATH and how commands are found, and common variables like HOME and USER.",
+      "difficulty": "beginner",
+      "tags": [
+        "variables",
+        "environment",
+        "path",
+        "export"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "shell-and-terminal"
+      ],
+      "relatedTopics": [
+        "quoting-and-expansion",
+        "shell-startup-files-and-aliases"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "quoting-and-expansion",
+      "slug": "quoting-and-expansion",
+      "title": "Quoting, Expansion and Globbing",
+      "category": "linux",
+      "subcategory": "shell-and-bash",
+      "type": "concept",
+      "description": "Single vs double quotes, escaping, word splitting, globbing, brace, tilde, parameter, arithmetic and command expansion and their order.",
+      "difficulty": "intermediate",
+      "tags": [
+        "quoting",
+        "expansion",
+        "globbing",
+        "word-splitting"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "shell-and-environment-variables"
+      ],
+      "relatedTopics": [
+        "bash-script-basics",
+        "bash-conditionals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "shell-startup-files-and-aliases",
+      "slug": "shell-startup-files-and-aliases",
+      "title": "Shell Startup Files, Aliases and Configuration",
+      "category": "linux",
+      "subcategory": "shell-and-bash",
+      "type": "concept",
+      "description": "Login vs interactive shells, ~/.bashrc, ~/.profile and /etc files, aliases, source, customising the prompt and persistent PATH.",
+      "difficulty": "intermediate",
+      "tags": [
+        "bashrc",
+        "profile",
+        "alias",
+        "source",
+        "startup-files"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "shell-and-environment-variables"
+      ],
+      "relatedTopics": [
+        "command-help-and-lookup",
+        "cron-scheduling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "bash-script-basics",
+      "slug": "bash-script-basics",
+      "title": "Bash Script Basics: Shebang, Arguments, read and Exit Codes",
+      "category": "linux",
+      "subcategory": "bash-scripting",
+      "type": "concept",
+      "description": "Writing and running scripts: shebang, permissions, variables, arguments ($1, $#, \"$@\"), read, exit codes, and debugging with bash -x.",
+      "difficulty": "beginner",
+      "tags": [
+        "bash-script",
+        "shebang",
+        "arguments",
+        "exit-codes"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "quoting-and-expansion"
+      ],
+      "relatedTopics": [
+        "bash-conditionals",
+        "bash-loops"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "bash-conditionals",
+      "slug": "bash-conditionals",
+      "title": "Conditionals: if, test, [ ], [[ ]] and case",
+      "category": "linux",
+      "subcategory": "bash-scripting",
+      "type": "concept",
+      "description": "if, elif, else, test and [ ], [[ ]] with pattern and regex matching, file tests, string and integer comparisons, (( )) and case.",
+      "difficulty": "beginner",
+      "tags": [
+        "if",
+        "test",
+        "conditionals",
+        "case"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "bash-script-basics"
+      ],
+      "relatedTopics": [
+        "bash-loops",
+        "bash-functions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "bash-loops",
+      "slug": "bash-loops",
+      "title": "Loops: for, while, until, break and continue",
+      "category": "linux",
+      "subcategory": "bash-scripting",
+      "type": "concept",
+      "description": "for over lists, globs and ranges, C-style for, while and until, reading files line by line, break and continue.",
+      "difficulty": "beginner",
+      "tags": [
+        "for-loop",
+        "while-loop",
+        "until",
+        "read-lines"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "bash-conditionals"
+      ],
+      "relatedTopics": [
+        "bash-functions",
+        "bash-practical-scripts"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "bash-functions",
+      "slug": "bash-functions",
+      "title": "Functions: Arguments, local, return and exit",
+      "category": "linux",
+      "subcategory": "bash-scripting",
+      "type": "concept",
+      "description": "Defining functions, arguments, local variables, return vs exit, returning data with output, and organising scripts with functions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "functions",
+        "local",
+        "return",
+        "scripting"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "bash-loops"
+      ],
+      "relatedTopics": [
+        "bash-practical-scripts",
+        "linux-signals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "bash-practical-scripts",
+      "slug": "bash-practical-scripts",
+      "title": "Practical Bash Scripts",
+      "category": "linux",
+      "subcategory": "bash-scripting",
+      "type": "concept",
+      "description": "Complete scripts: log summary, department report, cleanup with a dry run, timestamped backups with rotation and a disk-space check.",
+      "difficulty": "intermediate",
+      "tags": [
+        "scripting",
+        "automation",
+        "backup",
+        "set-euo-pipefail"
+      ],
+      "estimatedMinutes": 40,
+      "order": 5,
+      "prerequisites": [
+        "bash-functions"
+      ],
+      "relatedTopics": [
+        "cron-scheduling",
+        "find-command"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "find-command",
+      "slug": "find-command",
+      "title": "find: Searching for Files",
+      "category": "linux",
+      "subcategory": "find-sed-awk",
+      "type": "concept",
+      "description": "find by name, type, size, time, owner and permissions; combining tests, -exec and -delete safely, and pairing with xargs.",
+      "difficulty": "intermediate",
+      "tags": [
+        "find",
+        "search-files",
+        "exec",
+        "xargs"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "grep-command",
+        "file-permissions"
+      ],
+      "relatedTopics": [
+        "xargs-and-tee",
+        "troubleshooting-disk-and-files"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sed-command",
+      "slug": "sed-command",
+      "title": "sed: The Stream Editor",
+      "category": "linux",
+      "subcategory": "find-sed-awk",
+      "type": "concept",
+      "description": "sed substitution with flags and groups, addresses and ranges, printing and deleting lines, in-place editing with backups.",
+      "difficulty": "intermediate",
+      "tags": [
+        "sed",
+        "substitution",
+        "regex",
+        "stream-editor"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "grep-command"
+      ],
+      "relatedTopics": [
+        "awk-command",
+        "cut-tr-and-paste"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "awk-command",
+      "slug": "awk-command",
+      "title": "awk: Fields, Patterns and Reports",
+      "category": "linux",
+      "subcategory": "find-sed-awk",
+      "type": "concept",
+      "description": "awk fields and separators, patterns and actions, NR and NF, BEGIN and END, sums, averages, grouping with arrays and formatted reports.",
+      "difficulty": "intermediate",
+      "tags": [
+        "awk",
+        "fields",
+        "reports",
+        "text-processing"
+      ],
+      "estimatedMinutes": 40,
+      "order": 3,
+      "prerequisites": [
+        "cut-tr-and-paste",
+        "sed-command"
+      ],
+      "relatedTopics": [
+        "sort-uniq-and-wc",
+        "bash-practical-scripts"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "archives-and-compression",
+      "slug": "archives-and-compression",
+      "title": "Archives and Compression: tar, gzip and zip",
+      "category": "linux",
+      "subcategory": "archives-and-packages",
+      "type": "concept",
+      "description": "tar to create, list and extract archives, gzip, bzip2 and xz compression, zip and unzip, and safe extraction habits.",
+      "difficulty": "beginner",
+      "tags": [
+        "tar",
+        "gzip",
+        "zip",
+        "archives",
+        "compression"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "file-and-directory-commands"
+      ],
+      "relatedTopics": [
+        "package-management",
+        "ssh-and-remote-access"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "package-management",
+      "slug": "package-management",
+      "title": "Package Management with apt",
+      "category": "linux",
+      "subcategory": "archives-and-packages",
+      "type": "concept",
+      "description": "apt update vs upgrade, install, remove and purge, search and show, dpkg queries, repositories, and the RHEL dnf equivalents.",
+      "difficulty": "beginner",
+      "tags": [
+        "apt",
+        "dpkg",
+        "packages",
+        "repositories",
+        "dnf"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "su-and-sudo"
+      ],
+      "relatedTopics": [
+        "systemd-and-services",
+        "archives-and-compression"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "ip-and-hostname",
+      "slug": "ip-and-hostname",
+      "title": "Network Configuration: ip, Routes, Hostname and /etc/hosts",
+      "category": "linux",
+      "subcategory": "networking",
+      "type": "concept",
+      "description": "Interfaces, IP addresses and CIDR, ip addr, ip link and ip route, the default gateway, hostname, /etc/hosts and legacy ifconfig.",
+      "difficulty": "beginner",
+      "tags": [
+        "ip",
+        "ip-address",
+        "routing",
+        "hostname",
+        "etc-hosts"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "linux-architecture"
+      ],
+      "relatedTopics": [
+        "connectivity-and-dns-tools",
+        "ports-and-http-tools"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "connectivity-and-dns-tools",
+      "slug": "connectivity-and-dns-tools",
+      "title": "Connectivity and DNS: ping, traceroute, dig and nslookup",
+      "category": "linux",
+      "subcategory": "networking",
+      "type": "concept",
+      "description": "ping, traceroute and tracepath for reachability, DNS resolution order, /etc/resolv.conf, and dig, nslookup, host and getent.",
+      "difficulty": "beginner",
+      "tags": [
+        "ping",
+        "traceroute",
+        "dns",
+        "dig",
+        "nslookup"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "ip-and-hostname"
+      ],
+      "relatedTopics": [
+        "ports-and-http-tools",
+        "troubleshooting-network"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "ports-and-http-tools",
+      "slug": "ports-and-http-tools",
+      "title": "Ports, Sockets and HTTP Tools: ss, netstat, nc, curl and wget",
+      "category": "linux",
+      "subcategory": "networking",
+      "type": "concept",
+      "description": "Ports and sockets, listening addresses, ss and netstat, nc for port tests, curl for HTTP requests and debugging, and wget downloads.",
+      "difficulty": "intermediate",
+      "tags": [
+        "ports",
+        "ss",
+        "netstat",
+        "curl",
+        "wget"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "connectivity-and-dns-tools"
+      ],
+      "relatedTopics": [
+        "troubleshooting-processes-and-services",
+        "ssh-and-remote-access"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "disk-usage-df-du",
+      "slug": "disk-usage-df-du",
+      "title": "Disk Usage: df and du",
+      "category": "linux",
+      "subcategory": "storage",
+      "type": "concept",
+      "description": "df for filesystem space and inodes, du for directory sizes, finding what fills a disk, and why df and du can disagree.",
+      "difficulty": "beginner",
+      "tags": [
+        "df",
+        "du",
+        "disk-usage",
+        "disk-space"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "filesystem-hierarchy"
+      ],
+      "relatedTopics": [
+        "troubleshooting-disk-and-files",
+        "partitions-and-mounting"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "partitions-and-mounting",
+      "slug": "partitions-and-mounting",
+      "title": "Disks, Partitions, Filesystems and Mounting",
+      "category": "linux",
+      "subcategory": "storage",
+      "type": "concept",
+      "description": "Disks, partitions and filesystems, lsblk and blkid, mount and umount, /etc/fstab with UUIDs, and the safety rules for mkfs and fdisk.",
+      "difficulty": "intermediate",
+      "tags": [
+        "partitions",
+        "mount",
+        "fstab",
+        "lsblk",
+        "filesystems"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "disk-usage-df-du"
+      ],
+      "relatedTopics": [
+        "inodes-and-links",
+        "filesystem-hierarchy"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "inodes-and-links",
+      "slug": "inodes-and-links",
+      "title": "Inodes, Hard Links and Symbolic Links",
+      "category": "linux",
+      "subcategory": "storage",
+      "type": "concept",
+      "description": "Inodes and what they store, directories as name-to-inode tables, hard links vs symbolic links, link counts and broken links.",
+      "difficulty": "intermediate",
+      "tags": [
+        "inode",
+        "hard-link",
+        "symbolic-link",
+        "ln"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "file-and-directory-commands"
+      ],
+      "relatedTopics": [
+        "disk-usage-df-du",
+        "find-command"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "systemd-and-services",
+      "slug": "systemd-and-services",
+      "title": "systemd and Services: systemctl",
+      "category": "linux",
+      "subcategory": "system-management",
+      "type": "concept",
+      "description": "systemd units, systemctl start, stop, restart, reload, enable and status, writing a service unit, restart policies and failed units.",
+      "difficulty": "intermediate",
+      "tags": [
+        "systemd",
+        "systemctl",
+        "services",
+        "unit-files"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "linux-processes",
+        "su-and-sudo"
+      ],
+      "relatedTopics": [
+        "logs-and-journalctl",
+        "cron-scheduling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "logs-and-journalctl",
+      "slug": "logs-and-journalctl",
+      "title": "Logs: /var/log, journalctl and Log Rotation",
+      "category": "linux",
+      "subcategory": "system-management",
+      "type": "concept",
+      "description": "Where logs live in /var/log, journalctl filters by unit, time, priority and boot, kernel logs, logger, and logrotate configuration.",
+      "difficulty": "intermediate",
+      "tags": [
+        "logs",
+        "journalctl",
+        "var-log",
+        "logrotate"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "systemd-and-services"
+      ],
+      "relatedTopics": [
+        "troubleshooting-processes-and-services",
+        "cron-scheduling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "cron-scheduling",
+      "slug": "cron-scheduling",
+      "title": "Cron and Scheduling",
+      "category": "linux",
+      "subcategory": "system-management",
+      "type": "concept",
+      "description": "Cron expressions, crontab -e, -l and -r, system crontabs, the cron environment pitfalls, flock, at, and systemd timers.",
+      "difficulty": "intermediate",
+      "tags": [
+        "cron",
+        "crontab",
+        "scheduling",
+        "systemd-timers"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "bash-script-basics"
+      ],
+      "relatedTopics": [
+        "systemd-and-services",
+        "bash-practical-scripts"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "ssh-and-remote-access",
+      "slug": "ssh-and-remote-access",
+      "title": "SSH, Keys, scp and rsync",
+      "category": "linux",
+      "subcategory": "remote-access",
+      "type": "concept",
+      "description": "SSH and key-based authentication, ssh-keygen, authorized_keys, known_hosts, ~/.ssh/config, scp, rsync, tunnels and sshd hardening.",
+      "difficulty": "intermediate",
+      "tags": [
+        "ssh",
+        "ssh-keys",
+        "scp",
+        "rsync",
+        "remote-access"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "file-permissions",
+        "ports-and-http-tools"
+      ],
+      "relatedTopics": [
+        "troubleshooting-network",
+        "archives-and-compression"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "troubleshooting-disk-and-files",
+      "slug": "troubleshooting-disk-and-files",
+      "title": "Troubleshooting: Disk Space, Files and Commands",
+      "category": "linux",
+      "subcategory": "troubleshooting",
+      "type": "concept",
+      "description": "Step-by-step workflows for disk full, large files, growing logs, deleted-but-open files, undeletable files, permission denied and command not found.",
+      "difficulty": "intermediate",
+      "tags": [
+        "troubleshooting",
+        "disk-full",
+        "permission-denied",
+        "command-not-found",
+        "lsof"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "disk-usage-df-du",
+        "file-permissions"
+      ],
+      "relatedTopics": [
+        "troubleshooting-processes-and-services",
+        "linux-scenario-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "troubleshooting-processes-and-services",
+      "slug": "troubleshooting-processes-and-services",
+      "title": "Troubleshooting: CPU, Memory, Services, Ports and Logs",
+      "category": "linux",
+      "subcategory": "troubleshooting",
+      "type": "concept",
+      "description": "Workflows for high CPU, high memory and OOM kills, stubborn background processes, services that fail to start, port conflicts and recent logs.",
+      "difficulty": "intermediate",
+      "tags": [
+        "troubleshooting",
+        "high-cpu",
+        "memory",
+        "port-in-use",
+        "services"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "process-monitoring",
+        "systemd-and-services"
+      ],
+      "relatedTopics": [
+        "troubleshooting-network",
+        "linux-scenario-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "troubleshooting-network",
+      "slug": "troubleshooting-network",
+      "title": "Troubleshooting: Network Connectivity and DNS",
+      "category": "linux",
+      "subcategory": "troubleshooting",
+      "type": "concept",
+      "description": "Layer-by-layer connectivity troubleshooting, refused vs timed out, DNS failures with getent and dig, and services reachable only locally.",
+      "difficulty": "intermediate",
+      "tags": [
+        "troubleshooting",
+        "network",
+        "dns",
+        "connectivity",
+        "firewall"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "connectivity-and-dns-tools",
+        "ports-and-http-tools"
+      ],
+      "relatedTopics": [
+        "ssh-and-remote-access",
+        "linux-scenario-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "linux-fundamentals-interview-questions",
+      "slug": "linux-fundamentals-interview-questions",
+      "title": "Linux Fundamentals Interview Questions",
+      "category": "linux",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank on Linux basics: kernel and shell, filesystem hierarchy, paths, file commands, streams, pipes, system calls and what happens when you run a command.",
+      "difficulty": "beginner",
+      "tags": [
+        "interview",
+        "linux-basics",
+        "kernel",
+        "filesystem"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "linux-architecture",
+        "pipes-and-command-chaining"
+      ],
+      "relatedTopics": [
+        "linux-interview-traps",
+        "linux-permissions-users-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "linux-permissions-users-interview-questions",
+      "slug": "linux-permissions-users-interview-questions",
+      "title": "Permissions and Users Interview Questions",
+      "category": "linux",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank on permission bits, octal modes, directory permissions, umask, SUID/SGID/sticky, account files, groups, su, sudo and shared directories.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "permissions",
+        "users",
+        "sudo"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "file-permissions",
+        "special-permissions",
+        "su-and-sudo"
+      ],
+      "relatedTopics": [
+        "linux-interview-traps",
+        "linux-scenario-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "linux-processes-interview-questions",
+      "slug": "linux-processes-interview-questions",
+      "title": "Processes, Signals and Services Interview Questions",
+      "category": "linux",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank on processes, states, zombies and orphans, signals, job control, nohup, systemd services, logs and service restart loops.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "processes",
+        "signals",
+        "systemd"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "linux-signals",
+        "systemd-and-services"
+      ],
+      "relatedTopics": [
+        "linux-scenario-interview-questions",
+        "linux-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "linux-shell-scripting-interview-questions",
+      "slug": "linux-shell-scripting-interview-questions",
+      "title": "Shell and Bash Scripting Interview Questions",
+      "category": "linux",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank on Bash: variables, quoting, exit codes, $@ vs $*, set -euo pipefail, tests, loops, parameter expansion, traps and one-liners.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "bash",
+        "scripting",
+        "one-liners"
+      ],
+      "estimatedMinutes": 40,
+      "order": 4,
+      "prerequisites": [
+        "bash-practical-scripts",
+        "awk-command"
+      ],
+      "relatedTopics": [
+        "linux-interview-traps",
+        "linux-fundamentals-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "linux-networking-storage-interview-questions",
+      "slug": "linux-networking-storage-interview-questions",
+      "title": "Networking, Storage and Packages Interview Questions",
+      "category": "linux",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank on IP and DNS tools, ports, curl vs wget, scp vs rsync, df vs du, inodes, links, mounting, fstab, archives and apt.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "networking",
+        "storage",
+        "packages"
+      ],
+      "estimatedMinutes": 35,
+      "order": 5,
+      "prerequisites": [
+        "ports-and-http-tools",
+        "inodes-and-links"
+      ],
+      "relatedTopics": [
+        "linux-scenario-interview-questions",
+        "linux-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "linux-scenario-interview-questions",
+      "slug": "linux-scenario-interview-questions",
+      "title": "Scenario-Based Linux Interview Questions",
+      "category": "linux",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Scenario questions with model answers: disk full, website down, failing services, port conflicts, cron, slow servers, SSH lockouts and compromised hosts.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "scenarios",
+        "troubleshooting",
+        "production"
+      ],
+      "estimatedMinutes": 45,
+      "order": 6,
+      "prerequisites": [
+        "troubleshooting-disk-and-files",
+        "troubleshooting-processes-and-services",
+        "troubleshooting-network"
+      ],
+      "relatedTopics": [
+        "linux-interview-traps",
+        "linux-processes-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "linux-interview-traps",
+      "slug": "linux-interview-traps",
+      "title": "Linux Interview Traps",
+      "category": "linux",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "The misconceptions interviewers probe, each disproved with a runnable command: sort > same file, uniq, grep -c, 2>&1 order, subshells, quoting and more.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "traps",
+        "gotchas",
+        "misconceptions"
+      ],
+      "estimatedMinutes": 40,
+      "order": 7,
+      "prerequisites": [
+        "standard-streams-and-redirection",
+        "quoting-and-expansion"
+      ],
+      "relatedTopics": [
+        "linux-fundamentals-interview-questions",
+        "linux-shell-scripting-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    }
+  ]
 }

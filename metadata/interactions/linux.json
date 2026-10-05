@@ -1,0 +1,183 @@
+{
+  "$schema": "../schemas/interactions.schema.json",
+  "schemaVersion": 1,
+  "category": "linux",
+  "interactions": [
+    {
+      "id": "permission-calculator",
+      "type": "visualizer",
+      "title": "Permission calculator and access check",
+      "description": "Type a mode or tick the bits, pick who is asking and what they want to do, then step through the kernel's decision: one class, one bit, allowed or denied.",
+      "topics": [
+        { "topic": "file-permissions", "after": "Core Concept" },
+        { "topic": "special-permissions", "after": "Core Concept", "options": { "mode": "1777", "kind": "dir", "who": "others", "op": "w" } }
+      ]
+    },
+    {
+      "id": "pipeline-simulator",
+      "type": "simulator",
+      "title": "Follow the data through a pipeline",
+      "description": "Each stage of a real pipeline on the practice-lab files, with the exact output that flows into the next command.",
+      "topics": [
+        { "topic": "pipes-and-command-chaining", "after": "Core Concept", "options": { "pipeline": "ips" } },
+        { "topic": "sort-uniq-and-wc", "after": "Examples", "options": { "pipeline": "fruits" } }
+      ]
+    },
+    {
+      "id": "redirection-simulator",
+      "type": "simulator",
+      "title": "Where do stdout and stderr go?",
+      "description": "ls prints one line to stdout and one error to stderr. Choose a redirection and watch the shell rewire file descriptors from left to right.",
+      "topics": [
+        { "topic": "standard-streams-and-redirection", "after": "Core Concept", "options": { "scenario": "wrong" } }
+      ]
+    },
+    {
+      "id": "process-state-visualizer",
+      "type": "visualizer",
+      "title": "A process changes state",
+      "description": "Follow one process through fork and exec, sleeping, stopping, uninterruptible I/O, becoming a zombie and being reaped — with the ps line at every step.",
+      "topics": [
+        { "topic": "linux-processes", "after": "Core Concept" }
+      ]
+    },
+    {
+      "id": "signal-simulator",
+      "type": "simulator",
+      "title": "Send signals to a process",
+      "description": "Send SIGTERM, SIGINT, SIGHUP, SIGSTOP, SIGCONT and SIGKILL to a plain process, one that traps signals, one that ignores them, and a zombie.",
+      "topics": [
+        { "topic": "linux-signals", "after": "Core Concept" }
+      ]
+    },
+    {
+      "id": "find-command-builder",
+      "type": "visualizer",
+      "title": "Build a find command",
+      "description": "Combine name, type, size and age tests and watch find test every entry of the practice lab — including why -size -1k matches only empty files.",
+      "topics": [
+        { "topic": "find-command", "after": "Examples" }
+      ]
+    },
+    {
+      "id": "sed-substitution-explorer",
+      "type": "visualizer",
+      "title": "sed substitution, line by line",
+      "description": "Write an s/pattern/replacement/ command with an address and flags, and see which lines are selected, where the pattern matches and what sed prints.",
+      "topics": [
+        { "topic": "sed-command", "after": "Examples", "options": { "file": "app.log", "pattern": "([0-9]+)ms", "replacement": "\\1 ms", "global": true } }
+      ]
+    },
+    {
+      "id": "hard-vs-symbolic-links",
+      "type": "visualizer",
+      "title": "Hard links vs symbolic links",
+      "description": "Create a file, a hard link and a symlink, then edit, delete and recreate the original. Watch directory entries, inodes and link counts.",
+      "topics": [
+        { "topic": "inodes-and-links", "after": "Core Concept" }
+      ]
+    },
+    {
+      "id": "disk-full-investigation",
+      "type": "simulator",
+      "module": "linux-troubleshooting-simulator",
+      "title": "Investigate a full disk",
+      "description": "A simulated server is out of disk space. Choose each next command; wrong choices explain why they do not help.",
+      "topics": [
+        { "topic": "troubleshooting-disk-and-files", "after": "Scenario 1: Disk Full", "options": { "scenario": "disk-full" } },
+        { "topic": "disk-usage-df-du", "after": "Examples", "options": { "scenario": "disk-full" } }
+      ]
+    },
+    {
+      "id": "port-in-use-investigation",
+      "type": "simulator",
+      "module": "linux-troubleshooting-simulator",
+      "title": "A service fails: port already in use",
+      "description": "A service will not start after a deployment. Read the status, find who holds the port, identify it and fix it safely.",
+      "topics": [
+        { "topic": "troubleshooting-processes-and-services", "after": "Scenario 5: Port Already in Use", "options": { "scenario": "port-in-use" } },
+        { "topic": "ports-and-http-tools", "after": "Examples", "options": { "scenario": "port-in-use" } }
+      ]
+    },
+    {
+      "id": "quoting-predict-output",
+      "type": "knowledge-check",
+      "title": "Predict the output: quoting and expansion",
+      "description": "Run in ~/linux-lab, where config/ contains app.conf and db.conf.",
+      "topics": [
+        { "topic": "quoting-and-expansion", "after": "Examples" }
+      ],
+      "questions": [
+        {
+          "prompt": "What does the second command print?",
+          "code": { "language": "bash", "source": "name=\"Linux lab\"\necho '$name'" },
+          "options": ["Linux lab", "$name", "'Linux lab'", "an empty line"],
+          "answer": 1,
+          "explanation": "Single quotes keep every character literally, so no variable expansion happens."
+        },
+        {
+          "prompt": "What does this print?",
+          "code": { "language": "bash", "source": "echo \"$name has $(ls config | wc -l) files\"" },
+          "options": ["$name has $(ls config | wc -l) files", "Linux lab has 2 files", "Linux lab has $(ls config | wc -l) files", "an error"],
+          "answer": 1,
+          "explanation": "Double quotes allow variable expansion and command substitution, but prevent word splitting and globbing."
+        },
+        {
+          "prompt": "A file named \"a b.txt\" exists. What happens?",
+          "code": { "language": "bash", "source": "f=\"a b.txt\"\nls $f" },
+          "options": ["It lists a b.txt", "ls reports two errors: 'a' and 'b.txt' do not exist", "It lists every .txt file", "ls prints nothing"],
+          "answer": 1,
+          "explanation": "The unquoted $f is split on the space into two arguments, a and b.txt. Write ls \"$f\"."
+        },
+        {
+          "prompt": "What is the output?",
+          "code": { "language": "bash", "source": "echo \"config/*.conf\"; echo config/*.conf" },
+          "options": ["config/*.conf twice", "config/app.conf config/db.conf twice", "config/*.conf, then config/app.conf config/db.conf", "config/app.conf config/db.conf, then config/*.conf"],
+          "answer": 2,
+          "explanation": "Globs are not expanded inside quotes. Unquoted, the shell replaces the pattern with the matching file names before echo runs."
+        },
+        {
+          "prompt": "What does this print?",
+          "code": { "language": "bash", "source": "echo {1..3}-x" },
+          "options": ["{1..3}-x", "1-x 2-x 3-x", "1 2 3-x", "1-3-x"],
+          "answer": 1,
+          "explanation": "Brace expansion generates one word per value, each with the suffix attached."
+        }
+      ]
+    },
+    {
+      "id": "cron-expression-check",
+      "type": "knowledge-check",
+      "title": "Read and write cron expressions",
+      "topics": [
+        { "topic": "cron-scheduling", "after": "Core Concept" }
+      ],
+      "questions": [
+        {
+          "prompt": "When does `*/15 9-17 * * 1-5` run?",
+          "options": ["Every 15 hours on weekends", "Every 15 minutes between 09:00 and 17:45, Monday to Friday", "At 09:15 and 17:15 every day", "Every 15 minutes from 9 to 17 on the 1st–5th of each month"],
+          "answer": 1,
+          "explanation": "Minute */15 (0, 15, 30, 45) of every hour from 9 to 17 inclusive, on days of week 1–5. The last run is 17:45."
+        },
+        {
+          "prompt": "Which expression means 02:30 every Sunday?",
+          "options": ["`2 30 * * 0`", "`30 2 * * 0`", "`30 2 0 * *`", "`30 2 * 0 *`"],
+          "answer": 1,
+          "explanation": "The order is minute, hour, day of month, month, day of week; Sunday is 0 (or 7)."
+        },
+        {
+          "prompt": "What does `0 9 1 * 1` do?",
+          "options": ["09:00 on the first Monday of each month", "09:00 on the 1st of each month and every Monday", "09:00 on Mondays in January", "Nothing — the fields conflict"],
+          "answer": 1,
+          "explanation": "When both day of month and day of week are restricted, cron runs when EITHER matches."
+        },
+        {
+          "prompt": "This job never creates its file: `0 1 * * * tar -czf /backup/home-$(date +%F).tar.gz /home`. Why?",
+          "options": ["$( ) is not allowed in crontab", "tar needs sudo", "An unescaped % ends the command in a crontab line; write \\%", "The time fields are wrong"],
+          "answer": 2,
+          "explanation": "In crontab lines % becomes a newline and the rest is sent as standard input. Escape it as \\% or move the command into a script."
+        }
+      ]
+    }
+  ]
+}

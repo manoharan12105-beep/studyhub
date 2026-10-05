@@ -2,7 +2,7 @@
 
 Interactive visualizations that topics are **candidates** for. A topic opts in by setting its metadata `visualizer` to one of these ids. The app shows a visualizer once its module exists in `js/visualizers/<id>.js` (or `js/simulators/`) **and** it is registered in `metadata/interactions/<category>.json` — see [extending.md](extending.md).
 
-**Implemented (Phase 3):** `percentage-bar-model`, `interest-growth-chart`, `binary-search-steps`, `sorting-visualizer` (bubble, selection, insertion, merge, quick, heap), `tree-traversal`, `reference-type-vs-object-type`, `http-request-lifecycle` (simulator), `join-visualizer`, `ranking-functions-comparison`. All other ids below are still candidates.
+**Implemented (Phase 3):** `percentage-bar-model`, `interest-growth-chart`, `binary-search-steps`, `sorting-visualizer` (bubble, selection, insertion, merge, quick, heap), `tree-traversal`, `reference-type-vs-object-type`, `http-request-lifecycle` (simulator), `join-visualizer`, `ranking-functions-comparison`; Phase 2F (Linux): `permission-calculator`, `process-state-visualizer`, `find-command-builder`, `sed-substitution-explorer`, `hard-vs-symbolic-links`, and the simulators `pipeline-simulator`, `redirection-simulator`, `signal-simulator`, `linux-troubleshooting-simulator` (shared by the `disk-full-investigation` and `port-in-use-investigation` interactions). All other ids below are still candidates.
 
 Rules for every visualizer (see also `.claude/skills/ui-ux/SKILL.md`):
 
@@ -113,3 +113,19 @@ Rules for every visualizer (see also `.claude/skills/ui-ux/SKILL.md`):
 | `btree-index-lookup` | index-fundamentals | A B-tree descending from root to leaf for equality and range searches, the leaf-chain scan, and composite keys showing why the leading column matters. | keys (single or composite), search |
 | `query-plan-tree` | explain-and-query-plans | An `EXPLAIN` plan as a tree of nodes with estimated vs actual rows, loops and time, highlighting the most expensive node and large misestimates. | plan text |
 | `partition-pruning` | table-partitioning | A partitioned table with its partitions; a `WHERE` clause greys out partitions that cannot match, and a function on the key shows why pruning stops. | partition scheme, `WHERE` clause |
+
+## Linux
+
+All implemented. Outputs shown by the modules were captured from real runs in the practice lab (`~/linux-lab`); the servers in the troubleshooting simulator are simulated and labelled as such.
+
+| Id | Topics | What it shows | Custom input |
+|----|--------|---------------|--------------|
+| `permission-calculator` | file-permissions, special-permissions | Octal ↔ symbolic mode (including SUID/SGID/sticky as s/S/t/T) and the kernel's access check step by step: identify the user, use exactly one class, test one bit — with directory semantics for r/w/x. | mode or checkboxes, file/directory, who, operation |
+| `pipeline-simulator` (simulator) | pipes-and-command-chaining, sort-uniq-and-wc | A pipeline on the lab files stage by stage, with the exact intermediate output flowing into each next command. | pipeline |
+| `redirection-simulator` (simulator) | standard-streams-and-redirection | The file descriptor table as the shell applies redirections left to right, then where each stdout/stderr line lands (terminal, files, /dev/null, pipe). | redirection |
+| `process-state-visualizer` | linux-processes | One process moving between R, S, D, T and Z and being reaped, with its `ps` line at each event (normal run, job control, disk I/O, zombie and orphan). | scenario |
+| `signal-simulator` (simulator) | linux-signals | Signals sent to a plain process, a trapping script, an ignoring script and a zombie: caught, ignored or default action, pending signals while stopped, 128 + N exit statuses. | process kind, signal sequence |
+| `find-command-builder` | find-command | A find command built from name, type, size and age tests, evaluated entry by entry against the lab tree (GNU rounding for `-size`, whole days for `-mtime`). | pattern, type, size, age, action |
+| `sed-substitution-explorer` | sed-command | `sed -E 's/…/…/'` applied line by line: address selection, highlighted matches, the substituted line and the output. | file, address, pattern, replacement, flags |
+| `hard-vs-symbolic-links` | inodes-and-links | Directory entries, inodes and link counts while a hard link and a symlink are created and the original is edited, deleted and recreated. | — |
+| `linux-troubleshooting-simulator` (simulator) | troubleshooting-disk-and-files, disk-usage-df-du, troubleshooting-processes-and-services, ports-and-http-tools | A guided investigation on a simulated server: choose the next command; right choices show output and advance, wrong ones explain why. Scenarios (`options.scenario`): `disk-full`, `port-in-use`. | scenario, command choices |
