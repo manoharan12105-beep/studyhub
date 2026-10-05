@@ -1,6 +1,6 @@
 # Extending StudyHub
 
-How to add subjects, topics, interactions, visualizers and simulators **without changing the core application**. This is the contract for future content phases (2G Computer Networks, 2H System Design, and later). Phase 2F (Linux) followed it without any core app change.
+How to add subjects, topics, interactions, visualizers and simulators **without changing the core application**. This is the contract for future content phases (2H System Design and later). Phases 2F (Linux) and 2G (Computer Networks) followed it without any core app change.
 
 ## A future content phase in five steps
 
@@ -14,7 +14,7 @@ No change to `app.js`, the views, the router or the engines is needed for any of
 
 ## Add a subject
 
-Computer Networks and System Design are already registered as empty categories (`metadata/topics/<id>.json` with `"topics": []`), so the dashboard shows them as **Coming soon**. A subject becomes available automatically as soon as its catalog has a published topic. To add another subject: content-guide §7 "A new category".
+System Design is already registered as an empty category (`metadata/topics/<id>.json` with `"topics": []`), so the dashboard shows it as **Coming soon**. A subject becomes available automatically as soon as its catalog has a published topic. To add another subject: content-guide §7 "A new category".
 
 ## Add a topic
 
@@ -76,7 +76,7 @@ export function mount(root, { options }) {
 
 Rules: the lesson must be complete without the interaction; every step has a text explanation (`text`); controls stay keyboard-operable; no external requests; respect `prefers-reduced-motion`; clean up timers in `destroy()`.
 
-Existing modules to copy from: `js/simulators/http-request-lifecycle.js` (scenario inputs + lazy state machine — the pattern for network and system-design simulations), `js/simulators/linux-troubleshooting-simulator.js` (one module shared by several interactions through `options`, with learner choices replayed on the stepper), `js/simulators/signal-simulator.js` (frames rebuilt from a user-built event history), `js/visualizers/sorting-visualizer.js` (precomputed frames), `js/visualizers/tree-traversal.js` (SVG drawing).
+Existing modules to copy from: `js/simulators/http-request-lifecycle.js` (scenario inputs + lazy state machine — the pattern for network and system-design simulations), `js/simulators/linux-troubleshooting-simulator.js` (one module shared by several interactions through `options`, with learner choices replayed on the stepper), `js/simulators/signal-simulator.js` (frames rebuilt from a user-built event history), `js/simulators/tcp-connection-simulator.js` with `js/simulators/network-common.js` (protocol message sequences: actors, states and a message log), `js/simulators/network-troubleshooting-simulator.js` (reuses the Linux troubleshooting state machine with new scenarios), `js/visualizers/sorting-visualizer.js` (precomputed frames), `js/visualizers/tree-traversal.js` (SVG drawing).
 
 ## Three.js
 

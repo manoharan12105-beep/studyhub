@@ -137,7 +137,7 @@ Visualizers and simulators share one engine: **input → first frame → Next �
 
 ### Derived engagement (no registry needed)
 
-- **Practice / interview sessions** (`question-parser.js` + `quiz.js`) read existing `practice.md` / `interview-questions.md` by their conventions (`### P3.`, `- A)` options, `<details>` Hint/Answer/Solution, `**Answer:** C)`). Multiple-choice items with a detectable answer are auto-checked; the rest use reveal + self-rating. Shared set material (`## Set 1: …`) and file preambles are shown with each item. All 4,389 items in the current content parse.
+- **Practice / interview sessions** (`question-parser.js` + `quiz.js`) read existing `practice.md` / `interview-questions.md` by their conventions (`### P3.`, `- A)` options, `<details>` Hint/Answer/Solution, `**Answer:** C)`). Multiple-choice items with a detectable answer are auto-checked; the rest use reveal + self-rating. Shared set material (`## Set 1: …`) and file preambles are shown with each item. All 6,449 items in the current content parse.
 - **Flashcards** are built from interview questions (question → answer).
 
 ## 7. Study engine (client-side state)

@@ -733,11 +733,172 @@
     {
       "id": "computer-networks",
       "title": "Computer Networks",
-      "description": "Networking from the OSI and TCP/IP models to TCP, DNS, routing and subnetting.",
+      "description": "How data travels from one application to another: OSI and TCP/IP, Ethernet and ARP, IP and subnetting, routing, TCP and UDP, DNS, DHCP, HTTP/HTTPS, NAT, security, performance and troubleshooting.",
       "order": 8,
       "icon": null,
       "catalog": "metadata/topics/computer-networks.json",
-      "subcategories": []
+      "interactions": "metadata/interactions/computer-networks.json",
+      "subcategories": [
+        {
+          "id": "network-fundamentals",
+          "title": "Network Fundamentals",
+          "description": "What a network is, components and architectures, network types, the Internet's structure, topologies, performance metrics, switching and delivery modes.",
+          "order": 1
+        },
+        {
+          "id": "network-devices",
+          "title": "Network Devices",
+          "description": "NICs, repeaters, hubs, bridges, switches, routers, modems, access points, firewalls and load balancers — and how they compare.",
+          "order": 2
+        },
+        {
+          "id": "osi-model",
+          "title": "OSI Model",
+          "description": "The seven layers, what each one does, PDUs and addressing, and encapsulation and decapsulation.",
+          "order": 3
+        },
+        {
+          "id": "tcp-ip-model",
+          "title": "TCP/IP Model",
+          "description": "The model the Internet actually runs on, and how it maps to OSI.",
+          "order": 4
+        },
+        {
+          "id": "physical-and-data-link",
+          "title": "Physical and Data Link Layers",
+          "description": "Signals and media, Ethernet frames and MAC addresses, error detection, switching, collision and broadcast domains, VLANs and STP.",
+          "order": 5
+        },
+        {
+          "id": "arp-and-local-delivery",
+          "title": "ARP and Local Delivery",
+          "description": "Why both IP and MAC addresses exist, how ARP finds a MAC, and what changes when the destination is on another network.",
+          "order": 6
+        },
+        {
+          "id": "ip-addressing",
+          "title": "Network Layer and IP Addressing",
+          "description": "IP packets, IPv4 structure, public, private and special addresses, subnet masks and CIDR, and IPv6.",
+          "order": 7
+        },
+        {
+          "id": "subnetting",
+          "title": "Subnetting",
+          "description": "Practical subnetting by hand: hosts, subnets, network and broadcast addresses, host ranges, VLSM, supernetting and interview problems.",
+          "order": 8
+        },
+        {
+          "id": "routing",
+          "title": "Routing",
+          "description": "Routing tables, next hops, default routes, longest prefix match, static and dynamic routing, RIP, OSPF, BGP, TTL and ICMP.",
+          "order": 9
+        },
+        {
+          "id": "transport-layer",
+          "title": "Transport Layer: TCP and UDP",
+          "description": "Ports and sockets, UDP, TCP reliability, the three-way handshake, connection termination, TCP states, and TCP vs UDP.",
+          "order": 10
+        },
+        {
+          "id": "flow-and-congestion-control",
+          "title": "Flow and Congestion Control",
+          "description": "Protecting the receiver with flow control and the network with congestion control.",
+          "order": 11
+        },
+        {
+          "id": "application-layer",
+          "title": "Application Layer",
+          "description": "Application protocols and their ports, email (SMTP, POP3, IMAP), FTP, Telnet, SNMP and SSH.",
+          "order": 12
+        },
+        {
+          "id": "http",
+          "title": "HTTP",
+          "description": "Requests and responses, methods and idempotency, status codes, headers, cookies and sessions, and HTTP/1.1, HTTP/2 and HTTP/3.",
+          "order": 13
+        },
+        {
+          "id": "https-and-tls",
+          "title": "HTTPS and TLS",
+          "description": "Symmetric and asymmetric encryption, certificates and CAs, and the TLS handshake behind HTTPS.",
+          "order": 14
+        },
+        {
+          "id": "dns",
+          "title": "DNS",
+          "description": "The DNS hierarchy, recursive and iterative resolution, record types, caching, TTL and failure scenarios.",
+          "order": 15
+        },
+        {
+          "id": "dhcp",
+          "title": "DHCP",
+          "description": "How a device gets its IP address, mask, gateway and DNS servers: DORA, leases and renewal.",
+          "order": 16
+        },
+        {
+          "id": "nat",
+          "title": "NAT",
+          "description": "Network address translation: static NAT, dynamic NAT, PAT, home routers, port forwarding and NAT traversal.",
+          "order": 17
+        },
+        {
+          "id": "network-security",
+          "title": "Network Security",
+          "description": "Security goals, authentication vs authorization, firewalls and ACLs, VPNs, and common attacks with their defences.",
+          "order": 18
+        },
+        {
+          "id": "performance",
+          "title": "Performance and Distributed Networking",
+          "description": "Latency and bandwidth in backend systems, keep-alive and connection pooling, caching and CDNs, and L4 vs L7 load balancing.",
+          "order": 19
+        },
+        {
+          "id": "troubleshooting",
+          "title": "Troubleshooting",
+          "description": "A layered troubleshooting method, the diagnostic commands, and step-by-step workflows for connectivity and connection errors.",
+          "order": 20
+        },
+        {
+          "id": "end-to-end-flows",
+          "title": "End-to-End Network Flows",
+          "description": "Everything connected: from joining Wi-Fi to a rendered web page, a packet's journey hop by hop, and backend request flows.",
+          "order": 21
+        },
+        {
+          "id": "interview",
+          "title": "Interview Preparation",
+          "description": "Interview banks by area, scenario and debugging questions, and Computer Networks interview traps.",
+          "order": 22
+        }
+      ],
+      "studyModes": [
+        {
+          "id": "revision",
+          "title": "Revision",
+          "description": "Complete revision of every module, the interview cheat sheet, important comparisons, traps and misconceptions, layers, protocols and ports, subnetting formulas, and the troubleshooting and request flows.",
+          "sources": [
+            { "path": "content/computer-networks/revision/complete-revision.md", "title": "Complete Revision" },
+            { "path": "content/computer-networks/revision/interview-cheat-sheet.md", "title": "Interview Cheat Sheet" },
+            { "path": "content/computer-networks/revision/important-comparisons.md", "title": "Important Comparisons" },
+            { "path": "content/computer-networks/revision/traps-and-misconceptions.md", "title": "Traps and Misconceptions" },
+            { "path": "content/computer-networks/revision/layers-protocols-and-ports.md", "title": "Layers, Protocols and Ports" },
+            { "path": "content/computer-networks/revision/subnetting-formulas.md", "title": "Subnetting Formulas" },
+            { "path": "content/computer-networks/revision/flows-and-troubleshooting.md", "title": "Request Flows and Troubleshooting" }
+          ]
+        },
+        {
+          "id": "quick-revision",
+          "title": "Quick Revision",
+          "description": "One hour: all three blocks. 30 minutes: Block 1. 10 minutes: the final sheet only.",
+          "estimatedMinutes": 60,
+          "sources": [
+            { "path": "content/computer-networks/revision/quick-30-minute-essentials.md", "title": "Block 1: 30-Minute Essentials" },
+            { "path": "content/computer-networks/revision/quick-20-minute-drills.md", "title": "Block 2: 20-Minute Drills" },
+            { "path": "content/computer-networks/revision/quick-10-minute-final.md", "title": "Block 3: 10-Minute Final Sheet" }
+          ]
+        }
+      ]
     },
     {
       "id": "system-design",

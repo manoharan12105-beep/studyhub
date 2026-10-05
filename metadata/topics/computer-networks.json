@@ -2,5 +2,2993 @@
   "$schema": "../schemas/topics.schema.json",
   "schemaVersion": 1,
   "category": "computer-networks",
-  "topics": []
+  "topics": [
+    {
+      "id": "computer-network-basics",
+      "slug": "computer-network-basics",
+      "title": "What Is a Computer Network?",
+      "category": "computer-networks",
+      "subcategory": "network-fundamentals",
+      "type": "concept",
+      "description": "What a network is and why it exists, how ARPANET and TCP/IP started the Internet, and how IP addresses, ports, packets and protocols deliver data.",
+      "difficulty": "beginner",
+      "tags": [
+        "computer-network",
+        "internet",
+        "arpanet",
+        "ip-address",
+        "port",
+        "packet"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "network-components-and-architectures",
+        "network-protocols-and-standards",
+        "url-to-webpage-journey"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "network-components-and-architectures",
+      "slug": "network-components-and-architectures",
+      "title": "Network Components and Architectures",
+      "category": "computer-networks",
+      "subcategory": "network-fundamentals",
+      "type": "concept",
+      "description": "Hosts, NICs, links and intermediate devices; clients vs servers; client-server, three-tier and peer-to-peer architectures.",
+      "difficulty": "beginner",
+      "tags": [
+        "client-server",
+        "peer-to-peer",
+        "host",
+        "server",
+        "client"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "computer-network-basics"
+      ],
+      "relatedTopics": [
+        "nic-repeater-hub-bridge-switch",
+        "firewalls-proxies-and-load-balancers"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "network-protocols-and-standards",
+      "slug": "network-protocols-and-standards",
+      "title": "Network Protocols and Standards",
+      "category": "computer-networks",
+      "subcategory": "network-fundamentals",
+      "type": "concept",
+      "description": "What a protocol is (syntax, semantics, timing), who writes standards (IETF RFCs, IEEE, IANA) and why protocols are layered.",
+      "difficulty": "beginner",
+      "tags": [
+        "protocol",
+        "rfc",
+        "ietf",
+        "ieee",
+        "layering"
+      ],
+      "estimatedMinutes": 15,
+      "order": 3,
+      "prerequisites": [
+        "computer-network-basics"
+      ],
+      "relatedTopics": [
+        "osi-model-overview",
+        "tcp-ip-model",
+        "application-layer-protocols"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "network-types",
+      "slug": "network-types",
+      "title": "Network Types: PAN, LAN, MAN, WAN, Intranet and Extranet",
+      "category": "computer-networks",
+      "subcategory": "network-fundamentals",
+      "type": "concept",
+      "description": "Networks by size (PAN, LAN, MAN, WAN) and by access (Internet, intranet, extranet), with their technologies, owners and trade-offs.",
+      "difficulty": "beginner",
+      "tags": [
+        "lan",
+        "wan",
+        "man",
+        "pan",
+        "intranet",
+        "extranet"
+      ],
+      "estimatedMinutes": 15,
+      "order": 4,
+      "prerequisites": [
+        "computer-network-basics"
+      ],
+      "relatedTopics": [
+        "internet-structure",
+        "routers-modems-and-access-points",
+        "vpns-and-tunneling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "internet-structure",
+      "slug": "internet-structure",
+      "title": "How the Internet Is Built",
+      "category": "computer-networks",
+      "subcategory": "network-fundamentals",
+      "type": "concept",
+      "description": "Autonomous systems, ISP tiers, transit and peering, IXPs, submarine fibre cables and why geography sets latency.",
+      "difficulty": "beginner",
+      "tags": [
+        "isp",
+        "ixp",
+        "submarine-cables",
+        "autonomous-system",
+        "peering"
+      ],
+      "estimatedMinutes": 15,
+      "order": 5,
+      "prerequisites": [
+        "network-types"
+      ],
+      "relatedTopics": [
+        "static-and-dynamic-routing",
+        "caching-and-cdns",
+        "network-performance-metrics"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "network-topologies",
+      "slug": "network-topologies",
+      "title": "Network Topologies",
+      "category": "computer-networks",
+      "subcategory": "network-fundamentals",
+      "type": "concept",
+      "description": "Bus, ring, star, mesh, tree and hybrid topologies, physical vs logical topology, and the full-mesh link formula.",
+      "difficulty": "beginner",
+      "tags": [
+        "topology",
+        "bus",
+        "star",
+        "ring",
+        "mesh",
+        "tree"
+      ],
+      "estimatedMinutes": 15,
+      "order": 6,
+      "prerequisites": [
+        "network-types"
+      ],
+      "relatedTopics": [
+        "nic-repeater-hub-bridge-switch",
+        "collision-and-broadcast-domains"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "network-performance-metrics",
+      "slug": "network-performance-metrics",
+      "title": "Bandwidth, Throughput, Latency, Jitter and Packet Loss",
+      "category": "computer-networks",
+      "subcategory": "network-fundamentals",
+      "type": "concept",
+      "description": "The five performance metrics, the four components of latency, bottlenecks and the bandwidth-delay product.",
+      "difficulty": "beginner",
+      "tags": [
+        "bandwidth",
+        "throughput",
+        "latency",
+        "jitter",
+        "packet-loss",
+        "rtt"
+      ],
+      "estimatedMinutes": 25,
+      "order": 7,
+      "prerequisites": [
+        "computer-network-basics"
+      ],
+      "relatedTopics": [
+        "network-performance-for-backends",
+        "tcp-flow-control",
+        "tcp-congestion-control"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "switching-techniques",
+      "slug": "switching-techniques",
+      "title": "Circuit, Message and Packet Switching",
+      "category": "computer-networks",
+      "subcategory": "network-fundamentals",
+      "type": "concept",
+      "description": "How circuit, message and packet switching move data, datagram vs virtual circuit, and why the Internet uses packet switching.",
+      "difficulty": "beginner",
+      "tags": [
+        "circuit-switching",
+        "packet-switching",
+        "message-switching",
+        "datagram"
+      ],
+      "estimatedMinutes": 15,
+      "order": 8,
+      "prerequisites": [
+        "computer-network-basics"
+      ],
+      "relatedTopics": [
+        "network-layer-and-ip-packets",
+        "tcp-segments-and-reliability"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "unicast-broadcast-multicast-anycast",
+      "slug": "unicast-broadcast-multicast-anycast",
+      "title": "Unicast, Broadcast, Multicast and Anycast",
+      "category": "computer-networks",
+      "subcategory": "network-fundamentals",
+      "type": "concept",
+      "description": "One, all, a group or the nearest: delivery modes, their addresses, why routers stop broadcasts, and duplex modes.",
+      "difficulty": "beginner",
+      "tags": [
+        "unicast",
+        "broadcast",
+        "multicast",
+        "anycast",
+        "duplex"
+      ],
+      "estimatedMinutes": 15,
+      "order": 9,
+      "prerequisites": [
+        "computer-network-basics"
+      ],
+      "relatedTopics": [
+        "arp-address-resolution",
+        "dhcp-dora",
+        "collision-and-broadcast-domains"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "nic-repeater-hub-bridge-switch",
+      "slug": "nic-repeater-hub-bridge-switch",
+      "title": "NIC, Repeater, Hub, Bridge and Switch",
+      "category": "computer-networks",
+      "subcategory": "network-devices",
+      "type": "concept",
+      "description": "The devices inside a LAN: what each reads, how hubs share bandwidth and collisions, and how bridges and switches forward by MAC.",
+      "difficulty": "beginner",
+      "tags": [
+        "nic",
+        "hub",
+        "switch",
+        "bridge",
+        "repeater"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "network-components-and-architectures"
+      ],
+      "relatedTopics": [
+        "how-switches-work",
+        "network-device-comparisons",
+        "collision-and-broadcast-domains"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "routers-modems-and-access-points",
+      "slug": "routers-modems-and-access-points",
+      "title": "Routers, Gateways, Modems and Access Points",
+      "category": "computer-networks",
+      "subcategory": "network-devices",
+      "type": "concept",
+      "description": "How a router forwards packets, what a default gateway is, and the jobs of modems and access points inside a home router.",
+      "difficulty": "beginner",
+      "tags": [
+        "router",
+        "default-gateway",
+        "modem",
+        "access-point",
+        "gateway"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "nic-repeater-hub-bridge-switch"
+      ],
+      "relatedTopics": [
+        "routing-fundamentals",
+        "local-vs-remote-delivery",
+        "network-device-comparisons"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "firewalls-proxies-and-load-balancers",
+      "slug": "firewalls-proxies-and-load-balancers",
+      "title": "Middleboxes: Firewalls, Proxies and Load Balancers",
+      "category": "computer-networks",
+      "subcategory": "network-devices",
+      "type": "concept",
+      "description": "Firewalls, NAT, forward vs reverse proxies, load balancers and API gateways, and what they mean for a Spring Boot backend.",
+      "difficulty": "intermediate",
+      "tags": [
+        "firewall",
+        "proxy",
+        "reverse-proxy",
+        "load-balancer",
+        "middlebox"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "routers-modems-and-access-points"
+      ],
+      "relatedTopics": [
+        "firewalls-and-acls",
+        "load-balancing-l4-vs-l7",
+        "network-address-translation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "network-device-comparisons",
+      "slug": "network-device-comparisons",
+      "title": "Network Device Comparisons",
+      "category": "computer-networks",
+      "subcategory": "network-devices",
+      "type": "concept",
+      "description": "Hub vs switch, switch vs router, modem vs router, router vs gateway, and Layer 2 vs Layer 3 devices in one place.",
+      "difficulty": "beginner",
+      "tags": [
+        "hub-vs-switch",
+        "router-vs-switch",
+        "modem-vs-router",
+        "layer-2",
+        "layer-3"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "routers-modems-and-access-points"
+      ],
+      "relatedTopics": [
+        "osi-model-overview",
+        "collision-and-broadcast-domains"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "osi-model-overview",
+      "slug": "osi-model-overview",
+      "title": "The OSI Model: Seven Layers",
+      "category": "computer-networks",
+      "subcategory": "osi-model",
+      "type": "concept",
+      "description": "The seven OSI layers with PDUs, addresses, protocols and devices, peer communication, and using the layers to troubleshoot.",
+      "difficulty": "beginner",
+      "tags": [
+        "osi-model",
+        "layers",
+        "pdu",
+        "troubleshooting"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "network-protocols-and-standards"
+      ],
+      "relatedTopics": [
+        "tcp-ip-model",
+        "osi-vs-tcp-ip",
+        "encapsulation-and-decapsulation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "osi-encapsulation-journey",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "osi-physical-and-data-link-layers",
+      "slug": "osi-physical-and-data-link-layers",
+      "title": "OSI Layers 1 and 2: Physical and Data Link",
+      "category": "computer-networks",
+      "subcategory": "osi-model",
+      "type": "concept",
+      "description": "Bits and signals at Layer 1; framing, MAC addressing, CRC error detection and media access at Layer 2.",
+      "difficulty": "beginner",
+      "tags": [
+        "physical-layer",
+        "data-link-layer",
+        "framing",
+        "mac-address"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "osi-model-overview"
+      ],
+      "relatedTopics": [
+        "ethernet-frames-and-mac-addresses",
+        "signals-and-transmission-media"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "osi-network-and-transport-layers",
+      "slug": "osi-network-and-transport-layers",
+      "title": "OSI Layers 3 and 4: Network and Transport",
+      "category": "computer-networks",
+      "subcategory": "osi-model",
+      "type": "concept",
+      "description": "Host-to-host delivery with IP and routing vs process-to-process delivery with ports, TCP and UDP.",
+      "difficulty": "beginner",
+      "tags": [
+        "network-layer",
+        "transport-layer",
+        "ip",
+        "tcp",
+        "udp"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "osi-model-overview"
+      ],
+      "relatedTopics": [
+        "network-layer-and-ip-packets",
+        "transport-layer-and-ports"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "osi-upper-layers",
+      "slug": "osi-upper-layers",
+      "title": "OSI Layers 5, 6 and 7: Session, Presentation and Application",
+      "category": "computer-networks",
+      "subcategory": "osi-model",
+      "type": "concept",
+      "description": "Dialogue management, encoding, encryption and compression, and application services — and where they live in real software.",
+      "difficulty": "beginner",
+      "tags": [
+        "session-layer",
+        "presentation-layer",
+        "application-layer",
+        "encoding"
+      ],
+      "estimatedMinutes": 15,
+      "order": 4,
+      "prerequisites": [
+        "osi-model-overview"
+      ],
+      "relatedTopics": [
+        "application-layer-protocols",
+        "tls-handshake-and-https"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "encapsulation-and-decapsulation",
+      "slug": "encapsulation-and-decapsulation",
+      "title": "Encapsulation and Decapsulation",
+      "category": "computer-networks",
+      "subcategory": "osi-model",
+      "type": "concept",
+      "description": "How each layer wraps data with headers and a trailer, what routers re-encapsulate at each hop, overhead, MTU and MSS.",
+      "difficulty": "beginner",
+      "tags": [
+        "encapsulation",
+        "headers",
+        "mtu",
+        "mss",
+        "pdu"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "osi-model-overview"
+      ],
+      "relatedTopics": [
+        "packet-journey-across-networks",
+        "ethernet-frames-and-mac-addresses"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "osi-encapsulation-journey",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "tcp-ip-model",
+      "slug": "tcp-ip-model",
+      "title": "The TCP/IP Model",
+      "category": "computer-networks",
+      "subcategory": "tcp-ip-model",
+      "type": "concept",
+      "description": "The 4- and 5-layer TCP/IP model, IP as the narrow waist, protocols by layer and who implements each layer.",
+      "difficulty": "beginner",
+      "tags": [
+        "tcp-ip",
+        "internet-protocol-suite",
+        "layers"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "osi-model-overview"
+      ],
+      "relatedTopics": [
+        "osi-vs-tcp-ip",
+        "encapsulation-and-decapsulation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "osi-encapsulation-journey",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "osi-vs-tcp-ip",
+      "slug": "osi-vs-tcp-ip",
+      "title": "OSI vs TCP/IP",
+      "category": "computer-networks",
+      "subcategory": "tcp-ip-model",
+      "type": "concept",
+      "description": "Layer mapping, practical differences and why TCP/IP won, plus why OSI numbering (L4, L7) is still everyday vocabulary.",
+      "difficulty": "beginner",
+      "tags": [
+        "osi-model",
+        "tcp-ip",
+        "comparison"
+      ],
+      "estimatedMinutes": 15,
+      "order": 2,
+      "prerequisites": [
+        "tcp-ip-model"
+      ],
+      "relatedTopics": [
+        "osi-model-overview",
+        "load-balancing-l4-vs-l7"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "signals-and-transmission-media",
+      "slug": "signals-and-transmission-media",
+      "title": "Bits, Signals and Transmission Media",
+      "category": "computer-networks",
+      "subcategory": "physical-and-data-link",
+      "type": "concept",
+      "description": "How bits become signals, twisted pair vs fibre vs wireless, attenuation, and simplex, half and full duplex.",
+      "difficulty": "beginner",
+      "tags": [
+        "transmission-media",
+        "fibre",
+        "twisted-pair",
+        "wireless",
+        "duplex"
+      ],
+      "estimatedMinutes": 15,
+      "order": 1,
+      "prerequisites": [
+        "osi-physical-and-data-link-layers"
+      ],
+      "relatedTopics": [
+        "internet-structure",
+        "nic-repeater-hub-bridge-switch"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "ethernet-frames-and-mac-addresses",
+      "slug": "ethernet-frames-and-mac-addresses",
+      "title": "Ethernet Frames, MAC Addresses and Error Detection",
+      "category": "computer-networks",
+      "subcategory": "physical-and-data-link",
+      "type": "concept",
+      "description": "MAC address structure, the Ethernet II frame field by field, EtherType, MTU, and parity, checksum and CRC error detection.",
+      "difficulty": "beginner",
+      "tags": [
+        "ethernet",
+        "mac-address",
+        "frame",
+        "crc",
+        "error-detection"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "osi-physical-and-data-link-layers"
+      ],
+      "relatedTopics": [
+        "how-switches-work",
+        "arp-address-resolution"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "how-switches-work",
+      "slug": "how-switches-work",
+      "title": "How Switches Work: MAC Learning, Forwarding and Flooding",
+      "category": "computer-networks",
+      "subcategory": "physical-and-data-link",
+      "type": "concept",
+      "description": "MAC address tables, learning from source MACs, forwarding, filtering and flooding, ageing, cut-through and MAC flooding attacks.",
+      "difficulty": "beginner",
+      "tags": [
+        "switch",
+        "mac-table",
+        "flooding",
+        "mac-learning"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "ethernet-frames-and-mac-addresses"
+      ],
+      "relatedTopics": [
+        "collision-and-broadcast-domains",
+        "vlans-trunks-and-stp"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "collision-and-broadcast-domains",
+      "slug": "collision-and-broadcast-domains",
+      "title": "Collision Domains and Broadcast Domains",
+      "category": "computer-networks",
+      "subcategory": "physical-and-data-link",
+      "type": "concept",
+      "description": "What collision and broadcast domains are, CSMA/CD and CSMA/CA, which devices separate each, and how to count them.",
+      "difficulty": "intermediate",
+      "tags": [
+        "collision-domain",
+        "broadcast-domain",
+        "csma-cd",
+        "csma-ca"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "how-switches-work"
+      ],
+      "relatedTopics": [
+        "vlans-trunks-and-stp",
+        "network-device-comparisons"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "vlans-trunks-and-stp",
+      "slug": "vlans-trunks-and-stp",
+      "title": "VLANs, Trunk Ports and Spanning Tree",
+      "category": "computer-networks",
+      "subcategory": "physical-and-data-link",
+      "type": "concept",
+      "description": "VLANs as broadcast domains, access vs trunk ports, 802.1Q tags, inter-VLAN routing, Layer 2 loops and how STP prevents them.",
+      "difficulty": "intermediate",
+      "tags": [
+        "vlan",
+        "trunk-port",
+        "access-port",
+        "802-1q",
+        "stp"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "collision-and-broadcast-domains"
+      ],
+      "relatedTopics": [
+        "subnetting-fundamentals",
+        "routing-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "ip-vs-mac-addresses",
+      "slug": "ip-vs-mac-addresses",
+      "title": "IP Addresses vs MAC Addresses",
+      "category": "computer-networks",
+      "subcategory": "arp-and-local-delivery",
+      "type": "concept",
+      "description": "Why every packet carries both IP and MAC addresses, which ones change at each hop, and how the next hop is chosen.",
+      "difficulty": "beginner",
+      "tags": [
+        "ip-address",
+        "mac-address",
+        "comparison"
+      ],
+      "estimatedMinutes": 15,
+      "order": 1,
+      "prerequisites": [
+        "ethernet-frames-and-mac-addresses",
+        "ipv4-addressing"
+      ],
+      "relatedTopics": [
+        "arp-address-resolution",
+        "packet-journey-across-networks"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "packet-journey-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "arp-address-resolution",
+      "slug": "arp-address-resolution",
+      "title": "ARP: Address Resolution Protocol",
+      "category": "computer-networks",
+      "subcategory": "arp-and-local-delivery",
+      "type": "concept",
+      "description": "ARP requests and replies, the ARP cache, gratuitous and proxy ARP, ARP spoofing, and ARP vs DNS.",
+      "difficulty": "beginner",
+      "tags": [
+        "arp",
+        "arp-cache",
+        "gratuitous-arp",
+        "arp-spoofing"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "ip-vs-mac-addresses"
+      ],
+      "relatedTopics": [
+        "local-vs-remote-delivery",
+        "common-network-attacks",
+        "dns-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "arp-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "local-vs-remote-delivery",
+      "slug": "local-vs-remote-delivery",
+      "title": "Local vs Remote Delivery: The Default Gateway in Action",
+      "category": "computer-networks",
+      "subcategory": "arp-and-local-delivery",
+      "type": "concept",
+      "description": "How a host decides local vs remote with its subnet mask, when it ARPs for the gateway, and what wrong gateways and masks break.",
+      "difficulty": "intermediate",
+      "tags": [
+        "default-gateway",
+        "subnet-mask",
+        "arp",
+        "routing-decision"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "arp-address-resolution"
+      ],
+      "relatedTopics": [
+        "subnet-masks-and-cidr",
+        "routing-fundamentals",
+        "troubleshooting-connectivity-problems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "arp-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "network-layer-and-ip-packets",
+      "slug": "network-layer-and-ip-packets",
+      "title": "The Network Layer and IP Packets",
+      "category": "computer-networks",
+      "subcategory": "ip-addressing",
+      "type": "concept",
+      "description": "The IPv4 header field by field, TTL, best-effort delivery, fragmentation and MTU, ICMP, and control vs data plane.",
+      "difficulty": "intermediate",
+      "tags": [
+        "ip",
+        "ipv4-header",
+        "ttl",
+        "fragmentation",
+        "best-effort"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "osi-network-and-transport-layers"
+      ],
+      "relatedTopics": [
+        "ttl-and-icmp",
+        "routing-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "ipv4-addressing",
+      "slug": "ipv4-addressing",
+      "title": "IPv4 Addressing: Structure, Network and Host Portions",
+      "category": "computer-networks",
+      "subcategory": "ip-addressing",
+      "type": "concept",
+      "description": "Dotted decimal and binary, network and host portions, classful addressing and why CIDR replaced it, host counting.",
+      "difficulty": "beginner",
+      "tags": [
+        "ipv4",
+        "binary",
+        "address-classes",
+        "network-portion"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "network-layer-and-ip-packets"
+      ],
+      "relatedTopics": [
+        "subnet-masks-and-cidr",
+        "public-private-and-special-ip-addresses"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "public-private-and-special-ip-addresses",
+      "slug": "public-private-and-special-ip-addresses",
+      "title": "Public, Private and Special IP Addresses",
+      "category": "computer-networks",
+      "subcategory": "ip-addressing",
+      "type": "concept",
+      "description": "Private RFC 1918 ranges, loopback, APIPA, 0.0.0.0, broadcast, CGNAT and documentation ranges, and static vs dynamic addresses.",
+      "difficulty": "beginner",
+      "tags": [
+        "private-ip",
+        "public-ip",
+        "loopback",
+        "apipa",
+        "static-ip",
+        "dynamic-ip"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "ipv4-addressing"
+      ],
+      "relatedTopics": [
+        "network-address-translation",
+        "dhcp-dora"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "subnet-masks-and-cidr",
+      "slug": "subnet-masks-and-cidr",
+      "title": "Subnet Masks and CIDR",
+      "category": "computer-networks",
+      "subcategory": "ip-addressing",
+      "type": "concept",
+      "description": "Masks and prefix lengths, finding network and broadcast addresses with AND, host ranges, valid gateways and wildcard masks.",
+      "difficulty": "intermediate",
+      "tags": [
+        "subnet-mask",
+        "cidr",
+        "prefix-length",
+        "network-address",
+        "broadcast-address"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "ipv4-addressing"
+      ],
+      "relatedTopics": [
+        "subnetting-fundamentals",
+        "longest-prefix-match",
+        "local-vs-remote-delivery"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "subnet-calculator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "ipv6-addressing",
+      "slug": "ipv6-addressing",
+      "title": "IPv6 Addressing and IPv4 vs IPv6",
+      "category": "computer-networks",
+      "subcategory": "ip-addressing",
+      "type": "concept",
+      "description": "IPv6 notation and shortening, /64 subnets, address types, SLAAC and NDP, IPv4 vs IPv6 and the dual-stack transition.",
+      "difficulty": "intermediate",
+      "tags": [
+        "ipv6",
+        "ipv4-vs-ipv6",
+        "slaac",
+        "ndp",
+        "dual-stack"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "ipv4-addressing"
+      ],
+      "relatedTopics": [
+        "public-private-and-special-ip-addresses",
+        "unicast-broadcast-multicast-anycast"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "subnetting-fundamentals",
+      "slug": "subnetting-fundamentals",
+      "title": "Subnetting Fundamentals",
+      "category": "computer-networks",
+      "subcategory": "subnetting",
+      "type": "concept",
+      "description": "Why subnet, borrowing host bits, the subnet and host formulas, sizing from requirements and listing subnets.",
+      "difficulty": "intermediate",
+      "tags": [
+        "subnetting",
+        "borrowing-bits",
+        "subnet-formula",
+        "host-formula"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "subnet-masks-and-cidr"
+      ],
+      "relatedTopics": [
+        "subnetting-block-size-method",
+        "vlsm-and-supernetting"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "subnet-calculator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "subnetting-block-size-method",
+      "slug": "subnetting-block-size-method",
+      "title": "Subnetting by Hand: The Block-Size Method",
+      "category": "computer-networks",
+      "subcategory": "subnetting",
+      "type": "concept",
+      "description": "A fast method for network, broadcast and host range in any octet, the /8 to /30 reference table, and a Java checker.",
+      "difficulty": "intermediate",
+      "tags": [
+        "subnetting",
+        "block-size",
+        "cidr-table",
+        "host-range"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "subnetting-fundamentals"
+      ],
+      "relatedTopics": [
+        "subnetting-problems",
+        "longest-prefix-match"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "subnet-calculator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "vlsm-and-supernetting",
+      "slug": "vlsm-and-supernetting",
+      "title": "VLSM and Supernetting",
+      "category": "computer-networks",
+      "subcategory": "subnetting",
+      "type": "concept",
+      "description": "Allocating different-sized subnets largest-first, and summarising contiguous networks into one route without over-summarising.",
+      "difficulty": "advanced",
+      "tags": [
+        "vlsm",
+        "supernetting",
+        "route-summarization",
+        "aggregation"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "subnetting-block-size-method"
+      ],
+      "relatedTopics": [
+        "static-and-dynamic-routing",
+        "longest-prefix-match"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "subnetting-problems",
+      "slug": "subnetting-problems",
+      "title": "Subnetting Interview Problems",
+      "category": "computer-networks",
+      "subcategory": "subnetting",
+      "type": "pattern",
+      "description": "Recognising the ten subnetting question types and solving each by recipe, with worked examples from easy to hard.",
+      "difficulty": "intermediate",
+      "tags": [
+        "subnetting",
+        "interview-problems",
+        "placement-tests"
+      ],
+      "estimatedMinutes": 40,
+      "order": 4,
+      "prerequisites": [
+        "subnetting-block-size-method"
+      ],
+      "relatedTopics": [
+        "vlsm-and-supernetting",
+        "cn-ip-routing-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "examples.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "routing-fundamentals",
+      "slug": "routing-fundamentals",
+      "title": "Routing Fundamentals",
+      "category": "computer-networks",
+      "subcategory": "routing",
+      "type": "concept",
+      "description": "Routing tables, next hops, connected, static, dynamic and default routes, the router forwarding process, and routing vs forwarding.",
+      "difficulty": "intermediate",
+      "tags": [
+        "routing",
+        "routing-table",
+        "next-hop",
+        "default-route",
+        "forwarding"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "routers-modems-and-access-points",
+        "subnet-masks-and-cidr"
+      ],
+      "relatedTopics": [
+        "longest-prefix-match",
+        "static-and-dynamic-routing",
+        "ttl-and-icmp"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "routing-table-lookup",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "longest-prefix-match",
+      "slug": "longest-prefix-match",
+      "title": "Longest Prefix Match",
+      "category": "computer-networks",
+      "subcategory": "routing",
+      "type": "algorithm",
+      "description": "How routers choose among overlapping routes, why prefix length beats metrics, and real uses: host routes, VPN tunnels, BGP hijacks.",
+      "difficulty": "intermediate",
+      "tags": [
+        "longest-prefix-match",
+        "routing-table",
+        "cidr",
+        "forwarding"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "routing-fundamentals"
+      ],
+      "relatedTopics": [
+        "vlsm-and-supernetting",
+        "vpns-and-tunneling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "routing-table-lookup",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "static-and-dynamic-routing",
+      "slug": "static-and-dynamic-routing",
+      "title": "Static Routing, Dynamic Routing, RIP, OSPF and BGP",
+      "category": "computer-networks",
+      "subcategory": "routing",
+      "type": "concept",
+      "description": "Static vs dynamic routes, distance vector vs link state, RIP, OSPF and BGP, IGP vs EGP and autonomous systems.",
+      "difficulty": "intermediate",
+      "tags": [
+        "static-routing",
+        "dynamic-routing",
+        "rip",
+        "ospf",
+        "bgp"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "routing-fundamentals"
+      ],
+      "relatedTopics": [
+        "internet-structure",
+        "longest-prefix-match"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "ttl-and-icmp",
+      "slug": "ttl-and-icmp",
+      "title": "TTL, ICMP, ping and traceroute",
+      "category": "computer-networks",
+      "subcategory": "routing",
+      "type": "concept",
+      "description": "TTL and loop prevention, important ICMP messages, how ping and traceroute work, reading traces and why not to block all ICMP.",
+      "difficulty": "intermediate",
+      "tags": [
+        "ttl",
+        "icmp",
+        "ping",
+        "traceroute",
+        "pmtud"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "network-layer-and-ip-packets"
+      ],
+      "relatedTopics": [
+        "network-diagnostic-commands",
+        "routing-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "transport-layer-and-ports",
+      "slug": "transport-layer-and-ports",
+      "title": "The Transport Layer and Port Numbers",
+      "category": "computer-networks",
+      "subcategory": "transport-layer",
+      "type": "concept",
+      "description": "Process-to-process delivery, port ranges, important port numbers, source and destination ports, and demultiplexing.",
+      "difficulty": "beginner",
+      "tags": [
+        "transport-layer",
+        "port-numbers",
+        "ephemeral-ports",
+        "multiplexing"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "osi-network-and-transport-layers"
+      ],
+      "relatedTopics": [
+        "sockets-and-connections",
+        "tcp-vs-udp"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sockets-and-connections",
+      "slug": "sockets-and-connections",
+      "title": "Sockets and Connections: Port vs Socket",
+      "category": "computer-networks",
+      "subcategory": "transport-layer",
+      "type": "concept",
+      "description": "Sockets, the 4-tuple, listening vs connected sockets, a runnable Java socket example, and ephemeral port limits.",
+      "difficulty": "intermediate",
+      "tags": [
+        "socket",
+        "port-vs-socket",
+        "four-tuple",
+        "java-sockets"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "transport-layer-and-ports"
+      ],
+      "relatedTopics": [
+        "tcp-three-way-handshake",
+        "keep-alive-and-connection-pooling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "udp-protocol",
+      "slug": "udp-protocol",
+      "title": "UDP: User Datagram Protocol",
+      "category": "computer-networks",
+      "subcategory": "transport-layer",
+      "type": "concept",
+      "description": "The 8-byte UDP header, message boundaries, a runnable Java UDP example, advantages, limitations and use cases.",
+      "difficulty": "beginner",
+      "tags": [
+        "udp",
+        "datagram",
+        "connectionless",
+        "java-udp"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "transport-layer-and-ports"
+      ],
+      "relatedTopics": [
+        "tcp-vs-udp",
+        "dns-fundamentals",
+        "http-versions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "tcp-segments-and-reliability",
+      "slug": "tcp-segments-and-reliability",
+      "title": "TCP: Segments, Sequence Numbers and Reliability",
+      "category": "computer-networks",
+      "subcategory": "transport-layer",
+      "type": "concept",
+      "description": "The TCP header, byte sequence numbers, cumulative ACKs, retransmission timeouts, fast retransmit, SACK and TCP timers.",
+      "difficulty": "intermediate",
+      "tags": [
+        "tcp",
+        "sequence-numbers",
+        "acknowledgement",
+        "retransmission",
+        "reliability"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "transport-layer-and-ports"
+      ],
+      "relatedTopics": [
+        "tcp-three-way-handshake",
+        "tcp-flow-control"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "tcp-three-way-handshake",
+      "slug": "tcp-three-way-handshake",
+      "title": "The TCP Three-Way Handshake",
+      "category": "computer-networks",
+      "subcategory": "transport-layer",
+      "type": "concept",
+      "description": "SYN, SYN-ACK and ACK with sequence numbers and states, options, why three steps, refused vs timeout, and SYN floods.",
+      "difficulty": "intermediate",
+      "tags": [
+        "three-way-handshake",
+        "syn",
+        "syn-ack",
+        "tcp-states",
+        "syn-flood"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "tcp-segments-and-reliability"
+      ],
+      "relatedTopics": [
+        "tcp-connection-termination",
+        "tls-handshake-and-https"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "tcp-connection-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "tcp-connection-termination",
+      "slug": "tcp-connection-termination",
+      "title": "TCP Connection Termination, TIME_WAIT and TCP States",
+      "category": "computer-networks",
+      "subcategory": "transport-layer",
+      "type": "concept",
+      "description": "FIN and ACK half-closes, the four-way termination, TIME_WAIT and CLOSE_WAIT, RST, and the full TCP state machine.",
+      "difficulty": "intermediate",
+      "tags": [
+        "tcp-termination",
+        "fin",
+        "time-wait",
+        "close-wait",
+        "tcp-states"
+      ],
+      "estimatedMinutes": 25,
+      "order": 6,
+      "prerequisites": [
+        "tcp-three-way-handshake"
+      ],
+      "relatedTopics": [
+        "keep-alive-and-connection-pooling",
+        "troubleshooting-connection-errors"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "tcp-connection-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "tcp-vs-udp",
+      "slug": "tcp-vs-udp",
+      "title": "TCP vs UDP",
+      "category": "computer-networks",
+      "subcategory": "transport-layer",
+      "type": "concept",
+      "description": "Connection-oriented vs connectionless, segment vs datagram, a full feature comparison and how to choose for an application.",
+      "difficulty": "beginner",
+      "tags": [
+        "tcp-vs-udp",
+        "comparison",
+        "connection-oriented",
+        "connectionless"
+      ],
+      "estimatedMinutes": 15,
+      "order": 7,
+      "prerequisites": [
+        "udp-protocol",
+        "tcp-segments-and-reliability"
+      ],
+      "relatedTopics": [
+        "http-versions",
+        "cn-transport-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "tcp-flow-control",
+      "slug": "tcp-flow-control",
+      "title": "TCP Flow Control and the Sliding Window",
+      "category": "computer-networks",
+      "subcategory": "flow-and-congestion-control",
+      "type": "concept",
+      "description": "The receive window, sliding window vs stop-and-wait, zero windows, window scaling and flow vs congestion control.",
+      "difficulty": "intermediate",
+      "tags": [
+        "flow-control",
+        "sliding-window",
+        "receive-window",
+        "window-scaling"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "tcp-segments-and-reliability"
+      ],
+      "relatedTopics": [
+        "tcp-congestion-control",
+        "network-performance-metrics"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "tcp-congestion-control",
+      "slug": "tcp-congestion-control",
+      "title": "TCP Congestion Control",
+      "category": "computer-networks",
+      "subcategory": "flow-and-congestion-control",
+      "type": "concept",
+      "description": "Congestion windows, slow start, congestion avoidance, fast recovery, AIMD, CUBIC and BBR, and why backends care.",
+      "difficulty": "advanced",
+      "tags": [
+        "congestion-control",
+        "slow-start",
+        "congestion-window",
+        "aimd",
+        "cubic"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "tcp-flow-control"
+      ],
+      "relatedTopics": [
+        "network-performance-for-backends",
+        "keep-alive-and-connection-pooling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "application-layer-protocols",
+      "slug": "application-layer-protocols",
+      "title": "Application Layer Protocols: FTP, Telnet, SNMP and the Protocol Map",
+      "category": "computer-networks",
+      "subcategory": "application-layer",
+      "type": "concept",
+      "description": "Application protocol patterns, the protocol and port map, FTP control and data connections, Telnet and SNMP.",
+      "difficulty": "beginner",
+      "tags": [
+        "application-layer",
+        "ftp",
+        "telnet",
+        "snmp",
+        "port-numbers"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "transport-layer-and-ports"
+      ],
+      "relatedTopics": [
+        "http-fundamentals",
+        "ssh-protocol",
+        "email-protocols-smtp-pop3-imap"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "email-protocols-smtp-pop3-imap",
+      "slug": "email-protocols-smtp-pop3-imap",
+      "title": "How Email Works: SMTP, POP3 and IMAP",
+      "category": "computer-networks",
+      "subcategory": "application-layer",
+      "type": "concept",
+      "description": "The journey of an email, an SMTP conversation, POP3 vs IMAP, MX records and SPF, DKIM and DMARC.",
+      "difficulty": "beginner",
+      "tags": [
+        "email",
+        "smtp",
+        "pop3",
+        "imap",
+        "mx-record"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "application-layer-protocols"
+      ],
+      "relatedTopics": [
+        "dns-record-types",
+        "common-network-attacks"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "ssh-protocol",
+      "slug": "ssh-protocol",
+      "title": "SSH: Secure Remote Access",
+      "category": "computer-networks",
+      "subcategory": "application-layer",
+      "type": "concept",
+      "description": "SSH connection setup, host and user keys, SCP and SFTP, port forwarding through bastions, and SSH vs Telnet.",
+      "difficulty": "intermediate",
+      "tags": [
+        "ssh",
+        "public-key-authentication",
+        "port-forwarding",
+        "sftp"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "application-layer-protocols"
+      ],
+      "relatedTopics": [
+        "encryption-fundamentals",
+        "vpns-and-tunneling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "http-fundamentals",
+      "slug": "http-fundamentals",
+      "title": "HTTP Fundamentals: Requests and Responses",
+      "category": "computer-networks",
+      "subcategory": "http",
+      "type": "concept",
+      "description": "URL anatomy, request and response structure, statelessness, and a runnable Java HttpServer and HttpClient exchange.",
+      "difficulty": "beginner",
+      "tags": [
+        "http",
+        "request",
+        "response",
+        "url",
+        "stateless"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "application-layer-protocols"
+      ],
+      "relatedTopics": [
+        "http-methods-and-idempotency",
+        "http-status-codes",
+        "rest-principles"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "http-exchange-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "http-methods-and-idempotency",
+      "slug": "http-methods-and-idempotency",
+      "title": "HTTP Methods, Safety, Idempotency and REST",
+      "category": "computer-networks",
+      "subcategory": "http",
+      "type": "concept",
+      "description": "GET, POST, PUT, PATCH, DELETE, HEAD and OPTIONS, safe vs idempotent, retries and idempotency keys, and REST in Spring.",
+      "difficulty": "intermediate",
+      "tags": [
+        "http-methods",
+        "idempotency",
+        "rest",
+        "put-vs-patch"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "http-fundamentals"
+      ],
+      "relatedTopics": [
+        "http-status-codes",
+        "rest-http-methods"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "http-status-codes",
+      "slug": "http-status-codes",
+      "title": "HTTP Status Codes",
+      "category": "computer-networks",
+      "subcategory": "http",
+      "type": "reference",
+      "description": "The five classes, the codes to know, 401 vs 403, 502 vs 503 vs 504 behind load balancers, Spring mappings and retry rules.",
+      "difficulty": "beginner",
+      "tags": [
+        "status-codes",
+        "401-vs-403",
+        "502-503-504",
+        "redirects"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "http-fundamentals"
+      ],
+      "relatedTopics": [
+        "rest-http-status-codes",
+        "load-balancing-l4-vs-l7"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "http-exchange-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "http-headers-cookies-and-sessions",
+      "slug": "http-headers-cookies-and-sessions",
+      "title": "HTTP Headers, Cookies and Sessions",
+      "category": "computer-networks",
+      "subcategory": "http",
+      "type": "concept",
+      "description": "Content, authentication and caching headers, cookies and their attributes, server-side sessions vs tokens.",
+      "difficulty": "intermediate",
+      "tags": [
+        "http-headers",
+        "cookies",
+        "sessions",
+        "cache-control",
+        "authorization"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "http-fundamentals"
+      ],
+      "relatedTopics": [
+        "caching-and-cdns",
+        "session-vs-stateless-authentication",
+        "network-security-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "http-versions",
+      "slug": "http-versions",
+      "title": "HTTP/1.1, HTTP/2 and HTTP/3",
+      "category": "computer-networks",
+      "subcategory": "http",
+      "type": "concept",
+      "description": "Keep-alive, head-of-line blocking, binary framing and multiplexing, HPACK, and HTTP/3 over QUIC.",
+      "difficulty": "intermediate",
+      "tags": [
+        "http2",
+        "http3",
+        "quic",
+        "multiplexing",
+        "head-of-line-blocking"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "http-fundamentals",
+        "tcp-vs-udp"
+      ],
+      "relatedTopics": [
+        "keep-alive-and-connection-pooling",
+        "tls-handshake-and-https"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "encryption-fundamentals",
+      "slug": "encryption-fundamentals",
+      "title": "Encryption Fundamentals for HTTPS",
+      "category": "computer-networks",
+      "subcategory": "https-and-tls",
+      "type": "concept",
+      "description": "Confidentiality, integrity and authentication; symmetric vs asymmetric encryption, Diffie-Hellman, signatures and forward secrecy.",
+      "difficulty": "intermediate",
+      "tags": [
+        "encryption",
+        "symmetric",
+        "asymmetric",
+        "diffie-hellman",
+        "hashing"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "application-layer-protocols"
+      ],
+      "relatedTopics": [
+        "certificates-and-certificate-authorities",
+        "tls-handshake-and-https",
+        "ssh-protocol"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "certificates-and-certificate-authorities",
+      "slug": "certificates-and-certificate-authorities",
+      "title": "Certificates and Certificate Authorities",
+      "category": "computer-networks",
+      "subcategory": "https-and-tls",
+      "type": "concept",
+      "description": "What a certificate contains, the chain of trust, how clients verify certificates, CSRs and Let’s Encrypt, and Java trust stores.",
+      "difficulty": "intermediate",
+      "tags": [
+        "certificates",
+        "certificate-authority",
+        "chain-of-trust",
+        "x509"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "encryption-fundamentals"
+      ],
+      "relatedTopics": [
+        "tls-handshake-and-https",
+        "common-network-attacks"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "tls-handshake-and-https",
+      "slug": "tls-handshake-and-https",
+      "title": "The TLS Handshake and HTTP vs HTTPS",
+      "category": "computer-networks",
+      "subcategory": "https-and-tls",
+      "type": "concept",
+      "description": "HTTP vs HTTPS, the TLS 1.3 handshake step by step, SNI and ALPN, TLS 1.2 vs 1.3, and TLS termination at load balancers.",
+      "difficulty": "intermediate",
+      "tags": [
+        "tls",
+        "https",
+        "tls-handshake",
+        "sni",
+        "alpn"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "certificates-and-certificate-authorities"
+      ],
+      "relatedTopics": [
+        "url-to-webpage-journey",
+        "load-balancing-l4-vs-l7"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "tls-handshake-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "dns-fundamentals",
+      "slug": "dns-fundamentals",
+      "title": "DNS Fundamentals",
+      "category": "computer-networks",
+      "subcategory": "dns",
+      "type": "concept",
+      "description": "Why DNS exists, the domain hierarchy, zones and delegation, stub, recursive, root, TLD and authoritative servers.",
+      "difficulty": "beginner",
+      "tags": [
+        "dns",
+        "domain-hierarchy",
+        "root-server",
+        "tld",
+        "authoritative-server"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "application-layer-protocols"
+      ],
+      "relatedTopics": [
+        "dns-resolution-process",
+        "dns-record-types"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "dns-resolution-process",
+      "slug": "dns-resolution-process",
+      "title": "DNS Resolution: Recursive and Iterative Queries",
+      "category": "computer-networks",
+      "subcategory": "dns",
+      "type": "concept",
+      "description": "Step-by-step name resolution, recursive vs iterative queries, caching at every layer, CNAME chains and failure answers.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dns-resolution",
+        "recursive-query",
+        "iterative-query",
+        "dns-cache"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "dns-fundamentals"
+      ],
+      "relatedTopics": [
+        "dns-caching-ttl-and-failures",
+        "url-to-webpage-journey"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "dns-resolution-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "dns-record-types",
+      "slug": "dns-record-types",
+      "title": "DNS Record Types: A, AAAA, CNAME, MX, NS, TXT and More",
+      "category": "computer-networks",
+      "subcategory": "dns",
+      "type": "reference",
+      "description": "Resource records and what each type is for, CNAME rules and the zone apex, MX priorities, glue records.",
+      "difficulty": "beginner",
+      "tags": [
+        "a-record",
+        "cname",
+        "mx-record",
+        "txt-record",
+        "ns-record"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "dns-fundamentals"
+      ],
+      "relatedTopics": [
+        "email-protocols-smtp-pop3-imap",
+        "certificates-and-certificate-authorities"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "dns-caching-ttl-and-failures",
+      "slug": "dns-caching-ttl-and-failures",
+      "title": "DNS Caching, TTL, Propagation and Failure Scenarios",
+      "category": "computer-networks",
+      "subcategory": "dns",
+      "type": "concept",
+      "description": "TTLs and negative caching, why changes take time to propagate, planning migrations, and diagnosing DNS failures.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dns-ttl",
+        "dns-propagation",
+        "nxdomain",
+        "servfail",
+        "dns-troubleshooting"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "dns-resolution-process"
+      ],
+      "relatedTopics": [
+        "troubleshooting-connectivity-problems",
+        "network-diagnostic-commands"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "dhcp-dora",
+      "slug": "dhcp-dora",
+      "title": "DHCP: How a Device Gets Its IP Configuration",
+      "category": "computer-networks",
+      "subcategory": "dhcp",
+      "type": "concept",
+      "description": "What DHCP provides, the DORA exchange, leases and renewal, relays, reservations, rogue servers and DNS vs DHCP.",
+      "difficulty": "beginner",
+      "tags": [
+        "dhcp",
+        "dora",
+        "lease",
+        "dhcp-relay"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "public-private-and-special-ip-addresses"
+      ],
+      "relatedTopics": [
+        "url-to-webpage-journey",
+        "unicast-broadcast-multicast-anycast"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "dhcp-dora-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "network-address-translation",
+      "slug": "network-address-translation",
+      "title": "NAT: Network Address Translation",
+      "category": "computer-networks",
+      "subcategory": "nat",
+      "type": "concept",
+      "description": "Static NAT, dynamic NAT and PAT, translation tables, port forwarding, CGNAT, NAT traversal, and why NAT is not a firewall.",
+      "difficulty": "intermediate",
+      "tags": [
+        "nat",
+        "pat",
+        "port-forwarding",
+        "cgnat",
+        "nat-traversal"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "public-private-and-special-ip-addresses"
+      ],
+      "relatedTopics": [
+        "packet-journey-across-networks",
+        "firewalls-and-acls"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "nat-translation-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "network-security-fundamentals",
+      "slug": "network-security-fundamentals",
+      "title": "Network Security Fundamentals and Authentication vs Authorization",
+      "category": "computer-networks",
+      "subcategory": "network-security",
+      "type": "concept",
+      "description": "The CIA triad, authentication vs authorization (401 vs 403), defence in depth, least privilege and zero trust.",
+      "difficulty": "beginner",
+      "tags": [
+        "network-security",
+        "authentication",
+        "authorization",
+        "cia-triad",
+        "zero-trust"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "tls-handshake-and-https"
+      ],
+      "relatedTopics": [
+        "firewalls-and-acls",
+        "authentication-architecture"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "firewalls-and-acls",
+      "slug": "firewalls-and-acls",
+      "title": "Firewalls and Access Control Lists",
+      "category": "computer-networks",
+      "subcategory": "network-security",
+      "type": "concept",
+      "description": "Rule order and default deny, stateless vs stateful firewalls, drop vs reject, WAFs, and cloud security groups vs NACLs.",
+      "difficulty": "intermediate",
+      "tags": [
+        "firewall",
+        "acl",
+        "stateful-firewall",
+        "security-group",
+        "waf"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "network-security-fundamentals"
+      ],
+      "relatedTopics": [
+        "troubleshooting-connection-errors",
+        "firewalls-proxies-and-load-balancers"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "vpns-and-tunneling",
+      "slug": "vpns-and-tunneling",
+      "title": "VPNs and Tunnelling",
+      "category": "computer-networks",
+      "subcategory": "network-security",
+      "type": "concept",
+      "description": "Remote-access and site-to-site VPNs, tunnelling and encapsulation, full vs split tunnels, VPN protocols and MTU costs.",
+      "difficulty": "intermediate",
+      "tags": [
+        "vpn",
+        "tunneling",
+        "ipsec",
+        "wireguard",
+        "split-tunnel"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "network-security-fundamentals"
+      ],
+      "relatedTopics": [
+        "longest-prefix-match",
+        "encapsulation-and-decapsulation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "common-network-attacks",
+      "slug": "common-network-attacks",
+      "title": "Common Network Attacks and Defences",
+      "category": "computer-networks",
+      "subcategory": "network-security",
+      "type": "concept",
+      "description": "DoS and DDoS, sniffing, man-in-the-middle, IP, ARP and DNS spoofing, phishing and port scanning — with defences.",
+      "difficulty": "intermediate",
+      "tags": [
+        "ddos",
+        "mitm",
+        "spoofing",
+        "phishing",
+        "port-scanning"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "network-security-fundamentals"
+      ],
+      "relatedTopics": [
+        "arp-address-resolution",
+        "tls-handshake-and-https",
+        "firewalls-and-acls"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "network-performance-for-backends",
+      "slug": "network-performance-for-backends",
+      "title": "Network Performance for Backend Systems",
+      "category": "computer-networks",
+      "subcategory": "performance",
+      "type": "concept",
+      "description": "RTT numbers to reason with, where time goes in an API call, round trips in backend code, bottlenecks, timeouts and percentiles.",
+      "difficulty": "intermediate",
+      "tags": [
+        "latency",
+        "rtt",
+        "round-trips",
+        "timeouts",
+        "backend-performance"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "network-performance-metrics"
+      ],
+      "relatedTopics": [
+        "keep-alive-and-connection-pooling",
+        "caching-and-cdns"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "keep-alive-and-connection-pooling",
+      "slug": "keep-alive-and-connection-pooling",
+      "title": "Keep-Alive and Connection Pooling",
+      "category": "computer-networks",
+      "subcategory": "performance",
+      "type": "concept",
+      "description": "Why new connections are expensive, HTTP keep-alive, database and HTTP connection pools, pool sizing and failure modes.",
+      "difficulty": "intermediate",
+      "tags": [
+        "keep-alive",
+        "connection-pooling",
+        "hikaricp",
+        "http-client"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "network-performance-for-backends",
+        "tcp-connection-termination"
+      ],
+      "relatedTopics": [
+        "backend-request-flows",
+        "load-balancing-l4-vs-l7"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "caching-and-cdns",
+      "slug": "caching-and-cdns",
+      "title": "Caching and CDNs",
+      "category": "computer-networks",
+      "subcategory": "performance",
+      "type": "concept",
+      "description": "Cache layers, HTTP caching headers and revalidation, how CDN edges serve users, what to cache and cache invalidation.",
+      "difficulty": "intermediate",
+      "tags": [
+        "caching",
+        "cdn",
+        "edge-server",
+        "cache-control",
+        "etag"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "http-headers-cookies-and-sessions"
+      ],
+      "relatedTopics": [
+        "network-performance-for-backends",
+        "internet-structure"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "load-balancing-l4-vs-l7",
+      "slug": "load-balancing-l4-vs-l7",
+      "title": "Load Balancing: L4 vs L7",
+      "category": "computer-networks",
+      "subcategory": "performance",
+      "type": "concept",
+      "description": "L4 vs L7 load balancers, balancing algorithms, health checks, sticky sessions, and HTTPS through a load balancer to Spring Boot.",
+      "difficulty": "intermediate",
+      "tags": [
+        "load-balancing",
+        "l4-load-balancer",
+        "l7-load-balancer",
+        "health-checks",
+        "sticky-sessions"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "firewalls-proxies-and-load-balancers",
+        "http-fundamentals"
+      ],
+      "relatedTopics": [
+        "backend-request-flows",
+        "tls-handshake-and-https"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "load-balancer-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "network-troubleshooting-methodology",
+      "slug": "network-troubleshooting-methodology",
+      "title": "Network Troubleshooting Methodology",
+      "category": "computer-networks",
+      "subcategory": "troubleshooting",
+      "type": "concept",
+      "description": "A systematic process, the layered checklist, bottom-up, top-down and divide-and-conquer, and the \"no internet\" decision tree.",
+      "difficulty": "beginner",
+      "tags": [
+        "troubleshooting",
+        "methodology",
+        "osi-troubleshooting"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "osi-model-overview"
+      ],
+      "relatedTopics": [
+        "network-diagnostic-commands",
+        "troubleshooting-connectivity-problems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "network-troubleshooting-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "network-diagnostic-commands",
+      "slug": "network-diagnostic-commands",
+      "title": "Network Diagnostic Commands",
+      "category": "computer-networks",
+      "subcategory": "troubleshooting",
+      "type": "reference",
+      "description": "ipconfig, ip, ping, traceroute and tracert, nslookup and dig, curl, nc, ss and netstat, arp — what each proves, with real output.",
+      "difficulty": "beginner",
+      "tags": [
+        "ping",
+        "traceroute",
+        "nslookup",
+        "curl",
+        "netstat",
+        "ipconfig"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "network-troubleshooting-methodology"
+      ],
+      "relatedTopics": [
+        "ttl-and-icmp",
+        "ports-and-http-tools",
+        "connectivity-and-dns-tools"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "troubleshooting-connectivity-problems",
+      "slug": "troubleshooting-connectivity-problems",
+      "title": "Troubleshooting Connectivity Problems",
+      "category": "computer-networks",
+      "subcategory": "troubleshooting",
+      "type": "concept",
+      "description": "Scenarios: internet not working, ping IP but not domain, wrong gateway, wrong subnet, high latency and packet loss.",
+      "difficulty": "intermediate",
+      "tags": [
+        "troubleshooting",
+        "dns-failure",
+        "default-gateway",
+        "latency",
+        "packet-loss"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "network-diagnostic-commands"
+      ],
+      "relatedTopics": [
+        "troubleshooting-connection-errors",
+        "dns-caching-ttl-and-failures"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "network-troubleshooting-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "troubleshooting-connection-errors",
+      "slug": "troubleshooting-connection-errors",
+      "title": "Troubleshooting Connection Errors",
+      "category": "computer-networks",
+      "subcategory": "troubleshooting",
+      "type": "concept",
+      "description": "Scenarios: connection refused, connection timeout, port unreachable, one website failing, firewall blocks and connection resets.",
+      "difficulty": "intermediate",
+      "tags": [
+        "connection-refused",
+        "connection-timeout",
+        "connection-reset",
+        "firewall"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "network-diagnostic-commands"
+      ],
+      "relatedTopics": [
+        "tcp-three-way-handshake",
+        "firewalls-and-acls",
+        "backend-request-flows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "network-troubleshooting-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "url-to-webpage-journey",
+      "slug": "url-to-webpage-journey",
+      "title": "From Wi-Fi to Web Page: What Happens When You Type a URL",
+      "category": "computer-networks",
+      "subcategory": "end-to-end-flows",
+      "type": "concept",
+      "description": "The complete journey: Wi-Fi, DHCP, ARP, DNS, routing, NAT, TCP and TLS handshakes, HTTP, server response and rendering.",
+      "difficulty": "intermediate",
+      "tags": [
+        "what-happens-when-you-type-a-url",
+        "end-to-end",
+        "dns",
+        "tcp",
+        "tls",
+        "http"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "dhcp-dora",
+        "dns-resolution-process",
+        "tls-handshake-and-https"
+      ],
+      "relatedTopics": [
+        "packet-journey-across-networks",
+        "backend-request-flows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "packet-journey-across-networks",
+      "slug": "packet-journey-across-networks",
+      "title": "A Packet's Journey: Same LAN and Across Networks",
+      "category": "computer-networks",
+      "subcategory": "end-to-end-flows",
+      "type": "concept",
+      "description": "Hop-by-hop headers on the same LAN and across routers and NAT: what changes at switches, routers and NAT devices.",
+      "difficulty": "intermediate",
+      "tags": [
+        "packet-journey",
+        "encapsulation",
+        "nat",
+        "routing",
+        "arp"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "local-vs-remote-delivery",
+        "network-address-translation"
+      ],
+      "relatedTopics": [
+        "url-to-webpage-journey",
+        "ip-vs-mac-addresses"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "packet-journey-simulator",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "backend-request-flows",
+      "slug": "backend-request-flows",
+      "title": "Backend Request Flows: Load Balancer, Spring Boot, Services and PostgreSQL",
+      "category": "computer-networks",
+      "subcategory": "end-to-end-flows",
+      "type": "concept",
+      "description": "Frontend to API, HTTPS through a load balancer, service-to-service calls and Spring Boot to PostgreSQL, with errors per hop.",
+      "difficulty": "advanced",
+      "tags": [
+        "backend",
+        "spring-boot",
+        "load-balancer",
+        "postgresql",
+        "microservices"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "load-balancing-l4-vs-l7",
+        "keep-alive-and-connection-pooling"
+      ],
+      "relatedTopics": [
+        "url-to-webpage-journey",
+        "troubleshooting-connection-errors",
+        "spring-cors"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "cn-fundamentals-interview-questions",
+      "slug": "cn-fundamentals-interview-questions",
+      "title": "Interview Questions: Fundamentals, Devices and Models",
+      "category": "computer-networks",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Cross-topic questions on networks, devices, OSI and TCP/IP, Ethernet, switching and ARP, from basic to follow-up chains.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "osi-model",
+        "router-vs-switch",
+        "mac-vs-ip"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "osi-vs-tcp-ip",
+        "arp-address-resolution"
+      ],
+      "relatedTopics": [
+        "cn-interview-traps",
+        "cn-ip-routing-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "cn-ip-routing-interview-questions",
+      "slug": "cn-ip-routing-interview-questions",
+      "title": "Interview Questions: IP Addressing, Subnetting, Routing, NAT and DHCP",
+      "category": "computer-networks",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Cross-topic questions on IPv4 and IPv6, subnetting calculations, routing and longest prefix match, NAT and DHCP.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "subnetting",
+        "routing",
+        "nat",
+        "dhcp"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "subnetting-problems",
+        "routing-fundamentals"
+      ],
+      "relatedTopics": [
+        "cn-transport-interview-questions",
+        "cn-scenario-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "cn-transport-interview-questions",
+      "slug": "cn-transport-interview-questions",
+      "title": "Interview Questions: TCP, UDP, Flow and Congestion Control",
+      "category": "computer-networks",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Cross-topic questions on ports and sockets, TCP vs UDP, handshakes and termination, TIME_WAIT, flow and congestion control.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "tcp-vs-udp",
+        "three-way-handshake",
+        "congestion-control"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "tcp-vs-udp",
+        "tcp-congestion-control"
+      ],
+      "relatedTopics": [
+        "cn-application-interview-questions",
+        "cn-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "cn-application-interview-questions",
+      "slug": "cn-application-interview-questions",
+      "title": "Interview Questions: HTTP, HTTPS, DNS and Backend Networking",
+      "category": "computer-networks",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Cross-topic questions on HTTP semantics and versions, TLS, DNS, cookies and sessions, load balancing, CDNs and connection reuse.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "http",
+        "https",
+        "dns",
+        "load-balancing"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "tls-handshake-and-https",
+        "load-balancing-l4-vs-l7"
+      ],
+      "relatedTopics": [
+        "cn-scenario-interview-questions",
+        "spring-rest-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "cn-scenario-interview-questions",
+      "slug": "cn-scenario-interview-questions",
+      "title": "Interview Questions: Scenarios, Debugging and \"What Happens Internally\"",
+      "category": "computer-networks",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Open-ended scenario and debugging questions: the URL journey, no internet, refused vs timeout, 504s, database connectivity.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "scenarios",
+        "debugging",
+        "troubleshooting"
+      ],
+      "estimatedMinutes": 35,
+      "order": 5,
+      "prerequisites": [
+        "url-to-webpage-journey",
+        "troubleshooting-connection-errors"
+      ],
+      "relatedTopics": [
+        "cn-interview-traps",
+        "backend-request-flows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "cn-interview-traps",
+      "slug": "cn-interview-traps",
+      "title": "Computer Networks Interview Traps",
+      "category": "computer-networks",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Twenty statements that sound right but are wrong — domains, addressing, TCP, HTTP, TLS, DNS, NAT and security — and the truth.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "traps",
+        "misconceptions"
+      ],
+      "estimatedMinutes": 25,
+      "order": 6,
+      "prerequisites": [
+        "cn-fundamentals-interview-questions"
+      ],
+      "relatedTopics": [
+        "cn-scenario-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    }
+  ]
 }

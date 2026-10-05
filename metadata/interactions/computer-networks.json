@@ -1,0 +1,196 @@
+{
+  "$schema": "../schemas/interactions.schema.json",
+  "schemaVersion": 1,
+  "category": "computer-networks",
+  "interactions": [
+    {
+      "id": "osi-encapsulation-journey",
+      "type": "visualizer",
+      "title": "Encapsulation through the layers",
+      "description": "Follow one HTTPS request down the sender's stack, through a router that rebuilds only Layer 2 and changes TTL, and up the receiver's stack.",
+      "topics": [
+        { "topic": "encapsulation-and-decapsulation", "after": "How It Works" },
+        { "topic": "osi-model-overview", "after": "How It Works" },
+        { "topic": "tcp-ip-model", "after": "How It Works", "options": { "model": "tcpip" } }
+      ]
+    },
+    {
+      "id": "subnet-calculator",
+      "type": "visualizer",
+      "title": "Subnet calculator that shows its work",
+      "description": "Enter any address and prefix: see the bits, the AND with the mask, the network and broadcast addresses, the host range — and the block-size shortcut.",
+      "topics": [
+        { "topic": "subnet-masks-and-cidr", "after": "How It Works" },
+        { "topic": "subnetting-block-size-method", "after": "How It Works", "options": { "ip": "10.128.77.33", "prefix": 20 } }
+      ]
+    },
+    {
+      "id": "routing-table-lookup",
+      "type": "visualizer",
+      "title": "Longest prefix match, route by route",
+      "description": "Type a destination and watch the router test every route; the longest matching prefix wins, whatever the metrics say.",
+      "topics": [
+        { "topic": "longest-prefix-match", "after": "How It Works" },
+        { "topic": "routing-fundamentals", "after": "How It Works", "options": { "destination": "8.8.8.8" } }
+      ]
+    },
+    {
+      "id": "tcp-connection-simulator",
+      "type": "simulator",
+      "title": "TCP connections, segment by segment",
+      "description": "Flags, sequence and acknowledgement numbers and both endpoints' states for every segment — change the initial sequence number and the scenario.",
+      "topics": [
+        { "topic": "tcp-three-way-handshake", "after": "How It Works", "options": { "group": "open" } },
+        { "topic": "tcp-connection-termination", "after": "How It Works", "options": { "group": "close" } }
+      ]
+    },
+    {
+      "id": "arp-simulator",
+      "type": "simulator",
+      "title": "ARP: who has this IP address?",
+      "description": "Send to a host on the same subnet or on another network, with an empty or warm cache, and see whose MAC address the laptop actually asks for.",
+      "topics": [
+        { "topic": "arp-address-resolution", "after": "How It Works" },
+        { "topic": "local-vs-remote-delivery", "after": "How It Works", "options": { "destination": "remote" } }
+      ]
+    },
+    {
+      "id": "dns-resolution-simulator",
+      "type": "simulator",
+      "title": "Resolve a name: root, TLD, authoritative",
+      "description": "Choose a name and how warm the caches are, then follow every query, referral and cached answer — including a CNAME chain and NXDOMAIN.",
+      "topics": [
+        { "topic": "dns-resolution-process", "after": "How It Works" }
+      ]
+    },
+    {
+      "id": "dhcp-dora-simulator",
+      "type": "simulator",
+      "title": "DHCP: Discover, Offer, Request, Acknowledge",
+      "description": "Watch a laptop with no address get its IP, mask, gateway and DNS servers — and what happens with two servers, a renewal, or no server at all.",
+      "topics": [
+        { "topic": "dhcp-dora", "after": "How It Works" }
+      ]
+    },
+    {
+      "id": "packet-journey-simulator",
+      "type": "simulator",
+      "title": "Which headers change at each hop?",
+      "description": "Step a packet through switches, routers and NAT and compare its MACs, IPs, ports and TTL on every link.",
+      "topics": [
+        { "topic": "packet-journey-across-networks", "after": "Case 2: Across Networks with NAT" },
+        { "topic": "ip-vs-mac-addresses", "after": "How It Works" }
+      ]
+    },
+    {
+      "id": "http-exchange-simulator",
+      "type": "simulator",
+      "title": "Predict the HTTP status",
+      "description": "Read a raw request, predict the status class, then step through the checks a Spring Boot API applies and see the raw response.",
+      "topics": [
+        { "topic": "http-status-codes", "after": "The Codes to Know" },
+        { "topic": "http-fundamentals", "after": "How It Works", "options": { "scenario": "create" } }
+      ]
+    },
+    {
+      "id": "tls-handshake-simulator",
+      "type": "simulator",
+      "title": "The TLS 1.3 handshake",
+      "description": "See when traffic becomes encrypted, how many round trips HTTPS costs, and which check rejects an expired or wrong certificate.",
+      "topics": [
+        { "topic": "tls-handshake-and-https", "after": "How It Works: the TLS 1.3 Handshake (simplified)" }
+      ]
+    },
+    {
+      "id": "nat-translation-simulator",
+      "type": "simulator",
+      "title": "NAT translation table in action",
+      "description": "Two devices share one public IP: watch mappings appear, replies translate back, unsolicited traffic get dropped, and idle mappings expire.",
+      "topics": [
+        { "topic": "network-address-translation", "after": "How It Works" }
+      ]
+    },
+    {
+      "id": "load-balancer-simulator",
+      "type": "simulator",
+      "title": "L4 vs L7 load balancing",
+      "description": "Send requests from three clients through an L4 or an L7 balancer, switch the algorithm, mark a backend unhealthy, and see what each balancer can and cannot do.",
+      "topics": [
+        { "topic": "load-balancing-l4-vs-l7", "after": "How It Works" }
+      ]
+    },
+    {
+      "id": "network-troubleshooting-simulator",
+      "type": "simulator",
+      "title": "Troubleshoot a broken network",
+      "description": "A simulated machine has a network fault. Choose each next command; wrong choices explain why they do not help.",
+      "topics": [
+        { "topic": "troubleshooting-connectivity-problems", "after": "Scenario 1: Internet Not Working", "options": { "scenario": "no-internet" } },
+        { "topic": "dns-caching-ttl-and-failures", "after": "DNS Failure Scenarios", "options": { "scenario": "dns-failure" } },
+        { "topic": "troubleshooting-connection-errors", "after": "Scenario 2: Connection Timeout", "options": { "scenario": "api-timeout" } },
+        { "topic": "network-troubleshooting-methodology", "after": "How It Works", "options": { "scenario": "no-internet" } }
+      ]
+    },
+    {
+      "id": "tcp-vs-udp-comparison",
+      "type": "comparison",
+      "title": "TCP vs UDP — test yourself",
+      "description": "Hide the cells and recall each property before revealing it.",
+      "topics": [
+        { "topic": "tcp-vs-udp", "after": "Comparison" }
+      ],
+      "columns": ["TCP", "UDP"],
+      "rows": [
+        { "aspect": "Connection setup", "cells": ["Three-way handshake (1 RTT)", "None — send immediately"] },
+        { "aspect": "Reliability", "cells": ["ACKs and retransmission", "None — lost datagrams are gone"] },
+        { "aspect": "Ordering", "cells": ["In order (sequence numbers)", "No ordering"] },
+        { "aspect": "Data unit", "cells": ["Byte stream (segments); no message boundaries", "Datagrams; boundaries preserved"] },
+        { "aspect": "Flow and congestion control", "cells": ["Yes (rwnd, cwnd)", "No — the application must behave"] },
+        { "aspect": "Header size", "cells": ["20–60 bytes", "8 bytes"] },
+        { "aspect": "Broadcast / multicast", "cells": ["No — one-to-one", "Yes"] },
+        { "aspect": "Head-of-line blocking", "cells": ["Yes — a lost segment stalls later data", "No"] },
+        { "aspect": "Typical uses", "cells": ["HTTP/1.1–2, SSH, SMTP, PostgreSQL", "DNS, DHCP, VoIP, games, QUIC/HTTP/3"] }
+      ]
+    },
+    {
+      "id": "flow-vs-congestion-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: flow vs congestion control",
+      "topics": [
+        { "topic": "tcp-congestion-control", "after": "Flow Control vs Congestion Control" }
+      ],
+      "questions": [
+        {
+          "prompt": "A capture shows the receiver advertising `window 0`. Which mechanism is acting, and where is the bottleneck?",
+          "options": ["Congestion control — a router is overloaded", "Flow control — the receiving application is not reading fast enough", "Congestion control — the sender's cwnd is 0", "Neither — the connection is closing"],
+          "answer": 1,
+          "explanation": "The Window field is the receiver's advertised rwnd. Zero means its receive buffer is full because the application has not read the data — flow control. The network is not the bottleneck."
+        },
+        {
+          "prompt": "rwnd = 64 KB and cwnd = 20 KB. How much unacknowledged data may the sender have in flight?",
+          "options": ["64 KB", "84 KB", "20 KB", "44 KB"],
+          "answer": 2,
+          "explanation": "The sender is limited by min(rwnd, cwnd) = 20 KB. Here congestion control, not the receiver, is the limit."
+        },
+        {
+          "prompt": "During slow start, cwnd is 8 segments and every segment is acknowledged. About how big is cwnd one RTT later?",
+          "options": ["9 segments", "16 segments", "4 segments", "1 segment"],
+          "answer": 1,
+          "explanation": "In slow start cwnd grows by one segment per ACK, so it doubles every round trip: 8 → 16. Above ssthresh it would grow by about one segment per RTT instead."
+        },
+        {
+          "prompt": "cwnd = 30 segments when three duplicate ACKs arrive (Reno). What happens?",
+          "options": ["cwnd drops to 1 and slow start restarts", "Fast retransmit; ssthresh and cwnd become 15", "Nothing until a timeout", "The receiver shrinks rwnd to 15"],
+          "answer": 1,
+          "explanation": "Duplicate ACKs show data is still flowing (mild congestion): the lost segment is retransmitted immediately and cwnd is halved (fast recovery). Only a retransmission timeout resets cwnd to 1."
+        },
+        {
+          "prompt": "Which statement is true?",
+          "options": ["The receiver tells the sender its cwnd", "Routers advertise the cwnd in the IP header", "cwnd is private to the sender; only rwnd travels in the TCP header", "UDP has built-in congestion control"],
+          "answer": 2,
+          "explanation": "The sender computes cwnd from signals such as loss, delay and ECN and never transmits it. The receiver's rwnd is in every segment's Window field. UDP has no congestion control — protocols built on it (QUIC) add their own."
+        }
+      ]
+    }
+  ]
+}
