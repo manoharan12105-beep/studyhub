@@ -374,6 +374,208 @@
           ]
         }
       ]
+    },
+    {
+      "id": "dbms-postgresql",
+      "title": "DBMS and PostgreSQL",
+      "description": "DBMS theory, SQL from basics to window functions and recursive CTEs, PostgreSQL features and internals, design, transactions, indexing and query optimization.",
+      "order": 6,
+      "icon": null,
+      "catalog": "metadata/topics/dbms-postgresql.json",
+      "subcategories": [
+        {
+          "id": "dbms-fundamentals",
+          "title": "DBMS Fundamentals",
+          "description": "Databases and DBMS, data models, schema and instance, SQL vs NoSQL, and OLTP vs OLAP.",
+          "order": 1
+        },
+        {
+          "id": "relational-model",
+          "title": "Relational Model, Keys and Constraints",
+          "description": "Tables, rows and domains, every kind of key, constraints and referential integrity.",
+          "order": 2
+        },
+        {
+          "id": "sql-fundamentals",
+          "title": "SQL Fundamentals",
+          "description": "The sample database, SQL command types, DDL, DML, SELECT basics and SQL functions.",
+          "order": 3
+        },
+        {
+          "id": "null-and-conditional-logic",
+          "title": "NULL and Conditional Logic",
+          "description": "NULL and three-valued logic, the NOT IN trap, CASE, COALESCE, NULLIF and casting.",
+          "order": 4
+        },
+        {
+          "id": "joins",
+          "title": "Joins",
+          "description": "Inner, outer, cross and self joins, ON vs USING, and WHERE vs ON with outer joins.",
+          "order": 5
+        },
+        {
+          "id": "subqueries",
+          "title": "Subqueries",
+          "description": "Scalar, multi-row and derived-table subqueries, correlated subqueries, IN, EXISTS, ANY and ALL.",
+          "order": 6
+        },
+        {
+          "id": "aggregation-and-grouping",
+          "title": "Aggregation and Grouping",
+          "description": "GROUP BY, HAVING, aggregate filtering and the logical order of query processing.",
+          "order": 7
+        },
+        {
+          "id": "ctes",
+          "title": "Common Table Expressions",
+          "description": "WITH queries, CTE chaining, materialization in PostgreSQL and recursive CTEs.",
+          "order": 8
+        },
+        {
+          "id": "window-functions",
+          "title": "Window Functions",
+          "description": "OVER, PARTITION BY, frames, ranking functions, LEAD/LAG and running totals.",
+          "order": 9
+        },
+        {
+          "id": "set-operations",
+          "title": "Set Operations",
+          "description": "UNION, UNION ALL, INTERSECT and EXCEPT.",
+          "order": 10
+        },
+        {
+          "id": "postgresql-data-types",
+          "title": "PostgreSQL Data Types",
+          "description": "Numeric, character, date/time and special types, and SERIAL vs IDENTITY vs sequences.",
+          "order": 11
+        },
+        {
+          "id": "postgresql-features",
+          "title": "PostgreSQL Features",
+          "description": "RETURNING, upsert with ON CONFLICT, DISTINCT ON, JSONB, arrays, generated columns, schemas and extensions.",
+          "order": 12
+        },
+        {
+          "id": "database-design",
+          "title": "Database Design",
+          "description": "ER modelling, mapping relationships to tables, and schema design case studies.",
+          "order": 13
+        },
+        {
+          "id": "normalization",
+          "title": "Normalization",
+          "description": "Functional dependencies, anomalies, 1NF to BCNF, and denormalization.",
+          "order": 14
+        },
+        {
+          "id": "transactions",
+          "title": "Transactions",
+          "description": "ACID, BEGIN/COMMIT/ROLLBACK/SAVEPOINT, and isolation levels as PostgreSQL implements them.",
+          "order": 15
+        },
+        {
+          "id": "concurrency-and-mvcc",
+          "title": "Concurrency and MVCC",
+          "description": "Locks, SELECT FOR UPDATE, deadlocks, MVCC, VACUUM and autovacuum.",
+          "order": 16
+        },
+        {
+          "id": "indexing",
+          "title": "Indexing",
+          "description": "B-tree and hash indexes, selectivity, composite, partial, expression and covering indexes.",
+          "order": 17
+        },
+        {
+          "id": "query-optimization",
+          "title": "Query Optimization",
+          "description": "The planner, EXPLAIN and EXPLAIN ANALYZE, plan nodes, and before/after optimization cases.",
+          "order": 18
+        },
+        {
+          "id": "views-and-materialized-views",
+          "title": "Views and Materialized Views",
+          "description": "Views, updatable views, materialized views and refreshing them.",
+          "order": 19
+        },
+        {
+          "id": "temp-tables",
+          "title": "Temporary Tables",
+          "description": "Temporary tables, their lifetime and ON COMMIT behaviour, compared with CTEs, subqueries and views.",
+          "order": 20
+        },
+        {
+          "id": "functions-procedures-triggers",
+          "title": "Functions, Procedures and Triggers",
+          "description": "PL/pgSQL functions and procedures, CALL, and BEFORE/AFTER/INSTEAD OF triggers.",
+          "order": 21
+        },
+        {
+          "id": "security-and-permissions",
+          "title": "Security and Permissions",
+          "description": "Roles, role inheritance, ownership, and GRANT/REVOKE at database, schema, table and column level.",
+          "order": 22
+        },
+        {
+          "id": "partitioning",
+          "title": "Partitioning",
+          "description": "Range, list and hash partitioning, partition pruning, and partitioning vs indexing.",
+          "order": 23
+        },
+        {
+          "id": "sql-problem-solving",
+          "title": "SQL Problem Solving",
+          "description": "Classic SQL interview problems solved several ways: top-N, duplicates, running totals, gaps and islands, division, hierarchies.",
+          "order": 24
+        },
+        {
+          "id": "interview",
+          "title": "Interview Preparation",
+          "description": "Interview question banks by area and level, scenario questions, backend questions, rapid-fire questions and traps.",
+          "order": 25
+        },
+        {
+          "id": "debugging",
+          "title": "Debugging and Common Mistakes",
+          "description": "Wrong results, errors, locks and slow queries as problem, cause, incorrect and correct query, and takeaway.",
+          "order": 26
+        }
+      ],
+      "studyModes": [
+        {
+          "id": "revision",
+          "title": "Revision",
+          "description": "One-shot revisions of DBMS, SQL and PostgreSQL, cheat sheets for joins, subqueries, CTEs, windows, NULL, transactions, indexing, optimization and commands, and interview traps.",
+          "sources": [
+            { "path": "content/dbms-postgresql/revision/dbms-one-shot.md", "title": "DBMS One-Shot" },
+            { "path": "content/dbms-postgresql/revision/sql-one-shot.md", "title": "SQL One-Shot" },
+            { "path": "content/dbms-postgresql/revision/postgresql-one-shot.md", "title": "PostgreSQL One-Shot" },
+            { "path": "content/dbms-postgresql/revision/joins-cheat-sheet.md", "title": "Joins" },
+            { "path": "content/dbms-postgresql/revision/subqueries-cheat-sheet.md", "title": "Subqueries" },
+            { "path": "content/dbms-postgresql/revision/cte-cheat-sheet.md", "title": "CTEs" },
+            { "path": "content/dbms-postgresql/revision/window-functions-cheat-sheet.md", "title": "Window Functions" },
+            { "path": "content/dbms-postgresql/revision/null-cheat-sheet.md", "title": "NULL" },
+            { "path": "content/dbms-postgresql/revision/transactions-cheat-sheet.md", "title": "Transactions" },
+            { "path": "content/dbms-postgresql/revision/indexing-cheat-sheet.md", "title": "Indexing" },
+            { "path": "content/dbms-postgresql/revision/query-optimization-cheat-sheet.md", "title": "Query Optimization" },
+            { "path": "content/dbms-postgresql/revision/postgresql-commands-cheat-sheet.md", "title": "PostgreSQL Commands" },
+            { "path": "content/dbms-postgresql/revision/interview-traps.md", "title": "Interview Traps" }
+          ]
+        },
+        {
+          "id": "quick-revision",
+          "title": "Quick Revision",
+          "description": "Five 30-minute blocks — concepts, SQL patterns, traps and common questions, PostgreSQL features, optimization and indexes — plus the last-minute SQL query sheet.",
+          "estimatedMinutes": 150,
+          "sources": [
+            { "path": "content/dbms-postgresql/revision/quick-important-concepts.md", "title": "Important Concepts" },
+            { "path": "content/dbms-postgresql/revision/quick-sql-patterns.md", "title": "SQL Patterns" },
+            { "path": "content/dbms-postgresql/revision/quick-traps-and-questions.md", "title": "Traps and Common Questions" },
+            { "path": "content/dbms-postgresql/revision/quick-postgresql-features.md", "title": "PostgreSQL Features" },
+            { "path": "content/dbms-postgresql/revision/quick-optimization-and-indexes.md", "title": "Optimization and Indexes" },
+            { "path": "content/dbms-postgresql/revision/last-minute-sql-revision.md", "title": "Last-Minute SQL" }
+          ]
+        }
+      ]
     }
   ]
 }

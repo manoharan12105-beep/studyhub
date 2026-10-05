@@ -1,0 +1,2679 @@
+{
+  "$schema": "../schemas/topics.schema.json",
+  "schemaVersion": 1,
+  "category": "dbms-postgresql",
+  "topics": [
+    {
+      "id": "dbms-introduction",
+      "slug": "dbms-introduction",
+      "title": "Databases and DBMS",
+      "category": "dbms-postgresql",
+      "subcategory": "dbms-fundamentals",
+      "type": "concept",
+      "description": "What a database and a DBMS are, DBMS vs RDBMS, file system vs DBMS, advantages, limitations and the DBA role.",
+      "difficulty": "beginner",
+      "tags": [
+        "database",
+        "dbms",
+        "rdbms",
+        "file-system-vs-dbms",
+        "dba"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "data-models-and-schemas",
+        "relational-model-basics",
+        "sql-nosql-oltp-olap"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "data-models-and-schemas",
+      "slug": "data-models-and-schemas",
+      "title": "Data Models, Schema and Instance",
+      "category": "dbms-postgresql",
+      "subcategory": "dbms-fundamentals",
+      "type": "concept",
+      "description": "Relational, hierarchical, network and object data models, schema vs instance, PostgreSQL schemas, metadata and the three-level architecture.",
+      "difficulty": "beginner",
+      "tags": [
+        "data-model",
+        "schema",
+        "instance",
+        "metadata",
+        "hierarchical-model",
+        "network-model"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "dbms-introduction"
+      ],
+      "relatedTopics": [
+        "relational-model-basics",
+        "generated-columns-schemas-extensions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sql-nosql-oltp-olap",
+      "slug": "sql-nosql-oltp-olap",
+      "title": "SQL vs NoSQL, OLTP vs OLAP and Data Warehouses",
+      "category": "dbms-postgresql",
+      "subcategory": "dbms-fundamentals",
+      "type": "concept",
+      "description": "NoSQL families, SQL vs NoSQL trade-offs, ACID vs BASE, OLTP vs OLAP, and data warehouse basics: ETL, facts, dimensions and star schemas.",
+      "difficulty": "beginner",
+      "tags": [
+        "nosql",
+        "sql-vs-nosql",
+        "oltp",
+        "olap",
+        "data-warehouse",
+        "star-schema"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "dbms-introduction"
+      ],
+      "relatedTopics": [
+        "data-models-and-schemas",
+        "denormalization",
+        "jsonb-and-arrays"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "relational-model-basics",
+      "slug": "relational-model-basics",
+      "title": "The Relational Model",
+      "category": "dbms-postgresql",
+      "subcategory": "relational-model",
+      "type": "concept",
+      "description": "Relations, tuples, attributes, domains, degree and cardinality, properties of relations, how SQL tables differ, and relational algebra.",
+      "difficulty": "beginner",
+      "tags": [
+        "relational-model",
+        "tuple",
+        "attribute",
+        "domain",
+        "relational-algebra"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "data-models-and-schemas"
+      ],
+      "relatedTopics": [
+        "database-keys",
+        "sql-constraints",
+        "select-query-basics"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "database-keys",
+      "slug": "database-keys",
+      "title": "Keys: Super, Candidate, Primary, Foreign and More",
+      "category": "dbms-postgresql",
+      "subcategory": "relational-model",
+      "type": "concept",
+      "description": "Super, candidate, primary, alternate, foreign, composite, natural and surrogate keys: definitions, how they relate, PostgreSQL behaviour and traps.",
+      "difficulty": "beginner",
+      "tags": [
+        "keys",
+        "primary-key",
+        "foreign-key",
+        "candidate-key",
+        "surrogate-key",
+        "composite-key"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "relational-model-basics"
+      ],
+      "relatedTopics": [
+        "sql-constraints",
+        "functional-dependencies",
+        "serial-identity-and-sequences"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sql-constraints",
+      "slug": "sql-constraints",
+      "title": "Constraints and Referential Integrity",
+      "category": "dbms-postgresql",
+      "subcategory": "relational-model",
+      "type": "concept",
+      "description": "NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY, CHECK and DEFAULT in PostgreSQL, referential actions (CASCADE, SET NULL, RESTRICT) and violations.",
+      "difficulty": "beginner",
+      "tags": [
+        "constraints",
+        "referential-integrity",
+        "on-delete-cascade",
+        "check-constraint",
+        "default"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "database-keys"
+      ],
+      "relatedTopics": [
+        "ddl-commands",
+        "dml-commands",
+        "debugging-errors-and-performance"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "dbms-sample-database",
+      "slug": "dbms-sample-database",
+      "title": "The Sample Database",
+      "category": "dbms-postgresql",
+      "subcategory": "sql-fundamentals",
+      "type": "reference",
+      "description": "The runnable PostgreSQL dataset (company, shop, accounts) behind every example, practice problem and expected output in this category.",
+      "difficulty": "beginner",
+      "tags": [
+        "sample-database",
+        "setup",
+        "psql"
+      ],
+      "estimatedMinutes": 10,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "select-query-basics",
+        "sql-command-categories"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sql-command-categories",
+      "slug": "sql-command-categories",
+      "title": "SQL Overview: DDL, DML, DQL, DCL and TCL",
+      "category": "dbms-postgresql",
+      "subcategory": "sql-fundamentals",
+      "type": "concept",
+      "description": "What SQL is, the five statement categories with their commands, autocommit, and PostgreSQL transactional DDL.",
+      "difficulty": "beginner",
+      "tags": [
+        "sql",
+        "ddl",
+        "dml",
+        "dcl",
+        "tcl",
+        "transactional-ddl"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "dbms-sample-database"
+      ],
+      "relatedTopics": [
+        "ddl-commands",
+        "dml-commands",
+        "database-transactions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "ddl-commands",
+      "slug": "ddl-commands",
+      "title": "DDL: CREATE, ALTER, DROP and TRUNCATE",
+      "category": "dbms-postgresql",
+      "subcategory": "sql-fundamentals",
+      "type": "reference",
+      "description": "CREATE, ALTER, DROP and TRUNCATE in PostgreSQL, their costs on large tables, and DELETE vs TRUNCATE vs DROP.",
+      "difficulty": "beginner",
+      "tags": [
+        "create-table",
+        "alter-table",
+        "drop",
+        "truncate",
+        "delete-vs-truncate"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "sql-command-categories",
+        "sql-constraints"
+      ],
+      "relatedTopics": [
+        "dml-commands",
+        "serial-identity-and-sequences",
+        "sql-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "dml-commands",
+      "slug": "dml-commands",
+      "title": "DML: INSERT, UPDATE and DELETE",
+      "category": "dbms-postgresql",
+      "subcategory": "sql-fundamentals",
+      "type": "reference",
+      "description": "INSERT forms, UPDATE and DELETE with joins (UPDATE … FROM, DELETE … USING), RETURNING, statement atomicity and MERGE.",
+      "difficulty": "beginner",
+      "tags": [
+        "insert",
+        "update",
+        "delete",
+        "merge",
+        "update-from"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "sql-command-categories"
+      ],
+      "relatedTopics": [
+        "returning-and-upsert",
+        "ddl-commands",
+        "postgresql-mvcc"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "select-query-basics",
+      "slug": "select-query-basics",
+      "title": "SELECT, Filtering, Sorting and Pagination",
+      "category": "dbms-postgresql",
+      "subcategory": "sql-fundamentals",
+      "type": "reference",
+      "description": "SELECT lists, aliases and expressions, WHERE operators and precedence, ORDER BY with NULLs, DISTINCT, LIMIT/OFFSET/FETCH and keyset pagination.",
+      "difficulty": "beginner",
+      "tags": [
+        "select",
+        "where",
+        "order-by",
+        "distinct",
+        "limit",
+        "offset",
+        "pagination"
+      ],
+      "estimatedMinutes": 35,
+      "order": 5,
+      "prerequisites": [
+        "dbms-sample-database"
+      ],
+      "relatedTopics": [
+        "sql-functions",
+        "logical-query-processing-order",
+        "distinct-on"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sql-functions",
+      "slug": "sql-functions",
+      "title": "SQL Functions: Aggregate, String, Date and Numeric",
+      "category": "dbms-postgresql",
+      "subcategory": "sql-fundamentals",
+      "type": "reference",
+      "description": "Aggregates and NULLs, COUNT(*) vs COUNT(column) vs COUNT(1), string, date/time and numeric functions, and integer division.",
+      "difficulty": "beginner",
+      "tags": [
+        "aggregate-functions",
+        "count",
+        "string-functions",
+        "date-functions",
+        "numeric-functions"
+      ],
+      "estimatedMinutes": 35,
+      "order": 6,
+      "prerequisites": [
+        "select-query-basics"
+      ],
+      "relatedTopics": [
+        "group-by-and-having",
+        "null-and-three-valued-logic",
+        "postgresql-date-time-types"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "null-and-three-valued-logic",
+      "slug": "null-and-three-valued-logic",
+      "title": "NULL and Three-Valued Logic",
+      "category": "dbms-postgresql",
+      "subcategory": "null-and-conditional-logic",
+      "type": "concept",
+      "description": "What NULL means, TRUE/FALSE/UNKNOWN logic, why = NULL fails, IS [NOT] DISTINCT FROM, and NULL in WHERE, ORDER BY, GROUP BY, DISTINCT, aggregates and constraints.",
+      "difficulty": "beginner",
+      "tags": [
+        "null",
+        "three-valued-logic",
+        "is-null",
+        "is-distinct-from",
+        "coalesce"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "select-query-basics",
+        "sql-functions"
+      ],
+      "relatedTopics": [
+        "null-in-joins-and-subqueries",
+        "case-coalesce-and-casting",
+        "sql-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "null-three-valued-logic",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "null-in-joins-and-subqueries",
+      "slug": "null-in-joins-and-subqueries",
+      "title": "NULL in Joins and Subqueries (the NOT IN Trap)",
+      "category": "dbms-postgresql",
+      "subcategory": "null-and-conditional-logic",
+      "type": "concept",
+      "description": "NULL keys in joins, NULLs produced by outer joins, NOT IN vs NOT EXISTS with NULLs, ANY/ALL with NULLs and scalar subqueries that return nothing.",
+      "difficulty": "intermediate",
+      "tags": [
+        "null",
+        "not-in",
+        "not-exists",
+        "anti-join",
+        "outer-join"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "null-and-three-valued-logic",
+        "sql-join-types"
+      ],
+      "relatedTopics": [
+        "exists-in-any-all",
+        "sql-subqueries",
+        "debugging-wrong-results"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "case-coalesce-and-casting",
+      "slug": "case-coalesce-and-casting",
+      "title": "CASE, COALESCE, NULLIF and Type Casting",
+      "category": "dbms-postgresql",
+      "subcategory": "null-and-conditional-logic",
+      "type": "concept",
+      "description": "Simple and searched CASE, conditional aggregation, COALESCE, NULLIF, GREATEST/LEAST, and CAST vs :: with implicit and explicit casting rules in PostgreSQL.",
+      "difficulty": "beginner",
+      "tags": [
+        "case",
+        "coalesce",
+        "nullif",
+        "cast",
+        "type-conversion"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "null-and-three-valued-logic"
+      ],
+      "relatedTopics": [
+        "group-by-and-having",
+        "postgresql-data-types",
+        "sql-functions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sql-join-types",
+      "slug": "sql-join-types",
+      "title": "INNER, LEFT, RIGHT and FULL Joins",
+      "category": "dbms-postgresql",
+      "subcategory": "joins",
+      "type": "concept",
+      "description": "Inner and outer joins with NULL padding, result sizes, fan-out and duplicate rows, multi-table joins and anti-joins.",
+      "difficulty": "beginner",
+      "tags": [
+        "joins",
+        "inner-join",
+        "left-join",
+        "right-join",
+        "full-outer-join",
+        "fan-out"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "select-query-basics",
+        "database-keys"
+      ],
+      "relatedTopics": [
+        "join-conditions-on-using-where",
+        "cross-and-self-joins",
+        "null-in-joins-and-subqueries"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "join-visualizer",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "cross-and-self-joins",
+      "slug": "cross-and-self-joins",
+      "title": "CROSS JOIN and SELF JOIN",
+      "category": "dbms-postgresql",
+      "subcategory": "joins",
+      "type": "concept",
+      "description": "Cartesian products and report grids, self joins for managers and pairs, non-equi joins, and the dangers of missing join conditions.",
+      "difficulty": "beginner",
+      "tags": [
+        "cross-join",
+        "self-join",
+        "cartesian-product",
+        "non-equi-join"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "sql-join-types"
+      ],
+      "relatedTopics": [
+        "recursive-ctes",
+        "relational-division-and-hierarchy-problems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "join-conditions-on-using-where",
+      "slug": "join-conditions-on-using-where",
+      "title": "ON vs USING vs WHERE in Joins",
+      "category": "dbms-postgresql",
+      "subcategory": "joins",
+      "type": "concept",
+      "description": "ON vs USING, why NATURAL JOIN is fragile, and how conditions in ON vs WHERE change outer-join results.",
+      "difficulty": "intermediate",
+      "tags": [
+        "on-vs-using",
+        "where-vs-on",
+        "natural-join",
+        "outer-join"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "sql-join-types"
+      ],
+      "relatedTopics": [
+        "null-in-joins-and-subqueries",
+        "debugging-wrong-results",
+        "logical-query-processing-order"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sql-subqueries",
+      "slug": "sql-subqueries",
+      "title": "Subqueries: Scalar, Multi-Row and Derived Tables",
+      "category": "dbms-postgresql",
+      "subcategory": "subqueries",
+      "type": "concept",
+      "description": "Scalar, single-row, multi-row, multi-column and derived-table subqueries, where each may appear, and when a join fits better.",
+      "difficulty": "beginner",
+      "tags": [
+        "subquery",
+        "scalar-subquery",
+        "derived-table",
+        "nested-query",
+        "multi-column-subquery"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "select-query-basics",
+        "sql-join-types"
+      ],
+      "relatedTopics": [
+        "correlated-subqueries",
+        "exists-in-any-all",
+        "common-table-expressions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "correlated-subqueries",
+      "slug": "correlated-subqueries",
+      "title": "Correlated Subqueries",
+      "category": "dbms-postgresql",
+      "subcategory": "subqueries",
+      "type": "concept",
+      "description": "Per-row logical evaluation vs real PostgreSQL plans (SubPlan, semi-join, anti-join), rewrites, the outer-column binding trap.",
+      "difficulty": "intermediate",
+      "tags": [
+        "correlated-subquery",
+        "subplan",
+        "semi-join",
+        "nth-highest-salary",
+        "explain"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "sql-subqueries"
+      ],
+      "relatedTopics": [
+        "exists-in-any-all",
+        "window-functions-basics",
+        "explain-and-query-plans"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "correlated-subquery-evaluation",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "exists-in-any-all",
+      "slug": "exists-in-any-all",
+      "title": "IN, EXISTS, ANY and ALL",
+      "category": "dbms-postgresql",
+      "subcategory": "subqueries",
+      "type": "concept",
+      "description": "IN vs EXISTS, NOT IN vs NOT EXISTS with NULLs and plans, ANY/ALL comparisons, empty-set behaviour and = ANY(array) from Java.",
+      "difficulty": "intermediate",
+      "tags": [
+        "in-vs-exists",
+        "not-in",
+        "not-exists",
+        "any",
+        "all",
+        "anti-join"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "sql-subqueries",
+        "null-and-three-valued-logic"
+      ],
+      "relatedTopics": [
+        "null-in-joins-and-subqueries",
+        "correlated-subqueries",
+        "relational-division-and-hierarchy-problems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "group-by-and-having",
+      "slug": "group-by-and-having",
+      "title": "GROUP BY and HAVING",
+      "category": "dbms-postgresql",
+      "subcategory": "aggregation-and-grouping",
+      "type": "concept",
+      "description": "Grouping rules, WHERE vs HAVING, FILTER and conditional aggregation, string_agg/array_agg, and ROLLUP, CUBE and GROUPING SETS.",
+      "difficulty": "beginner",
+      "tags": [
+        "group-by",
+        "having",
+        "aggregation",
+        "filter-clause",
+        "rollup",
+        "cube",
+        "grouping-sets"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "select-query-basics",
+        "sql-functions"
+      ],
+      "relatedTopics": [
+        "logical-query-processing-order",
+        "window-functions-basics",
+        "duplicates-and-missing-data-problems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "group-by-buckets",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "logical-query-processing-order",
+      "slug": "logical-query-processing-order",
+      "title": "Logical Query Processing Order",
+      "category": "dbms-postgresql",
+      "subcategory": "aggregation-and-grouping",
+      "type": "concept",
+      "description": "The logical order FROM → WHERE → GROUP BY → HAVING → window → SELECT → DISTINCT → ORDER BY → LIMIT, and how plans differ.",
+      "difficulty": "beginner",
+      "tags": [
+        "execution-order",
+        "logical-order",
+        "alias-scope",
+        "where-vs-having",
+        "query-processing"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "group-by-and-having"
+      ],
+      "relatedTopics": [
+        "window-functions-basics",
+        "join-conditions-on-using-where",
+        "explain-and-query-plans"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "sql-logical-execution-order",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "common-table-expressions",
+      "slug": "common-table-expressions",
+      "title": "Common Table Expressions (WITH)",
+      "category": "dbms-postgresql",
+      "subcategory": "ctes",
+      "type": "concept",
+      "description": "WITH queries for readable multi-step SQL, PostgreSQL 12+ inlining vs MATERIALIZED, data-modifying CTEs and their shared snapshot.",
+      "difficulty": "intermediate",
+      "tags": [
+        "cte",
+        "with-clause",
+        "materialized-cte",
+        "data-modifying-cte",
+        "optimization-fence"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "sql-subqueries",
+        "group-by-and-having"
+      ],
+      "relatedTopics": [
+        "recursive-ctes",
+        "temporary-tables",
+        "sql-views"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "cte-pipeline",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "recursive-ctes",
+      "slug": "recursive-ctes",
+      "title": "Recursive CTEs",
+      "category": "dbms-postgresql",
+      "subcategory": "ctes",
+      "type": "concept",
+      "description": "WITH RECURSIVE for hierarchies, graphs and series: iteration with a working table, walking up and down, cycles, CYCLE and SEARCH.",
+      "difficulty": "intermediate",
+      "tags": [
+        "recursive-cte",
+        "hierarchy",
+        "org-chart",
+        "graph-traversal",
+        "cycle-detection"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "common-table-expressions",
+        "cross-and-self-joins"
+      ],
+      "relatedTopics": [
+        "relational-division-and-hierarchy-problems",
+        "time-series-sql-problems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "recursive-cte-iteration",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "window-functions-basics",
+      "slug": "window-functions-basics",
+      "title": "Window Functions: OVER, PARTITION BY and Frames",
+      "category": "dbms-postgresql",
+      "subcategory": "window-functions",
+      "type": "concept",
+      "description": "OVER, PARTITION BY and ORDER BY, ROWS vs RANGE vs GROUPS frames, the default-frame tie trap, running totals and moving averages.",
+      "difficulty": "intermediate",
+      "tags": [
+        "window-functions",
+        "over-clause",
+        "partition-by",
+        "window-frame",
+        "running-total",
+        "moving-average"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "group-by-and-having",
+        "logical-query-processing-order"
+      ],
+      "relatedTopics": [
+        "ranking-window-functions",
+        "value-window-functions",
+        "time-series-sql-problems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "window-function-frames",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "ranking-window-functions",
+      "slug": "ranking-window-functions",
+      "title": "Ranking Window Functions",
+      "category": "dbms-postgresql",
+      "subcategory": "window-functions",
+      "type": "concept",
+      "description": "row_number, rank, dense_rank, ntile, percent_rank and cume_dist, top-N per group, Nth highest value and deduplication.",
+      "difficulty": "intermediate",
+      "tags": [
+        "row-number",
+        "rank",
+        "dense-rank",
+        "ntile",
+        "top-n-per-group",
+        "nth-highest-salary"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "window-functions-basics"
+      ],
+      "relatedTopics": [
+        "nth-highest-and-top-n-problems",
+        "distinct-on",
+        "duplicates-and-missing-data-problems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "ranking-functions-comparison",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "value-window-functions",
+      "slug": "value-window-functions",
+      "title": "Value Window Functions: LAG, LEAD, FIRST_VALUE, LAST_VALUE",
+      "category": "dbms-postgresql",
+      "subcategory": "window-functions",
+      "type": "concept",
+      "description": "lag and lead for previous/next-row comparisons, first_value, last_value and nth_value with frames, change detection and fill-forward.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lag",
+        "lead",
+        "first-value",
+        "last-value",
+        "nth-value",
+        "change-detection"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "window-functions-basics"
+      ],
+      "relatedTopics": [
+        "gaps-and-islands",
+        "time-series-sql-problems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sql-set-operations",
+      "slug": "sql-set-operations",
+      "title": "Set Operations: UNION, INTERSECT, EXCEPT",
+      "category": "dbms-postgresql",
+      "subcategory": "set-operations",
+      "type": "concept",
+      "description": "UNION vs UNION ALL, INTERSECT, EXCEPT and their ALL variants, column and type rules, NULL equality, precedence and plan cost.",
+      "difficulty": "beginner",
+      "tags": [
+        "union",
+        "union-all",
+        "intersect",
+        "except",
+        "set-operations"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "select-query-basics"
+      ],
+      "relatedTopics": [
+        "exists-in-any-all",
+        "sql-join-types",
+        "duplicates-and-missing-data-problems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "set-operations-venn",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "postgresql-data-types",
+      "slug": "postgresql-data-types",
+      "title": "PostgreSQL Data Types",
+      "category": "dbms-postgresql",
+      "subcategory": "postgresql-data-types",
+      "type": "concept",
+      "description": "Integer, numeric and floating types, text vs varchar vs char, boolean, UUID (v4 and v7), ENUM and DOMAIN, and how to choose.",
+      "difficulty": "beginner",
+      "tags": [
+        "data-types",
+        "numeric",
+        "varchar-vs-text",
+        "uuid",
+        "enum",
+        "boolean"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "ddl-commands"
+      ],
+      "relatedTopics": [
+        "postgresql-date-time-types",
+        "serial-identity-and-sequences",
+        "jsonb-and-arrays"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "postgresql-date-time-types",
+      "slug": "postgresql-date-time-types",
+      "title": "Date and Time Types",
+      "category": "dbms-postgresql",
+      "subcategory": "postgresql-data-types",
+      "type": "concept",
+      "description": "date, time, timestamp vs timestamptz, session time zones, AT TIME ZONE, interval arithmetic with month ends and DST, half-open ranges.",
+      "difficulty": "intermediate",
+      "tags": [
+        "timestamp",
+        "timestamptz",
+        "time-zones",
+        "interval",
+        "date-arithmetic"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "postgresql-data-types",
+        "sql-functions"
+      ],
+      "relatedTopics": [
+        "time-series-sql-problems",
+        "debugging-wrong-results"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "serial-identity-and-sequences",
+      "slug": "serial-identity-and-sequences",
+      "title": "SERIAL, IDENTITY and Sequences",
+      "category": "dbms-postgresql",
+      "subcategory": "postgresql-data-types",
+      "type": "concept",
+      "description": "SERIAL vs GENERATED ALWAYS/BY DEFAULT AS IDENTITY, sequence functions, why ids have gaps, out-of-sync sequences and gap-free numbering.",
+      "difficulty": "intermediate",
+      "tags": [
+        "serial",
+        "identity-column",
+        "sequence",
+        "nextval",
+        "auto-increment"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "postgresql-data-types",
+        "database-keys"
+      ],
+      "relatedTopics": [
+        "returning-and-upsert",
+        "ddl-commands"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "returning-and-upsert",
+      "slug": "returning-and-upsert",
+      "title": "RETURNING and Upsert (ON CONFLICT)",
+      "category": "dbms-postgresql",
+      "subcategory": "postgresql-features",
+      "type": "concept",
+      "description": "RETURNING (with PostgreSQL 18 old/new), INSERT … ON CONFLICT DO NOTHING / DO UPDATE with EXCLUDED, conflict targets and MERGE.",
+      "difficulty": "intermediate",
+      "tags": [
+        "returning",
+        "upsert",
+        "on-conflict",
+        "excluded",
+        "merge"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "dml-commands",
+        "sql-constraints"
+      ],
+      "relatedTopics": [
+        "serial-identity-and-sequences",
+        "distinct-on",
+        "common-table-expressions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "distinct-on",
+      "slug": "distinct-on",
+      "title": "DISTINCT ON",
+      "category": "dbms-postgresql",
+      "subcategory": "postgresql-features",
+      "type": "concept",
+      "description": "PostgreSQL DISTINCT ON for the first row per group: the ORDER BY rule, tiebreakers, comparison with row_number and index plans.",
+      "difficulty": "intermediate",
+      "tags": [
+        "distinct-on",
+        "top-1-per-group",
+        "latest-row-per-group"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "select-query-basics"
+      ],
+      "relatedTopics": [
+        "ranking-window-functions",
+        "returning-and-upsert"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "jsonb-and-arrays",
+      "slug": "jsonb-and-arrays",
+      "title": "JSONB and Arrays",
+      "category": "dbms-postgresql",
+      "subcategory": "postgresql-features",
+      "type": "concept",
+      "description": "json vs jsonb, -> and ->> operators, containment and JSON path, modifying and building JSON, JSON_TABLE, GIN indexes and arrays.",
+      "difficulty": "intermediate",
+      "tags": [
+        "jsonb",
+        "json",
+        "arrays",
+        "gin-index",
+        "json-table"
+      ],
+      "estimatedMinutes": 40,
+      "order": 3,
+      "prerequisites": [
+        "postgresql-data-types"
+      ],
+      "relatedTopics": [
+        "advanced-indexes",
+        "relationship-mapping",
+        "database-normalization"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "generated-columns-schemas-extensions",
+      "slug": "generated-columns-schemas-extensions",
+      "title": "Generated Columns, Schemas and Extensions",
+      "category": "dbms-postgresql",
+      "subcategory": "postgresql-features",
+      "type": "concept",
+      "description": "STORED and VIRTUAL generated columns, schemas and search_path, the PostgreSQL 15 public-schema change, and commonly used extensions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "generated-columns",
+        "schemas",
+        "search-path",
+        "extensions",
+        "pg-trgm",
+        "citext"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "ddl-commands"
+      ],
+      "relatedTopics": [
+        "roles-and-privileges",
+        "advanced-indexes",
+        "postgresql-data-types"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "er-modeling",
+      "slug": "er-modeling",
+      "title": "Entity–Relationship Modeling",
+      "category": "dbms-postgresql",
+      "subcategory": "database-design",
+      "type": "concept",
+      "description": "Entities, weak entities, attribute types, relationship degree, cardinality and participation, Chen and crow's foot notation, EER.",
+      "difficulty": "beginner",
+      "tags": [
+        "er-diagram",
+        "entity",
+        "weak-entity",
+        "cardinality",
+        "participation",
+        "specialization"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "relational-model-basics",
+        "database-keys"
+      ],
+      "relatedTopics": [
+        "relationship-mapping",
+        "schema-design-case-studies",
+        "database-normalization"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "er-to-table-mapping",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "relationship-mapping",
+      "slug": "relationship-mapping",
+      "title": "Mapping Relationships to Tables",
+      "category": "dbms-postgresql",
+      "subcategory": "database-design",
+      "type": "concept",
+      "description": "Implementing 1:1, 1:N, M:N and self-referencing relationships, multi-valued attributes, weak entities and inheritance strategies.",
+      "difficulty": "intermediate",
+      "tags": [
+        "one-to-many",
+        "many-to-many",
+        "junction-table",
+        "one-to-one",
+        "inheritance-mapping"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "er-modeling",
+        "sql-constraints"
+      ],
+      "relatedTopics": [
+        "schema-design-case-studies",
+        "database-normalization",
+        "jsonb-and-arrays"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "schema-design-case-studies",
+      "slug": "schema-design-case-studies",
+      "title": "Schema Design Case Studies",
+      "category": "dbms-postgresql",
+      "subcategory": "database-design",
+      "type": "concept",
+      "description": "Library, hotel booking and e-commerce schemas with partial unique indexes, exclusion constraints, price snapshots and status history.",
+      "difficulty": "advanced",
+      "tags": [
+        "schema-design",
+        "exclusion-constraint",
+        "partial-index",
+        "system-design",
+        "case-study"
+      ],
+      "estimatedMinutes": 50,
+      "order": 3,
+      "prerequisites": [
+        "relationship-mapping",
+        "sql-constraints"
+      ],
+      "relatedTopics": [
+        "database-normalization",
+        "denormalization",
+        "locking-and-deadlocks",
+        "scenario-based-sql-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "functional-dependencies",
+      "slug": "functional-dependencies",
+      "title": "Functional Dependencies",
+      "category": "dbms-postgresql",
+      "subcategory": "normalization",
+      "type": "concept",
+      "description": "Functional dependencies, partial and transitive dependencies, Armstrong's axioms, attribute closure, candidate keys and prime attributes.",
+      "difficulty": "intermediate",
+      "tags": [
+        "functional-dependency",
+        "armstrongs-axioms",
+        "attribute-closure",
+        "candidate-key",
+        "prime-attribute"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "database-keys",
+        "relational-model-basics"
+      ],
+      "relatedTopics": [
+        "database-normalization",
+        "denormalization"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "database-normalization",
+      "slug": "database-normalization",
+      "title": "Database Normalization (1NF to BCNF)",
+      "category": "dbms-postgresql",
+      "subcategory": "normalization",
+      "type": "concept",
+      "description": "Anomalies, 1NF, 2NF, 3NF, BCNF and 4NF with a step-by-step SQL decomposition, lossless-join proof and the BCNF trade-off.",
+      "difficulty": "intermediate",
+      "tags": [
+        "normalization",
+        "1nf",
+        "2nf",
+        "3nf",
+        "bcnf",
+        "lossless-join",
+        "anomalies"
+      ],
+      "estimatedMinutes": 50,
+      "order": 2,
+      "prerequisites": [
+        "functional-dependencies"
+      ],
+      "relatedTopics": [
+        "denormalization",
+        "relationship-mapping",
+        "schema-design-case-studies"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "normalization-stepper",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "denormalization",
+      "slug": "denormalization",
+      "title": "Denormalization",
+      "category": "dbms-postgresql",
+      "subcategory": "normalization",
+      "type": "concept",
+      "description": "When and how to denormalize: redundant columns, counters, summary tables, star schemas, keeping copies consistent and reconciling drift.",
+      "difficulty": "intermediate",
+      "tags": [
+        "denormalization",
+        "redundancy",
+        "summary-table",
+        "star-schema",
+        "oltp-vs-olap"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "database-normalization"
+      ],
+      "relatedTopics": [
+        "materialized-views",
+        "postgresql-triggers",
+        "sql-nosql-oltp-olap"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "database-transactions",
+      "slug": "database-transactions",
+      "title": "Transactions and ACID",
+      "category": "dbms-postgresql",
+      "subcategory": "transactions",
+      "type": "concept",
+      "description": "Transactions, ACID and how PostgreSQL implements each property, aborted transactions, savepoints, transactional DDL and JDBC usage.",
+      "difficulty": "beginner",
+      "tags": [
+        "transactions",
+        "acid",
+        "commit",
+        "rollback",
+        "savepoint",
+        "jdbc"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "dml-commands",
+        "sql-constraints"
+      ],
+      "relatedTopics": [
+        "postgresql-isolation-levels",
+        "postgresql-mvcc",
+        "transactions-and-acid"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "transaction-timeline",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "postgresql-isolation-levels",
+      "slug": "postgresql-isolation-levels",
+      "title": "Isolation Levels in PostgreSQL",
+      "category": "dbms-postgresql",
+      "subcategory": "transactions",
+      "type": "concept",
+      "description": "Read phenomena, the four isolation levels and PostgreSQL's actual behaviour, lost updates, write skew, SSI and retry on 40001.",
+      "difficulty": "intermediate",
+      "tags": [
+        "isolation-levels",
+        "read-committed",
+        "repeatable-read",
+        "serializable",
+        "write-skew",
+        "lost-update"
+      ],
+      "estimatedMinutes": 50,
+      "order": 2,
+      "prerequisites": [
+        "database-transactions"
+      ],
+      "relatedTopics": [
+        "locking-and-deadlocks",
+        "postgresql-mvcc",
+        "transaction-isolation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "transaction-isolation-anomalies",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "locking-and-deadlocks",
+      "slug": "locking-and-deadlocks",
+      "title": "Locking and Deadlocks",
+      "category": "dbms-postgresql",
+      "subcategory": "concurrency-and-mvcc",
+      "type": "concept",
+      "description": "Row and table lock modes, the DDL lock queue, pessimistic vs optimistic locking, NOWAIT and SKIP LOCKED, deadlocks and advisory locks.",
+      "difficulty": "intermediate",
+      "tags": [
+        "locking",
+        "select-for-update",
+        "skip-locked",
+        "deadlock",
+        "optimistic-locking",
+        "advisory-locks"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "database-transactions",
+        "postgresql-isolation-levels"
+      ],
+      "relatedTopics": [
+        "postgresql-mvcc",
+        "jpa-locking",
+        "debugging-errors-and-performance"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "lock-wait-deadlock",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "postgresql-mvcc",
+      "slug": "postgresql-mvcc",
+      "title": "MVCC and VACUUM in PostgreSQL",
+      "category": "dbms-postgresql",
+      "subcategory": "concurrency-and-mvcc",
+      "type": "concept",
+      "description": "Row versions with xmin/xmax, snapshots and visibility, dead tuples, VACUUM and autovacuum, HOT updates, bloat and XID wraparound.",
+      "difficulty": "advanced",
+      "tags": [
+        "mvcc",
+        "vacuum",
+        "autovacuum",
+        "dead-tuples",
+        "bloat",
+        "hot-update",
+        "xid-wraparound"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "database-transactions",
+        "postgresql-isolation-levels"
+      ],
+      "relatedTopics": [
+        "locking-and-deadlocks",
+        "index-fundamentals",
+        "debugging-errors-and-performance"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "mvcc-row-versions",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "index-fundamentals",
+      "slug": "index-fundamentals",
+      "title": "Index Fundamentals (B-tree)",
+      "category": "dbms-postgresql",
+      "subcategory": "indexing",
+      "type": "concept",
+      "description": "B-tree structure, seq/index/bitmap/index-only scans, selectivity, composite column order, PostgreSQL 18 skip scan and index costs.",
+      "difficulty": "intermediate",
+      "tags": [
+        "index",
+        "b-tree",
+        "composite-index",
+        "index-only-scan",
+        "bitmap-scan",
+        "selectivity"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "select-query-basics",
+        "database-keys"
+      ],
+      "relatedTopics": [
+        "advanced-indexes",
+        "explain-and-query-plans",
+        "query-optimization-practice"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "btree-index-lookup",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "advanced-indexes",
+      "slug": "advanced-indexes",
+      "title": "Advanced Indexes: Partial, Covering, GIN, GiST, BRIN, Hash",
+      "category": "dbms-postgresql",
+      "subcategory": "indexing",
+      "type": "concept",
+      "description": "Partial, covering and expression indexes, GIN for jsonb/arrays/full-text/trigram, GiST for ranges, BRIN for time series, hash.",
+      "difficulty": "advanced",
+      "tags": [
+        "partial-index",
+        "covering-index",
+        "gin",
+        "gist",
+        "brin",
+        "full-text-search",
+        "pg-trgm"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "index-fundamentals"
+      ],
+      "relatedTopics": [
+        "jsonb-and-arrays",
+        "schema-design-case-studies",
+        "query-optimization-practice"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "explain-and-query-plans",
+      "slug": "explain-and-query-plans",
+      "title": "EXPLAIN and Query Plans",
+      "category": "dbms-postgresql",
+      "subcategory": "query-optimization",
+      "type": "concept",
+      "description": "Reading EXPLAIN and EXPLAIN ANALYZE output: costs, rows and loops, scan and join node types, sort methods, statistics and misestimates.",
+      "difficulty": "intermediate",
+      "tags": [
+        "explain",
+        "explain-analyze",
+        "query-plan",
+        "hash-join",
+        "nested-loop",
+        "statistics"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "index-fundamentals"
+      ],
+      "relatedTopics": [
+        "query-optimization-practice",
+        "correlated-subqueries",
+        "logical-query-processing-order"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "query-plan-tree",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "query-optimization-practice",
+      "slug": "query-optimization-practice",
+      "title": "Query Optimization in Practice",
+      "category": "dbms-postgresql",
+      "subcategory": "query-optimization",
+      "type": "concept",
+      "description": "A measure-explain-fix workflow with before/after plans: FK indexes, sargable predicates, keyset pagination, N+1, counts and batching.",
+      "difficulty": "advanced",
+      "tags": [
+        "query-optimization",
+        "sargable",
+        "keyset-pagination",
+        "n-plus-1",
+        "pg-stat-statements"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "explain-and-query-plans",
+        "index-fundamentals"
+      ],
+      "relatedTopics": [
+        "advanced-indexes",
+        "materialized-views",
+        "debugging-errors-and-performance"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sql-views",
+      "slug": "sql-views",
+      "title": "Views",
+      "category": "dbms-postgresql",
+      "subcategory": "views-and-materialized-views",
+      "type": "concept",
+      "description": "Views as stored queries merged into the caller, uses for abstraction and security, updatable views, WITH CHECK OPTION and limits.",
+      "difficulty": "beginner",
+      "tags": [
+        "view",
+        "updatable-view",
+        "with-check-option",
+        "security-invoker"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "select-query-basics",
+        "sql-join-types"
+      ],
+      "relatedTopics": [
+        "materialized-views",
+        "roles-and-privileges",
+        "common-table-expressions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "materialized-views",
+      "slug": "materialized-views",
+      "title": "Materialized Views",
+      "category": "dbms-postgresql",
+      "subcategory": "views-and-materialized-views",
+      "type": "concept",
+      "description": "Materialized views as indexable snapshots: creating, refreshing, REFRESH CONCURRENTLY and its unique-index rule, staleness, alternatives.",
+      "difficulty": "intermediate",
+      "tags": [
+        "materialized-view",
+        "refresh",
+        "refresh-concurrently",
+        "caching",
+        "reporting"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "sql-views"
+      ],
+      "relatedTopics": [
+        "denormalization",
+        "query-optimization-practice",
+        "temporary-tables"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "temporary-tables",
+      "slug": "temporary-tables",
+      "title": "Temporary Tables",
+      "category": "dbms-postgresql",
+      "subcategory": "temp-tables",
+      "type": "concept",
+      "description": "Session-private temporary tables, ON COMMIT options, pg_temp shadowing, manual ANALYZE, connection-pool pitfalls and unlogged tables.",
+      "difficulty": "intermediate",
+      "tags": [
+        "temporary-table",
+        "on-commit-drop",
+        "unlogged-table",
+        "pg-temp",
+        "staging"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "ddl-commands",
+        "common-table-expressions"
+      ],
+      "relatedTopics": [
+        "materialized-views",
+        "common-table-expressions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "postgresql-functions-and-procedures",
+      "slug": "postgresql-functions-and-procedures",
+      "title": "Functions and Procedures",
+      "category": "dbms-postgresql",
+      "subcategory": "functions-procedures-triggers",
+      "type": "concept",
+      "description": "SQL and PL/pgSQL functions, set-returning functions, volatility, STRICT and SECURITY DEFINER, procedures with COMMIT, and JDBC calls.",
+      "difficulty": "intermediate",
+      "tags": [
+        "functions",
+        "stored-procedures",
+        "plpgsql",
+        "volatility",
+        "security-definer"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "select-query-basics",
+        "database-transactions"
+      ],
+      "relatedTopics": [
+        "postgresql-triggers",
+        "roles-and-privileges",
+        "query-optimization-practice"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "postgresql-triggers",
+      "slug": "postgresql-triggers",
+      "title": "Triggers",
+      "category": "dbms-postgresql",
+      "subcategory": "functions-procedures-triggers",
+      "type": "concept",
+      "description": "BEFORE, AFTER and INSTEAD OF triggers, row vs statement level, NEW/OLD and return values, WHEN, transition tables and pitfalls.",
+      "difficulty": "intermediate",
+      "tags": [
+        "triggers",
+        "before-trigger",
+        "after-trigger",
+        "instead-of-trigger",
+        "audit-log"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "postgresql-functions-and-procedures"
+      ],
+      "relatedTopics": [
+        "denormalization",
+        "sql-views",
+        "schema-design-case-studies"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "roles-and-privileges",
+      "slug": "roles-and-privileges",
+      "title": "Roles, Privileges and Row-Level Security",
+      "category": "dbms-postgresql",
+      "subcategory": "security-and-permissions",
+      "type": "concept",
+      "description": "Roles and membership, GRANT/REVOKE on schemas, tables, columns and functions, default and predefined privileges, RLS and SQL injection.",
+      "difficulty": "intermediate",
+      "tags": [
+        "roles",
+        "grant",
+        "revoke",
+        "privileges",
+        "row-level-security",
+        "sql-injection"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "sql-command-categories",
+        "generated-columns-schemas-extensions"
+      ],
+      "relatedTopics": [
+        "sql-views",
+        "postgresql-functions-and-procedures",
+        "backend-database-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "table-partitioning",
+      "slug": "table-partitioning",
+      "title": "Table Partitioning",
+      "category": "dbms-postgresql",
+      "subcategory": "partitioning",
+      "type": "concept",
+      "description": "Range, list and hash partitioning in PostgreSQL, default partitions, partition pruning, key and index rules, retention with detach/drop, and when partitioning does not help.",
+      "difficulty": "advanced",
+      "tags": [
+        "partitioning",
+        "partition-pruning",
+        "range-partitioning",
+        "list-partitioning",
+        "hash-partitioning",
+        "retention"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "index-fundamentals",
+        "explain-and-query-plans"
+      ],
+      "relatedTopics": [
+        "advanced-indexes",
+        "query-optimization-practice",
+        "window-functions-basics"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "partition-pruning",
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "nth-highest-and-top-n-problems",
+      "slug": "nth-highest-and-top-n-problems",
+      "title": "Nth-Highest and Top-N Problems",
+      "category": "dbms-postgresql",
+      "subcategory": "sql-problem-solving",
+      "type": "pattern",
+      "description": "Second and Nth-highest salary, highest and top N per department, above-average earners, latest record per user, and first and last transactions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "nth-highest",
+        "top-n-per-group",
+        "dense-rank",
+        "distinct-on",
+        "lateral",
+        "interview-problems"
+      ],
+      "estimatedMinutes": 50,
+      "order": 1,
+      "prerequisites": [
+        "ranking-window-functions",
+        "correlated-subqueries"
+      ],
+      "relatedTopics": [
+        "distinct-on",
+        "value-window-functions",
+        "sql-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "duplicates-and-missing-data-problems",
+      "slug": "duplicates-and-missing-data-problems",
+      "title": "Duplicates and Missing Data Problems",
+      "category": "dbms-postgresql",
+      "subcategory": "sql-problem-solving",
+      "type": "pattern",
+      "description": "Finding, showing and deleting duplicate rows, preventing them with unique indexes, and anti-joins for employees, departments and customers with no match.",
+      "difficulty": "intermediate",
+      "tags": [
+        "duplicates",
+        "delete-duplicates",
+        "anti-join",
+        "not-exists",
+        "not-in-null",
+        "data-quality"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "exists-in-any-all",
+        "group-by-and-having"
+      ],
+      "relatedTopics": [
+        "null-in-joins-and-subqueries",
+        "returning-and-upsert",
+        "debugging-wrong-results"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "time-series-sql-problems",
+      "slug": "time-series-sql-problems",
+      "title": "Time-Series SQL Problems",
+      "category": "dbms-postgresql",
+      "subcategory": "sql-problem-solving",
+      "type": "pattern",
+      "description": "Monthly sales, complete calendars with generate_series, running totals, month-over-month change, moving averages, gaps between records and time zones.",
+      "difficulty": "intermediate",
+      "tags": [
+        "time-series",
+        "running-total",
+        "monthly-sales",
+        "moving-average",
+        "generate-series",
+        "lag"
+      ],
+      "estimatedMinutes": 50,
+      "order": 3,
+      "prerequisites": [
+        "window-functions-basics",
+        "postgresql-date-time-types"
+      ],
+      "relatedTopics": [
+        "value-window-functions",
+        "gaps-and-islands",
+        "table-partitioning"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "gaps-and-islands",
+      "slug": "gaps-and-islands",
+      "title": "Gaps and Islands",
+      "category": "dbms-postgresql",
+      "subcategory": "sql-problem-solving",
+      "type": "pattern",
+      "description": "Consecutive login days, missing sequence numbers, runs of equal status, sessionisation and merging overlapping ranges with window-function techniques.",
+      "difficulty": "advanced",
+      "tags": [
+        "gaps-and-islands",
+        "consecutive-days",
+        "streaks",
+        "sessionization",
+        "row-number",
+        "range-merge"
+      ],
+      "estimatedMinutes": 50,
+      "order": 4,
+      "prerequisites": [
+        "ranking-window-functions",
+        "value-window-functions"
+      ],
+      "relatedTopics": [
+        "time-series-sql-problems",
+        "duplicates-and-missing-data-problems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "relational-division-and-hierarchy-problems",
+      "slug": "relational-division-and-hierarchy-problems",
+      "title": "Relational Division and Hierarchy Problems",
+      "category": "dbms-postgresql",
+      "subcategory": "sql-problem-solving",
+      "type": "pattern",
+      "description": "Customers who ordered every product with counting and double NOT EXISTS, and employee and category hierarchies with recursive CTEs, paths and cycle detection.",
+      "difficulty": "advanced",
+      "tags": [
+        "relational-division",
+        "hierarchy",
+        "recursive-cte",
+        "org-chart",
+        "category-tree",
+        "not-exists"
+      ],
+      "estimatedMinutes": 50,
+      "order": 5,
+      "prerequisites": [
+        "recursive-ctes",
+        "exists-in-any-all"
+      ],
+      "relatedTopics": [
+        "cross-and-self-joins",
+        "group-by-and-having",
+        "sql-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "dbms-fundamentals-interview-questions",
+      "slug": "dbms-fundamentals-interview-questions",
+      "title": "DBMS Fundamentals Interview Questions",
+      "category": "dbms-postgresql",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank on DBMS components, schemas and data independence, keys and integrity, ER mapping, normal forms, anomalies, OLTP vs OLAP, NoSQL, CAP and WAL.",
+      "difficulty": "beginner",
+      "tags": [
+        "interview",
+        "dbms",
+        "keys",
+        "normalization",
+        "three-schema-architecture"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "dbms-introduction",
+        "database-keys",
+        "database-normalization"
+      ],
+      "relatedTopics": [
+        "rapid-fire-database-questions",
+        "sql-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sql-interview-questions",
+      "slug": "sql-interview-questions",
+      "title": "SQL Interview Questions",
+      "category": "dbms-postgresql",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank on query processing order, joins, grouping, subqueries, set operations, pivoting, fan-out, upsert vs MERGE, aliases, keyset paging and table diffs.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "sql",
+        "joins",
+        "group-by",
+        "subqueries"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "select-query-basics",
+        "sql-join-types",
+        "group-by-and-having"
+      ],
+      "relatedTopics": [
+        "advanced-sql-interview-questions",
+        "sql-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "postgresql-interview-questions",
+      "slug": "postgresql-interview-questions",
+      "title": "PostgreSQL Interview Questions",
+      "category": "dbms-postgresql",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank on PostgreSQL vs MySQL, psql, COPY, jsonb, search_path, vacuum, DISTINCT ON, id types, pooling, extensions, TOAST, replication, backups and wraparound.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "postgresql",
+        "vacuum",
+        "replication",
+        "jsonb"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "postgresql-data-types",
+        "postgresql-mvcc"
+      ],
+      "relatedTopics": [
+        "backend-database-interview-questions",
+        "transactions-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "advanced-sql-interview-questions",
+      "slug": "advanced-sql-interview-questions",
+      "title": "Advanced SQL Interview Questions",
+      "category": "dbms-postgresql",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank on window functions and frames, ROLLUP and GROUPING, LATERAL, data-modifying CTEs, percentiles, generate_series and as-of joins.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "window-functions",
+        "lateral",
+        "rollup",
+        "cte"
+      ],
+      "estimatedMinutes": 45,
+      "order": 4,
+      "prerequisites": [
+        "window-functions-basics",
+        "common-table-expressions"
+      ],
+      "relatedTopics": [
+        "sql-interview-questions",
+        "gaps-and-islands"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "transactions-interview-questions",
+      "slug": "transactions-interview-questions",
+      "title": "Transactions Interview Questions",
+      "category": "dbms-postgresql",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank on ACID, aborted transactions and savepoints, read-only transactions, lost updates, FOR UPDATE and SKIP LOCKED, isolation, deadlocks, write skew and retries.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "transactions",
+        "isolation",
+        "locking",
+        "deadlock"
+      ],
+      "estimatedMinutes": 45,
+      "order": 5,
+      "prerequisites": [
+        "database-transactions",
+        "postgresql-isolation-levels",
+        "locking-and-deadlocks"
+      ],
+      "relatedTopics": [
+        "postgresql-mvcc",
+        "backend-database-interview-questions",
+        "transactions-and-acid"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "indexing-interview-questions",
+      "slug": "indexing-interview-questions",
+      "title": "Indexing Interview Questions",
+      "category": "dbms-postgresql",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank on index costs, heaps vs clustered indexes, composite column order, unused indexes, bloat, partial and expression indexes, B-tree internals and UUID keys.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "indexes",
+        "b-tree",
+        "composite-index",
+        "index-only-scan"
+      ],
+      "estimatedMinutes": 40,
+      "order": 6,
+      "prerequisites": [
+        "index-fundamentals",
+        "advanced-indexes"
+      ],
+      "relatedTopics": [
+        "query-optimization-interview-questions",
+        "explain-and-query-plans"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "query-optimization-interview-questions",
+      "slug": "query-optimization-interview-questions",
+      "title": "Query Optimization Interview Questions",
+      "category": "dbms-postgresql",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank on EXPLAIN options, costs, nested-loop loops, row misestimates, finding slow queries, sargable predicates, semi-joins, configuration and prepared-statement plans.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "query-optimization",
+        "explain",
+        "planner",
+        "statistics"
+      ],
+      "estimatedMinutes": 45,
+      "order": 7,
+      "prerequisites": [
+        "explain-and-query-plans",
+        "query-optimization-practice"
+      ],
+      "relatedTopics": [
+        "indexing-interview-questions",
+        "debugging-errors-and-performance"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "scenario-based-sql-questions",
+      "slug": "scenario-based-sql-questions",
+      "title": "Scenario-Based SQL Questions",
+      "category": "dbms-postgresql",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Business requests turned into SQL: category revenue, anti-joins by city, segmentation, discounts, churn lists, revenue reconciliation, leaderboards and data-quality checks.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "scenarios",
+        "reporting",
+        "business-sql",
+        "data-quality"
+      ],
+      "estimatedMinutes": 50,
+      "order": 8,
+      "prerequisites": [
+        "group-by-and-having",
+        "exists-in-any-all",
+        "ranking-window-functions"
+      ],
+      "relatedTopics": [
+        "nth-highest-and-top-n-problems",
+        "time-series-sql-problems",
+        "debugging-wrong-results"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "backend-database-interview-questions",
+      "slug": "backend-database-interview-questions",
+      "title": "Backend Developer Database Questions",
+      "category": "dbms-postgresql",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Interview bank for Java backend developers: PreparedStatement, pooling, unique violations, money types, @Transactional, idempotency, migrations, pagination, outbox, replicas and tenancy.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "backend",
+        "jdbc",
+        "connection-pool",
+        "migrations",
+        "idempotency"
+      ],
+      "estimatedMinutes": 45,
+      "order": 9,
+      "prerequisites": [
+        "database-transactions",
+        "returning-and-upsert"
+      ],
+      "relatedTopics": [
+        "transactions-interview-questions",
+        "roles-and-privileges",
+        "jpa-locking"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "rapid-fire-database-questions",
+      "slug": "rapid-fire-database-questions",
+      "title": "Rapid-Fire Database Questions",
+      "category": "dbms-postgresql",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Forty-five short questions with one-line answers across DBMS theory, SQL, PostgreSQL, transactions, indexing and optimization for rapid-fire rounds.",
+      "difficulty": "beginner",
+      "tags": [
+        "interview",
+        "rapid-fire",
+        "revision",
+        "sql",
+        "postgresql"
+      ],
+      "estimatedMinutes": 25,
+      "order": 10,
+      "prerequisites": [
+        "select-query-basics"
+      ],
+      "relatedTopics": [
+        "dbms-fundamentals-interview-questions",
+        "sql-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "sql-interview-traps",
+      "slug": "sql-interview-traps",
+      "title": "SQL Interview Traps",
+      "category": "dbms-postgresql",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "The classic SQL traps with proofs: NULL comparisons, NOT IN, counts, WHERE vs HAVING vs ON, UNION, DELETE vs TRUNCATE, ranking ties, UNIQUE and NULL, timestamptz and more.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "traps",
+        "null",
+        "not-in",
+        "count",
+        "ranking"
+      ],
+      "estimatedMinutes": 45,
+      "order": 11,
+      "prerequisites": [
+        "null-and-three-valued-logic",
+        "sql-join-types"
+      ],
+      "relatedTopics": [
+        "sql-interview-questions",
+        "debugging-wrong-results",
+        "rapid-fire-database-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "debugging-wrong-results",
+      "slug": "debugging-wrong-results",
+      "title": "Debugging Wrong Query Results",
+      "category": "dbms-postgresql",
+      "subcategory": "debugging",
+      "type": "concept",
+      "description": "Queries that run but return wrong data: NULL comparisons, outer joins turned inner, fan-out, wrong grouping, aggregates in WHERE, NOT IN, window ties, NULLs and time zones.",
+      "difficulty": "intermediate",
+      "tags": [
+        "debugging",
+        "wrong-results",
+        "null",
+        "fan-out",
+        "left-join",
+        "time-zones"
+      ],
+      "estimatedMinutes": 50,
+      "order": 1,
+      "prerequisites": [
+        "sql-join-types",
+        "null-and-three-valued-logic",
+        "group-by-and-having"
+      ],
+      "relatedTopics": [
+        "sql-interview-traps",
+        "debugging-errors-and-performance",
+        "scenario-based-sql-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    },
+    {
+      "id": "debugging-errors-and-performance",
+      "slug": "debugging-errors-and-performance",
+      "title": "Debugging Errors and Performance",
+      "category": "dbms-postgresql",
+      "subcategory": "debugging",
+      "type": "concept",
+      "description": "Runaway recursive CTEs, unused indexes, slow lookups, foreign-key and unique violations, out-of-sync sequences, deadlocks and uncommitted transactions, with fixes.",
+      "difficulty": "intermediate",
+      "tags": [
+        "debugging",
+        "errors",
+        "performance",
+        "deadlock",
+        "sequences",
+        "sqlstate"
+      ],
+      "estimatedMinutes": 50,
+      "order": 2,
+      "prerequisites": [
+        "explain-and-query-plans",
+        "locking-and-deadlocks",
+        "recursive-ctes"
+      ],
+      "relatedTopics": [
+        "debugging-wrong-results",
+        "query-optimization-interview-questions",
+        "serial-identity-and-sequences"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-05"
+    }
+  ]
+}

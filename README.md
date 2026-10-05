@@ -1,9 +1,9 @@
 # StudyHub
 
-A personal study and interview-preparation platform for aptitude, data structures, algorithms, object-oriented programming, Spring Boot, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
+A personal study and interview-preparation platform for aptitude, data structures, algorithms, object-oriented programming, Spring Boot, DBMS and PostgreSQL, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
 
-> **Project status: Phase 2D — Spring Boot content complete.**
-> Aptitude (58 topics), Data Structures & Algorithms (113 topics), Object-Oriented Programming (75 topics) and Spring Boot (91 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
+> **Project status: Phase 2E — DBMS + PostgreSQL content complete.**
+> Aptitude (58 topics), Data Structures & Algorithms (113 topics), Object-Oriented Programming (75 topics), Spring Boot (91 topics) and DBMS + PostgreSQL (75 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
 > CS Concepts content has not been written yet, and **the application has not been built yet** — `index.html` is still a placeholder page. Until then, the content can be read directly on GitHub.
 
 | Phase | Scope | Status |
@@ -13,6 +13,7 @@ A personal study and interview-preparation platform for aptitude, data structure
 | 2B | DSA content (Java) | Done |
 | 2C | OOP content (Java OOP, SOLID, design patterns, design problems) | Done |
 | 2D | Spring Boot content (core, REST, JPA, transactions, security, production, debugging, interview) | Done |
+| 2E | DBMS + PostgreSQL content (theory, SQL, PostgreSQL features, design, transactions, indexing, optimization, problem solving, interview, debugging) | Done |
 | 2 (other) | CS Concepts and later categories | Not started |
 | 3 | Static web application | Not started |
 
@@ -56,6 +57,12 @@ StudyHub/
 │   │   ├── design-patterns/        25 topics (all 23 GoF patterns + intro + comparisons)
 │   │   ├── design-problems/         5 topics (parking lot, library, vehicle rental, ATM, food ordering)
 │   │   ├── interview/               5 topics (by level, output-based, scenarios, traps, why)
+│   │   └── revision/                Revision and Quick Revision sources
+│   ├── dbms-postgresql/
+│   │   ├── dbms-fundamentals/ … partitioning/   23 subcategories, 57 topics (theory, SQL, PostgreSQL, design, transactions, indexing, optimization)
+│   │   ├── sql-problem-solving/     5 topics (top-N, duplicates, time series, gaps and islands, division and hierarchies)
+│   │   ├── interview/              11 topics (question banks by area, scenarios, backend, rapid-fire, traps)
+│   │   ├── debugging/               2 topics (16 debugging scenarios)
 │   │   └── revision/                Revision and Quick Revision sources
 │   └── spring-boot/
 │       ├── fundamentals/            7 topics (container, beans, lifecycle, scanning, @Configuration, scopes)
@@ -115,11 +122,11 @@ Each topic `type` has its own lesson template, so DSA, theory, command-reference
 | `aptitude` | Formulas, shortcuts, problem patterns |
 | `reference` | Commands, tools and syntax |
 
-Programming examples are written in **Java** (Spring Boot examples use JDK 21 and Spring Boot 4.1). Answers to questions are hidden in collapsible `<details>` blocks, so files work as self-tests on GitHub as well as in the app.
+Programming examples are written in **Java** (Spring Boot examples use JDK 21 and Spring Boot 4.1; DBMS examples use JDBC). SQL is written for PostgreSQL 17+ and verified against a shared sample database. Answers to questions are hidden in collapsible `<details>` blocks, so files work as self-tests on GitHub as well as in the app.
 
 ### Study modes
 
-Aptitude, DSA, OOP and Spring Boot each offer three ways to study:
+Aptitude, DSA, OOP, Spring Boot and DBMS + PostgreSQL each offer three ways to study:
 
 | Mode | What it is | Source files |
 |------|------------|--------------|
@@ -144,6 +151,12 @@ Aptitude, DSA, OOP and Spring Boot each offer three ways to study:
 | **Learn** | The full topics: concepts, internals, verified Java examples, common mistakes, interview traps, practice, debugging scenarios and interview question banks | `content/spring-boot/<subcategory>/<topic>/` |
 | **Revision** | 5–10 points per topic, 21 comparison tables, interview traps by module and a debugging checklist | `content/spring-boot/revision/` (8 sources) |
 | **Quick Revision** | One line per topic, an annotation cheat sheet and last-minute traps — about 30 minutes | `content/spring-boot/revision/quick-*.md` (7 sources) |
+
+| DBMS + PostgreSQL mode | What it is | Source files |
+|------------------------|------------|--------------|
+| **Learn** | The full topics: theory, verified SQL with outputs, PostgreSQL features, practice, problem-solving patterns, interview banks and debugging scenarios | `content/dbms-postgresql/<subcategory>/<topic>/` |
+| **Revision** | DBMS, SQL and PostgreSQL one-shots, nine cheat sheets and interview traps | `content/dbms-postgresql/revision/` (13 sources) |
+| **Quick Revision** | Five 30-minute blocks (concepts, SQL patterns, traps and questions, PostgreSQL features, optimization and indexes) plus a last-minute SQL sheet | `content/dbms-postgresql/revision/quick-*.md`, `last-minute-sql-revision.md` (6 sources) |
 
 The modes are declared in `metadata/categories.json` (`studyModes`); the app will combine each mode's source files into one view. Any category can add study modes the same way.
 

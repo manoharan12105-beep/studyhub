@@ -1,0 +1,202 @@
+# PostgreSQL Interview Questions — Interview Questions
+
+## Beginner
+
+### Q1. What makes PostgreSQL different from MySQL?
+
+<details>
+<summary>Answer</summary>
+
+Commonly cited differences (both are mature and capable):
+
+- **Standards and features**: transactional DDL, rich types (`jsonb`, arrays, ranges, `uuid`, network types), `CHECK` and exclusion constraints, partial and expression indexes, `RETURNING`, `DISTINCT ON`, full window function and CTE support.
+- **Extensibility**: custom types, operators, index methods and extensions (PostGIS, `pg_trgm`, `pgvector`).
+- **Concurrency**: MVCC with old row versions in the table itself (vacuum), versus InnoDB's undo logs.
+- **Index types**: B-tree, hash, GIN, GiST, SP-GiST and BRIN.
+
+MySQL is often chosen for simple read-heavy web workloads and its replication ecosystem; PostgreSQL for complex queries, data integrity and extensibility.
+
+</details>
+
+### Q2. What is `psql`, and which meta-commands do you use most?
+
+<details>
+<summary>Answer</summary>
+
+`psql` is PostgreSQL's command-line client. Common meta-commands:
+
+- `\l` — list databases; `\c db` — connect.
+- `\dt` — tables; `\d table` — describe a table; `\di` — indexes; `\dn` — schemas; `\du` — roles; `\df` — functions.
+- `\x` — expanded output; `\timing` — show query time.
+- `\i file.sql` — run a file; `\copy` — client-side import/export; `\e` — edit the query buffer.
+
+Meta-commands are interpreted by `psql`, not by the server.
+
+</details>
+
+### Q3. What does `COPY` do, and why is it faster than many `INSERT`s?
+
+<details>
+<summary>Answer</summary>
+
+`COPY table FROM`/`TO` streams rows in bulk between a table and a file or the client (`COPY … FROM STDIN`; `\copy` in psql reads a client-side file). It is faster because it avoids per-statement parsing, planning and network round trips, and it writes rows in batches. Load large data with `COPY` (JDBC: `CopyManager`). Creating indexes after the load is often faster than maintaining them during it.
+
+</details>
+
+### Q4. `json` or `jsonb`?
+
+<details>
+<summary>Answer</summary>
+
+Use `jsonb` almost always. `json` stores the exact input text (whitespace, key order, duplicate keys) and re-parses it on every access. `jsonb` stores a decomposed binary form: it is slightly slower to insert, much faster to query, supports containment (`@>`) and existence (`?`) operators and GIN indexes, and drops duplicate keys (the last one wins). Choose `json` only if you must preserve the original text exactly.
+
+</details>
+
+### Q5. What is `search_path`, and why does it matter for security?
+
+<details>
+<summary>Answer</summary>
+
+`search_path` is the list of schemas searched for unqualified names (by default `"$user", public`). If an untrusted user can create objects in a schema that appears earlier in the path, they can shadow a function or table that your code calls, so privileged code can be hijacked. That is why `SECURITY DEFINER` functions should set a fixed `search_path` (`SET search_path = pg_catalog, app`), and why PostgreSQL 15 removed the default `CREATE` privilege on `public`.
+
+</details>
+
+## Intermediate
+
+### Q6. What is vacuum, and why is it needed?
+
+<details>
+<summary>Answer</summary>
+
+Under MVCC, `UPDATE` and `DELETE` leave old row versions (**dead tuples**) in the table. `VACUUM`:
+
+1. Marks space of dead tuples reusable (it does not shrink the file).
+2. Updates the visibility map (enables index-only scans) and the free space map.
+3. **Freezes** old transaction ids to prevent **XID wraparound**, which would otherwise force a shutdown.
+
+**Autovacuum** runs it automatically, based on the number of changed rows. `VACUUM FULL` rewrites the table to return space to the OS, but takes an exclusive lock. Long-running transactions prevent vacuum from removing tuples they might still see, which is a common cause of bloat.
+
+</details>
+
+### Q7. What is `DISTINCT ON`?
+
+<details>
+<summary>Answer</summary>
+
+A PostgreSQL extension that keeps the first row of each group defined by the `DISTINCT ON` expressions, in `ORDER BY` order:
+
+```sql
+SELECT DISTINCT ON (dept_id) dept_id, name, hire_date
+FROM employees
+WHERE dept_id IS NOT NULL
+ORDER BY dept_id, hire_date DESC, emp_id;
+```
+
+**Output:**
+
+```text
+ dept_id |  name  | hire_date
+---------+--------+------------
+      10 | Karan  | 2021-08-20
+      20 | Rahul  | 2024-06-01
+      30 | Pooja  | 2023-03-01
+      40 | Farhan | 2019-07-22
+(4 rows)
+```
+
+It gives the most recent hire per department in one statement. The `DISTINCT ON` expressions must be the leftmost `ORDER BY` items.
+
+</details>
+
+### Q8. `SERIAL` vs `IDENTITY` vs `UUID` primary keys?
+
+<details>
+<summary>Answer</summary>
+
+- **`IDENTITY`** (`bigint GENERATED ALWAYS AS IDENTITY`): standard, compact (8 bytes), ordered, index-friendly. The default choice.
+- **`SERIAL`**: legacy shorthand for an integer with a sequence default; works, but has looser ownership and permission semantics.
+- **`uuid`** (16 bytes): globally unique without coordination; ids can be generated by clients or by several databases, and are not guessable. Random UUIDv4 values scatter B-tree inserts (more page splits and WAL); time-ordered **UUIDv7** (`uuidv7()` in PostgreSQL 18) avoids most of that.
+
+All sequence-based ids have gaps; never rely on them being consecutive.
+
+</details>
+
+### Q9. How does PostgreSQL handle many client connections?
+
+<details>
+<summary>Answer</summary>
+
+Each connection is a separate OS process with its own memory, so thousands of mostly-idle connections waste RAM and add contention. `max_connections` is typically a few hundred. Use **connection pooling**: application-side pools (HikariCP in Java) and/or **PgBouncer** in transaction mode, which multiplexes many client connections onto few server connections. With transaction pooling, session state (prepared statements in older versions, `SET`, advisory locks, temp tables) does not persist across transactions.
+
+</details>
+
+### Q10. What are extensions? Name a few useful ones.
+
+<details>
+<summary>Answer</summary>
+
+Packages that add types, functions, operators or index methods to a database with `CREATE EXTENSION`. Common ones:
+
+- `pg_stat_statements` — query statistics; essential for tuning.
+- `pg_trgm` — trigram similarity and fast `LIKE '%x%'`.
+- `pgcrypto` — hashing and encryption functions.
+- `citext` — case-insensitive text.
+- `btree_gist` — B-tree operators for GiST (exclusion constraints).
+- `postgres_fdw` — query remote PostgreSQL tables.
+- `PostGIS` — geospatial data.
+- `pgvector` — vector similarity search.
+
+</details>
+
+### Q11. What is TOAST?
+
+<details>
+<summary>Answer</summary>
+
+The Oversized-Attribute Storage Technique. A row must fit in an 8 kB page, so large values (long `text`, `jsonb`, `bytea`) are compressed and/or moved to a separate TOAST table in chunks, leaving a pointer in the main row. It is automatic. Consequences: `SELECT *` on wide rows is costly (de-TOASTing), updating a big `jsonb` value rewrites the whole value, and selecting only the needed columns matters.
+
+</details>
+
+## Advanced
+
+### Q12. How does PostgreSQL replication work?
+
+<details>
+<summary>Answer</summary>
+
+- **Streaming (physical) replication**: standbys receive the primary's WAL and replay it, producing a byte-identical, read-only copy of the whole cluster (hot standby). It is asynchronous by default; `synchronous_standby_names` makes commits wait for a standby. Used for high availability and read scaling.
+- **Logical replication** (publications and subscriptions): sends row-level changes for chosen tables. It works across major versions and allows different schemas or indexes on the subscriber. Used for upgrades, partial replication and integration.
+
+Failover is not automatic in core PostgreSQL; tools such as Patroni manage it.
+
+</details>
+
+### Q13. What backup strategies exist for PostgreSQL?
+
+<details>
+<summary>Answer</summary>
+
+- **Logical**: `pg_dump` (one database; plain SQL or custom format for selective, parallel `pg_restore`) and `pg_dumpall` (roles, tablespaces). Portable across versions, but slow to restore at scale, and a snapshot of a single moment.
+- **Physical**: `pg_basebackup` (or tools such as pgBackRest) plus continuous **WAL archiving**, which enables **point-in-time recovery** (restore to just before a bad `DELETE`).
+
+A backup is only proven when a restore has been tested.
+
+</details>
+
+### Q14. What is XID wraparound, and how is it prevented?
+
+<details>
+<summary>Answer</summary>
+
+Transaction ids are 32-bit and compared in a circular space: about 2 billion transactions are "in the past" and 2 billion "in the future". If old row versions kept their original xmin forever, after about 2 billion transactions they would suddenly appear to be in the future, and so invisible (data loss). Vacuum **freezes** old tuples (marks them visible to everyone). Autovacuum launches an aggressive anti-wraparound vacuum when a table's oldest XID passes `autovacuum_freeze_max_age`. If freezing cannot keep up (autovacuum disabled, long-running transactions, abandoned replication slots or prepared transactions), PostgreSQL eventually refuses new XIDs to protect data. Monitor `age(datfrozenxid)`.
+
+</details>
+
+### Q15. What is a tablespace, and when would you use one?
+
+<details>
+<summary>Answer</summary>
+
+A tablespace is a directory on the server's file system where PostgreSQL stores the files of chosen tables and indexes: `CREATE TABLESPACE fast LOCATION '/ssd/pg'`, then `CREATE TABLE … TABLESPACE fast`. It can place hot data on fast disks or old partitions on cheap ones. It is not a backup or quota unit: losing a tablespace's disk breaks the whole cluster. In cloud-managed PostgreSQL, tablespaces are usually unavailable or unnecessary.
+
+</details>
