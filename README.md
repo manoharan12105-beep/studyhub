@@ -238,3 +238,17 @@ Views: dashboard (progress, continue learning, subjects, recent, bookmarks, quic
 Keyboard: `/` search · `←`/`→` previous/next topic (or question in a session) · `?` shortcuts · `Esc` close. Light/dark theme follows the system and can be toggled.
 
 There are no accounts and no server: progress lives in this browser only.
+
+## Copyright & Usage
+
+StudyHub is a personal project that has been developed with significant time and effort, including its learning content, curriculum organization, interactive experiences, visualizations, and application design.
+
+The repository is publicly available so that the project can be viewed and its development can be followed. However, the project is not released under an open-source license.
+
+You're very welcome to explore and use the deployed StudyHub website for personal educational purposes. We kindly ask that you do not copy, republish, redistribute, modify, or create a competing or derivative version of the project's original content or implementation without prior permission.
+
+If you are interested in reusing any substantial portion of StudyHub, please contact the project owner, [Manoharan M](https://github.com/manoharan12105-beep), to discuss permission.
+
+Thank you for respecting the time, effort, and work that went into building StudyHub.
+
+For the complete terms, please see the [`LICENSE`](LICENSE) file.
