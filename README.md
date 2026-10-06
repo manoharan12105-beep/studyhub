@@ -4,7 +4,7 @@ A personal study and interview-preparation platform for aptitude, data structure
 
 > **Project status: Phase 3 — the interactive application is built.**
 > Aptitude (58 topics), Data Structures & Algorithms (113 topics), Object-Oriented Programming (75 topics), Spring Boot (91 topics), DBMS + PostgreSQL (75 topics), Linux (59 topics) and Computer Networks (88 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
-> The static app (`index.html`) adds navigation, search, progress tracking, practice and interview sessions, flashcards and interactive visualizers around that content. System Design and CS Concepts are registered and shown as **Coming soon**.
+> The static app (`index.html`) adds navigation, search, progress tracking, practice and interview sessions, flashcards and interactive visualizers around that content. CS Concepts currently holds a short Excel Fundamentals module; System Design is registered and shown as **Coming soon**.
 
 | Phase | Scope | Status |
 |-------|-------|--------|
@@ -14,7 +14,8 @@ A personal study and interview-preparation platform for aptitude, data structure
 | 2C | OOP content (Java OOP, SOLID, design patterns, design problems) | Done |
 | 2D | Spring Boot content (core, REST, JPA, transactions, security, production, debugging, interview) | Done |
 | 2E | DBMS + PostgreSQL content (theory, SQL, PostgreSQL features, design, transactions, indexing, optimization, problem solving, interview, debugging) | Done |
-| 2 (other) | CS Concepts and later categories | Not started |
+| 2 (other) | CS Concepts: Excel Fundamentals emergency module (18 topics) | Done |
+| 2 (other) | Further CS Concepts and later categories | Not started |
 | 3 | Static web application: content, engagement and study engines | Done |
 | 2F | Linux content (commands, text processing, permissions, processes, Bash scripting, networking, storage, services, SSH, troubleshooting, interview) | Done |
 | 2G | Computer Networks content (fundamentals, devices, OSI and TCP/IP, Ethernet and ARP, IP and subnetting, routing, TCP/UDP, HTTP/HTTPS, DNS, DHCP, NAT, security, performance, troubleshooting, end-to-end flows, interview) | Done |
@@ -50,6 +51,8 @@ StudyHub/
 │   │   ├── interview/                5 interview-question topics
 │   │   └── revision/                Revision and Quick Revision sources
 │   ├── cs-concepts/
+│   │   ├── excel/                   18 Excel Fundamentals topics
+│   │   └── revision/                Excel revision sources
 │   ├── oop/
 │   │   ├── fundamentals/            5 topics (objects, constructors, static, memory)
 │   │   ├── pillars/                 8 topics (encapsulation … interfaces)

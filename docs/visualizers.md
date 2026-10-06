@@ -2,7 +2,7 @@
 
 Interactive visualizations that topics are **candidates** for. A topic opts in by setting its metadata `visualizer` to one of these ids. The app shows a visualizer once its module exists in `js/visualizers/<id>.js` (or `js/simulators/`) **and** it is registered in `metadata/interactions/<category>.json` — see [extending.md](extending.md).
 
-**Implemented (Phase 3):** `percentage-bar-model`, `interest-growth-chart`, `binary-search-steps`, `sorting-visualizer` (bubble, selection, insertion, merge, quick, heap), `tree-traversal`, `reference-type-vs-object-type`, `http-request-lifecycle` (simulator), `join-visualizer`, `ranking-functions-comparison`; Phase 2F (Linux): `permission-calculator`, `process-state-visualizer`, `find-command-builder`, `sed-substitution-explorer`, `hard-vs-symbolic-links`, and the simulators `pipeline-simulator`, `redirection-simulator`, `signal-simulator`, `linux-troubleshooting-simulator` (shared by the `disk-full-investigation` and `port-in-use-investigation` interactions); Phase 2G (Computer Networks): every id in the Computer Networks table. All other ids below are still candidates.
+**Implemented (Phase 3):** `percentage-bar-model`, `interest-growth-chart`, `binary-search-steps`, `sorting-visualizer` (bubble, selection, insertion, merge, quick, heap), `tree-traversal`, `reference-type-vs-object-type`, `http-request-lifecycle` (simulator), `join-visualizer`, `ranking-functions-comparison`; Phase 2F (Linux): `permission-calculator`, `process-state-visualizer`, `find-command-builder`, `sed-substitution-explorer`, `hard-vs-symbolic-links`, and the simulators `pipeline-simulator`, `redirection-simulator`, `signal-simulator`, `linux-troubleshooting-simulator` (shared by the `disk-full-investigation` and `port-in-use-investigation` interactions); Phase 2G (Computer Networks): every id in the Computer Networks table; CS Concepts (Excel): every id in the Excel table. All other ids below are still candidates.
 
 Rules for every visualizer (see also `.claude/skills/ui-ux/SKILL.md`):
 
@@ -149,3 +149,13 @@ All implemented. Machines, addresses and zone data in the modules are invented (
 | `nat-translation-simulator` (simulator) | network-address-translation | Two devices sharing one public IP: mappings created, replies translated back, unsolicited inbound dropped or port-forwarded, idle mappings expiring. | port forwarding on/off |
 | `load-balancer-simulator` (simulator) | load-balancing-l4-vs-l7 | Requests from three client connections through an L4 or L7 balancer: connection pinning vs per-request path routing, round robin vs least connections, an unhealthy backend skipped. | mode, algorithm, backend health |
 | `network-troubleshooting-simulator` (simulator) | network-troubleshooting-methodology, troubleshooting-connectivity-problems, troubleshooting-connection-errors, dns-caching-ttl-and-failures | A guided investigation: choose the next command; right choices show output and advance, wrong ones explain why. Scenarios (`options.scenario`): `no-internet` (wrong gateway), `dns-failure`, `api-timeout` (security group). Reuses the Linux troubleshooting state machine. | scenario, command choices |
+
+## CS Concepts — Excel
+
+All implemented. Worksheets and data are the module's shared datasets (Sales A1:D13 for the PivotTable builder); every result was checked in Excel.
+
+| Id | Topics | What it shows | Custom input |
+|----|--------|---------------|--------------|
+| `excel-formula-predictor` | excel-basic-formulas, excel-essential-functions, excel-if-and-or | A small worksheet and formula bar; the learner predicts what D1 shows, then steps through substitution, precedence or the function's rule (COUNT vs COUNTA, a zero in AVERAGE, AND vs OR, #DIV/0!) to the result. `options.scenarios` limits the list per topic. | formula scenario, prediction |
+| `excel-cell-reference-explorer` | excel-cell-references | A formula copied cell by cell: price × tax rate down C2:C5 (`$E$1`, `E1`, `E$1`, `$E1`) or a discount grid down and across (`$A2*B$1`, relative, absolute), with each shifted formula, the cells it reads and wrong results flagged. | example, reference style |
+| `excel-pivottable-builder` | excel-pivottable-fundamentals, excel-pivottable-calculations-and-filtering | The Sales source rows and a PivotTable built step by step: filter rows, unique row items, column split, Sum/Count/Average per cell, Grand Totals. Rejects a field in two areas. | Rows, Columns, Values, Filter field and item |

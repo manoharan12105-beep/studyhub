@@ -14,7 +14,7 @@ If this file and a doc disagree, fix the disagreement rather than picking one si
 
 StudyHub is a personal study and interview-preparation platform (aptitude, data structures, algorithms, object-oriented programming, CS concepts, and categories the owner adds later). The same material must teach a beginner and serve as fast interview revision.
 
-**Current phase: Phase 3 application built** (content Phases 2A Aptitude, 2B DSA, 2C OOP, 2D Spring Boot, 2E DBMS + PostgreSQL, 2F Linux, 2G Computer Networks done). Next planned content phase: 2H System Design (registered as an empty "Coming soon" category). Do not write further study content unless the owner asks for that phase.
+**Current phase: Phase 3 application built** (content Phases 2A Aptitude, 2B DSA, 2C OOP, 2D Spring Boot, 2E DBMS + PostgreSQL, 2F Linux, 2G Computer Networks done; CS Concepts holds the Excel Fundamentals emergency module). Next planned content phase: 2H System Design (registered as an empty "Coming soon" category). Do not write further study content unless the owner asks for that phase.
 
 ## Hard rules
 
@@ -24,7 +24,7 @@ StudyHub is a personal study and interview-preparation platform (aptitude, data 
 4. **Everything self-hosted.** No CDNs or external runtime requests; vendor libraries into `assets/vendor/`.
 5. **Relative paths only** (`metadata/categories.json`, never `/metadata/...`) — the site is served under `/<repo>/`.
 6. **Content and code are separate.** Content is Markdown in `content/`, metadata is JSON in `metadata/`, code is in the root app files, `js/` and `assets/`. Adding a topic or category must never require app code changes.
-7. **Java for programming examples** (Java 17, standard library only). Exception: the `spring-boot` category uses JDK 21 with Spring Boot 4.1 libraries (see content-guide §4). The `dbms-postgresql` category writes SQL for PostgreSQL 17+, and its Java examples use JDBC (`java.sql`) with the PostgreSQL JDBC driver at runtime. The `linux` category teaches shell commands and Bash scripts, and `computer-networks` uses diagnostic commands, raw HTTP and Java 17 networking programs (content-guide §4). No other languages unless the owner explicitly asks. The app's own code is JavaScript — this rule is about educational content.
+7. **Java for programming examples** (Java 17, standard library only). Exception: the `spring-boot` category uses JDK 21 with Spring Boot 4.1 libraries (see content-guide §4). The `dbms-postgresql` category writes SQL for PostgreSQL 17+, and its Java examples use JDBC (`java.sql`) with the PostgreSQL JDBC driver at runtime. The `linux` category teaches shell commands and Bash scripts, and `computer-networks` uses diagnostic commands, raw HTTP and Java 17 networking programs, and the Excel module in `cs-concepts` uses Excel formulas (content-guide §4). No other languages unless the owner explicitly asks. The app's own code is JavaScript — this rule is about educational content.
 8. **Never invent curriculum.** Create only the categories, subcategories and topics the owner provides. Do not pad with extra topics or "suggested" folders.
 9. **Markdown + JSON only** for content and metadata. No MDX.
 
@@ -111,6 +111,7 @@ Before saying work is done:
 - **SQL (DBMS category):** every non-illustrative `sql` block runs on PostgreSQL 17+ against the sample database, and every `**Output:**`/`**Expected output:**` block matches what `psql` prints.
 - **Shell (Linux category):** every non-illustrative `bash` block runs in a fresh practice lab (`~/linux-lab`) on Ubuntu/Debian with GNU coreutils, and every `**Output:**` block matches what it prints. Never run destructive or root commands on the host; those stay `# Illustrative`.
 - **Networks (Computer Networks category):** Java programs compile and run on Java 17 against localhost; subnetting and other calculations are checked with a script; sample command output comes from real runs, with public addresses replaced by documentation ranges and marked `**Output (varies)**`.
+- **Excel (CS Concepts):** every formula result, PivotTable value and error shown in content or an interaction is checked in desktop Excel.
 - **Markdown:** headings follow the template; links and image paths resolve; renders correctly on GitHub.
 - **Interactions:** registry files match `metadata/schemas/interactions.schema.json` and content-guide §6 rule 8 (topics exist, `after` headings exist, modules exist, answer indexes valid); each new interaction steps from start to finish without errors.
 - **App:** test through a local static server (architecture §10): every route, light/dark, keyboard-only navigation, a 320px-wide viewport, and the browser console free of errors.

@@ -2,5 +2,617 @@
   "$schema": "../schemas/topics.schema.json",
   "schemaVersion": 1,
   "category": "cs-concepts",
-  "topics": []
+  "topics": [
+    {
+      "id": "excel-fundamentals",
+      "slug": "excel-fundamentals",
+      "title": "Excel Fundamentals",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "Workbook vs worksheet, rows, columns, cells, addresses, ranges and the Excel window — plus the three practice datasets used throughout the module.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "workbook",
+        "worksheet",
+        "cell",
+        "range",
+        "formula-bar"
+      ],
+      "estimatedMinutes": 15,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "excel-entering-and-editing-data",
+        "excel-basic-formulas"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-entering-and-editing-data",
+      "slug": "excel-entering-and-editing-data",
+      "title": "Entering and Editing Data",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "Text, numbers and dates; editing cells; Delete vs Clear; copy, cut and paste; Paste Values; AutoFill and the fill handle.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "data-entry",
+        "autofill",
+        "fill-handle",
+        "copy-paste"
+      ],
+      "estimatedMinutes": 15,
+      "order": 2,
+      "prerequisites": [
+        "excel-fundamentals"
+      ],
+      "relatedTopics": [
+        "excel-formatting",
+        "excel-cell-references"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-basic-formulas",
+      "slug": "excel-basic-formulas",
+      "title": "Basic Excel Formulas",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "How formulas work: the equals sign, arithmetic operators, parentheses, operator precedence, and formula vs value.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "formula",
+        "operators",
+        "operator-precedence"
+      ],
+      "estimatedMinutes": 15,
+      "order": 3,
+      "prerequisites": [
+        "excel-fundamentals"
+      ],
+      "relatedTopics": [
+        "excel-essential-functions",
+        "excel-cell-references"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "excel-formula-predictor",
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-essential-functions",
+      "slug": "excel-essential-functions",
+      "title": "Essential Excel Functions",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "SUM, AVERAGE, MIN, MAX, COUNT and COUNTA — syntax, AutoSum, COUNT vs COUNTA, and how blanks, text and zeros are treated.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "functions",
+        "sum",
+        "average",
+        "count",
+        "counta"
+      ],
+      "estimatedMinutes": 15,
+      "order": 4,
+      "prerequisites": [
+        "excel-basic-formulas"
+      ],
+      "relatedTopics": [
+        "excel-if-and-or",
+        "excel-pivottable-calculations-and-filtering"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-if-and-or",
+      "slug": "excel-if-and-or",
+      "title": "IF, AND and OR",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "Decisions in a cell: IF with a condition, true result and false result; combining conditions with AND and OR; one level of nesting.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "if-function",
+        "and-function",
+        "or-function",
+        "logical-functions"
+      ],
+      "estimatedMinutes": 15,
+      "order": 5,
+      "prerequisites": [
+        "excel-essential-functions"
+      ],
+      "relatedTopics": [
+        "excel-conditional-formatting",
+        "excel-common-errors"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-cell-references",
+      "slug": "excel-cell-references",
+      "title": "Cell References",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "Relative, absolute and mixed references: what changes when a formula is copied, the price × tax-rate example, and F4.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "cell-reference",
+        "relative-reference",
+        "absolute-reference",
+        "mixed-reference"
+      ],
+      "estimatedMinutes": 20,
+      "order": 6,
+      "prerequisites": [
+        "excel-basic-formulas"
+      ],
+      "relatedTopics": [
+        "excel-entering-and-editing-data",
+        "excel-keyboard-shortcuts"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "excel-cell-reference-explorer",
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-formatting",
+      "slug": "excel-formatting",
+      "title": "Formatting",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "Fonts, borders, fill, alignment and number formats (currency, percentage, date, decimals) — and why formatting changes the display, not the value.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "formatting",
+        "number-format",
+        "percentage",
+        "format-painter"
+      ],
+      "estimatedMinutes": 12,
+      "order": 7,
+      "prerequisites": [
+        "excel-entering-and-editing-data"
+      ],
+      "relatedTopics": [
+        "excel-conditional-formatting",
+        "excel-tables"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-sort-and-filter",
+      "slug": "excel-sort-and-filter",
+      "title": "Sort and Filter",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "Sorting text, numbers and dates, two-level sorts, and filtering by value, text, number and date — with the classic one-column sort mistake.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "sort",
+        "filter",
+        "autofilter",
+        "multi-level-sort"
+      ],
+      "estimatedMinutes": 15,
+      "order": 8,
+      "prerequisites": [
+        "excel-fundamentals"
+      ],
+      "relatedTopics": [
+        "excel-tables",
+        "excel-find-replace-and-cleanup"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-tables",
+      "slug": "excel-tables",
+      "title": "Excel Tables",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "Turning a list into an Excel Table with Ctrl + T: headers, automatic filters, expansion, formatting, Total Row, and Table vs normal range.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "excel-table",
+        "ctrl-t",
+        "total-row",
+        "banded-rows"
+      ],
+      "estimatedMinutes": 12,
+      "order": 9,
+      "prerequisites": [
+        "excel-sort-and-filter"
+      ],
+      "relatedTopics": [
+        "excel-pivottable-fundamentals",
+        "excel-basic-charts"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-conditional-formatting",
+      "slug": "excel-conditional-formatting",
+      "title": "Conditional Formatting",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "Formatting cells by their values: Greater Than, Less Than, Equal To, Duplicate Values, Top/Bottom rules, Color Scales and Data Bars.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "conditional-formatting",
+        "highlight-cells",
+        "duplicate-values",
+        "color-scales",
+        "data-bars"
+      ],
+      "estimatedMinutes": 12,
+      "order": 10,
+      "prerequisites": [
+        "excel-formatting"
+      ],
+      "relatedTopics": [
+        "excel-find-replace-and-cleanup",
+        "excel-if-and-or"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-basic-charts",
+      "slug": "excel-basic-charts",
+      "title": "Basic Charts",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "Selecting chart data and choosing between column, bar, line and pie charts for comparisons, trends and shares.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "charts",
+        "column-chart",
+        "bar-chart",
+        "line-chart",
+        "pie-chart"
+      ],
+      "estimatedMinutes": 15,
+      "order": 11,
+      "prerequisites": [
+        "excel-essential-functions"
+      ],
+      "relatedTopics": [
+        "excel-pivotchart-basics",
+        "excel-tables"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-find-replace-and-cleanup",
+      "slug": "excel-find-replace-and-cleanup",
+      "title": "Find, Replace and Basic Data Cleanup",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "Find (Ctrl + F), Replace (Ctrl + H), Remove Duplicates, Text to Columns and Freeze Panes — with the mistakes that destroy data.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "find-replace",
+        "remove-duplicates",
+        "text-to-columns",
+        "freeze-panes",
+        "data-cleaning"
+      ],
+      "estimatedMinutes": 15,
+      "order": 12,
+      "prerequisites": [
+        "excel-sort-and-filter"
+      ],
+      "relatedTopics": [
+        "excel-conditional-formatting",
+        "excel-pivottable-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-pivottable-fundamentals",
+      "slug": "excel-pivottable-fundamentals",
+      "title": "PivotTable Fundamentals",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "What a PivotTable is, clean source data, creating one, and exactly what the Rows, Columns, Values and Filters areas do.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "pivottable",
+        "pivot-fields",
+        "rows",
+        "columns",
+        "values",
+        "filters"
+      ],
+      "estimatedMinutes": 20,
+      "order": 13,
+      "prerequisites": [
+        "excel-tables"
+      ],
+      "relatedTopics": [
+        "excel-pivottable-calculations-and-filtering",
+        "excel-pivotchart-basics"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "excel-pivottable-builder",
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-pivottable-calculations-and-filtering",
+      "slug": "excel-pivottable-calculations-and-filtering",
+      "title": "PivotTable Calculations and Filtering",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "Sum, Count and Average in Values, Grand Totals, subtotals, sorting and filtering results, Refresh, and grouping and Show Values As awareness.",
+      "difficulty": "intermediate",
+      "tags": [
+        "excel",
+        "pivottable",
+        "value-field-settings",
+        "refresh",
+        "subtotal",
+        "grand-total"
+      ],
+      "estimatedMinutes": 20,
+      "order": 14,
+      "prerequisites": [
+        "excel-pivottable-fundamentals"
+      ],
+      "relatedTopics": [
+        "excel-pivotchart-basics",
+        "excel-essential-functions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-pivotchart-basics",
+      "slug": "excel-pivotchart-basics",
+      "title": "PivotChart Basics",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "Charts linked to a PivotTable: creating a PivotChart, filtering it with field buttons, how it follows the PivotTable, and choosing a type.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "pivotchart",
+        "pivottable",
+        "charts"
+      ],
+      "estimatedMinutes": 12,
+      "order": 15,
+      "prerequisites": [
+        "excel-pivottable-fundamentals",
+        "excel-basic-charts"
+      ],
+      "relatedTopics": [
+        "excel-pivottable-calculations-and-filtering"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-common-errors",
+      "slug": "excel-common-errors",
+      "title": "Common Excel Errors",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "concept",
+      "description": "What #DIV/0!, #VALUE!, #REF!, #NAME? and #N/A mean, why they happen and how to fix them — and how an error differs from a blank or zero.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "errors",
+        "div-0",
+        "value-error",
+        "ref-error",
+        "name-error"
+      ],
+      "estimatedMinutes": 15,
+      "order": 16,
+      "prerequisites": [
+        "excel-basic-formulas"
+      ],
+      "relatedTopics": [
+        "excel-essential-functions",
+        "excel-if-and-or"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-keyboard-shortcuts",
+      "slug": "excel-keyboard-shortcuts",
+      "title": "Essential Excel Keyboard Shortcuts",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "reference",
+      "description": "The shortcuts worth memorising for tests and daily work: editing, finding, selecting, AutoSum, F2, F4, Tables and filters.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "shortcuts",
+        "keyboard",
+        "autosum"
+      ],
+      "estimatedMinutes": 10,
+      "order": 17,
+      "prerequisites": [
+        "excel-fundamentals"
+      ],
+      "relatedTopics": [
+        "excel-emergency-cheat-sheet",
+        "excel-cell-references"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    },
+    {
+      "id": "excel-emergency-cheat-sheet",
+      "slug": "excel-emergency-cheat-sheet",
+      "title": "Excel Emergency Cheat Sheet",
+      "category": "cs-concepts",
+      "subcategory": "excel",
+      "type": "reference",
+      "description": "One-page final revision of the whole module: terms, formulas, functions, references, data tools, charts, PivotTables, errors and shortcuts.",
+      "difficulty": "beginner",
+      "tags": [
+        "excel",
+        "cheat-sheet",
+        "revision",
+        "interview-prep"
+      ],
+      "estimatedMinutes": 15,
+      "order": 18,
+      "prerequisites": [],
+      "relatedTopics": [
+        "excel-fundamentals",
+        "excel-keyboard-shortcuts"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-06"
+    }
+  ]
 }

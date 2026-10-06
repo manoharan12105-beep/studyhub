@@ -930,6 +930,39 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 .pkt-bits { flex: 1 1 100%; background: var(--surface-3); font-weight: 400; overflow-wrap: anywhere; }
 .pkt-seg.is-new { outline: 2px solid var(--accent); outline-offset: 1px; }
 
+/* Excel interactions: worksheet grid, formula bar, prediction options, PivotTable */
+.xl-formula-bar { display: flex; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-2); padding: var(--space-1) var(--space-2); border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); min-width: 0; }
+.xl-name-box { flex: none; min-width: 3.2em; padding: 2px var(--space-2); border-right: 1px solid var(--border); font-family: var(--font-mono); font-size: var(--text-sm); font-weight: 700; }
+.xl-fx { flex: none; font-style: italic; font-weight: 700; color: var(--text-muted); }
+.xl-formula { min-width: 0; overflow-wrap: anywhere; font-size: var(--text-sm); }
+.xl-grid { border-collapse: collapse; font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
+.xl-grid th { min-width: 2.2em; padding: 2px var(--space-2); background: var(--surface-2); border: 1px solid var(--border); font-weight: 600; color: var(--text-muted); text-align: center; }
+.xl-grid td { min-width: 5.5em; height: 2em; padding: 2px var(--space-2); border: 1px solid var(--border); white-space: nowrap; }
+.xl-grid td.is-number { text-align: right; }
+.xl-grid td.is-ref { background: var(--accent-soft); box-shadow: inset 0 0 0 2px var(--accent); }
+.xl-grid td.is-empty-ref { background: var(--warning-soft); box-shadow: inset 0 0 0 2px var(--warning); }
+.xl-grid td.is-active { box-shadow: inset 0 0 0 2px var(--success); font-weight: 700; }
+.xl-grid td.is-error { background: var(--danger-soft); color: var(--danger); }
+.xl-work { margin: var(--space-2) 0 0; font-size: var(--text-sm); overflow-wrap: anywhere; }
+.xl-predict { margin-top: var(--space-4); }
+.xl-predict-title { margin: 0 0 var(--space-2); font-weight: 700; }
+.xl-predict .xl-options { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); padding-left: 0; }
+.xl-predict .xl-options li { margin: 0; }
+.pivot-stage { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-4); align-items: start; }
+.pivot-stage .table-wrap { margin-top: 0; margin-bottom: 0; }
+.pivot-title { margin: 0 0 var(--space-1); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+.pivot-source .viz-table th, .pivot-source .viz-table td { padding: var(--space-1) var(--space-2); }
+.pivot-table td.is-number { text-align: right; }
+.pivot-table .pivot-grand th, .pivot-table .pivot-grand td, .pivot-table td.pivot-total { font-weight: 700; }
+.pivot-table .pivot-grand th, .pivot-table .pivot-grand td { border-top: 2px solid var(--border-strong); }
+.pivot-filter-line { display: inline-flex; margin: 0 0 var(--space-2); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: var(--text-sm); }
+.pivot-filter-line span { padding: 2px var(--space-3); }
+.pivot-filter-field { background: var(--surface-2); font-weight: 650; border-right: 1px solid var(--border); }
+@media (max-width: 400px) {
+  .xl-grid th { min-width: 1.8em; padding: 2px var(--space-1); }
+  .xl-grid td { min-width: 3.4em; padding: 2px var(--space-1); }
+}
+
 @media (max-width: 767px) {
   .tree-stage, .join-stage, .dispatch-stage, .net-two-col { grid-template-columns: 1fr; }
 }

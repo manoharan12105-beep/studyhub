@@ -139,7 +139,44 @@
       "order": 3,
       "icon": null,
       "catalog": "metadata/topics/cs-concepts.json",
-      "subcategories": []
+      "interactions": "metadata/interactions/cs-concepts.json",
+      "subcategories": [
+        {
+          "id": "excel",
+          "title": "Excel Fundamentals",
+          "description": "Emergency preparation for basic Excel tests, interviews and workplace tasks: formulas, references, data tools, charts and PivotTables.",
+          "order": 1
+        }
+      ],
+      "studyModes": [
+        {
+          "id": "excel-revision",
+          "title": "Excel Complete Revision",
+          "description": "Module-by-module revision of Excel Fundamentals: what to remember, why it matters and the mistake to avoid.",
+          "estimatedMinutes": 30,
+          "sources": [
+            { "path": "content/cs-concepts/revision/excel-complete-revision.md", "title": "Complete Revision" }
+          ]
+        },
+        {
+          "id": "excel-quick-revision",
+          "title": "Excel Quick Revision",
+          "description": "Decision tables and quick drills: which feature, function, chart and PivotTable area to use, and what a formula returns.",
+          "estimatedMinutes": 15,
+          "sources": [
+            { "path": "content/cs-concepts/revision/excel-quick-revision.md", "title": "Quick Revision" }
+          ]
+        },
+        {
+          "id": "excel-10-minute-sheet",
+          "title": "Excel Emergency 10-Minute Sheet",
+          "description": "Only the highest-value Excel facts, to read once right before an assessment.",
+          "estimatedMinutes": 10,
+          "sources": [
+            { "path": "content/cs-concepts/revision/excel-emergency-10-minute-sheet.md", "title": "10-Minute Sheet" }
+          ]
+        }
+      ]
     },
     {
       "id": "oop",

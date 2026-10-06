@@ -1,0 +1,219 @@
+{
+  "$schema": "../schemas/interactions.schema.json",
+  "schemaVersion": 1,
+  "category": "cs-concepts",
+  "interactions": [
+    {
+      "id": "excel-formula-predictor",
+      "type": "visualizer",
+      "title": "Predict the formula result",
+      "description": "Pick a formula, guess what D1 shows, then step through how Excel substitutes the cell values and works out the result.",
+      "topics": [
+        {
+          "topic": "excel-basic-formulas",
+          "after": "Operator Precedence",
+          "options": {
+            "scenarios": [
+              "add",
+              "precedence",
+              "parentheses",
+              "divide"
+            ],
+            "scenario": "precedence"
+          }
+        },
+        {
+          "topic": "excel-essential-functions",
+          "after": "How Functions Treat Blanks, Text and Zero",
+          "options": {
+            "scenarios": [
+              "sum",
+              "average",
+              "count",
+              "counta"
+            ],
+            "scenario": "average"
+          }
+        },
+        {
+          "topic": "excel-if-and-or",
+          "after": "AND and OR",
+          "options": {
+            "scenarios": [
+              "if",
+              "and",
+              "or"
+            ],
+            "scenario": "and"
+          }
+        }
+      ]
+    },
+    {
+      "id": "excel-cell-reference-explorer",
+      "type": "visualizer",
+      "title": "Copy a formula: what moves, what stays",
+      "description": "Choose relative, absolute or mixed references, then copy the formula cell by cell and watch which references shift and which results go wrong.",
+      "topics": [
+        {
+          "topic": "excel-cell-references",
+          "after": "Mixed References",
+          "options": {
+            "layout": "tax",
+            "choice": "rel"
+          }
+        }
+      ]
+    },
+    {
+      "id": "excel-pivottable-builder",
+      "type": "visualizer",
+      "title": "Build a PivotTable step by step",
+      "description": "Place the Sales fields in Rows, Columns, Values and Filters, then step through how Excel filters, groups, splits and summarises the source rows.",
+      "topics": [
+        {
+          "topic": "excel-pivottable-fundamentals",
+          "after": "PivotTable Fields: Rows, Columns, Values, Filters",
+          "options": {
+            "rows": "Product",
+            "columns": "Region",
+            "values": "sum"
+          }
+        },
+        {
+          "topic": "excel-pivottable-calculations-and-filtering",
+          "after": "Sum, Count and Average in Values",
+          "options": {
+            "rows": "Region",
+            "columns": "",
+            "values": "average"
+          }
+        }
+      ]
+    },
+    {
+      "id": "excel-quick-check",
+      "type": "knowledge-check",
+      "title": "Excel quick check",
+      "description": "Ten questions across the whole module — formulas, functions, references, data tools, charts, PivotTables, errors and shortcuts.",
+      "topics": [
+        {
+          "topic": "excel-emergency-cheat-sheet",
+          "after": "Last-Minute Traps"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "A1 = 10 and B1 = 20. What does `=A1+B1*2` show?",
+          "options": [
+            "60",
+            "50",
+            "40",
+            "30"
+          ],
+          "answer": 1,
+          "explanation": "Multiplication comes before addition: 20 × 2 = 40, then 10 + 40 = 50. `=(A1+B1)*2` would give 60."
+        },
+        {
+          "prompt": "B2:B6 contains 82, the text `AB`, 38, an empty cell and 91. What does `=COUNT(B2:B6)` return?",
+          "options": [
+            "5",
+            "4",
+            "3",
+            "2"
+          ],
+          "answer": 2,
+          "explanation": "COUNT counts only cells with numbers: 82, 38 and 91. Text and empty cells are ignored. `=COUNTA(B2:B6)` would return 4."
+        },
+        {
+          "prompt": "The tax rate is in E1. Which formula in C2 still works after it is copied down to C3:C5?",
+          "options": [
+            "`=B2*E1`",
+            "`=B2*$E$1`",
+            "`=$B$2*E1`",
+            "`=B2*$E1`"
+          ],
+          "answer": 1,
+          "explanation": "The price must move with each row (relative B2) and the rate must stay on E1 (absolute $E$1). `=B2*E1` and `=B2*$E1` let the row move to the empty E2, E3…, giving 0."
+        },
+        {
+          "prompt": "In the Sales list you select only the Sales column, sort it, and choose \"Continue with the current selection\". What happens?",
+          "options": [
+            "The whole list is sorted correctly",
+            "Excel refuses to sort",
+            "The Sales numbers are reordered but Product, Region and Month stay put, so rows get the wrong sales figure",
+            "Only the selected cells are highlighted"
+          ],
+          "answer": 2,
+          "explanation": "Sorting one column on its own separates it from the rest of each row. Choose \"Expand the selection\", or click a single cell inside the list before sorting."
+        },
+        {
+          "prompt": "Conditional Formatting rule: Highlight Cells Rules → Greater Than 50. Which marks are highlighted?",
+          "options": [
+            "50 and above",
+            "Above 50 only — 50 itself is not highlighted",
+            "Below 50",
+            "Every mark, coloured by size"
+          ],
+          "answer": 1,
+          "explanation": "Greater Than is strict, so the boundary is excluded. Use Between or a custom rule when the boundary should be included."
+        },
+        {
+          "prompt": "Which chart best shows monthly sales from January to December?",
+          "options": [
+            "Pie chart",
+            "Line chart",
+            "Bar chart with long category names",
+            "No chart — use a PivotTable"
+          ],
+          "answer": 1,
+          "explanation": "A line chart shows a trend over time. Pie charts show parts of one whole; column and bar charts compare categories."
+        },
+        {
+          "prompt": "You want total sales for each Region, with one column per Product. Where do the fields go?",
+          "options": [
+            "Rows: Product · Columns: Region · Values: Sum of Sales",
+            "Rows: Region · Columns: Product · Values: Sum of Sales",
+            "Rows: Sales · Columns: Region · Values: Count of Product",
+            "Filters: Region · Values: Product"
+          ],
+          "answer": 1,
+          "explanation": "The thing you want one line for (Region) goes in Rows, the split across the top (Product) goes in Columns, and the number to summarise (Sales) goes in Values."
+        },
+        {
+          "prompt": "A PivotChart shows Laptop and Mobile sales. You use its Region field button to keep only South. What happens to the linked PivotTable?",
+          "options": [
+            "Nothing — only the chart changes",
+            "It is filtered to South as well",
+            "It is deleted and rebuilt as a normal range",
+            "It switches from Sum to Count"
+          ],
+          "answer": 1,
+          "explanation": "A PivotChart and its PivotTable share the same fields and filters, so filtering either one filters both. The South values are Laptop 157000 and Mobile 111000."
+        },
+        {
+          "prompt": "D2 is empty. What does `=C2/D2` show?",
+          "options": [
+            "0",
+            "The value of C2",
+            "`#DIV/0!`",
+            "`#VALUE!`"
+          ],
+          "answer": 2,
+          "explanation": "An empty cell counts as 0 in arithmetic, so the formula divides by zero and returns `#DIV/0!`."
+        },
+        {
+          "prompt": "While editing a formula, which key cycles a reference through `B1` → `$B$1` → `B$1` → `$B1`?",
+          "options": [
+            "F2",
+            "F4",
+            "Ctrl + T",
+            "Ctrl + Shift + L"
+          ],
+          "answer": 1,
+          "explanation": "F4 toggles the `$` signs on the reference at the cursor. F2 edits the active cell, Ctrl + T creates a Table, and Ctrl + Shift + L toggles filters."
+        }
+      ]
+    }
+  ]
+}
