@@ -31,8 +31,9 @@ Content is never modified to suit the app. **Content ≠ interaction:** a lesson
 ## 3. File layout
 
 ```text
-index.html                     app shell (header, sidebar, main, dialogs); inline theme script
-styles.css                     all styles; design tokens as CSS custom properties (light + dark)
+index.html                     app shell (header + menu, sidebar, main, dialogs); inline script applies
+                               the theme and sidebar state before first paint
+styles.css                     all styles; design tokens as CSS custom properties (six themes)
 app.js                         entry: boot, route → view dispatch, global shortcuts
 js/
   util.js                      DOM helpers (el, svg, icon), escaping, slugify, announce
@@ -44,7 +45,8 @@ js/
   storage.js                   namespaced, versioned localStorage wrapper (memory fallback)
   progress.js bookmarks.js history.js activity.js   study state, one key each
   study-engine.js              aggregates: stats, continue learning, recent, bookmarks
-  theme.js                     light / dark / system
+  theme.js                     six themes + "match system" (§9)
+  updates.js                   What's new: loads metadata/updates.json, tracks seen ids and visits
   engagement/
     registry.js                type → module, placement in lessons, lazy mounting, cleanup
     stepper.js                 step engine shared by all visualizers and simulators
@@ -56,15 +58,17 @@ js/
   three/knowledge-map.js       dashboard 3D map (Three.js, lazy): one node per available subject;
                                click / arrow keys focus a subject and open its detail panel
   map-focus.js                 search → map bridge ("View in knowledge map"); no Three.js import
-  views/                       home, subject (+module), topic, toc, mode, session, lists, layout, common
+  views/                       home, subject (+module), topic, toc, mode, session, lists, common;
+                               layout (sidebar, drawer, header search), menu (header menu + dialogs)
 assets/
   vendor/                      marked 18.0.14, three 0.170.0 (see assets/vendor/README.md)
-  icons/                       favicon
+  icons/                       favicon; subjects/<id>.svg single-colour subject icons (CSS mask)
 metadata/
-  categories.json              categories, subcategories, study modes, catalog + interaction file paths
+  categories.json              groups, categories, subcategories, study modes, catalog + interaction file paths
+  updates.json                 What's new changelog (newest first)
   topics/<category>.json       topic catalogs
   interactions/<category>.json interaction registries
-  schemas/                     JSON Schemas for all three
+  schemas/                     JSON Schemas for all of the above
 ```
 
 ## 4. Data flow
@@ -88,8 +92,9 @@ Hash routes (GitHub Pages has no fallback for unknown paths). In-page anchors us
 | `#/session/<kind>/topic/<id>`             | Focused session; kind = `practice`, `interview`, `flashcards` |
 | `#/session/<kind>/module/<cat>/<sub>`     | … across a module |
 | `#/session/<kind>/subject/<cat>`          | … across a subject |
-| `#/search?q=…&subject=…&difficulty=…`     | Search |
+| `#/search?q=…&type=…&subject=…&difficulty=…` | Search, results grouped by kind |
 | `#/bookmarks`, `#/history`, `#/lab`       | Bookmarks, recently studied, all interactions |
+| `#/updates`                               | Update history (from `metadata/updates.json`) |
 | any route + `?s=<heading-id>`             | Scrolls to that heading without re-rendering |
 
 Topic routes use the permanent `id`, so links, progress and bookmarks survive folder moves.
@@ -149,9 +154,12 @@ studyhub:v1:progress    { "<topic-id>": { "status": "in-progress|completed", "up
 studyhub:v1:bookmarks   [ "<topic-id>", … ]                    newest first
 studyhub:v1:history     [ { "kind": "topic|mode|session", "id", "tab"?, "label"?, "at" } ]   max 40
 studyhub:v1:questions   { "<topic-id>": { "<kind>:<item>": { "r": "correct|incorrect|known|review", "t": ISO } } }
-studyhub:v1:theme       "light" | "dark" | "system"
-studyhub:v1:prefs       { "questionView": "session|all" }
+studyhub:v1:theme       "system" | "light" | "dark" | "ocean" | "purple" | "amber" | "forest"
+studyhub:v1:prefs       { "questionView": "session|all", "sidebarCollapsed": bool }
+studyhub:v1:updates     { "seen": [ "<update-id>", … ], "previousVisit": ISO, "currentVisit": ISO }
 ```
+
+On the first run of `updates`, entries older than the newest history entry (or all of them, for a brand-new browser) count as seen, so nobody is greeted with the whole changelog. A gap of 30 minutes or more starts a new visit; "Last visit" in What's new is `previousVisit`.
 
 Question keys use the content's append-only ids (`P3`, `Q7`), so results stay valid as content grows. A breaking format change must bump `v1` and migrate.
 
@@ -166,7 +174,14 @@ Vendored under `assets/vendor/<name>-<version>/` with licenses; recorded in `ass
 
 ## 9. Accessibility and UI
 
-Semantic landmarks, skip link, one `h1` per view with focus moved to it on navigation and a polite live-region announcement, visible `:focus-visible` rings, `aria-current` in navigation, the mobile drawer makes `main` inert and closes on Esc, `<dialog>` for shortcuts, all state shown with text (not colour only), WCAG AA token colours in both themes, `prefers-reduced-motion` honoured (no transitions; 3D map static, camera jumps instead of flying), no horizontal page scroll at 320 px. The 3D map canvas is focusable: arrow keys / Home / End focus a subject, Esc resets the view. Shortcuts: `/` search, `←`/`→` previous/next topic (or question inside a session), `?` help, `Esc` close.
+Semantic landmarks, skip link, one `h1` per view with focus moved to it on navigation and a polite live-region announcement, visible `:focus-visible` rings, `aria-current` in navigation, the mobile drawer makes `main` inert and closes on Esc, `<dialog>` for shortcuts, What's new and About, all state shown with text (not colour only), WCAG AA token colours in every theme, `prefers-reduced-motion` honoured (no transitions; 3D map static, camera jumps instead of flying), no horizontal page scroll at 320 px. The 3D map canvas is focusable: arrow keys / Home / End focus a subject, Esc resets the view. Shortcuts: `/` search, `Ctrl`/`⌘`+`K` quick actions, `←`/`→` previous/next topic (or question inside a session), `?` help, `Esc` close.
+
+### Header menu, themes and sidebar
+
+- **Header menu** (`views/menu.js`): one ⋮ button (ARIA menu button) with three groups — *Study* (Bookmarks, Recently studied, Keyboard shortcuts), *Appearance* (Theme › — a submenu shown in the same panel, listing the theme radios) and *StudyHub* (What's new, About). Arrow keys / Home / End move, Esc closes and returns focus (in the Theme submenu, ← or Esc goes back to Theme); choosing a theme keeps the menu open so themes can be compared. The badge on the button counts unseen updates.
+- **Themes** (`theme.js`): Light, Dark, Ocean, Purple, Amber, Forest and Match system. A theme is a token block in `styles.css` selected by `data-theme="<id>"` on `<html>`; *Match system* removes the attribute and the `prefers-color-scheme` block applies. Components only use tokens, so a new theme is one token block plus an entry in `THEMES` and in the inline head script. Changing theme dispatches `studyhub:theme`, which the 3D map listens to.
+- **Sidebar** (`views/layout.js`): *Study* (Dashboard, Continue learning, Interactive lab) and *Library* — subjects grouped by `categories.json` `groups`, each a compact row with icon and `completed/total`; the active subject shows a progress bar. No topics in the sidebar (they live on subject and module pages). At ≥ 768 px it collapses to an icon rail (tooltips on hover/focus, state in `prefs.sidebarCollapsed`); below 768 px it is a drawer with a focus trap (rest of the page inert), closed by Esc, the backdrop or following a link.
+- **What's new** (`updates.js`): static changelog only — no network checks. Unseen entries since the last visit are listed in the dialog; otherwise "You're caught up" with the last visit date. `#/updates` is the full history.
 
 ## 10. Local development
 
@@ -177,6 +192,8 @@ npx http-server -c-1 .        # or: python -m http.server 8000
 ```
 
 Then open the printed URL. Test from a subpath too if possible (GitHub Pages serves under `/<repo>/`).
+
+**Caching.** Servers that send no cache headers (e.g. `python -m http.server`) let the browser reuse old copies of files for hours. A new `index.html` and JavaScript with a cached older `styles.css` produces a half-styled page: unstyled menu buttons, run-together text, and coloured themes falling back to Dark. Prevent it in two ways: `index.html` loads `styles.css?v=<date>` and `app.js?v=<date>`, so **change that date whenever either file changes**; and serve locally with caching off (`-c-1` above) or hard-reload (`Ctrl+Shift+R`).
 
 ## 11. Deployment
 

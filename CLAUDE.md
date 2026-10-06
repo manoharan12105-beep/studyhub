@@ -14,7 +14,7 @@ If this file and a doc disagree, fix the disagreement rather than picking one si
 
 StudyHub is a personal study and interview-preparation platform (aptitude, data structures, algorithms, object-oriented programming, CS concepts, and categories the owner adds later). The same material must teach a beginner and serve as fast interview revision.
 
-**Current phase: Phase 3 application built** (content Phases 2A Aptitude, 2B DSA, 2C OOP, 2D Spring Boot, 2E DBMS + PostgreSQL, 2F Linux, 2G Computer Networks done; CS Concepts holds the Excel Fundamentals emergency module). Next planned content phase: 2H System Design (registered as an empty "Coming soon" category). Do not write further study content unless the owner asks for that phase.
+**Current phase: Phase 3 application built**, plus the UI/UX phase (header menu, six themes, What's new, grouped sidebar; see architecture §9) (content Phases 2A Aptitude, 2B DSA, 2C OOP, 2D Spring Boot, 2E DBMS + PostgreSQL, 2F Linux, 2G Computer Networks done; CS Concepts holds the Excel Fundamentals emergency module). Next planned content phase: 2H System Design (registered as an empty "Coming soon" category). Do not write further study content unless the owner asks for that phase.
 
 ## Hard rules
 
@@ -35,13 +35,14 @@ index.html, styles.css, app.js        application shell, styles, entry module
 js/                                   engines (content-loader, markdown-renderer, search, storage,
                                       progress, bookmarks, history, activity, study-engine),
                                       engagement/, visualizers/, simulators/, three/, views/
-assets/                               icons, images, vendored libraries (assets/vendor/)
+assets/                               icons (subjects/<id>.svg), images, vendored libraries (assets/vendor/)
 content/<category>/[<sub>/]<slug>/    topic Markdown (+ images/)
 content/<category>/revision/          sources for category study modes (reserved name)
-metadata/categories.json              category + subcategory registry, study modes
+metadata/categories.json              groups, category + subcategory registry, study modes
+metadata/updates.json                 What's new changelog (newest first)
 metadata/topics/<category>.json       topic catalog per category
 metadata/interactions/<category>.json interaction registry per category (optional)
-metadata/schemas/                     JSON Schemas for categories, topic catalogs, interactions
+metadata/schemas/                     JSON Schemas for categories, topic catalogs, interactions, updates
 templates/                            lesson, companion and metadata templates
 docs/                                 content guide, architecture, visualizer registry
 .claude/skills/                       Claude skills for this project
@@ -66,6 +67,7 @@ Follow [docs/content-guide.md](docs/content-guide.md). In short:
 - Formulas in plain text/Unicode (no LaTeX). Diagrams as SVG in the topic's `images/` or ASCII in ```` ```text ````. No Mermaid, no external images.
 - Accuracy over volume: verify every complexity, formula and code sample. No filler.
 - A topic is visible to the app only when it has a metadata entry; `files` must match the folder exactly.
+- A new category gets a `group` and an icon at `assets/icons/subjects/<id>.svg`. Every content phase (and any user-visible app change) adds an entry at the top of `metadata/updates.json` with counts taken from the metadata — never estimates; update ids are permanent.
 - Subtopics are H2 sections of their topic, not separate folders.
 - Category study modes (e.g. the **Learn · Revision · Quick Revision** modes of Aptitude, DSA, OOP, Spring Boot, DBMS + PostgreSQL, Linux and Computer Networks) are declared in `categories.json` `studyModes`; each mode merges several source files from `content/<category>/revision/` into one view. User-facing names come from metadata, never file names.
 
@@ -89,9 +91,10 @@ Follow [docs/content-guide.md](docs/content-guide.md). In short:
 
 - Follow [docs/architecture.md](docs/architecture.md): hash routing, metadata-driven navigation, lazy-loaded Markdown, native ES modules. Adding subjects, topics or interactions must not require core app changes ([docs/extending.md](docs/extending.md)).
 - Small, readable modules a student can follow. Plain functions over clever abstractions. Comments explain *why*.
+- When `styles.css` or `app.js` changes, update the `?v=<date>` on their links in `index.html` (cache busting — architecture §10).
 - No inline event handlers in HTML; no `innerHTML` with unsanitised input.
 - Handle failures visibly: a missing file shows a helpful message, never a blank page.
-- UI/UX and accessibility: see [.claude/skills/ui-ux/SKILL.md](.claude/skills/ui-ux/SKILL.md). Non-negotiables: WCAG 2.2 AA contrast, full keyboard access, visible focus, semantic HTML, `prefers-reduced-motion` respected, works at 320px width, light and dark themes.
+- UI/UX and accessibility: see [.claude/skills/ui-ux/SKILL.md](.claude/skills/ui-ux/SKILL.md). Non-negotiables: WCAG 2.2 AA contrast, full keyboard access, visible focus, semantic HTML, `prefers-reduced-motion` respected, works at 320px width, every theme (Light, Dark, Ocean, Purple, Amber, Forest — token blocks in `styles.css`; components use tokens only, never raw colours).
 - Design goal: **beautiful + useful + easy to study.** Readability and hierarchy over decoration — no heavy gradients, glassmorphism or gratuitous animation.
 
 ## Skills
@@ -114,7 +117,7 @@ Before saying work is done:
 - **Excel (CS Concepts):** every formula result, PivotTable value and error shown in content or an interaction is checked in desktop Excel.
 - **Markdown:** headings follow the template; links and image paths resolve; renders correctly on GitHub.
 - **Interactions:** registry files match `metadata/schemas/interactions.schema.json` and content-guide §6 rule 8 (topics exist, `after` headings exist, modules exist, answer indexes valid); each new interaction steps from start to finish without errors.
-- **App:** test through a local static server (architecture §10): every route, light/dark, keyboard-only navigation, a 320px-wide viewport, and the browser console free of errors.
+- **App:** test through a local static server (architecture §10): every route, every theme (at least one light and one dark), keyboard-only navigation, a 320px-wide viewport, and the browser console free of errors.
 - Report what was verified and what was not. Never claim something works without having checked it.
 
 ## Git and GitHub

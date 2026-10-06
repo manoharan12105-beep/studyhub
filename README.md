@@ -32,7 +32,7 @@ A personal study and interview-preparation platform for aptitude, data structure
 ```text
 StudyHub/
 ├── index.html                  App shell — must stay at the root
-├── styles.css · app.js         Styles (design tokens, light/dark) and entry module
+├── styles.css · app.js         Styles (design tokens, six themes) and entry module
 ├── js/                         Content, engagement and study engines, views, visualizers, simulators
 ├── .nojekyll                   Tells GitHub Pages to serve files as-is
 ├── assets/                     Icons and vendored libraries (marked, three.js)
@@ -190,9 +190,10 @@ The modes are declared in `metadata/categories.json` (`studyModes`); the app com
 
 The browser can't list folders on GitHub Pages, so the app discovers content through JSON:
 
-1. `metadata/categories.json` lists categories, their subcategories, and where each category's catalog is.
+1. `metadata/categories.json` lists categories (with their sidebar group and icon), their subcategories, and where each category's catalog is.
 2. `metadata/topics/<category>.json` lists every topic in that category: title, type, difficulty, tags, estimated time, prerequisites, related topics, which files exist, and draft/published status.
 3. `metadata/interactions/<category>.json` (optional) registers interactive exercises — knowledge checks, flashcards, comparisons, visualizers and simulators — and the lesson section each appears after. Lessons themselves stay plain Markdown.
+4. `metadata/updates.json` is the What's new changelog shown from the header menu; each content phase adds an entry.
 
 The topic `id` is permanent — it identifies the topic in URLs, progress tracking and bookmarks. Field-by-field reference: [docs/content-guide.md §6](docs/content-guide.md#6-metadata-reference).
 
@@ -245,7 +246,7 @@ A static single-page app built from three layers (details: [docs/architecture.md
 
 Views: dashboard (progress, continue learning, subjects, recent, bookmarks, quick revision, 3D knowledge map on wide screens) · subject (modules, Learn · Revision · Quick Revision, practice/interview by module) · module · topic (Lesson · Examples · Interview · Practice · Revision · Flashcards tabs, table of contents, previous/next) · study modes · focused sessions · search · bookmarks · history · interactive lab (every interaction in one place).
 
-Keyboard: `/` search · `←`/`→` previous/next topic (or question in a session) · `?` shortcuts · `Esc` close. Light/dark theme follows the system and can be toggled.
+Keyboard: `/` search · `Ctrl`/`⌘`+`K` quick actions · `←`/`→` previous/next topic (or question in a session) · `?` shortcuts · `Esc` close. The ⋮ header menu holds bookmarks, recently studied, shortcuts, the theme (Light, Dark, Ocean, Purple, Amber, Forest, or match the system) and What's new.
 
 There are no accounts and no server: progress lives in this browser only.
 

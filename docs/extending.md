@@ -2,23 +2,46 @@
 
 How to add subjects, topics, interactions, visualizers and simulators **without changing the core application**. This is the contract for future content phases (2H System Design and later). Phases 2F (Linux) and 2G (Computer Networks) followed it without any core app change.
 
-## A future content phase in five steps
+## A future content phase in six steps
 
 1. **Content** — write Markdown under `content/<category>/[<subcategory>/]<slug>/` following [content-guide.md](content-guide.md).
 2. **Metadata** — fill `metadata/topics/<category>.json`; add subcategories (and optional `studyModes`) in `metadata/categories.json`.
 3. **Register interactions** — add `metadata/interactions/<category>.json` and point the category's `interactions` field at it.
 4. **Add subject-specific modules** — new visualizers/simulators in `js/visualizers/` or `js/simulators/`, built on `js/engagement/stepper.js`.
-5. **Validate** — JSON Schemas, consistency rules (content-guide §6), and a run through a local static server with the browser console open.
+5. **Announce** — add an entry at the top of `metadata/updates.json` (see "Add an update" below).
+6. **Validate** — JSON Schemas, consistency rules (content-guide §6), and a run through a local static server with the browser console open.
 
 No change to `app.js`, the views, the router or the engines is needed for any of these.
 
 ## Add a subject
 
-System Design is already registered as an empty category (`metadata/topics/<id>.json` with `"topics": []`), so the dashboard shows it as **Coming soon**. A subject becomes available automatically as soon as its catalog has a published topic. To add another subject: content-guide §7 "A new category".
+System Design is already registered as an empty category (`metadata/topics/<id>.json` with `"topics": []`), so the dashboard shows it as **Coming soon**. A subject becomes available automatically as soon as its catalog has a published topic. To add another subject: content-guide §7 "A new category". Give the category a `group` (one of the `groups` ids in `categories.json`: `foundation`, `computer-science`, `development`, `architecture` — add a group there if none fits) and an `icon`: a 24×24 single-colour stroke SVG at `assets/icons/subjects/<id>.svg`. The app paints it with the theme colour through a CSS mask, so the SVG's own colour does not matter. The sidebar, dashboard cards and subject page pick both up automatically.
 
 ## Add a topic
 
 content-guide §7 "A new topic". The topic appears in navigation, search, sessions and progress once its metadata entry is `published`.
+
+## Add an update ("What's new")
+
+Add an entry at the **top** of the `updates` array in `metadata/updates.json` (newest first; schema: `metadata/schemas/updates.schema.json`):
+
+```json
+{
+  "id": "2026-11-02-system-design",
+  "date": "2026-11-02",
+  "type": "content",
+  "title": "System Design",
+  "description": "42 topics in 9 modules, with 6 interactive simulations.",
+  "link": "#/c/system-design"
+}
+```
+
+- `id` is permanent and unique (date + slug): the app remembers seen updates by id, so never reuse or rename one.
+- `type`: `content`, `revision`, `interaction`, `ui`, `bugfix` or `improvement`.
+- `link` (optional) is an in-app hash route.
+- Numbers in `description` must come from the metadata (count topics, modules, interactions) — never estimates.
+
+Readers who have used StudyHub before see a badge on the header menu and the new entry under What's new. There is no network check; the list is whatever is deployed.
 
 ## Add a data-driven interaction (no code)
 

@@ -113,7 +113,7 @@ function topicHeader(topic, category, sub) {
     const done = progress.isComplete(topic.id);
     completeBtn.setAttribute('aria-pressed', String(done));
     completeBtn.classList.toggle('is-done', done);
-    completeBtn.replaceChildren(icon('check', 16), done ? 'Completed' : 'Mark complete');
+    completeBtn.replaceChildren(icon(done ? 'check' : 'circle', 16), done ? 'Completed' : 'Mark as complete');
     const record = progress.getRecord(topic.id);
     const st = progress.getStatus(topic.id);
     status.className = `status status-${st}`;
@@ -127,14 +127,15 @@ function topicHeader(topic, category, sub) {
   });
   completeBtn.addEventListener('click', () => {
     const done = progress.toggleComplete(topic.id);
-    refresh();
+    document.dispatchEvent(new CustomEvent('studyhub:topic-refresh'));
     announce(done ? 'Marked as complete.' : 'Marked as in progress.');
   });
   refresh();
   document.addEventListener('studyhub:topic-refresh', refresh);
   track({ destroy: () => document.removeEventListener('studyhub:topic-refresh', refresh) });
 
-  const crumbs = [{ label: 'Dashboard', href: '#/' }];
+  // The trail follows the content structure: subject › module › topic.
+  const crumbs = category ? [] : [{ label: 'Dashboard', href: '#/' }];
   if (category) crumbs.push({ label: category.title, href: href(['c', category.id]) });
   if (sub) crumbs.push({ label: sub.title, href: href(['c', category.id, sub.id]) });
   crumbs.push({ label: topic.title });
@@ -167,38 +168,60 @@ function interactiveChip(shells) {
 
 function topicFooter(topic) {
   const { prev, next } = neighbours(topic);
+  const { category } = topicContext(topic);
   const links = (ids, label) => {
     const topics = (ids || []).map(getTopic).filter(Boolean);
     if (!topics.length) return null;
     return el('div', { class: 'related' }, el('h2', { class: 'related-title' }, label),
       el('ul', { class: 'chip-list', role: 'list' }, topics.map((t) => el('li', {}, el('a', { class: 'chip-link', href: href(['t', t.id]) }, t.title)))));
   };
-  const completeCta = el('div', { class: 'finish-cta' },
-    el('p', {}, el('strong', {}, 'Finished this topic?'), ' Mark it complete to track your progress.'));
-  const btn = el('button', { type: 'button', class: 'btn btn-primary' });
-  const sync = () => {
+
+  // One completion block, two states. Its toggle is the same progress record as
+  // the header button (studyhub:topic-refresh keeps both in step).
+  const finish = el('section', { class: 'finish-cta', 'aria-label': 'Topic completion' });
+  function sync() {
     const done = progress.isComplete(topic.id);
-    btn.replaceChildren(icon('check', 16), done ? 'Completed' : 'Mark complete');
-    btn.setAttribute('aria-pressed', String(done));
-  };
-  btn.addEventListener('click', () => {
-    const done = progress.toggleComplete(topic.id);
-    sync();
-    document.dispatchEvent(new CustomEvent('studyhub:topic-refresh'));
-    announce(done ? 'Marked as complete.' : 'Marked as in progress.');
-  });
+    finish.classList.toggle('is-done', done);
+    const toggle = el('button', { type: 'button', class: done ? 'btn btn-ghost btn-sm' : 'btn btn-primary', 'aria-pressed': String(done) },
+      done ? 'Mark as not complete' : [icon('circle', 16), 'Mark as complete']);
+    toggle.addEventListener('click', () => {
+      const nowDone = progress.toggleComplete(topic.id);
+      document.dispatchEvent(new CustomEvent('studyhub:topic-refresh'));
+      announce(nowDone ? 'Marked as complete.' : 'Marked as in progress.');
+      finish.querySelector('.finish-next a, button')?.focus();
+    });
+    if (!done) {
+      finish.replaceChildren(el('div', { class: 'finish-text' },
+        el('p', { class: 'finish-title' }, 'Finished this topic?'),
+        el('p', { class: 'muted small' }, 'Mark it complete to track your progress.')), toggle);
+      return;
+    }
+    finish.replaceChildren(
+      el('div', { class: 'finish-text' },
+        el('p', { class: 'finish-title finish-done' }, icon('check', 18), `${topic.title} completed`),
+        next
+          ? el('p', { class: 'finish-next-line' }, el('span', { class: 'muted' }, 'Next: '), el('strong', {}, next.title))
+          : el('p', { class: 'muted small' }, `That was the last topic in ${category?.title || 'this subject'}.`)),
+      el('div', { class: 'finish-next' },
+        next
+          ? el('a', { class: 'btn btn-primary', href: href(['t', next.id]) }, 'Continue', icon('arrowRight', 16))
+          : el('a', { class: 'btn btn-primary', href: category ? href(['c', category.id]) : '#/' }, category ? `Back to ${category.title}` : 'Dashboard'),
+        toggle));
+  }
   sync();
-  completeCta.append(btn);
+  document.addEventListener('studyhub:topic-refresh', sync);
+  track({ destroy: () => document.removeEventListener('studyhub:topic-refresh', sync) });
 
   return el('footer', { class: 'topic-footer' },
-    completeCta,
+    finish,
     links(topic.prerequisites, 'Study first'),
     links(topic.relatedTopics, 'Related topics'),
     el('nav', { class: 'pager', 'aria-label': 'Previous and next topic' },
       prev ? el('a', { class: 'pager-link pager-prev', href: href(['t', prev.id]), rel: 'prev' },
-        el('span', { class: 'pager-label' }, icon('chevronLeft', 14), 'Previous'), el('span', { class: 'pager-title' }, prev.title)) : el('span'),
+        el('span', { class: 'pager-label' }, icon('chevronLeft', 14), 'Previous topic'), el('span', { class: 'pager-title' }, prev.title)) : el('span'),
       next ? el('a', { class: 'pager-link pager-next', href: href(['t', next.id]), rel: 'next' },
-        el('span', { class: 'pager-label' }, 'Next', icon('chevronRight', 14)), el('span', { class: 'pager-title' }, next.title)) : el('span')));
+        el('span', { class: 'pager-label' }, 'Next topic', icon('chevronRight', 14)), el('span', { class: 'pager-title' }, next.title)) : el('span')),
+    el('p', { class: 'pager-hint muted small' }, el('kbd', {}, '←'), ' ', el('kbd', {}, '→'), ' also move between topics.'));
 }
 
 // ---- Practice / interview tabs -----------------------------------------------------

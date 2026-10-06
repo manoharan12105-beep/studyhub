@@ -9,6 +9,11 @@
   "properties": {
     "$schema": { "type": "string" },
     "schemaVersion": { "const": 1 },
+    "groups": {
+      "type": "array",
+      "description": "Optional. Library groups for the sidebar and dashboard (Foundation, Computer Science, …). A category joins one through its group field; categories without a known group are listed under Other subjects.",
+      "items": { "$ref": "#/$defs/group" }
+    },
     "categories": {
       "type": "array",
       "items": { "$ref": "#/$defs/category" }
@@ -31,7 +36,11 @@
         "order": { "type": "integer", "minimum": 1, "description": "Display order on the dashboard." },
         "icon": {
           "type": ["string", "null"],
-          "description": "Relative path to an icon under assets/icons/, or null for the app default."
+          "description": "Relative path to a single-colour SVG icon under assets/icons/ (drawn in the current text colour as a mask), or null for the app default."
+        },
+        "group": {
+          "$ref": "#/$defs/id",
+          "description": "Optional. The id of an entry in the top-level groups array."
         },
         "catalog": {
           "type": "string",
@@ -82,6 +91,16 @@
             }
           }
         }
+      }
+    },
+    "group": {
+      "type": "object",
+      "required": ["id", "title", "order"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "order": { "type": "integer", "minimum": 1 }
       }
     },
     "subcategory": {

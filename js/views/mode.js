@@ -35,8 +35,7 @@ export async function renderMode(main, { categoryId, modeId, anchor, isCurrent }
 
   main.replaceChildren(el('div', { class: 'page mode-page' },
     pageHeader({
-      crumbs: [{ label: 'Dashboard', href: '#/' }, { label: category.title, href: href(['c', category.id]) }, { label: mode.title }],
-      eyebrow: category.title,
+      crumbs: [{ label: category.title, href: href(['c', category.id]) }, { label: mode.title }],
       title: mode.title,
       lead: mode.description,
       meta: el('p', { class: 'topic-meta' },

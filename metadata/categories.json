@@ -1,13 +1,20 @@
 {
   "$schema": "./schemas/categories.schema.json",
   "schemaVersion": 1,
+  "groups": [
+    { "id": "foundation", "title": "Foundation", "order": 1 },
+    { "id": "computer-science", "title": "Computer Science", "order": 2 },
+    { "id": "development", "title": "Development", "order": 3 },
+    { "id": "architecture", "title": "Architecture", "order": 4 }
+  ],
   "categories": [
     {
       "id": "aptitude",
       "title": "Aptitude",
       "description": "Quantitative, logical and verbal aptitude for placement tests.",
       "order": 1,
-      "icon": null,
+      "icon": "assets/icons/subjects/aptitude.svg",
+      "group": "foundation",
       "catalog": "metadata/topics/aptitude.json",
       "interactions": "metadata/interactions/aptitude.json",
       "subcategories": [
@@ -61,7 +68,8 @@
       "title": "Data Structures & Algorithms",
       "description": "Data structures, algorithms, complexity analysis and Java implementations.",
       "order": 2,
-      "icon": null,
+      "icon": "assets/icons/subjects/dsa.svg",
+      "group": "foundation",
       "catalog": "metadata/topics/dsa.json",
       "interactions": "metadata/interactions/dsa.json",
       "subcategories": [
@@ -137,7 +145,8 @@
       "title": "Computer Science Concepts",
       "description": "Core computer science subjects for technical interviews.",
       "order": 3,
-      "icon": null,
+      "icon": "assets/icons/subjects/cs-concepts.svg",
+      "group": "computer-science",
       "catalog": "metadata/topics/cs-concepts.json",
       "interactions": "metadata/interactions/cs-concepts.json",
       "subcategories": [
@@ -183,7 +192,8 @@
       "title": "Object-Oriented Programming",
       "description": "Java OOP from objects and the four pillars to SOLID, design patterns and object-oriented design problems.",
       "order": 4,
-      "icon": null,
+      "icon": "assets/icons/subjects/oop.svg",
+      "group": "foundation",
       "catalog": "metadata/topics/oop.json",
       "interactions": "metadata/interactions/oop.json",
       "subcategories": [
@@ -288,7 +298,8 @@
       "title": "Spring Boot",
       "description": "Spring and Spring Boot for backend interviews: the container and DI, REST APIs, JPA and transactions, security and JWT, and production practice.",
       "order": 5,
-      "icon": null,
+      "icon": "assets/icons/subjects/spring-boot.svg",
+      "group": "development",
       "catalog": "metadata/topics/spring-boot.json",
       "interactions": "metadata/interactions/spring-boot.json",
       "subcategories": [
@@ -421,7 +432,8 @@
       "title": "DBMS and PostgreSQL",
       "description": "DBMS theory, SQL from basics to window functions and recursive CTEs, PostgreSQL features and internals, design, transactions, indexing and query optimization.",
       "order": 6,
-      "icon": null,
+      "icon": "assets/icons/subjects/dbms-postgresql.svg",
+      "group": "computer-science",
       "catalog": "metadata/topics/dbms-postgresql.json",
       "interactions": "metadata/interactions/dbms-postgresql.json",
       "subcategories": [
@@ -623,8 +635,9 @@
       "id": "linux",
       "title": "Linux",
       "description": "The Linux command line for developers: filesystem, text processing, permissions, processes, Bash scripting, networking, storage, services, SSH and troubleshooting.",
-      "order": 7,
-      "icon": null,
+      "order": 8,
+      "icon": "assets/icons/subjects/linux.svg",
+      "group": "computer-science",
       "catalog": "metadata/topics/linux.json",
       "interactions": "metadata/interactions/linux.json",
       "subcategories": [
@@ -771,8 +784,9 @@
       "id": "computer-networks",
       "title": "Computer Networks",
       "description": "How data travels from one application to another: OSI and TCP/IP, Ethernet and ARP, IP and subnetting, routing, TCP and UDP, DNS, DHCP, HTTP/HTTPS, NAT, security, performance and troubleshooting.",
-      "order": 8,
-      "icon": null,
+      "order": 7,
+      "icon": "assets/icons/subjects/computer-networks.svg",
+      "group": "computer-science",
       "catalog": "metadata/topics/computer-networks.json",
       "interactions": "metadata/interactions/computer-networks.json",
       "subcategories": [
@@ -942,7 +956,8 @@
       "title": "System Design",
       "description": "Designing scalable systems: load balancing, caching, replication, sharding, queues and trade-offs.",
       "order": 9,
-      "icon": null,
+      "icon": "assets/icons/subjects/system-design.svg",
+      "group": "architecture",
       "catalog": "metadata/topics/system-design.json",
       "subcategories": []
     }

@@ -39,6 +39,25 @@ export function totals(kind) {
   return { attempted, positive };
 }
 
+/** Per-topic summary for one topic: { attempted, positive, wrong, last } over the given kinds. */
+export function topicSummaries(kinds) {
+  const map = read(KEY, {});
+  const result = new Map();
+  for (const [topicId, topic] of Object.entries(map)) {
+    let attempted = 0;
+    let positive = 0;
+    let last = '';
+    for (const [key, value] of Object.entries(topic || {})) {
+      if (!kinds.includes(key.split(':')[0])) continue;
+      attempted++;
+      if (value.r === 'correct' || value.r === 'known') positive++;
+      if (value.t > last) last = value.t;
+    }
+    if (attempted) result.set(topicId, { attempted, positive, wrong: attempted - positive, last });
+  }
+  return result;
+}
+
 /** Latest activity timestamps, used for the dashboard's "recent activity" line. */
 export function lastActivity() {
   const map = read(KEY, {});

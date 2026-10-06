@@ -215,8 +215,9 @@ Schemas: [`metadata/schemas/categories.schema.json`](../metadata/schemas/categor
 | `id`            | kebab-case     | Also the folder name under `content/`. Permanent.        |
 | `title`         | string         | Display name.                                            |
 | `description`   | string         | One sentence for the dashboard card.                     |
-| `order`         | integer ≥ 1    | Dashboard order.                                         |
-| `icon`          | path \| null   | Icon under `assets/icons/`, or null for the default.     |
+| `order`         | integer ≥ 1    | Dashboard and sidebar order (unique).                    |
+| `group`         | id (opt.)      | Sidebar library group: an id from the top-level `groups` array (`{ id, title, order }`). Ungrouped subjects are listed under "Other subjects". |
+| `icon`          | path \| null   | Single-colour 24×24 SVG at `assets/icons/subjects/<id>.svg` (painted in the theme colour), or null for the default. |
 | `catalog`       | path           | `metadata/topics/<id>.json`.                             |
 | `interactions`  | path (opt.)    | `metadata/interactions/<id>.json` — the category's interaction registry (§6.1). |
 | `subcategories` | array          | `{ id, title, description?, order }`. May be empty.      |
@@ -256,6 +257,7 @@ Schemas: [`metadata/schemas/categories.schema.json`](../metadata/schemas/categor
 6. Every `studyModes[].sources[].path` exists, and every file in a `revision/` folder is listed in some mode.
 7. Every non-null `visualizer` id is listed in [visualizers.md](visualizers.md).
 8. Interaction registries: ids are unique across all files, every `topics[].topic` exists in the same category, every `after` is an H2 of that topic's `content.md`, every visualizer/simulator module file exists, and every `answer` index is within `options`.
+9. Every category `group` is declared in `groups`, and every `icon` file exists.
 
 ### 6.1 Interaction registry (`metadata/interactions/<category>.json`)
 
@@ -283,9 +285,10 @@ The topic `visualizer` field still marks a *candidate*; a visualizer is shown on
 
 ### A new category
 
-1. Add an entry (from `templates/metadata/category.json`) to `metadata/categories.json`.
+1. Add an entry (from `templates/metadata/category.json`) to `metadata/categories.json`, with its `group` and an icon at `assets/icons/subjects/<id>.svg`.
 2. Create `metadata/topics/<id>.json` with `"$schema": "../schemas/topics.schema.json"`, `"schemaVersion": 1`, `"category": "<id>"`, `"topics": []`.
 3. Create `content/<id>/`.
+4. When it is published, announce it in `metadata/updates.json` ([extending.md](extending.md#add-an-update-whats-new)).
 
 ### A new interaction
 

@@ -53,6 +53,7 @@ export async function fetchJson(path) {
 /** The single index object every view reads from. Built once by loadIndex(). */
 export const index = {
   categories: [],
+  groups: [],
   categoriesById: new Map(),
   topicsById: new Map(),
   pathToRoute: new Map(),
@@ -89,6 +90,8 @@ export async function loadIndex() {
   index.categories = registry.categories
     .map((raw, i) => buildCategory(raw, catalogs[i]))
     .sort(byOrder);
+  index.groups = (Array.isArray(registry.groups) ? registry.groups : [])
+    .filter((g) => g && g.id && g.title).slice().sort(byOrder);
 
   for (const category of index.categories) {
     index.categoriesById.set(category.id, category);
@@ -144,6 +147,23 @@ function buildCategory(raw, catalogResult) {
     category.topics.push(topic);
   }
   return category;
+}
+
+/**
+ * Library groups with their categories, in display order (sidebar, dashboard).
+ * Categories without a declared group are collected under "Other subjects".
+ */
+export function groupedCategories() {
+  const known = new Set(index.groups.map((g) => g.id));
+  const groups = index.groups.map((group) => ({ group, categories: index.categories.filter((c) => c.group === group.id) }));
+  const other = index.categories.filter((c) => !known.has(c.group));
+  if (other.length) groups.push({ group: { id: 'other', title: index.groups.length ? 'Other subjects' : 'Subjects' }, categories: other });
+  return groups.filter((g) => g.categories.length);
+}
+
+/** Every category in grouped display order. */
+export function categoriesInDisplayOrder() {
+  return groupedCategories().flatMap((g) => g.categories);
 }
 
 export function getCategory(id) {

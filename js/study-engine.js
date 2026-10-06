@@ -39,6 +39,45 @@ function nextIncomplete(topic) {
   return next;
 }
 
+/**
+ * Where to continue inside one subject: the topic last opened there and not
+ * finished, else the first unfinished one. null when everything is complete.
+ */
+export function resumeInCategory(categoryId) {
+  const category = getCategory(categoryId);
+  if (!category) return null;
+  const ids = new Set(category.topics.map((t) => t.id));
+  const recent = history.recentTopics(Infinity).find((e) => ids.has(e.id) && !progress.isComplete(e.id) && getTopic(e.id));
+  if (recent) return { topic: getTopic(recent.id), tab: recent.tab, reason: 'resume' };
+  const next = nextInCategory(categoryId);
+  if (!next) return null;
+  const s = stats(category.topics);
+  return { topic: next, reason: s.completed || s.inProgress ? 'next' : 'start' };
+}
+
+/** Recently opened topics of one subject, newest first. */
+export function recentInCategory(categoryId, limit = 3) {
+  return recentTopics(40).filter((r) => r.topic.category === categoryId).slice(0, limit);
+}
+
+// A topic needs attention when enough answers exist to judge (MIN_ANSWERS)
+// and fewer than WEAK_RATE of them were right / known.
+const MIN_ANSWERS = 3;
+const WEAK_RATE = 0.6;
+
+/**
+ * Topics where the learner's own recorded answers (practice, knowledge checks,
+ * interview and flashcard self-ratings) are mostly wrong. Empty when there is
+ * not enough data — nothing is guessed.
+ */
+export function needsAttention(limit = 4) {
+  return [...activity.topicSummaries(['practice', 'check', 'interview', 'flashcards']).entries()]
+    .map(([id, s]) => ({ topic: getTopic(id), ...s, rate: s.positive / s.attempted }))
+    .filter((r) => r.topic && r.attempted >= MIN_ANSWERS && r.rate < WEAK_RATE)
+    .sort((a, b) => a.rate - b.rate || b.attempted - a.attempted)
+    .slice(0, limit);
+}
+
 /** First topic in a category not completed yet (learning order). */
 export function nextInCategory(categoryId) {
   return getCategory(categoryId)?.topics.find((t) => !progress.isComplete(t.id)) || null;

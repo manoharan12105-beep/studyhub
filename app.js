@@ -13,27 +13,30 @@ import { announce, isTypingTarget } from './js/util.js';
 import * as theme from './js/theme.js';
 import { onExternalChange } from './js/storage.js';
 import { destroyAll } from './js/engagement/registry.js';
-import { renderSidebar, initDrawer, closeDrawer, initHeaderSearch } from './js/views/layout.js';
+import * as updates from './js/updates.js';
+import { renderSidebar, initSidebar, closeDrawer, initHeaderSearch } from './js/views/layout.js';
+import { initMenu } from './js/views/menu.js';
 import { renderHome } from './js/views/home.js';
 import { renderSubject, renderModule } from './js/views/subject.js';
 import { renderTopic, scrollToAnchor } from './js/views/topic.js';
 import { renderMode } from './js/views/mode.js';
 import { renderSession } from './js/views/session.js';
-import { renderSearch, renderBookmarks, renderHistory, renderLab } from './js/views/lists.js';
+import { renderSearch, renderBookmarks, renderHistory, renderLab, renderUpdates } from './js/views/lists.js';
 import { errorState } from './js/views/common.js';
 
 const main = document.getElementById('main');
 let renderToken = 0;
 let currentContext = { path: '/' };
 let firstRender = true;
+let palette = null;
 
 boot();
 
 async function boot() {
   theme.apply();
-  initThemeButton();
   installCopyHandler();
-  initDrawer();
+  initSidebar();
+  initMenu();
   initShortcuts();
 
   try {
@@ -48,7 +51,8 @@ async function boot() {
     return;
   }
 
-  initHeaderSearch();
+  palette = initHeaderSearch();
+  await updates.init();
   // Progress or bookmarks changed (here or in another tab): refresh the sidebar.
   document.addEventListener('studyhub:change', () => renderSidebar(currentContext));
   onExternalChange(() => renderSidebar(currentContext));
@@ -73,6 +77,7 @@ async function onRoute(route, { sameView }) {
 
   try {
     if (!first) result = await renderHome(main);
+    else if (first === 'updates') result = renderUpdates(main);
     else if (first === 'c' && a && b === 'm' && c) {
       Object.assign(context, { categoryId: a, modeId: c });
       result = await renderMode(main, { categoryId: a, modeId: c, anchor, isCurrent });
@@ -121,6 +126,7 @@ async function onRoute(route, { sameView }) {
   document.title = result.title === 'Dashboard' ? 'StudyHub' : `${result.title} · StudyHub`;
 
   if (!anchor) window.scrollTo(0, 0);
+  else if (!first) scrollToAnchor(anchor); // dashboard sections, e.g. #/?s=quick-revision
   // Move focus to the new page's heading so keyboard and screen-reader users
   // start at the top of the new content (not on the first page load).
   if (!firstRender) {
@@ -133,36 +139,25 @@ async function onRoute(route, { sameView }) {
   firstRender = false;
 }
 
-function initThemeButton() {
-  const button = document.getElementById('theme-btn');
-  const sync = () => {
-    const dark = theme.effectiveTheme() === 'dark';
-    button.setAttribute('aria-pressed', String(dark));
-    button.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
-  };
-  button.addEventListener('click', () => {
-    const next = theme.toggle();
-    sync();
-    announce(`${next === 'dark' ? 'Dark' : 'Light'} mode`);
-  });
-  document.addEventListener('studyhub:theme', sync);
-  sync();
-}
-
 function initShortcuts() {
   const dialog = document.getElementById('shortcuts-dialog');
-  document.getElementById('shortcuts-btn').addEventListener('click', () => dialog.showModal());
-  dialog.addEventListener('click', (event) => {
-    if (event.target.closest('[data-close-dialog]') || event.target === dialog) dialog.close();
-  });
 
   document.addEventListener('keydown', (event) => {
-    if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
+    if (event.defaultPrevented) return;
+    // Ctrl/⌘+K: search with quick actions (works from the search box too).
+    if ((event.ctrlKey || event.metaKey) && !event.altKey && event.key.toLowerCase() === 'k') {
+      if (document.querySelector('dialog[open]') || (isTypingTarget(event.target) && event.target.id !== 'search-input')) return;
+      event.preventDefault();
+      closeDrawer(false);
+      palette?.openPalette();
+      return;
+    }
+    if (event.ctrlKey || event.metaKey || event.altKey) return;
     if (event.key === 'Escape') {
       closeDrawer();
       return;
     }
-    if (isTypingTarget(event.target) || dialog.open) return;
+    if (isTypingTarget(event.target) || document.querySelector('dialog[open]')) return;
 
     if (event.key === '/') {
       event.preventDefault();

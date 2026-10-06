@@ -27,12 +27,28 @@ export function progressBar(value, label) {
   }, el('span', { style: `width:${value}%` }));
 }
 
+/**
+ * Breadcrumb trail. On narrow screens CSS keeps it on one line: the first
+ * crumb, an ellipsis for any skipped middle crumbs, and the parent (the
+ * current page is the h1 right below).
+ */
 export function breadcrumbs(items) {
-  return el('nav', { class: 'breadcrumbs', 'aria-label': 'Breadcrumb' },
-    el('ol', {}, items.map((item, i) => el('li', {},
-      i === items.length - 1 || !item.href
-        ? el('span', { 'aria-current': i === items.length - 1 ? 'page' : null }, item.label)
-        : el('a', { href: item.href }, item.label)))));
+  const last = items.length - 1;
+  const role = (i) => (i === last ? 'crumb-current' : i === last - 1 ? 'crumb-parent' : i === 0 ? 'crumb-first' : 'crumb-middle');
+  const crumbs = items.map((item, i) => el('li', { class: role(i) },
+    i === last || !item.href
+      ? el('span', { 'aria-current': i === last ? 'page' : null }, item.label)
+      : el('a', { href: item.href }, item.label)));
+  if (items.length > 3) crumbs.splice(1, 0, el('li', { class: 'crumb-ellipsis', 'aria-hidden': 'true' }, '…'));
+  return el('nav', { class: 'breadcrumbs', 'aria-label': 'Breadcrumb' }, el('ol', {}, crumbs));
+}
+
+/** Small subject icon from metadata (a single-colour SVG drawn in the text colour). */
+export function subjectIcon(category, size = 'md') {
+  const path = typeof category?.icon === 'string' && /^[\w./-]+\.svg$/.test(category.icon) && !category.icon.includes('..') ? category.icon : null;
+  return path
+    ? el('span', { class: `subject-icon subject-icon-${size}`, style: `--icon: url("${path}")`, 'aria-hidden': 'true' })
+    : el('span', { class: `subject-icon-fallback subject-icon-${size}`, 'aria-hidden': 'true' }, icon('book', size === 'lg' ? 24 : 18));
 }
 
 export function pageHeader({ crumbs, title, eyebrow, lead, actions, meta }) {

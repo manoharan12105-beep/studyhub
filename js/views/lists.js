@@ -4,66 +4,89 @@ import { el, debounce, timeAgo, icon } from '../util.js';
 import { mapSupported, focusOnMap } from '../map-focus.js';
 import { index, isAvailable, getTopic, getCategory, loadInteractions } from '../content-loader.js';
 import { href } from '../router.js';
-import { search, KIND_LABELS } from '../search.js';
+import { search, groupResults, loadInteractionEntries, GROUPS, KIND_LABELS } from '../search.js';
 import * as engine from '../study-engine.js';
 import { remove } from '../storage.js';
 import { createShell, mountInto, typeLabel } from '../engagement/registry.js';
 import { pageHeader, topicRow, emptyState, DIFFICULTY_LABELS, difficultyBadge, statusBadge } from './common.js';
 import { highlightMatch } from './layout.js';
+import { updateCard } from './menu.js';
+import * as updates from '../updates.js';
 
 // ---- Search ------------------------------------------------------------------------
+
+const PER_GROUP = 8;
 
 export function renderSearch(main, { query }) {
   const input = el('input', { type: 'search', class: 'input input-lg', value: query.get('q') || '', 'aria-label': 'Search', placeholder: 'Search topics, modules, tags…', autocomplete: 'off' });
   const subject = el('select', { class: 'select', 'aria-label': 'Subject' }, el('option', { value: '' }, 'All subjects'),
     index.categories.filter(isAvailable).map((c) => el('option', { value: c.id }, c.title)));
+  const type = el('select', { class: 'select', 'aria-label': 'Result type' }, el('option', { value: '' }, 'All types'),
+    GROUPS.map((g) => el('option', { value: g.id }, g.label)));
   const difficulty = el('select', { class: 'select', 'aria-label': 'Difficulty' }, el('option', { value: '' }, 'Any difficulty'),
     Object.entries(DIFFICULTY_LABELS).map(([v, l]) => el('option', { value: v }, l)));
   subject.value = query.get('subject') || '';
+  type.value = query.get('type') || '';
   difficulty.value = query.get('difficulty') || '';
   const count = el('p', { class: 'muted small', 'aria-live': 'polite' });
-  const list = el('ul', { class: 'result-list', role: 'list' });
+  const results = el('div', { class: 'search-groups' });
 
   function run() {
     const q = input.value.trim();
     // Keep the URL shareable without triggering a re-render (replaceState fires no hashchange).
-    window.history.replaceState(null, '', href(['search'], { q, subject: subject.value, difficulty: difficulty.value }));
+    window.history.replaceState(null, '', href(['search'], { q, subject: subject.value, type: type.value, difficulty: difficulty.value }));
     if (!q) {
-      list.replaceChildren();
+      results.replaceChildren();
       count.textContent = 'Type to search across every subject.';
       return;
     }
-    const results = search(q, { categoryId: subject.value || null, difficulty: difficulty.value || null });
-    count.textContent = `${results.length} result${results.length === 1 ? '' : 's'} for “${q}”`;
-    if (!results.length) {
-      list.replaceChildren(el('li', {}, emptyState(
-        subject.value || difficulty.value ? 'No matches with these filters. Try “All subjects” and “Any difficulty”.' : 'No matches. Try a shorter word or a related term (for example “join”, “heap”, “percent”).')));
+    const kinds = GROUPS.find((g) => g.id === type.value)?.kinds || null;
+    const found = search(q, { categoryId: subject.value || null, difficulty: difficulty.value || null, kinds });
+    count.textContent = `${found.length} result${found.length === 1 ? '' : 's'} for “${q}”`;
+    if (!found.length) {
+      results.replaceChildren(emptyState(
+        subject.value || type.value || difficulty.value ? 'No matches with these filters. Try “All subjects”, “All types” and “Any difficulty”.' : 'No matches. Try a shorter word or a related term (for example “join”, “heap”, “percent”).'));
       return;
     }
-    const withMap = mapSupported();
-    list.replaceChildren(...results.slice(0, 80).map(({ entry }) => el('li', { class: 'result' },
-      el('a', { class: 'result-link', href: entry.href },
-        el('span', { class: 'result-path' }, [...entry.path, KIND_LABELS[entry.kind]].join(' → ')),
-        el('span', { class: 'result-title' }, highlightMatch(entry.title, q)),
-        entry.topic ? el('span', { class: 'result-desc' }, entry.topic.description) : null,
-        entry.topic ? el('span', { class: 'topic-row-meta' }, statusBadge(entry.topic.id), difficultyBadge(entry.topic.difficulty)) : null),
-      // Subjects are the nodes of the dashboard map; nothing else gets this action.
-      withMap && entry.kind === 'subject' ? el('button', {
-        type: 'button', class: 'btn btn-ghost btn-sm result-map',
-        onClick: () => focusOnMap(entry.categoryId),
-      }, icon('spark', 14), 'View in knowledge map', el('span', { class: 'sr-only' }, ` (${entry.title})`)) : null)));
+    // One group: show up to 80 results. All types: a few per group, each expandable.
+    results.replaceChildren(...groupResults(found).map((group) => {
+      const limit = type.value ? 80 : PER_GROUP;
+      const more = group.results.length - limit;
+      const showAll = more > 0 ? el('button', { type: 'button', class: 'btn btn-ghost btn-sm' }, `Show all ${group.results.length} ${group.label.toLowerCase()}`) : null;
+      showAll?.addEventListener('click', () => { type.value = group.id; run(); results.querySelector('h2')?.focus(); });
+      return el('section', { class: 'search-group-section', 'aria-labelledby': `rg-${group.id}` },
+        el('h2', { class: 'search-group-title', id: `rg-${group.id}`, tabindex: -1 }, group.label, el('span', { class: 'muted' }, ` ${group.results.length}`)),
+        el('ul', { class: 'result-list', role: 'list' }, group.results.slice(0, limit).map(({ entry }) => resultRow(entry, q))),
+        showAll);
+    }));
   }
   const debounced = debounce(run, 80);
   input.addEventListener('input', debounced);
-  subject.addEventListener('change', run);
-  difficulty.addEventListener('change', run);
+  for (const select of [subject, type, difficulty]) select.addEventListener('change', run);
 
   main.replaceChildren(el('div', { class: 'page' },
     pageHeader({ crumbs: [{ label: 'Dashboard', href: '#/' }, { label: 'Search' }], title: 'Search' }),
-    el('div', { class: 'search-page-bar' }, input, subject, difficulty),
-    count, list));
+    el('div', { class: 'search-page-bar' }, input, subject, type, difficulty),
+    count, results));
   run();
+  // Interactive results join once their registries have loaded (instant when cached).
+  loadInteractionEntries().then(() => { if (document.body.contains(results)) run(); }).catch(() => {});
   return { title: 'Search', focus: input };
+}
+
+function resultRow(entry, q) {
+  const withMap = mapSupported();
+  return el('li', { class: 'result' },
+    el('a', { class: 'result-link', href: entry.href },
+      el('span', { class: 'result-path' }, el('span', { class: `search-kind search-kind-${entry.kind}` }, KIND_LABELS[entry.kind]), entry.path.join(' → ')),
+      el('span', { class: 'result-title' }, highlightMatch(entry.title, q)),
+      entry.kind === 'topic' ? el('span', { class: 'result-desc' }, entry.topic.description) : null,
+      entry.kind === 'topic' ? el('span', { class: 'topic-row-meta' }, statusBadge(entry.topic.id), difficultyBadge(entry.topic.difficulty)) : null),
+    // Subjects are the nodes of the dashboard map; nothing else gets this action.
+    withMap && entry.kind === 'subject' ? el('button', {
+      type: 'button', class: 'btn btn-ghost btn-sm result-map',
+      onClick: () => focusOnMap(entry.categoryId),
+    }, icon('spark', 14), 'View in knowledge map', el('span', { class: 'sr-only' }, ` (${entry.title})`)) : null);
 }
 
 // ---- Bookmarks ---------------------------------------------------------------------
@@ -158,4 +181,26 @@ export async function renderLab(main, { isCurrent }) {
     stage,
     groups.length ? groups : emptyState('No interactions are registered yet.')));
   return { title: 'Interactive lab' };
+}
+
+// ---- Update history ----------------------------------------------------------------
+
+export function renderUpdates(main) {
+  const all = updates.all();
+  const fresh = new Set(updates.unseen().map((u) => u.id));
+  main.replaceChildren(el('div', { class: 'page updates-page' },
+    pageHeader({
+      crumbs: [{ label: 'Dashboard', href: '#/' }, { label: "What's new" }],
+      title: "What's new",
+      lead: 'Everything added to StudyHub, newest first. New content arrives with each update of the site — there is nothing to install or refresh.',
+    }),
+    all.length
+      ? el('ol', { class: 'update-list update-history', role: 'list' }, all.map((u) => {
+        const card = updateCard(u, { headingLevel: 2 });
+        if (fresh.has(u.id)) card.querySelector('.update-meta').append(el('span', { class: 'badge badge-new' }, 'New'));
+        return card;
+      }))
+      : emptyState('No updates have been published yet.')));
+  updates.markAllSeen();
+  return { title: "What's new" };
 }

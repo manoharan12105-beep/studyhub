@@ -99,16 +99,15 @@ export async function renderSession(main, { kind, scope, isCurrent }) {
 }
 
 function resolveScope([type, a, b]) {
-  const home = { label: 'Dashboard', href: '#/' };
   if (type === 'topic') {
     const topic = getTopic(a);
     if (!topic) return null;
     const category = getCategory(topic.category);
-    return { label: topic.title, topics: [topic], crumbs: [home, { label: category.title, href: href(['c', category.id]) }, { label: topic.title, href: href(['t', topic.id]) }] };
+    return { label: topic.title, topics: [topic], crumbs: [{ label: category.title, href: href(['c', category.id]) }, { label: topic.title, href: href(['t', topic.id]) }] };
   }
   const category = getCategory(a);
   if (!category) return null;
-  const crumbs = [home, { label: category.title, href: href(['c', category.id]) }];
+  const crumbs = [{ label: category.title, href: href(['c', category.id]) }];
   if (type === 'subject') return { label: category.title, topics: category.topics, crumbs };
   if (type === 'module') {
     const sub = getSubcategory(category, b);

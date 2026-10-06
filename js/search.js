@@ -1,14 +1,34 @@
-// Global search over metadata: subjects, modules, study modes and topics.
+// Global search over metadata: subjects, modules, study modes, topics, each
+// topic's revision / practice / interview files, and registered interactions.
 //
-// Built once from the in-memory index (no Markdown is fetched), so results are
+// Built from the in-memory index (no Markdown is fetched), so results are
 // instant. Every query word must match some field; matches in the title count
 // most, then tags, then subject/module names, then the description.
 
-import { index, isAvailable } from './content-loader.js';
+import { index, isAvailable, loadInteractions } from './content-loader.js';
 import { href } from './router.js';
 
 const WEIGHTS = { title: 10, tags: 6, context: 3, description: 2 };
 let entries = null;
+let interactionEntries = [];
+let interactionsLoading = null;
+
+/** Result groups, in display order. A kind belongs to exactly one group. */
+export const GROUPS = [
+  { id: 'subjects', label: 'Subjects & modules', kinds: ['subject', 'module'] },
+  { id: 'topics', label: 'Topics', kinds: ['topic'] },
+  { id: 'revision', label: 'Revision', kinds: ['mode', 'revision'] },
+  { id: 'practice', label: 'Practice', kinds: ['practice'] },
+  { id: 'interview', label: 'Interview', kinds: ['interview'] },
+  { id: 'interactive', label: 'Interactive', kinds: ['interaction'] },
+];
+
+// Companion files that get their own search entry: file → [kind, tab, words that find it].
+const COMPANIONS = [
+  ['revision.md', 'revision', 'revision', 'revision notes revise'],
+  ['practice.md', 'practice', 'practice', 'practice exercises problems'],
+  ['interview-questions.md', 'interview', 'interview-questions', 'interview questions'],
+];
 
 function normalize(text) {
   return String(text || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '')
@@ -52,9 +72,50 @@ function buildEntries() {
         },
         categoryId: category.id,
       });
+      // Companion entries match on the topic's name and the file's own words, not the
+      // description, so they only appear when the topic itself is a strong match.
+      for (const [file, kind, tab, words] of COMPANIONS) {
+        if (!topic.files.includes(file)) continue;
+        list.push({
+          kind, title: topic.title, path: [category.title, sub?.title].filter(Boolean),
+          href: href(['t', topic.id, tab]), topic,
+          fields: { title: normalize(topic.title), tags: words, context: normalize(`${category.title} ${sub?.title || ''}`), description: '' },
+          categoryId: category.id,
+        });
+      }
     }
   }
-  return list;
+  return list.concat(interactionEntries);
+}
+
+/**
+ * Interactions live in per-subject registries (small JSON files) that load
+ * asynchronously; they join the index once loaded.
+ */
+export function loadInteractionEntries() {
+  interactionsLoading ||= addInteractionEntries();
+  return interactionsLoading;
+}
+
+async function addInteractionEntries() {
+  const categories = index.categories.filter((c) => isAvailable(c) && c.interactions);
+  const registries = await Promise.all(categories.map((c) => loadInteractions(c.id)));
+  interactionEntries = categories.flatMap((category, i) => registries[i].interactions.map((interaction) => {
+    const topicId = interaction.topics?.[0]?.topic;
+    const topic = topicId ? index.topicsById.get(topicId) : null;
+    return {
+      kind: 'interaction', title: interaction.title, path: [category.title, topic?.title].filter(Boolean),
+      href: topic ? href(['t', topic.id], { s: `try-${interaction.id}` }) : href(['lab']),
+      fields: {
+        title: normalize(interaction.title),
+        tags: normalize(`${interaction.type} interactive`),
+        context: normalize(`${category.title} ${topic?.title || ''}`),
+        description: normalize(interaction.description),
+      },
+      categoryId: category.id,
+    };
+  }));
+  entries = null; // rebuild with the new entries on the next query
 }
 
 function scoreTerm(entry, term) {
@@ -92,11 +153,20 @@ export function search(query, filters = {}) {
     if (!total) continue;
     // Exact title match floats to the top; subjects/modules slightly above topics on ties.
     if (entry.fields.title === terms.join(' ')) total += 25;
-    if (entry.kind !== 'topic') total += 1;
+    if (entry.kind === 'subject' || entry.kind === 'module') total += 1;
     results.push({ entry, score: total });
   }
   results.sort((a, b) => b.score - a.score || a.entry.title.localeCompare(b.entry.title));
   return results;
 }
 
-export const KIND_LABELS = { subject: 'Subject', module: 'Module', mode: 'Study mode', topic: 'Topic' };
+/** Split ranked results into GROUPS (each keeps the ranking order). */
+export function groupResults(results) {
+  return GROUPS.map((group) => ({ ...group, results: results.filter((r) => group.kinds.includes(r.entry.kind)) }))
+    .filter((group) => group.results.length);
+}
+
+export const KIND_LABELS = {
+  subject: 'Subject', module: 'Module', mode: 'Revision', topic: 'Topic', revision: 'Revision',
+  practice: 'Practice', interview: 'Interview', interaction: 'Interactive',
+};

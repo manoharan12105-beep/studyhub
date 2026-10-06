@@ -1,11 +1,15 @@
 // Subject (category) page and module (subcategory) page.
 
-import { el, icon, formatMinutes } from '../util.js';
-import { getCategory, getSubcategory, isAvailable, ungroupedTopics, interactiveTopicIds } from '../content-loader.js';
+import { el, icon, formatMinutes, timeAgo } from '../util.js';
+import {
+  index, getCategory, getSubcategory, isAvailable, ungroupedTopics, interactiveTopicIds, loadInteractions,
+} from '../content-loader.js';
 import { href } from '../router.js';
 import * as engine from '../study-engine.js';
 import { getStatus } from '../progress.js';
-import { pageHeader, progressBar, topicRow, errorState, notice, DIFFICULTY_LABELS } from './common.js';
+import {
+  pageHeader, progressBar, topicRow, errorState, notice, subjectIcon, DIFFICULTY_LABELS,
+} from './common.js';
 
 function totalMinutes(topics) {
   return topics.reduce((sum, t) => sum + (t.estimatedMinutes || 0), 0);
@@ -58,43 +62,109 @@ export async function renderSubject(main, { categoryId }) {
   }
 
   const s = engine.stats(category.topics);
-  const next = engine.nextInCategory(category.id);
-  const interactive = await interactiveTopicIds(category.id);
+  const resume = engine.resumeInCategory(category.id);
+  const [interactive, registry] = await Promise.all([interactiveTopicIds(category.id), loadInteractions(category.id)]);
   const modules = category.subcategories.filter((sub) => sub.topics.length);
   const loose = ungroupedTopics(category);
+  const group = index.groups.find((g) => g.id === category.group);
 
-  main.replaceChildren(el('div', { class: 'page' },
+  main.replaceChildren(el('div', { class: 'page subject-page' },
     pageHeader({
       crumbs: [{ label: 'Dashboard', href: '#/' }, { label: category.title }],
+      eyebrow: group ? group.title : null,
       title: category.title,
       lead: category.description,
-      actions: next ? el('a', { class: 'btn btn-primary', href: href(['t', next.id]) }, s.completed || s.inProgress ? `Continue: ${next.title}` : `Start: ${next.title}`, icon('chevronRight', 16)) : null,
-      meta: el('div', { class: 'subject-stats' },
-        el('p', {}, el('strong', {}, `${category.topics.length}`), ' topics · ', el('strong', {}, `${modules.length}`), ' modules · about ', formatMinutes(totalMinutes(category.topics)), ' of study'),
-        el('div', { class: 'subject-progress' }, progressBar(s.percent, `${category.title} progress`),
-          el('span', { class: 'small' }, `${s.completed} completed · ${s.inProgress} in progress · ${s.percent}%`))),
     }),
-    modeTabs(category),
+    el('section', { class: 'subject-summary', 'aria-label': `${category.title} at a glance` },
+      el('div', { class: 'subject-summary-main' },
+        subjectIcon(category, 'lg'),
+        el('dl', { class: 'fact-row' },
+          fact(category.topics.length, 'topics'),
+          fact(modules.length, 'modules'),
+          registry.interactions.length ? fact(registry.interactions.length, 'interactive exercises') : null,
+          fact(formatMinutes(totalMinutes(category.topics)), 'of lessons'))),
+      el('div', { class: 'subject-progress' },
+        el('div', { class: 'progress-row' },
+          el('span', {}, el('strong', {}, `${s.completed}`), ` of ${s.total} completed`,
+            s.inProgress ? el('span', { class: 'muted' }, ` · ${s.inProgress} in progress`) : null),
+          el('span', { class: 'muted' }, `${s.percent}%`)),
+        progressBar(s.percent, `${category.title} progress`)),
+      resume
+        ? el('div', { class: 'subject-resume' },
+          el('p', { class: 'small' },
+            el('span', { class: 'muted' }, resume.reason === 'start' ? 'Start with ' : resume.reason === 'next' ? 'Up next: ' : 'Continue: '),
+            el('strong', {}, resume.topic.title)),
+          el('a', { class: 'btn btn-primary', href: resume.tab && resume.tab !== 'lesson' ? href(['t', resume.topic.id, resume.tab]) : href(['t', resume.topic.id]) },
+            resume.reason === 'start' ? 'Start learning' : 'Continue learning', icon('arrowRight', 16)))
+        : el('p', { class: 'subject-resume finish-done' }, icon('check', 18), 'Every topic in this subject is complete.')),
+    quickActions(category),
+    recentInSubject(category),
     el('section', { class: 'section', 'aria-labelledby': 'modules-title' },
       el('div', { class: 'section-head' }, el('h2', { id: 'modules-title' }, 'Modules'),
         el('p', { class: 'muted small' }, 'Work through them in order, or jump to what you need.')),
-      el('ol', { class: 'module-grid', role: 'list' }, modules.map((sub, i) => moduleCard(category, sub, i + 1, interactive)))),
+      el('ol', { class: 'module-list', role: 'list' }, modules.map((sub, i) => moduleRow(category, sub, i + 1, interactive)))),
     loose.length ? el('section', { class: 'section' }, el('h2', {}, 'Other topics'),
       el('ul', { class: 'topic-list', role: 'list' }, loose.map((t) => topicRow(t, { interactive: interactive.has(t.id) })))) : null,
     testYourselfSection(category, modules)));
   return { title: category.title };
 }
 
-function moduleCard(category, sub, number, interactive) {
+function fact(value, label) {
+  return el('div', { class: 'fact' }, el('dt', {}, label), el('dd', {}, String(value)));
+}
+
+/** Revision modes and whole-subject sessions, with their real time estimates. */
+function quickActions(category) {
+  const practice = category.topics.filter(has('practice.md')).length;
+  const interview = category.topics.filter(has('interview-questions.md')).length;
+  const session = (kind) => href(['session', kind, 'subject', category.id]);
+  const topicsMeta = (n) => `${n} topic${n === 1 ? '' : 's'}`;
+  const tiles = [
+    ...category.studyModes.map((mode) => actionTile(href(['c', category.id, 'm', mode.id]), 'revision', 'Revision', mode.title,
+      mode.estimatedMinutes ? `~${formatMinutes(mode.estimatedMinutes)}` : null)),
+    practice ? actionTile(session('practice'), 'check', 'Session', 'Practice', topicsMeta(practice)) : null,
+    interview ? actionTile(session('interview'), 'book', 'Session', 'Interview questions', topicsMeta(interview)) : null,
+    interview ? actionTile(session('flashcards'), 'spark', 'Session', 'Flashcards', topicsMeta(interview)) : null,
+  ].filter(Boolean);
+  if (!tiles.length) return null;
+  return el('section', { class: 'quick-actions', 'aria-labelledby': 'qa-title' },
+    el('h2', { class: 'quick-actions-title', id: 'qa-title' }, 'Revise and test yourself'),
+    el('div', { class: 'quick-actions-row' }, tiles));
+}
+
+function actionTile(link, iconName, kind, title, meta) {
+  return el('a', { class: 'action-tile', href: link },
+    el('span', { class: 'action-kind' }, icon(iconName, 14), kind),
+    el('span', { class: 'action-title' }, title),
+    meta ? el('span', { class: 'action-meta' }, meta) : null);
+}
+
+function recentInSubject(category) {
+  const recent = engine.recentInCategory(category.id, 3);
+  if (!recent.length) return null;
+  return el('section', { class: 'recent-strip', 'aria-labelledby': 'recent-sub-title' },
+    el('h2', { class: 'recent-strip-title', id: 'recent-sub-title' }, 'Recently studied'),
+    el('ul', { role: 'list' }, recent.map(({ entry, topic }) => el('li', {},
+      el('a', { href: entry.tab ? href(['t', topic.id, entry.tab]) : href(['t', topic.id]) }, icon('arrowRight', 14), topic.title),
+      el('span', { class: 'muted small' }, ` · ${timeAgo(entry.at)}`)))));
+}
+
+function moduleRow(category, sub, number, interactive) {
   const s = engine.stats(sub.topics);
   const count = sub.topics.filter((t) => interactive.has(t.id)).length;
-  return el('li', { class: 'card module-card' },
-    el('p', { class: 'module-number' }, `Module ${number}`),
-    el('h3', { class: 'card-title' }, el('a', { class: 'stretched', href: href(['c', category.id, sub.id]) }, sub.title)),
-    sub.description ? el('p', { class: 'card-desc' }, sub.description) : null,
-    el('p', { class: 'card-meta' }, `${sub.topics.length} topic${sub.topics.length === 1 ? '' : 's'} · ${formatMinutes(totalMinutes(sub.topics))}`,
-      count ? el('span', { class: 'badge badge-interactive' }, icon('spark', 12), `${count} interactive`) : null),
-    el('div', { class: 'card-progress' }, progressBar(s.percent, `${sub.title} progress`), el('span', { class: 'small muted' }, `${s.completed}/${s.total}`)));
+  const done = s.total > 0 && s.completed === s.total;
+  return el('li', {}, el('a', { class: `module-row ${done ? 'is-done' : ''}`, href: href(['c', category.id, sub.id]) },
+    el('span', { class: 'module-num', 'aria-hidden': 'true' }, String(number).padStart(2, '0')),
+    el('span', { class: 'module-main' },
+      el('span', { class: 'module-title' }, el('span', { class: 'sr-only' }, `Module ${number}: `), sub.title),
+      sub.description ? el('span', { class: 'module-desc' }, sub.description) : null,
+      el('span', { class: 'module-meta' }, `${sub.topics.length} topic${sub.topics.length === 1 ? '' : 's'} · ${formatMinutes(totalMinutes(sub.topics))}`,
+        count ? el('span', { class: 'badge badge-interactive' }, icon('spark', 12), `${count} interactive`) : null)),
+    el('span', { class: 'module-progress' },
+      done
+        ? el('span', { class: 'status status-completed' }, el('span', { class: 'status-dot', 'aria-hidden': 'true' }), 'Completed')
+        : el('span', { class: 'small muted' }, `${s.completed}/${s.total}`, el('span', { class: 'sr-only' }, ' completed')),
+      progressBar(s.percent, `${sub.title} progress`))));
 }
 
 function testYourselfSection(category, modules) {
@@ -146,8 +216,7 @@ export async function renderModule(main, { categoryId, subId }) {
 
   main.replaceChildren(el('div', { class: 'page' },
     pageHeader({
-      crumbs: [{ label: 'Dashboard', href: '#/' }, { label: category.title, href: href(['c', category.id]) }, { label: sub.title }],
-      eyebrow: category.title,
+      crumbs: [{ label: category.title, href: href(['c', category.id]) }, { label: sub.title }],
       title: sub.title,
       lead: sub.description,
       meta: el('div', { class: 'subject-stats' },

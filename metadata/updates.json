@@ -1,0 +1,93 @@
+{
+  "$schema": "./schemas/updates.schema.json",
+  "schemaVersion": 1,
+  "updates": [
+    {
+      "id": "2026-10-06-navigation-and-themes",
+      "date": "2026-10-06",
+      "title": "Clearer navigation and six themes",
+      "description": "A grouped, collapsible sidebar, one header menu, six colour themes, search results grouped by type, and this What's new panel.",
+      "type": "ui"
+    },
+    {
+      "id": "2026-10-06-excel-fundamentals",
+      "date": "2026-10-06",
+      "title": "Excel Fundamentals",
+      "description": "18 Excel topics in Computer Science Concepts with 4 interactive exercises, including a PivotTable builder, plus complete, quick and 10-minute revision sheets.",
+      "type": "content",
+      "link": "#/c/cs-concepts"
+    },
+    {
+      "id": "2026-10-05-computer-networks",
+      "date": "2026-10-05",
+      "title": "Computer Networks",
+      "description": "88 topics in 22 modules with 15 interactive simulators and calculators, Revision and Quick Revision.",
+      "type": "content",
+      "link": "#/c/computer-networks"
+    },
+    {
+      "id": "2026-10-05-knowledge-map-focus",
+      "date": "2026-10-05",
+      "title": "Knowledge map focus",
+      "description": "Select a subject on the dashboard map to focus it and see its progress. Subject search results can open the subject on the map.",
+      "type": "improvement",
+      "link": "#/"
+    },
+    {
+      "id": "2026-10-05-linux",
+      "date": "2026-10-05",
+      "title": "Linux",
+      "description": "59 topics in 18 modules with 12 interactive exercises, Revision and Quick Revision.",
+      "type": "content",
+      "link": "#/c/linux"
+    },
+    {
+      "id": "2026-10-05-interactive-study",
+      "date": "2026-10-05",
+      "title": "Interactive exercises and study sessions",
+      "description": "Visualizers, knowledge checks and flashcards inside lessons, plus focused practice, interview and flashcard sessions.",
+      "type": "interaction",
+      "link": "#/lab"
+    },
+    {
+      "id": "2026-10-05-dbms-postgresql",
+      "date": "2026-10-05",
+      "title": "DBMS and PostgreSQL",
+      "description": "75 topics in 26 modules, from SQL fundamentals to transactions, MVCC, indexing and query optimization, with Revision and Quick Revision.",
+      "type": "content",
+      "link": "#/c/dbms-postgresql"
+    },
+    {
+      "id": "2026-10-04-spring-boot",
+      "date": "2026-10-04",
+      "title": "Spring Boot",
+      "description": "91 topics in 15 modules with Revision and Quick Revision.",
+      "type": "content",
+      "link": "#/c/spring-boot"
+    },
+    {
+      "id": "2026-10-04-oop",
+      "date": "2026-10-04",
+      "title": "Object-Oriented Programming",
+      "description": "75 topics in 11 modules with Revision and Quick Revision.",
+      "type": "content",
+      "link": "#/c/oop"
+    },
+    {
+      "id": "2026-10-04-dsa",
+      "date": "2026-10-04",
+      "title": "Data Structures & Algorithms",
+      "description": "113 topics in 6 modules with Revision and Quick Revision.",
+      "type": "content",
+      "link": "#/c/dsa"
+    },
+    {
+      "id": "2026-10-02-aptitude",
+      "date": "2026-10-02",
+      "title": "Aptitude",
+      "description": "58 topics in 3 modules: quantitative, logical and verbal aptitude.",
+      "type": "content",
+      "link": "#/c/aptitude"
+    }
+  ]
+}
