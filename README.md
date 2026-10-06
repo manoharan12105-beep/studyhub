@@ -248,7 +248,7 @@ Views: dashboard (progress, continue learning, subjects, recent, bookmarks, quic
 
 Keyboard: `/` search · `Ctrl`/`⌘`+`K` quick actions · `←`/`→` previous/next topic (or question in a session) · `?` shortcuts · `Esc` close. The ⋮ header menu holds bookmarks, recently studied, shortcuts, the theme (Light, Dark, Ocean, Purple, Amber, Forest, or match the system) and What's new.
 
-There are no accounts and no server: progress lives in this browser only.
+There are no accounts and no server: progress lives in this browser only. To move it to another browser or device, use **⋮ → Progress Import / Export**: Export copies a versioned backup text to the clipboard, Import restores it from a paste. The backup is processed locally and never uploaded.
 
 ## Copyright & Usage
 

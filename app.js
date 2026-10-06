@@ -7,7 +7,7 @@
 //   Views              js/views/
 
 import { loadIndex, getTopic, neighbours } from './js/content-loader.js';
-import { start, href, navigate } from './js/router.js';
+import { start, href, navigate, parse } from './js/router.js';
 import { installCopyHandler } from './js/markdown-renderer.js';
 import { announce, isTypingTarget } from './js/util.js';
 import * as theme from './js/theme.js';
@@ -56,6 +56,8 @@ async function boot() {
   // Progress or bookmarks changed (here or in another tab): refresh the sidebar.
   document.addEventListener('studyhub:change', () => renderSidebar(currentContext));
   onExternalChange(() => renderSidebar(currentContext));
+  // A progress backup was restored: redraw the sidebar and the current page from the new state.
+  document.addEventListener('studyhub:restored', () => onRoute(parse(), { sameView: false }));
   start(onRoute);
 }
 

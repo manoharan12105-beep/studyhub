@@ -46,6 +46,7 @@ js/
   progress.js bookmarks.js history.js activity.js   study state, one key each
   study-engine.js              aggregates: stats, continue learning, recent, bookmarks
   theme.js                     six themes + "match system" (§9)
+  backup.js                    progress backup: allowlist, encode/decode, validation, atomic restore
   updates.js                   What's new: loads metadata/updates.json, tracks seen ids and visits
   engagement/
     registry.js                type → module, placement in lessons, lazy mounting, cleanup
@@ -163,6 +164,15 @@ On the first run of `updates`, entries older than the newest history entry (or a
 
 Question keys use the content's append-only ids (`P3`, `Q7`), so results stay valid as content grows. A breaking format change must bump `v1` and migrate.
 
+### Progress Import / Export (clipboard backup)
+
+StudyHub is static: progress exists only in the browser that recorded it. **Menu → Progress Import / Export** moves it between browsers or devices through the clipboard (`js/backup.js`, dialog in `js/views/backup-dialog.js`). Nothing is uploaded and there are no files.
+
+- **Exported:** exactly the allowlist `progress`, `bookmarks`, `history`, `questions`. Not exported: `theme`, `prefs` (appearance and layout belong to each browser), `updates` (per-browser What's new state), and any key outside `studyhub:v1:`.
+- **Format:** one line, `STUDYHUB-PROGRESS:v1:z.<base64url>` — deflate-raw compressed JSON `{ format: "studyhub-progress", version: 1, exportedAt, data }` (`j.` = uncompressed JSON, used where `CompressionStream` is missing). The version appears in the prefix and in the JSON; a backup with any other version is refused with a clear message, so a future v2 can add migration.
+- **Import:** the pasted text is decoded and every entry is type-checked against the shapes above (ids, statuses, dates, result values; unknown keys rejected, objects rebuilt from known fields) *before* anything is written. After a confirmation listing what the backup contains, the four keys are **replaced** in one step by `storage.writeAll()`, which restores the previous values if any write fails. Views re-render on the `studyhub:restored` event.
+- **Adding a new kind of persistent learner state:** add its key to `ALLOWLIST` with a validator in `js/backup.js`, or it will not travel with backups.
+
 ## 8. Third-party code
 
 | Library | Version | Use | Loaded |
@@ -178,7 +188,7 @@ Semantic landmarks, skip link, one `h1` per view with focus moved to it on navig
 
 ### Header menu, themes and sidebar
 
-- **Header menu** (`views/menu.js`): one ⋮ button (ARIA menu button) with three groups — *Study* (Bookmarks, Recently studied, Keyboard shortcuts), *Appearance* (Theme › — a submenu shown in the same panel, listing the theme radios) and *StudyHub* (What's new, About). Arrow keys / Home / End move, Esc closes and returns focus (in the Theme submenu, ← or Esc goes back to Theme); choosing a theme keeps the menu open so themes can be compared. The badge on the button counts unseen updates.
+- **Header menu** (`views/menu.js`): one ⋮ button (ARIA menu button) with three groups — *Study* (Bookmarks, Recently studied, Keyboard shortcuts), *Appearance* (Theme › — a submenu shown in the same panel, listing the theme radios) and *StudyHub* (Progress Import / Export, What's new, About). Arrow keys / Home / End move, Esc closes and returns focus (in the Theme submenu, ← or Esc goes back to Theme); choosing a theme keeps the menu open so themes can be compared. The badge on the button counts unseen updates.
 - **Themes** (`theme.js`): Light, Dark, Ocean, Purple, Amber, Forest and Match system. A theme is a token block in `styles.css` selected by `data-theme="<id>"` on `<html>`; *Match system* removes the attribute and the `prefers-color-scheme` block applies. Components only use tokens, so a new theme is one token block plus an entry in `THEMES` and in the inline head script. Changing theme dispatches `studyhub:theme`, which the 3D map listens to.
 - **Sidebar** (`views/layout.js`): *Study* (Dashboard, Continue learning, Interactive lab) and *Library* — subjects grouped by `categories.json` `groups`, each a compact row with icon and `completed/total`; the active subject shows a progress bar. No topics in the sidebar (they live on subject and module pages). At ≥ 768 px it collapses to an icon rail (tooltips on hover/focus, state in `prefs.sidebarCollapsed`); below 768 px it is a drawer with a focus trap (rest of the page inert), closed by Esc, the backdrop or following a link.
 - **What's new** (`updates.js`): static changelog only — no network checks. Unseen entries since the last visit are listed in the dialog; otherwise "You're caught up" with the last visit date. `#/updates` is the full history.

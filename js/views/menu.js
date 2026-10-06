@@ -8,6 +8,7 @@ import { el, icon, announce } from '../util.js';
 import { index, isAvailable } from '../content-loader.js';
 import * as theme from '../theme.js';
 import * as updates from '../updates.js';
+import { openBackup } from './backup-dialog.js';
 
 const REPO_URL = 'https://github.com/manoharan12105-beep/studyhub';
 
@@ -120,6 +121,10 @@ function onMenuClick(event) {
   if (item.dataset.action === 'shortcuts') document.getElementById('shortcuts-dialog').showModal();
   else if (item.dataset.action === 'updates') openUpdates();
   else if (item.dataset.action === 'about') openAbout();
+  else if (item.dataset.action === 'backup') openBackup();
+  // The menu item that opened the dialog is gone; focus returns to the ⋮ button on close.
+  const opened = document.querySelector('dialog[open]');
+  if (opened) opened.dataset.returnFocus = 'menu';
 }
 
 // ---- Menu content -----------------------------------------------------------------
@@ -148,6 +153,9 @@ function buildItems() {
         { 'data-action': 'theme', 'aria-haspopup': 'menu' })),
     el('div', { role: 'separator', class: 'menu-sep' }),
     group('menu-g-hub', 'StudyHub',
+      item([icon('transfer', 16), el('span', { class: 'menu-text' }, 'Progress Import / Export',
+        el('span', { class: 'menu-desc', id: 'menu-backup-desc' }, 'Backup or restore your StudyHub progress'))],
+      { 'data-action': 'backup', 'aria-label': 'Progress Import / Export', 'aria-describedby': 'menu-backup-desc' }),
       item([icon('spark', 16), "What's new", fresh ? el('span', { class: 'menu-pill' }, `${fresh} new`) : null], { 'data-action': 'updates' }),
       item([icon('info', 16), 'About StudyHub'], { 'data-action': 'about' })),
   ];
@@ -194,6 +202,13 @@ function syncBadge() {
 function wireDialog(dialog) {
   dialog.addEventListener('click', (event) => {
     if (event.target.closest('[data-close-dialog]') || event.target === dialog) dialog.close();
+  });
+  dialog.addEventListener('close', () => {
+    if (dialog.dataset.returnFocus !== 'menu') return;
+    delete dialog.dataset.returnFocus;
+    // 'close' fires a moment after Esc; leave focus alone if the user already moved it (e.g. pressed /).
+    const active = document.activeElement;
+    if (!active || active === document.body || dialog.contains(active)) button.focus();
   });
 }
 

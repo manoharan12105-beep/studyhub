@@ -76,7 +76,7 @@ Follow [docs/content-guide.md](docs/content-guide.md). In short:
 - Never change a topic `id` (it keys URLs, progress and bookmarks). Folders can move; ids cannot.
 - Never renumber question/example ids.
 - Schema changes are additive (new optional fields). Breaking changes bump `schemaVersion` and update all metadata and the app in one commit.
-- localStorage keys are versioned (`studyhub:v1:*`); migrate old data rather than discarding it.
+- localStorage keys are versioned (`studyhub:v1:*`); migrate old data rather than discarding it. Learner state that should survive a device change must be added to the progress-backup allowlist and validator in `js/backup.js` (architecture §7).
 - Edit existing content in place; don't rewrite a whole file to change one section. Preserve the owner's own wording unless asked to rewrite it.
 
 ## Interactions

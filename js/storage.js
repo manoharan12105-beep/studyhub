@@ -54,6 +54,27 @@ export function write(key, value) {
   }
 }
 
+/**
+ * Write several keys as one step (progress restore). If any write fails, every
+ * key gets its previous value back and false is returned — never a half-written state.
+ */
+export function writeAll(entries) {
+  const store = backend || { getItem: (k) => memory.get(k) ?? null, setItem: (k, v) => memory.set(k, v), removeItem: (k) => memory.delete(k) };
+  const previous = entries.map(([key]) => [PREFIX + key, store.getItem(PREFIX + key)]);
+  try {
+    for (const [key, value] of entries) store.setItem(PREFIX + key, JSON.stringify(value));
+    return true;
+  } catch {
+    for (const [fullKey, raw] of previous) {
+      try {
+        if (raw === null) store.removeItem(fullKey);
+        else store.setItem(fullKey, raw);
+      } catch { /* best effort: the original value was already there */ }
+    }
+    return false;
+  }
+}
+
 export function remove(key) {
   try {
     if (backend) backend.removeItem(PREFIX + key);
