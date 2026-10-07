@@ -3,6 +3,14 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-07-operating-systems",
+      "date": "2026-10-07",
+      "title": "Operating Systems",
+      "description": "38 topics in 7 modules — OS fundamentals, processes and threads, CPU scheduling, synchronization, deadlocks and the Banker's algorithm, memory management, storage and I/O — with 5 simulators and visualizers, 2 checks, a flashcard deck, Revision, Quick Revision and a 15-minute emergency sheet.",
+      "type": "content",
+      "link": "#/c/operating-systems"
+    },
+    {
       "id": "2026-10-07-system-design",
       "date": "2026-10-07",
       "title": "System Design",

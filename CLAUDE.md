@@ -14,7 +14,7 @@ If this file and a doc disagree, fix the disagreement rather than picking one si
 
 StudyHub is a personal study and interview-preparation platform (aptitude, data structures, algorithms, object-oriented programming, CS concepts, and categories the owner adds later). The same material must teach a beginner and serve as fast interview revision.
 
-**Current phase: Phase 3 application built**, plus the UI/UX phase (header menu, six themes, What's new, grouped sidebar; see architecture §9) (content Phases 2A Aptitude, 2B DSA, 2C OOP, 2D Spring Boot, 2E DBMS + PostgreSQL, 2F Linux, 2G Computer Networks, 2H System Design done; CS Concepts holds the Excel Fundamentals emergency module). No further content phase is planned yet. Do not write further study content unless the owner asks for that phase.
+**Current phase: Phase 3 application built**, plus the UI/UX phase (header menu, six themes, What's new, grouped sidebar; see architecture §9) (content Phases 2A Aptitude, 2B DSA, 2C OOP, 2D Spring Boot, 2E DBMS + PostgreSQL, 2F Linux, 2G Computer Networks, 2H System Design, 2I Operating Systems done; CS Concepts holds the Excel Fundamentals emergency module). No further content phase is planned yet. Do not write further study content unless the owner asks for that phase.
 
 ## Hard rules
 
@@ -69,7 +69,7 @@ Follow [docs/content-guide.md](docs/content-guide.md). In short:
 - A topic is visible to the app only when it has a metadata entry; `files` must match the folder exactly.
 - A new category gets a `group` and an icon at `assets/icons/subjects/<id>.svg`. Every content phase (and any user-visible app change) adds an entry at the top of `metadata/updates.json` with counts taken from the metadata — never estimates; update ids are permanent.
 - Subtopics are H2 sections of their topic, not separate folders.
-- Category study modes (e.g. the **Learn · Revision · Quick Revision** modes of Aptitude, DSA, OOP, Spring Boot, DBMS + PostgreSQL, Linux, Computer Networks and System Design) are declared in `categories.json` `studyModes`; each mode merges several source files from `content/<category>/revision/` into one view. User-facing names come from metadata, never file names.
+- Category study modes (e.g. the **Learn · Revision · Quick Revision** modes of Aptitude, DSA, OOP, Spring Boot, DBMS + PostgreSQL, Linux, Computer Networks, System Design and Operating Systems, which adds a 15-minute emergency sheet) are declared in `categories.json` `studyModes`; each mode merges several source files from `content/<category>/revision/` into one view. User-facing names come from metadata, never file names.
 
 ## Changing existing content (backwards compatibility)
 
@@ -115,6 +115,7 @@ Before saying work is done:
 - **Shell (Linux category):** every non-illustrative `bash` block runs in a fresh practice lab (`~/linux-lab`) on Ubuntu/Debian with GNU coreutils, and every `**Output:**` block matches what it prints. Never run destructive or root commands on the host; those stay `# Illustrative`.
 - **Networks (Computer Networks category):** Java programs compile and run on Java 17 against localhost; subnetting and other calculations are checked with a script; sample command output comes from real runs, with public addresses replaced by documentation ranges and marked `**Output (varies)**`.
 - **System Design:** Java programs compile and run on Java 17 and print exactly their `**Output:**` block; estimates, availability, quorum and capacity numbers (in lessons and in simulators) are checked with a script.
+- **Operating Systems:** Java programs compile and run on Java 17 and print exactly their `**Output:**` block (multithreaded demos print only deterministic results; a demo whose output varies is marked `**Output (varies):**` and captured from a real run); every scheduling, page-replacement, Banker's, paging and disk-scheduling number is recomputed with a script (`js/simulators/os-common.js` holds the shared algorithms).
 - **Excel (CS Concepts):** every formula result, PivotTable value and error shown in content or an interaction is checked in desktop Excel.
 - **Markdown:** headings follow the template; links and image paths resolve; renders correctly on GitHub.
 - **Interactions:** registry files match `metadata/schemas/interactions.schema.json` and content-guide §6 rule 8 (topics exist, `after` headings exist, modules exist, answer indexes valid); each new interaction steps from start to finish without errors.

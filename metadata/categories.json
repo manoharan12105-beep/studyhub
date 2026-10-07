@@ -1056,6 +1056,95 @@
           ]
         }
       ]
+    },
+    {
+      "id": "operating-systems",
+      "title": "Operating Systems",
+      "description": "Placement-focused OS fundamentals: processes and threads, CPU scheduling, synchronization, deadlocks, memory management, file systems and I/O.",
+      "order": 10,
+      "icon": "assets/icons/subjects/operating-systems.svg",
+      "group": "computer-science",
+      "catalog": "metadata/topics/operating-systems.json",
+      "interactions": "metadata/interactions/operating-systems.json",
+      "subcategories": [
+        {
+          "id": "os-fundamentals",
+          "title": "OS Fundamentals",
+          "description": "What an operating system is, the types of OS, user and kernel mode, kernel architectures and system calls.",
+          "order": 1
+        },
+        {
+          "id": "processes-and-threads",
+          "title": "Processes and Threads",
+          "description": "Program vs process, process states, the PCB, context switching, threads and multithreading, and process vs thread.",
+          "order": 2
+        },
+        {
+          "id": "cpu-scheduling",
+          "title": "CPU Scheduling",
+          "description": "Scheduling fundamentals, FCFS, SJF and SRTF, Round Robin, priority scheduling, and the metrics that compare them.",
+          "order": 3
+        },
+        {
+          "id": "synchronization",
+          "title": "Synchronization",
+          "description": "Race conditions, critical sections and mutual exclusion, mutexes, semaphores, and mutex vs semaphore.",
+          "order": 4
+        },
+        {
+          "id": "deadlocks",
+          "title": "Deadlocks",
+          "description": "What deadlock is, the four necessary conditions, prevention, avoidance, the Banker's algorithm, and detection and recovery.",
+          "order": 5
+        },
+        {
+          "id": "memory-management",
+          "title": "Memory Management",
+          "description": "Logical and physical addresses, paging, segmentation, virtual memory, page faults, FIFO, LRU and Optimal replacement, and thrashing.",
+          "order": 6
+        },
+        {
+          "id": "storage-and-io",
+          "title": "Storage and I/O",
+          "description": "File system fundamentals, disk scheduling, and I/O basics: polling, interrupts, DMA and I/O models.",
+          "order": 7
+        }
+      ],
+      "studyModes": [
+        {
+          "id": "revision",
+          "title": "Revision",
+          "description": "Complete revision of every module, important comparisons, interview traps and confusions, and the key formulas and algorithms.",
+          "sources": [
+            { "path": "content/operating-systems/revision/complete-revision.md", "title": "Complete OS Revision" },
+            { "path": "content/operating-systems/revision/important-comparisons.md", "title": "Important Comparisons" },
+            { "path": "content/operating-systems/revision/traps-and-confusions.md", "title": "Interview Traps and Confusions" },
+            { "path": "content/operating-systems/revision/formulas-and-algorithms.md", "title": "Key Formulas and Algorithms" }
+          ]
+        },
+        {
+          "id": "quick-revision",
+          "title": "Quick Revision",
+          "description": "Five short blocks, about ten minutes each: read all five for a 50-minute revision, or only the blocks you need.",
+          "estimatedMinutes": 50,
+          "sources": [
+            { "path": "content/operating-systems/revision/quick-1-os-fundamentals.md", "title": "Block 1: OS Fundamentals" },
+            { "path": "content/operating-systems/revision/quick-2-processes-and-scheduling.md", "title": "Block 2: Processes and Scheduling" },
+            { "path": "content/operating-systems/revision/quick-3-synchronization-and-deadlocks.md", "title": "Block 3: Synchronization and Deadlocks" },
+            { "path": "content/operating-systems/revision/quick-4-memory-management.md", "title": "Block 4: Memory Management" },
+            { "path": "content/operating-systems/revision/quick-5-final-interview-revision.md", "title": "Block 5: Final Interview Revision" }
+          ]
+        },
+        {
+          "id": "emergency-sheet",
+          "title": "OS Emergency 15-Minute Revision",
+          "description": "Only the highest-value OS facts and differences, to read once right before an interview.",
+          "estimatedMinutes": 15,
+          "sources": [
+            { "path": "content/operating-systems/revision/emergency-15-minute-sheet.md", "title": "15-Minute Sheet" }
+          ]
+        }
+      ]
     }
   ]
 }

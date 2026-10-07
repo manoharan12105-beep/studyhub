@@ -1,9 +1,9 @@
 # StudyHub
 
-A personal study and interview-preparation platform for aptitude, data structures, algorithms, object-oriented programming, Spring Boot, DBMS and PostgreSQL, Linux, computer networks, system design, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
+A personal study and interview-preparation platform for aptitude, data structures, algorithms, object-oriented programming, Spring Boot, DBMS and PostgreSQL, Linux, computer networks, system design, operating systems, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
 
 > **Project status: Phase 3 — the interactive application is built.**
-> Aptitude (58 topics), Data Structures & Algorithms (113 topics), Object-Oriented Programming (75 topics), Spring Boot (91 topics), DBMS + PostgreSQL (75 topics), Linux (59 topics), Computer Networks (88 topics) and System Design (82 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
+> Aptitude (58 topics), Data Structures & Algorithms (113 topics), Object-Oriented Programming (75 topics), Spring Boot (91 topics), DBMS + PostgreSQL (75 topics), Linux (59 topics), Computer Networks (88 topics), System Design (82 topics) and Operating Systems (38 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
 > The static app (`index.html`) adds navigation, search, progress tracking, practice and interview sessions, flashcards and interactive visualizers around that content. CS Concepts currently holds a short Excel Fundamentals module.
 
 | Phase | Scope | Status |
@@ -20,6 +20,7 @@ A personal study and interview-preparation platform for aptitude, data structure
 | 2F | Linux content (commands, text processing, permissions, processes, Bash scripting, networking, storage, services, SSH, troubleshooting, interview) | Done |
 | 2G | Computer Networks content (fundamentals, devices, OSI and TCP/IP, Ethernet and ARP, IP and subnetting, routing, TCP/UDP, HTTP/HTTPS, DNS, DHCP, NAT, security, performance, troubleshooting, end-to-end flows, interview) | Done |
 | 2H | System Design content (foundations, communication and APIs, data and storage, caching, scaling and distribution, consistency and coordination, reliability, messaging, observability, case studies, interview) | Done |
+| 2I | Operating Systems content (fundamentals, processes and threads, CPU scheduling, synchronization, deadlocks, memory management, storage and I/O) | Done |
 
 ## Goals
 
@@ -77,6 +78,9 @@ StudyHub/
 │   │   ├── troubleshooting/         3 topics (16 step-by-step scenarios)
 │   │   ├── interview/               7 topics (question banks by area, scenarios, traps)
 │   │   └── revision/                Revision and Quick Revision sources
+│   ├── operating-systems/
+│   │   ├── os-fundamentals/ … storage-and-io/   7 subcategories, 38 topics (processes, scheduling, synchronization, deadlocks, memory, I/O)
+│   │   └── revision/                Revision, Quick Revision and the 15-minute emergency sheet
 │   └── spring-boot/
 │       ├── fundamentals/            7 topics (container, beans, lifecycle, scanning, @Configuration, scopes)
 │       ├── dependency-injection/    4 topics
@@ -136,11 +140,11 @@ Each topic `type` has its own lesson template, so DSA, theory, command-reference
 | `aptitude` | Formulas, shortcuts, problem patterns |
 | `reference` | Commands, tools and syntax |
 
-Programming examples are written in **Java** (Spring Boot examples use JDK 21 and Spring Boot 4.1; DBMS examples use JDBC). SQL is written for PostgreSQL 17+ and verified against a shared sample database. Linux commands and Bash scripts are verified in a throwaway practice lab on Ubuntu with GNU tools; machine-dependent output is marked as such. Computer Networks command output was captured on real Windows and Ubuntu machines (with addresses replaced by documentation ranges), and its Java programs and subnetting answers are verified by running them. System Design's Java programs are run and their output checked, and its estimates and availability numbers are recalculated. Answers to questions are hidden in collapsible `<details>` blocks, so files work as self-tests on GitHub as well as in the app.
+Programming examples are written in **Java** (Spring Boot examples use JDK 21 and Spring Boot 4.1; DBMS examples use JDBC). SQL is written for PostgreSQL 17+ and verified against a shared sample database. Linux commands and Bash scripts are verified in a throwaway practice lab on Ubuntu with GNU tools; machine-dependent output is marked as such. Computer Networks command output was captured on real Windows and Ubuntu machines (with addresses replaced by documentation ranges), and its Java programs and subnetting answers are verified by running them. System Design's Java programs are run and their output checked, and its estimates and availability numbers are recalculated. Operating Systems' Java programs are run and their output checked, and every scheduling, page-replacement, Banker's-algorithm and address-translation answer is recomputed with the same code the OS simulators use. Answers to questions are hidden in collapsible `<details>` blocks, so files work as self-tests on GitHub as well as in the app.
 
 ### Study modes
 
-Aptitude, DSA, OOP, Spring Boot, DBMS + PostgreSQL, Linux, Computer Networks and System Design each offer three ways to study:
+Aptitude, DSA, OOP, Spring Boot, DBMS + PostgreSQL, Linux, Computer Networks, System Design and Operating Systems each offer at least three ways to study:
 
 | Mode | What it is | Source files |
 |------|------------|--------------|
@@ -189,6 +193,13 @@ Aptitude, DSA, OOP, Spring Boot, DBMS + PostgreSQL, Linux, Computer Networks and
 | **Learn** | 82 topics in 11 modules, from requirements and estimation to caching, replication, sharding, consistency, reliability, messaging and four case studies, with 23 interactive simulations and visualizers (including an interview simulator) | `content/system-design/<subcategory>/<topic>/` |
 | **Revision** | Complete revision of every module, decision cheat sheets, important comparisons, key numbers and rules, and traps and confusions | `content/system-design/revision/` (5 sources) |
 | **Quick Revision** | Six 10-minute blocks (foundations, communication, data and caching, scaling and consistency, reliability and operations, case studies and the interview) — one hour in all, each usable alone | `content/system-design/revision/quick-*.md` (6 sources) |
+
+| Operating Systems mode | What it is | Source files |
+|------------------------|------------|--------------|
+| **Learn** | 38 topics in 7 modules, from what an OS is to scheduling calculations, synchronization, deadlocks and the Banker's algorithm, paging, page replacement, file systems and I/O, with 5 simulators and visualizers, 2 checks and a flashcard deck | `content/operating-systems/<subcategory>/<topic>/` |
+| **Revision** | Complete OS revision, important comparisons, interview traps and confusions, and key formulas and algorithms | `content/operating-systems/revision/` (4 sources) |
+| **Quick Revision** | Five 10-minute blocks (fundamentals, processes and scheduling, synchronization and deadlocks, memory, final interview revision) — 50 minutes in all, each usable alone | `content/operating-systems/revision/quick-*.md` (5 sources) |
+| **OS Emergency 15-Minute Revision** | The highest-value facts and differences on one page, for the last 15 minutes | `content/operating-systems/revision/emergency-15-minute-sheet.md` |
 
 The modes are declared in `metadata/categories.json` (`studyModes`); the app combines each mode's source files into one view. Any category can add study modes the same way.
 

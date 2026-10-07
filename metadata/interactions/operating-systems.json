@@ -1,0 +1,204 @@
+{
+  "$schema": "../schemas/interactions.schema.json",
+  "schemaVersion": 1,
+  "category": "operating-systems",
+  "interactions": [
+    {
+      "id": "os-process-states",
+      "type": "simulator",
+      "title": "Drive a process through its states",
+      "description": "Send events in any order — admit, dispatch, time slice, I/O, exit — and watch the state change. Try the impossible ones too: each is explained.",
+      "module": "os-process-state-simulator",
+      "topics": [
+        { "topic": "process-states", "after": "How It Works" }
+      ]
+    },
+    {
+      "id": "cpu-scheduling-simulator",
+      "type": "simulator",
+      "title": "CPU scheduling simulator",
+      "description": "Edit the processes, pick an algorithm and step through every decision: the Gantt chart grows, the ready queue changes, and the last step shows CT, TAT, WT and RT.",
+      "module": "cpu-scheduling-simulator",
+      "topics": [
+        { "topic": "fcfs-scheduling", "after": "Example", "options": { "algorithm": "fcfs", "processes": [["P1", 0, 4, 1], ["P2", 1, 3, 1], ["P3", 2, 1, 1], ["P4", 3, 2, 1]] } },
+        { "topic": "sjf-and-srtf-scheduling", "after": "Example", "options": { "algorithm": "srtf", "processes": [["P1", 0, 8, 1], ["P2", 1, 4, 1], ["P3", 2, 2, 1], ["P4", 3, 5, 1]] } },
+        { "topic": "round-robin-scheduling", "after": "Example", "options": { "algorithm": "rr", "quantum": 2, "processes": [["P1", 0, 5, 1], ["P2", 1, 3, 1], ["P3", 2, 1, 1], ["P4", 3, 2, 1], ["P5", 4, 3, 1]] } },
+        { "topic": "priority-scheduling", "after": "Example", "options": { "algorithm": "priority-p", "processes": [["P1", 0, 4, 3], ["P2", 1, 3, 1], ["P3", 2, 2, 4], ["P4", 3, 1, 2], ["P5", 4, 2, 2]] } },
+        { "topic": "scheduling-metrics-and-comparison", "after": "Example", "options": { "algorithm": "srtf", "quantum": 2, "processes": [["P1", 0, 5, 3], ["P2", 1, 3, 1], ["P3", 2, 8, 4], ["P4", 3, 6, 2]] } }
+      ]
+    },
+    {
+      "id": "page-replacement-visualizer",
+      "type": "visualizer",
+      "title": "Page replacement: FIFO, LRU and Optimal",
+      "description": "Step through a reference string frame by frame, see each victim and why it was chosen, then compare all three policies — including with one more frame.",
+      "module": "page-replacement-visualizer",
+      "topics": [
+        { "topic": "page-replacement-algorithms", "after": "Example" }
+      ]
+    },
+    {
+      "id": "bankers-algorithm-visualizer",
+      "type": "visualizer",
+      "title": "Banker's algorithm, check by check",
+      "description": "Pick an example and, optionally, a request. Watch Need, the request checks and every Need ≤ Work test until the state is declared safe or unsafe.",
+      "module": "bankers-algorithm-visualizer",
+      "topics": [
+        { "topic": "bankers-algorithm", "after": "Example" },
+        { "topic": "deadlock-avoidance", "after": "Example", "options": { "example": "unsafe" } }
+      ]
+    },
+    {
+      "id": "paging-address-translation",
+      "type": "visualizer",
+      "title": "Translate a logical address",
+      "description": "Choose a page size, a page table and an address; split it into page and offset bits, look up the frame, and get the physical address — or a page fault.",
+      "module": "paging-address-translator",
+      "topics": [
+        { "topic": "paging", "after": "Example" }
+      ]
+    },
+    {
+      "id": "mutex-or-semaphore-scenarios",
+      "type": "knowledge-check",
+      "title": "Mutex or semaphore? Pick the tool",
+      "topics": [
+        { "topic": "mutex-vs-semaphore", "after": "Comparison" }
+      ],
+      "questions": [
+        {
+          "prompt": "Two threads update the same linked list. Each thread that locks the list will also unlock it. Which primitive fits best?",
+          "options": ["A mutex", "A counting semaphore initialised to 2", "A semaphore initialised to 0", "No synchronisation is needed"],
+          "answer": 0,
+          "explanation": "This is mutual exclusion on shared data, and the same thread locks and unlocks — exactly what a mutex (with ownership) is for. A semaphore of 2 would let both threads in at once."
+        },
+        {
+          "prompt": "A server has 10 database connections. A request thread should wait only when all 10 are in use. Which primitive fits best?",
+          "options": ["A mutex", "A counting semaphore initialised to 10", "A binary semaphore initialised to 0", "A spinlock"],
+          "answer": 1,
+          "explanation": "A counting semaphore models N identical resources: each thread does wait() before taking a connection and signal() after returning it, so at most 10 are in use."
+        },
+        {
+          "prompt": "A disk interrupt handler must wake a worker thread when new data has arrived. The handler never locked anything. What should it use?",
+          "options": ["Unlock a mutex owned by the worker", "Signal a semaphore initialised to 0 that the worker waits on", "Disable interrupts", "Call the worker's method directly"],
+          "answer": 1,
+          "explanation": "This is signalling between different threads. A mutex can only be unlocked by its owner, so the handler cannot use it; a semaphore has no owner, and starting at 0 makes the worker wait until the first signal."
+        },
+        {
+          "prompt": "A code review finds an error path that calls signal(s) twice on a semaphore s = 1 used as a lock. What can happen?",
+          "options": ["Nothing — extra signals are ignored", "The program deadlocks immediately", "Two threads can be inside the critical section at the same time", "The JVM throws an exception"],
+          "answer": 2,
+          "explanation": "A semaphore has no owner and simply counts: the extra signal leaves a spare permit, so two threads can pass wait(s) together and corrupt the shared data. A mutex would reject the unlock from a non-owner."
+        },
+        {
+          "prompt": "A high-priority thread waits for a lock held by a low-priority thread while a medium-priority thread keeps running. Which primitive lets the OS fix this with priority inheritance?",
+          "options": ["A mutex, because it records its owner", "A counting semaphore", "A binary semaphore", "Any of them equally"],
+          "answer": 0,
+          "explanation": "Priority inheritance needs to know whose priority to raise — the owner of the lock. Mutexes have owners; semaphores do not."
+        }
+      ]
+    },
+    {
+      "id": "os-interview-check",
+      "type": "knowledge-check",
+      "title": "Final check: OS interview essentials",
+      "description": "Ten mixed questions across the whole subject — the traps interviewers like most.",
+      "topics": [
+        { "topic": "io-basics", "after": "Quick Revision" }
+      ],
+      "questions": [
+        {
+          "prompt": "A process blocked on a disk read is told the read has finished. Which state does it move to?",
+          "options": ["Running", "Ready", "New", "Terminated"],
+          "answer": 1,
+          "explanation": "An event completion moves a process from Waiting to Ready; it runs again only when the scheduler dispatches it. There is no Waiting → Running transition."
+        },
+        {
+          "prompt": "Which statement about threads of the same process is correct?",
+          "options": ["Each thread has its own heap", "Threads share the stack but not the heap", "Each thread has its own stack; the heap is shared", "Threads share nothing"],
+          "answer": 2,
+          "explanation": "Threads share code, global data, the heap and open files; each has its own stack, registers and program counter."
+        },
+        {
+          "prompt": "A program calls getpid(), which returns immediately. What happens?",
+          "options": ["A context switch", "A mode switch into the kernel and back, with no context switch", "Nothing — getpid runs entirely in user mode on every system", "The process is terminated"],
+          "answer": 1,
+          "explanation": "A system call is a mode switch. A context switch happens only if the call blocks or the scheduler chooses another process."
+        },
+        {
+          "prompt": "P1 (AT 0, BT 4), P2 (AT 1, BT 3), P3 (AT 2, BT 1), P4 (AT 3, BT 2). What is the average waiting time under FCFS?",
+          "options": ["2.75", "3.25", "4.25", "5.75"],
+          "answer": 1,
+          "explanation": "Gantt P1 0–4, P2 4–7, P3 7–8, P4 8–10. Waiting times 0, 3, 5, 5 → 13 ÷ 4 = 3.25. (5.75 is the average turnaround time.)"
+        },
+        {
+          "prompt": "Which scheduling algorithms can never starve a process?",
+          "options": ["SJF and SRTF", "Priority and SJF", "FCFS and Round Robin", "SRTF and Round Robin"],
+          "answer": 2,
+          "explanation": "In FCFS and Round Robin every process eventually reaches the head of the queue. SJF, SRTF and priority scheduling can pass a process over indefinitely unless aging is added."
+        },
+        {
+          "prompt": "Why is count++ on a shared variable not thread-safe?",
+          "options": ["It is a single instruction that the CPU cannot interrupt", "It is a load, an add and a store that another thread can interleave", "Java forbids it on shared variables", "It always runs in kernel mode"],
+          "answer": 1,
+          "explanation": "Two threads can both load the same value before either stores, so one increment is lost. That is a race condition."
+        },
+        {
+          "prompt": "All four Coffman conditions hold in a system with multiple instances of each resource. Is it deadlocked?",
+          "options": ["Yes, always", "Not necessarily — the conditions are necessary, not sufficient", "No, multiple instances prevent deadlock", "Only if the system is unsafe"],
+          "answer": 1,
+          "explanation": "The four conditions must all hold for a deadlock, but their presence does not guarantee one; with several instances a process outside the cycle may release a resource and break it."
+        },
+        {
+          "prompt": "Page size is 1 KB and page 2 is in frame 7. What is the physical address of logical address 3000?",
+          "options": ["2952", "7168", "8120", "10168"],
+          "answer": 2,
+          "explanation": "p = 3000 ÷ 1024 = 2, d = 3000 − 2048 = 952. Physical = 7 × 1024 + 952 = 8120."
+        },
+        {
+          "prompt": "Which page-replacement algorithm can show Belady's anomaly?",
+          "options": ["LRU", "Optimal", "FIFO", "All three"],
+          "answer": 2,
+          "explanation": "FIFO can produce more faults with more frames (9 → 10 on 1 2 3 4 1 2 5 1 2 3 4 5). LRU and Optimal are stack algorithms and never do."
+        },
+        {
+          "prompt": "During thrashing, what does CPU utilisation typically do?",
+          "options": ["It rises to 100 %", "It falls, because processes wait for paging I/O", "It stays the same", "It depends only on the scheduling algorithm"],
+          "answer": 1,
+          "explanation": "Processes spend their time blocked on page faults, so the CPU has little to run. Adding processes makes it worse; the fix is to reduce the degree of multiprogramming or add memory."
+        }
+      ]
+    },
+    {
+      "id": "os-flashcards",
+      "type": "flashcards",
+      "title": "OS flashcards: the must-know definitions",
+      "description": "Twenty cards covering the most asked Operating Systems definitions and differences.",
+      "topics": [
+        { "topic": "io-basics", "after": "Quick Revision" }
+      ],
+      "cards": [
+        { "front": "Operating system", "back": "Software between hardware and programs: it manages CPU, memory, storage and devices, and provides services such as processes and files." },
+        { "front": "User mode vs kernel mode", "back": "Restricted vs privileged CPU mode. Programs enter the kernel only through a system call, an interrupt or an exception." },
+        { "front": "System call", "back": "A controlled request from a user program to the kernel, made with a trap instruction and dispatched through the system-call table." },
+        { "front": "Program vs process", "back": "A program is a passive file; a process is a program in execution with its own memory, registers and state." },
+        { "front": "Five process states", "back": "New, Ready, Running, Waiting (Blocked), Terminated. Waiting → Ready when the event completes, never straight to Running." },
+        { "front": "PCB", "back": "The kernel's record of a process: PID, state, saved registers and PC, scheduling data, memory information, open files." },
+        { "front": "Context switch", "back": "Saving the running process's CPU state into its PCB and loading another's. Pure overhead; thread switches are cheaper than process switches." },
+        { "front": "Process vs thread", "back": "A process has its own address space; threads share their process's code, data, heap and files but each has its own stack and registers." },
+        { "front": "Preemptive vs non-preemptive scheduling", "back": "Preemptive: the OS can take the CPU away (SRTF, RR). Non-preemptive: the process keeps it until it blocks or ends (FCFS, SJF)." },
+        { "front": "TAT, WT and RT formulas", "back": "TAT = CT − AT. WT = TAT − BT. RT = first start − AT." },
+        { "front": "Round Robin quantum too large / too small", "back": "Too large: behaves like FCFS. Too small: context-switch overhead dominates." },
+        { "front": "Starvation and its fix", "back": "A ready process is passed over indefinitely (SJF, SRTF, priority). Fix: aging — raise its priority as it waits." },
+        { "front": "Race condition", "back": "A result that depends on the timing of unsynchronised concurrent access to shared data with at least one write (e.g. count++)." },
+        { "front": "Critical-section requirements", "back": "Mutual exclusion, progress and bounded waiting." },
+        { "front": "Mutex vs semaphore", "back": "Mutex: a lock with an owner, one holder. Semaphore: a counter with wait/signal, no owner, up to N holders or used for signalling." },
+        { "front": "Four deadlock conditions", "back": "Mutual exclusion, hold and wait, no preemption, circular wait — all four are necessary." },
+        { "front": "Banker's algorithm core rule", "back": "Need = Max − Allocation. Grant a request only if, after pretending to grant it, a safe sequence still exists." },
+        { "front": "Paging translation", "back": "p = address ÷ page size, d = address mod page size; physical address = frame × page size + d." },
+        { "front": "Page fault", "back": "An access to a valid page that is not in RAM: trap, load the page from disk, update the page table, restart the instruction." },
+        { "front": "Thrashing", "back": "The system spends more time paging than executing because the working sets exceed RAM; CPU utilisation drops." }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1279 @@
+{
+  "$schema": "../schemas/topics.schema.json",
+  "schemaVersion": 1,
+  "category": "operating-systems",
+  "topics": [
+    {
+      "id": "os-introduction",
+      "slug": "os-introduction",
+      "title": "What Is an Operating System?",
+      "category": "operating-systems",
+      "subcategory": "os-fundamentals",
+      "type": "concept",
+      "description": "The OS as resource manager and extended machine: its goals, its responsibilities, the kernel versus the whole OS, and what happens when you save a file.",
+      "difficulty": "beginner",
+      "tags": [
+        "operating-system",
+        "kernel",
+        "resource-manager",
+        "os-goals"
+      ],
+      "estimatedMinutes": 15,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "types-of-operating-systems",
+        "user-mode-and-kernel-mode",
+        "system-calls"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "types-of-operating-systems",
+      "slug": "types-of-operating-systems",
+      "title": "Types of Operating Systems",
+      "category": "operating-systems",
+      "subcategory": "os-fundamentals",
+      "type": "concept",
+      "description": "Batch, multiprogramming, multitasking, multiprocessing and real-time systems: the problem each solves, with concurrency versus parallelism.",
+      "difficulty": "beginner",
+      "tags": [
+        "batch",
+        "multiprogramming",
+        "multitasking",
+        "multiprocessing",
+        "real-time"
+      ],
+      "estimatedMinutes": 15,
+      "order": 2,
+      "prerequisites": [
+        "os-introduction"
+      ],
+      "relatedTopics": [
+        "cpu-scheduling-fundamentals",
+        "round-robin-scheduling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "user-mode-and-kernel-mode",
+      "slug": "user-mode-and-kernel-mode",
+      "title": "User Mode vs Kernel Mode",
+      "category": "operating-systems",
+      "subcategory": "os-fundamentals",
+      "type": "concept",
+      "description": "Dual-mode operation: the mode bit, privileged instructions, how system calls, interrupts and exceptions enter the kernel, and mode switch versus context switch.",
+      "difficulty": "beginner",
+      "tags": [
+        "kernel-mode",
+        "user-mode",
+        "privileged-instructions",
+        "dual-mode",
+        "protection-rings"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "os-introduction"
+      ],
+      "relatedTopics": [
+        "system-calls",
+        "context-switching",
+        "os-architecture"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "os-architecture",
+      "slug": "os-architecture",
+      "title": "OS Architecture Basics",
+      "category": "operating-systems",
+      "subcategory": "os-fundamentals",
+      "type": "concept",
+      "description": "Monolithic, layered, microkernel, modular and hybrid kernels: what runs in kernel mode, the speed-versus-isolation trade-off, and Linux, Windows and QNX.",
+      "difficulty": "intermediate",
+      "tags": [
+        "monolithic-kernel",
+        "microkernel",
+        "hybrid-kernel",
+        "kernel-modules"
+      ],
+      "estimatedMinutes": 15,
+      "order": 4,
+      "prerequisites": [
+        "user-mode-and-kernel-mode"
+      ],
+      "relatedTopics": [
+        "os-introduction",
+        "system-calls"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "system-calls",
+      "slug": "system-calls",
+      "title": "System Calls",
+      "category": "operating-systems",
+      "subcategory": "os-fundamentals",
+      "type": "concept",
+      "description": "How a program asks the kernel for a service: the trap, the system-call table, parameter passing, the six categories, and fork, exec and wait.",
+      "difficulty": "beginner",
+      "tags": [
+        "system-call",
+        "fork",
+        "exec",
+        "trap",
+        "library-function"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "user-mode-and-kernel-mode"
+      ],
+      "relatedTopics": [
+        "program-vs-process",
+        "process-states",
+        "io-basics"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "program-vs-process",
+      "slug": "program-vs-process",
+      "title": "Program vs Process",
+      "category": "operating-systems",
+      "subcategory": "processes-and-threads",
+      "type": "concept",
+      "description": "A passive program versus a running process: the process memory layout, creation and termination, and zombie and orphan processes.",
+      "difficulty": "beginner",
+      "tags": [
+        "process",
+        "program",
+        "memory-layout",
+        "zombie-process",
+        "orphan-process"
+      ],
+      "estimatedMinutes": 15,
+      "order": 1,
+      "prerequisites": [
+        "system-calls"
+      ],
+      "relatedTopics": [
+        "process-states",
+        "process-control-block",
+        "process-vs-thread"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "process-states",
+      "slug": "process-states",
+      "title": "Process States",
+      "category": "operating-systems",
+      "subcategory": "processes-and-threads",
+      "type": "concept",
+      "description": "New, ready, running, waiting and terminated: every transition and its trigger, the ready and device queues, and suspended states.",
+      "difficulty": "beginner",
+      "tags": [
+        "process-states",
+        "ready-queue",
+        "state-transitions",
+        "blocked"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "program-vs-process"
+      ],
+      "relatedTopics": [
+        "process-control-block",
+        "context-switching",
+        "cpu-scheduling-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "os-process-state-simulator",
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "process-control-block",
+      "slug": "process-control-block",
+      "title": "Process Control Block (PCB)",
+      "category": "operating-systems",
+      "subcategory": "processes-and-threads",
+      "type": "concept",
+      "description": "What the kernel stores about each process — identity, state, saved registers, scheduling, memory and I/O information — and how the PCB is used.",
+      "difficulty": "beginner",
+      "tags": [
+        "pcb",
+        "task-struct",
+        "process-table",
+        "tcb"
+      ],
+      "estimatedMinutes": 15,
+      "order": 3,
+      "prerequisites": [
+        "process-states"
+      ],
+      "relatedTopics": [
+        "context-switching",
+        "threads-and-multithreading"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "context-switching",
+      "slug": "context-switching",
+      "title": "Context Switching",
+      "category": "operating-systems",
+      "subcategory": "processes-and-threads",
+      "type": "concept",
+      "description": "Saving and restoring CPU state between processes: triggers, steps, direct and cache costs, thread versus process switches, and mode versus context switch.",
+      "difficulty": "intermediate",
+      "tags": [
+        "context-switch",
+        "dispatcher",
+        "overhead",
+        "tlb"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "process-control-block",
+        "user-mode-and-kernel-mode"
+      ],
+      "relatedTopics": [
+        "process-vs-thread",
+        "round-robin-scheduling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "threads-and-multithreading",
+      "slug": "threads-and-multithreading",
+      "title": "Threads and Multithreading",
+      "category": "operating-systems",
+      "subcategory": "processes-and-threads",
+      "type": "concept",
+      "description": "What a thread shares and owns, the benefits of multithreading, user versus kernel threads, and the many-to-one, one-to-one and many-to-many models.",
+      "difficulty": "intermediate",
+      "tags": [
+        "thread",
+        "multithreading",
+        "user-threads",
+        "kernel-threads",
+        "java-threads"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "program-vs-process"
+      ],
+      "relatedTopics": [
+        "process-vs-thread",
+        "race-conditions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "process-vs-thread",
+      "slug": "process-vs-thread",
+      "title": "Process vs Thread",
+      "category": "operating-systems",
+      "subcategory": "processes-and-threads",
+      "type": "concept",
+      "description": "Separate versus shared memory: creation and switching cost, communication, isolation and crash impact, and when to choose each.",
+      "difficulty": "beginner",
+      "tags": [
+        "process-vs-thread",
+        "isolation",
+        "ipc",
+        "shared-memory"
+      ],
+      "estimatedMinutes": 15,
+      "order": 6,
+      "prerequisites": [
+        "threads-and-multithreading"
+      ],
+      "relatedTopics": [
+        "context-switching",
+        "program-vs-process"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "cpu-scheduling-fundamentals",
+      "slug": "cpu-scheduling-fundamentals",
+      "title": "CPU Scheduling Fundamentals",
+      "category": "operating-systems",
+      "subcategory": "cpu-scheduling",
+      "type": "concept",
+      "description": "CPU and I/O bursts, the three schedulers and the dispatcher, preemptive versus non-preemptive scheduling, and the five scheduling criteria.",
+      "difficulty": "beginner",
+      "tags": [
+        "cpu-scheduling",
+        "preemptive",
+        "non-preemptive",
+        "dispatcher",
+        "scheduling-criteria"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "process-states"
+      ],
+      "relatedTopics": [
+        "fcfs-scheduling",
+        "scheduling-metrics-and-comparison"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "fcfs-scheduling",
+      "slug": "fcfs-scheduling",
+      "title": "FCFS Scheduling",
+      "category": "operating-systems",
+      "subcategory": "cpu-scheduling",
+      "type": "concept",
+      "description": "First come, first served: Gantt charts, completion, turnaround and waiting time, idle gaps, and the convoy effect, with a Java implementation.",
+      "difficulty": "beginner",
+      "tags": [
+        "fcfs",
+        "gantt-chart",
+        "convoy-effect",
+        "waiting-time",
+        "turnaround-time"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "cpu-scheduling-fundamentals"
+      ],
+      "relatedTopics": [
+        "sjf-and-srtf-scheduling",
+        "scheduling-metrics-and-comparison"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "cpu-scheduling-simulator",
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "sjf-and-srtf-scheduling",
+      "slug": "sjf-and-srtf-scheduling",
+      "title": "SJF and SRTF Scheduling",
+      "category": "operating-systems",
+      "subcategory": "cpu-scheduling",
+      "type": "concept",
+      "description": "Shortest job first and its preemptive form: why they minimise waiting time, burst prediction, starvation, and full worked examples in Java.",
+      "difficulty": "intermediate",
+      "tags": [
+        "sjf",
+        "srtf",
+        "shortest-job-first",
+        "exponential-averaging",
+        "starvation"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "fcfs-scheduling"
+      ],
+      "relatedTopics": [
+        "priority-scheduling",
+        "scheduling-metrics-and-comparison"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "cpu-scheduling-simulator",
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "round-robin-scheduling",
+      "slug": "round-robin-scheduling",
+      "title": "Round Robin Scheduling",
+      "category": "operating-systems",
+      "subcategory": "cpu-scheduling",
+      "type": "concept",
+      "description": "Time slices and a circular queue: queue tracing at quantum boundaries, choosing the quantum, response time and context-switch overhead.",
+      "difficulty": "intermediate",
+      "tags": [
+        "round-robin",
+        "time-quantum",
+        "time-sharing",
+        "response-time"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "fcfs-scheduling"
+      ],
+      "relatedTopics": [
+        "context-switching",
+        "scheduling-metrics-and-comparison"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "cpu-scheduling-simulator",
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "priority-scheduling",
+      "slug": "priority-scheduling",
+      "title": "Priority Scheduling",
+      "category": "operating-systems",
+      "subcategory": "cpu-scheduling",
+      "type": "concept",
+      "description": "Preemptive and non-preemptive priority scheduling, starvation and aging, and priority inversion with priority inheritance.",
+      "difficulty": "intermediate",
+      "tags": [
+        "priority-scheduling",
+        "aging",
+        "starvation",
+        "priority-inversion",
+        "priority-inheritance"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "sjf-and-srtf-scheduling"
+      ],
+      "relatedTopics": [
+        "mutex",
+        "scheduling-metrics-and-comparison"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "cpu-scheduling-simulator",
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "scheduling-metrics-and-comparison",
+      "slug": "scheduling-metrics-and-comparison",
+      "title": "Scheduling Metrics and Comparison",
+      "category": "operating-systems",
+      "subcategory": "cpu-scheduling",
+      "type": "concept",
+      "description": "The formulas, a method for any Gantt-chart question, all five algorithms on one input, and multilevel feedback queues.",
+      "difficulty": "intermediate",
+      "tags": [
+        "turnaround-time",
+        "waiting-time",
+        "response-time",
+        "throughput",
+        "mlfq"
+      ],
+      "estimatedMinutes": 25,
+      "order": 6,
+      "prerequisites": [
+        "round-robin-scheduling",
+        "priority-scheduling"
+      ],
+      "relatedTopics": [
+        "cpu-scheduling-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "cpu-scheduling-simulator",
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "race-conditions",
+      "slug": "race-conditions",
+      "title": "Race Conditions",
+      "category": "operating-systems",
+      "subcategory": "synchronization",
+      "type": "concept",
+      "description": "Why count++ loses updates, the conditions for a race, check-then-act races, and a Java demonstration fixed with an atomic counter.",
+      "difficulty": "beginner",
+      "tags": [
+        "race-condition",
+        "lost-update",
+        "atomicity",
+        "check-then-act",
+        "concurrency"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "threads-and-multithreading"
+      ],
+      "relatedTopics": [
+        "critical-section-and-mutual-exclusion",
+        "mutex"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "critical-section-and-mutual-exclusion",
+      "slug": "critical-section-and-mutual-exclusion",
+      "title": "Critical Section and Mutual Exclusion",
+      "category": "operating-systems",
+      "subcategory": "synchronization",
+      "type": "concept",
+      "description": "The critical-section problem and its three requirements, Peterson's solution, test-and-set and compare-and-swap, and spinlocks versus blocking.",
+      "difficulty": "intermediate",
+      "tags": [
+        "critical-section",
+        "mutual-exclusion",
+        "peterson",
+        "test-and-set",
+        "spinlock"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "race-conditions"
+      ],
+      "relatedTopics": [
+        "mutex",
+        "semaphore"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "mutex",
+      "slug": "mutex",
+      "title": "Mutex",
+      "category": "operating-systems",
+      "subcategory": "synchronization",
+      "type": "concept",
+      "description": "Locks with ownership: lock and unlock, blocking waiters, reentrant mutexes, correct use in Java, and the problems mutexes can cause.",
+      "difficulty": "intermediate",
+      "tags": [
+        "mutex",
+        "lock",
+        "reentrant-lock",
+        "synchronized",
+        "ownership"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "critical-section-and-mutual-exclusion"
+      ],
+      "relatedTopics": [
+        "semaphore",
+        "mutex-vs-semaphore",
+        "deadlock-prevention"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "semaphore",
+      "slug": "semaphore",
+      "title": "Semaphore",
+      "category": "operating-systems",
+      "subcategory": "synchronization",
+      "type": "concept",
+      "description": "Counting and binary semaphores, wait and signal, the blocking implementation, producer–consumer, and readers–writers and dining philosophers.",
+      "difficulty": "intermediate",
+      "tags": [
+        "semaphore",
+        "counting-semaphore",
+        "binary-semaphore",
+        "producer-consumer",
+        "dining-philosophers"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "critical-section-and-mutual-exclusion"
+      ],
+      "relatedTopics": [
+        "mutex",
+        "mutex-vs-semaphore"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "mutex-vs-semaphore",
+      "slug": "mutex-vs-semaphore",
+      "title": "Mutex vs Semaphore",
+      "category": "operating-systems",
+      "subcategory": "synchronization",
+      "type": "concept",
+      "description": "Ownership versus counting: why a binary semaphore is not a mutex, and which primitive fits locking, resource pools and signalling.",
+      "difficulty": "intermediate",
+      "tags": [
+        "mutex-vs-semaphore",
+        "binary-semaphore",
+        "ownership",
+        "signalling"
+      ],
+      "estimatedMinutes": 15,
+      "order": 5,
+      "prerequisites": [
+        "mutex",
+        "semaphore"
+      ],
+      "relatedTopics": [
+        "priority-scheduling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "deadlock-fundamentals",
+      "slug": "deadlock-fundamentals",
+      "title": "What Is Deadlock?",
+      "category": "operating-systems",
+      "subcategory": "deadlocks",
+      "type": "concept",
+      "description": "Deadlock defined with the two-lock example, resource-allocation graphs, the four handling strategies, and deadlock versus starvation and livelock.",
+      "difficulty": "beginner",
+      "tags": [
+        "deadlock",
+        "resource-allocation-graph",
+        "livelock",
+        "starvation"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "mutex"
+      ],
+      "relatedTopics": [
+        "deadlock-conditions",
+        "deadlock-detection-and-recovery"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "deadlock-conditions",
+      "slug": "deadlock-conditions",
+      "title": "Four Necessary Conditions",
+      "category": "operating-systems",
+      "subcategory": "deadlocks",
+      "type": "concept",
+      "description": "Mutual exclusion, hold and wait, no preemption and circular wait: each in an example, why they are necessary but not sufficient, and how to break them.",
+      "difficulty": "beginner",
+      "tags": [
+        "coffman-conditions",
+        "circular-wait",
+        "hold-and-wait",
+        "mutual-exclusion"
+      ],
+      "estimatedMinutes": 15,
+      "order": 2,
+      "prerequisites": [
+        "deadlock-fundamentals"
+      ],
+      "relatedTopics": [
+        "deadlock-prevention"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "deadlock-prevention",
+      "slug": "deadlock-prevention",
+      "title": "Deadlock Prevention",
+      "category": "operating-systems",
+      "subcategory": "deadlocks",
+      "type": "concept",
+      "description": "Breaking each necessary condition, the cost of each technique, and lock ordering in a Java money-transfer example.",
+      "difficulty": "intermediate",
+      "tags": [
+        "deadlock-prevention",
+        "lock-ordering",
+        "resource-ordering",
+        "spooling"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "deadlock-conditions"
+      ],
+      "relatedTopics": [
+        "deadlock-avoidance",
+        "mutex"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "deadlock-avoidance",
+      "slug": "deadlock-avoidance",
+      "title": "Deadlock Avoidance",
+      "category": "operating-systems",
+      "subcategory": "deadlocks",
+      "type": "concept",
+      "description": "Safe states and safe sequences, why unsafe is not deadlock, claim-edge graphs, and a single-resource avoidance example.",
+      "difficulty": "intermediate",
+      "tags": [
+        "deadlock-avoidance",
+        "safe-state",
+        "safe-sequence",
+        "unsafe-state"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "deadlock-prevention"
+      ],
+      "relatedTopics": [
+        "bankers-algorithm"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "bankers-algorithm-visualizer",
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "bankers-algorithm",
+      "slug": "bankers-algorithm",
+      "title": "Banker's Algorithm — Fundamentals",
+      "category": "operating-systems",
+      "subcategory": "deadlocks",
+      "type": "concept",
+      "description": "Available, Max, Allocation and Need; the safety and resource-request algorithms worked step by step; and a Java implementation.",
+      "difficulty": "intermediate",
+      "tags": [
+        "bankers-algorithm",
+        "safety-algorithm",
+        "need-matrix",
+        "resource-request"
+      ],
+      "estimatedMinutes": 30,
+      "order": 5,
+      "prerequisites": [
+        "deadlock-avoidance"
+      ],
+      "relatedTopics": [
+        "deadlock-detection-and-recovery"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "bankers-algorithm-visualizer",
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "deadlock-detection-and-recovery",
+      "slug": "deadlock-detection-and-recovery",
+      "title": "Deadlock Detection and Recovery",
+      "category": "operating-systems",
+      "subcategory": "deadlocks",
+      "type": "concept",
+      "description": "Wait-for graphs, the detection algorithm for multiple instances, when to run it, and recovery by termination or resource preemption.",
+      "difficulty": "intermediate",
+      "tags": [
+        "deadlock-detection",
+        "wait-for-graph",
+        "deadlock-recovery",
+        "rollback"
+      ],
+      "estimatedMinutes": 20,
+      "order": 6,
+      "prerequisites": [
+        "bankers-algorithm"
+      ],
+      "relatedTopics": [
+        "deadlock-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "memory-management-fundamentals",
+      "slug": "memory-management-fundamentals",
+      "title": "Memory Management Fundamentals",
+      "category": "operating-systems",
+      "subcategory": "memory-management",
+      "type": "concept",
+      "description": "Logical versus physical addresses, the MMU with base and limit registers, first, best and worst fit, and internal versus external fragmentation.",
+      "difficulty": "beginner",
+      "tags": [
+        "logical-address",
+        "physical-address",
+        "mmu",
+        "fragmentation",
+        "first-fit"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "process-vs-thread"
+      ],
+      "relatedTopics": [
+        "paging",
+        "segmentation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "paging",
+      "slug": "paging",
+      "title": "Paging",
+      "category": "operating-systems",
+      "subcategory": "memory-management",
+      "type": "concept",
+      "description": "Pages, frames and page tables: address translation, bit counting, the TLB and effective access time, and page-table size.",
+      "difficulty": "intermediate",
+      "tags": [
+        "paging",
+        "page-table",
+        "tlb",
+        "address-translation",
+        "frames"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "memory-management-fundamentals"
+      ],
+      "relatedTopics": [
+        "segmentation",
+        "virtual-memory"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "paging-address-translator",
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "segmentation",
+      "slug": "segmentation",
+      "title": "Segmentation",
+      "category": "operating-systems",
+      "subcategory": "memory-management",
+      "type": "concept",
+      "description": "Variable-size logical segments with base and limit, translation and protection, external fragmentation, and paging versus segmentation.",
+      "difficulty": "intermediate",
+      "tags": [
+        "segmentation",
+        "segment-table",
+        "base-and-limit",
+        "paging-vs-segmentation"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "paging"
+      ],
+      "relatedTopics": [
+        "memory-management-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "virtual-memory",
+      "slug": "virtual-memory",
+      "title": "Virtual Memory",
+      "category": "operating-systems",
+      "subcategory": "memory-management",
+      "type": "concept",
+      "description": "Address spaces larger than RAM: demand paging, valid–invalid bits, locality, copy-on-write, and virtual versus physical memory.",
+      "difficulty": "intermediate",
+      "tags": [
+        "virtual-memory",
+        "demand-paging",
+        "copy-on-write",
+        "locality"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "paging"
+      ],
+      "relatedTopics": [
+        "page-faults",
+        "thrashing"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "page-faults",
+      "slug": "page-faults",
+      "title": "Page Fault",
+      "category": "operating-systems",
+      "subcategory": "memory-management",
+      "type": "concept",
+      "description": "What triggers a page fault, the handling steps, major and minor faults, and effective access time with a page-fault rate.",
+      "difficulty": "intermediate",
+      "tags": [
+        "page-fault",
+        "demand-paging",
+        "effective-access-time",
+        "major-fault"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "virtual-memory"
+      ],
+      "relatedTopics": [
+        "page-replacement-algorithms",
+        "thrashing"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "page-replacement-algorithms",
+      "slug": "page-replacement-algorithms",
+      "title": "Page Replacement: FIFO, LRU and Optimal",
+      "category": "operating-systems",
+      "subcategory": "memory-management",
+      "type": "concept",
+      "description": "Choosing a victim page: FIFO, LRU and Optimal traced frame by frame, Belady's anomaly, LRU approximations, and a Java simulator.",
+      "difficulty": "intermediate",
+      "tags": [
+        "page-replacement",
+        "fifo",
+        "lru",
+        "optimal",
+        "beladys-anomaly"
+      ],
+      "estimatedMinutes": 30,
+      "order": 6,
+      "prerequisites": [
+        "page-faults"
+      ],
+      "relatedTopics": [
+        "thrashing",
+        "cache-eviction-policies"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "page-replacement-visualizer",
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "thrashing",
+      "slug": "thrashing",
+      "title": "Thrashing",
+      "category": "operating-systems",
+      "subcategory": "memory-management",
+      "type": "concept",
+      "description": "Why too little memory makes the CPU idle: the multiprogramming curve, working sets, page-fault frequency, and cures.",
+      "difficulty": "intermediate",
+      "tags": [
+        "thrashing",
+        "working-set",
+        "page-fault-frequency",
+        "degree-of-multiprogramming"
+      ],
+      "estimatedMinutes": 20,
+      "order": 7,
+      "prerequisites": [
+        "page-replacement-algorithms"
+      ],
+      "relatedTopics": [
+        "virtual-memory"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "file-system-fundamentals",
+      "slug": "file-system-fundamentals",
+      "title": "File System Fundamentals",
+      "category": "operating-systems",
+      "subcategory": "storage-and-io",
+      "type": "concept",
+      "description": "Files, directories and links; contiguous, linked and indexed allocation; inodes; free-space bitmaps; and journaling.",
+      "difficulty": "beginner",
+      "tags": [
+        "file-system",
+        "inode",
+        "file-allocation",
+        "directory-structure",
+        "journaling"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "memory-management-fundamentals"
+      ],
+      "relatedTopics": [
+        "disk-scheduling",
+        "inodes-and-links"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "disk-scheduling",
+      "slug": "disk-scheduling",
+      "title": "Disk Scheduling",
+      "category": "operating-systems",
+      "subcategory": "storage-and-io",
+      "type": "concept",
+      "description": "FCFS, SSTF, SCAN, C-SCAN, LOOK and C-LOOK on one request queue, with total head movement, starvation and fairness.",
+      "difficulty": "intermediate",
+      "tags": [
+        "disk-scheduling",
+        "sstf",
+        "scan",
+        "c-scan",
+        "look"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "file-system-fundamentals"
+      ],
+      "relatedTopics": [
+        "io-basics"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "io-basics",
+      "slug": "io-basics",
+      "title": "I/O Basics",
+      "category": "operating-systems",
+      "subcategory": "storage-and-io",
+      "type": "concept",
+      "description": "Controllers and drivers, polling versus interrupts versus DMA, blocking, non-blocking and asynchronous I/O, and buffering, caching and spooling.",
+      "difficulty": "beginner",
+      "tags": [
+        "io",
+        "dma",
+        "interrupts",
+        "polling",
+        "device-driver"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "system-calls"
+      ],
+      "relatedTopics": [
+        "disk-scheduling",
+        "process-states"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    }
+  ]
+}
