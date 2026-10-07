@@ -1,10 +1,10 @@
 # StudyHub
 
-A personal study and interview-preparation platform for aptitude, data structures, algorithms, object-oriented programming, Spring Boot, DBMS and PostgreSQL, Linux, computer networks, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
+A personal study and interview-preparation platform for aptitude, data structures, algorithms, object-oriented programming, Spring Boot, DBMS and PostgreSQL, Linux, computer networks, system design, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
 
 > **Project status: Phase 3 — the interactive application is built.**
-> Aptitude (58 topics), Data Structures & Algorithms (113 topics), Object-Oriented Programming (75 topics), Spring Boot (91 topics), DBMS + PostgreSQL (75 topics), Linux (59 topics) and Computer Networks (88 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
-> The static app (`index.html`) adds navigation, search, progress tracking, practice and interview sessions, flashcards and interactive visualizers around that content. CS Concepts currently holds a short Excel Fundamentals module; System Design is registered and shown as **Coming soon**.
+> Aptitude (58 topics), Data Structures & Algorithms (113 topics), Object-Oriented Programming (75 topics), Spring Boot (91 topics), DBMS + PostgreSQL (75 topics), Linux (59 topics), Computer Networks (88 topics) and System Design (82 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
+> The static app (`index.html`) adds navigation, search, progress tracking, practice and interview sessions, flashcards and interactive visualizers around that content. CS Concepts currently holds a short Excel Fundamentals module.
 
 | Phase | Scope | Status |
 |-------|-------|--------|
@@ -19,7 +19,7 @@ A personal study and interview-preparation platform for aptitude, data structure
 | 3 | Static web application: content, engagement and study engines | Done |
 | 2F | Linux content (commands, text processing, permissions, processes, Bash scripting, networking, storage, services, SSH, troubleshooting, interview) | Done |
 | 2G | Computer Networks content (fundamentals, devices, OSI and TCP/IP, Ethernet and ARP, IP and subnetting, routing, TCP/UDP, HTTP/HTTPS, DNS, DHCP, NAT, security, performance, troubleshooting, end-to-end flows, interview) | Done |
-| 2H | System Design content | Planned — see [docs/extending.md](docs/extending.md) |
+| 2H | System Design content (foundations, communication and APIs, data and storage, caching, scaling and distribution, consistency and coordination, reliability, messaging, observability, case studies, interview) | Done |
 
 ## Goals
 
@@ -136,11 +136,11 @@ Each topic `type` has its own lesson template, so DSA, theory, command-reference
 | `aptitude` | Formulas, shortcuts, problem patterns |
 | `reference` | Commands, tools and syntax |
 
-Programming examples are written in **Java** (Spring Boot examples use JDK 21 and Spring Boot 4.1; DBMS examples use JDBC). SQL is written for PostgreSQL 17+ and verified against a shared sample database. Linux commands and Bash scripts are verified in a throwaway practice lab on Ubuntu with GNU tools; machine-dependent output is marked as such. Computer Networks command output was captured on real Windows and Ubuntu machines (with addresses replaced by documentation ranges), and its Java programs and subnetting answers are verified by running them. Answers to questions are hidden in collapsible `<details>` blocks, so files work as self-tests on GitHub as well as in the app.
+Programming examples are written in **Java** (Spring Boot examples use JDK 21 and Spring Boot 4.1; DBMS examples use JDBC). SQL is written for PostgreSQL 17+ and verified against a shared sample database. Linux commands and Bash scripts are verified in a throwaway practice lab on Ubuntu with GNU tools; machine-dependent output is marked as such. Computer Networks command output was captured on real Windows and Ubuntu machines (with addresses replaced by documentation ranges), and its Java programs and subnetting answers are verified by running them. System Design's Java programs are run and their output checked, and its estimates and availability numbers are recalculated. Answers to questions are hidden in collapsible `<details>` blocks, so files work as self-tests on GitHub as well as in the app.
 
 ### Study modes
 
-Aptitude, DSA, OOP, Spring Boot, DBMS + PostgreSQL, Linux and Computer Networks each offer three ways to study:
+Aptitude, DSA, OOP, Spring Boot, DBMS + PostgreSQL, Linux, Computer Networks and System Design each offer three ways to study:
 
 | Mode | What it is | Source files |
 |------|------------|--------------|
@@ -183,6 +183,12 @@ Aptitude, DSA, OOP, Spring Boot, DBMS + PostgreSQL, Linux and Computer Networks 
 | **Learn** | 88 topics in 22 modules, from "what is a network" to the full URL journey and backend request flows, with 15 interactive simulations and visualizers | `content/computer-networks/<subcategory>/<topic>/` |
 | **Revision** | Complete revision, interview cheat sheet, comparisons, traps, layers/protocols/ports, subnetting formulas, request flows and troubleshooting | `content/computer-networks/revision/` (7 sources) |
 | **Quick Revision** | One hour: a 30-minute essentials block, 20 minutes of drills and a 10-minute final sheet (each usable alone) | `content/computer-networks/revision/quick-*.md` (3 sources) |
+
+| System Design mode | What it is | Source files |
+|--------------------|------------|--------------|
+| **Learn** | 82 topics in 11 modules, from requirements and estimation to caching, replication, sharding, consistency, reliability, messaging and four case studies, with 23 interactive simulations and visualizers (including an interview simulator) | `content/system-design/<subcategory>/<topic>/` |
+| **Revision** | Complete revision of every module, decision cheat sheets, important comparisons, key numbers and rules, and traps and confusions | `content/system-design/revision/` (5 sources) |
+| **Quick Revision** | Six 10-minute blocks (foundations, communication, data and caching, scaling and consistency, reliability and operations, case studies and the interview) — one hour in all, each usable alone | `content/system-design/revision/quick-*.md` (6 sources) |
 
 The modes are declared in `metadata/categories.json` (`studyModes`); the app combines each mode's source files into one view. Any category can add study modes the same way.
 

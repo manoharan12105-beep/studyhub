@@ -2,5 +2,2774 @@
   "$schema": "../schemas/topics.schema.json",
   "schemaVersion": 1,
   "category": "system-design",
-  "topics": []
+  "topics": [
+    {
+      "id": "what-is-system-design",
+      "slug": "what-is-system-design",
+      "title": "What Is System Design?",
+      "category": "system-design",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "What a system is, why design matters at scale, the bank-counter story of scaling, and the three failures of a single cheap server.",
+      "difficulty": "beginner",
+      "tags": [
+        "system-design",
+        "scalability",
+        "single-point-of-failure",
+        "trade-offs"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "hld-vs-lld",
+        "vertical-vs-horizontal-scaling",
+        "system-building-blocks"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "hld-vs-lld",
+      "slug": "hld-vs-lld",
+      "title": "HLD vs LLD",
+      "category": "system-design",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "High-level design (components and data flow) vs low-level design (classes and code), and how to answer at the right altitude.",
+      "difficulty": "beginner",
+      "tags": [
+        "hld",
+        "lld",
+        "architecture",
+        "interview"
+      ],
+      "estimatedMinutes": 12,
+      "order": 2,
+      "prerequisites": [
+        "what-is-system-design"
+      ],
+      "relatedTopics": [
+        "system-design-interview-framework"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "functional-and-non-functional-requirements",
+      "slug": "functional-and-non-functional-requirements",
+      "title": "Functional and Non-Functional Requirements",
+      "category": "system-design",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "What the system does vs how well it does it, the standard quality attributes, and why qualities decide the architecture.",
+      "difficulty": "beginner",
+      "tags": [
+        "requirements",
+        "functional-requirements",
+        "non-functional-requirements",
+        "scalability",
+        "availability"
+      ],
+      "estimatedMinutes": 18,
+      "order": 3,
+      "prerequisites": [
+        "what-is-system-design"
+      ],
+      "relatedTopics": [
+        "clarifying-requirements",
+        "sla-slo-sli-and-availability"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "clarifying-requirements",
+      "slug": "clarifying-requirements",
+      "title": "Clarifying Requirements",
+      "category": "system-design",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "The questions to ask before drawing anything: users, read/write mix, what must never be lost, latency budget and cost.",
+      "difficulty": "beginner",
+      "tags": [
+        "requirements",
+        "clarification",
+        "interview",
+        "read-heavy",
+        "write-heavy"
+      ],
+      "estimatedMinutes": 15,
+      "order": 4,
+      "prerequisites": [
+        "functional-and-non-functional-requirements"
+      ],
+      "relatedTopics": [
+        "back-of-the-envelope-estimation",
+        "system-design-interview-framework"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "back-of-the-envelope-estimation",
+      "slug": "back-of-the-envelope-estimation",
+      "title": "Back-of-the-Envelope Estimation",
+      "category": "system-design",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "Turning users into requests per second, peak load, storage, bandwidth and replica counts with round numbers.",
+      "difficulty": "intermediate",
+      "tags": [
+        "estimation",
+        "dau",
+        "qps",
+        "storage",
+        "bandwidth",
+        "peak-traffic"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "clarifying-requirements"
+      ],
+      "relatedTopics": [
+        "capacity-planning-and-bottlenecks",
+        "design-url-shortener"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "sla-slo-sli-and-availability",
+      "slug": "sla-slo-sli-and-availability",
+      "title": "SLA, SLO, SLI and Availability Math",
+      "category": "system-design",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "Indicators, objectives and agreements, what the nines mean in downtime, error budgets, and availability of serial and parallel components.",
+      "difficulty": "intermediate",
+      "tags": [
+        "sla",
+        "slo",
+        "sli",
+        "availability",
+        "nines",
+        "error-budget"
+      ],
+      "estimatedMinutes": 20,
+      "order": 6,
+      "prerequisites": [
+        "functional-and-non-functional-requirements"
+      ],
+      "relatedTopics": [
+        "redundancy-high-availability-and-failover",
+        "monitoring-and-alerting"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "data-intensive-vs-compute-intensive",
+      "slug": "data-intensive-vs-compute-intensive",
+      "title": "Data-Intensive vs Compute-Intensive Systems",
+      "category": "system-design",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "Deciding whether time is lost moving data or calculating, and why that decides where you spend effort and money.",
+      "difficulty": "beginner",
+      "tags": [
+        "data-intensive",
+        "compute-intensive",
+        "bottleneck"
+      ],
+      "estimatedMinutes": 12,
+      "order": 7,
+      "prerequisites": [
+        "what-is-system-design"
+      ],
+      "relatedTopics": [
+        "capacity-planning-and-bottlenecks"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "system-building-blocks",
+      "slug": "system-building-blocks",
+      "title": "The Building Blocks of a System",
+      "category": "system-design",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "Clients, application servers and APIs, databases, caches, load balancers, queues, storage and monitoring, plus sync vs async calls.",
+      "difficulty": "beginner",
+      "tags": [
+        "building-blocks",
+        "database",
+        "cache",
+        "load-balancer",
+        "message-queue",
+        "sync",
+        "async"
+      ],
+      "estimatedMinutes": 18,
+      "order": 8,
+      "prerequisites": [
+        "what-is-system-design"
+      ],
+      "relatedTopics": [
+        "request-journey",
+        "message-queues"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "monolith-vs-microservices",
+      "slug": "monolith-vs-microservices",
+      "title": "Monolith, Modular Monolith and Microservices",
+      "category": "system-design",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "One deployable, one deployable with strict modules, or many services: what each costs and when to split.",
+      "difficulty": "intermediate",
+      "tags": [
+        "monolith",
+        "modular-monolith",
+        "microservices",
+        "architecture"
+      ],
+      "estimatedMinutes": 22,
+      "order": 9,
+      "prerequisites": [
+        "system-building-blocks"
+      ],
+      "relatedTopics": [
+        "service-discovery",
+        "reverse-proxy-and-api-gateway",
+        "distributed-transactions-and-sagas"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "vertical-vs-horizontal-scaling",
+      "slug": "vertical-vs-horizontal-scaling",
+      "title": "Vertical vs Horizontal Scaling",
+      "category": "system-design",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "Scaling up with a bigger machine vs scaling out with more machines: limits, cost, failure and the new problems scale-out brings.",
+      "difficulty": "beginner",
+      "tags": [
+        "scaling",
+        "vertical-scaling",
+        "horizontal-scaling",
+        "scale-up",
+        "scale-out"
+      ],
+      "estimatedMinutes": 15,
+      "order": 10,
+      "prerequisites": [
+        "what-is-system-design"
+      ],
+      "relatedTopics": [
+        "stateless-vs-stateful-services",
+        "load-balancing-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "stateless-vs-stateful-services",
+      "slug": "stateless-vs-stateful-services",
+      "title": "Stateless vs Stateful Services",
+      "category": "system-design",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "Why sessions in server memory break scale-out, how a shared session store or tokens fix it, and why sticky sessions are a trap.",
+      "difficulty": "intermediate",
+      "tags": [
+        "stateless",
+        "stateful",
+        "sessions",
+        "sticky-sessions",
+        "redis"
+      ],
+      "estimatedMinutes": 18,
+      "order": 11,
+      "prerequisites": [
+        "vertical-vs-horizontal-scaling"
+      ],
+      "relatedTopics": [
+        "load-balancing-fundamentals",
+        "distributed-caching"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "request-journey",
+      "slug": "request-journey",
+      "title": "The Journey of a Request",
+      "category": "system-design",
+      "subcategory": "communication",
+      "type": "concept",
+      "description": "Client, DNS, load balancer, API server, cache, database and back: what happens at every hop, and latency vs bandwidth.",
+      "difficulty": "beginner",
+      "tags": [
+        "request-flow",
+        "dns",
+        "load-balancer",
+        "cache",
+        "latency",
+        "bandwidth"
+      ],
+      "estimatedMinutes": 18,
+      "order": 1,
+      "prerequisites": [
+        "system-building-blocks"
+      ],
+      "relatedTopics": [
+        "dns-in-system-design",
+        "load-balancing-fundamentals",
+        "caching-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "dns-in-system-design",
+      "slug": "dns-in-system-design",
+      "title": "DNS in System Design",
+      "category": "system-design",
+      "subcategory": "communication",
+      "type": "concept",
+      "description": "How names become addresses, why DNS is distributed and cached, and how TTLs and DNS routing are used for failover and geography.",
+      "difficulty": "beginner",
+      "tags": [
+        "dns",
+        "ttl",
+        "geo-dns",
+        "resolver",
+        "failover"
+      ],
+      "estimatedMinutes": 18,
+      "order": 2,
+      "prerequisites": [
+        "request-journey"
+      ],
+      "relatedTopics": [
+        "dns-fundamentals",
+        "content-delivery-networks",
+        "redundancy-high-availability-and-failover"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "network-basics-for-system-design",
+      "slug": "network-basics-for-system-design",
+      "title": "IP Addresses, Ports, Sockets and Connections",
+      "category": "system-design",
+      "subcategory": "communication",
+      "type": "concept",
+      "description": "Addresses find a machine, ports find a process, a socket pair identifies a connection, and why connections are a limited resource.",
+      "difficulty": "beginner",
+      "tags": [
+        "ip-address",
+        "port",
+        "socket",
+        "tcp",
+        "connection-limits"
+      ],
+      "estimatedMinutes": 18,
+      "order": 3,
+      "prerequisites": [
+        "request-journey"
+      ],
+      "relatedTopics": [
+        "connection-pooling-and-database-bottlenecks",
+        "real-time-communication"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "http-and-https-for-system-design",
+      "slug": "http-and-https-for-system-design",
+      "title": "HTTP and HTTPS for System Design",
+      "category": "system-design",
+      "subcategory": "communication",
+      "type": "concept",
+      "description": "Requests, responses, methods and headers, what TLS adds, keep-alive, HTTP/2 and HTTP/3, and where TLS is terminated.",
+      "difficulty": "beginner",
+      "tags": [
+        "http",
+        "https",
+        "tls",
+        "keep-alive",
+        "http2"
+      ],
+      "estimatedMinutes": 18,
+      "order": 4,
+      "prerequisites": [
+        "network-basics-for-system-design"
+      ],
+      "relatedTopics": [
+        "rest-api-design",
+        "http-fundamentals",
+        "tls-handshake-and-https"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "rest-api-design",
+      "slug": "rest-api-design",
+      "title": "REST API Design",
+      "category": "system-design",
+      "subcategory": "communication",
+      "type": "concept",
+      "description": "Resources and endpoints, methods, PUT vs PATCH, path vs query vs body, status codes and response shapes that can evolve.",
+      "difficulty": "beginner",
+      "tags": [
+        "rest",
+        "api",
+        "http-methods",
+        "status-codes",
+        "put",
+        "patch"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "http-and-https-for-system-design"
+      ],
+      "relatedTopics": [
+        "api-versioning-pagination-and-filtering",
+        "api-styles-compared",
+        "idempotency-in-distributed-systems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "api-versioning-pagination-and-filtering",
+      "slug": "api-versioning-pagination-and-filtering",
+      "title": "API Versioning, Pagination and Filtering",
+      "category": "system-design",
+      "subcategory": "communication",
+      "type": "concept",
+      "description": "Evolving an API without breaking clients, offset vs cursor pagination, and filtering and sorting that stay fast at scale.",
+      "difficulty": "intermediate",
+      "tags": [
+        "api-versioning",
+        "pagination",
+        "cursor-pagination",
+        "filtering",
+        "sorting"
+      ],
+      "estimatedMinutes": 22,
+      "order": 6,
+      "prerequisites": [
+        "rest-api-design"
+      ],
+      "relatedTopics": [
+        "rate-limiting",
+        "database-indexing-for-scale"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "rate-limiting",
+      "slug": "rate-limiting",
+      "title": "Rate Limiting",
+      "category": "system-design",
+      "subcategory": "communication",
+      "type": "algorithm",
+      "description": "Why APIs limit clients, the token bucket, leaky bucket, fixed and sliding window algorithms, and distributed rate limiting with Redis.",
+      "difficulty": "intermediate",
+      "tags": [
+        "rate-limiting",
+        "token-bucket",
+        "leaky-bucket",
+        "sliding-window",
+        "throttling"
+      ],
+      "estimatedMinutes": 28,
+      "order": 7,
+      "prerequisites": [
+        "rest-api-design"
+      ],
+      "relatedTopics": [
+        "reverse-proxy-and-api-gateway",
+        "graceful-degradation-and-load-shedding",
+        "distributed-caching"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "api-styles-compared",
+      "slug": "api-styles-compared",
+      "title": "REST vs SOAP vs GraphQL vs gRPC",
+      "category": "system-design",
+      "subcategory": "communication",
+      "type": "concept",
+      "description": "Four API styles: what each is built for, data formats, over- and under-fetching, and how to choose.",
+      "difficulty": "intermediate",
+      "tags": [
+        "rest",
+        "soap",
+        "graphql",
+        "grpc",
+        "protocol-buffers"
+      ],
+      "estimatedMinutes": 20,
+      "order": 8,
+      "prerequisites": [
+        "rest-api-design"
+      ],
+      "relatedTopics": [
+        "real-time-communication",
+        "monolith-vs-microservices"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "real-time-communication",
+      "slug": "real-time-communication",
+      "title": "Polling, Long Polling, SSE and WebSockets",
+      "category": "system-design",
+      "subcategory": "communication",
+      "type": "concept",
+      "description": "Getting updates to clients: short polling, long polling, Server-Sent Events and WebSockets, and what each costs at scale.",
+      "difficulty": "intermediate",
+      "tags": [
+        "websockets",
+        "polling",
+        "long-polling",
+        "server-sent-events",
+        "real-time"
+      ],
+      "estimatedMinutes": 20,
+      "order": 9,
+      "prerequisites": [
+        "http-and-https-for-system-design"
+      ],
+      "relatedTopics": [
+        "design-chat-application",
+        "load-balancing-algorithms"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "reverse-proxy-and-api-gateway",
+      "slug": "reverse-proxy-and-api-gateway",
+      "title": "Reverse Proxy and API Gateway",
+      "category": "system-design",
+      "subcategory": "communication",
+      "type": "concept",
+      "description": "Forward vs reverse proxies, what an API gateway adds for microservices, and how both relate to load balancers.",
+      "difficulty": "intermediate",
+      "tags": [
+        "reverse-proxy",
+        "forward-proxy",
+        "api-gateway",
+        "tls-termination"
+      ],
+      "estimatedMinutes": 18,
+      "order": 10,
+      "prerequisites": [
+        "request-journey"
+      ],
+      "relatedTopics": [
+        "load-balancing-fundamentals",
+        "rate-limiting",
+        "monolith-vs-microservices"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "content-delivery-networks",
+      "slug": "content-delivery-networks",
+      "title": "Content Delivery Networks (CDN)",
+      "category": "system-design",
+      "subcategory": "communication",
+      "type": "concept",
+      "description": "Edge servers near users, pull vs push CDNs, cache headers, invalidation, and what a CDN can and cannot cache.",
+      "difficulty": "intermediate",
+      "tags": [
+        "cdn",
+        "edge",
+        "origin",
+        "cache-control",
+        "static-content"
+      ],
+      "estimatedMinutes": 20,
+      "order": 11,
+      "prerequisites": [
+        "caching-fundamentals"
+      ],
+      "relatedTopics": [
+        "caching-and-cdns",
+        "object-and-blob-storage",
+        "design-video-streaming-platform"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "service-discovery",
+      "slug": "service-discovery",
+      "title": "Service Discovery",
+      "category": "system-design",
+      "subcategory": "communication",
+      "type": "concept",
+      "description": "How services find healthy instances of each other when addresses change: registries, client- and server-side discovery, DNS.",
+      "difficulty": "advanced",
+      "tags": [
+        "service-discovery",
+        "service-registry",
+        "health-checks",
+        "microservices"
+      ],
+      "estimatedMinutes": 15,
+      "order": 12,
+      "prerequisites": [
+        "monolith-vs-microservices"
+      ],
+      "relatedTopics": [
+        "load-balancing-fundamentals",
+        "distributed-locks-and-leader-election"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "data-modeling-and-access-patterns",
+      "slug": "data-modeling-and-access-patterns",
+      "title": "Data Modeling and Access Patterns",
+      "category": "system-design",
+      "subcategory": "data-and-storage",
+      "type": "concept",
+      "description": "Starting from the questions users ask the system, then shaping records and keys to answer them, before picking technology.",
+      "difficulty": "beginner",
+      "tags": [
+        "data-modeling",
+        "access-patterns",
+        "schema",
+        "feed"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "system-building-blocks"
+      ],
+      "relatedTopics": [
+        "choosing-a-database",
+        "database-indexing-for-scale"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "relational-databases-for-system-design",
+      "slug": "relational-databases-for-system-design",
+      "title": "Relational Databases in System Design",
+      "category": "system-design",
+      "subcategory": "data-and-storage",
+      "type": "concept",
+      "description": "Tables, keys, constraints and relationships, ACID transactions, and what relational databases do well and badly at scale.",
+      "difficulty": "beginner",
+      "tags": [
+        "sql",
+        "relational-database",
+        "acid",
+        "transactions",
+        "joins",
+        "constraints"
+      ],
+      "estimatedMinutes": 22,
+      "order": 2,
+      "prerequisites": [
+        "data-modeling-and-access-patterns"
+      ],
+      "relatedTopics": [
+        "nosql-databases",
+        "choosing-a-database",
+        "database-transactions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "nosql-databases",
+      "slug": "nosql-databases",
+      "title": "NoSQL Databases",
+      "category": "system-design",
+      "subcategory": "data-and-storage",
+      "type": "concept",
+      "description": "Key-value, document, wide-column and graph databases: data models, strengths, limits, and what \"NoSQL scales\" really means.",
+      "difficulty": "intermediate",
+      "tags": [
+        "nosql",
+        "key-value",
+        "document-database",
+        "wide-column",
+        "graph-database"
+      ],
+      "estimatedMinutes": 22,
+      "order": 3,
+      "prerequisites": [
+        "relational-databases-for-system-design"
+      ],
+      "relatedTopics": [
+        "choosing-a-database",
+        "sharding-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "choosing-a-database",
+      "slug": "choosing-a-database",
+      "title": "Choosing a Database",
+      "category": "system-design",
+      "subcategory": "data-and-storage",
+      "type": "concept",
+      "description": "A reasoning process for picking storage from access patterns, relationships, consistency, scale and operations, with worked decisions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "database-selection",
+        "sql",
+        "nosql",
+        "trade-offs",
+        "polyglot-persistence"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "nosql-databases"
+      ],
+      "relatedTopics": [
+        "data-modeling-and-access-patterns",
+        "consistency-models"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "database-indexing-for-scale",
+      "slug": "database-indexing-for-scale",
+      "title": "Database Indexes at Scale",
+      "category": "system-design",
+      "subcategory": "data-and-storage",
+      "type": "concept",
+      "description": "Why queries slow down as data grows, how an index avoids a full scan, what indexes cost on writes, and how to choose them.",
+      "difficulty": "intermediate",
+      "tags": [
+        "index",
+        "b-tree",
+        "composite-index",
+        "query-performance"
+      ],
+      "estimatedMinutes": 18,
+      "order": 5,
+      "prerequisites": [
+        "relational-databases-for-system-design"
+      ],
+      "relatedTopics": [
+        "index-fundamentals",
+        "caching-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "connection-pooling-and-database-bottlenecks",
+      "slug": "connection-pooling-and-database-bottlenecks",
+      "title": "Connection Pooling and Database Bottlenecks",
+      "category": "system-design",
+      "subcategory": "data-and-storage",
+      "type": "concept",
+      "description": "Why opening connections is expensive, connection limits, pool sizing, and the usual ways a database becomes the bottleneck.",
+      "difficulty": "intermediate",
+      "tags": [
+        "connection-pool",
+        "connection-limits",
+        "read-write-splitting",
+        "database-bottleneck"
+      ],
+      "estimatedMinutes": 22,
+      "order": 6,
+      "prerequisites": [
+        "network-basics-for-system-design"
+      ],
+      "relatedTopics": [
+        "database-replication",
+        "capacity-planning-and-bottlenecks"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "object-and-blob-storage",
+      "slug": "object-and-blob-storage",
+      "title": "Object and Blob Storage",
+      "category": "system-design",
+      "subcategory": "data-and-storage",
+      "type": "concept",
+      "description": "Why large files belong in object storage, how keys, metadata and durability work, presigned uploads, and storage tiers.",
+      "difficulty": "beginner",
+      "tags": [
+        "object-storage",
+        "blob-storage",
+        "s3",
+        "presigned-url",
+        "durability"
+      ],
+      "estimatedMinutes": 18,
+      "order": 7,
+      "prerequisites": [
+        "data-modeling-and-access-patterns"
+      ],
+      "relatedTopics": [
+        "content-delivery-networks",
+        "design-photo-sharing-app"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "search-systems",
+      "slug": "search-systems",
+      "title": "Search Systems",
+      "category": "system-design",
+      "subcategory": "data-and-storage",
+      "type": "concept",
+      "description": "Why LIKE queries do not scale, inverted indexes, relevance, and running Elasticsearch or OpenSearch beside the main database.",
+      "difficulty": "intermediate",
+      "tags": [
+        "search",
+        "inverted-index",
+        "elasticsearch",
+        "opensearch",
+        "full-text-search"
+      ],
+      "estimatedMinutes": 20,
+      "order": 8,
+      "prerequisites": [
+        "choosing-a-database"
+      ],
+      "relatedTopics": [
+        "database-indexing-for-scale",
+        "event-driven-architecture"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "caching-fundamentals",
+      "slug": "caching-fundamentals",
+      "title": "Caching Fundamentals",
+      "category": "system-design",
+      "subcategory": "caching",
+      "type": "concept",
+      "description": "Why caches exist, hits and misses, hit ratio, where caches live, what is worth caching, and what caching costs.",
+      "difficulty": "beginner",
+      "tags": [
+        "cache",
+        "cache-hit",
+        "cache-miss",
+        "hit-ratio",
+        "redis"
+      ],
+      "estimatedMinutes": 22,
+      "order": 1,
+      "prerequisites": [
+        "request-journey"
+      ],
+      "relatedTopics": [
+        "cache-aside-and-read-through",
+        "content-delivery-networks",
+        "distributed-caching"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "cache-aside-and-read-through",
+      "slug": "cache-aside-and-read-through",
+      "title": "Cache-Aside and Read-Through",
+      "category": "system-design",
+      "subcategory": "caching",
+      "type": "pattern",
+      "description": "Lazy loading where the application or the cache fills entries on a miss, with the read and write paths of each.",
+      "difficulty": "intermediate",
+      "tags": [
+        "cache-aside",
+        "read-through",
+        "lazy-loading",
+        "redis"
+      ],
+      "estimatedMinutes": 18,
+      "order": 2,
+      "prerequisites": [
+        "caching-fundamentals"
+      ],
+      "relatedTopics": [
+        "cache-write-strategies",
+        "cache-invalidation-and-ttl"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "cache-write-strategies",
+      "slug": "cache-write-strategies",
+      "title": "Write-Through, Write-Around and Write-Back",
+      "category": "system-design",
+      "subcategory": "caching",
+      "type": "pattern",
+      "description": "Three ways to handle writes with a cache, what each guarantees, what each risks, and where each fits.",
+      "difficulty": "intermediate",
+      "tags": [
+        "write-through",
+        "write-around",
+        "write-back",
+        "write-behind"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "cache-aside-and-read-through"
+      ],
+      "relatedTopics": [
+        "cache-invalidation-and-ttl",
+        "delivery-semantics"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "cache-invalidation-and-ttl",
+      "slug": "cache-invalidation-and-ttl",
+      "title": "Cache Invalidation and TTL",
+      "category": "system-design",
+      "subcategory": "caching",
+      "type": "concept",
+      "description": "Keeping cached data fresh enough: TTL expiry, delete-on-write, versioned keys, and the race conditions between cache and database.",
+      "difficulty": "intermediate",
+      "tags": [
+        "cache-invalidation",
+        "ttl",
+        "stale-data",
+        "cache-consistency"
+      ],
+      "estimatedMinutes": 22,
+      "order": 4,
+      "prerequisites": [
+        "cache-aside-and-read-through"
+      ],
+      "relatedTopics": [
+        "cache-stampede-penetration-and-hot-keys",
+        "consistency-models"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "cache-eviction-policies",
+      "slug": "cache-eviction-policies",
+      "title": "Cache Eviction Policies and LRU",
+      "category": "system-design",
+      "subcategory": "caching",
+      "type": "algorithm",
+      "description": "What to remove when the cache is full: LRU, LFU, FIFO and others, with a working LRU cache in Java.",
+      "difficulty": "intermediate",
+      "tags": [
+        "eviction",
+        "lru",
+        "lfu",
+        "fifo",
+        "linkedhashmap"
+      ],
+      "estimatedMinutes": 22,
+      "order": 5,
+      "prerequisites": [
+        "caching-fundamentals"
+      ],
+      "relatedTopics": [
+        "distributed-caching"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "cache-stampede-penetration-and-hot-keys",
+      "slug": "cache-stampede-penetration-and-hot-keys",
+      "title": "Cache Stampede, Penetration and Hot Keys",
+      "category": "system-design",
+      "subcategory": "caching",
+      "type": "concept",
+      "description": "The three ways a cache fails under load: many misses at once, misses that never fill, and one key too hot for one node.",
+      "difficulty": "advanced",
+      "tags": [
+        "cache-stampede",
+        "thundering-herd",
+        "cache-penetration",
+        "hot-key",
+        "bloom-filter"
+      ],
+      "estimatedMinutes": 22,
+      "order": 6,
+      "prerequisites": [
+        "cache-invalidation-and-ttl"
+      ],
+      "relatedTopics": [
+        "distributed-caching",
+        "graceful-degradation-and-load-shedding"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "distributed-caching",
+      "slug": "distributed-caching",
+      "title": "Distributed Caching",
+      "category": "system-design",
+      "subcategory": "caching",
+      "type": "concept",
+      "description": "Local vs shared caches, partitioning a cache across nodes, replication and failover, and two-level caching.",
+      "difficulty": "advanced",
+      "tags": [
+        "distributed-cache",
+        "redis",
+        "memcached",
+        "cache-cluster",
+        "local-cache"
+      ],
+      "estimatedMinutes": 20,
+      "order": 7,
+      "prerequisites": [
+        "caching-fundamentals"
+      ],
+      "relatedTopics": [
+        "consistent-hashing",
+        "cache-stampede-penetration-and-hot-keys"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "load-balancing-fundamentals",
+      "slug": "load-balancing-fundamentals",
+      "title": "Load Balancing Fundamentals",
+      "category": "system-design",
+      "subcategory": "scaling-and-distribution",
+      "type": "concept",
+      "description": "What a load balancer does, L4 vs L7, health checks, connection draining, and why the balancer itself must not be a single point of failure.",
+      "difficulty": "beginner",
+      "tags": [
+        "load-balancer",
+        "health-checks",
+        "l4",
+        "l7",
+        "reverse-proxy"
+      ],
+      "estimatedMinutes": 22,
+      "order": 1,
+      "prerequisites": [
+        "vertical-vs-horizontal-scaling"
+      ],
+      "relatedTopics": [
+        "load-balancing-algorithms",
+        "load-balancing-l4-vs-l7",
+        "redundancy-high-availability-and-failover"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "load-balancing-algorithms",
+      "slug": "load-balancing-algorithms",
+      "title": "Load-Balancing Algorithms",
+      "category": "system-design",
+      "subcategory": "scaling-and-distribution",
+      "type": "algorithm",
+      "description": "Round robin, weighted, least connections, least response time, hashing and geo routing: how each picks a server and where it fails.",
+      "difficulty": "intermediate",
+      "tags": [
+        "round-robin",
+        "weighted-round-robin",
+        "least-connections",
+        "ip-hash",
+        "least-response-time"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "load-balancing-fundamentals"
+      ],
+      "relatedTopics": [
+        "consistent-hashing",
+        "stateless-vs-stateful-services"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "database-replication",
+      "slug": "database-replication",
+      "title": "Database Replication and Read Replicas",
+      "category": "system-design",
+      "subcategory": "scaling-and-distribution",
+      "type": "concept",
+      "description": "Keeping copies of data on several machines: primary and replicas, read/write splitting, failover, and why replication is not a backup.",
+      "difficulty": "intermediate",
+      "tags": [
+        "replication",
+        "read-replica",
+        "primary",
+        "failover",
+        "read-write-splitting"
+      ],
+      "estimatedMinutes": 22,
+      "order": 3,
+      "prerequisites": [
+        "relational-databases-for-system-design"
+      ],
+      "relatedTopics": [
+        "sync-async-replication-and-lag",
+        "sharding-fundamentals",
+        "disaster-recovery-rpo-and-rto"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "sync-async-replication-and-lag",
+      "slug": "sync-async-replication-and-lag",
+      "title": "Synchronous vs Asynchronous Replication and Lag",
+      "category": "system-design",
+      "subcategory": "scaling-and-distribution",
+      "type": "concept",
+      "description": "Waiting for replicas vs not, semi-synchronous replication, replication lag and the anomalies it causes, and how to hide them.",
+      "difficulty": "intermediate",
+      "tags": [
+        "synchronous-replication",
+        "asynchronous-replication",
+        "replication-lag",
+        "read-your-writes"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "database-replication"
+      ],
+      "relatedTopics": [
+        "consistency-models",
+        "quorum-reads-and-writes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "multi-leader-and-leaderless-replication",
+      "slug": "multi-leader-and-leaderless-replication",
+      "title": "Multi-Leader and Leaderless Replication",
+      "category": "system-design",
+      "subcategory": "scaling-and-distribution",
+      "type": "concept",
+      "description": "More than one node accepting writes: multi-region leaders, write conflicts and their resolution, and leaderless Dynamo-style stores.",
+      "difficulty": "advanced",
+      "tags": [
+        "multi-leader",
+        "leaderless",
+        "conflict-resolution",
+        "last-write-wins"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "sync-async-replication-and-lag"
+      ],
+      "relatedTopics": [
+        "quorum-reads-and-writes",
+        "consistency-models"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "quorum-reads-and-writes",
+      "slug": "quorum-reads-and-writes",
+      "title": "Quorum Reads and Writes",
+      "category": "system-design",
+      "subcategory": "scaling-and-distribution",
+      "type": "concept",
+      "description": "N, W and R: why W + R > N makes reads overlap the latest write, and what each configuration trades.",
+      "difficulty": "advanced",
+      "tags": [
+        "quorum",
+        "n-r-w",
+        "replication-factor",
+        "leaderless"
+      ],
+      "estimatedMinutes": 18,
+      "order": 6,
+      "prerequisites": [
+        "multi-leader-and-leaderless-replication"
+      ],
+      "relatedTopics": [
+        "cap-theorem",
+        "consistency-models"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "sharding-fundamentals",
+      "slug": "sharding-fundamentals",
+      "title": "Sharding and Partitioning",
+      "category": "system-design",
+      "subcategory": "scaling-and-distribution",
+      "type": "concept",
+      "description": "Splitting data across machines: range, hash and directory partitioning, choosing a shard key, and what queries become harder.",
+      "difficulty": "intermediate",
+      "tags": [
+        "sharding",
+        "partitioning",
+        "shard-key",
+        "range-partitioning",
+        "hash-partitioning"
+      ],
+      "estimatedMinutes": 25,
+      "order": 7,
+      "prerequisites": [
+        "database-replication"
+      ],
+      "relatedTopics": [
+        "hot-partitions-and-resharding",
+        "consistent-hashing"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "hot-partitions-and-resharding",
+      "slug": "hot-partitions-and-resharding",
+      "title": "Hot Partitions, Resharding and Secondary Indexes",
+      "category": "system-design",
+      "subcategory": "scaling-and-distribution",
+      "type": "concept",
+      "description": "When one shard gets most of the traffic, moving data when shards are added, and local vs global secondary indexes.",
+      "difficulty": "advanced",
+      "tags": [
+        "hot-partition",
+        "hotspot",
+        "resharding",
+        "secondary-index",
+        "celebrity-problem"
+      ],
+      "estimatedMinutes": 20,
+      "order": 8,
+      "prerequisites": [
+        "sharding-fundamentals"
+      ],
+      "relatedTopics": [
+        "consistent-hashing",
+        "cache-stampede-penetration-and-hot-keys"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "consistent-hashing",
+      "slug": "consistent-hashing",
+      "title": "Consistent Hashing",
+      "category": "system-design",
+      "subcategory": "scaling-and-distribution",
+      "type": "algorithm",
+      "description": "Placing keys and nodes on a hash ring so adding or removing a node moves only a small share of keys, with virtual nodes and Java code.",
+      "difficulty": "advanced",
+      "tags": [
+        "consistent-hashing",
+        "hash-ring",
+        "virtual-nodes",
+        "rebalancing"
+      ],
+      "estimatedMinutes": 25,
+      "order": 9,
+      "prerequisites": [
+        "sharding-fundamentals"
+      ],
+      "relatedTopics": [
+        "distributed-caching",
+        "hot-partitions-and-resharding"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "capacity-planning-and-bottlenecks",
+      "slug": "capacity-planning-and-bottlenecks",
+      "title": "Capacity Planning and Finding Bottlenecks",
+      "category": "system-design",
+      "subcategory": "scaling-and-distribution",
+      "type": "concept",
+      "description": "Turning estimates into machine counts with headroom, finding the component that limits throughput, and load testing.",
+      "difficulty": "advanced",
+      "tags": [
+        "capacity-planning",
+        "bottleneck",
+        "headroom",
+        "load-testing",
+        "utilization"
+      ],
+      "estimatedMinutes": 22,
+      "order": 10,
+      "prerequisites": [
+        "back-of-the-envelope-estimation"
+      ],
+      "relatedTopics": [
+        "latency-percentiles",
+        "connection-pooling-and-database-bottlenecks"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "cap-theorem",
+      "slug": "cap-theorem",
+      "title": "The CAP Theorem",
+      "category": "system-design",
+      "subcategory": "consistency-and-coordination",
+      "type": "concept",
+      "description": "What consistency, availability and partition tolerance mean precisely, why a partition forces a choice, and CP vs AP reasoning.",
+      "difficulty": "intermediate",
+      "tags": [
+        "cap-theorem",
+        "network-partition",
+        "consistency",
+        "availability",
+        "pacelc"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "database-replication"
+      ],
+      "relatedTopics": [
+        "consistency-models",
+        "quorum-reads-and-writes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "consistency-models",
+      "slug": "consistency-models",
+      "title": "Strong vs Eventual Consistency",
+      "category": "system-design",
+      "subcategory": "consistency-and-coordination",
+      "type": "concept",
+      "description": "Linearizable, eventual, read-your-writes, monotonic and causal consistency, what each costs, and choosing per feature.",
+      "difficulty": "advanced",
+      "tags": [
+        "strong-consistency",
+        "eventual-consistency",
+        "linearizability",
+        "read-your-writes",
+        "pacelc"
+      ],
+      "estimatedMinutes": 22,
+      "order": 2,
+      "prerequisites": [
+        "cap-theorem"
+      ],
+      "relatedTopics": [
+        "sync-async-replication-and-lag",
+        "cache-invalidation-and-ttl"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "distributed-locks-and-leader-election",
+      "slug": "distributed-locks-and-leader-election",
+      "title": "Distributed Locks and Leader Election",
+      "category": "system-design",
+      "subcategory": "consistency-and-coordination",
+      "type": "concept",
+      "description": "Making exactly one node do something: lease-based locks, fencing tokens, why Redis locks are subtle, and leader election.",
+      "difficulty": "advanced",
+      "tags": [
+        "distributed-lock",
+        "leader-election",
+        "fencing-token",
+        "zookeeper",
+        "etcd"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "consistency-models"
+      ],
+      "relatedTopics": [
+        "redundancy-high-availability-and-failover",
+        "service-discovery"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "distributed-transactions-and-sagas",
+      "slug": "distributed-transactions-and-sagas",
+      "title": "Distributed Transactions, Sagas and the Outbox",
+      "category": "system-design",
+      "subcategory": "consistency-and-coordination",
+      "type": "concept",
+      "description": "Keeping data consistent across services: why 2PC is avoided, sagas with compensations, and the transactional outbox.",
+      "difficulty": "advanced",
+      "tags": [
+        "distributed-transaction",
+        "two-phase-commit",
+        "saga",
+        "transactional-outbox",
+        "compensation"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "monolith-vs-microservices"
+      ],
+      "relatedTopics": [
+        "event-driven-architecture",
+        "idempotency-in-distributed-systems",
+        "delivery-semantics"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "failures-and-single-points-of-failure",
+      "slug": "failures-and-single-points-of-failure",
+      "title": "Failures and Single Points of Failure",
+      "category": "system-design",
+      "subcategory": "reliability",
+      "type": "concept",
+      "description": "Hardware, software and human faults, faults vs failures, finding single points of failure, and designing for failure.",
+      "difficulty": "beginner",
+      "tags": [
+        "fault",
+        "failure",
+        "single-point-of-failure",
+        "hardware-fault",
+        "human-error"
+      ],
+      "estimatedMinutes": 18,
+      "order": 1,
+      "prerequisites": [
+        "what-is-system-design"
+      ],
+      "relatedTopics": [
+        "redundancy-high-availability-and-failover",
+        "disaster-recovery-rpo-and-rto"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "redundancy-high-availability-and-failover",
+      "slug": "redundancy-high-availability-and-failover",
+      "title": "Redundancy, High Availability and Failover",
+      "category": "system-design",
+      "subcategory": "reliability",
+      "type": "concept",
+      "description": "Active-passive and active-active redundancy, high availability vs fault tolerance, failover mechanics and split brain.",
+      "difficulty": "intermediate",
+      "tags": [
+        "redundancy",
+        "high-availability",
+        "fault-tolerance",
+        "failover",
+        "active-passive",
+        "active-active"
+      ],
+      "estimatedMinutes": 22,
+      "order": 2,
+      "prerequisites": [
+        "failures-and-single-points-of-failure"
+      ],
+      "relatedTopics": [
+        "sla-slo-sli-and-availability",
+        "database-replication"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "timeouts-retries-and-backoff",
+      "slug": "timeouts-retries-and-backoff",
+      "title": "Timeouts, Retries, Backoff and Jitter",
+      "category": "system-design",
+      "subcategory": "reliability",
+      "type": "concept",
+      "description": "Never waiting forever, retrying only what is safe, exponential backoff with jitter, and how retries cause retry storms.",
+      "difficulty": "intermediate",
+      "tags": [
+        "timeout",
+        "retry",
+        "exponential-backoff",
+        "jitter",
+        "retry-storm"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "failures-and-single-points-of-failure"
+      ],
+      "relatedTopics": [
+        "circuit-breakers-and-bulkheads",
+        "idempotency-in-distributed-systems"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "circuit-breakers-and-bulkheads",
+      "slug": "circuit-breakers-and-bulkheads",
+      "title": "Circuit Breakers, Bulkheads and Fallbacks",
+      "category": "system-design",
+      "subcategory": "reliability",
+      "type": "pattern",
+      "description": "Stopping calls to a failing dependency, isolating resources so one failure cannot sink everything, and serving fallbacks.",
+      "difficulty": "intermediate",
+      "tags": [
+        "circuit-breaker",
+        "bulkhead",
+        "fallback",
+        "cascading-failure"
+      ],
+      "estimatedMinutes": 22,
+      "order": 4,
+      "prerequisites": [
+        "timeouts-retries-and-backoff"
+      ],
+      "relatedTopics": [
+        "graceful-degradation-and-load-shedding"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "idempotency-in-distributed-systems",
+      "slug": "idempotency-in-distributed-systems",
+      "title": "Idempotency",
+      "category": "system-design",
+      "subcategory": "reliability",
+      "type": "concept",
+      "description": "Why retries need idempotent operations, idempotency keys for payments and orders, and deduplication in consumers.",
+      "difficulty": "intermediate",
+      "tags": [
+        "idempotency",
+        "idempotency-key",
+        "deduplication",
+        "retries"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "timeouts-retries-and-backoff"
+      ],
+      "relatedTopics": [
+        "delivery-semantics",
+        "http-methods-and-idempotency"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "graceful-degradation-and-load-shedding",
+      "slug": "graceful-degradation-and-load-shedding",
+      "title": "Graceful Degradation and Load Shedding",
+      "category": "system-design",
+      "subcategory": "reliability",
+      "type": "concept",
+      "description": "Keeping the core working when parts fail or load exceeds capacity: degraded features, shedding low-priority work, admission control.",
+      "difficulty": "advanced",
+      "tags": [
+        "graceful-degradation",
+        "load-shedding",
+        "feature-flags",
+        "overload"
+      ],
+      "estimatedMinutes": 18,
+      "order": 6,
+      "prerequisites": [
+        "circuit-breakers-and-bulkheads"
+      ],
+      "relatedTopics": [
+        "backpressure",
+        "rate-limiting"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "disaster-recovery-rpo-and-rto",
+      "slug": "disaster-recovery-rpo-and-rto",
+      "title": "Disaster Recovery, Backups, RPO and RTO",
+      "category": "system-design",
+      "subcategory": "reliability",
+      "type": "concept",
+      "description": "Backups vs replication, restore testing, recovery point and recovery time objectives, and the four DR strategies.",
+      "difficulty": "intermediate",
+      "tags": [
+        "disaster-recovery",
+        "backup",
+        "restore",
+        "rpo",
+        "rto",
+        "multi-region"
+      ],
+      "estimatedMinutes": 22,
+      "order": 7,
+      "prerequisites": [
+        "redundancy-high-availability-and-failover"
+      ],
+      "relatedTopics": [
+        "database-replication",
+        "sla-slo-sli-and-availability"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "message-queues",
+      "slug": "message-queues",
+      "title": "Message Queues",
+      "category": "system-design",
+      "subcategory": "messaging",
+      "type": "concept",
+      "description": "Producers, queues and consumers: buffering, acknowledgements and redelivery, and when async processing is and is not the right call.",
+      "difficulty": "beginner",
+      "tags": [
+        "message-queue",
+        "producer",
+        "consumer",
+        "acknowledgement",
+        "async"
+      ],
+      "estimatedMinutes": 22,
+      "order": 1,
+      "prerequisites": [
+        "system-building-blocks"
+      ],
+      "relatedTopics": [
+        "queues-vs-pub-sub",
+        "delivery-semantics",
+        "backpressure"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "queues-vs-pub-sub",
+      "slug": "queues-vs-pub-sub",
+      "title": "Point-to-Point Queues vs Publish-Subscribe",
+      "category": "system-design",
+      "subcategory": "messaging",
+      "type": "concept",
+      "description": "One message to one consumer vs one message to every subscriber, fan-out patterns, and combining both.",
+      "difficulty": "intermediate",
+      "tags": [
+        "pub-sub",
+        "fan-out",
+        "topic",
+        "queue",
+        "subscriber"
+      ],
+      "estimatedMinutes": 15,
+      "order": 2,
+      "prerequisites": [
+        "message-queues"
+      ],
+      "relatedTopics": [
+        "event-driven-architecture",
+        "kafka-vs-rabbitmq"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "delivery-semantics",
+      "slug": "delivery-semantics",
+      "title": "Delivery Semantics: At-Most-Once, At-Least-Once, Exactly-Once",
+      "category": "system-design",
+      "subcategory": "messaging",
+      "type": "concept",
+      "description": "When acknowledgements happen decides whether messages can be lost or duplicated, and why \"exactly once\" means effectively once.",
+      "difficulty": "advanced",
+      "tags": [
+        "at-most-once",
+        "at-least-once",
+        "exactly-once",
+        "deduplication",
+        "idempotent-consumer"
+      ],
+      "estimatedMinutes": 22,
+      "order": 3,
+      "prerequisites": [
+        "message-queues"
+      ],
+      "relatedTopics": [
+        "idempotency-in-distributed-systems",
+        "dead-letter-and-retry-queues"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "message-ordering-and-consumer-groups",
+      "slug": "message-ordering-and-consumer-groups",
+      "title": "Message Ordering, Partitions and Consumer Groups",
+      "category": "system-design",
+      "subcategory": "messaging",
+      "type": "concept",
+      "description": "Why global ordering does not scale, per-key ordering with partitions, and how consumer groups share work.",
+      "difficulty": "advanced",
+      "tags": [
+        "message-ordering",
+        "partition-key",
+        "consumer-group",
+        "kafka"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "queues-vs-pub-sub"
+      ],
+      "relatedTopics": [
+        "kafka-vs-rabbitmq",
+        "sharding-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "dead-letter-and-retry-queues",
+      "slug": "dead-letter-and-retry-queues",
+      "title": "Dead-Letter and Retry Queues",
+      "category": "system-design",
+      "subcategory": "messaging",
+      "type": "pattern",
+      "description": "Handling messages that keep failing: retry limits, delayed retry queues, dead-letter queues and redriving.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dead-letter-queue",
+        "retry-queue",
+        "poison-message",
+        "redrive"
+      ],
+      "estimatedMinutes": 15,
+      "order": 5,
+      "prerequisites": [
+        "delivery-semantics"
+      ],
+      "relatedTopics": [
+        "timeouts-retries-and-backoff"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "backpressure",
+      "slug": "backpressure",
+      "title": "Backpressure",
+      "category": "system-design",
+      "subcategory": "messaging",
+      "type": "concept",
+      "description": "What to do when producers are faster than consumers: bounded queues, signalling upstream, scaling consumers and shedding.",
+      "difficulty": "advanced",
+      "tags": [
+        "backpressure",
+        "consumer-lag",
+        "bounded-queue",
+        "flow-control"
+      ],
+      "estimatedMinutes": 18,
+      "order": 6,
+      "prerequisites": [
+        "message-queues"
+      ],
+      "relatedTopics": [
+        "graceful-degradation-and-load-shedding",
+        "rate-limiting"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "kafka-vs-rabbitmq",
+      "slug": "kafka-vs-rabbitmq",
+      "title": "Kafka vs RabbitMQ",
+      "category": "system-design",
+      "subcategory": "messaging",
+      "type": "concept",
+      "description": "A replayable partitioned log vs a routing message broker: models, strengths, and how to pick one in an interview.",
+      "difficulty": "intermediate",
+      "tags": [
+        "kafka",
+        "rabbitmq",
+        "log",
+        "broker",
+        "streaming"
+      ],
+      "estimatedMinutes": 18,
+      "order": 7,
+      "prerequisites": [
+        "queues-vs-pub-sub"
+      ],
+      "relatedTopics": [
+        "message-ordering-and-consumer-groups",
+        "event-driven-architecture"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "event-driven-architecture",
+      "slug": "event-driven-architecture",
+      "title": "Event-Driven Architecture",
+      "category": "system-design",
+      "subcategory": "messaging",
+      "type": "concept",
+      "description": "Services reacting to events instead of calling each other: events vs commands, choreography vs orchestration, and the costs.",
+      "difficulty": "advanced",
+      "tags": [
+        "event-driven",
+        "events",
+        "commands",
+        "event-sourcing",
+        "choreography"
+      ],
+      "estimatedMinutes": 22,
+      "order": 8,
+      "prerequisites": [
+        "queues-vs-pub-sub"
+      ],
+      "relatedTopics": [
+        "distributed-transactions-and-sagas",
+        "consistency-models"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "observability-fundamentals",
+      "slug": "observability-fundamentals",
+      "title": "Observability: Metrics, Logs and Traces",
+      "category": "system-design",
+      "subcategory": "observability",
+      "type": "concept",
+      "description": "The three signals for understanding a running system, structured logging, correlation IDs and what to measure first.",
+      "difficulty": "beginner",
+      "tags": [
+        "observability",
+        "metrics",
+        "logs",
+        "structured-logging",
+        "traces"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "system-building-blocks"
+      ],
+      "relatedTopics": [
+        "monitoring-and-alerting",
+        "distributed-tracing",
+        "latency-percentiles"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "latency-percentiles",
+      "slug": "latency-percentiles",
+      "title": "Latency Percentiles: P50, P95, P99",
+      "category": "system-design",
+      "subcategory": "observability",
+      "type": "concept",
+      "description": "Why averages hide slow requests, how percentiles are computed, tail latency, and why fan-out makes the tail matter.",
+      "difficulty": "intermediate",
+      "tags": [
+        "latency",
+        "percentiles",
+        "p50",
+        "p95",
+        "p99",
+        "tail-latency"
+      ],
+      "estimatedMinutes": 18,
+      "order": 2,
+      "prerequisites": [
+        "observability-fundamentals"
+      ],
+      "relatedTopics": [
+        "monitoring-and-alerting",
+        "capacity-planning-and-bottlenecks"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "distributed-tracing",
+      "slug": "distributed-tracing",
+      "title": "Distributed Tracing",
+      "category": "system-design",
+      "subcategory": "observability",
+      "type": "concept",
+      "description": "Following one request across services with traces and spans, context propagation, sampling, and finding the slow hop.",
+      "difficulty": "advanced",
+      "tags": [
+        "distributed-tracing",
+        "span",
+        "trace-id",
+        "context-propagation",
+        "opentelemetry"
+      ],
+      "estimatedMinutes": 15,
+      "order": 3,
+      "prerequisites": [
+        "observability-fundamentals"
+      ],
+      "relatedTopics": [
+        "monolith-vs-microservices",
+        "latency-percentiles"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "monitoring-and-alerting",
+      "slug": "monitoring-and-alerting",
+      "title": "Monitoring and Alerting",
+      "category": "system-design",
+      "subcategory": "observability",
+      "type": "concept",
+      "description": "The four golden signals, RED and USE, API and machine metrics, alerting on symptoms and error budgets, and avoiding alert fatigue.",
+      "difficulty": "intermediate",
+      "tags": [
+        "monitoring",
+        "alerting",
+        "golden-signals",
+        "red-method",
+        "use-method"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "observability-fundamentals"
+      ],
+      "relatedTopics": [
+        "sla-slo-sli-and-availability",
+        "latency-percentiles"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "design-url-shortener",
+      "slug": "design-url-shortener",
+      "title": "Case Study: Design a URL Shortener",
+      "category": "system-design",
+      "subcategory": "case-studies",
+      "type": "concept",
+      "description": "Requirements to final architecture for a short-link service: estimation, APIs, ID generation, storage, caching, redirects and failures.",
+      "difficulty": "intermediate",
+      "tags": [
+        "url-shortener",
+        "base62",
+        "id-generation",
+        "case-study"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "back-of-the-envelope-estimation",
+        "caching-fundamentals"
+      ],
+      "relatedTopics": [
+        "system-design-interview-framework",
+        "design-photo-sharing-app"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "design-photo-sharing-app",
+      "slug": "design-photo-sharing-app",
+      "title": "Case Study: Design a Photo-Sharing App",
+      "category": "system-design",
+      "subcategory": "case-studies",
+      "type": "concept",
+      "description": "Growing a photo app from one $10 server to millions of users, one failure at a time, including uploads, the feed and its fan-out.",
+      "difficulty": "intermediate",
+      "tags": [
+        "photo-sharing",
+        "feed",
+        "fan-out",
+        "object-storage",
+        "case-study"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "design-url-shortener"
+      ],
+      "relatedTopics": [
+        "design-video-streaming-platform",
+        "object-and-blob-storage"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "design-video-streaming-platform",
+      "slug": "design-video-streaming-platform",
+      "title": "Case Study: Design a Video Streaming Platform",
+      "category": "system-design",
+      "subcategory": "case-studies",
+      "type": "concept",
+      "description": "Upload, transcoding pipeline, segments and adaptive bitrate, HLS and DASH over HTTP, CDNs and the numbers behind them.",
+      "difficulty": "advanced",
+      "tags": [
+        "video-streaming",
+        "transcoding",
+        "adaptive-bitrate",
+        "hls",
+        "dash",
+        "cdn",
+        "case-study"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "design-photo-sharing-app"
+      ],
+      "relatedTopics": [
+        "content-delivery-networks",
+        "message-queues"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "design-chat-application",
+      "slug": "design-chat-application",
+      "title": "Case Study: Design a Chat Application",
+      "category": "system-design",
+      "subcategory": "case-studies",
+      "type": "concept",
+      "description": "One-to-one and group messaging: persistent connections, routing between servers, ordering, delivery receipts, offline users and presence.",
+      "difficulty": "advanced",
+      "tags": [
+        "chat",
+        "websockets",
+        "presence",
+        "message-ordering",
+        "case-study"
+      ],
+      "estimatedMinutes": 45,
+      "order": 4,
+      "prerequisites": [
+        "real-time-communication",
+        "message-queues"
+      ],
+      "relatedTopics": [
+        "message-ordering-and-consumer-groups",
+        "delivery-semantics"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "system-design-interview-framework",
+      "slug": "system-design-interview-framework",
+      "title": "The System Design Interview Framework",
+      "category": "system-design",
+      "subcategory": "interview",
+      "type": "reference",
+      "description": "A fourteen-step flow from clarifying requirements to future improvements, with what to say at each step and a practice simulator.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "framework",
+        "trade-offs",
+        "communication"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "clarifying-requirements",
+        "back-of-the-envelope-estimation"
+      ],
+      "relatedTopics": [
+        "design-url-shortener",
+        "sd-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "sd-fundamentals-interview-questions",
+      "slug": "sd-fundamentals-interview-questions",
+      "title": "Interview Questions: Foundations and Communication",
+      "category": "system-design",
+      "subcategory": "interview",
+      "type": "reference",
+      "description": "Mixed interview bank across requirements, estimation, scaling, statelessness, APIs, proxies, CDNs and real-time communication.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "foundations",
+        "api",
+        "communication"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "system-design-interview-framework"
+      ],
+      "relatedTopics": [
+        "sd-scenario-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "sd-data-and-caching-interview-questions",
+      "slug": "sd-data-and-caching-interview-questions",
+      "title": "Interview Questions: Data and Caching",
+      "category": "system-design",
+      "subcategory": "interview",
+      "type": "reference",
+      "description": "Mixed interview bank across data modeling, database choice, indexes, storage, search and every caching topic.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "database",
+        "caching",
+        "storage"
+      ],
+      "estimatedMinutes": 40,
+      "order": 3,
+      "prerequisites": [
+        "system-design-interview-framework"
+      ],
+      "relatedTopics": [
+        "sd-scaling-and-consistency-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "sd-scaling-and-consistency-interview-questions",
+      "slug": "sd-scaling-and-consistency-interview-questions",
+      "title": "Interview Questions: Scaling and Consistency",
+      "category": "system-design",
+      "subcategory": "interview",
+      "type": "reference",
+      "description": "Mixed interview bank across load balancing, replication, sharding, consistent hashing, CAP, consistency and coordination.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "replication",
+        "sharding",
+        "cap",
+        "consistency"
+      ],
+      "estimatedMinutes": 40,
+      "order": 4,
+      "prerequisites": [
+        "system-design-interview-framework"
+      ],
+      "relatedTopics": [
+        "sd-reliability-and-messaging-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "sd-reliability-and-messaging-interview-questions",
+      "slug": "sd-reliability-and-messaging-interview-questions",
+      "title": "Interview Questions: Reliability, Messaging and Operations",
+      "category": "system-design",
+      "subcategory": "interview",
+      "type": "reference",
+      "description": "Mixed interview bank across failures, retries, circuit breakers, idempotency, DR, queues, delivery semantics and observability.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "reliability",
+        "messaging",
+        "observability"
+      ],
+      "estimatedMinutes": 40,
+      "order": 5,
+      "prerequisites": [
+        "system-design-interview-framework"
+      ],
+      "relatedTopics": [
+        "sd-scenario-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "sd-scenario-interview-questions",
+      "slug": "sd-scenario-interview-questions",
+      "title": "Scenario and Troubleshooting Questions",
+      "category": "system-design",
+      "subcategory": "interview",
+      "type": "reference",
+      "description": "Production-style \"what happens if\" and \"the system is slow\" questions that combine several topics in one answer.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "scenario",
+        "troubleshooting",
+        "what-happens-if"
+      ],
+      "estimatedMinutes": 45,
+      "order": 6,
+      "prerequisites": [
+        "system-design-interview-framework"
+      ],
+      "relatedTopics": [
+        "sd-interview-traps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    },
+    {
+      "id": "sd-interview-traps",
+      "slug": "sd-interview-traps",
+      "title": "System Design Interview Traps",
+      "category": "system-design",
+      "subcategory": "interview",
+      "type": "reference",
+      "description": "Statements that sound right but are wrong, from \"NoSQL scales\" to \"pick two of CAP\", with the precise answer for each.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "traps",
+        "misconceptions"
+      ],
+      "estimatedMinutes": 30,
+      "order": 7,
+      "prerequisites": [
+        "system-design-interview-framework"
+      ],
+      "relatedTopics": [
+        "sd-scenario-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-07"
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 # Extending StudyHub
 
-How to add subjects, topics, interactions, visualizers and simulators **without changing the core application**. This is the contract for future content phases (2H System Design and later). Phases 2F (Linux) and 2G (Computer Networks) followed it without any core app change.
+How to add subjects, topics, interactions, visualizers and simulators **without changing the core application**. This is the contract for future content phases. Phases 2F (Linux), 2G (Computer Networks) and 2H (System Design) followed it without any core app change (2H added only its own modules in `js/simulators/` and `js/visualizers/` and their styles).
 
 ## A future content phase in six steps
 
@@ -15,7 +15,7 @@ No change to `app.js`, the views, the router or the engines is needed for any of
 
 ## Add a subject
 
-System Design is already registered as an empty category (`metadata/topics/<id>.json` with `"topics": []`), so the dashboard shows it as **Coming soon**. A subject becomes available automatically as soon as its catalog has a published topic. To add another subject: content-guide §7 "A new category". Give the category a `group` (one of the `groups` ids in `categories.json`: `foundation`, `computer-science`, `development`, `architecture` — add a group there if none fits) and an `icon`: a 24×24 single-colour stroke SVG at `assets/icons/subjects/<id>.svg`. The app paints it with the theme colour through a CSS mask, so the SVG's own colour does not matter. The sidebar, dashboard cards and subject page pick both up automatically.
+A category can be registered before it has content (`metadata/topics/<id>.json` with `"topics": []`); the dashboard then shows it as **Coming soon**, and it becomes available automatically as soon as its catalog has a published topic (System Design went through exactly this). To add another subject: content-guide §7 "A new category". Give the category a `group` (one of the `groups` ids in `categories.json`: `foundation`, `computer-science`, `development`, `architecture` — add a group there if none fits) and an `icon`: a 24×24 single-colour stroke SVG at `assets/icons/subjects/<id>.svg`. The app paints it with the theme colour through a CSS mask, so the SVG's own colour does not matter. The sidebar, dashboard cards and subject page pick both up automatically.
 
 ## Add a topic
 
@@ -23,15 +23,15 @@ content-guide §7 "A new topic". The topic appears in navigation, search, sessio
 
 ## Add an update ("What's new")
 
-Add an entry at the **top** of the `updates` array in `metadata/updates.json` (newest first; schema: `metadata/schemas/updates.schema.json`):
+Add an entry at the **top** of the `updates` array in `metadata/updates.json` (newest first; schema: `metadata/schemas/updates.schema.json`). The System Design phase's entry, for example (counts taken from the metadata):
 
 ```json
 {
-  "id": "2026-11-02-system-design",
-  "date": "2026-11-02",
-  "type": "content",
+  "id": "2026-10-07-system-design",
+  "date": "2026-10-07",
   "title": "System Design",
-  "description": "42 topics in 9 modules, with 6 interactive simulations.",
+  "description": "82 topics in 11 modules — from requirements and estimation to caching, replication, sharding, CAP, reliability, messaging and four case studies — with 23 interactive simulations, 22 checks, comparisons and flashcard decks, an interview simulator, Revision and Quick Revision.",
+  "type": "content",
   "link": "#/c/system-design"
 }
 ```

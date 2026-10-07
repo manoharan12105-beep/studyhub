@@ -1,0 +1,1486 @@
+{
+  "$schema": "../schemas/interactions.schema.json",
+  "schemaVersion": 1,
+  "category": "system-design",
+  "interactions": [
+    {
+      "id": "request-journey",
+      "type": "simulator",
+      "title": "Follow a request hop by hop",
+      "description": "Pick a scenario and step through DNS, the load balancer, the API server, the cache and the database; watch the latency add up.",
+      "module": "request-journey-simulator",
+      "topics": [
+        {
+          "topic": "request-journey",
+          "after": "How It Works"
+        }
+      ]
+    },
+    {
+      "id": "load-balancing-algorithms",
+      "type": "simulator",
+      "title": "Load-balancing algorithms and health checks",
+      "description": "Send requests through round robin, weighted round robin, least connections or IP hash; let S3 crash and see the health-check window.",
+      "module": "load-balancing-algorithms-simulator",
+      "topics": [
+        {
+          "topic": "load-balancing-algorithms",
+          "after": "How It Works"
+        },
+        {
+          "topic": "load-balancing-fundamentals",
+          "after": "How It Works",
+          "options": {
+            "algorithm": "rr",
+            "crash": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "cache-hits-and-ttl",
+      "type": "simulator",
+      "title": "Cache hits, misses, TTL and LRU",
+      "description": "Step through a timeline of requests against a 3-entry cache with a 30 s TTL: hits, misses, expiry and eviction.",
+      "module": "cache-behaviour-simulator",
+      "topics": [
+        {
+          "topic": "caching-fundamentals",
+          "after": "How It Works"
+        },
+        {
+          "topic": "cache-aside-and-read-through",
+          "after": "How It Works"
+        }
+      ]
+    },
+    {
+      "id": "cache-staleness",
+      "type": "simulator",
+      "title": "Stale data vs active invalidation",
+      "description": "A price changes in the database. Compare TTL-only caching with deleting the key on every write.",
+      "module": "cache-behaviour-simulator",
+      "topics": [
+        {
+          "topic": "cache-invalidation-and-ttl",
+          "after": "How It Works",
+          "options": {
+            "scenario": "stale"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cache-stampede",
+      "type": "simulator",
+      "title": "Cache stampede vs request coalescing",
+      "description": "A hot key expires while requests pour in. Count the database queries with and without coalescing.",
+      "module": "cache-behaviour-simulator",
+      "topics": [
+        {
+          "topic": "cache-stampede-penetration-and-hot-keys",
+          "after": "How It Works",
+          "options": {
+            "scenario": "stampede"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cache-eviction",
+      "type": "visualizer",
+      "title": "Eviction policies on your own sequence",
+      "description": "Type a sequence of keys, choose a capacity and a policy, and compare hits for LRU, LFU, FIFO and MRU.",
+      "module": "cache-eviction-visualizer",
+      "topics": [
+        {
+          "topic": "cache-eviction-policies",
+          "after": "How It Works"
+        }
+      ]
+    },
+    {
+      "id": "replication-and-failover",
+      "type": "simulator",
+      "title": "Replication, lag and failover",
+      "description": "Write, read from a replica, crash the primary and fail over — under asynchronous, semi-synchronous and synchronous replication.",
+      "module": "replication-simulator",
+      "topics": [
+        {
+          "topic": "database-replication",
+          "after": "How It Works"
+        },
+        {
+          "topic": "sync-async-replication-and-lag",
+          "after": "How It Works",
+          "options": {
+            "mode": "semi"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sharding-keys",
+      "type": "simulator",
+      "title": "Choose a shard key",
+      "description": "Place 24 users with three different shard keys and shard counts; find the hot partition.",
+      "module": "sharding-simulator",
+      "topics": [
+        {
+          "topic": "sharding-fundamentals",
+          "after": "How It Works"
+        },
+        {
+          "topic": "hot-partitions-and-resharding",
+          "after": "How It Works",
+          "options": {
+            "key": "signup"
+          }
+        }
+      ]
+    },
+    {
+      "id": "consistent-hashing-ring",
+      "type": "visualizer",
+      "title": "The consistent-hashing ring",
+      "description": "Place servers and keys on the ring, add a server and remove one; compare the keys moved with hash % N, with and without virtual nodes.",
+      "module": "consistent-hashing-ring",
+      "topics": [
+        {
+          "topic": "consistent-hashing",
+          "after": "How It Works"
+        },
+        {
+          "topic": "distributed-caching",
+          "after": "How It Works",
+          "options": {
+            "vnodes": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "quorum-calculator",
+      "type": "visualizer",
+      "title": "Quorum calculator",
+      "description": "Choose N, W and R, write a new value and read it back in the worst case: does W + R > N guarantee you see it?",
+      "module": "quorum-calculator",
+      "topics": [
+        {
+          "topic": "quorum-reads-and-writes",
+          "after": "How It Works"
+        },
+        {
+          "topic": "multi-leader-and-leaderless-replication",
+          "after": "How It Works",
+          "options": {
+            "n": 5,
+            "w": 3,
+            "r": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "cap-partition-scenario",
+      "type": "simulator",
+      "title": "A network partition: CP or AP?",
+      "description": "Nodes in two regions lose contact. Decide feature by feature whether to stay consistent or stay available, and see the consequences.",
+      "module": "design-decision-simulator",
+      "topics": [
+        {
+          "topic": "cap-theorem",
+          "after": "How It Works",
+          "options": {
+            "scenario": "cap-partition"
+          }
+        }
+      ]
+    },
+    {
+      "id": "url-shortener-builder",
+      "type": "simulator",
+      "title": "Build the URL shortener",
+      "description": "Make each architectural decision — code generation, storage, caching, hot keys, redirects, failures — and see its trade-off.",
+      "module": "design-decision-simulator",
+      "topics": [
+        {
+          "topic": "design-url-shortener",
+          "after": "Basic Architecture",
+          "options": {
+            "scenario": "url-shortener"
+          }
+        }
+      ]
+    },
+    {
+      "id": "url-shortener-interview-simulator",
+      "type": "simulator",
+      "title": "Interview simulator: design a URL shortener",
+      "description": "Walk the whole interview: requirements, estimates, API, data, IDs, caching, scaling, replication, failures and the 10× question.",
+      "module": "design-decision-simulator",
+      "topics": [
+        {
+          "topic": "system-design-interview-framework",
+          "after": "Practice Run: Design a URL Shortener",
+          "options": {
+            "scenario": "url-shortener-interview"
+          }
+        }
+      ]
+    },
+    {
+      "id": "photo-sharing-builder",
+      "type": "simulator",
+      "title": "Grow the photo app, one failure at a time",
+      "description": "Start from one $10 server and fix each failure as traffic grows, ending with the feed design.",
+      "module": "design-decision-simulator",
+      "topics": [
+        {
+          "topic": "design-photo-sharing-app",
+          "after": "Basic Architecture",
+          "options": {
+            "scenario": "photo-sharing"
+          }
+        }
+      ]
+    },
+    {
+      "id": "video-streaming-builder",
+      "type": "simulator",
+      "title": "Build the video pipeline",
+      "description": "Choose the upload path, processing, formats, delivery, protocol and player behaviour for a streaming platform.",
+      "module": "design-decision-simulator",
+      "topics": [
+        {
+          "topic": "design-video-streaming-platform",
+          "after": "Basic Architecture",
+          "options": {
+            "scenario": "video-streaming"
+          }
+        }
+      ]
+    },
+    {
+      "id": "latency-percentile-explorer",
+      "type": "visualizer",
+      "title": "Percentiles vs the average",
+      "description": "Enter response times and step through the average, P50, P90, P95 and P99 on the sorted values.",
+      "module": "percentile-explorer",
+      "topics": [
+        {
+          "topic": "latency-percentiles",
+          "after": "How It Works"
+        }
+      ]
+    },
+    {
+      "id": "message-queue-buffering",
+      "type": "simulator",
+      "title": "A message queue, tick by tick",
+      "description": "Watch a burst being buffered, then switch scenarios: consumer crash, poison message, backpressure.",
+      "module": "message-queue-simulator",
+      "topics": [
+        {
+          "topic": "message-queues",
+          "after": "How It Works"
+        }
+      ]
+    },
+    {
+      "id": "message-redelivery",
+      "type": "simulator",
+      "title": "Redelivery after a consumer crash",
+      "description": "A consumer dies before acknowledging: see the message reappear after the visibility timeout and get processed twice.",
+      "module": "message-queue-simulator",
+      "topics": [
+        {
+          "topic": "delivery-semantics",
+          "after": "How It Works",
+          "options": {
+            "scenario": "crash"
+          }
+        }
+      ]
+    },
+    {
+      "id": "poison-message-dlq",
+      "type": "simulator",
+      "title": "A poison message and the dead-letter queue",
+      "description": "One message fails every time: watch it retried, then parked in the DLQ while the rest flow.",
+      "module": "message-queue-simulator",
+      "topics": [
+        {
+          "topic": "dead-letter-and-retry-queues",
+          "after": "How It Works",
+          "options": {
+            "scenario": "poison"
+          }
+        }
+      ]
+    },
+    {
+      "id": "queue-backpressure",
+      "type": "simulator",
+      "title": "Backpressure with a bounded queue",
+      "description": "The producer outpaces two consumers; the bounded queue fills and starts rejecting.",
+      "module": "message-queue-simulator",
+      "topics": [
+        {
+          "topic": "backpressure",
+          "after": "How It Works",
+          "options": {
+            "scenario": "backpressure"
+          }
+        }
+      ]
+    },
+    {
+      "id": "retry-storm",
+      "type": "simulator",
+      "title": "Retry storms, backoff and jitter",
+      "description": "Twenty clients fail together. Compare immediate retries, exponential backoff and backoff with jitter.",
+      "module": "retry-circuit-breaker-simulator",
+      "topics": [
+        {
+          "topic": "timeouts-retries-and-backoff",
+          "after": "How It Works",
+          "options": {
+            "mode": "retries"
+          }
+        }
+      ]
+    },
+    {
+      "id": "circuit-breaker",
+      "type": "simulator",
+      "title": "Circuit breaker states",
+      "description": "A dependency stays down for eight ticks. Compare blocked threads and calls with and without a circuit breaker.",
+      "module": "retry-circuit-breaker-simulator",
+      "topics": [
+        {
+          "topic": "circuit-breakers-and-bulkheads",
+          "after": "How It Works",
+          "options": {
+            "mode": "breaker"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rate-limiter-algorithms",
+      "type": "simulator",
+      "title": "Rate-limiting algorithms side by side",
+      "description": "Send bursts, boundary traffic or steady requests through a token bucket, fixed window, sliding window or leaky bucket.",
+      "module": "rate-limiter-simulator",
+      "topics": [
+        {
+          "topic": "rate-limiting",
+          "after": "How It Works"
+        }
+      ]
+    },
+    {
+      "id": "sd-requirements-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: requirements",
+      "topics": [
+        {
+          "topic": "functional-and-non-functional-requirements",
+          "after": "How It Works"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "Which is a non-functional requirement?",
+          "options": [
+            "Users can reset their password",
+            "Search returns results within 200 ms at P99",
+            "Admins can ban users",
+            "Users can follow other users"
+          ],
+          "answer": 1,
+          "explanation": "It states how well the system performs, with a number. The others are features."
+        },
+        {
+          "prompt": "A photo app says \"uploads may take 3 s, but the feed must load in 200 ms\". Where should heavy processing happen?",
+          "options": [
+            "On every feed request",
+            "On the write path — at upload time or asynchronously after it",
+            "In the browser",
+            "Nowhere; skip thumbnails"
+          ],
+          "answer": 1,
+          "explanation": "The relaxed write latency pays for precomputing results, so the strict read path only fetches them."
+        },
+        {
+          "prompt": "Why is \"the system should be fast and scalable\" a weak requirement?",
+          "options": [
+            "It is too long",
+            "It has no numbers, so it cannot decide any design choice",
+            "Speed is a functional requirement",
+            "Scalability cannot be measured"
+          ],
+          "answer": 1,
+          "explanation": "Without targets (requests per second, latency percentile, growth) you cannot tell whether a design meets it."
+        }
+      ]
+    },
+    {
+      "id": "sd-estimation-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: estimation",
+      "topics": [
+        {
+          "topic": "back-of-the-envelope-estimation",
+          "after": "How It Works"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "43.2 million requests per day, spread evenly. About how many per second?",
+          "options": [
+            "50",
+            "500",
+            "5,000",
+            "43,200"
+          ],
+          "answer": 1,
+          "explanation": "43,200,000 ÷ 86,400 = 500 per second."
+        },
+        {
+          "prompt": "Responses total 500 MB per second. Roughly what network capacity is needed?",
+          "options": [
+            "500 Mbps",
+            "4 Gbps",
+            "62.5 Mbps",
+            "40 Gbps"
+          ],
+          "answer": 1,
+          "explanation": "Multiply bytes by 8: 500 MB/s × 8 = 4,000 Mbps = 4 Gbps."
+        },
+        {
+          "prompt": "2 million new photos a day at 2 MB each, kept with 3 replicas. Storage added per day?",
+          "options": [
+            "4 TB",
+            "6 GB",
+            "12 TB",
+            "400 GB"
+          ],
+          "answer": 2,
+          "explanation": "2 M × 2 MB = 4 TB of raw data; with 3 copies, 12 TB."
+        }
+      ]
+    },
+    {
+      "id": "stateless-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: stateless servers",
+      "topics": [
+        {
+          "topic": "stateless-vs-stateful-services",
+          "after": "How It Works"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "After scaling from 2 to 6 servers, users are randomly logged out. The best fix is:",
+          "options": [
+            "Sticky sessions on the load balancer",
+            "Sessions in a shared store such as Redis (or signed tokens)",
+            "Longer session timeouts",
+            "Go back to 2 servers"
+          ],
+          "answer": 1,
+          "explanation": "Moving session state out of the servers makes them interchangeable; sticky sessions keep the state problem and add uneven load."
+        },
+        {
+          "prompt": "A server reads and writes PostgreSQL and keeps nothing in memory between requests. It is:",
+          "options": [
+            "Stateful, because it uses a database",
+            "Stateless",
+            "Stateful only at night",
+            "Neither"
+          ],
+          "answer": 1,
+          "explanation": "Statefulness is about what the server instance itself remembers; the state lives in the database."
+        }
+      ]
+    },
+    {
+      "id": "rest-status-codes-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: status codes",
+      "topics": [
+        {
+          "topic": "rest-api-design",
+          "after": "How It Works"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "A logged-in user tries to delete another user's photo. Which status?",
+          "options": [
+            "401 Unauthorized",
+            "403 Forbidden",
+            "400 Bad Request",
+            "500 Internal Server Error"
+          ],
+          "answer": 1,
+          "explanation": "The user is authenticated but not allowed. 401 means not authenticated at all."
+        },
+        {
+          "prompt": "`POST /users` creates user 77. Which response fits best?",
+          "options": [
+            "200 OK with an empty body",
+            "201 Created with the new id (and a Location header)",
+            "204 No Content",
+            "302 Found"
+          ],
+          "answer": 1,
+          "explanation": "201 signals that a resource was created; return its identifier."
+        },
+        {
+          "prompt": "A client exceeds its rate limit. Which response?",
+          "options": [
+            "403 Forbidden",
+            "429 Too Many Requests with Retry-After",
+            "503 with no headers",
+            "200 with an error message"
+          ],
+          "answer": 1,
+          "explanation": "429 tells the client to slow down; Retry-After says when to try again."
+        }
+      ]
+    },
+    {
+      "id": "choose-database-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: choosing storage",
+      "topics": [
+        {
+          "topic": "choosing-a-database",
+          "after": "How It Works"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "Billions of chat messages; the main query is \"latest 50 messages of one conversation\". Best fit?",
+          "options": [
+            "A graph database",
+            "A wide-column store partitioned by conversation ID",
+            "A single key-value entry per user holding all messages",
+            "Object storage"
+          ],
+          "answer": 1,
+          "explanation": "The partition key groups a conversation; the clustering key keeps it sorted by time; writes are fast appends."
+        },
+        {
+          "prompt": "Transfers must debit one account and credit another atomically. Best fit?",
+          "options": [
+            "A relational database with transactions",
+            "A CDN",
+            "A search engine",
+            "An in-memory cache only"
+          ],
+          "answer": 0,
+          "explanation": "Multi-row ACID transactions and constraints are the relational database's strength."
+        },
+        {
+          "prompt": "What should you establish before naming a database?",
+          "options": [
+            "Its popularity",
+            "The access patterns, relationships, consistency and scale",
+            "The cloud provider's logo",
+            "The programming language"
+          ],
+          "answer": 1,
+          "explanation": "Storage choice follows from how data is read and written and how correct it must be."
+        }
+      ]
+    },
+    {
+      "id": "consistency-models-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: consistency",
+      "topics": [
+        {
+          "topic": "consistency-models",
+          "after": "How It Works"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "\"I always see my own edits, even if others briefly see the old version.\" This is:",
+          "options": [
+            "Linearizability",
+            "Read-your-writes",
+            "Eventual consistency only",
+            "Monotonic writes"
+          ],
+          "answer": 1,
+          "explanation": "A session guarantee that only covers the writer's own reads."
+        },
+        {
+          "prompt": "A like count goes 12 → 10 → 13 across refreshes. Which guarantee is missing?",
+          "options": [
+            "Monotonic reads",
+            "Durability",
+            "Atomicity",
+            "Read-your-writes"
+          ],
+          "answer": 0,
+          "explanation": "Reads went to replicas with different lag; pinning a session to one replica fixes it."
+        },
+        {
+          "prompt": "Which feature most needs strong consistency?",
+          "options": [
+            "View counts",
+            "Booking the last seat on a flight",
+            "The trending list",
+            "Profile pictures"
+          ],
+          "answer": 1,
+          "explanation": "A stale read there causes a wrong, costly decision (double booking)."
+        }
+      ]
+    },
+    {
+      "id": "idempotency-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: idempotency",
+      "topics": [
+        {
+          "topic": "idempotency-in-distributed-systems",
+          "after": "How It Works"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "Which operation is idempotent?",
+          "options": [
+            "`balance = balance + 100`",
+            "`SET plan = 'pro' WHERE id = 5`",
+            "`INSERT` a new order with an auto-generated id",
+            "Send an email"
+          ],
+          "answer": 1,
+          "explanation": "Setting a value has the same effect however many times it runs."
+        },
+        {
+          "prompt": "Who should create a payment's idempotency key?",
+          "options": [
+            "The server, on each request",
+            "The client, once per logical payment, reused on retries",
+            "The client, a new one per retry",
+            "The database sequence"
+          ],
+          "answer": 1,
+          "explanation": "The key must identify the logical operation across all its retries."
+        }
+      ]
+    },
+    {
+      "id": "disaster-recovery-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: RPO and RTO",
+      "topics": [
+        {
+          "topic": "disaster-recovery-rpo-and-rto",
+          "after": "How It Works"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "\"We may lose at most 5 minutes of data.\" This is a:",
+          "options": [
+            "RTO",
+            "RPO",
+            "SLA latency",
+            "Error budget"
+          ],
+          "answer": 1,
+          "explanation": "Recovery point objective — the maximum acceptable data loss, measured in time."
+        },
+        {
+          "prompt": "A bad migration corrupts a table. What restores the data?",
+          "options": [
+            "A synchronous replica",
+            "Point-in-time recovery from backups and archived logs",
+            "A bigger server",
+            "A CDN purge"
+          ],
+          "answer": 1,
+          "explanation": "Replicas copied the corruption; backups hold the data as it was before."
+        }
+      ]
+    },
+    {
+      "id": "sd-traps-check",
+      "type": "knowledge-check",
+      "title": "Spot the trap",
+      "topics": [
+        {
+          "topic": "sd-interview-traps",
+          "after": "Core Concept"
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "Which statement about CAP is precise?",
+          "options": [
+            "Pick any two of C, A and P",
+            "During a network partition, choose consistency or availability",
+            "CA systems are the most common distributed databases",
+            "P means sharding the data"
+          ],
+          "answer": 1,
+          "explanation": "Partitions cannot be opted out of in a distributed system; the choice is what happens during one."
+        },
+        {
+          "prompt": "Write-around caching means:",
+          "options": [
+            "Writes go to the cache and the database together",
+            "Writes skip the cache and go only to the database",
+            "Writes go only to the cache",
+            "Reads skip the cache"
+          ],
+          "answer": 1,
+          "explanation": "It is the opposite of write-through on the write path."
+        },
+        {
+          "prompt": "Quorum reads see the latest write when:",
+          "options": [
+            "W and R are both more than N/2 — and only then",
+            "W + R > N",
+            "W = R",
+            "R = 1"
+          ],
+          "answer": 1,
+          "explanation": "Majorities are one case of W + R > N; W = N with R = 1 also works."
+        },
+        {
+          "prompt": "Which is true about replicas and backups?",
+          "options": [
+            "Replicas make backups unnecessary",
+            "Replicas copy accidental deletes instantly; backups are still required",
+            "Backups replace replicas",
+            "Neither protects data"
+          ],
+          "answer": 1,
+          "explanation": "They solve different failures: availability vs recovery from mistakes."
+        }
+      ]
+    },
+    {
+      "id": "hld-vs-lld-comparison",
+      "type": "comparison",
+      "title": "HLD vs LLD",
+      "description": "Hide the answers and recall each difference.",
+      "topics": [
+        {
+          "topic": "hld-vs-lld",
+          "after": "Comparison"
+        }
+      ],
+      "columns": [
+        "HLD",
+        "LLD"
+      ],
+      "rows": [
+        {
+          "aspect": "Unit of design",
+          "cells": [
+            "Services, stores, network paths",
+            "Classes, methods, data structures"
+          ]
+        },
+        {
+          "aspect": "Main questions",
+          "cells": [
+            "Where does data live? What scales? What fails?",
+            "Is it correct? Easy to change?"
+          ]
+        },
+        {
+          "aspect": "Artefact",
+          "cells": [
+            "Architecture diagram",
+            "Class diagram, code"
+          ]
+        },
+        {
+          "aspect": "Example prompt",
+          "cells": [
+            "Design Instagram",
+            "Design an in-memory LRU cache"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scaling-comparison",
+      "type": "comparison",
+      "title": "Vertical vs horizontal scaling",
+      "description": "Test your recall of the trade-offs.",
+      "topics": [
+        {
+          "topic": "vertical-vs-horizontal-scaling",
+          "after": "Comparison"
+        }
+      ],
+      "columns": [
+        "Vertical",
+        "Horizontal"
+      ],
+      "rows": [
+        {
+          "aspect": "How",
+          "cells": [
+            "Bigger machine",
+            "More machines"
+          ]
+        },
+        {
+          "aspect": "Code changes",
+          "cells": [
+            "None",
+            "Stateless servers, load balancer, shared data"
+          ]
+        },
+        {
+          "aspect": "Upper limit",
+          "cells": [
+            "The largest machine",
+            "Practically none"
+          ]
+        },
+        {
+          "aspect": "One machine fails",
+          "cells": [
+            "Everything is down",
+            "Capacity drops by one machine's share"
+          ]
+        },
+        {
+          "aspect": "Best for",
+          "cells": [
+            "Databases, small apps, quick relief",
+            "Stateless tiers, large systems"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monolith-microservices-comparison",
+      "type": "comparison",
+      "title": "Monolith, modular monolith, microservices",
+      "description": "Recall what each architecture costs and buys.",
+      "topics": [
+        {
+          "topic": "monolith-vs-microservices",
+          "after": "Comparison"
+        }
+      ],
+      "columns": [
+        "Monolith",
+        "Modular monolith",
+        "Microservices"
+      ],
+      "rows": [
+        {
+          "aspect": "Deployables",
+          "cells": [
+            "1",
+            "1",
+            "Many"
+          ]
+        },
+        {
+          "aspect": "Internal calls",
+          "cells": [
+            "Function calls",
+            "Function calls via module APIs",
+            "Network calls"
+          ]
+        },
+        {
+          "aspect": "Data",
+          "cells": [
+            "Shared database",
+            "Schema per module",
+            "Database per service"
+          ]
+        },
+        {
+          "aspect": "Scaling",
+          "cells": [
+            "Whole app",
+            "Whole app",
+            "Per service"
+          ]
+        },
+        {
+          "aspect": "Operational effort",
+          "cells": [
+            "Low",
+            "Low",
+            "High"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "api-styles-comparison",
+      "type": "comparison",
+      "title": "REST vs SOAP vs GraphQL vs gRPC",
+      "description": "Hide the cells and name each style's format and sweet spot.",
+      "topics": [
+        {
+          "topic": "api-styles-compared",
+          "after": "Comparison"
+        }
+      ],
+      "columns": [
+        "REST",
+        "SOAP",
+        "GraphQL",
+        "gRPC"
+      ],
+      "rows": [
+        {
+          "aspect": "Data format",
+          "cells": [
+            "JSON (usually)",
+            "XML",
+            "JSON",
+            "Protocol Buffers (binary)"
+          ]
+        },
+        {
+          "aspect": "Endpoints",
+          "cells": [
+            "Many, per resource",
+            "One per service",
+            "One",
+            "Methods on services"
+          ]
+        },
+        {
+          "aspect": "HTTP caching",
+          "cells": [
+            "Excellent",
+            "Poor",
+            "Hard",
+            "Hard"
+          ]
+        },
+        {
+          "aspect": "Best for",
+          "cells": [
+            "Public APIs",
+            "Legacy enterprise",
+            "Flexible front ends",
+            "Internal service-to-service"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nosql-families-comparison",
+      "type": "comparison",
+      "title": "Relational and NoSQL families",
+      "description": "Recall the model and sweet spot of each store.",
+      "topics": [
+        {
+          "topic": "nosql-databases",
+          "after": "Comparison"
+        }
+      ],
+      "columns": [
+        "Relational",
+        "Key-value",
+        "Document",
+        "Wide-column",
+        "Graph"
+      ],
+      "rows": [
+        {
+          "aspect": "Query style",
+          "cells": [
+            "SQL with joins",
+            "By key only",
+            "Fields within documents",
+            "Partition + clustering key",
+            "Traversals"
+          ]
+        },
+        {
+          "aspect": "Transactions",
+          "cells": [
+            "Multi-row ACID",
+            "Single key",
+            "Single document (multi costlier)",
+            "Single partition",
+            "Varies"
+          ]
+        },
+        {
+          "aspect": "Sweet spot",
+          "cells": [
+            "Business records",
+            "Caches, sessions",
+            "Catalogues, profiles",
+            "Messages, time series",
+            "Relationships"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "replication-vs-sharding-comparison",
+      "type": "comparison",
+      "title": "Replication vs sharding",
+      "description": "Two ways to distribute data, often used together.",
+      "topics": [
+        {
+          "topic": "sharding-fundamentals",
+          "after": "Comparison"
+        }
+      ],
+      "columns": [
+        "Replication",
+        "Sharding"
+      ],
+      "rows": [
+        {
+          "aspect": "Each node holds",
+          "cells": [
+            "All the data",
+            "Part of the data"
+          ]
+        },
+        {
+          "aspect": "Scales",
+          "cells": [
+            "Reads and availability",
+            "Data size and writes"
+          ]
+        },
+        {
+          "aspect": "Write capacity",
+          "cells": [
+            "Unchanged (one primary)",
+            "Grows with shards"
+          ]
+        },
+        {
+          "aspect": "New problems",
+          "cells": [
+            "Lag, failover",
+            "Shard keys, cross-shard queries, resharding"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strong-vs-eventual-comparison",
+      "type": "comparison",
+      "title": "Strong vs eventual consistency",
+      "description": "Recall the guarantee, the cost and the typical uses.",
+      "topics": [
+        {
+          "topic": "consistency-models",
+          "after": "Comparison"
+        }
+      ],
+      "columns": [
+        "Strong",
+        "Eventual"
+      ],
+      "rows": [
+        {
+          "aspect": "A read returns",
+          "cells": [
+            "The latest completed write",
+            "Possibly a stale value"
+          ]
+        },
+        {
+          "aspect": "Latency",
+          "cells": [
+            "Higher (coordination)",
+            "Lower"
+          ]
+        },
+        {
+          "aspect": "During a partition",
+          "cells": [
+            "May refuse requests (CP)",
+            "Keeps answering (AP)"
+          ]
+        },
+        {
+          "aspect": "Typical uses",
+          "cells": [
+            "Money, stock, locks, identity",
+            "Feeds, counts, caches, search"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "queue-vs-pubsub-comparison",
+      "type": "comparison",
+      "title": "Queue vs pub/sub",
+      "description": "Who receives each message?",
+      "topics": [
+        {
+          "topic": "queues-vs-pub-sub",
+          "after": "Comparison"
+        }
+      ],
+      "columns": [
+        "Point-to-point queue",
+        "Publish-subscribe"
+      ],
+      "rows": [
+        {
+          "aspect": "Each message goes to",
+          "cells": [
+            "One consumer",
+            "Every subscriber"
+          ]
+        },
+        {
+          "aspect": "Purpose",
+          "cells": [
+            "Distribute work",
+            "Broadcast events"
+          ]
+        },
+        {
+          "aspect": "Adding a consumer",
+          "cells": [
+            "Shares the existing work",
+            "Receives its own copy of everything"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kafka-vs-rabbitmq-comparison",
+      "type": "comparison",
+      "title": "Kafka vs RabbitMQ",
+      "description": "A replayable log vs a routing broker.",
+      "topics": [
+        {
+          "topic": "kafka-vs-rabbitmq",
+          "after": "Comparison"
+        }
+      ],
+      "columns": [
+        "Kafka",
+        "RabbitMQ"
+      ],
+      "rows": [
+        {
+          "aspect": "Core model",
+          "cells": [
+            "Partitioned, replicated log",
+            "Exchanges routing to queues"
+          ]
+        },
+        {
+          "aspect": "After consumption",
+          "cells": [
+            "Retained; can be replayed",
+            "Deleted on acknowledgement (classic queues)"
+          ]
+        },
+        {
+          "aspect": "Ordering",
+          "cells": [
+            "Per partition",
+            "Per queue"
+          ]
+        },
+        {
+          "aspect": "Best for",
+          "cells": [
+            "Event streams, CDC, analytics pipelines",
+            "Task queues, routing, priorities"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sd-foundations-flashcards",
+      "type": "flashcards",
+      "title": "Flashcards: foundations and communication",
+      "topics": [
+        {
+          "topic": "sd-fundamentals-interview-questions",
+          "after": "Core Concept"
+        }
+      ],
+      "cards": [
+        {
+          "front": "Vertical vs horizontal scaling?",
+          "back": "Vertical: a bigger machine (ceiling, single point of failure). Horizontal: more machines (needs a load balancer, stateless servers, shared data)."
+        },
+        {
+          "front": "Why does adding a second server create a data problem?",
+          "back": "Each server keeps its own data, so records diverge. A shared database (or session store) fixes it."
+        },
+        {
+          "front": "Sync vs async calls?",
+          "back": "Sync waits for the answer; async hands the work off (usually via a queue) and continues."
+        },
+        {
+          "front": "How much downtime is 99.9 %?",
+          "back": "About 43 minutes per 30-day month, 8.76 hours per year."
+        },
+        {
+          "front": "Availability of three 99.9 % services in series?",
+          "back": "0.999³ ≈ 99.7 %."
+        },
+        {
+          "front": "1 million requests per day is about how many per second?",
+          "back": "About 12 per second (1,000,000 ÷ 86,400)."
+        },
+        {
+          "front": "Latency vs bandwidth?",
+          "back": "Latency: time for one round trip. Bandwidth: how much data flows per second."
+        },
+        {
+          "front": "Where is DNS cached?",
+          "back": "In the browser, the operating system and the recursive resolver (and sometimes the application runtime)."
+        },
+        {
+          "front": "PUT vs PATCH?",
+          "back": "PUT replaces the whole resource; PATCH changes only the fields sent."
+        },
+        {
+          "front": "401 vs 403?",
+          "back": "401: not authenticated. 403: authenticated but not allowed."
+        },
+        {
+          "front": "Offset vs cursor pagination?",
+          "back": "Offset is simple but slow at depth and unstable under inserts; cursor is fast and stable but cannot jump to page N."
+        },
+        {
+          "front": "Token bucket in one sentence?",
+          "back": "Tokens refill at a fixed rate up to a capacity; each request takes one; no token → 429. Allows bursts, enforces the average."
+        },
+        {
+          "front": "SSE vs WebSockets?",
+          "back": "SSE: one-way server push over HTTP. WebSockets: two-way persistent channel."
+        },
+        {
+          "front": "Forward vs reverse proxy?",
+          "back": "A forward proxy acts for clients; a reverse proxy acts for servers (a load balancer is one)."
+        },
+        {
+          "front": "What does a CDN save?",
+          "back": "Distance (latency) and origin bandwidth, by serving cached content from edges near users."
+        }
+      ]
+    },
+    {
+      "id": "sd-data-caching-flashcards",
+      "type": "flashcards",
+      "title": "Flashcards: data and caching",
+      "topics": [
+        {
+          "topic": "sd-data-and-caching-interview-questions",
+          "after": "Core Concept"
+        }
+      ],
+      "cards": [
+        {
+          "front": "What comes first when designing data?",
+          "back": "Access patterns — then the data shape — then the technology."
+        },
+        {
+          "front": "Where do photo files go?",
+          "back": "Object storage (S3); the database keeps the object key and metadata."
+        },
+        {
+          "front": "Four NoSQL families?",
+          "back": "Key-value, document, wide-column, graph."
+        },
+        {
+          "front": "Why not index every column?",
+          "back": "Every index must be updated on each write, slowing writes and using space."
+        },
+        {
+          "front": "Little's law for connection pools?",
+          "back": "Connections busy ≈ query rate × query duration (2,000/s × 5 ms = 10)."
+        },
+        {
+          "front": "Cache-aside write rule?",
+          "back": "Update the database first, then delete the cache key; keep a TTL as safety net."
+        },
+        {
+          "front": "Write-through vs write-back?",
+          "back": "Write-through updates cache and DB synchronously (fresh, slower). Write-back updates the cache and the DB later (fast, may lose data)."
+        },
+        {
+          "front": "Write-around?",
+          "back": "Writes skip the cache and go only to the database; reads fill the cache later."
+        },
+        {
+          "front": "LRU in O(1)?",
+          "back": "Hash map + doubly linked list (Java: LinkedHashMap in access order)."
+        },
+        {
+          "front": "Cache stampede defences?",
+          "back": "Request coalescing, serve stale while refreshing, early refresh, TTL jitter, pre-warming."
+        },
+        {
+          "front": "Cache penetration defences?",
+          "back": "Negative caching, Bloom filter of existing keys, validation, rate limiting."
+        },
+        {
+          "front": "Hot key defences?",
+          "back": "Local in-process caches, replicated key copies, cache read replicas."
+        },
+        {
+          "front": "Why can modulo hashing empty a cache cluster?",
+          "back": "Changing N remaps most keys (4 → 5 nodes: ~80 %), so lookups miss."
+        }
+      ]
+    },
+    {
+      "id": "sd-scaling-flashcards",
+      "type": "flashcards",
+      "title": "Flashcards: scaling and consistency",
+      "topics": [
+        {
+          "topic": "sd-scaling-and-consistency-interview-questions",
+          "after": "Core Concept"
+        }
+      ],
+      "cards": [
+        {
+          "front": "Two jobs of a load balancer?",
+          "back": "Choose a server for each request, and check server health."
+        },
+        {
+          "front": "When is least connections the right algorithm?",
+          "back": "For long-lived or uneven connections such as WebSockets and streaming."
+        },
+        {
+          "front": "Why do writes go only to the primary?",
+          "back": "One writer gives every change a single order; several writers could store conflicting values."
+        },
+        {
+          "front": "Read-your-writes fix?",
+          "back": "Route a user's reads of their own recent changes to the primary."
+        },
+        {
+          "front": "Is replication a backup?",
+          "back": "No — replicas copy mistakes instantly. Keep point-in-time backups."
+        },
+        {
+          "front": "Quorum rule?",
+          "back": "W + R > N: every read overlaps a replica holding the latest write."
+        },
+        {
+          "front": "What does consistent hashing fix?",
+          "back": "Adding or removing a node moves only ~1/N of the keys instead of nearly all."
+        },
+        {
+          "front": "Why virtual nodes?",
+          "back": "Even load per server, and a failed server's keys spread across many others."
+        },
+        {
+          "front": "CAP in one sentence?",
+          "back": "During a network partition a distributed system must choose consistency or availability."
+        },
+        {
+          "front": "PACELC?",
+          "back": "If Partition: Availability or Consistency; Else: Latency or Consistency."
+        },
+        {
+          "front": "Fencing token?",
+          "back": "An increasing number issued with each lock grant; the resource rejects writes with older tokens."
+        },
+        {
+          "front": "Saga?",
+          "back": "A sequence of local transactions with compensating actions instead of one distributed transaction."
+        },
+        {
+          "front": "Transactional outbox?",
+          "back": "Write the event into an outbox table in the same transaction as the change; a relay publishes it."
+        }
+      ]
+    },
+    {
+      "id": "sd-reliability-flashcards",
+      "type": "flashcards",
+      "title": "Flashcards: reliability, messaging and operations",
+      "topics": [
+        {
+          "topic": "sd-reliability-and-messaging-interview-questions",
+          "after": "Core Concept"
+        }
+      ],
+      "cards": [
+        {
+          "front": "Fault vs failure?",
+          "back": "A fault is one component misbehaving; a failure is the system failing its users."
+        },
+        {
+          "front": "Why add jitter to backoff?",
+          "back": "So clients that failed together don't retry in synchronised waves."
+        },
+        {
+          "front": "Circuit breaker states?",
+          "back": "Closed (calls pass, failures counted) → Open (fail fast) → Half-open (trial calls) → Closed or Open."
+        },
+        {
+          "front": "Bulkhead?",
+          "back": "Separate resource limits per dependency so one slow dependency cannot starve the rest."
+        },
+        {
+          "front": "Idempotency key?",
+          "back": "A client-generated ID per logical operation; a repeated key returns the stored result instead of acting again."
+        },
+        {
+          "front": "RPO vs RTO?",
+          "back": "RPO: maximum data loss (time). RTO: maximum downtime."
+        },
+        {
+          "front": "At-least-once delivery consequence?",
+          "back": "Messages may be processed twice, so consumers must be idempotent."
+        },
+        {
+          "front": "What is a DLQ for?",
+          "back": "Parking messages that keep failing, so they stop blocking work and can be inspected and redriven."
+        },
+        {
+          "front": "Kafka ordering guarantee?",
+          "back": "Order within a partition; use the same key for messages that must stay ordered."
+        },
+        {
+          "front": "Backpressure?",
+          "back": "A signal from a slow stage telling producers to slow down (or have work rejected)."
+        },
+        {
+          "front": "Three observability signals?",
+          "back": "Metrics, logs and traces."
+        },
+        {
+          "front": "Why percentiles, not averages?",
+          "back": "Averages are distorted by outliers and hide the slow tail; P50/P95/P99 show the typical and slow experience."
+        },
+        {
+          "front": "Four golden signals?",
+          "back": "Latency, traffic, errors, saturation."
+        }
+      ]
+    }
+  ]
+}

@@ -3,6 +3,14 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-07-system-design",
+      "date": "2026-10-07",
+      "title": "System Design",
+      "description": "82 topics in 11 modules — from requirements and estimation to caching, replication, sharding, CAP, reliability, messaging and four case studies — with 23 interactive simulations, 22 checks, comparisons and flashcard decks, an interview simulator, Revision and Quick Revision.",
+      "type": "content",
+      "link": "#/c/system-design"
+    },
+    {
       "id": "2026-10-06-navigation-and-themes",
       "date": "2026-10-06",
       "title": "Clearer navigation and six themes",

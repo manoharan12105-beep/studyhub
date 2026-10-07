@@ -954,12 +954,108 @@
     {
       "id": "system-design",
       "title": "System Design",
-      "description": "Designing scalable systems: load balancing, caching, replication, sharding, queues and trade-offs.",
+      "description": "Designing systems that scale and survive failure: requirements and estimation, APIs, databases and caching, load balancing, replication and sharding, consistency, reliability, messaging, observability and case studies.",
       "order": 9,
       "icon": "assets/icons/subjects/system-design.svg",
       "group": "architecture",
       "catalog": "metadata/topics/system-design.json",
-      "subcategories": []
+      "interactions": "metadata/interactions/system-design.json",
+      "subcategories": [
+        {
+          "id": "foundations",
+          "title": "Foundations",
+          "description": "What system design is, HLD vs LLD, requirements and clarification, estimation, availability math, building blocks, architectures, scaling and statelessness.",
+          "order": 1
+        },
+        {
+          "id": "communication",
+          "title": "Communication and APIs",
+          "description": "The journey of a request, DNS, ports and connections, HTTP(S), REST design, versioning and pagination, rate limiting, API styles, real-time updates, proxies, gateways, CDNs and service discovery.",
+          "order": 2
+        },
+        {
+          "id": "data-and-storage",
+          "title": "Data and Storage",
+          "description": "Access patterns and data modeling, relational and NoSQL databases, choosing a database, indexes, connection pools, object storage and search.",
+          "order": 3
+        },
+        {
+          "id": "caching",
+          "title": "Caching",
+          "description": "Cache hits and misses, cache-aside, write strategies, invalidation and TTL, eviction and LRU, stampedes and hot keys, and distributed caches.",
+          "order": 4
+        },
+        {
+          "id": "scaling-and-distribution",
+          "title": "Scaling and Distribution",
+          "description": "Load balancing and its algorithms, replication and lag, multi-leader and leaderless stores, quorums, sharding, hot partitions, consistent hashing and capacity planning.",
+          "order": 5
+        },
+        {
+          "id": "consistency-and-coordination",
+          "title": "Consistency and Coordination",
+          "description": "The CAP theorem, consistency models, distributed locks and leader election, and distributed transactions with sagas and the outbox.",
+          "order": 6
+        },
+        {
+          "id": "reliability",
+          "title": "Reliability and Resilience",
+          "description": "Failures and single points of failure, redundancy and failover, timeouts and retries, circuit breakers, idempotency, graceful degradation and disaster recovery.",
+          "order": 7
+        },
+        {
+          "id": "messaging",
+          "title": "Messaging and Event-Driven Systems",
+          "description": "Message queues, pub/sub, delivery semantics, ordering and consumer groups, dead-letter queues, backpressure, Kafka vs RabbitMQ and event-driven architecture.",
+          "order": 8
+        },
+        {
+          "id": "observability",
+          "title": "Observability and Operations",
+          "description": "Metrics, logs and traces, latency percentiles, distributed tracing, monitoring and alerting.",
+          "order": 9
+        },
+        {
+          "id": "case-studies",
+          "title": "Case Studies",
+          "description": "Full designs reasoned step by step: a URL shortener, a photo-sharing app, a video streaming platform and a chat application.",
+          "order": 10
+        },
+        {
+          "id": "interview",
+          "title": "Interview Preparation",
+          "description": "The interview framework with a practice simulator, interview banks by area, scenario questions and interview traps.",
+          "order": 11
+        }
+      ],
+      "studyModes": [
+        {
+          "id": "revision",
+          "title": "Revision",
+          "description": "Complete revision of every module, decision cheat sheets, important comparisons, key numbers and rules, and interview traps and common confusions.",
+          "sources": [
+            { "path": "content/system-design/revision/complete-revision.md", "title": "Complete Revision" },
+            { "path": "content/system-design/revision/decision-cheat-sheets.md", "title": "Decision Cheat Sheets" },
+            { "path": "content/system-design/revision/important-comparisons.md", "title": "Important Comparisons" },
+            { "path": "content/system-design/revision/key-numbers-and-rules.md", "title": "Key Numbers and Rules" },
+            { "path": "content/system-design/revision/traps-and-confusions.md", "title": "Traps and Confusions" }
+          ]
+        },
+        {
+          "id": "quick-revision",
+          "title": "Quick Revision",
+          "description": "Six short blocks, about ten minutes each: read all six for an hour's revision, or only the blocks you need.",
+          "estimatedMinutes": 60,
+          "sources": [
+            { "path": "content/system-design/revision/quick-1-foundations.md", "title": "Block 1: Foundations" },
+            { "path": "content/system-design/revision/quick-2-communication.md", "title": "Block 2: Communication" },
+            { "path": "content/system-design/revision/quick-3-data-and-caching.md", "title": "Block 3: Data and Caching" },
+            { "path": "content/system-design/revision/quick-4-scaling.md", "title": "Block 4: Scaling and Consistency" },
+            { "path": "content/system-design/revision/quick-5-reliability.md", "title": "Block 5: Reliability and Operations" },
+            { "path": "content/system-design/revision/quick-6-case-studies.md", "title": "Block 6: Case Studies and the Interview" }
+          ]
+        }
+      ]
     }
   ]
 }
