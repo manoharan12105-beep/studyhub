@@ -23,7 +23,7 @@ StudyHub
 ├── Engagement engine  interaction registry → knowledge checks, flashcards, comparisons,
 │                      visualizers, simulators; practice / interview sessions
 └── Study engine       localStorage → progress, bookmarks, history, question results,
-                       continue learning, study plans
+                       continue learning, study plans, notes
 ```
 
 Content is never modified to suit the app. **Content ≠ interaction:** a lesson stays plain Markdown; the interaction registry references the topic by id and says where in the lesson an interaction appears.
@@ -47,6 +47,7 @@ js/
   study-engine.js              aggregates: stats, continue learning, recent, bookmarks
   plan-schedule.js             study plans, pure: stage resolution, filters, items, capacity, day split (§7)
   plans.js                     study plan records, built-in definitions, plan progress and "today"
+  notes.js                     personal notes per topic: records, validation (shared with backup.js)
   theme.js                     six themes + "match system" (§9)
   backup.js                    progress backup: allowlist, encode/decode, validation, atomic restore
   updates.js                   What's new: loads metadata/updates.json, tracks seen ids and visits
@@ -63,7 +64,9 @@ js/
   map-focus.js                 search → map bridge ("View in knowledge map"); no Three.js import
   views/                       home, subject (+module), topic, toc, mode, session, lists, common;
                                layout (sidebar, drawer, header search), menu (header menu + dialogs);
-                               plans (plans dashboard, built-in preview, plan page), plan-builder
+                               plans (plans dashboard, built-in preview, plan page), plan-builder;
+                               notes (My notes, one note, topic "Your notes", dashboard recent notes),
+                               note-dialog (note editor + delete confirmation in #note-dialog)
 assets/
   vendor/                      marked 18.0.14, three 0.170.0 (see assets/vendor/README.md)
   icons/                       favicon; subjects/<id>.svg single-colour subject icons (CSS mask)
@@ -102,6 +105,8 @@ Hash routes (GitHub Pages has no fallback for unknown paths). In-page anchors us
 | `#/plans/builtin/<plan-id>/<difficulty>`  | A built-in plan at one difficulty: what it covers, Start |
 | `#/plans/new[?from=<plan-id>/<difficulty>]` | Custom plan builder (optionally starting from a built-in plan) |
 | `#/plans/p/<record-id>[/edit]`            | One of your plans (today, milestones, schedule) · edit it |
+| `#/notes[?q=…&subject=…&module=…&topic=…&date=…&from=…&to=…&sort=…]` | My notes: search, filters and sort (state kept in the query) |
+| `#/notes/<note-id>`                       | One note: full text, subject → module → topic, Edit · Delete · Open topic |
 | `#/search?q=…&type=…&subject=…&difficulty=…` | Search, results grouped by kind |
 | `#/bookmarks`, `#/history`, `#/lab`       | Bookmarks, recently studied, all interactions |
 | `#/updates`                               | Update history (from `metadata/updates.json`) |
@@ -168,6 +173,7 @@ studyhub:v1:theme       "system" | "light" | "dark" | "ocean" | "purple" | "ambe
 studyhub:v1:prefs       { "questionView": "session|all", "sidebarCollapsed": bool }
 studyhub:v1:updates     { "seen": [ "<update-id>", … ], "previousVisit": ISO, "currentVisit": ISO }
 studyhub:v1:plans       { "active": "<record-id>" | null, "plans": [ record, … ] }   max 30 records (see Study plans)
+studyhub:v1:notes       [ { "id", "title", "content", "subjectId", "moduleId", "topicId", "createdAt", "updatedAt" } ]   max 500 (see Notes)
 ```
 
 On the first run of `updates`, entries older than the newest history entry (or all of them, for a brand-new browser) count as seen, so nobody is greeted with the whole changelog. A gap of 30 minutes or more starts a new visit; "Last visit" in What's new is `previousVisit`.
@@ -186,13 +192,24 @@ Two kinds of plan, one record format (`js/plans.js`), scheduled by the same pure
 - **Links:** Learn → `#/t/<id>`, Interactive → the lesson at its first exercise (`?s=try-<interaction-id>`), Practice / Interview / Flashcards → the existing session routes with `?level=` when not every difficulty is chosen, Revision → `#/c/<category>/m/<mode-id>`. The session's level filter uses a question's own `**Difficulty:**` line, else its `## Beginner|Intermediate|Advanced` section, else the topic's difficulty (beginner = easy, intermediate = medium, advanced = hard).
 - **Editing** (`#/plans/p/<id>/edit`): change topics (tree, reorder, remove), filters, schedule or modes and rebuild; finished items stay finished. On the plan page items can be ticked and moved to another day without a rebuild, and the schedule can restart from today.
 
+### Notes
+
+Personal plain-text notes, each tied to one topic (`js/notes.js`; views in `js/views/notes.js` and `js/views/note-dialog.js`). No Markdown, formatting, tags or attachments — by design.
+
+- **Record:** `id` (`n-` + base36 time + random suffix), `title` (one line, ≤ 120 characters), `content` (≤ 10,000 characters, line breaks kept), `subjectId` (category id), `moduleId` (subcategory id, `null` for a topic without one), `topicId`, `createdAt`, `updatedAt` (ISO). Only ids are stored; subject, module and topic names are read from the metadata index when a note is shown.
+- **Association:** a note is created from a topic page (header **Add note**, or **Add note** in the *Your notes* box under the lesson); subject and module are taken from the topic's metadata. Editing changes only `title`, `content` and `updatedAt` — the association never changes.
+- **Where notes appear:** the topic's *Your notes* box (View · Edit), **My notes** in the sidebar (with the count, computed from storage), `#/notes` (search over title, text and subject/module/topic names; Subject → Module → Topic filters that only list values with notes; date filter on the last update — today, this week from Monday, this month, custom range; sort newest/oldest created or recently updated), `#/notes/<id>` (Open topic goes back to `#/t/<topic-id>`), up to four recent notes on the dashboard, and *Open notes* in the Ctrl/⌘+K quick actions. Notes are never added to the global search index.
+- **Editor:** `#note-dialog` (`<dialog>`), title and text required with inline messages. Esc, the close button, a backdrop click or Cancel ask *Discard?* when the form was edited (menu.js routes close-button and backdrop clicks through a cancelable `cancel` event). Delete always asks for confirmation. Changes dispatch `studyhub:change` with `key: "notes"`; every view showing notes re-renders from storage.
+- **Unknown topics:** a note whose topic is no longer published stays visible in My notes ("Topic no longer available") but is not exported (the export screen says how many were left out).
+- **Extending:** a future "move note" feature is the only place that may change `subjectId`/`moduleId`/`topicId`; validate the new topic with `placeOf()`. A new field must be optional and added to `cleanNote()`, which both the app and the backup use.
+
 ### Progress Import / Export (clipboard backup)
 
 StudyHub is static: progress exists only in the browser that recorded it. **Menu → Progress Import / Export** moves it between browsers or devices through the clipboard (`js/backup.js`, dialog in `js/views/backup-dialog.js`). Nothing is uploaded and there are no files.
 
-- **Exported:** exactly the allowlist `progress`, `bookmarks`, `history`, `questions`, `plans`. Not exported: `theme`, `prefs` (appearance and layout belong to each browser), `updates` (per-browser What's new state), and any key outside `studyhub:v1:`.
+- **Exported:** exactly the allowlist `progress`, `bookmarks`, `history`, `questions`, `plans`, `notes`. Not exported: `theme`, `prefs` (appearance and layout belong to each browser), `updates` (per-browser What's new state), and any key outside `studyhub:v1:`.
 - **Format:** one line, `STUDYHUB-PROGRESS:v1:z.<base64url>` — deflate-raw compressed JSON `{ format: "studyhub-progress", version: 1, exportedAt, data }` (`j.` = uncompressed JSON, used where `CompressionStream` is missing). The version appears in the prefix and in the JSON; a backup with any other version is refused with a clear message, so a future v2 can add migration.
-- **Import:** the pasted text is decoded and every entry is type-checked against the shapes above (ids, statuses, dates, result values; unknown keys rejected, objects rebuilt from known fields) *before* anything is written. After a confirmation listing what the backup contains, the keys are **replaced** in one step by `storage.writeAll()`, which restores the previous values if any write fails. Views re-render on the `studyhub:restored` event. `plans` was added later: a backup without it (made before study plans existed) still imports, and leaves this browser's plans untouched; plan records are checked field by field (ids, item keys, settings ranges, day count = duration, at most 30 plans and 365 days).
+- **Import:** the pasted text is decoded and every entry is type-checked against the shapes above (ids, statuses, dates, result values; unknown keys rejected, objects rebuilt from known fields) *before* anything is written. After a confirmation listing what the backup contains, the keys are **replaced** in one step by `storage.writeAll()`, which restores the previous values if any write fails. Views re-render on the `studyhub:restored` event. `plans` was added later: a backup without it (made before study plans existed) still imports, and leaves this browser's plans untouched; plan records are checked field by field (ids, item keys, settings ranges, day count = duration, at most 30 plans and 365 days). `notes` was added the same way: a backup without it leaves this browser's notes untouched. Each imported note must be well formed (id, non-empty title and text, ISO dates with updated ≥ created, no duplicate ids, at most 500) and point at an existing topic whose subject and module match the stored `subjectId`/`moduleId`; otherwise the whole backup is refused.
 - **Adding a new kind of persistent learner state:** add its key to `ALLOWLIST` with a validator in `js/backup.js`, or it will not travel with backups.
 
 ## 8. Third-party code

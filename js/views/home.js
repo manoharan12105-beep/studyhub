@@ -11,6 +11,7 @@ import { track } from '../engagement/registry.js';
 import { mapSupported } from '../map-focus.js';
 import * as studyPlans from '../plans.js';
 import { planCard, wireInteractiveLinks } from './plans.js';
+import { recentNotesSection } from './notes.js';
 
 export async function renderHome(main) {
   const overall = engine.overallStats();
@@ -58,6 +59,7 @@ export async function renderHome(main) {
       el('div', { class: 'section-head' }, el('h2', { id: 'subjects-title' }, 'Subjects')),
       el('ul', { class: 'card-grid', role: 'list' }, available.map(subjectCard), upcoming.map(comingSoonCard))),
     el('div', { class: 'two-col' }, recentSection(), bookmarksSection()),
+    recentNotesSection(),
     activitySection(totals)));
 
   // Counts that need the interaction registries (small JSON files).

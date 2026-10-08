@@ -198,10 +198,15 @@ function syncBadge() {
 
 // ---- Dialogs ------------------------------------------------------------------------
 
-/** Close buttons and backdrop clicks for every <dialog class="dialog">. */
+/**
+ * Close buttons and backdrop clicks for every <dialog class="dialog">. They go
+ * through a cancelable 'cancel' event, like Esc, so a dialog with unsaved input
+ * (the note editor) can ask before closing.
+ */
 function wireDialog(dialog) {
   dialog.addEventListener('click', (event) => {
-    if (event.target.closest('[data-close-dialog]') || event.target === dialog) dialog.close();
+    if (!(event.target.closest('[data-close-dialog]') || event.target === dialog)) return;
+    if (dialog.dispatchEvent(new Event('cancel', { cancelable: true }))) dialog.close();
   });
   dialog.addEventListener('close', () => {
     if (dialog.dataset.returnFocus !== 'menu') return;

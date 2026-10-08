@@ -14,6 +14,8 @@
 //   #/plans/builtin/<plan-id>/<level>    built-in plan at one difficulty
 //   #/plans/new[?from=<plan-id>/<level>] custom plan builder
 //   #/plans/p/<record-id>[/edit]         one of your plans · edit it
+//   #/notes[?q=…&subject=…&module=…&topic=…&date=…&from=…&to=…&sort=…]   My notes
+//   #/notes/<note-id>                    one note
 //   #/search?q=…   #/bookmarks   #/history   #/lab
 //
 // Query parameter `s` scrolls to a heading id inside the page (in-page anchors

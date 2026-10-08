@@ -18,6 +18,8 @@ import { createQuiz } from '../engagement/quiz.js';
 import { createDeck } from '../engagement/flashcards.js';
 import { breadcrumbs, difficultyBadge, errorState, loading, notice } from './common.js';
 import { buildToc, watchToc } from './toc.js';
+import { topicNotesSection } from './notes.js';
+import { openNoteEditor } from './note-dialog.js';
 
 const QUESTION_TABS = { practice: 'practice', 'interview-questions': 'interview' };
 
@@ -105,6 +107,8 @@ function topicHeader(topic, category, sub) {
   const bookmarkBtn = el('button', { type: 'button', class: 'btn btn-secondary', 'aria-pressed': String(bookmarks.has(topic.id)) });
   const completeBtn = el('button', { type: 'button', class: 'btn btn-secondary btn-complete', 'aria-pressed': String(progress.isComplete(topic.id)) });
   const status = el('span', { class: 'topic-status' });
+  const noteBtn = el('button', { type: 'button', class: 'btn btn-secondary', 'data-focus-key': 'topic-add-note' }, icon('note', 16), 'Add note');
+  noteBtn.addEventListener('click', () => openNoteEditor({ topicId: topic.id }));
 
   function refresh() {
     const marked = bookmarks.has(topic.id);
@@ -144,7 +148,7 @@ function topicHeader(topic, category, sub) {
     breadcrumbs(crumbs),
     el('div', { class: 'page-title-row' },
       el('h1', { class: 'page-title', tabindex: -1 }, topic.title),
-      el('div', { class: 'page-actions' }, bookmarkBtn, completeBtn)),
+      el('div', { class: 'page-actions' }, bookmarkBtn, noteBtn, completeBtn)),
     el('p', { class: 'lead' }, topic.description),
     el('div', { class: 'topic-meta' },
       sub ? el('span', { class: 'meta-item' }, sub.title) : null,
@@ -214,6 +218,7 @@ function topicFooter(topic) {
 
   return el('footer', { class: 'topic-footer' },
     finish,
+    topicNotesSection(topic),
     links(topic.prerequisites, 'Study first'),
     links(topic.relatedTopics, 'Related topics'),
     el('nav', { class: 'pager', 'aria-label': 'Previous and next topic' },

@@ -11,15 +11,17 @@
 // in one step (storage.writeAll rolls back on failure). "plans" was added after
 // the first backups were made: a backup without it leaves this browser's study
 // plans as they are, so older backups still restore exactly what they hold.
+// "notes" (js/notes.js) works the same way.
 
 import { read, writeAll } from './storage.js';
 import { isItemKey } from './plan-schedule.js';
+import { cleanNote, MAX_NOTES } from './notes.js';
 
 const PREFIX = 'STUDYHUB-PROGRESS:';
 const FORMAT = 'studyhub-progress';
 export const VERSION = 1;
-export const ALLOWLIST = ['progress', 'bookmarks', 'history', 'questions', 'plans'];
-const OPTIONAL = new Set(['plans']); // absent in older backups: keep the local value
+export const ALLOWLIST = ['progress', 'bookmarks', 'history', 'questions', 'plans', 'notes'];
+const OPTIONAL = new Set(['plans', 'notes']); // absent in older backups: keep the local value
 
 // Limits keep a pasted text from filling storage or freezing the page.
 const MAX_TEXT = 4_000_000;
@@ -186,8 +188,26 @@ function cleanPlans(value, strict) {
   return { active, plans: kept };
 }
 
-const CLEANERS = { progress: cleanProgress, bookmarks: cleanBookmarks, history: cleanHistory, questions: cleanQuestions, plans: cleanPlans };
-const EMPTY = { progress: () => ({}), bookmarks: () => [], history: () => [], questions: () => ({}), plans: () => ({ active: null, plans: [] }) };
+/**
+ * Notes (js/notes.js): each note must be well formed and point at a topic that
+ * exists, with that topic's own subject and module. Export skips notes that fail
+ * (e.g. their topic is no longer published); import rejects the whole backup.
+ */
+function cleanNotes(value, strict) {
+  if (!Array.isArray(value) || (strict && value.length > MAX_NOTES)) throw invalid();
+  const out = [];
+  for (const raw of value) {
+    const shaped = cleanNote(raw);
+    const note = shaped && cleanNote(shaped, { checkTopic: true });
+    if (strict && shaped && !note) throw new BackupError('This backup has notes for topics that do not exist in StudyHub, so it was not restored.');
+    if (!note || out.some((n) => n.id === note.id)) { if (strict) throw invalid(); continue; }
+    out.push(note);
+  }
+  return out.slice(0, MAX_NOTES);
+}
+
+const CLEANERS = { progress: cleanProgress, bookmarks: cleanBookmarks, history: cleanHistory, questions: cleanQuestions, plans: cleanPlans, notes: cleanNotes };
+const EMPTY = { progress: () => ({}), bookmarks: () => [], history: () => [], questions: () => ({}), plans: () => ({ active: null, plans: [] }), notes: () => [] };
 
 function cleanData(data, strict) {
   if (!isPlainObject(data)) throw invalid();
@@ -218,11 +238,13 @@ export function summarize(data) {
     answers,
     plans: data.plans ? data.plans.plans.length : 0,
     plansIncluded: data.plans !== undefined,
+    notes: data.notes ? data.notes.length : 0,
+    notesIncluded: data.notes !== undefined,
   };
 }
 
 export function isEmpty(summary) {
-  return ['completed', 'inProgress', 'bookmarks', 'history', 'answers', 'plans'].every((key) => !summary[key]);
+  return ['completed', 'inProgress', 'bookmarks', 'history', 'answers', 'plans', 'notes'].every((key) => !summary[key]);
 }
 
 /** This browser's state, cleaned the same way an import is checked. */

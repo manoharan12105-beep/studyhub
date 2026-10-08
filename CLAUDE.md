@@ -33,7 +33,7 @@ StudyHub is a personal study and interview-preparation platform (aptitude, data 
 ```text
 index.html, styles.css, app.js        application shell, styles, entry module
 js/                                   engines (content-loader, markdown-renderer, search, storage,
-                                      progress, bookmarks, history, activity, study-engine),
+                                      progress, bookmarks, history, activity, notes, study-engine),
                                       engagement/, visualizers/, simulators/, three/, views/
 assets/                               icons (subjects/<id>.svg), images, vendored libraries (assets/vendor/)
 content/<category>/[<sub>/]<slug>/    topic Markdown (+ images/)

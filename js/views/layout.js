@@ -10,6 +10,7 @@ import { mapSupported, focusOnMap } from '../map-focus.js';
 import { read, update } from '../storage.js';
 import * as progress from '../progress.js';
 import * as engine from '../study-engine.js';
+import * as notes from '../notes.js';
 import { openUpdates } from './menu.js';
 import { subjectIcon } from './common.js';
 
@@ -31,7 +32,8 @@ export function renderSidebar(context) {
     navLink({ target: '#/', label: 'Dashboard', iconName: 'home', active: context.path === '/' }),
     navLink({ target: resume.href, label: 'Continue learning', iconName: 'resume', hint: resume.hint }),
     navLink({ target: '#/plans', label: 'Study plans', iconName: 'calendar', active: context.path === '/plans' || context.path.startsWith('/plans/') }),
-    navLink({ target: '#/lab', label: 'Interactive lab', iconName: 'flask', active: context.path === '/lab' }));
+    navLink({ target: '#/lab', label: 'Interactive lab', iconName: 'flask', active: context.path === '/lab' }),
+    navLink({ target: '#/notes', label: 'My notes', iconName: 'note', active: context.path === '/notes' || context.path.startsWith('/notes/'), count: notes.count() }));
 
   const library = groupedCategories().map(({ group, categories }) => {
     const headingId = `nav-g-${group.id}`;
@@ -58,11 +60,14 @@ function continueTarget() {
   return first ? { href: href(['t', first.id]), hint: `Start with ${first.title}` } : { href: '#/', hint: '' };
 }
 
-function navLink({ target, label, iconName, active = false, hint = '' }) {
+/** count (optional): shown after the label, e.g. the number of notes. */
+function navLink({ target, label, iconName, active = false, hint = '', count = 0 }) {
   return el('li', {}, el('a', {
     class: `nav-link ${active ? 'is-active' : ''}`, href: target, 'aria-current': active ? 'page' : null,
-    'data-tooltip': hint ? `${label} · ${hint}` : label,
-  }, el('span', { class: 'nav-icon' }, icon(iconName, 18)), el('span', { class: 'nav-label' }, label)));
+    'data-tooltip': hint ? `${label} · ${hint}` : count ? `${label} · ${count}` : label,
+  }, el('span', { class: 'nav-icon' }, icon(iconName, 18)),
+  el('span', { class: 'nav-label' }, label, count ? el('span', { class: 'sr-only' }, ` (${count})`) : null),
+  count ? el('span', { class: 'nav-aside' }, el('span', { class: 'nav-count', 'aria-hidden': 'true' }, String(count))) : null));
 }
 
 function subjectLink(category, context) {
@@ -246,6 +251,7 @@ export function initHeaderSearch() {
       option({ 'data-href': resume.href }, 'Continue learning', resume.hint),
       option({ 'data-href': href([], { s: 'quick-revision' }) }, 'Quick revision', 'Dashboard · revision sheets for every subject'),
       option({ 'data-href': '#/plans' }, 'Study plans', 'Built-in plans and your own day-by-day plans'),
+      option({ 'data-href': '#/notes' }, 'Open notes', 'My notes · search everything you wrote'),
       option({ 'data-href': '#/bookmarks' }, 'Bookmarks'),
       option({ 'data-href': '#/history' }, 'Recently studied'),
       option({ 'data-action': 'updates' }, "What's new"),

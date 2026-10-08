@@ -4,6 +4,7 @@
 
 import { el, icon } from '../util.js';
 import * as backup from '../backup.js';
+import * as notes from '../notes.js';
 
 const PRIVACY = 'Your progress stays in your browser. Nothing is uploaded to a server.';
 
@@ -42,6 +43,7 @@ function contents(summary) {
     summary.history && plural(summary.history, 'recently studied page'),
     summary.answers && `${plural(summary.answers, 'recorded answer')} (practice, interview, flashcards, knowledge checks)`,
     summary.plans && plural(summary.plans, 'study plan'),
+    summary.notes && plural(summary.notes, 'note'),
   ].filter(Boolean);
 }
 
@@ -141,12 +143,22 @@ async function showExport() {
     el('p', { class: 'backup-lead' }, 'This backup contains:'),
     contentList(summary),
     el('p', { class: 'small muted' }, 'Theme and layout settings are not included — they stay with each browser.'),
+    skippedNotes(summary.notes),
     el('label', { class: 'backup-label', for: 'backup-export-text' }, 'Backup text'),
     field,
     el('p', { class: 'small muted' }, 'To restore it, open StudyHub on the other browser or device, choose Progress Import / Export → Import Progress, and paste.'),
     actions(button('Copy again', copy), button('Done', null, { primary: true, close: true, autofocus: true })));
   await copy();
   focusFirst();
+}
+
+/** Notes whose topic is no longer published could not be restored anywhere, so they are not exported — say so. */
+function skippedNotes(exported) {
+  const skipped = notes.count() - exported;
+  if (skipped <= 0) return null;
+  const one = skipped === 1;
+  return el('p', { class: 'small muted' },
+    `${plural(skipped, 'note')} ${one ? 'is' : 'are'} not included because ${one ? 'its topic is' : 'their topics are'} no longer in StudyHub. ${one ? 'It stays' : 'They stay'} in My notes in this browser.`);
 }
 
 // ---- Import ---------------------------------------------------------------------------
@@ -210,9 +222,10 @@ function showImport(previousText = '') {
 
 function showConfirm(parsed, text) {
   const current = backup.summarize(backup.currentData());
-  // A backup made before study plans existed leaves this browser's plans alone.
+  // A backup made before study plans (or notes) existed leaves this browser's plans (or notes) alone.
   const keepsPlans = !parsed.summary.plansIncluded && current.plans > 0;
-  const now = contents(keepsPlans ? { ...current, plans: 0 } : current);
+  const keepsNotes = !parsed.summary.notesIncluded && current.notes > 0;
+  const now = contents({ ...current, plans: keepsPlans ? 0 : current.plans, notes: keepsNotes ? 0 : current.notes });
   const exported = new Date(parsed.exportedAt).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
   step('Restore StudyHub progress?',
     el('p', { class: 'backup-lead' }, `This backup (exported ${exported}) contains:`),
@@ -220,7 +233,8 @@ function showConfirm(parsed, text) {
     el('div', { class: 'callout callout-warning backup-warning' },
       el('p', {}, el('strong', {}, 'Restoring replaces your current StudyHub progress in this browser. '),
         now.length ? `It currently has ${now.join(', ')}.` : 'There is no progress here yet.'),
-      keepsPlans ? el('p', {}, `This backup was made before study plans existed, so your ${current.plans === 1 ? 'study plan stays' : `${current.plans} study plans stay`} as they are.`) : null),
+      keepsPlans ? el('p', {}, `This backup was made before study plans existed, so your ${current.plans === 1 ? 'study plan stays' : `${current.plans} study plans stay`} as they are.`) : null,
+      keepsNotes ? el('p', {}, `This backup was made before notes existed, so your ${current.notes === 1 ? 'note stays' : `${current.notes} notes stay`} as they are.`) : null),
     actions(button('Cancel', () => showImport(text), { autofocus: true }), button('Restore', () => doRestore(parsed, text), { primary: true })));
   focusFirst();
 }

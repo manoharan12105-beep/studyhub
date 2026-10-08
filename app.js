@@ -24,6 +24,7 @@ import { renderSession } from './js/views/session.js';
 import { renderSearch, renderBookmarks, renderHistory, renderLab, renderUpdates } from './js/views/lists.js';
 import { renderPlans, renderBuiltin, renderPlan } from './js/views/plans.js';
 import { renderBuilder } from './js/views/plan-builder.js';
+import { renderNotes, renderNote } from './js/views/notes.js';
 import { errorState } from './js/views/common.js';
 
 const main = document.getElementById('main');
@@ -107,6 +108,7 @@ async function onRoute(route, { sameView }) {
       else if (c === 'edit') result = await renderBuilder(main, { recordId: b, isCurrent });
       else result = await renderPlan(main, { id: b });
     } else if (first === 'search') result = renderSearch(main, { query: route.query });
+    else if (first === 'notes' && !b) result = a ? renderNote(main, { id: a }) : renderNotes(main, { query: route.query });
     else if (first === 'bookmarks') result = renderBookmarks(main);
     else if (first === 'history') result = renderHistory(main);
     else if (first === 'lab') result = await renderLab(main, { isCurrent });
