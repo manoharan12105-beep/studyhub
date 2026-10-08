@@ -7,15 +7,19 @@
 //
 // Only the keys in ALLOWLIST are exported or restored. Appearance and per-browser
 // state (theme, prefs, updates) deliberately stay with the browser.
-// Import validates everything before writing anything, then replaces all four
-// keys in one step (storage.writeAll rolls back on failure).
+// Import validates everything before writing anything, then replaces the keys
+// in one step (storage.writeAll rolls back on failure). "plans" was added after
+// the first backups were made: a backup without it leaves this browser's study
+// plans as they are, so older backups still restore exactly what they hold.
 
 import { read, writeAll } from './storage.js';
+import { isItemKey } from './plan-schedule.js';
 
 const PREFIX = 'STUDYHUB-PROGRESS:';
 const FORMAT = 'studyhub-progress';
 export const VERSION = 1;
-export const ALLOWLIST = ['progress', 'bookmarks', 'history', 'questions'];
+export const ALLOWLIST = ['progress', 'bookmarks', 'history', 'questions', 'plans'];
+const OPTIONAL = new Set(['plans']); // absent in older backups: keep the local value
 
 // Limits keep a pasted text from filling storage or freezing the page.
 const MAX_TEXT = 4_000_000;
@@ -26,6 +30,17 @@ const STATUSES = ['in-progress', 'completed'];
 const HISTORY_KINDS = ['topic', 'mode', 'session'];
 const QUESTION_KINDS = ['practice', 'interview', 'flashcards', 'check'];
 const RESULTS = ['correct', 'incorrect', 'known', 'review'];
+// Study plans (js/plans.js). Limits match the app: 30 plans, 365 days.
+const MAX_PLANS = 30;
+const MAX_PLAN_DAYS = 365;
+const MAX_PLAN_TOPICS = 2000;
+const MAX_PLAN_ITEMS = 10_000;
+const PLAN_KINDS = ['builtin', 'custom'];
+const TOPIC_LEVELS = ['beginner', 'intermediate', 'advanced'];
+const QUESTION_LEVELS = ['easy', 'medium', 'hard'];
+const PLAN_MODES = ['learn', 'interactive', 'practice', 'interview', 'flashcards', 'revision'];
+const YMD = /^\d{4}-\d{2}-\d{2}$/;
+const BASED_ON = /^[a-z0-9]+(?:-[a-z0-9]+)*\/(?:beginner|intermediate|advanced)$/;
 
 /** Error with a message meant for the learner (never a raw JS error). */
 export class BackupError extends Error {}
@@ -102,15 +117,86 @@ function cleanQuestions(value, strict) {
   return out;
 }
 
-const CLEANERS = { progress: cleanProgress, bookmarks: cleanBookmarks, history: cleanHistory, questions: cleanQuestions };
-const EMPTY = { progress: () => ({}), bookmarks: () => [], history: () => [], questions: () => ({}) };
+const isIdText = (v, max = 120) => typeof v === 'string' && v.length <= max && ID.test(v);
+const isInt = (v, min, max) => Number.isInteger(v) && v >= min && v <= max;
+const isSubset = (v, allowed) => Array.isArray(v) && v.length > 0 && v.length <= allowed.length
+  && new Set(v).size === v.length && v.every((x) => allowed.includes(x));
+const isIdList = (v, max) => Array.isArray(v) && v.length <= max && v.every((x) => isIdText(x));
+
+function cleanPlanSettings(s, dayCount) {
+  const ok = isPlainObject(s) && isInt(s.durationDays, 1, MAX_PLAN_DAYS) && s.durationDays === dayCount
+    && isInt(s.dailyMinutes, 10, 600)
+    && isSubset(s.topicLevels, TOPIC_LEVELS) && isSubset(s.questionLevels, QUESTION_LEVELS) && isSubset(s.modes, PLAN_MODES)
+    && ['full', 'quick'].includes(s.revision)
+    && [s.skipCompleted, s.prioritizeWeak, s.overload].every((b) => typeof b === 'boolean');
+  if (!ok) return null;
+  return {
+    durationDays: s.durationDays, dailyMinutes: s.dailyMinutes, topicLevels: [...s.topicLevels], questionLevels: [...s.questionLevels],
+    modes: [...s.modes], revision: s.revision, skipCompleted: s.skipCompleted, prioritizeWeak: s.prioritizeWeak, overload: s.overload,
+  };
+}
+
+/** One plan record, rebuilt from known fields; null when anything is malformed. */
+function cleanPlan(r) {
+  if (!isPlainObject(r) || !isIdText(r.id, 40) || !PLAN_KINDS.includes(r.kind) || !isText(r.title, 80)) return null;
+  if (r.kind === 'builtin' && !(isIdText(r.plan, 60) && TOPIC_LEVELS.includes(r.variant))) return null;
+  if (r.basedOn !== undefined && !(typeof r.basedOn === 'string' && r.basedOn.length <= 80 && BASED_ON.test(r.basedOn))) return null;
+  if (!isDate(r.created) || (r.updated !== undefined && !isDate(r.updated))) return null;
+  if (!(typeof r.start === 'string' && YMD.test(r.start) && isDate(r.start))) return null;
+  if (!Array.isArray(r.days) || r.days.length < 1 || r.days.length > MAX_PLAN_DAYS || !r.days.every(Array.isArray)) return null;
+  const itemCount = r.days.reduce((n, day) => n + day.length, 0);
+  if (itemCount > MAX_PLAN_ITEMS || !r.days.every((day) => day.every(isItemKey))) return null;
+  const settings = cleanPlanSettings(r.settings, r.days.length);
+  if (!settings || !isIdList(r.topics, MAX_PLAN_TOPICS)) return null;
+  if (!Array.isArray(r.milestones) || r.milestones.length > 200
+    || !r.milestones.every((m) => isPlainObject(m) && isText(m.title, 200) && isIdList(m.topics, MAX_PLAN_TOPICS))) return null;
+  if (!isPlainObject(r.minutes) || !PLAN_MODES.every((m) => isInt(r.minutes[m], 1, 600))) return null;
+  if (!isPlainObject(r.done) || Object.keys(r.done).length > MAX_PLAN_ITEMS
+    || !Object.entries(r.done).every(([key, at]) => isItemKey(key) && isDate(at))) return null;
+
+  const clean = { id: r.id, kind: r.kind };
+  if (r.kind === 'builtin') Object.assign(clean, { plan: r.plan, variant: r.variant });
+  if (r.basedOn !== undefined) clean.basedOn = r.basedOn;
+  Object.assign(clean, { title: r.title, created: r.created });
+  if (r.updated !== undefined) clean.updated = r.updated;
+  const done = Object.create(null);
+  for (const [key, at] of Object.entries(r.done)) done[key] = at;
+  return Object.assign(clean, {
+    start: r.start,
+    settings,
+    topics: [...r.topics],
+    milestones: r.milestones.map((m) => ({ title: m.title, topics: [...m.topics] })),
+    minutes: Object.fromEntries(PLAN_MODES.map((m) => [m, r.minutes[m]])),
+    days: r.days.map((day) => [...day]),
+    done,
+  });
+}
+
+function cleanPlans(value, strict) {
+  if (!isPlainObject(value) || !Array.isArray(value.plans) || (strict && value.plans.length > MAX_PLANS)) throw invalid();
+  const plans = [];
+  for (const record of value.plans) {
+    const clean = cleanPlan(record);
+    if (!clean || plans.some((p) => p.id === clean.id)) { if (strict) throw invalid(); continue; }
+    plans.push(clean);
+  }
+  const kept = plans.slice(0, MAX_PLANS);
+  const active = typeof value.active === 'string' && kept.some((p) => p.id === value.active) ? value.active : null;
+  if (strict && value.active !== null && value.active !== undefined && active === null) throw invalid();
+  return { active, plans: kept };
+}
+
+const CLEANERS = { progress: cleanProgress, bookmarks: cleanBookmarks, history: cleanHistory, questions: cleanQuestions, plans: cleanPlans };
+const EMPTY = { progress: () => ({}), bookmarks: () => [], history: () => [], questions: () => ({}), plans: () => ({ active: null, plans: [] }) };
 
 function cleanData(data, strict) {
   if (!isPlainObject(data)) throw invalid();
   if (strict && Object.keys(data).some((key) => !ALLOWLIST.includes(key))) throw invalid();
   const out = {};
   for (const key of ALLOWLIST) {
-    // A missing key is empty: restore replaces it with nothing.
+    // A missing key is empty (restore replaces it with nothing), except keys newer
+    // than the first backups: those stay out, and restore leaves them alone.
+    if (data[key] === undefined && OPTIONAL.has(key)) continue;
     out[key] = data[key] === undefined ? EMPTY[key]() : CLEANERS[key](data[key], strict);
   }
   const answers = Object.values(out.questions).reduce((n, map) => n + Object.keys(map).length, 0);
@@ -130,11 +216,13 @@ export function summarize(data) {
     bookmarks: data.bookmarks.length,
     history: data.history.length,
     answers,
+    plans: data.plans ? data.plans.plans.length : 0,
+    plansIncluded: data.plans !== undefined,
   };
 }
 
 export function isEmpty(summary) {
-  return Object.values(summary).every((n) => n === 0);
+  return ['completed', 'inProgress', 'bookmarks', 'history', 'answers', 'plans'].every((key) => !summary[key]);
 }
 
 /** This browser's state, cleaned the same way an import is checked. */
@@ -214,7 +302,7 @@ export async function parseBackup(text) {
 
 /** Replace all allowlisted keys at once. Returns false (state untouched) if storage refused. */
 export function restore(data) {
-  const ok = writeAll(ALLOWLIST.map((key) => [key, data[key]]));
+  const ok = writeAll(ALLOWLIST.filter((key) => data[key] !== undefined).map((key) => [key, data[key]]));
   if (ok) document.dispatchEvent(new CustomEvent('studyhub:restored'));
   return ok;
 }

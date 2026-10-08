@@ -2,6 +2,9 @@
 //   #/session/practice|interview|flashcards/topic/<id>
 //   #/session/…/module/<category>/<subcategory>
 //   #/session/…/subject/<category>
+// Optional ?level=easy,medium keeps only questions of those difficulties (study
+// plans link this way): a question's own **Difficulty:** line, else its Beginner /
+// Intermediate / Advanced section, else the topic's level (plan-schedule.js).
 
 import { el } from '../util.js';
 import { getCategory, getSubcategory, getTopic, topicDir, fetchText } from '../content-loader.js';
@@ -13,6 +16,7 @@ import { parseQuestions } from '../engagement/question-parser.js';
 import { createQuiz } from '../engagement/quiz.js';
 import { createDeck } from '../engagement/flashcards.js';
 import { track } from '../engagement/registry.js';
+import { parseLevels, questionLevel } from '../plan-schedule.js';
 import { pageHeader, errorState, notice } from './common.js';
 
 const KINDS = {
@@ -22,7 +26,9 @@ const KINDS = {
 };
 const PARALLEL = 6;
 
-export async function renderSession(main, { kind, scope, isCurrent }) {
+const LEVEL_NAMES = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
+
+export async function renderSession(main, { kind, scope, query, isCurrent }) {
   const spec = KINDS[kind];
   const resolved = spec ? resolveScope(scope) : null;
   if (!spec || !resolved) {
@@ -71,14 +77,22 @@ export async function renderSession(main, { kind, scope, isCurrent }) {
   await Promise.all(Array.from({ length: Math.min(PARALLEL, topics.length) }, worker));
   if (!isCurrent()) return null;
 
-  const items = [];
+  const all = [];
   for (const result of results) {
     if (!result) continue;
     const { items: parsed } = parseQuestions(result.rendered.node);
-    for (const item of parsed) if (item.prefix === spec.prefix) items.push({ ...item, topic: result.topic });
+    for (const item of parsed) if (item.prefix === spec.prefix) all.push({ ...item, topic: result.topic });
   }
-  status.textContent = `${items.length} questions from ${topics.length - failed} topic${topics.length - failed === 1 ? '' : 's'}`
-    + (failed ? ` (${failed} file${failed === 1 ? '' : 's'} could not be loaded)` : '');
+  const levels = parseLevels(query?.get('level'));
+  const items = levels ? all.filter((item) => levels.includes(questionLevel(item, item.topic))) : all;
+  const levelText = levels ? levels.map((l) => LEVEL_NAMES[l]).join(' and ').toLowerCase() : '';
+  const showAll = levels ? el('a', { href: href(['session', kind, ...scope]) }, 'Show all questions') : null;
+  status.replaceChildren(`${levels ? `${items.length} of ${all.length}` : items.length} questions${levels ? ` (${levelText})` : ''} from ${topics.length - failed} topic${topics.length - failed === 1 ? '' : 's'}`
+    + (failed ? ` (${failed} file${failed === 1 ? '' : 's'} could not be loaded)` : ''), ...(showAll ? [' · ', showAll] : []));
+  if (levels && !items.length) {
+    stage.replaceChildren(notice(`None of these ${all.length} questions are marked ${levelText}. Use “Show all questions” to practise them anyway.`, 'info'));
+    return { title: `${spec.title} · ${label}` };
+  }
 
   const multiTopic = topics.length > 1;
   if (kind === 'flashcards') {

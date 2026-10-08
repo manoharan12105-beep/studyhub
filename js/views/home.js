@@ -9,6 +9,8 @@ import * as progress from '../progress.js';
 import { progressBar, statusBadge, subjectIcon } from './common.js';
 import { track } from '../engagement/registry.js';
 import { mapSupported } from '../map-focus.js';
+import * as studyPlans from '../plans.js';
+import { planCard, wireInteractiveLinks } from './plans.js';
 
 export async function renderHome(main) {
   const overall = engine.overallStats();
@@ -49,6 +51,7 @@ export async function renderHome(main) {
   main.replaceChildren(el('div', { class: 'page page-home' },
     hero,
     continueSection(),
+    planSection(),
     quickRevisionSection(available),
     attentionSection(),
     el('section', { class: 'section', 'aria-labelledby': 'subjects-title' },
@@ -115,6 +118,19 @@ function continueSection() {
         [category?.title, reason === 'next' ? null : sub?.title].filter(Boolean).join(' › ')),
       body),
     el('a', { class: 'btn btn-primary btn-lg', href: target }, reason === 'next' ? 'Start next' : 'Continue', icon('arrowRight', 18)));
+}
+
+/** The active study plan, when there is one: today's place and the next activity. */
+function planSection() {
+  const active = studyPlans.activePlan();
+  if (!active) return null;
+  const section = el('section', { class: 'section home-plan', 'aria-labelledby': 'home-plan-title' },
+    el('div', { class: 'section-head' },
+      el('h2', { id: 'home-plan-title' }, 'Your study plan'),
+      el('a', { class: 'small', href: '#/plans' }, 'All study plans')),
+    planCard(active, studyPlans.summarize(active), { featured: true }));
+  wireInteractiveLinks(section);
+  return section;
 }
 
 /**

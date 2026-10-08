@@ -14,7 +14,7 @@ If this file and a doc disagree, fix the disagreement rather than picking one si
 
 StudyHub is a personal study and interview-preparation platform (aptitude, data structures, algorithms, object-oriented programming, CS concepts, and categories the owner adds later). The same material must teach a beginner and serve as fast interview revision.
 
-**Current phase: Phase 3 application built**, plus the UI/UX phase (header menu, six themes, What's new, grouped sidebar; see architecture §9) (content Phases 2A Aptitude, 2B DSA, 2C OOP, 2D Spring Boot, 2E DBMS + PostgreSQL, 2F Linux, 2G Computer Networks, 2H System Design, 2I Operating Systems done; CS Concepts holds the Excel Fundamentals emergency module). No further content phase is planned yet. Do not write further study content unless the owner asks for that phase.
+**Current phase: Phase 3 application built**, plus the UI/UX phase (header menu, six themes, What's new, grouped sidebar; see architecture §9) (content Phases 2A Aptitude, 2B DSA, 2C OOP, 2D Spring Boot, 2E DBMS + PostgreSQL, 2F Linux, 2G Computer Networks, 2H System Design, 2I Operating Systems done; CS Concepts holds the Excel Fundamentals emergency module), and Phase 2J Interview Preparation & Study Plans (built-in plans in `metadata/study-plans.json`, custom plan builder; architecture §7). No further content phase is planned yet. Do not write further study content unless the owner asks for that phase.
 
 ## Hard rules
 
@@ -40,9 +40,10 @@ content/<category>/[<sub>/]<slug>/    topic Markdown (+ images/)
 content/<category>/revision/          sources for category study modes (reserved name)
 metadata/categories.json              groups, category + subcategory registry, study modes
 metadata/updates.json                 What's new changelog (newest first)
+metadata/study-plans.json             built-in study plans (stage templates + difficulty variants; ids only)
 metadata/topics/<category>.json       topic catalog per category
 metadata/interactions/<category>.json interaction registry per category (optional)
-metadata/schemas/                     JSON Schemas for categories, topic catalogs, interactions, updates
+metadata/schemas/                     JSON Schemas for categories, topic catalogs, interactions, updates, study plans
 templates/                            lesson, companion and metadata templates
 docs/                                 content guide, architecture, visualizer registry
 .claude/skills/                       Claude skills for this project
@@ -118,6 +119,7 @@ Before saying work is done:
 - **Operating Systems:** Java programs compile and run on Java 17 and print exactly their `**Output:**` block (multithreaded demos print only deterministic results; a demo whose output varies is marked `**Output (varies):**` and captured from a real run); every scheduling, page-replacement, Banker's, paging and disk-scheduling number is recomputed with a script (`js/simulators/os-common.js` holds the shared algorithms).
 - **Excel (CS Concepts):** every formula result, PivotTable value and error shown in content or an interaction is checked in desktop Excel.
 - **Markdown:** headings follow the template; links and image paths resolve; renders correctly on GitHub.
+- **Study plans:** `study-plans.json` matches its schema; every stage, subject, module and topic it names exists; every variant fits `durationDays × dailyMinutes` and every listed mode yields at least one activity — checked by running `js/plan-schedule.js` on the real catalogs (extending.md).
 - **Interactions:** registry files match `metadata/schemas/interactions.schema.json` and content-guide §6 rule 8 (topics exist, `after` headings exist, modules exist, answer indexes valid); each new interaction steps from start to finish without errors.
 - **App:** test through a local static server (architecture §10): every route, every theme (at least one light and one dark), keyboard-only navigation, a 320px-wide viewport, and the browser console free of errors.
 - Report what was verified and what was not. Never claim something works without having checked it.

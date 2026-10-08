@@ -30,6 +30,7 @@ export function renderSidebar(context) {
   const study = el('ul', { class: 'nav-list', 'aria-labelledby': 'nav-h-study' },
     navLink({ target: '#/', label: 'Dashboard', iconName: 'home', active: context.path === '/' }),
     navLink({ target: resume.href, label: 'Continue learning', iconName: 'resume', hint: resume.hint }),
+    navLink({ target: '#/plans', label: 'Study plans', iconName: 'calendar', active: context.path === '/plans' || context.path.startsWith('/plans/') }),
     navLink({ target: '#/lab', label: 'Interactive lab', iconName: 'flask', active: context.path === '/lab' }));
 
   const library = groupedCategories().map(({ group, categories }) => {
@@ -244,6 +245,7 @@ export function initHeaderSearch() {
     const actions = [
       option({ 'data-href': resume.href }, 'Continue learning', resume.hint),
       option({ 'data-href': href([], { s: 'quick-revision' }) }, 'Quick revision', 'Dashboard · revision sheets for every subject'),
+      option({ 'data-href': '#/plans' }, 'Study plans', 'Built-in plans and your own day-by-day plans'),
       option({ 'data-href': '#/bookmarks' }, 'Bookmarks'),
       option({ 'data-href': '#/history' }, 'Recently studied'),
       option({ 'data-action': 'updates' }, "What's new"),

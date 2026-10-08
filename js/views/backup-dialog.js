@@ -41,6 +41,7 @@ function contents(summary) {
     summary.bookmarks && plural(summary.bookmarks, 'bookmark'),
     summary.history && plural(summary.history, 'recently studied page'),
     summary.answers && `${plural(summary.answers, 'recorded answer')} (practice, interview, flashcards, knowledge checks)`,
+    summary.plans && plural(summary.plans, 'study plan'),
   ].filter(Boolean);
 }
 
@@ -209,14 +210,17 @@ function showImport(previousText = '') {
 
 function showConfirm(parsed, text) {
   const current = backup.summarize(backup.currentData());
-  const now = contents(current);
+  // A backup made before study plans existed leaves this browser's plans alone.
+  const keepsPlans = !parsed.summary.plansIncluded && current.plans > 0;
+  const now = contents(keepsPlans ? { ...current, plans: 0 } : current);
   const exported = new Date(parsed.exportedAt).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
   step('Restore StudyHub progress?',
     el('p', { class: 'backup-lead' }, `This backup (exported ${exported}) contains:`),
     contentList(parsed.summary),
     el('div', { class: 'callout callout-warning backup-warning' },
       el('p', {}, el('strong', {}, 'Restoring replaces your current StudyHub progress in this browser. '),
-        now.length ? `It currently has ${now.join(', ')}.` : 'There is no progress here yet.')),
+        now.length ? `It currently has ${now.join(', ')}.` : 'There is no progress here yet.'),
+      keepsPlans ? el('p', {}, `This backup was made before study plans existed, so your ${current.plans === 1 ? 'study plan stays' : `${current.plans} study plans stay`} as they are.`) : null),
     actions(button('Cancel', () => showImport(text), { autofocus: true }), button('Restore', () => doRestore(parsed, text), { primary: true })));
   focusFirst();
 }

@@ -21,6 +21,7 @@ A personal study and interview-preparation platform for aptitude, data structure
 | 2G | Computer Networks content (fundamentals, devices, OSI and TCP/IP, Ethernet and ARP, IP and subnetting, routing, TCP/UDP, HTTP/HTTPS, DNS, DHCP, NAT, security, performance, troubleshooting, end-to-end flows, interview) | Done |
 | 2H | System Design content (foundations, communication and APIs, data and storage, caching, scaling and distribution, consistency and coordination, reliability, messaging, observability, case studies, interview) | Done |
 | 2I | Operating Systems content (fundamentals, processes and threads, CPU scheduling, synchronization, deadlocks, memory management, storage and I/O) | Done |
+| 2J | Interview preparation and study plans: 13 built-in plans (35 difficulty variants) and a custom plan builder | Done |
 
 ## Goals
 
@@ -259,9 +260,9 @@ A static single-page app built from three layers (details: [docs/architecture.md
 |-------|--------------|
 | **Content engine** | Loads metadata, renders Markdown (callouts, highlighted Java/SQL with copy buttons, tables, answers in `<details>`), turns links between topics into in-app links, builds the search index |
 | **Engagement engine** | Places registered interactions inside lessons — knowledge checks, predict-the-output, flashcards, interactive comparisons, step-by-step visualizers and simulations — and turns every `practice.md` / `interview-questions.md` into one-question-at-a-time sessions with auto-checked multiple choice, hints, reveal and self-rating |
-| **Study engine** | Progress (not started / in progress / completed, reading position), bookmarks, recently studied, question results, continue learning — all in `localStorage` |
+| **Study engine** | Progress (not started / in progress / completed, reading position), bookmarks, recently studied, question results, continue learning, study plans — all in `localStorage` |
 
-Views: dashboard (progress, continue learning, subjects, recent, bookmarks, quick revision, 3D knowledge map on wide screens) · subject (modules, Learn · Revision · Quick Revision, practice/interview by module) · module · topic (Lesson · Examples · Interview · Practice · Revision · Flashcards tabs, table of contents, previous/next) · study modes · focused sessions · search · bookmarks · history · interactive lab (every interaction in one place).
+Views: dashboard (progress, continue learning, subjects, recent, bookmarks, quick revision, 3D knowledge map on wide screens) · subject (modules, Learn · Revision · Quick Revision, practice/interview by module) · module · topic (Lesson · Examples · Interview · Practice · Revision · Flashcards tabs, table of contents, previous/next) · study modes · focused sessions · search · bookmarks · history · interactive lab (every interaction in one place) · study plans (built-in plans at Beginner, Intermediate and Advanced level, a custom plan builder over any subjects, modules and topics, and a day-by-day plan page with today's activities, milestones and catch-up).
 
 Keyboard: `/` search · `Ctrl`/`⌘`+`K` quick actions · `←`/`→` previous/next topic (or question in a session) · `?` shortcuts · `Esc` close. The ⋮ header menu holds bookmarks, recently studied, shortcuts, the theme (Light, Dark, Ocean, Purple, Amber, Forest, or match the system) and What's new.
 

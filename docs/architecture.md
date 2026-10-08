@@ -23,7 +23,7 @@ StudyHub
 ├── Engagement engine  interaction registry → knowledge checks, flashcards, comparisons,
 │                      visualizers, simulators; practice / interview sessions
 └── Study engine       localStorage → progress, bookmarks, history, question results,
-                       continue learning
+                       continue learning, study plans
 ```
 
 Content is never modified to suit the app. **Content ≠ interaction:** a lesson stays plain Markdown; the interaction registry references the topic by id and says where in the lesson an interaction appears.
@@ -45,6 +45,8 @@ js/
   storage.js                   namespaced, versioned localStorage wrapper (memory fallback)
   progress.js bookmarks.js history.js activity.js   study state, one key each
   study-engine.js              aggregates: stats, continue learning, recent, bookmarks
+  plan-schedule.js             study plans, pure: stage resolution, filters, items, capacity, day split (§7)
+  plans.js                     study plan records, built-in definitions, plan progress and "today"
   theme.js                     six themes + "match system" (§9)
   backup.js                    progress backup: allowlist, encode/decode, validation, atomic restore
   updates.js                   What's new: loads metadata/updates.json, tracks seen ids and visits
@@ -60,13 +62,15 @@ js/
                                click / arrow keys focus a subject and open its detail panel
   map-focus.js                 search → map bridge ("View in knowledge map"); no Three.js import
   views/                       home, subject (+module), topic, toc, mode, session, lists, common;
-                               layout (sidebar, drawer, header search), menu (header menu + dialogs)
+                               layout (sidebar, drawer, header search), menu (header menu + dialogs);
+                               plans (plans dashboard, built-in preview, plan page), plan-builder
 assets/
   vendor/                      marked 18.0.14, three 0.170.0 (see assets/vendor/README.md)
   icons/                       favicon; subjects/<id>.svg single-colour subject icons (CSS mask)
 metadata/
   categories.json              groups, categories, subcategories, study modes, catalog + interaction file paths
   updates.json                 What's new changelog (newest first)
+  study-plans.json             built-in study plans: stage templates + plans with difficulty variants
   topics/<category>.json       topic catalogs
   interactions/<category>.json interaction registries
   schemas/                     JSON Schemas for all of the above
@@ -93,6 +97,11 @@ Hash routes (GitHub Pages has no fallback for unknown paths). In-page anchors us
 | `#/session/<kind>/topic/<id>`             | Focused session; kind = `practice`, `interview`, `flashcards` |
 | `#/session/<kind>/module/<cat>/<sub>`     | … across a module |
 | `#/session/<kind>/subject/<cat>`          | … across a subject |
+| any session route + `?level=easy,medium`  | Only questions of those difficulties (study plans link this way) |
+| `#/plans`                                 | Study plans: active plan, your other plans, built-in plans |
+| `#/plans/builtin/<plan-id>/<difficulty>`  | A built-in plan at one difficulty: what it covers, Start |
+| `#/plans/new[?from=<plan-id>/<difficulty>]` | Custom plan builder (optionally starting from a built-in plan) |
+| `#/plans/p/<record-id>[/edit]`            | One of your plans (today, milestones, schedule) · edit it |
 | `#/search?q=…&type=…&subject=…&difficulty=…` | Search, results grouped by kind |
 | `#/bookmarks`, `#/history`, `#/lab`       | Bookmarks, recently studied, all interactions |
 | `#/updates`                               | Update history (from `metadata/updates.json`) |
@@ -158,19 +167,32 @@ studyhub:v1:questions   { "<topic-id>": { "<kind>:<item>": { "r": "correct|incor
 studyhub:v1:theme       "system" | "light" | "dark" | "ocean" | "purple" | "amber" | "forest"
 studyhub:v1:prefs       { "questionView": "session|all", "sidebarCollapsed": bool }
 studyhub:v1:updates     { "seen": [ "<update-id>", … ], "previousVisit": ISO, "currentVisit": ISO }
+studyhub:v1:plans       { "active": "<record-id>" | null, "plans": [ record, … ] }   max 30 records (see Study plans)
 ```
 
 On the first run of `updates`, entries older than the newest history entry (or all of them, for a brand-new browser) count as seen, so nobody is greeted with the whole changelog. A gap of 30 minutes or more starts a new visit; "Last visit" in What's new is `previousVisit`.
 
 Question keys use the content's append-only ids (`P3`, `Q7`), so results stay valid as content grows. A breaking format change must bump `v1` and migrate.
 
+### Study plans
+
+Two kinds of plan, one record format (`js/plans.js`), scheduled by the same pure functions (`js/plan-schedule.js`, also runnable in Node):
+
+- **Built-in plans** live in `metadata/study-plans.json` (schema `study-plans.schema.json`). `stages` are reusable templates — each names subjects, modules (subcategory ids) or topic ids and is one milestone. A plan has up to three `variants` (one per difficulty); each lists stage ids plus `topicLevels` (lesson difficulty kept), `questionLevels`, `modes`, `revision` (full or quick sheets), `durationDays` and `dailyMinutes`. Variants differ in topics, question levels, modes and workload. Topics are resolved against the catalogs at run time, so a plan can only contain topics that exist; it never holds lesson or question text. `defaults.modeMinutes` gives the planning time of non-lesson activities (Learn uses the topic's `estimatedMinutes`; Revision uses the study mode's `estimatedMinutes` when set).
+- **Custom plans** are made in the builder (`#/plans/new`): a Subject → Module → Topic checkbox tree (tri-state parents; module and topic rows are built when expanded; only metadata is read), lesson level and question difficulty filters, duration (7/14/30/60/custom days), daily time (15/30/45/60/120/custom minutes), start date, study modes and options.
+- **Record** (`studyhub:v1:plans`): `id`, `kind` (`builtin` + `plan`/`variant`, or `custom`, optional `basedOn`), `title`, `created`, `updated`, `start` (YYYY-MM-DD), `settings` { durationDays, dailyMinutes, topicLevels, questionLevels, modes, revision, skipCompleted, prioritizeWeak, overload }, `topics` (the chosen scope, before filters), `milestones` [{ title, topics }], `minutes` (planning minutes used), `days` (one array of item keys per day) and `done` { key: ISO }. Item keys reference content only by id: `learn|interactive|practice|interview|flashcards:<topic-id>`, `revision:<category>/<mode-id>`. Starting a built-in plan copies only ids and settings; the definition is never changed.
+- **Generation** (deterministic): scope → `planTopics` (lesson level filter, optional *skip completed* from `progress`, optional *weak areas first* from `study-engine.needsAttention()` — at least 3 recorded answers and under 60% right; nothing is guessed) → `buildItems` (one item per topic and available mode: Practice needs `practice.md`, Interview and Flashcards need `interview-questions.md`, Interactive needs an interaction in the registry; one Revision item per subject, after its last topic) → `schedule` (days fill in order up to the daily time; an item moves to the next day when at least half of it would not fit; never more days than the duration). `capacity` compares the work with the schedule; when it does not fit, the builder offers *Extend duration*, *Increase daily time*, *Reduce topics* or *Continue anyway* (days then hold total ÷ days).
+- **Progress inside a plan:** a Learn item is done exactly when the topic is completed in `studyhub:v1:progress` — wherever that happened — and ticking it in the plan completes the lesson. Other items are ticked in the plan (`done`). Today = days since `start` + 1; earlier unfinished items are listed under *Catch up*. Items whose topic or study mode no longer exists are skipped, never shown as errors.
+- **Links:** Learn → `#/t/<id>`, Interactive → the lesson at its first exercise (`?s=try-<interaction-id>`), Practice / Interview / Flashcards → the existing session routes with `?level=` when not every difficulty is chosen, Revision → `#/c/<category>/m/<mode-id>`. The session's level filter uses a question's own `**Difficulty:**` line, else its `## Beginner|Intermediate|Advanced` section, else the topic's difficulty (beginner = easy, intermediate = medium, advanced = hard).
+- **Editing** (`#/plans/p/<id>/edit`): change topics (tree, reorder, remove), filters, schedule or modes and rebuild; finished items stay finished. On the plan page items can be ticked and moved to another day without a rebuild, and the schedule can restart from today.
+
 ### Progress Import / Export (clipboard backup)
 
 StudyHub is static: progress exists only in the browser that recorded it. **Menu → Progress Import / Export** moves it between browsers or devices through the clipboard (`js/backup.js`, dialog in `js/views/backup-dialog.js`). Nothing is uploaded and there are no files.
 
-- **Exported:** exactly the allowlist `progress`, `bookmarks`, `history`, `questions`. Not exported: `theme`, `prefs` (appearance and layout belong to each browser), `updates` (per-browser What's new state), and any key outside `studyhub:v1:`.
+- **Exported:** exactly the allowlist `progress`, `bookmarks`, `history`, `questions`, `plans`. Not exported: `theme`, `prefs` (appearance and layout belong to each browser), `updates` (per-browser What's new state), and any key outside `studyhub:v1:`.
 - **Format:** one line, `STUDYHUB-PROGRESS:v1:z.<base64url>` — deflate-raw compressed JSON `{ format: "studyhub-progress", version: 1, exportedAt, data }` (`j.` = uncompressed JSON, used where `CompressionStream` is missing). The version appears in the prefix and in the JSON; a backup with any other version is refused with a clear message, so a future v2 can add migration.
-- **Import:** the pasted text is decoded and every entry is type-checked against the shapes above (ids, statuses, dates, result values; unknown keys rejected, objects rebuilt from known fields) *before* anything is written. After a confirmation listing what the backup contains, the four keys are **replaced** in one step by `storage.writeAll()`, which restores the previous values if any write fails. Views re-render on the `studyhub:restored` event.
+- **Import:** the pasted text is decoded and every entry is type-checked against the shapes above (ids, statuses, dates, result values; unknown keys rejected, objects rebuilt from known fields) *before* anything is written. After a confirmation listing what the backup contains, the keys are **replaced** in one step by `storage.writeAll()`, which restores the previous values if any write fails. Views re-render on the `studyhub:restored` event. `plans` was added later: a backup without it (made before study plans existed) still imports, and leaves this browser's plans untouched; plan records are checked field by field (ids, item keys, settings ranges, day count = duration, at most 30 plans and 365 days).
 - **Adding a new kind of persistent learner state:** add its key to `ALLOWLIST` with a validator in `js/backup.js`, or it will not travel with backups.
 
 ## 8. Third-party code

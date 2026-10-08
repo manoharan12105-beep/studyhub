@@ -3,6 +3,14 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-08-study-plans",
+      "date": "2026-10-08",
+      "title": "Study plans",
+      "description": "13 built-in study plans in 35 Beginner, Intermediate and Advanced variants, plus a custom plan builder for any subjects, modules or topics, with day-by-day schedules that count the progress you already have and question sessions filtered by difficulty.",
+      "type": "improvement",
+      "link": "#/plans"
+    },
+    {
       "id": "2026-10-07-operating-systems",
       "date": "2026-10-07",
       "title": "Operating Systems",

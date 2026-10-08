@@ -1,0 +1,1711 @@
+{
+  "$schema": "./schemas/study-plans.schema.json",
+  "schemaVersion": 1,
+  "defaults": {
+    "modeMinutes": {
+      "learn": 30,
+      "interactive": 10,
+      "practice": 15,
+      "interview": 10,
+      "flashcards": 5,
+      "revision": 60
+    }
+  },
+  "stages": {
+    "apt-quant": {
+      "title": "Quantitative aptitude",
+      "include": [
+        {
+          "subject": "aptitude",
+          "modules": [
+            "quantitative-aptitude"
+          ]
+        }
+      ]
+    },
+    "apt-logical": {
+      "title": "Logical reasoning",
+      "include": [
+        {
+          "subject": "aptitude",
+          "modules": [
+            "logical-reasoning"
+          ]
+        }
+      ]
+    },
+    "apt-verbal": {
+      "title": "Verbal ability",
+      "include": [
+        {
+          "subject": "aptitude",
+          "modules": [
+            "verbal-ability"
+          ]
+        }
+      ]
+    },
+    "dsa-foundations": {
+      "title": "DSA foundations",
+      "include": [
+        {
+          "subject": "dsa",
+          "modules": [
+            "fundamentals",
+            "problem-solving"
+          ]
+        }
+      ]
+    },
+    "dsa-structures": {
+      "title": "Data structures",
+      "include": [
+        {
+          "subject": "dsa",
+          "modules": [
+            "data-structures"
+          ]
+        }
+      ]
+    },
+    "dsa-algorithms": {
+      "title": "Algorithms",
+      "include": [
+        {
+          "subject": "dsa",
+          "modules": [
+            "algorithms"
+          ]
+        }
+      ]
+    },
+    "dsa-patterns": {
+      "title": "Problem-solving patterns",
+      "include": [
+        {
+          "subject": "dsa",
+          "modules": [
+            "patterns"
+          ]
+        }
+      ]
+    },
+    "dsa-interview": {
+      "title": "DSA interview",
+      "include": [
+        {
+          "subject": "dsa",
+          "modules": [
+            "interview"
+          ]
+        }
+      ]
+    },
+    "oop-core": {
+      "title": "OOP and Java fundamentals",
+      "include": [
+        {
+          "subject": "oop",
+          "modules": [
+            "fundamentals",
+            "pillars",
+            "relationships",
+            "java-oop"
+          ]
+        }
+      ]
+    },
+    "oop-design": {
+      "title": "Object-oriented design",
+      "include": [
+        {
+          "subject": "oop",
+          "modules": [
+            "applied-oop",
+            "design-principles",
+            "object-oriented-design",
+            "code-quality"
+          ]
+        }
+      ]
+    },
+    "oop-patterns": {
+      "title": "Design patterns and problems",
+      "include": [
+        {
+          "subject": "oop",
+          "modules": [
+            "design-patterns",
+            "design-problems"
+          ]
+        }
+      ]
+    },
+    "oop-interview": {
+      "title": "OOP interview",
+      "include": [
+        {
+          "subject": "oop",
+          "modules": [
+            "interview"
+          ]
+        }
+      ]
+    },
+    "sql-core": {
+      "title": "SQL fundamentals",
+      "include": [
+        {
+          "subject": "dbms-postgresql",
+          "modules": [
+            "dbms-fundamentals",
+            "relational-model",
+            "sql-fundamentals",
+            "null-and-conditional-logic",
+            "joins",
+            "subqueries",
+            "aggregation-and-grouping",
+            "set-operations"
+          ]
+        }
+      ]
+    },
+    "sql-advanced": {
+      "title": "Advanced SQL and PostgreSQL",
+      "include": [
+        {
+          "subject": "dbms-postgresql",
+          "modules": [
+            "ctes",
+            "window-functions",
+            "postgresql-data-types",
+            "postgresql-features",
+            "views-and-materialized-views",
+            "temp-tables",
+            "functions-procedures-triggers",
+            "sql-problem-solving"
+          ]
+        }
+      ]
+    },
+    "db-design": {
+      "title": "Database design",
+      "include": [
+        {
+          "subject": "dbms-postgresql",
+          "modules": [
+            "database-design",
+            "normalization"
+          ]
+        }
+      ]
+    },
+    "db-internals": {
+      "title": "Transactions, indexing and performance",
+      "include": [
+        {
+          "subject": "dbms-postgresql",
+          "modules": [
+            "transactions",
+            "concurrency-and-mvcc",
+            "indexing",
+            "query-optimization",
+            "security-and-permissions",
+            "partitioning",
+            "debugging"
+          ]
+        }
+      ]
+    },
+    "db-interview": {
+      "title": "DBMS interview",
+      "include": [
+        {
+          "subject": "dbms-postgresql",
+          "modules": [
+            "interview"
+          ]
+        }
+      ]
+    },
+    "os-core": {
+      "title": "Operating systems",
+      "include": [
+        {
+          "subject": "operating-systems"
+        }
+      ]
+    },
+    "cn-core": {
+      "title": "Networking foundations",
+      "include": [
+        {
+          "subject": "computer-networks",
+          "modules": [
+            "network-fundamentals",
+            "network-devices",
+            "osi-model",
+            "tcp-ip-model",
+            "physical-and-data-link",
+            "arp-and-local-delivery",
+            "ip-addressing",
+            "subnetting",
+            "routing"
+          ]
+        }
+      ]
+    },
+    "cn-protocols": {
+      "title": "Transport and application protocols",
+      "include": [
+        {
+          "subject": "computer-networks",
+          "modules": [
+            "transport-layer",
+            "flow-and-congestion-control",
+            "application-layer",
+            "http",
+            "https-and-tls",
+            "dns",
+            "dhcp",
+            "nat"
+          ]
+        }
+      ]
+    },
+    "cn-operations": {
+      "title": "Network security, performance and troubleshooting",
+      "include": [
+        {
+          "subject": "computer-networks",
+          "modules": [
+            "network-security",
+            "performance",
+            "troubleshooting",
+            "end-to-end-flows"
+          ]
+        }
+      ]
+    },
+    "cn-interview": {
+      "title": "Networks interview",
+      "include": [
+        {
+          "subject": "computer-networks",
+          "modules": [
+            "interview"
+          ]
+        }
+      ]
+    },
+    "linux-core": {
+      "title": "Linux essentials",
+      "include": [
+        {
+          "subject": "linux",
+          "modules": [
+            "linux-fundamentals",
+            "filesystem",
+            "basic-commands",
+            "redirection-and-pipes",
+            "text-processing",
+            "permissions",
+            "users-and-groups",
+            "processes"
+          ]
+        }
+      ]
+    },
+    "linux-scripting": {
+      "title": "Shell scripting",
+      "include": [
+        {
+          "subject": "linux",
+          "modules": [
+            "shell-and-bash",
+            "bash-scripting",
+            "find-sed-awk"
+          ]
+        }
+      ]
+    },
+    "linux-admin": {
+      "title": "Linux administration",
+      "include": [
+        {
+          "subject": "linux",
+          "modules": [
+            "archives-and-packages",
+            "networking",
+            "storage",
+            "system-management",
+            "remote-access",
+            "troubleshooting"
+          ]
+        }
+      ]
+    },
+    "linux-interview": {
+      "title": "Linux interview",
+      "include": [
+        {
+          "subject": "linux",
+          "modules": [
+            "interview"
+          ]
+        }
+      ]
+    },
+    "sb-core": {
+      "title": "Spring and Spring Boot core",
+      "include": [
+        {
+          "subject": "spring-boot",
+          "modules": [
+            "fundamentals",
+            "dependency-injection",
+            "spring-boot-core"
+          ]
+        }
+      ]
+    },
+    "sb-web": {
+      "title": "Web layer and REST APIs",
+      "include": [
+        {
+          "subject": "spring-boot",
+          "modules": [
+            "spring-mvc",
+            "rest",
+            "validation",
+            "exception-handling"
+          ]
+        }
+      ]
+    },
+    "sb-data": {
+      "title": "Data access and transactions",
+      "include": [
+        {
+          "subject": "spring-boot",
+          "modules": [
+            "jpa-hibernate",
+            "transactions"
+          ]
+        }
+      ]
+    },
+    "sb-security": {
+      "title": "Spring Security",
+      "include": [
+        {
+          "subject": "spring-boot",
+          "modules": [
+            "security",
+            "web-security"
+          ]
+        }
+      ]
+    },
+    "sb-production": {
+      "title": "Production, advanced topics and debugging",
+      "include": [
+        {
+          "subject": "spring-boot",
+          "modules": [
+            "production",
+            "advanced",
+            "debugging"
+          ]
+        }
+      ]
+    },
+    "sb-interview": {
+      "title": "Spring Boot interview",
+      "include": [
+        {
+          "subject": "spring-boot",
+          "modules": [
+            "interview"
+          ]
+        }
+      ]
+    },
+    "sd-foundations": {
+      "title": "System design foundations",
+      "include": [
+        {
+          "subject": "system-design",
+          "modules": [
+            "foundations",
+            "communication"
+          ]
+        }
+      ]
+    },
+    "sd-data": {
+      "title": "Data, storage and caching",
+      "include": [
+        {
+          "subject": "system-design",
+          "modules": [
+            "data-and-storage",
+            "caching"
+          ]
+        }
+      ]
+    },
+    "sd-scale": {
+      "title": "Scaling, consistency and reliability",
+      "include": [
+        {
+          "subject": "system-design",
+          "modules": [
+            "scaling-and-distribution",
+            "consistency-and-coordination",
+            "reliability",
+            "messaging",
+            "observability"
+          ]
+        }
+      ]
+    },
+    "sd-cases": {
+      "title": "Case studies",
+      "include": [
+        {
+          "subject": "system-design",
+          "modules": [
+            "case-studies"
+          ]
+        }
+      ]
+    },
+    "sd-interview": {
+      "title": "System design interview",
+      "include": [
+        {
+          "subject": "system-design",
+          "modules": [
+            "interview"
+          ]
+        }
+      ]
+    }
+  },
+  "plans": [
+    {
+      "id": "complete-placement",
+      "title": "Complete Placement Preparation",
+      "description": "Aptitude, data structures and algorithms, OOP, SQL and core CS in one ordered path for campus placements.",
+      "category": "placement",
+      "order": 1,
+      "targetAudience": "Students preparing for campus placements from the first aptitude round to the technical interviews.",
+      "prerequisites": [
+        "Basic Java syntax: variables, loops, methods and arrays"
+      ],
+      "variants": [
+        {
+          "difficulty": "beginner",
+          "summary": "Beginner lessons only, with interactive exercises and easy-to-medium practice.",
+          "durationDays": 60,
+          "dailyMinutes": 120,
+          "topicLevels": [
+            "beginner"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "apt-quant",
+            "apt-logical",
+            "apt-verbal",
+            "dsa-foundations",
+            "dsa-structures",
+            "dsa-algorithms",
+            "oop-core",
+            "sql-core",
+            "os-core",
+            "cn-core"
+          ]
+        },
+        {
+          "difficulty": "intermediate",
+          "summary": "Beginner and intermediate lessons, patterns, database design and the interview modules, with practice at every level.",
+          "durationDays": 120,
+          "dailyMinutes": 180,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "apt-quant",
+            "apt-logical",
+            "apt-verbal",
+            "dsa-foundations",
+            "dsa-structures",
+            "dsa-algorithms",
+            "dsa-patterns",
+            "oop-core",
+            "oop-design",
+            "sql-core",
+            "db-design",
+            "os-core",
+            "cn-core",
+            "cn-protocols",
+            "dsa-interview",
+            "oop-interview",
+            "db-interview"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "Intermediate and advanced lessons only, adds design patterns, database internals and system design, with medium-to-hard questions and flashcards.",
+          "durationDays": 90,
+          "dailyMinutes": 180,
+          "topicLevels": [
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "flashcards",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "apt-quant",
+            "apt-logical",
+            "dsa-structures",
+            "dsa-algorithms",
+            "dsa-patterns",
+            "oop-design",
+            "oop-patterns",
+            "sql-advanced",
+            "db-internals",
+            "os-core",
+            "cn-protocols",
+            "sd-foundations",
+            "sd-data",
+            "dsa-interview",
+            "oop-interview",
+            "db-interview",
+            "sd-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "placement-30-day",
+      "title": "30-Day Placement Sprint",
+      "description": "A fixed 30-day schedule covering the highest-yield placement subjects for your level.",
+      "category": "placement",
+      "order": 2,
+      "targetAudience": "Students with about a month before placement season.",
+      "prerequisites": [
+        "Basic Java syntax: variables, loops, methods and arrays"
+      ],
+      "variants": [
+        {
+          "difficulty": "beginner",
+          "summary": "Beginner aptitude, DSA foundations and data structures, OOP basics and SQL fundamentals.",
+          "durationDays": 30,
+          "dailyMinutes": 120,
+          "topicLevels": [
+            "beginner"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "apt-quant",
+            "apt-logical",
+            "dsa-foundations",
+            "dsa-structures",
+            "oop-core",
+            "sql-core"
+          ]
+        },
+        {
+          "difficulty": "intermediate",
+          "summary": "Quantitative aptitude, data structures, OOP and SQL fundamentals up to intermediate level.",
+          "durationDays": 30,
+          "dailyMinutes": 180,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "apt-quant",
+            "dsa-structures",
+            "oop-core",
+            "sql-core"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "No lessons: practice and interview questions on intermediate and advanced topics, then quick revision.",
+          "durationDays": 30,
+          "dailyMinutes": 120,
+          "topicLevels": [
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "practice",
+            "interview",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "dsa-algorithms",
+            "dsa-patterns",
+            "oop-design",
+            "sql-advanced",
+            "db-internals",
+            "os-core",
+            "cn-protocols",
+            "dsa-interview",
+            "oop-interview",
+            "db-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crash-7-day",
+      "title": "7-Day Interview Crash Course",
+      "description": "One week of interview questions and quick revision for learners who have already studied the material.",
+      "category": "interview",
+      "order": 3,
+      "targetAudience": "Learners with an interview within a week who need recall, not new lessons.",
+      "prerequisites": [
+        "You have already studied the subjects in the plan"
+      ],
+      "variants": [
+        {
+          "difficulty": "intermediate",
+          "summary": "Interview questions on core OOP, SQL and operating systems topics, then quick revision.",
+          "durationDays": 7,
+          "dailyMinutes": 180,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "interview",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "oop-core",
+            "sql-core",
+            "os-core"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "Interview questions and flashcards from the interview modules of DSA, OOP, DBMS, networks, Spring Boot and system design, then quick revision.",
+          "durationDays": 7,
+          "dailyMinutes": 180,
+          "topicLevels": [
+            "beginner",
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "interview",
+            "flashcards",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "dsa-interview",
+            "oop-interview",
+            "db-interview",
+            "cn-interview",
+            "sb-interview",
+            "sd-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "core-cs",
+      "title": "Core Computer Science",
+      "description": "OOP, databases, operating systems and computer networks: the core subjects asked in technical rounds.",
+      "category": "subject",
+      "order": 4,
+      "targetAudience": "Learners who want the core CS fundamentals behind technical interviews.",
+      "prerequisites": [
+        "Basic Java syntax for the OOP examples"
+      ],
+      "variants": [
+        {
+          "difficulty": "beginner",
+          "summary": "Beginner lessons in OOP, SQL, operating systems and networking, with interactive exercises.",
+          "durationDays": 45,
+          "dailyMinutes": 75,
+          "topicLevels": [
+            "beginner"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "oop-core",
+            "sql-core",
+            "os-core",
+            "cn-core"
+          ]
+        },
+        {
+          "difficulty": "intermediate",
+          "summary": "Adds object-oriented design, database design and internals, and transport and application protocols.",
+          "durationDays": 90,
+          "dailyMinutes": 120,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "oop-core",
+            "oop-design",
+            "sql-core",
+            "db-design",
+            "db-internals",
+            "os-core",
+            "cn-core",
+            "cn-protocols"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "Intermediate and advanced topics only, network operations, the interview modules and flashcards.",
+          "durationDays": 45,
+          "dailyMinutes": 150,
+          "topicLevels": [
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "flashcards",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "oop-design",
+            "db-design",
+            "db-internals",
+            "os-core",
+            "cn-protocols",
+            "cn-operations",
+            "oop-interview",
+            "db-interview",
+            "cn-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "java-backend",
+      "title": "Java Backend Developer",
+      "description": "OOP in Java, SQL with PostgreSQL, Spring Boot, Linux and the networking a backend developer uses every day.",
+      "category": "role",
+      "order": 5,
+      "targetAudience": "Learners preparing for Java backend developer roles.",
+      "prerequisites": [
+        "Basic Java syntax: variables, loops, methods, classes"
+      ],
+      "variants": [
+        {
+          "difficulty": "beginner",
+          "summary": "Beginner OOP, SQL, Spring Boot core, web and data layers, and Linux essentials.",
+          "durationDays": 45,
+          "dailyMinutes": 90,
+          "topicLevels": [
+            "beginner"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "oop-core",
+            "sql-core",
+            "sb-core",
+            "sb-web",
+            "sb-data",
+            "linux-core"
+          ]
+        },
+        {
+          "difficulty": "intermediate",
+          "summary": "Adds object-oriented design, database design, Spring Security, shell scripting and HTTP, DNS and TLS.",
+          "durationDays": 90,
+          "dailyMinutes": 120,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "oop-core",
+            "oop-design",
+            "sql-core",
+            "db-design",
+            "sb-core",
+            "sb-web",
+            "sb-data",
+            "sb-security",
+            "linux-core",
+            "linux-scripting",
+            "cn-protocols"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "Design patterns, database internals, Spring in production, Linux administration and system design for scale, at intermediate and advanced level.",
+          "durationDays": 60,
+          "dailyMinutes": 150,
+          "topicLevels": [
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "flashcards",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "oop-patterns",
+            "db-internals",
+            "sb-data",
+            "sb-security",
+            "sb-production",
+            "linux-admin",
+            "sd-data",
+            "sd-scale",
+            "sb-interview",
+            "db-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dsa-interview",
+      "title": "DSA Interview Preparation",
+      "description": "Data structures, algorithms and problem-solving patterns in Java, ordered from foundations to interview problems.",
+      "category": "subject",
+      "order": 6,
+      "targetAudience": "Learners preparing for coding rounds.",
+      "prerequisites": [
+        "Basic Java syntax: variables, loops, methods and arrays"
+      ],
+      "variants": [
+        {
+          "difficulty": "beginner",
+          "summary": "Beginner lessons with visualizers and easy-to-medium practice.",
+          "durationDays": 30,
+          "dailyMinutes": 60,
+          "topicLevels": [
+            "beginner"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "dsa-foundations",
+            "dsa-structures",
+            "dsa-algorithms",
+            "dsa-patterns"
+          ]
+        },
+        {
+          "difficulty": "intermediate",
+          "summary": "Beginner and intermediate lessons, the DSA interview module and practice at every level.",
+          "durationDays": 45,
+          "dailyMinutes": 120,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "dsa-foundations",
+            "dsa-structures",
+            "dsa-algorithms",
+            "dsa-patterns",
+            "dsa-interview"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "Intermediate and advanced lessons only, medium-to-hard practice and interview questions.",
+          "durationDays": 30,
+          "dailyMinutes": 150,
+          "topicLevels": [
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "dsa-structures",
+            "dsa-algorithms",
+            "dsa-patterns",
+            "dsa-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sql-dbms",
+      "title": "SQL and DBMS",
+      "description": "SQL on PostgreSQL, database design, transactions, indexing and query performance.",
+      "category": "subject",
+      "order": 7,
+      "targetAudience": "Learners preparing for SQL rounds and DBMS interview questions.",
+      "prerequisites": [],
+      "variants": [
+        {
+          "difficulty": "beginner",
+          "summary": "Beginner SQL, design and transaction lessons with interactive exercises.",
+          "durationDays": 21,
+          "dailyMinutes": 60,
+          "topicLevels": [
+            "beginner"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "sql-core",
+            "sql-advanced",
+            "db-design",
+            "db-internals"
+          ]
+        },
+        {
+          "difficulty": "intermediate",
+          "summary": "Adds window functions, CTEs, normalization, MVCC and indexing, plus the DBMS interview module.",
+          "durationDays": 45,
+          "dailyMinutes": 90,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "sql-core",
+            "sql-advanced",
+            "db-design",
+            "db-internals",
+            "db-interview"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "Intermediate and advanced topics only, with medium-to-hard questions and flashcards.",
+          "durationDays": 30,
+          "dailyMinutes": 120,
+          "topicLevels": [
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "flashcards",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "sql-advanced",
+            "db-design",
+            "db-internals",
+            "db-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "spring-boot",
+      "title": "Spring Boot",
+      "description": "Spring Boot 4.1 from dependency injection to REST APIs, JPA, security and production.",
+      "category": "subject",
+      "order": 8,
+      "targetAudience": "Java developers learning Spring Boot for backend roles.",
+      "prerequisites": [
+        "Java classes, interfaces and collections",
+        "Basic SQL"
+      ],
+      "variants": [
+        {
+          "difficulty": "beginner",
+          "summary": "Beginner lessons across the core, web, data, security and production modules.",
+          "durationDays": 21,
+          "dailyMinutes": 60,
+          "topicLevels": [
+            "beginner"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "sb-core",
+            "sb-web",
+            "sb-data",
+            "sb-security",
+            "sb-production"
+          ]
+        },
+        {
+          "difficulty": "intermediate",
+          "summary": "Beginner and intermediate lessons with interview questions and the Spring Boot interview module.",
+          "durationDays": 30,
+          "dailyMinutes": 150,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "sb-core",
+            "sb-web",
+            "sb-data",
+            "sb-security",
+            "sb-production",
+            "sb-interview"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "JPA, transactions, security, production and debugging at intermediate and advanced level, with flashcards.",
+          "durationDays": 30,
+          "dailyMinutes": 90,
+          "topicLevels": [
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "flashcards",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "sb-data",
+            "sb-security",
+            "sb-production",
+            "sb-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-design",
+      "title": "System Design",
+      "description": "Requirements and estimation, storage, caching, scaling, consistency, reliability, messaging and case studies.",
+      "category": "subject",
+      "order": 9,
+      "targetAudience": "Learners preparing for system design rounds.",
+      "prerequisites": [
+        "Basic networking: HTTP and DNS",
+        "Basic SQL"
+      ],
+      "variants": [
+        {
+          "difficulty": "beginner",
+          "summary": "Beginner lessons with the interactive simulations and practice.",
+          "durationDays": 21,
+          "dailyMinutes": 45,
+          "topicLevels": [
+            "beginner"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "sd-foundations",
+            "sd-data",
+            "sd-scale"
+          ]
+        },
+        {
+          "difficulty": "intermediate",
+          "summary": "Beginner and intermediate lessons, case studies and the interview module, with simulations.",
+          "durationDays": 30,
+          "dailyMinutes": 120,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "interview",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "sd-foundations",
+            "sd-data",
+            "sd-scale",
+            "sd-cases",
+            "sd-interview"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "Intermediate and advanced topics only, case studies and the interview module, with flashcards.",
+          "durationDays": 21,
+          "dailyMinutes": 150,
+          "topicLevels": [
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "flashcards",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "sd-data",
+            "sd-scale",
+            "sd-cases",
+            "sd-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "technical-interview",
+      "title": "Technical Interview Readiness",
+      "description": "The interview module of every subject: DSA, OOP, DBMS, networks, Linux, Spring Boot and system design.",
+      "category": "interview",
+      "order": 10,
+      "targetAudience": "Learners who have covered the subjects and want interview-style answers across all of them.",
+      "prerequisites": [
+        "You have studied the subjects these interview modules draw on"
+      ],
+      "variants": [
+        {
+          "difficulty": "intermediate",
+          "summary": "Beginner and intermediate interview lessons with their interview questions.",
+          "durationDays": 14,
+          "dailyMinutes": 180,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "interview",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "dsa-interview",
+            "oop-interview",
+            "db-interview",
+            "cn-interview",
+            "linux-interview",
+            "sb-interview",
+            "sd-interview"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "Every interview lesson including the advanced ones, medium-to-hard questions and flashcards.",
+          "durationDays": 21,
+          "dailyMinutes": 150,
+          "topicLevels": [
+            "beginner",
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "interview",
+            "flashcards",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "dsa-interview",
+            "oop-interview",
+            "db-interview",
+            "cn-interview",
+            "linux-interview",
+            "sb-interview",
+            "sd-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "service-based",
+      "title": "Service-Based Company Preparation",
+      "description": "Aptitude first, then programming fundamentals, OOP, SQL and core CS basics, the usual pattern of service-company drives.",
+      "category": "placement",
+      "order": 11,
+      "targetAudience": "Students preparing for mass-recruitment drives with an aptitude round and a technical interview.",
+      "prerequisites": [
+        "Basic Java syntax: variables, loops, methods and arrays"
+      ],
+      "variants": [
+        {
+          "difficulty": "beginner",
+          "summary": "Beginner lessons in all three aptitude sections, DSA foundations, OOP, SQL, operating systems and networks.",
+          "durationDays": 60,
+          "dailyMinutes": 100,
+          "topicLevels": [
+            "beginner"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "apt-quant",
+            "apt-logical",
+            "apt-verbal",
+            "dsa-foundations",
+            "dsa-structures",
+            "oop-core",
+            "sql-core",
+            "os-core",
+            "cn-core"
+          ]
+        },
+        {
+          "difficulty": "intermediate",
+          "summary": "Aptitude up to intermediate level, data structures, OOP, SQL and core CS, plus the OOP and DBMS interview modules.",
+          "durationDays": 90,
+          "dailyMinutes": 150,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "apt-quant",
+            "apt-logical",
+            "apt-verbal",
+            "dsa-structures",
+            "oop-core",
+            "sql-core",
+            "os-core",
+            "cn-core",
+            "oop-interview",
+            "db-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "product-based",
+      "title": "Product-Based Company Preparation",
+      "description": "Deep DSA and problem-solving patterns, then design, operating systems and system design for product-company interviews.",
+      "category": "placement",
+      "order": 12,
+      "targetAudience": "Learners targeting coding-heavy interviews with a design round.",
+      "prerequisites": [
+        "Comfortable writing Java programs",
+        "Basic data structures: arrays, lists, maps"
+      ],
+      "variants": [
+        {
+          "difficulty": "intermediate",
+          "summary": "All DSA up to intermediate level with the interview module, object-oriented design, database internals, OS and system design basics.",
+          "durationDays": 75,
+          "dailyMinutes": 150,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "dsa-foundations",
+            "dsa-structures",
+            "dsa-algorithms",
+            "dsa-patterns",
+            "dsa-interview",
+            "oop-design",
+            "db-internals",
+            "os-core",
+            "sd-foundations",
+            "sd-data"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "Intermediate and advanced algorithms and patterns, design patterns, and system design through the case studies.",
+          "durationDays": 60,
+          "dailyMinutes": 180,
+          "topicLevels": [
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "flashcards",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "dsa-algorithms",
+            "dsa-patterns",
+            "dsa-interview",
+            "oop-patterns",
+            "db-internals",
+            "os-core",
+            "sd-data",
+            "sd-scale",
+            "sd-cases",
+            "sd-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aptitude-test",
+      "title": "Aptitude Test Preparation",
+      "description": "Quantitative aptitude, logical reasoning and verbal ability for placement and recruitment tests.",
+      "category": "subject",
+      "order": 13,
+      "targetAudience": "Students preparing for online aptitude tests.",
+      "prerequisites": [
+        "School-level arithmetic"
+      ],
+      "variants": [
+        {
+          "difficulty": "beginner",
+          "summary": "Beginner lessons in all three sections with interactive exercises and easy-to-medium practice.",
+          "durationDays": 21,
+          "dailyMinutes": 75,
+          "topicLevels": [
+            "beginner"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "apt-quant",
+            "apt-logical",
+            "apt-verbal"
+          ]
+        },
+        {
+          "difficulty": "intermediate",
+          "summary": "Beginner and intermediate lessons with practice at every level.",
+          "durationDays": 45,
+          "dailyMinutes": 100,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "apt-quant",
+            "apt-logical",
+            "apt-verbal"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "No lessons: medium-to-hard practice on intermediate and advanced topics, then the quick revision sheet.",
+          "durationDays": 14,
+          "dailyMinutes": 45,
+          "topicLevels": [
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "practice",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "apt-quant",
+            "apt-logical",
+            "apt-verbal"
+          ]
+        }
+      ]
+    }
+  ]
+}

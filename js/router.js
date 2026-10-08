@@ -9,6 +9,11 @@
 //   #/session/<kind>/topic/<topic-id>    focused practice / interview / flashcards
 //   #/session/<kind>/module/<cat>/<sub>
 //   #/session/<kind>/subject/<cat>
+//     (+ ?level=easy,medium keeps only questions of those difficulties)
+//   #/plans                              study plans dashboard
+//   #/plans/builtin/<plan-id>/<level>    built-in plan at one difficulty
+//   #/plans/new[?from=<plan-id>/<level>] custom plan builder
+//   #/plans/p/<record-id>[/edit]         one of your plans · edit it
 //   #/search?q=…   #/bookmarks   #/history   #/lab
 //
 // Query parameter `s` scrolls to a heading id inside the page (in-page anchors

@@ -22,6 +22,8 @@ import { renderTopic, scrollToAnchor } from './js/views/topic.js';
 import { renderMode } from './js/views/mode.js';
 import { renderSession } from './js/views/session.js';
 import { renderSearch, renderBookmarks, renderHistory, renderLab, renderUpdates } from './js/views/lists.js';
+import { renderPlans, renderBuiltin, renderPlan } from './js/views/plans.js';
+import { renderBuilder } from './js/views/plan-builder.js';
 import { errorState } from './js/views/common.js';
 
 const main = document.getElementById('main');
@@ -94,10 +96,16 @@ async function onRoute(route, { sameView }) {
       Object.assign(context, { topicId: a, categoryId: topic?.category, subId: topic?.subcategory });
       result = await renderTopic(main, { topicId: a, tab: b || 'lesson', anchor, isCurrent });
     } else if (first === 'session' && a) {
-      result = await renderSession(main, { kind: a, scope: route.segments.slice(2), isCurrent });
+      result = await renderSession(main, { kind: a, scope: route.segments.slice(2), query: route.query, isCurrent });
       const scope = route.segments.slice(2);
       if (scope[0] === 'topic') Object.assign(context, { categoryId: getTopic(scope[1])?.category });
       else Object.assign(context, { categoryId: scope[1], subId: scope[0] === 'module' ? scope[2] : undefined });
+    } else if (first === 'plans' && isPlansRoute(route.segments)) {
+      if (!a) result = await renderPlans(main, { isCurrent });
+      else if (a === 'new') result = await renderBuilder(main, { from: route.query.get('from'), isCurrent });
+      else if (a === 'builtin') result = await renderBuiltin(main, { planId: b, difficulty: c, isCurrent });
+      else if (c === 'edit') result = await renderBuilder(main, { recordId: b, isCurrent });
+      else result = await renderPlan(main, { id: b });
     } else if (first === 'search') result = renderSearch(main, { query: route.query });
     else if (first === 'bookmarks') result = renderBookmarks(main);
     else if (first === 'history') result = renderHistory(main);
@@ -139,6 +147,15 @@ async function onRoute(route, { sameView }) {
     result.focus.focus();
   }
   firstRender = false;
+}
+
+/** #/plans · #/plans/new · #/plans/builtin/<id>[/<level>] · #/plans/p/<id>[/edit] */
+function isPlansRoute([, a, b, c, d]) {
+  if (d) return false;
+  if (!a) return true;
+  if (a === 'new') return !b;
+  if (a === 'builtin') return Boolean(b);
+  return a === 'p' && Boolean(b) && (!c || c === 'edit');
 }
 
 function initShortcuts() {

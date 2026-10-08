@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "study-plans.schema.json",
+  "title": "StudyHub built-in study plans",
+  "description": "metadata/study-plans.json — built-in plans. Plans reference subjects, modules and topics by id only; lesson and question text always comes from content/. Topics are resolved against the catalogs when a plan is opened, so a plan never lists a topic that does not exist.",
+  "type": "object",
+  "required": ["schemaVersion", "defaults", "stages", "plans"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "defaults": {
+      "type": "object",
+      "required": ["modeMinutes"],
+      "additionalProperties": false,
+      "properties": {
+        "modeMinutes": {
+          "type": "object",
+          "description": "Planning minutes per activity. learn is used only when a topic has no estimatedMinutes; revision only when a study mode has no estimatedMinutes.",
+          "required": ["learn", "interactive", "practice", "interview", "flashcards", "revision"],
+          "additionalProperties": false,
+          "properties": {
+            "learn": { "$ref": "#/$defs/minutes" },
+            "interactive": { "$ref": "#/$defs/minutes" },
+            "practice": { "$ref": "#/$defs/minutes" },
+            "interview": { "$ref": "#/$defs/minutes" },
+            "flashcards": { "$ref": "#/$defs/minutes" },
+            "revision": { "$ref": "#/$defs/minutes" }
+          }
+        }
+      }
+    },
+    "stages": {
+      "type": "object",
+      "description": "Reusable stage templates, keyed by kebab-case id. Plan variants list stage ids; each stage is a milestone.",
+      "propertyNames": { "$ref": "#/$defs/id" },
+      "additionalProperties": { "$ref": "#/$defs/stage" }
+    },
+    "plans": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/plan" }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "minutes": { "type": "integer", "minimum": 1, "maximum": 600 },
+    "stage": {
+      "type": "object",
+      "required": ["title", "include"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "milestone": { "type": "string", "minLength": 1, "description": "Optional milestone label; default \"<title> complete\"." },
+        "include": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": ["subject"],
+                "additionalProperties": false,
+                "properties": {
+                  "subject": { "$ref": "#/$defs/id", "description": "A category id. Without modules: every topic of the subject in learning order." },
+                  "modules": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" }, "description": "Subcategory ids of that subject, in the order to study them." }
+                }
+              },
+              {
+                "type": "object",
+                "required": ["topics"],
+                "additionalProperties": false,
+                "properties": {
+                  "topics": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } }
+                }
+              }
+            ]
+          }
+        },
+        "exclude": { "type": "array", "items": { "$ref": "#/$defs/id" }, "description": "Topic ids to leave out of the included modules." }
+      }
+    },
+    "plan": {
+      "type": "object",
+      "required": ["id", "title", "description", "category", "order", "targetAudience", "prerequisites", "variants"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id", "description": "Permanent: learners' plan records point at it." },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "category": { "enum": ["placement", "interview", "role", "subject"] },
+        "order": { "type": "integer" },
+        "targetAudience": { "type": "string", "minLength": 1 },
+        "prerequisites": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "variants": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": { "$ref": "#/$defs/variant" }
+        }
+      }
+    },
+    "variant": {
+      "type": "object",
+      "required": ["difficulty", "summary", "durationDays", "dailyMinutes", "topicLevels", "questionLevels", "modes", "revision", "stages"],
+      "additionalProperties": false,
+      "properties": {
+        "difficulty": { "enum": ["beginner", "intermediate", "advanced"], "description": "One variant per difficulty." },
+        "summary": { "type": "string", "minLength": 1, "description": "What this variant changes, in one sentence." },
+        "durationDays": { "type": "integer", "minimum": 1, "maximum": 365 },
+        "dailyMinutes": { "type": "integer", "minimum": 15, "maximum": 600 },
+        "topicLevels": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "enum": ["beginner", "intermediate", "advanced"] },
+          "description": "Lesson difficulties (topic metadata) the variant keeps."
+        },
+        "questionLevels": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "enum": ["easy", "medium", "hard"] },
+          "description": "Question difficulties shown in this variant's practice, interview and flashcard sessions."
+        },
+        "modes": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "enum": ["learn", "interactive", "practice", "interview", "flashcards", "revision"] }
+        },
+        "revision": { "enum": ["full", "quick"], "description": "Which subject study mode the Revision items open: the first (full) one or the shortest timed one." },
+        "stages": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" },
+          "description": "Stage ids from `stages`, in study order."
+        }
+      }
+    }
+  }
+}

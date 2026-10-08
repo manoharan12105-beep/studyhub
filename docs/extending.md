@@ -8,7 +8,7 @@ How to add subjects, topics, interactions, visualizers and simulators **without 
 2. **Metadata** — fill `metadata/topics/<category>.json`; add subcategories (and optional `studyModes`) in `metadata/categories.json`.
 3. **Register interactions** — add `metadata/interactions/<category>.json` and point the category's `interactions` field at it.
 4. **Add subject-specific modules** — new visualizers/simulators in `js/visualizers/` or `js/simulators/`, built on `js/engagement/stepper.js`.
-5. **Announce** — add an entry at the top of `metadata/updates.json` (see "Add an update" below).
+5. **Announce** — add an entry at the top of `metadata/updates.json` (see "Add an update" below). If the owner wants the new subject in built-in study plans, add stages for it (see "Add or change a built-in study plan").
 6. **Validate** — JSON Schemas, consistency rules (content-guide §6), and a run through a local static server with the browser console open.
 
 No change to `app.js`, the views, the router or the engines is needed for any of these.
@@ -42,6 +42,18 @@ Add an entry at the **top** of the `updates` array in `metadata/updates.json` (n
 - Numbers in `description` must come from the metadata (count topics, modules, interactions) — never estimates.
 
 Readers who have used StudyHub before see a badge on the header menu and the new entry under What's new. There is no network check; the list is whatever is deployed.
+
+## Add or change a built-in study plan
+
+Built-in plans are metadata only: `metadata/study-plans.json` (schema `metadata/schemas/study-plans.schema.json`; how plans run: architecture §7 "Study plans"). New topics in a module a stage already names join every plan that uses the stage automatically.
+
+1. **Stages** — reuse a stage in `stages` or add one: a `title` (the milestone) and an `include` list of `{ "subject": "<category>", "modules": ["<subcategory>", …] }` (omit `modules` for the whole subject) or `{ "topics": ["<topic-id>", …] }`, plus an optional `exclude` of topic ids.
+2. **Plan** — add an entry to `plans` with a permanent kebab-case `id` (learners' records point at it), `title`, `description`, `category` (`placement`, `interview`, `role` or `subject`), `order`, `targetAudience` and `prerequisites`. Only plan for technologies that StudyHub has content for.
+3. **Variants** — one per difficulty you offer. Make them genuinely different: `topicLevels` (lesson difficulty kept), `questionLevels`, `modes` (`learn`, `interactive`, `practice`, `interview`, `flashcards`, `revision`), `revision` (`full` or `quick` sheets), `stages`, `durationDays` and `dailyMinutes`, and a one-sentence `summary` of what changes.
+4. **Size it from the data** — the work must fit `durationDays × dailyMinutes`. Run the plan functions on the real catalogs (`js/plan-schedule.js` is pure and runs in Node: `resolveStages` → `planTopics` → `buildItems` → `capacity`) and check that every listed mode produces at least one item; never estimate by hand.
+5. **Announce** it in `metadata/updates.json` if it is user-visible.
+
+Never change a plan `id`. Changing a variant affects plans started afterwards: a started plan keeps its own copy of topic ids, settings and days.
 
 ## Add a data-driven interaction (no code)
 
