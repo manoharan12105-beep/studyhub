@@ -491,6 +491,65 @@
           ]
         }
       ]
+    },
+    "devops-docker": {
+      "title": "DevOps foundations and Docker",
+      "include": [
+        {
+          "subject": "devops",
+          "modules": [
+            "devops-foundations",
+            "docker"
+          ]
+        }
+      ]
+    },
+    "devops-production": {
+      "title": "Production readiness and server deployment",
+      "include": [
+        {
+          "subject": "devops",
+          "modules": [
+            "production-readiness",
+            "server-deployment"
+          ]
+        }
+      ]
+    },
+    "devops-cicd": {
+      "title": "CI/CD and operations",
+      "include": [
+        {
+          "subject": "devops",
+          "modules": [
+            "ci-cd",
+            "operations"
+          ]
+        }
+      ]
+    },
+    "devops-labs": {
+      "title": "Practical labs and the deployment project",
+      "include": [
+        {
+          "subject": "devops",
+          "modules": [
+            "labs",
+            "deployment-project"
+          ]
+        }
+      ]
+    },
+    "devops-interview": {
+      "title": "DevOps interview",
+      "include": [
+        {
+          "subject": "devops",
+          "modules": [
+            "interview"
+          ]
+        }
+      ]
     }
   },
   "plans": [
@@ -1703,6 +1762,107 @@
             "apt-quant",
             "apt-logical",
             "apt-verbal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "devops-deployment",
+      "title": "DevOps & Deployment",
+      "description": "From Docker basics to a Spring Boot + PostgreSQL API deployed on a VPS with Nginx, HTTPS and a GitHub Actions CI/CD pipeline.",
+      "category": "subject",
+      "order": 14,
+      "targetAudience": "Java backend developers who want to deploy their own Spring Boot projects and answer deployment questions in interviews.",
+      "prerequisites": [
+        "A Spring Boot REST API with JPA",
+        "Basic Linux commands",
+        "Basic SQL"
+      ],
+      "variants": [
+        {
+          "difficulty": "beginner",
+          "summary": "Beginner and intermediate lessons on Docker, Compose, configuration, VPS, Nginx, HTTPS and CI/CD, with the simulations and easy-to-medium practice.",
+          "durationDays": 21,
+          "dailyMinutes": 60,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "devops-docker",
+            "devops-production",
+            "devops-cicd"
+          ]
+        },
+        {
+          "difficulty": "intermediate",
+          "summary": "Every lesson, the eighteen hands-on labs and the capstone deployment, with practice, interview questions and the interview module.",
+          "durationDays": 30,
+          "dailyMinutes": 90,
+          "topicLevels": [
+            "beginner",
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "interview",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "devops-docker",
+            "devops-production",
+            "devops-cicd",
+            "devops-labs",
+            "devops-interview"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "Intermediate and advanced lessons and labs only — Compose, production readiness, CD with rollback, troubleshooting — with hard questions, flashcards and the quick revision.",
+          "durationDays": 21,
+          "dailyMinutes": 105,
+          "topicLevels": [
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "flashcards",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "devops-docker",
+            "devops-production",
+            "devops-cicd",
+            "devops-labs",
+            "devops-interview"
           ]
         }
       ]

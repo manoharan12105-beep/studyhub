@@ -40,7 +40,7 @@ js/
   router.js                    hash routing
   content-loader.js            metadata index, Markdown fetch + cache, interaction registry loading
   markdown-renderer.js         marked + HTML allow-list + callouts, code, links, images, heading ids
-  highlight.js                 small regex highlighter (java, sql, json, yaml, properties, xml, http, bash, …)
+  highlight.js                 small regex highlighter (java, sql, json, yaml, properties, xml, http, bash, nginx, …)
   search.js                    metadata search index
   storage.js                   namespaced, versioned localStorage wrapper (memory fallback)
   progress.js bookmarks.js history.js activity.js   study state, one key each
@@ -157,7 +157,7 @@ Visualizers and simulators share one engine: **input → first frame → Next �
 
 ### Derived engagement (no registry needed)
 
-- **Practice / interview sessions** (`question-parser.js` + `quiz.js`) read existing `practice.md` / `interview-questions.md` by their conventions (`### P3.`, `- A)` options, `<details>` Hint/Answer/Solution, `**Answer:** C)`). Multiple-choice items with a detectable answer are auto-checked; the rest use reveal + self-rating. Shared set material (`## Set 1: …`) and file preambles are shown with each item. All 6,449 items in the current content parse.
+- **Practice / interview sessions** (`question-parser.js` + `quiz.js`) read existing `practice.md` / `interview-questions.md` by their conventions (`### P3.`, `- A)` options, `<details>` Hint/Answer/Solution, `**Answer:** C)`). Multiple-choice items with a detectable answer are auto-checked; the rest use reveal + self-rating. Shared set material (`## Set 1: …`) and file preambles are shown with each item. All 8,203 items in the current content parse.
 - **Flashcards** are built from interview questions (question → answer).
 
 ## 7. Study engine (client-side state)
@@ -174,6 +174,7 @@ studyhub:v1:prefs       { "questionView": "session|all", "sidebarCollapsed": boo
 studyhub:v1:updates     { "seen": [ "<update-id>", … ], "previousVisit": ISO, "currentVisit": ISO }
 studyhub:v1:plans       { "active": "<record-id>" | null, "plans": [ record, … ] }   max 30 records (see Study plans)
 studyhub:v1:notes       [ { "id", "title", "content", "subjectId", "moduleId", "topicId", "createdAt", "updatedAt" } ]   max 500 (see Notes)
+studyhub:v1:checklists  { "<interaction-id>": [ "<item-id>", … ] }   ticked items of interactive checklists (DevOps deployment checklist)
 ```
 
 On the first run of `updates`, entries older than the newest history entry (or all of them, for a brand-new browser) count as seen, so nobody is greeted with the whole changelog. A gap of 30 minutes or more starts a new visit; "Last visit" in What's new is `previousVisit`.
@@ -209,9 +210,9 @@ Personal Markdown notes, each tied to one topic (`js/notes.js`; views in `js/vie
 
 StudyHub is static: progress exists only in the browser that recorded it. **Menu → Progress Import / Export** moves it between browsers or devices through the clipboard (`js/backup.js`, dialog in `js/views/backup-dialog.js`). Nothing is uploaded and there are no files.
 
-- **Exported:** exactly the allowlist `progress`, `bookmarks`, `history`, `questions`, `plans`, `notes`. Not exported: `theme`, `prefs` (appearance and layout belong to each browser), `updates` (per-browser What's new state), and any key outside `studyhub:v1:`.
+- **Exported:** exactly the allowlist `progress`, `bookmarks`, `history`, `questions`, `plans`, `notes`, `checklists`. Not exported: `theme`, `prefs` (appearance and layout belong to each browser), `updates` (per-browser What's new state), and any key outside `studyhub:v1:`.
 - **Format:** one line, `STUDYHUB-PROGRESS:v1:z.<base64url>` — deflate-raw compressed JSON `{ format: "studyhub-progress", version: 1, exportedAt, data }` (`j.` = uncompressed JSON, used where `CompressionStream` is missing). The version appears in the prefix and in the JSON; a backup with any other version is refused with a clear message, so a future v2 can add migration.
-- **Import:** the pasted text is decoded and every entry is type-checked against the shapes above (ids, statuses, dates, result values; unknown keys rejected, objects rebuilt from known fields) *before* anything is written. After a confirmation listing what the backup contains, the keys are **replaced** in one step by `storage.writeAll()`, which restores the previous values if any write fails. Views re-render on the `studyhub:restored` event. `plans` was added later: a backup without it (made before study plans existed) still imports, and leaves this browser's plans untouched; plan records are checked field by field (ids, item keys, settings ranges, day count = duration, at most 30 plans and 365 days). `notes` was added the same way: a backup without it leaves this browser's notes untouched. Each imported note must be well formed (id, non-empty title and text, ISO dates with updated ≥ created, no duplicate ids, at most 500) and point at an existing topic whose subject and module match the stored `subjectId`/`moduleId`; otherwise the whole backup is refused.
+- **Import:** the pasted text is decoded and every entry is type-checked against the shapes above (ids, statuses, dates, result values; unknown keys rejected, objects rebuilt from known fields) *before* anything is written. After a confirmation listing what the backup contains, the keys are **replaced** in one step by `storage.writeAll()`, which restores the previous values if any write fails. Views re-render on the `studyhub:restored` event. `plans` was added later: a backup without it (made before study plans existed) still imports, and leaves this browser's plans untouched; plan records are checked field by field (ids, item keys, settings ranges, day count = duration, at most 30 plans and 365 days). `notes` was added the same way: a backup without it leaves this browser's notes untouched. Each imported note must be well formed (id, non-empty title and text, ISO dates with updated ≥ created, no duplicate ids, at most 500) and point at an existing topic whose subject and module match the stored `subjectId`/`moduleId`; otherwise the whole backup is refused. `checklists` (Phase 2K) is optional in the same way: a backup without it leaves this browser's ticks untouched; each list id and item id must be a kebab-case id, unique within its list (at most 50 lists of 200 items), or the whole backup is refused.
 - **Adding a new kind of persistent learner state:** add its key to `ALLOWLIST` with a validator in `js/backup.js`, or it will not travel with backups.
 
 ## 8. Third-party code

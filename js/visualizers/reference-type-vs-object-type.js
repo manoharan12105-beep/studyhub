@@ -71,21 +71,24 @@ ${ACTIONS[action].endsWith(';') ? ACTIONS[action] : `${ACTIONS[action]};`}`, 'ja
   function render(frame) {
     const ref = refSelect.value;
     const obj = objSelect.value;
-    compilerPanel.replaceChildren(
+    // replaceChildren() stringifies null and arrays, so pass a flat list of nodes.
+    compilerPanel.replaceChildren(...[
       el('p', { class: 'dispatch-title' }, 'Compile time — the compiler sees the reference'),
       el('p', {}, 'Declared type: ', el('strong', {}, ref)),
       el('p', { class: 'small muted' }, 'Methods it lets you call:'),
       el('ul', { class: 'method-list' }, visibleMethods(ref).map(({ m, from }) => el('li', { class: frame.highlightCompile === m ? 'is-current' : '' },
         el('code', { class: 'inline-code' }, m), el('span', { class: 'muted small' }, from === ref ? '' : ` (from ${from})`)))),
-      frame.compile ? el('p', { class: `verdict verdict-${frame.compile.ok ? 'ok' : 'bad'}` }, frame.compile.ok ? '✓ Compiles' : '✗ Compile error', el('span', { class: 'small' }, ` — ${frame.compile.why}`)) : null);
-    runtimePanel.replaceChildren(
+      frame.compile ? el('p', { class: `verdict verdict-${frame.compile.ok ? 'ok' : 'bad'}` }, frame.compile.ok ? '✓ Compiles' : '✗ Compile error', el('span', { class: 'small' }, ` — ${frame.compile.why}`)) : null,
+    ].filter(Boolean));
+    runtimePanel.replaceChildren(...[
       el('p', { class: 'dispatch-title' }, 'Run time — the JVM looks at the object'),
       frame.objectShown ? [
         el('p', {}, 'Object’s class: ', el('strong', {}, obj)),
         el('p', { class: 'small muted' }, 'Class chain searched for overrides:'),
         el('ol', { class: 'chain-list' }, chain(obj).map((t) => el('li', { class: frame.highlightRuntime === t ? 'is-current' : '' }, t))),
       ] : el('p', { class: 'muted small' }, 'Nothing runs until the code compiles.'),
-      frame.runtime ? el('p', { class: `verdict verdict-${frame.runtime.ok ? 'ok' : 'bad'}` }, frame.runtime.ok ? '▶ ' : '✗ ', frame.runtime.what) : null);
+      frame.runtime ? el('p', { class: `verdict verdict-${frame.runtime.ok ? 'ok' : 'bad'}` }, frame.runtime.ok ? '▶ ' : '✗ ', frame.runtime.what) : null,
+    ].flat().filter(Boolean));
   }
 
   for (const s of [refSelect, objSelect, actionSelect]) s.addEventListener('change', start);

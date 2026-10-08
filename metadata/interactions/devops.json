@@ -1,0 +1,428 @@
+{
+  "$schema": "../schemas/interactions.schema.json",
+  "schemaVersion": 1,
+  "category": "devops",
+  "interactions": [
+    {
+      "id": "delivery-vs-deployment-comparison",
+      "type": "comparison",
+      "title": "CI vs continuous delivery vs continuous deployment",
+      "description": "Hide the cells and recall what each practice automates and where a human decides.",
+      "topics": [
+        { "topic": "devops-fundamentals", "after": "CI vs CD vs Continuous Deployment" },
+        { "topic": "cd-automated-deployment", "after": "Continuous Delivery vs Continuous Deployment" }
+      ],
+      "columns": ["Continuous Integration", "Continuous Delivery", "Continuous Deployment"],
+      "rows": [
+        { "aspect": "Every change is…", "cells": ["Built and tested automatically", "Built, tested and packaged as a releasable artifact", "Built, tested, packaged and released"] },
+        { "aspect": "Ends with", "cells": ["A green or red build", "An artifact ready for production", "The change live in production"] },
+        { "aspect": "Manual step before production", "cells": ["Not about production", "Yes — an approval or button", "None"] },
+        { "aspect": "In GitHub Actions", "cells": ["A test job on push and pull_request", "Deploy job in an environment with required reviewers", "Deploy job in an environment without reviewers"] },
+        { "aspect": "Main risk it removes", "cells": ["Broken code merged unnoticed", "Slow, manual, error-prone releases", "Waiting for someone to press deploy"] }
+      ]
+    },
+    {
+      "id": "linux-deployment-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: Linux on the server",
+      "topics": [{ "topic": "linux-for-deployment", "after": "Troubleshooting a Server" }],
+      "questions": [
+        {
+          "prompt": "Which command shows which process is listening on port 8080?",
+          "options": ["`ps aux | grep 8080`", "`sudo ss -ltnp`", "`df -h`", "`ping localhost:8080`"],
+          "answer": 1,
+          "explanation": "`ss -ltnp` lists listening TCP sockets with numeric ports and the owning process. `ps` knows nothing about ports, and `ping` has no ports at all."
+        },
+        {
+          "prompt": "Which file mode fits a `.env` file containing the database password?",
+          "options": ["`777`", "`755`", "`644`", "`600`"],
+          "answer": 3,
+          "explanation": "`600` lets only the owner read and write it. `644` is readable by every user on the server."
+        },
+        {
+          "prompt": "`free -h` shows `free 120Mi` and `available 820Mi` on a 2 GB server. What is true?",
+          "options": ["The server is out of memory", "About 820 MiB can still be used by new programs; Linux uses spare memory as cache", "Swap must be added immediately", "The JVM has a memory leak"],
+          "answer": 1,
+          "explanation": "Linux fills spare RAM with page cache and releases it on demand. The `available` column is the one that matters."
+        },
+        {
+          "prompt": "ufw allows only 22, 80 and 443, yet a container started with `-p 8080:8080` is reachable from the internet on 8080. Why?",
+          "options": ["ufw is disabled", "Docker's own iptables rules for published ports bypass ufw's rules", "Port 8080 is always open", "Spring Boot opens the firewall"],
+          "answer": 1,
+          "explanation": "Docker programs iptables for published ports before ufw's rules apply. Publish internal ports on `127.0.0.1` only."
+        }
+      ]
+    },
+    {
+      "id": "container-vs-vm-comparison",
+      "type": "comparison",
+      "title": "Container vs virtual machine",
+      "description": "Test yourself on the differences interviewers ask about.",
+      "topics": [{ "topic": "docker-fundamentals", "after": "Containers vs Virtual Machines" }],
+      "columns": ["Virtual machine", "Container"],
+      "rows": [
+        { "aspect": "Isolates", "cells": ["A whole machine with its own kernel", "Processes sharing the host kernel"] },
+        { "aspect": "Built on", "cells": ["A hypervisor", "Namespaces, cgroups and a union filesystem"] },
+        { "aspect": "Typical size", "cells": ["Gigabytes", "Megabytes to a few hundred MB"] },
+        { "aspect": "Start time", "cells": ["Tens of seconds or more", "About a second"] },
+        { "aspect": "Isolation strength", "cells": ["Stronger (separate kernel)", "Good, weaker (shared kernel)"] },
+        { "aspect": "In this subject", "cells": ["The rented VPS", "Spring Boot and PostgreSQL inside the VPS"] }
+      ]
+    },
+    {
+      "id": "container-lifecycle-simulator",
+      "type": "simulator",
+      "title": "Container lifecycle simulator",
+      "description": "Run, stop, kill, restart and remove one simulated container; watch docker ps vs docker ps -a, exit codes and the writable layer.",
+      "topics": [{ "topic": "docker-fundamentals", "after": "Container Lifecycle" }]
+    },
+    {
+      "id": "docker-commands-flashcards",
+      "type": "flashcards",
+      "title": "Docker commands",
+      "description": "Recall the command for each task, then flip to check.",
+      "topics": [{ "topic": "docker-cli-commands", "after": "Commands" }],
+      "cards": [
+        { "front": "Start `taskapi:1.0.0` in the background as `api`, host port 8080 → container port 8080", "back": "`docker run -d --name api -p 8080:8080 taskapi:1.0.0`" },
+        { "front": "List all containers, including stopped ones", "back": "`docker ps -a`" },
+        { "front": "Follow the last 100 log lines of `api`", "back": "`docker logs -f --tail 100 api`" },
+        { "front": "Open a shell inside the running container `api`", "back": "`docker exec -it api sh`" },
+        { "front": "Stop `api` gracefully", "back": "`docker stop api` — SIGTERM, then SIGKILL after 10 s" },
+        { "front": "Delete `api` even if it is running", "back": "`docker rm -f api` (its writable layer is deleted; named volumes stay)" },
+        { "front": "Was `api` killed for exceeding its memory limit?", "back": "`docker inspect -f '{{.State.OOMKilled}}' api`" },
+        { "front": "One snapshot of CPU and memory per container", "back": "`docker stats --no-stream`" },
+        { "front": "Copy `/app/app.jar` out of container `api`", "back": "`docker cp api:/app/app.jar .`" },
+        { "front": "What uses disk space in Docker?", "back": "`docker system df`" },
+        { "front": "Remove dangling images only", "back": "`docker image prune`" },
+        { "front": "Exit code 137 vs 143", "back": "137 = SIGKILL (often out of memory); 143 = SIGTERM (normal `docker stop` of a JVM)" }
+      ]
+    },
+    {
+      "id": "cmd-entrypoint-check",
+      "type": "knowledge-check",
+      "title": "Predict the command: CMD, ENTRYPOINT and friends",
+      "topics": [{ "topic": "dockerfile-fundamentals", "after": "The Instructions" }],
+      "questions": [
+        {
+          "prompt": "Which command runs for `docker run img --server.port=9090`?",
+          "code": { "language": "dockerfile", "source": "FROM eclipse-temurin:21-jre\nCOPY app.jar /app/app.jar\nENTRYPOINT [\"java\", \"-jar\", \"/app/app.jar\"]\nCMD [\"--server.port=8080\"]" },
+          "options": ["`java -jar /app/app.jar --server.port=8080`", "`java -jar /app/app.jar --server.port=9090`", "`--server.port=9090`", "`java -jar /app/app.jar --server.port=8080 --server.port=9090`"],
+          "answer": 1,
+          "explanation": "Arguments after the image name replace `CMD`; the `ENTRYPOINT` stays and receives them."
+        },
+        {
+          "prompt": "Which command runs for `docker run img`?",
+          "code": { "language": "dockerfile", "source": "FROM eclipse-temurin:21-jre\nCMD [\"java\", \"-version\"]\nCMD [\"java\", \"-jar\", \"app.jar\"]" },
+          "options": ["`java -version`", "`java -jar app.jar`", "Both, one after the other", "The build fails: two CMD lines"],
+          "answer": 1,
+          "explanation": "Only the last `CMD` in a Dockerfile takes effect."
+        },
+        {
+          "prompt": "The image ends with `ENTRYPOINT java -jar app.jar`. What happens on `docker stop`?",
+          "options": ["Java receives SIGTERM and shuts down gracefully", "`/bin/sh` is PID 1 and does not forward SIGTERM, so Docker kills Java after 10 seconds", "The container ignores stop forever", "Docker restarts it"],
+          "answer": 1,
+          "explanation": "The shell form wraps the command in `/bin/sh -c`. Use the exec form `[\"java\", \"-jar\", \"app.jar\"]`."
+        },
+        {
+          "prompt": "The Dockerfile contains `EXPOSE 8080`. You run `docker run -d img` (no `-p`). Can `curl localhost:8080` on the host reach the app?",
+          "options": ["Yes, EXPOSE publishes the port", "No — EXPOSE only documents the port; nothing is published without -p", "Only on Linux", "Only if the app is a Spring Boot app"],
+          "answer": 1,
+          "explanation": "Publishing needs `-p HOST:CONTAINER` (or `-P` for all exposed ports on random host ports)."
+        }
+      ]
+    },
+    {
+      "id": "dockerfile-layer-cache-explorer",
+      "type": "visualizer",
+      "title": "Layer cache explorer",
+      "description": "Choose a Dockerfile layout and a change, then step through the build: which layers stay CACHED and which are REBUILT?",
+      "topics": [{ "topic": "dockerfile-fundamentals", "after": "Layers and the Build Cache", "options": { "dockerfile": "naive", "change": "source" } }]
+    },
+    {
+      "id": "container-connectivity-explorer",
+      "type": "visualizer",
+      "title": "Who can reach what? Ports, localhost and Docker DNS",
+      "description": "Pick where a request starts and which host:port it uses, and follow name resolution, the network namespace and the listening port to the result.",
+      "topics": [
+        { "topic": "spring-boot-in-docker", "after": "Host, Container and Localhost", "options": { "scenario": "ports" } },
+        { "topic": "docker-networking", "after": "Host localhost vs Container localhost", "options": { "scenario": "networking" } }
+      ]
+    },
+    {
+      "id": "volume-types-comparison",
+      "type": "comparison",
+      "title": "Named volume vs bind mount vs no mount",
+      "topics": [{ "topic": "postgresql-in-docker", "after": "Persistent Storage: Named Volumes and Bind Mounts" }],
+      "columns": ["Named volume", "Bind mount", "No mount"],
+      "rows": [
+        { "aspect": "Syntax", "cells": ["`-v pgdata:/var/lib/postgresql`", "`-v /srv/pgdata:/var/lib/postgresql`", "—"] },
+        { "aspect": "Managed by", "cells": ["Docker", "You (a host folder)", "The container's writable layer (or an anonymous volume)"] },
+        { "aspect": "Survives `docker rm`", "cells": ["Yes", "Yes", "No — a new container starts empty"] },
+        { "aspect": "Deleted by `compose down -v`", "cells": ["Yes", "No — host folders are not removed", "Yes (anonymous volumes)"] },
+        { "aspect": "Best for", "cells": ["Database data", "Config files, source code in development", "Nothing that matters"] }
+      ]
+    },
+    {
+      "id": "volume-persistence-simulator",
+      "type": "simulator",
+      "title": "Does the data survive? Volume persistence simulator",
+      "description": "Choose how PostgreSQL stores its data, insert rows, then recreate, down, down -v or delete the storage and see what the next container finds.",
+      "topics": [
+        { "topic": "postgresql-in-docker", "after": "Container Deletion vs Data Deletion", "options": { "mode": "named" } },
+        { "topic": "docker-compose", "after": "down vs down -v", "options": { "mode": "named" } }
+      ]
+    },
+    {
+      "id": "compose-commands-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: Docker Compose",
+      "topics": [{ "topic": "docker-compose", "after": "Commands" }],
+      "questions": [
+        {
+          "prompt": "Which command removes the containers and the network but keeps the PostgreSQL data?",
+          "options": ["`docker compose down -v`", "`docker compose down`", "`docker volume prune -a`", "`docker compose rm -v`"],
+          "answer": 1,
+          "explanation": "`down` keeps named volumes; `down -v` deletes the named volumes declared in the file."
+        },
+        {
+          "prompt": "The app service has `SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/taskdb` and PostgreSQL is the `db` service. What happens?",
+          "options": ["It works — Compose rewrites localhost", "The app's start-up fails with connection refused: localhost is the app container", "It works only with `depends_on`", "Compose refuses to start"],
+          "answer": 1,
+          "explanation": "Inside a container `localhost` is that container. Use the service name: `jdbc:postgresql://db:5432/taskdb`."
+        },
+        {
+          "prompt": "What does short-form `depends_on: [db]` guarantee?",
+          "options": ["PostgreSQL accepts connections before the app starts", "The db container is started before the app container", "The app restarts when db restarts", "Nothing at all"],
+          "answer": 1,
+          "explanation": "Only start order. To wait for readiness, use `condition: service_healthy` with a database health check."
+        },
+        {
+          "prompt": "You change only `app.environment` and run `docker compose up -d`. What happens?",
+          "options": ["Both containers are recreated", "Only the app container is recreated; db keeps running", "Nothing — you must run restart", "Compose deletes the volume"],
+          "answer": 1,
+          "explanation": "`up -d` compares desired and actual state and recreates only services whose configuration or image changed."
+        },
+        {
+          "prompt": "A service should come back after crashes and reboots but stay stopped after an operator stops it. Which policy?",
+          "options": ["`no`", "`on-failure`", "`always`", "`unless-stopped`"],
+          "answer": 3,
+          "explanation": "`unless-stopped` restarts after crashes and daemon restarts, except for containers you stopped yourself. `on-failure` does not restart after a daemon restart."
+        }
+      ]
+    },
+    {
+      "id": "config-checker",
+      "type": "visualizer",
+      "title": "Configuration checker",
+      "description": "Pick an example or paste your own compose.yaml, .env or application.yml and step through what a reviewer would flag. Runs only in your browser.",
+      "topics": [{ "topic": "configuration-and-secrets", "after": "BAD vs GOOD", "options": { "preset": "bad" } }]
+    },
+    {
+      "id": "secrets-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: configuration and secrets",
+      "topics": [{ "topic": "configuration-and-secrets", "after": "Why Secrets Must Never Be Committed" }],
+      "questions": [
+        {
+          "prompt": "A database password was pushed to a public repository and removed in the next commit. What is the first thing to do?",
+          "options": ["Nothing — it was removed", "Rotate the password", "Make the repository private", "Rewrite the Git history"],
+          "answer": 1,
+          "explanation": "The secret is still in the history, in clones and possibly in scanners' databases. Rotation is the only real fix; history rewriting comes later, if at all."
+        },
+        {
+          "prompt": "`application-prod.yml` sets `server.port: 8081` and the container has `SERVER_PORT=8082`. With the prod profile active, which port is used?",
+          "options": ["8080", "8081", "8082", "The app fails to start"],
+          "answer": 2,
+          "explanation": "OS environment variables rank above every application*.yml file."
+        },
+        {
+          "prompt": "Which line is safe to commit?",
+          "options": ["`password: admin123`", "`password: ${SPRING_DATASOURCE_PASSWORD:admin123}`", "`password: ${SPRING_DATASOURCE_PASSWORD}`", "`ENV DB_PASSWORD=admin123` in the Dockerfile"],
+          "answer": 2,
+          "explanation": "Only the bare placeholder keeps the value out of the repository. A default inside `${…}` commits the secret too."
+        },
+        {
+          "prompt": "What does Compose do with a `.env` file next to `compose.yaml`?",
+          "options": ["Copies it into every container", "Uses it to fill `${VAR}` placeholders in compose.yaml", "Commits it to Git", "Nothing unless `env_file` is set"],
+          "answer": 1,
+          "explanation": "`.env` drives interpolation in the Compose file; `env_file:` is what loads a file's lines as container variables."
+        }
+      ]
+    },
+    {
+      "id": "nginx-request-flow-simulator",
+      "type": "simulator",
+      "title": "Follow a request through Nginx",
+      "description": "Choose a scenario and follow the request hop by hop: DNS, Nginx, TLS, proxy_pass, Spring Boot, PostgreSQL — and see which status the client gets.",
+      "topics": [
+        { "topic": "nginx-reverse-proxy", "after": "How It Works", "options": { "scenario": "ok" } },
+        { "topic": "domain-dns-and-https", "after": "HTTP vs HTTPS", "options": { "scenario": "redirect" } }
+      ]
+    },
+    {
+      "id": "nginx-status-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: what does Nginx's status mean?",
+      "topics": [{ "topic": "nginx-reverse-proxy", "after": "Common Status Codes from Nginx" }],
+      "questions": [
+        {
+          "prompt": "error.log: `connect() failed (111: Connection refused) while connecting to upstream`. What did the client get?",
+          "options": ["404", "413", "502", "504"],
+          "answer": 2,
+          "explanation": "Nginx could not connect to the upstream — 502 Bad Gateway. Check whether the app runs and whether `proxy_pass` matches its port."
+        },
+        {
+          "prompt": "error.log: `upstream timed out (110: Connection timed out) while reading response header from upstream`. Status?",
+          "options": ["500", "502", "503", "504"],
+          "answer": 3,
+          "explanation": "The app accepted the connection but did not answer within `proxy_read_timeout`: 504 Gateway Timeout."
+        },
+        {
+          "prompt": "A 5 MB upload fails at Nginx with 413. Which directive fixes it?",
+          "options": ["`proxy_read_timeout`", "`client_max_body_size`", "`proxy_buffer_size`", "`server_name`"],
+          "answer": 1,
+          "explanation": "Nginx's default body limit is 1 MB; raise `client_max_body_size`."
+        },
+        {
+          "prompt": "Nginx runs in a container next to the `app` service. Which `proxy_pass` works?",
+          "options": ["`http://localhost:8080`", "`http://127.0.0.1:8080`", "`http://app:8080`", "`http://0.0.0.0:8080`"],
+          "answer": 2,
+          "explanation": "Inside the Nginx container, localhost is Nginx itself. Use the service name and the container port."
+        }
+      ]
+    },
+    {
+      "id": "https-dns-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: DNS and HTTPS",
+      "topics": [{ "topic": "domain-dns-and-https", "after": "HTTP to HTTPS Redirect" }],
+      "questions": [
+        {
+          "prompt": "Which record points `api.example.com` at the VPS's IPv4 address?",
+          "options": ["CNAME", "MX", "A", "TXT"],
+          "answer": 2,
+          "explanation": "An A record maps a name to an IPv4 address (AAAA for IPv6)."
+        },
+        {
+          "prompt": "Certbot's HTTP-01 challenge needs which two things to be ready?",
+          "options": ["Port 443 and a certificate", "DNS pointing to the server and port 80 reachable", "A CAA record and port 22", "Docker and Compose"],
+          "answer": 1,
+          "explanation": "Let's Encrypt fetches a token over HTTP on port 80 from the host the domain resolves to."
+        },
+        {
+          "prompt": "You changed an A record with TTL 3600 ten minutes ago; some users still reach the old IP. Why?",
+          "options": ["The change failed", "Resolvers may cache the old answer for up to an hour", "DNS changes take exactly 48 hours", "Browsers ignore DNS"],
+          "answer": 1,
+          "explanation": "\"Propagation\" is cached answers expiring; the TTL bounds it."
+        },
+        {
+          "prompt": "How do you check that automatic renewal will work without issuing a real certificate?",
+          "options": ["`sudo certbot renew --dry-run`", "`sudo nginx -t`", "`sudo certbot delete`", "`openssl rand -base64 32`"],
+          "answer": 0,
+          "explanation": "`--dry-run` runs renewal against Let's Encrypt's staging environment."
+        }
+      ]
+    },
+    {
+      "id": "cicd-pipeline-simulator",
+      "type": "simulator",
+      "title": "CI/CD pipeline simulator",
+      "description": "Follow one change from git push to production in different scenarios: a clean release, a failing test, a pull request, a denied push, an automatic rollback.",
+      "topics": [
+        { "topic": "ci-with-github-actions", "after": "How It Works", "options": { "scenario": "test-fails" } },
+        { "topic": "cd-automated-deployment", "after": "Deployment Workflow Design", "options": { "scenario": "unhealthy" } },
+        { "topic": "deployment-project-taskapi", "after": "Delivery Flow", "options": { "scenario": "success" } }
+      ]
+    },
+    {
+      "id": "workflow-yaml-check",
+      "type": "knowledge-check",
+      "title": "Read the workflow",
+      "topics": [{ "topic": "ci-with-github-actions", "after": "The CI Workflow" }],
+      "questions": [
+        {
+          "prompt": "For a pull request, which jobs run?",
+          "code": { "language": "yaml", "source": "on:\n  push:\n    branches: [main]\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n  publish:\n    needs: test\n    if: github.event_name == 'push' && github.ref == 'refs/heads/main'\n    runs-on: ubuntu-latest" },
+          "options": ["Only `test`", "`test` and `publish`", "Only `publish`", "None"],
+          "answer": 0,
+          "explanation": "The pull_request event triggers the workflow; `publish`'s condition requires a push to main, so it is skipped."
+        },
+        {
+          "prompt": "The first step of a job is `run: ./mvnw -B verify` and it fails with \"No such file or directory\". Why?",
+          "options": ["Maven is not installed", "The repository was never checked out — add `actions/checkout` first", "The wrapper needs root", "Java 21 is missing"],
+          "answer": 1,
+          "explanation": "Every job starts on an empty runner."
+        },
+        {
+          "prompt": "`./mvnw: Permission denied` on the Linux runner, but it works on a Windows laptop. Fix?",
+          "options": ["`chmod 777 -R .` in the workflow", "`git update-index --chmod=+x mvnw`, commit and push", "Switch to `runs-on: windows-latest`", "Delete `mvnw`"],
+          "answer": 1,
+          "explanation": "The executable bit was lost when committing from Windows; Git can record it explicitly."
+        },
+        {
+          "prompt": "What does `cache: maven` on `actions/setup-java` do?",
+          "options": ["Caches the built JAR between jobs", "Restores `~/.m2/repository` from earlier runs, keyed on the pom.xml files", "Pushes dependencies to GHCR", "Skips tests"],
+          "answer": 1,
+          "explanation": "Dependencies are downloaded once and reused until the pom changes."
+        }
+      ]
+    },
+    {
+      "id": "registry-tags-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: tags and registries",
+      "topics": [{ "topic": "container-registry", "after": "Image Names and Tags" }],
+      "questions": [
+        {
+          "prompt": "Which tag should production's `.env` reference?",
+          "options": ["`latest`", "`stable`", "The commit SHA tag built by CI", "None — use the digest of `latest` at deploy time"],
+          "answer": 2,
+          "explanation": "A SHA tag is unique and traceable to tested code, and makes rollback a one-line change."
+        },
+        {
+          "prompt": "Pushing to `ghcr.io` from Actions fails with `denied`. What is usually missing?",
+          "options": ["A Docker Hub account", "`permissions: packages: write` on the job", "`runs-on: macos-latest`", "A `.dockerignore`"],
+          "answer": 1,
+          "explanation": "`GITHUB_TOKEN` can push packages only when the job grants that permission."
+        },
+        {
+          "prompt": "What is a tag, technically?",
+          "options": ["An immutable content hash", "A movable label pointing to an image digest", "A copy of the image", "A Git branch"],
+          "answer": 1,
+          "explanation": "The digest (`sha256:…`) is immutable; tags can be moved by pushing again."
+        }
+      ]
+    },
+    {
+      "id": "container-restart-investigation",
+      "type": "simulator",
+      "module": "devops-troubleshooting-simulator",
+      "title": "Troubleshooting simulator: the restart loop",
+      "description": "The API restarts after a configuration change. Pick each next command; wrong picks explain why they do not help.",
+      "topics": [{ "topic": "logging-monitoring-and-health", "after": "Troubleshooting Common Failures", "options": { "scenario": "restart-loop" } }]
+    },
+    {
+      "id": "nginx-502-investigation",
+      "type": "simulator",
+      "module": "devops-troubleshooting-simulator",
+      "title": "Troubleshooting simulator: 502 Bad Gateway",
+      "description": "Users see 502. Find out why from Nginx's error log and the container state, without touching what is not broken.",
+      "topics": [{ "topic": "lab-production-troubleshooting", "after": "Steps", "options": { "scenario": "nginx-502" } }]
+    },
+    {
+      "id": "docker-disk-full-investigation",
+      "type": "simulator",
+      "module": "devops-troubleshooting-simulator",
+      "title": "Troubleshooting simulator: disk full on a Docker host",
+      "description": "PostgreSQL cannot write. Find what fills the disk and free space safely — without deleting data or rollback images.",
+      "topics": [{ "topic": "linux-for-deployment", "after": "Disk, Memory and CPU", "options": { "scenario": "disk-full-docker" } }]
+    },
+    {
+      "id": "deployment-checklist",
+      "type": "visualizer",
+      "title": "Your deployment checklist",
+      "description": "Tick each item once you have verified it on your own machine or server. Ticks are saved in this browser.",
+      "topics": [{ "topic": "deployment-checklist", "after": "How to Use This Checklist" }]
+    }
+  ]
+}

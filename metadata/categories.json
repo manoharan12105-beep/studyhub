@@ -1145,6 +1145,115 @@
           ]
         }
       ]
+    },
+    {
+      "id": "devops",
+      "title": "DevOps & Deployment",
+      "description": "Take a Spring Boot + PostgreSQL application to production: Docker, Compose, a Linux VPS, Nginx, HTTPS, GitHub Actions CI/CD, a container registry, monitoring and troubleshooting.",
+      "order": 11,
+      "icon": "assets/icons/subjects/devops.svg",
+      "group": "development",
+      "catalog": "metadata/topics/devops.json",
+      "interactions": "metadata/interactions/devops.json",
+      "subcategories": [
+        {
+          "id": "devops-foundations",
+          "title": "DevOps Foundations",
+          "description": "What DevOps means for a Java backend developer, the delivery lifecycle, environments, and the Linux skills a deployment needs.",
+          "order": 1
+        },
+        {
+          "id": "docker",
+          "title": "Docker",
+          "description": "Images, containers and registries, the Docker CLI, Dockerfiles, Spring Boot in a container, networking, PostgreSQL with volumes, and Docker Compose.",
+          "order": 2
+        },
+        {
+          "id": "production-readiness",
+          "title": "Configuration and Production Readiness",
+          "description": "Environment variables, .env files, profiles and secrets, and how to prepare a Spring Boot application before it meets production.",
+          "order": 3
+        },
+        {
+          "id": "server-deployment",
+          "title": "Server Deployment",
+          "description": "Deploying to a Linux VPS, Nginx as a reverse proxy, domains, DNS and HTTPS with Let's Encrypt.",
+          "order": 4
+        },
+        {
+          "id": "ci-cd",
+          "title": "CI/CD",
+          "description": "Continuous integration with GitHub Actions, container registries and image tags, and automated deployment with health checks and rollback.",
+          "order": 5
+        },
+        {
+          "id": "operations",
+          "title": "Operations and Security",
+          "description": "Logs, health checks, basic monitoring, production troubleshooting, and the security basics every deployed server needs.",
+          "order": 6
+        },
+        {
+          "id": "labs",
+          "title": "Practical Labs",
+          "description": "Eighteen hands-on labs, run on your own machine and server, that build the sample application from a first container to automated deployment.",
+          "order": 7
+        },
+        {
+          "id": "deployment-project",
+          "title": "Deployment Project",
+          "description": "The capstone: one Spring Boot + PostgreSQL API taken from GitHub to HTTPS in production, and the end-to-end deployment checklist.",
+          "order": 8
+        },
+        {
+          "id": "interview",
+          "title": "Interview Preparation",
+          "description": "Docker, Compose, CI/CD, Nginx and deployment interview questions, plus scenario and production-failure questions.",
+          "order": 9
+        }
+      ],
+      "studyModes": [
+        {
+          "id": "revision",
+          "title": "Revision",
+          "description": "Complete DevOps revision, the production troubleshooting guide, interview traps, important ports and protocols, and the end-to-end deployment checklist.",
+          "sources": [
+            { "path": "content/devops/revision/complete-revision.md", "title": "Complete DevOps Revision" },
+            { "path": "content/devops/revision/troubleshooting-cheat-sheet.md", "title": "Production Troubleshooting" },
+            { "path": "content/devops/revision/interview-traps.md", "title": "DevOps Interview Traps" },
+            { "path": "content/devops/revision/ports-and-protocols.md", "title": "Important Ports and Protocols" },
+            { "path": "content/devops/revision/deployment-checklist.md", "title": "End-to-End Deployment Checklist" }
+          ]
+        },
+        {
+          "id": "cheat-sheets",
+          "title": "Cheat Sheets",
+          "description": "One-page references for Docker commands, Dockerfiles, Docker Compose, Linux deployment commands, Nginx, GitHub Actions and the CI/CD pipeline.",
+          "sources": [
+            { "path": "content/devops/revision/docker-commands-cheat-sheet.md", "title": "Docker Commands" },
+            { "path": "content/devops/revision/dockerfile-cheat-sheet.md", "title": "Dockerfile" },
+            { "path": "content/devops/revision/docker-compose-cheat-sheet.md", "title": "Docker Compose" },
+            { "path": "content/devops/revision/linux-deployment-cheat-sheet.md", "title": "Linux Deployment" },
+            { "path": "content/devops/revision/nginx-cheat-sheet.md", "title": "Nginx" },
+            { "path": "content/devops/revision/github-actions-cheat-sheet.md", "title": "GitHub Actions" },
+            { "path": "content/devops/revision/cicd-pipeline-cheat-sheet.md", "title": "CI/CD Pipeline" }
+          ]
+        },
+        {
+          "id": "quick-revision",
+          "title": "Quick Revision",
+          "description": "Seven short blocks, about ten minutes each: read all seven for a 70-minute revision, or only the blocks you need.",
+          "estimatedMinutes": 70,
+          "sources": [
+            { "path": "content/devops/revision/quick-1-devops-and-linux.md", "title": "Block 1: DevOps and Linux" },
+            { "path": "content/devops/revision/quick-2-docker-fundamentals.md", "title": "Block 2: Docker Fundamentals" },
+            { "path": "content/devops/revision/quick-3-dockerfile-and-networking.md", "title": "Block 3: Dockerfile and Networking" },
+            { "path": "content/devops/revision/quick-4-postgresql-and-compose.md", "title": "Block 4: PostgreSQL and Compose" },
+            { "path": "content/devops/revision/quick-5-vps-nginx-https.md", "title": "Block 5: VPS, Nginx and HTTPS" },
+            { "path": "content/devops/revision/quick-6-cicd-and-registry.md", "title": "Block 6: CI/CD and Registry" },
+            { "path": "content/devops/revision/quick-7-production-troubleshooting.md", "title": "Block 7: Production Troubleshooting" }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -44,6 +44,7 @@ function contents(summary) {
     summary.answers && `${plural(summary.answers, 'recorded answer')} (practice, interview, flashcards, knowledge checks)`,
     summary.plans && plural(summary.plans, 'study plan'),
     summary.notes && plural(summary.notes, 'note'),
+    summary.checks && plural(summary.checks, 'ticked checklist item'),
   ].filter(Boolean);
 }
 

@@ -53,13 +53,14 @@ export function mount(root, { interaction, topic }) {
       done && !isLast ? button('Next question', () => { current++; show(); focusPrompt(); }, 'btn-primary') : null,
       done && isLast ? button('See result', () => showResult(), 'btn-primary') : null);
 
-    stage.replaceChildren(
+    // replaceChildren() would print a null child as the text "null", so drop them.
+    stage.replaceChildren(...[
       el('p', { class: 'check-prompt', tabindex: -1 }, renderInline(q.prompt)),
       q.code ? codeBlock(q.code) : null,
       el('ul', { class: 'option-list', role: 'list' }, options),
       feedback,
       nav,
-    );
+    ].filter(Boolean));
   }
 
   function choose(i) {

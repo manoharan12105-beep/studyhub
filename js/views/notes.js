@@ -418,7 +418,8 @@ export function topicNotesSection(topic) {
     const mine = notes.forTopic(topic.id);
     const add = el('button', { type: 'button', class: 'btn btn-secondary btn-sm', 'data-focus-key': 'topic-notes-add' }, icon('plus', 16), 'Add note');
     add.addEventListener('click', () => openNoteEditor({ topicId: topic.id }));
-    section.replaceChildren(
+    // replaceChildren() would print a null child as the text "null", so drop them.
+    section.replaceChildren(...[
       el('div', { class: 'topic-notes-head' },
         el('h2', { class: 'topic-notes-title', id: 'topic-notes-title' }, 'Your notes', mine.length ? el('span', { class: 'muted' }, ` (${mine.length})`) : null),
         add),
@@ -433,7 +434,8 @@ export function topicNotesSection(topic) {
               el('button', { type: 'button', class: 'btn btn-ghost btn-sm', 'data-note-action': 'edit', 'data-id': note.id, 'data-focus-key': `edit:${note.id}` }, 'Edit', sr)));
         }))
         : el('p', { class: 'muted small topic-notes-empty' }, 'You haven’t taken any notes for this topic yet.'),
-      mine.length ? el('p', { class: 'small topic-notes-all' }, el('a', { href: href(['notes'], { topic: topic.id, subject: topic.category }) }, 'See these in My notes')) : null);
+      mine.length ? el('p', { class: 'small topic-notes-all' }, el('a', { href: href(['notes'], { topic: topic.id, subject: topic.category }) }, 'See these in My notes')) : null,
+    ].filter(Boolean));
   }
 
   section.addEventListener('click', (event) => {

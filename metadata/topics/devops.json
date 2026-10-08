@@ -1,0 +1,1314 @@
+{
+  "$schema": "../schemas/topics.schema.json",
+  "schemaVersion": 1,
+  "category": "devops",
+  "topics": [
+    {
+      "id": "devops-fundamentals",
+      "slug": "devops-fundamentals",
+      "title": "DevOps Fundamentals",
+      "category": "devops",
+      "subcategory": "devops-foundations",
+      "type": "concept",
+      "description": "DevOps from a Java backend developer's view: Dev vs Ops, the lifecycle, CI vs continuous delivery vs deployment, automation, immutable artifacts and environments.",
+      "difficulty": "beginner",
+      "tags": [
+        "devops",
+        "ci-cd",
+        "continuous-delivery",
+        "immutable-infrastructure",
+        "environments"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "linux-for-deployment",
+        "cd-automated-deployment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "linux-for-deployment",
+      "slug": "linux-for-deployment",
+      "title": "Linux for Deployment",
+      "category": "devops",
+      "subcategory": "devops-foundations",
+      "type": "concept",
+      "description": "The Linux a deployment needs: SSH keys, users, permissions, processes, ports, services, environment variables, logs, disk and memory, firewall and server troubleshooting.",
+      "difficulty": "beginner",
+      "tags": [
+        "linux",
+        "ssh",
+        "ufw",
+        "systemctl",
+        "troubleshooting"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "devops-fundamentals"
+      ],
+      "relatedTopics": [
+        "ssh-and-remote-access",
+        "vps-deployment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "docker-fundamentals",
+      "slug": "docker-fundamentals",
+      "title": "Docker Fundamentals: Images, Containers and Registries",
+      "category": "devops",
+      "subcategory": "docker",
+      "type": "concept",
+      "description": "Why containers, containers vs VMs, namespaces and cgroups, Docker architecture, images and layers, the container lifecycle, Docker Hub and registries.",
+      "difficulty": "beginner",
+      "tags": [
+        "docker",
+        "containers",
+        "images",
+        "layers",
+        "container-lifecycle"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "devops-fundamentals"
+      ],
+      "relatedTopics": [
+        "docker-cli-commands",
+        "dockerfile-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "docker-cli-commands",
+      "slug": "docker-cli-commands",
+      "title": "Docker CLI Commands",
+      "category": "devops",
+      "subcategory": "docker",
+      "type": "reference",
+      "description": "pull, images, build, run, ps, stop, start, restart, rm, rmi, logs, exec, inspect, stats and cp — purpose, syntax, expected behaviour, mistakes and troubleshooting.",
+      "difficulty": "beginner",
+      "tags": [
+        "docker",
+        "docker-cli",
+        "docker-run",
+        "docker-logs",
+        "exit-codes"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "docker-fundamentals"
+      ],
+      "relatedTopics": [
+        "dockerfile-fundamentals",
+        "logging-monitoring-and-health"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "dockerfile-fundamentals",
+      "slug": "dockerfile-fundamentals",
+      "title": "Writing a Dockerfile",
+      "category": "devops",
+      "subcategory": "docker",
+      "type": "concept",
+      "description": "Dockerfile instructions, CMD vs ENTRYPOINT, COPY vs ADD, ARG vs ENV, build context and .dockerignore, layer caching, JDK vs JRE images and multi-stage Java builds.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dockerfile",
+        "multi-stage-build",
+        "layer-caching",
+        "cmd-vs-entrypoint",
+        "jvm-in-containers"
+      ],
+      "estimatedMinutes": 40,
+      "order": 3,
+      "prerequisites": [
+        "docker-fundamentals"
+      ],
+      "relatedTopics": [
+        "spring-boot-in-docker",
+        "docker-deployment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "spring-boot-in-docker",
+      "slug": "spring-boot-in-docker",
+      "title": "Spring Boot in Docker",
+      "category": "devops",
+      "subcategory": "docker",
+      "type": "concept",
+      "description": "Packaging the Task API, building and running its image, port mapping, environment variables and profiles, production configuration, logs and health endpoints.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-boot",
+        "docker",
+        "port-mapping",
+        "profiles",
+        "actuator"
+      ],
+      "estimatedMinutes": 35,
+      "order": 4,
+      "prerequisites": [
+        "dockerfile-fundamentals"
+      ],
+      "relatedTopics": [
+        "docker-networking",
+        "production-configuration",
+        "actuator-and-monitoring"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "docker-networking",
+      "slug": "docker-networking",
+      "title": "Docker Networking",
+      "category": "devops",
+      "subcategory": "docker",
+      "type": "concept",
+      "description": "Bridge and user-defined networks, container-to-container communication by name, Docker DNS, ports vs EXPOSE, and why Spring Boot must not use localhost for PostgreSQL.",
+      "difficulty": "intermediate",
+      "tags": [
+        "docker-networking",
+        "docker-dns",
+        "bridge-network",
+        "localhost",
+        "service-names"
+      ],
+      "estimatedMinutes": 30,
+      "order": 5,
+      "prerequisites": [
+        "spring-boot-in-docker"
+      ],
+      "relatedTopics": [
+        "postgresql-in-docker",
+        "docker-compose"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "postgresql-in-docker",
+      "slug": "postgresql-in-docker",
+      "title": "PostgreSQL in Docker: Volumes, Backup and Restore",
+      "category": "devops",
+      "subcategory": "docker",
+      "type": "concept",
+      "description": "Running PostgreSQL 18 in a container: configuration, initialization, port mapping, named volumes vs bind mounts, container vs data deletion, pg_dump backups and restores.",
+      "difficulty": "intermediate",
+      "tags": [
+        "postgresql",
+        "docker-volumes",
+        "bind-mounts",
+        "backup",
+        "pg-dump"
+      ],
+      "estimatedMinutes": 35,
+      "order": 6,
+      "prerequisites": [
+        "docker-networking"
+      ],
+      "relatedTopics": [
+        "docker-compose",
+        "production-security-basics"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "docker-compose",
+      "slug": "docker-compose",
+      "title": "Docker Compose",
+      "category": "devops",
+      "subcategory": "docker",
+      "type": "concept",
+      "description": "Services, networks, volumes, environment, ports, depends_on, health checks and restart policies; the complete Spring Boot + PostgreSQL compose.yaml; down vs down -v.",
+      "difficulty": "intermediate",
+      "tags": [
+        "docker-compose",
+        "healthcheck",
+        "depends-on",
+        "restart-policy",
+        "compose-yaml"
+      ],
+      "estimatedMinutes": 40,
+      "order": 7,
+      "prerequisites": [
+        "postgresql-in-docker"
+      ],
+      "relatedTopics": [
+        "configuration-and-secrets",
+        "vps-deployment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "configuration-and-secrets",
+      "slug": "configuration-and-secrets",
+      "title": "Configuration and Secrets",
+      "category": "devops",
+      "subcategory": "production-readiness",
+      "type": "concept",
+      "description": "Environment variables, .env files, Spring Boot precedence and profiles, database credentials, JWT secrets, API keys, GitHub Secrets and why secrets never go into Git.",
+      "difficulty": "intermediate",
+      "tags": [
+        "configuration",
+        "secrets",
+        "env-file",
+        "github-secrets",
+        "spring-profiles"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "docker-compose"
+      ],
+      "relatedTopics": [
+        "production-preparation",
+        "externalized-configuration"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "production-preparation",
+      "slug": "production-preparation",
+      "title": "Production Preparation for Spring Boot",
+      "category": "devops",
+      "subcategory": "production-readiness",
+      "type": "concept",
+      "description": "Production profile, migrations, logging, health checks, error handling, CORS, secure configuration, JVM sizing, graceful shutdown, restart policies and a readiness checklist.",
+      "difficulty": "intermediate",
+      "tags": [
+        "production-readiness",
+        "graceful-shutdown",
+        "cors",
+        "flyway",
+        "health-checks"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "configuration-and-secrets"
+      ],
+      "relatedTopics": [
+        "vps-deployment",
+        "production-configuration"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "vps-deployment",
+      "slug": "vps-deployment",
+      "title": "Deploying to a Linux VPS",
+      "category": "devops",
+      "subcategory": "server-deployment",
+      "type": "concept",
+      "description": "A provider-independent VPS deployment: SSH hardening, firewall, Docker and Compose installation, configuration upload, starting, checking, updating and rolling back.",
+      "difficulty": "intermediate",
+      "tags": [
+        "vps",
+        "deployment",
+        "docker-install",
+        "ufw",
+        "rollback"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "production-preparation",
+        "linux-for-deployment"
+      ],
+      "relatedTopics": [
+        "nginx-reverse-proxy",
+        "lab-deploy-to-vps"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "nginx-reverse-proxy",
+      "slug": "nginx-reverse-proxy",
+      "title": "Nginx as a Reverse Proxy",
+      "category": "devops",
+      "subcategory": "server-deployment",
+      "type": "concept",
+      "description": "Reverse proxies, why Nginx, the client → Nginx → Spring Boot path, proxy headers, static files vs proxying, security headers, WebSockets, logs and 502/504 errors.",
+      "difficulty": "intermediate",
+      "tags": [
+        "nginx",
+        "reverse-proxy",
+        "proxy-pass",
+        "502",
+        "security-headers"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "vps-deployment"
+      ],
+      "relatedTopics": [
+        "domain-dns-and-https",
+        "reverse-proxy-and-api-gateway"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "domain-dns-and-https",
+      "slug": "domain-dns-and-https",
+      "title": "Domain, DNS and HTTPS",
+      "category": "devops",
+      "subcategory": "server-deployment",
+      "type": "concept",
+      "description": "Domains, A records, TTL and propagation, HTTP vs HTTPS, TLS basics, Let's Encrypt with Certbot, automatic renewal and the HTTP-to-HTTPS redirect.",
+      "difficulty": "intermediate",
+      "tags": [
+        "dns",
+        "a-record",
+        "https",
+        "tls",
+        "lets-encrypt"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "nginx-reverse-proxy"
+      ],
+      "relatedTopics": [
+        "tls-handshake-and-https",
+        "dns-record-types"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "ci-with-github-actions",
+      "slug": "ci-with-github-actions",
+      "title": "CI with GitHub Actions",
+      "category": "devops",
+      "subcategory": "ci-cd",
+      "type": "concept",
+      "description": "Continuous integration with GitHub Actions: workflows, triggers, jobs, steps, Java setup, Maven build and tests against a PostgreSQL service container, artifacts and Docker build.",
+      "difficulty": "intermediate",
+      "tags": [
+        "github-actions",
+        "continuous-integration",
+        "workflow",
+        "maven",
+        "service-containers"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "devops-fundamentals",
+        "dockerfile-fundamentals"
+      ],
+      "relatedTopics": [
+        "container-registry",
+        "cd-automated-deployment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "container-registry",
+      "slug": "container-registry",
+      "title": "Container Registries and Image Tags",
+      "category": "devops",
+      "subcategory": "ci-cd",
+      "type": "concept",
+      "description": "Docker Hub and GitHub Container Registry, image names and tags, versioning by commit SHA, authentication, push and pull, and public vs private images.",
+      "difficulty": "intermediate",
+      "tags": [
+        "container-registry",
+        "ghcr",
+        "docker-hub",
+        "image-tags",
+        "versioning"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "ci-with-github-actions"
+      ],
+      "relatedTopics": [
+        "cd-automated-deployment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "cd-automated-deployment",
+      "slug": "cd-automated-deployment",
+      "title": "CD and Automated Deployment",
+      "category": "devops",
+      "subcategory": "ci-cd",
+      "type": "concept",
+      "description": "Continuous delivery vs deployment, an SSH deploy job with environment secrets, a deploy script that pulls, restarts, checks health and rolls back automatically.",
+      "difficulty": "advanced",
+      "tags": [
+        "continuous-deployment",
+        "continuous-delivery",
+        "ssh-deploy",
+        "health-check",
+        "rollback"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "container-registry",
+        "vps-deployment"
+      ],
+      "relatedTopics": [
+        "logging-monitoring-and-health",
+        "lab-automated-cd-deployment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "logging-monitoring-and-health",
+      "slug": "logging-monitoring-and-health",
+      "title": "Logging, Monitoring and Health",
+      "category": "devops",
+      "subcategory": "operations",
+      "type": "concept",
+      "description": "Application, Docker, Nginx and PostgreSQL logs, log rotation, health checks, uptime monitoring, CPU/memory/disk inspection and a guide to common production failures.",
+      "difficulty": "intermediate",
+      "tags": [
+        "logging",
+        "monitoring",
+        "health-checks",
+        "troubleshooting",
+        "log-rotation"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "docker-compose",
+        "nginx-reverse-proxy"
+      ],
+      "relatedTopics": [
+        "production-security-basics",
+        "monitoring-and-alerting"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "production-security-basics",
+      "slug": "production-security-basics",
+      "title": "Security and Production Basics",
+      "category": "devops",
+      "subcategory": "operations",
+      "type": "concept",
+      "description": "SSH keys, firewalls and exposed ports, private databases, secrets, least privilege, HTTPS, package and image updates, backup strategy and attack-surface awareness.",
+      "difficulty": "intermediate",
+      "tags": [
+        "security",
+        "least-privilege",
+        "firewall",
+        "backups",
+        "attack-surface"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "vps-deployment"
+      ],
+      "relatedTopics": [
+        "configuration-and-secrets",
+        "deployment-checklist"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "devops-lab-setup",
+      "slug": "devops-lab-setup",
+      "title": "Lab Setup and the Sample Application",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Tools, how labs are written and verified, and the complete tested source of the Task API (Spring Boot 4.1, JDK 21, PostgreSQL) used by every lab.",
+      "difficulty": "beginner",
+      "tags": [
+        "labs",
+        "sample-application",
+        "spring-boot",
+        "setup"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "spring-boot-in-docker"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-first-docker-container",
+      "slug": "lab-first-docker-container",
+      "title": "Lab 01 — Run Your First Docker Container",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Pull an image, run Nginx with a published port, read logs, exec into the container, and stop, start and remove it.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "docker",
+        "docker-run"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "docker-cli-commands"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-custom-docker-image",
+      "slug": "lab-custom-docker-image",
+      "title": "Lab 02 — Build a Custom Docker Image",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Write a Dockerfile for a static page, build and tag it, rebuild after a change and see the layer cache and .dockerignore at work.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "dockerfile",
+        "docker-build"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "dockerfile-fundamentals"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-dockerize-java-application",
+      "slug": "lab-dockerize-java-application",
+      "title": "Lab 03 — Dockerize a Java Application",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Take a plain Java HTTP server from source to a multi-stage image and a running container configured by environment variables.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "java",
+        "multi-stage-build"
+      ],
+      "estimatedMinutes": 40,
+      "order": 4,
+      "prerequisites": [
+        "dockerfile-fundamentals"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-spring-boot-in-docker",
+      "slug": "lab-spring-boot-in-docker",
+      "title": "Lab 04 — Run Spring Boot Inside Docker",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Build the Task API image, prove the layer cache, run it with the prod profile and environment variables, call the API and stop it gracefully.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "spring-boot",
+        "docker"
+      ],
+      "estimatedMinutes": 45,
+      "order": 5,
+      "prerequisites": [
+        "spring-boot-in-docker"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-postgresql-in-docker",
+      "slug": "lab-postgresql-in-docker",
+      "title": "Lab 05 — Run PostgreSQL Inside Docker",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Run PostgreSQL 18 with a named volume, connect with psql, and see why POSTGRES_* variables apply only to an empty data directory.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "postgresql",
+        "docker-volumes"
+      ],
+      "estimatedMinutes": 30,
+      "order": 6,
+      "prerequisites": [
+        "postgresql-in-docker"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-connect-spring-boot-to-postgresql",
+      "slug": "lab-connect-spring-boot-to-postgresql",
+      "title": "Lab 06 — Connect Spring Boot to PostgreSQL",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Connect the Task API and PostgreSQL containers on one network by name, watch Flyway migrate, and reproduce the three classic connection errors.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "docker-networking",
+        "flyway"
+      ],
+      "estimatedMinutes": 40,
+      "order": 7,
+      "prerequisites": [
+        "docker-networking"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-persistent-postgresql-volume",
+      "slug": "lab-persistent-postgresql-volume",
+      "title": "Lab 07 — Persistent PostgreSQL Volume",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Prove data survives container deletion with a named volume, lose it without one, and back up and restore with pg_dump and pg_restore.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "docker-volumes",
+        "backup"
+      ],
+      "estimatedMinutes": 40,
+      "order": 8,
+      "prerequisites": [
+        "postgresql-in-docker"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-docker-networking",
+      "slug": "lab-docker-networking",
+      "title": "Lab 08 — Docker Networking",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Demonstrate default vs user-defined networks, Docker DNS, localhost inside containers and container vs published ports.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "docker-networking",
+        "docker-dns"
+      ],
+      "estimatedMinutes": 30,
+      "order": 9,
+      "prerequisites": [
+        "docker-networking"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-docker-compose-application",
+      "slug": "lab-docker-compose-application",
+      "title": "Lab 09 — Docker Compose Application",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Run the whole Task API stack with one compose.yaml, practise the Compose lifecycle and see the difference between down and down -v.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "docker-compose"
+      ],
+      "estimatedMinutes": 45,
+      "order": 10,
+      "prerequisites": [
+        "docker-compose"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-production-configuration",
+      "slug": "lab-production-configuration",
+      "title": "Lab 10 — Environment Variables and Production Configuration",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Keep secrets out of Git, prove production fails fast without its variables, restrict CORS and check Actuator exposure and error responses.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "configuration",
+        "secrets"
+      ],
+      "estimatedMinutes": 40,
+      "order": 11,
+      "prerequisites": [
+        "configuration-and-secrets",
+        "production-preparation"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-deploy-to-vps",
+      "slug": "lab-deploy-to-vps",
+      "title": "Lab 11 — Deploy to a Linux VPS",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Harden a new VPS, install Docker, upload configuration and the image, start the stack and reach it at PUBLIC_IP:8080.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "vps",
+        "deployment"
+      ],
+      "estimatedMinutes": 90,
+      "order": 12,
+      "prerequisites": [
+        "vps-deployment"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-nginx-reverse-proxy",
+      "slug": "lab-nginx-reverse-proxy",
+      "title": "Lab 12 — Configure Nginx as a Reverse Proxy",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Put Nginx on port 80 in front of the Task API, make the app private on 127.0.0.1 and diagnose a 502.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "nginx",
+        "reverse-proxy"
+      ],
+      "estimatedMinutes": 45,
+      "order": 13,
+      "prerequisites": [
+        "nginx-reverse-proxy"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-connect-domain",
+      "slug": "lab-connect-domain",
+      "title": "Lab 13 — Connect a Domain to the VPS",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Create an A record, verify resolution with dig and serve the API under its domain name.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "dns",
+        "domain"
+      ],
+      "estimatedMinutes": 30,
+      "order": 14,
+      "prerequisites": [
+        "domain-dns-and-https"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-enable-https",
+      "slug": "lab-enable-https",
+      "title": "Lab 14 — Enable HTTPS with Let's Encrypt",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Obtain a certificate with Certbot, redirect HTTP to HTTPS, add security headers and confirm automatic renewal.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "https",
+        "certbot"
+      ],
+      "estimatedMinutes": 40,
+      "order": 15,
+      "prerequisites": [
+        "domain-dns-and-https"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-github-actions-ci",
+      "slug": "lab-github-actions-ci",
+      "title": "Lab 15 — GitHub Actions CI",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Push the project to GitHub, build and test every change against a PostgreSQL service container and protect the main branch.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "github-actions",
+        "ci"
+      ],
+      "estimatedMinutes": 45,
+      "order": 16,
+      "prerequisites": [
+        "ci-with-github-actions"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-push-image-to-registry",
+      "slug": "lab-push-image-to-registry",
+      "title": "Lab 16 — Push the Docker Image to a Registry",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Publish SHA-tagged images to GitHub Container Registry from Actions and pull them on the VPS with a read-only token.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "ghcr",
+        "registry"
+      ],
+      "estimatedMinutes": 40,
+      "order": 17,
+      "prerequisites": [
+        "container-registry"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-automated-cd-deployment",
+      "slug": "lab-automated-cd-deployment",
+      "title": "Lab 17 — Automated CD Deployment",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Complete the pipeline with an SSH deploy job, a health-checked deploy script and a proven automatic rollback.",
+      "difficulty": "advanced",
+      "tags": [
+        "lab",
+        "continuous-deployment",
+        "rollback"
+      ],
+      "estimatedMinutes": 60,
+      "order": 18,
+      "prerequisites": [
+        "cd-automated-deployment"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "lab-production-troubleshooting",
+      "slug": "lab-production-troubleshooting",
+      "title": "Lab 18 — Production Troubleshooting",
+      "category": "devops",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Inject and diagnose wrong hostnames, missing variables, database outages, port conflicts and Nginx 502s, and investigate disk usage safely.",
+      "difficulty": "advanced",
+      "tags": [
+        "lab",
+        "troubleshooting",
+        "incident-response"
+      ],
+      "estimatedMinutes": 60,
+      "order": 19,
+      "prerequisites": [
+        "logging-monitoring-and-health"
+      ],
+      "relatedTopics": [],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "deployment-project-taskapi",
+      "slug": "deployment-project-taskapi",
+      "title": "Capstone: Deploy a Spring Boot + PostgreSQL API End to End",
+      "category": "devops",
+      "subcategory": "deployment-project",
+      "type": "reference",
+      "description": "The complete project: GitHub → Actions → image → GHCR → VPS → Compose → Nginx → HTTPS → Spring Boot → PostgreSQL → volume, with every file and what was verified.",
+      "difficulty": "advanced",
+      "tags": [
+        "capstone",
+        "deployment",
+        "architecture",
+        "ci-cd",
+        "docker-compose"
+      ],
+      "estimatedMinutes": 60,
+      "order": 1,
+      "prerequisites": [
+        "cd-automated-deployment"
+      ],
+      "relatedTopics": [
+        "deployment-checklist",
+        "devops-lab-setup"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "deployment-checklist",
+      "slug": "deployment-checklist",
+      "title": "End-to-End Deployment Checklist",
+      "category": "devops",
+      "subcategory": "deployment-project",
+      "type": "reference",
+      "description": "Twenty-six checks from Git repository to monitored, backed-up HTTPS service, each with why it matters and how to verify it, plus an interactive checklist.",
+      "difficulty": "intermediate",
+      "tags": [
+        "checklist",
+        "deployment",
+        "production-readiness"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "deployment-project-taskapi"
+      ],
+      "relatedTopics": [
+        "production-preparation",
+        "production-security-basics"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "devops-interview-questions",
+      "slug": "devops-interview-questions",
+      "title": "DevOps and Docker Interview Questions",
+      "category": "devops",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Thirty core questions on Docker, Dockerfiles, networking, volumes, Compose, CI/CD, registries, Nginx, HTTPS, health checks, security and scaling basics.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "docker",
+        "ci-cd",
+        "nginx"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "docker-compose",
+        "cd-automated-deployment"
+      ],
+      "relatedTopics": [
+        "devops-scenario-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "devops-scenario-interview-questions",
+      "slug": "devops-scenario-interview-questions",
+      "title": "DevOps Scenario and Troubleshooting Questions",
+      "category": "devops",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Scenario, debugging and production-failure questions: 502s, restart loops, lost data, expired certificates, leaked secrets and zero-downtime deployments.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "scenarios",
+        "troubleshooting",
+        "production-failure"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "logging-monitoring-and-health"
+      ],
+      "relatedTopics": [
+        "devops-interview-questions",
+        "lab-production-troubleshooting"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-08"
+    }
+  ]
+}

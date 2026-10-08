@@ -11,7 +11,8 @@
 // in one step (storage.writeAll rolls back on failure). "plans" was added after
 // the first backups were made: a backup without it leaves this browser's study
 // plans as they are, so older backups still restore exactly what they hold.
-// "notes" (js/notes.js) works the same way.
+// "notes" (js/notes.js) and "checklists" (interactive checklists such as
+// js/visualizers/deployment-checklist.js) work the same way.
 
 import { read, writeAll } from './storage.js';
 import { isItemKey } from './plan-schedule.js';
@@ -20,8 +21,8 @@ import { cleanNote, MAX_NOTES } from './notes.js';
 const PREFIX = 'STUDYHUB-PROGRESS:';
 const FORMAT = 'studyhub-progress';
 export const VERSION = 1;
-export const ALLOWLIST = ['progress', 'bookmarks', 'history', 'questions', 'plans', 'notes'];
-const OPTIONAL = new Set(['plans', 'notes']); // absent in older backups: keep the local value
+export const ALLOWLIST = ['progress', 'bookmarks', 'history', 'questions', 'plans', 'notes', 'checklists'];
+const OPTIONAL = new Set(['plans', 'notes', 'checklists']); // absent in older backups: keep the local value
 
 // Limits keep a pasted text from filling storage or freezing the page.
 const MAX_TEXT = 4_000_000;
@@ -206,8 +207,27 @@ function cleanNotes(value, strict) {
   return out.slice(0, MAX_NOTES);
 }
 
-const CLEANERS = { progress: cleanProgress, bookmarks: cleanBookmarks, history: cleanHistory, questions: cleanQuestions, plans: cleanPlans, notes: cleanNotes };
-const EMPTY = { progress: () => ({}), bookmarks: () => [], history: () => [], questions: () => ({}), plans: () => ({ active: null, plans: [] }), notes: () => [] };
+/**
+ * Checklists: { "<interaction-id>": ["<item-id>", …] } — the ticked items of each
+ * interactive checklist. Ids only; unknown checklist or item ids are harmless
+ * (the checklist ignores them), so only the shape is checked.
+ */
+const MAX_CHECKLISTS = 50;
+const MAX_CHECKLIST_ITEMS = 200;
+function cleanChecklists(value, strict) {
+  if (!isPlainObject(value) || (strict && Object.keys(value).length > MAX_CHECKLISTS)) throw invalid();
+  const out = Object.create(null);
+  for (const [id, items] of Object.entries(value).slice(0, MAX_CHECKLISTS)) {
+    const ok = isIdText(id) && Array.isArray(items) && items.length <= MAX_CHECKLIST_ITEMS
+      && items.every((item) => isIdText(item, 80)) && new Set(items).size === items.length;
+    if (!ok) { if (strict) throw invalid(); continue; }
+    if (items.length) out[id] = [...items];
+  }
+  return out;
+}
+
+const CLEANERS = { progress: cleanProgress, bookmarks: cleanBookmarks, history: cleanHistory, questions: cleanQuestions, plans: cleanPlans, notes: cleanNotes, checklists: cleanChecklists };
+const EMPTY = { progress: () => ({}), bookmarks: () => [], history: () => [], questions: () => ({}), plans: () => ({ active: null, plans: [] }), notes: () => [], checklists: () => ({}) };
 
 function cleanData(data, strict) {
   if (!isPlainObject(data)) throw invalid();
@@ -240,11 +260,12 @@ export function summarize(data) {
     plansIncluded: data.plans !== undefined,
     notes: data.notes ? data.notes.length : 0,
     notesIncluded: data.notes !== undefined,
+    checks: data.checklists ? Object.values(data.checklists).reduce((n, items) => n + items.length, 0) : 0,
   };
 }
 
 export function isEmpty(summary) {
-  return ['completed', 'inProgress', 'bookmarks', 'history', 'answers', 'plans', 'notes'].every((key) => !summary[key]);
+  return ['completed', 'inProgress', 'bookmarks', 'history', 'answers', 'plans', 'notes', 'checks'].every((key) => !summary[key]);
 }
 
 /** This browser's state, cleaned the same way an import is checked. */

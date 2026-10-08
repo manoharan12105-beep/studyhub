@@ -3,6 +3,14 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-08-devops",
+      "date": "2026-10-08",
+      "title": "DevOps & Deployment",
+      "description": "42 topics in 9 modules — DevOps foundations, Linux for deployment, Docker, Dockerfiles, networking, PostgreSQL volumes, Compose, configuration and secrets, VPS deployment, Nginx, HTTPS, GitHub Actions CI/CD, registries, monitoring and security — with 18 hands-on labs, a capstone Spring Boot + PostgreSQL deployment project, 11 simulations, visualizers and tools (including an interactive deployment checklist), 12 checks, comparisons and flashcard decks, Revision, Cheat Sheets, Quick Revision and a new DevOps & Deployment study plan.",
+      "type": "content",
+      "link": "#/c/devops"
+    },
+    {
       "id": "2026-10-08-notes",
       "date": "2026-10-08",
       "title": "My notes",

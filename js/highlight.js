@@ -110,6 +110,19 @@ const LANGUAGES = {
       ['number', String.raw`\b\d+\b`],
     ],
   },
+  // Nginx configuration (DevOps subject): directives at the start of a line,
+  // $variables, quoted strings, sizes/timeouts and on/off.
+  nginx: {
+    flags: 'm',
+    rules: [
+      ['comment', String.raw`#[^\n]*`],
+      ['string', `${DQ_STRING}|${SQ_STRING}`],
+      ['annotation', String.raw`\$\w+`],
+      ['keyword', String.raw`^[ \t]*[a-z_0-9]+(?=[ \t{;])`],
+      ['literal', String.raw`\b(?:on|off)\b`],
+      ['number', String.raw`\b\d+[kmgsKMG]?\b`],
+    ],
+  },
   pseudocode: {
     flags: 'i',
     rules: [
