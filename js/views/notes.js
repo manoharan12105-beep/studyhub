@@ -4,10 +4,15 @@
 // The notes page has its own search and filters (the global search index never
 // holds notes). Names come from metadata through the stored ids. Filter state
 // lives in the URL query (replaceState), so Back from a note returns to the same list.
+//
+// Note text is Markdown: the note page renders it with the lesson renderer (raw
+// HTML escaped, images never loaded); cards and previews show it as plain text.
+// Notes download as .md files (one note, or every note currently listed).
 
-import { el, icon, debounce, timeAgo } from '../util.js';
+import { el, icon, debounce, timeAgo, slugify, announce } from '../util.js';
 import { getCategory, getTopic, categoriesInDisplayOrder, index, isAvailable } from '../content-loader.js';
 import { href } from '../router.js';
+import { renderMarkdown } from '../markdown-renderer.js';
 import * as notes from '../notes.js';
 import * as engine from '../study-engine.js';
 import { track } from '../engagement/registry.js';
@@ -52,8 +57,21 @@ function pathText({ category, sub, topic }) {
   return [category?.title, sub?.title, topic?.title || 'Topic no longer available'].filter(Boolean).join(' → ');
 }
 
+/** Markdown → readable plain text for previews (syntax markers removed, words kept). */
+export function plainText(markdown) {
+  return markdown
+    .replace(/^\s*(```|~~~).*$/gm, '') // code fence lines
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1') // images → alt text
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1') // links → link text
+    .replace(/^\s{0,3}(?:#{1,6}|>+|[-*+]|\d+[.)])\s+/gm, '') // headings, quotes, list markers
+    .replace(/\[!(?:NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/g, '')
+    .replace(/^\s*\|?(?:\s*:?-{3,}:?\s*\|)+\s*:?-*:?\s*$/gm, '') // table separator rows
+    .replace(/\|/g, ' ') // table cell borders
+    .replace(/(\*\*|__|\*|_|~~|`)(?=\S)([^\n]*?\S)\1/g, '$2'); // emphasis, inline code (one line)
+}
+
 function preview(text) {
-  const flat = text.replace(/\s+/g, ' ').trim();
+  const flat = plainText(text).replace(/\s+/g, ' ').trim();
   return flat.length > PREVIEW ? `${flat.slice(0, PREVIEW).trimEnd()}…` : flat;
 }
 
@@ -63,6 +81,44 @@ function studyTarget() {
   if (next) return href(['t', next.topic.id]);
   const first = index.categories.find(isAvailable)?.topics[0];
   return first ? href(['t', first.id]) : '#/';
+}
+
+// ---- Markdown files -------------------------------------------------------------------
+
+/** One note as a Markdown document: title, where it belongs, dates, then the note itself. */
+export function noteToMarkdown(note) {
+  return [
+    `# ${note.title}`,
+    '',
+    `> ${pathText(names(note))} · created ${formatDate(note.createdAt)} · updated ${formatDate(note.updatedAt)}`,
+    '',
+    note.content,
+    '',
+  ].join('\n');
+}
+
+/** Save text as a local file through a Blob URL — nothing leaves the browser. */
+function downloadFile(name, text) {
+  const url = URL.createObjectURL(new Blob([text], { type: 'text/markdown;charset=utf-8' }));
+  const link = el('a', { href: url, download: name, hidden: '' });
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  announce(`Downloaded ${name}`);
+}
+
+function fileName(title) {
+  return `${slugify(title).replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'note'}.md`;
+}
+
+export function downloadNote(note) {
+  downloadFile(fileName(note.title), noteToMarkdown(note));
+}
+
+function downloadNotes(list) {
+  const today = new Date().toISOString().slice(0, 10);
+  downloadFile(`studyhub-notes-${today}.md`, list.map(noteToMarkdown).join('\n---\n\n'));
 }
 
 function privacyNote() {
@@ -119,6 +175,10 @@ export function renderNotes(main, { query }) {
   setOptions(ctl.sort, Object.entries(SORT_LABELS), state.sort);
 
   const count = el('p', { class: 'muted small notes-count', id: 'notes-count', 'aria-live': 'polite' });
+  let shownNotes = [];
+  const downloadAll = el('button', { type: 'button', class: 'btn btn-ghost btn-sm' }, icon('download', 16), 'Download .md');
+  downloadAll.addEventListener('click', () => { if (shownNotes.length) downloadNotes(shownNotes); });
+  const countRow = el('div', { class: 'notes-count-row' }, count, downloadAll);
   const list = el('ul', { class: 'note-list', role: 'list' });
   const results = el('div', {});
   const controls = el('div', { class: 'notes-controls' },
@@ -146,7 +206,7 @@ export function renderNotes(main, { query }) {
         privacyNote());
       return;
     }
-    if (!page.contains(controls)) page.replaceChildren(heading, privacyNote(), controls, count, results);
+    if (!page.contains(controls)) page.replaceChildren(heading, privacyNote(), controls, countRow, results);
     syncOptions();
     run();
   }
@@ -230,6 +290,9 @@ export function renderNotes(main, { query }) {
       return terms.every((term) => hay.includes(term));
     }).sort((a, b) => SORTS[state.sort](a.note, b.note));
 
+    shownNotes = shown.map((row) => row.note);
+    downloadAll.hidden = !shown.length;
+    downloadAll.setAttribute('aria-label', shown.length === 1 ? 'Download this note as a Markdown file' : `Download these ${shown.length} notes as one Markdown file`);
     const filtered = state.q || state.subject || state.module || state.topic || state.date !== 'any';
     count.textContent = filtered
       ? `Showing ${shown.length} of ${all.length} note${all.length === 1 ? '' : 's'}`
@@ -313,6 +376,8 @@ export function renderNote(main, { id }) {
     const n = names(note);
     const edit = el('button', { type: 'button', class: 'btn btn-secondary', 'data-focus-key': `edit:${note.id}` }, icon('note', 16), 'Edit');
     const del = el('button', { type: 'button', class: 'btn btn-ghost btn-danger-text' }, 'Delete');
+    const download = el('button', { type: 'button', class: 'btn btn-ghost' }, icon('download', 16), 'Download .md');
+    download.addEventListener('click', () => downloadNote(note));
     edit.addEventListener('click', () => openNoteEditor({ noteId: note.id }));
     del.addEventListener('click', () => confirmDeleteNote(note.id, { onDeleted: () => { window.location.hash = '#/notes'; } }));
     const openTopic = n.topic
@@ -329,13 +394,13 @@ export function renderNote(main, { id }) {
       pageHeader({
         crumbs: [{ label: 'Dashboard', href: '#/' }, { label: 'My notes', href: '#/notes' }, { label: note.title }],
         title: note.title,
-        actions: [edit, del, openTopic],
+        actions: [edit, download, del, openTopic],
       }),
       el('p', { class: 'note-trail' }, el('span', { class: 'sr-only' }, 'Topic: '), trail.map((node, i) => [i ? el('span', { class: 'note-trail-sep', 'aria-hidden': 'true' }, ' → ') : null, node])),
       el('dl', { class: 'note-dates' },
         el('div', {}, el('dt', {}, 'Created'), el('dd', {}, el('time', { datetime: note.createdAt }, formatDateTime(note.createdAt)))),
         el('div', {}, el('dt', {}, 'Updated'), el('dd', {}, el('time', { datetime: note.updatedAt }, formatDateTime(note.updatedAt))))),
-      el('div', { class: 'note-body' }, note.content),
+      el('div', { class: 'note-body' }, renderMarkdown(note.content, { idPrefix: 'note-', breaks: true, noImages: true }).node),
       privacyNote()));
     return { title: note.title };
   }

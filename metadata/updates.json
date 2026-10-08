@@ -6,7 +6,7 @@
       "id": "2026-10-08-notes",
       "date": "2026-10-08",
       "title": "My notes",
-      "description": "Take plain-text notes on any topic with Add note; each note is linked to its subject, module and topic, and My notes lets you search, filter by subject, module, topic or date, sort, and jump back to the topic. Notes stay in this browser and travel with Progress Import / Export.",
+      "description": "Take Markdown notes on any topic with Add note, or import a .md file; each note is linked to its subject, module and topic, and My notes lets you search, filter by subject, module, topic or date, sort, download notes as .md files and jump back to the topic. Notes stay in this browser and travel with Progress Import / Export.",
       "type": "improvement",
       "link": "#/notes"
     },

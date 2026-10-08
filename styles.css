@@ -1634,6 +1634,13 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 .note-discard { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--space-2) var(--space-3); width: 100%; }
 .note-discard-q { margin: 0; font-weight: 600; }
 .note-discard-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.note-field-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.note-preview { min-height: 10rem; max-height: 50vh; overflow: auto; padding: var(--space-2) var(--space-3); border: 1px solid var(--border-strong); border-radius: var(--radius-sm); background: var(--surface-2); overflow-wrap: anywhere; }
+.note-preview[hidden], .note-textarea[hidden] { display: none; }
+.note-preview .markdown-body { font-size: var(--text-base); }
+.note-import { display: flex; justify-content: flex-start; }
+.notes-count-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); margin: 0 0 var(--space-3); }
+.notes-count-row .notes-count { margin: 0; }
 .note-delete-title { font-weight: 650; overflow-wrap: anywhere; }
 
 .notes-controls { display: grid; gap: var(--space-3); margin: var(--space-4) 0 var(--space-3); }
@@ -1665,7 +1672,9 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 .note-dates div { display: flex; gap: var(--space-2); }
 .note-dates dt { color: var(--text-muted); }
 .note-dates dd { margin: 0; }
-.note-body { max-width: var(--measure); padding: var(--space-4) var(--space-5); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.65; }
+.note-body { max-width: var(--measure); padding: var(--space-4) var(--space-5); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); overflow-wrap: anywhere; }
+.note-body > .markdown-body > :first-child, .note-preview > .markdown-body > :first-child { margin-top: 0; }
+.note-body > .markdown-body > :last-child, .note-preview > .markdown-body > :last-child { margin-bottom: 0; }
 
 .topic-notes { margin-top: var(--space-5); padding: var(--space-4) var(--space-5); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); }
 .topic-notes-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); }

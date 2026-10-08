@@ -1,6 +1,8 @@
 // Note editor and delete confirmation, both inside #note-dialog (index.html).
 // The topic a note belongs to is never chosen here: a new note takes the topic
-// it was started from, and editing keeps it. Plain text only.
+// it was started from, and editing keeps it. The text is Markdown (Write /
+// Preview), and a .md file can be imported into the form: its first "# Heading"
+// becomes the title when the title is empty, the rest fills or extends the text.
 //
 // Unsaved text is never dropped silently: Esc, the close button, a backdrop
 // click or Cancel first ask "Discard changes?" when the form has been edited.
@@ -9,8 +11,29 @@
 
 import { el, icon, announce } from '../util.js';
 import * as notes from '../notes.js';
+import { renderMarkdown } from '../markdown-renderer.js';
 
 const PRIVACY = 'Your notes are stored in this browser. Nothing is uploaded.';
+const MAX_FILE_BYTES = 200_000;
+
+/**
+ * A Markdown file → { title, body }. A leading "# Title" line is the title; the
+ * "> Subject → … · created … · updated …" line that StudyHub's own .md export
+ * writes under it is dropped, so a downloaded note imports cleanly.
+ */
+export function parseMarkdownFile(text) {
+  const lines = text.replace(/^﻿/, '').replace(/\r\n?/g, '\n').split('\n');
+  while (lines.length && !lines[0].trim()) lines.shift();
+  let title = '';
+  const heading = /^#\s+(.+?)\s*#*\s*$/.exec(lines[0] || '');
+  if (heading) {
+    title = heading[1].trim();
+    lines.shift();
+    while (lines.length && !lines[0].trim()) lines.shift();
+    if (/^> .* · created .* · updated .*$/.test(lines[0] || '')) lines.shift();
+  }
+  return { title, body: lines.join('\n').trim() };
+}
 
 let dialog;
 let heading;
@@ -130,13 +153,76 @@ export function openNoteEditor({ topicId = null, noteId = null, onSaved = null }
     announce(existing ? 'Discard your changes?' : 'Discard this note?');
   };
 
+  // Write / Preview: the preview uses the same renderer as the note page.
+  const preview = el('div', { class: 'note-preview', id: 'note-preview', hidden: '', tabindex: 0, 'aria-label': 'Note preview' });
+  const modeButtons = ['Write', 'Preview'].map((label) => el('button', {
+    type: 'button', class: `segment ${label === 'Write' ? 'is-active' : ''}`, 'aria-pressed': String(label === 'Write'),
+  }, label));
+  const showMode = (mode) => {
+    const previewing = mode === 'Preview';
+    modeButtons.forEach((b) => { const on = b.textContent === mode; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+    contentInput.hidden = previewing;
+    preview.hidden = !previewing;
+    if (previewing) {
+      preview.replaceChildren(contentInput.value.trim()
+        ? renderMarkdown(contentInput.value, { idPrefix: 'note-preview-', breaks: true, noImages: true }).node
+        : el('p', { class: 'muted' }, 'Nothing to preview yet.'));
+    }
+  };
+  modeButtons.forEach((b) => b.addEventListener('click', () => showMode(b.textContent)));
+
+  // Import a .md file into the form. Typed text is never replaced: an imported
+  // body is added after it, and the title is only filled when empty.
+  const fileInput = el('input', { type: 'file', class: 'sr-only', tabindex: -1, 'aria-hidden': 'true', accept: '.md,.markdown,.txt,text/markdown,text/plain' });
+  const importBtn = el('button', { type: 'button', class: 'btn btn-ghost btn-sm' }, icon('upload', 16), 'Import .md file');
+  importBtn.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', async () => {
+    const file = fileInput.files?.[0];
+    fileInput.value = '';
+    if (!file) return;
+    let text;
+    try {
+      if (file.size > MAX_FILE_BYTES) throw new Error('size');
+      text = await file.text();
+    } catch {
+      setError(contentInput, contentError, `“${file.name}” could not be imported. Choose a Markdown (.md) file under 200 KB.`);
+      importBtn.focus();
+      return;
+    }
+    const { title, body } = parseMarkdownFile(text);
+    if (!body) {
+      setError(contentInput, contentError, `“${file.name}” has no text to import.`);
+      importBtn.focus();
+      return;
+    }
+    const content = contentInput.value.trim() ? `${contentInput.value.replace(/\s+$/, '')}\n\n${body}` : body;
+    if (content.length > notes.MAX_CONTENT) {
+      setError(contentInput, contentError, `“${file.name}” is too long: a note holds up to ${notes.MAX_CONTENT.toLocaleString()} characters.`);
+      importBtn.focus();
+      return;
+    }
+    contentInput.value = content;
+    if (!titleInput.value.trim()) {
+      const fromFile = title || file.name.replace(/\.(md|markdown|txt)$/i, '');
+      titleInput.value = fromFile.replace(/[\u0000-\u001f\u007f]+/g, ' ').trim().slice(0, notes.MAX_TITLE);
+    }
+    setError(contentInput, contentError, '');
+    setError(titleInput, titleError, '');
+    showMode('Write');
+    contentInput.focus();
+    announce(`Imported ${file.name}.`);
+  });
+
   const form = el('form', { class: 'note-form', novalidate: '' },
     placeLines(forTopic),
     el('div', { class: 'field' }, el('label', { for: 'note-title' }, 'Title'), titleInput, titleError),
     el('div', { class: 'field' },
-      el('label', { for: 'note-content' }, 'Note'),
-      el('span', { class: 'field-hint', id: 'note-content-hint' }, 'Plain text. Line breaks are kept.'),
-      contentInput, contentError),
+      el('div', { class: 'note-field-head' },
+        el('label', { for: 'note-content' }, 'Note'),
+        el('div', { class: 'segmented', role: 'group', 'aria-label': 'Editor view' }, modeButtons)),
+      el('span', { class: 'field-hint', id: 'note-content-hint' }, 'Markdown supported: **bold**, lists, `code`, code blocks, tables and > [!TIP] callouts. Line breaks are kept.'),
+      contentInput, preview, contentError,
+      el('div', { class: 'note-import' }, importBtn, fileInput)),
     privacyNote(),
     actions);
 
@@ -147,6 +233,7 @@ export function openNoteEditor({ topicId = null, noteId = null, onSaved = null }
     setError(titleInput, titleError, errors.title);
     setError(contentInput, contentError, errors.content);
     if (errors.title || errors.content) {
+      if (errors.content) showMode('Write');
       (errors.title ? titleInput : contentInput).focus();
       announce(errors.title || errors.content);
       return;

@@ -47,6 +47,8 @@ const CALLOUTS = {
  *   anchorHref  (id) => href for in-page links; defaults to the current route + ?s=id
  *   dropTitle   remove the H1 (the view shows the title itself)
  *   demote      shift headings down one level (h1 → h2 …) when the file is a section of a page
+ *   breaks      keep single line breaks (learner notes written as plain text)
+ *   noImages    show every image as its alt text, never loading it (learner notes have no attachments)
  *
  * Returns { node, headings: [{ level, id, text, element }], title }.
  */
@@ -55,7 +57,13 @@ export function renderMarkdown(markdown, options = {}) {
   const anchorHref = options.anchorHref || defaultAnchorHref;
 
   const template = document.createElement('template');
-  template.innerHTML = marked.parse(markdown);
+  template.innerHTML = marked.parse(markdown, options.breaks ? { breaks: true } : undefined);
+  // Template content is inert: images are replaced before they could start loading.
+  if (options.noImages) {
+    for (const image of template.content.querySelectorAll('img')) {
+      image.replaceWith(el('span', { class: 'missing-image' }, `[Image: ${image.getAttribute('alt') || 'not shown'}]`));
+    }
+  }
   const root = el('div', { class: 'markdown-body' });
   root.append(template.content);
 
@@ -139,7 +147,8 @@ function stripLeadingText(element, count) {
     node.data = node.data.slice(take);
     remaining -= take;
   }
-  // A line break directly after the marker leaves a leading <br>; drop it.
+  // A line break directly after the marker leaves a leading <br> (behind the now-empty text); drop it.
+  while (element.firstChild?.nodeType === Node.TEXT_NODE && !element.firstChild.data.trim()) element.firstChild.remove();
   if (element.firstChild?.nodeName === 'BR') element.firstChild.remove();
 }
 
