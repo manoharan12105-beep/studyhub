@@ -1,0 +1,2175 @@
+{
+  "$schema": "../schemas/topics.schema.json",
+  "schemaVersion": 1,
+  "category": "claude-code-mastery",
+  "topics": [
+    {
+      "id": "what-is-claude-code",
+      "slug": "what-is-claude-code",
+      "title": "What Is Claude Code?",
+      "category": "claude-code-mastery",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "An agentic coding tool in your terminal: what it can access, the gather-act-verify loop, and how it differs from web-based Claude and IDE assistants.",
+      "difficulty": "beginner",
+      "tags": [
+        "claude-code",
+        "agentic-coding",
+        "agentic-loop",
+        "tools"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "claude-code-installation-setup",
+        "claude-modes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "claude-code-installation-setup",
+      "slug": "claude-code-installation-setup",
+      "title": "Installation and Environment Setup",
+      "category": "claude-code-mastery",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "Installing and updating Claude Code, signing in, first configuration, and choosing between the terminal, the VS Code extension and JetBrains integration.",
+      "difficulty": "beginner",
+      "tags": [
+        "installation",
+        "authentication",
+        "vs-code",
+        "jetbrains",
+        "settings"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "what-is-claude-code"
+      ],
+      "relatedTopics": [
+        "claude-code-first-session",
+        "settings-and-project-trust"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "claude-code-first-session",
+      "slug": "claude-code-first-session",
+      "title": "First Session: Explore an Existing Repository",
+      "category": "claude-code-mastery",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "Starting and ending a session, asking exploration questions, file mentions, shell mode, and checking answers against the code before trusting them.",
+      "difficulty": "beginner",
+      "tags": [
+        "first-session",
+        "repository-exploration",
+        "prompts",
+        "shell-mode"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "claude-code-installation-setup"
+      ],
+      "relatedTopics": [
+        "claude-modes",
+        "cc-lab-01-explore-repository"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "claude-modes",
+      "slug": "claude-modes",
+      "title": "Claude Modes",
+      "category": "claude-code-mastery",
+      "subcategory": "foundations",
+      "type": "concept",
+      "description": "The six permission modes — Manual, Accept Edits, Plan, Auto, Don't Ask and Bypass — what each runs without asking, what still prompts, and how to choose one.",
+      "difficulty": "intermediate",
+      "tags": [
+        "permission-modes",
+        "plan-mode",
+        "auto-mode",
+        "accept-edits",
+        "bypass-permissions"
+      ],
+      "estimatedMinutes": 55,
+      "order": 4,
+      "prerequisites": [
+        "claude-code-first-session"
+      ],
+      "relatedTopics": [
+        "permission-rules",
+        "reviewing-changes-defense-in-depth"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "context-window-fundamentals",
+      "slug": "context-window-fundamentals",
+      "title": "What Is a Context Window?",
+      "category": "claude-code-mastery",
+      "subcategory": "context-and-sessions",
+      "type": "concept",
+      "description": "What the context window holds, conversation history versus repository context, what consumes context, and why long sessions lose detail.",
+      "difficulty": "beginner",
+      "tags": [
+        "context-window",
+        "tokens",
+        "context-consumption"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "what-is-claude-code"
+      ],
+      "relatedTopics": [
+        "compaction-compact-and-clear",
+        "context-engineering-large-repos"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "compaction-compact-and-clear",
+      "slug": "compaction-compact-and-clear",
+      "title": "Context Compaction, /compact and /clear",
+      "category": "claude-code-mastery",
+      "subcategory": "context-and-sessions",
+      "type": "concept",
+      "description": "Automatic compaction, what survives it, focused /compact, /clear between tasks, and how to preserve decisions that must outlive a summary.",
+      "difficulty": "intermediate",
+      "tags": [
+        "compaction",
+        "compact",
+        "clear",
+        "context-management"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "context-window-fundamentals"
+      ],
+      "relatedTopics": [
+        "sessions-resume-and-naming",
+        "auto-memory-and-instruction-hygiene"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "sessions-resume-and-naming",
+      "slug": "sessions-resume-and-naming",
+      "title": "Saving, Resuming and Organizing Sessions",
+      "category": "claude-code-mastery",
+      "subcategory": "context-and-sessions",
+      "type": "concept",
+      "description": "Where sessions are stored, --continue and --resume, naming and branching sessions, and how session history differs from Git history and files on disk.",
+      "difficulty": "beginner",
+      "tags": [
+        "sessions",
+        "resume",
+        "continue",
+        "session-naming"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "context-window-fundamentals"
+      ],
+      "relatedTopics": [
+        "checkpoints-recovery-and-worktrees"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "checkpoints-recovery-and-worktrees",
+      "slug": "checkpoints-recovery-and-worktrees",
+      "title": "Checkpoints, Recovery and Parallel Work with Worktrees",
+      "category": "claude-code-mastery",
+      "subcategory": "context-and-sessions",
+      "type": "concept",
+      "description": "How checkpoints and /rewind work, what they cannot undo, recovering from a failed change with Git, and isolating parallel sessions in git worktrees.",
+      "difficulty": "intermediate",
+      "tags": [
+        "checkpoints",
+        "rewind",
+        "recovery",
+        "git-worktrees"
+      ],
+      "estimatedMinutes": 40,
+      "order": 4,
+      "prerequisites": [
+        "sessions-resume-and-naming"
+      ],
+      "relatedTopics": [
+        "cc-lab-07-recover-unwanted-change",
+        "claude-code-and-git"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "claude-md-fundamentals",
+      "slug": "claude-md-fundamentals",
+      "title": "What Is CLAUDE.md?",
+      "category": "claude-code-mastery",
+      "subcategory": "instructions-and-memory",
+      "type": "concept",
+      "description": "Persistent instructions at managed, user, project and local scope, how CLAUDE.md files load, AGENTS.md, and why instructions guide but do not enforce.",
+      "difficulty": "beginner",
+      "tags": [
+        "claude-md",
+        "project-instructions",
+        "user-instructions",
+        "agents-md"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "what-is-claude-code"
+      ],
+      "relatedTopics": [
+        "writing-project-claude-md",
+        "imports-and-scoped-rules"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "writing-project-claude-md",
+      "slug": "writing-project-claude-md",
+      "title": "Creating a Useful Project CLAUDE.md",
+      "category": "claude-code-mastery",
+      "subcategory": "instructions-and-memory",
+      "type": "concept",
+      "description": "What belongs in a project CLAUDE.md, a complete Java/Spring Boot example with a definition of done, and how vague or contradictory instructions fail.",
+      "difficulty": "intermediate",
+      "tags": [
+        "claude-md",
+        "spring-boot",
+        "definition-of-done",
+        "conventions"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "claude-md-fundamentals"
+      ],
+      "relatedTopics": [
+        "cc-lab-04-project-instructions",
+        "imports-and-scoped-rules"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "imports-and-scoped-rules",
+      "slug": "imports-and-scoped-rules",
+      "title": "Imports and Scoped Rules",
+      "category": "claude-code-mastery",
+      "subcategory": "instructions-and-memory",
+      "type": "concept",
+      "description": "@path imports, .claude/rules/ files, path-scoped rules with paths frontmatter, user-level rules, and excluding other teams' files in a monorepo.",
+      "difficulty": "intermediate",
+      "tags": [
+        "imports",
+        "claude-rules",
+        "path-scoped-rules",
+        "monorepo"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "claude-md-fundamentals"
+      ],
+      "relatedTopics": [
+        "auto-memory-and-instruction-hygiene",
+        "context-engineering-large-repos"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "auto-memory-and-instruction-hygiene",
+      "slug": "auto-memory-and-instruction-hygiene",
+      "title": "Auto Memory and Instruction Hygiene",
+      "category": "claude-code-mastery",
+      "subcategory": "instructions-and-memory",
+      "type": "concept",
+      "description": "How auto memory stores what Claude learns, its load limits, keeping memory accurate, and preventing duplicated, conflicting or bloated instructions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "auto-memory",
+        "memory-md",
+        "instruction-conflicts",
+        "prompt-audit"
+      ],
+      "estimatedMinutes": 35,
+      "order": 4,
+      "prerequisites": [
+        "imports-and-scoped-rules"
+      ],
+      "relatedTopics": [
+        "compaction-compact-and-clear",
+        "skills-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "permission-rules",
+      "slug": "permission-rules",
+      "title": "Permission Fundamentals: Allow, Ask and Deny",
+      "category": "claude-code-mastery",
+      "subcategory": "permissions-and-safety",
+      "type": "concept",
+      "description": "How Claude Code evaluates deny, ask and allow rules for reads, edits, shell commands, web fetches, MCP tools and subagents, and where Bash rules fall short.",
+      "difficulty": "intermediate",
+      "tags": [
+        "permissions",
+        "allow-rules",
+        "deny-rules",
+        "bash-rules",
+        "mcp-permissions"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "claude-modes"
+      ],
+      "relatedTopics": [
+        "settings-and-project-trust",
+        "secrets-and-dangerous-commands"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "settings-and-project-trust",
+      "slug": "settings-and-project-trust",
+      "title": "Settings Files, Precedence and Project Trust",
+      "category": "claude-code-mastery",
+      "subcategory": "permissions-and-safety",
+      "type": "concept",
+      "description": "User, project, local and managed settings, precedence and merging, checking what loaded, workspace trust, and opening a repository you do not trust.",
+      "difficulty": "intermediate",
+      "tags": [
+        "settings",
+        "precedence",
+        "workspace-trust",
+        "managed-settings"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "permission-rules"
+      ],
+      "relatedTopics": [
+        "secrets-and-dangerous-commands",
+        "mcp-security-and-trust"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "secrets-and-dangerous-commands",
+      "slug": "secrets-and-dangerous-commands",
+      "title": "Protecting Secrets and Preventing Dangerous Commands",
+      "category": "claude-code-mastery",
+      "subcategory": "permissions-and-safety",
+      "type": "concept",
+      "description": "Keeping secrets out of reach, read deny rules, the Bash sandbox, protected and critical paths, and how to handle installs, migrations, deletes and deployments.",
+      "difficulty": "intermediate",
+      "tags": [
+        "secrets",
+        "sandbox",
+        "dangerous-commands",
+        "deny-rules"
+      ],
+      "estimatedMinutes": 40,
+      "order": 3,
+      "prerequisites": [
+        "permission-rules"
+      ],
+      "relatedTopics": [
+        "reviewing-changes-defense-in-depth",
+        "guardrail-and-automation-hooks"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "reviewing-changes-defense-in-depth",
+      "slug": "reviewing-changes-defense-in-depth",
+      "title": "Reviewing Changes and Defense in Depth",
+      "category": "claude-code-mastery",
+      "subcategory": "permissions-and-safety",
+      "type": "concept",
+      "description": "Reviewing every change before you accept it, and why modes, permission rules, hooks, the sandbox, Git, tests and code review each protect against different failures.",
+      "difficulty": "intermediate",
+      "tags": [
+        "code-review",
+        "defense-in-depth",
+        "diff-review",
+        "safety"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "secrets-and-dangerous-commands"
+      ],
+      "relatedTopics": [
+        "code-review-diffs-and-prs",
+        "verifying-ai-generated-changes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "hooks-fundamentals",
+      "slug": "hooks-fundamentals",
+      "title": "What Are Hooks? Lifecycle and Events",
+      "category": "claude-code-mastery",
+      "subcategory": "hooks",
+      "type": "concept",
+      "description": "Hooks as deterministic commands at lifecycle events, which events can block, and how hooks differ from prompts, skills, MCP tools and GitHub Actions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "hooks",
+        "hook-events",
+        "lifecycle",
+        "automation"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "permission-rules"
+      ],
+      "relatedTopics": [
+        "hook-configuration-and-io",
+        "guardrail-and-automation-hooks"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "hook-configuration-and-io",
+      "slug": "hook-configuration-and-io",
+      "title": "Hook Configuration, Input and Output",
+      "category": "claude-code-mastery",
+      "subcategory": "hooks",
+      "type": "concept",
+      "description": "Where hooks are configured, matchers and the if filter, handler types, the JSON on stdin, exit codes, and JSON decisions such as deny, ask and additionalContext.",
+      "difficulty": "advanced",
+      "tags": [
+        "hook-configuration",
+        "exit-codes",
+        "pretooluse",
+        "json-output"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "hooks-fundamentals"
+      ],
+      "relatedTopics": [
+        "guardrail-and-automation-hooks",
+        "hook-debugging-and-limits"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "guardrail-and-automation-hooks",
+      "slug": "guardrail-and-automation-hooks",
+      "title": "Guardrail, Automation and Session Hooks",
+      "category": "claude-code-mastery",
+      "subcategory": "hooks",
+      "type": "concept",
+      "description": "PreToolUse guardrails for protected files and unsafe commands, PostToolUse checks, SessionStart context, notifications and Stop hooks, built for a Java project.",
+      "difficulty": "intermediate",
+      "tags": [
+        "pretooluse",
+        "posttooluse",
+        "sessionstart",
+        "notification-hooks"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "hook-configuration-and-io"
+      ],
+      "relatedTopics": [
+        "cc-lab-09-create-hook",
+        "hook-debugging-and-limits"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "hook-debugging-and-limits",
+      "slug": "hook-debugging-and-limits",
+      "title": "Hook Debugging, Failure Handling and Limits",
+      "category": "claude-code-mastery",
+      "subcategory": "hooks",
+      "type": "concept",
+      "description": "Finding why a hook did not fire or had no effect, failing open versus closed, timeouts, workspace trust, and what a hook can never guarantee.",
+      "difficulty": "advanced",
+      "tags": [
+        "hook-debugging",
+        "fail-closed",
+        "hook-security",
+        "troubleshooting"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "hook-configuration-and-io"
+      ],
+      "relatedTopics": [
+        "secrets-and-dangerous-commands"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "mcp-fundamentals",
+      "slug": "mcp-fundamentals",
+      "title": "What Is Model Context Protocol?",
+      "category": "claude-code-mastery",
+      "subcategory": "mcp",
+      "type": "concept",
+      "description": "MCP clients, servers and hosts, tools, resources and prompts, stdio and HTTP transports, and the JSON-RPC conversation between Claude Code and a server.",
+      "difficulty": "intermediate",
+      "tags": [
+        "mcp",
+        "model-context-protocol",
+        "json-rpc",
+        "mcp-tools"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "what-is-claude-code"
+      ],
+      "relatedTopics": [
+        "configuring-mcp-servers",
+        "mcp-security-and-trust"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "configuring-mcp-servers",
+      "slug": "configuring-mcp-servers",
+      "title": "Configuring MCP Servers",
+      "category": "claude-code-mastery",
+      "subcategory": "mcp",
+      "type": "concept",
+      "description": "claude mcp add for stdio and HTTP servers, local, project and user scope, .mcp.json with environment variables, authentication and inspecting servers with /mcp.",
+      "difficulty": "intermediate",
+      "tags": [
+        "mcp-configuration",
+        "mcp-json",
+        "mcp-scopes",
+        "oauth"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "mcp-fundamentals"
+      ],
+      "relatedTopics": [
+        "cc-lab-10-configure-mcp",
+        "mcp-context-and-troubleshooting"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "mcp-context-and-troubleshooting",
+      "slug": "mcp-context-and-troubleshooting",
+      "title": "MCP Tool Output, Context and Troubleshooting",
+      "category": "claude-code-mastery",
+      "subcategory": "mcp",
+      "type": "concept",
+      "description": "Deferred tool definitions, output limits, when a CLI is cheaper than a server, server statuses and a method for fixing connections that fail.",
+      "difficulty": "intermediate",
+      "tags": [
+        "mcp-output",
+        "tool-search",
+        "mcp-troubleshooting",
+        "context"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "configuring-mcp-servers"
+      ],
+      "relatedTopics": [
+        "context-engineering-large-repos"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "mcp-security-and-trust",
+      "slug": "mcp-security-and-trust",
+      "title": "MCP Security and Trust",
+      "category": "claude-code-mastery",
+      "subcategory": "mcp",
+      "type": "concept",
+      "description": "Why every server is code you trust, prompt injection through tool results, project server approval, least-privilege credentials and organization controls.",
+      "difficulty": "advanced",
+      "tags": [
+        "mcp-security",
+        "prompt-injection",
+        "least-privilege",
+        "trust"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "configuring-mcp-servers"
+      ],
+      "relatedTopics": [
+        "settings-and-project-trust",
+        "secrets-and-dangerous-commands"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "skills-fundamentals",
+      "slug": "skills-fundamentals",
+      "title": "What Are Skills? Discovery, Loading and Structure",
+      "category": "claude-code-mastery",
+      "subcategory": "skills",
+      "type": "concept",
+      "description": "SKILL.md files, where skills live, how descriptions load and bodies load on demand, frontmatter fields, bundled skills, and how custom commands became skills.",
+      "difficulty": "intermediate",
+      "tags": [
+        "skills",
+        "skill-md",
+        "slash-commands",
+        "frontmatter"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "claude-md-fundamentals"
+      ],
+      "relatedTopics": [
+        "writing-effective-skills",
+        "auto-memory-and-instruction-hygiene"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "writing-effective-skills",
+      "slug": "writing-effective-skills",
+      "title": "Writing a Good Skill: Arguments and Context",
+      "category": "claude-code-mastery",
+      "subcategory": "skills",
+      "type": "concept",
+      "description": "Descriptions that trigger correctly, invocation control, $ARGUMENTS, dynamic context injection, allowed-tools, supporting files and running a skill in a subagent.",
+      "difficulty": "intermediate",
+      "tags": [
+        "skill-authoring",
+        "arguments",
+        "dynamic-context",
+        "allowed-tools"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "skills-fundamentals"
+      ],
+      "relatedTopics": [
+        "reusable-engineering-workflows",
+        "cc-lab-11-build-skill"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "reusable-engineering-workflows",
+      "slug": "reusable-engineering-workflows",
+      "title": "Reusable Workflows: Review, Testing, Documentation and Release",
+      "category": "claude-code-mastery",
+      "subcategory": "skills",
+      "type": "concept",
+      "description": "Skills for Java code review, Spring Boot bug investigation, SQL review, test generation, documentation updates and pre-release checks, with what each must verify.",
+      "difficulty": "advanced",
+      "tags": [
+        "code-review-skill",
+        "test-generation",
+        "sql-review",
+        "release-checks"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "writing-effective-skills"
+      ],
+      "relatedTopics": [
+        "evaluating-and-maintaining-skills",
+        "code-review-diffs-and-prs"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "evaluating-and-maintaining-skills",
+      "slug": "evaluating-and-maintaining-skills",
+      "title": "Evaluating and Maintaining Skills",
+      "category": "claude-code-mastery",
+      "subcategory": "skills",
+      "type": "concept",
+      "description": "Testing whether a skill triggers and helps, measuring with evals, finding unused or costly skills, sharing through plugins and retiring stale skills.",
+      "difficulty": "advanced",
+      "tags": [
+        "skill-evaluation",
+        "evals",
+        "plugins",
+        "maintenance"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "writing-effective-skills"
+      ],
+      "relatedTopics": [
+        "reliable-long-running-workflows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "subagents-fundamentals",
+      "slug": "subagents-fundamentals",
+      "title": "What Are Subagents? Delegation and Context Isolation",
+      "category": "claude-code-mastery",
+      "subcategory": "subagents",
+      "type": "concept",
+      "description": "Subagents as isolated workers, the built-in Explore, Plan and general-purpose agents, what a subagent sees, when to delegate, and forks.",
+      "difficulty": "intermediate",
+      "tags": [
+        "subagents",
+        "delegation",
+        "context-isolation",
+        "explore-agent"
+      ],
+      "estimatedMinutes": 35,
+      "order": 1,
+      "prerequisites": [
+        "context-window-fundamentals"
+      ],
+      "relatedTopics": [
+        "subagent-configuration",
+        "parallel-review-and-coordination"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "subagent-configuration",
+      "slug": "subagent-configuration",
+      "title": "Subagent Configuration, Tools and Permission Boundaries",
+      "category": "claude-code-mastery",
+      "subcategory": "subagents",
+      "type": "concept",
+      "description": "Subagent files and scopes, frontmatter fields, restricting tools, how permission modes are inherited, model choice, persistent memory and worktree isolation.",
+      "difficulty": "advanced",
+      "tags": [
+        "subagent-configuration",
+        "tools",
+        "permission-boundaries",
+        "agents-directory"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "subagents-fundamentals"
+      ],
+      "relatedTopics": [
+        "parallel-review-and-coordination",
+        "cc-lab-12-delegate-review"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "parallel-review-and-coordination",
+      "slug": "parallel-review-and-coordination",
+      "title": "Parallel Code Review and Coordinating Results",
+      "category": "claude-code-mastery",
+      "subcategory": "subagents",
+      "type": "concept",
+      "description": "Independent correctness, security and test-coverage reviewers, consolidating and validating findings, resolving conflicts, and the cost, latency and reliability trade-offs.",
+      "difficulty": "advanced",
+      "tags": [
+        "parallel-review",
+        "code-review",
+        "findings",
+        "trade-offs"
+      ],
+      "estimatedMinutes": 40,
+      "order": 3,
+      "prerequisites": [
+        "subagent-configuration"
+      ],
+      "relatedTopics": [
+        "agent-teams",
+        "efficient-agent-workflows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "agent-teams",
+      "slug": "agent-teams",
+      "title": "Agent Teams and Collaboration",
+      "category": "claude-code-mastery",
+      "subcategory": "subagents",
+      "type": "concept",
+      "description": "Experimental agent teams: enabling them, the lead, teammates, shared task list and mailbox, how they differ from subagents, permissions and known limitations.",
+      "difficulty": "advanced",
+      "tags": [
+        "agent-teams",
+        "experimental",
+        "collaboration",
+        "multi-agent"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "subagents-fundamentals"
+      ],
+      "relatedTopics": [
+        "parallel-review-and-coordination",
+        "efficient-agent-workflows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "claude-code-and-git",
+      "slug": "claude-code-and-git",
+      "title": "Claude Code and Git: Branches, Changes and Permissions",
+      "category": "claude-code-mastery",
+      "subcategory": "github-workflows",
+      "type": "concept",
+      "description": "What Claude knows about your Git state, reading branches and uncommitted work, which Git operations prompt or are blocked, and why commits and pushes stay deliberate.",
+      "difficulty": "beginner",
+      "tags": [
+        "git",
+        "branches",
+        "commits",
+        "git-permissions"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "claude-modes"
+      ],
+      "relatedTopics": [
+        "feature-implementation-workflow",
+        "checkpoints-recovery-and-worktrees"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "feature-implementation-workflow",
+      "slug": "feature-implementation-workflow",
+      "title": "Working with Issues and the Feature Implementation Workflow",
+      "category": "claude-code-mastery",
+      "subcategory": "github-workflows",
+      "type": "concept",
+      "description": "Inspect, plan, implement, test, review the diff, fix and summarize: a disciplined workflow from a GitHub issue to a tested Spring Boot change.",
+      "difficulty": "intermediate",
+      "tags": [
+        "issues",
+        "feature-workflow",
+        "planning",
+        "spring-boot"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "claude-code-and-git"
+      ],
+      "relatedTopics": [
+        "code-review-diffs-and-prs",
+        "cc-lab-06-feature-with-tests"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "code-review-diffs-and-prs",
+      "slug": "code-review-diffs-and-prs",
+      "title": "Code Review, Reviewing Diffs and Pull Request Preparation",
+      "category": "claude-code-mastery",
+      "subcategory": "github-workflows",
+      "type": "concept",
+      "description": "Reading a diff with intent, /diff, /code-review and /security-review, what a reviewer checks, and preparing a pull request a human can review quickly.",
+      "difficulty": "intermediate",
+      "tags": [
+        "code-review",
+        "diffs",
+        "pull-requests",
+        "security-review"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "feature-implementation-workflow"
+      ],
+      "relatedTopics": [
+        "reviewing-changes-defense-in-depth",
+        "automated-review-and-triage"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "regression-analysis-and-issue-to-pr",
+      "slug": "regression-analysis-and-issue-to-pr",
+      "title": "Regression Analysis and the Issue-to-PR Workflow",
+      "category": "claude-code-mastery",
+      "subcategory": "github-workflows",
+      "type": "concept",
+      "description": "Analyzing test failures and regressions with evidence and git bisect, GitHub integrations (gh, @claude, MCP), and the full issue-to-fix-to-PR path.",
+      "difficulty": "intermediate",
+      "tags": [
+        "regression-analysis",
+        "git-bisect",
+        "github-integration",
+        "issue-to-pr"
+      ],
+      "estimatedMinutes": 40,
+      "order": 4,
+      "prerequisites": [
+        "code-review-diffs-and-prs"
+      ],
+      "relatedTopics": [
+        "cc-lab-13-issue-to-proposed-fix",
+        "test-driven-bug-fixes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "non-interactive-claude-code",
+      "slug": "non-interactive-claude-code",
+      "title": "Local vs CI Automation and Non-Interactive Usage",
+      "category": "claude-code-mastery",
+      "subcategory": "automation",
+      "type": "concept",
+      "description": "claude -p, output formats, pre-approving tools, permission modes for scripts, bare mode, turn and budget limits, exit codes and safe scripting.",
+      "difficulty": "intermediate",
+      "tags": [
+        "headless",
+        "print-mode",
+        "automation",
+        "scripting"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "permission-rules"
+      ],
+      "relatedTopics": [
+        "claude-code-github-actions",
+        "ci-pipelines-and-approval-gates"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "claude-code-github-actions",
+      "slug": "claude-code-github-actions",
+      "title": "GitHub Actions Integration and Secrets in Automation",
+      "category": "claude-code-mastery",
+      "subcategory": "automation",
+      "type": "concept",
+      "description": "The Claude Code GitHub Action, interactive and automation modes, setup, secrets and permissions, who can trigger runs, and limiting cost and time.",
+      "difficulty": "advanced",
+      "tags": [
+        "github-actions",
+        "claude-code-action",
+        "secrets",
+        "ci"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "non-interactive-claude-code"
+      ],
+      "relatedTopics": [
+        "automated-review-and-triage",
+        "cc-lab-14-ci-ai-step"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "automated-review-and-triage",
+      "slug": "automated-review-and-triage",
+      "title": "Automated Code Review and Issue Triage",
+      "category": "claude-code-mastery",
+      "subcategory": "automation",
+      "type": "concept",
+      "description": "AI review on pull requests and issue triage workflows, treating pull request content as untrusted input, and keeping humans responsible for merges.",
+      "difficulty": "advanced",
+      "tags": [
+        "automated-review",
+        "issue-triage",
+        "prompt-injection",
+        "pull-requests"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "claude-code-github-actions"
+      ],
+      "relatedTopics": [
+        "ci-pipelines-and-approval-gates",
+        "code-review-diffs-and-prs"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "ci-pipelines-and-approval-gates",
+      "slug": "ci-pipelines-and-approval-gates",
+      "title": "Test Pipelines, Failure Reporting and Approval Gates",
+      "category": "claude-code-mastery",
+      "subcategory": "automation",
+      "type": "concept",
+      "description": "Keeping deterministic build and tests as the gate, AI-assisted failure reports, environments with required reviewers, and why beginners never automate production deploys.",
+      "difficulty": "advanced",
+      "tags": [
+        "ci-cd",
+        "approval-gates",
+        "failure-reporting",
+        "deployment"
+      ],
+      "estimatedMinutes": 35,
+      "order": 4,
+      "prerequisites": [
+        "claude-code-github-actions"
+      ],
+      "relatedTopics": [
+        "reliable-long-running-workflows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "reproducing-bugs-logs-and-traces",
+      "slug": "reproducing-bugs-logs-and-traces",
+      "title": "Reproducible Bugs, Stack Traces and Logs",
+      "category": "claude-code-mastery",
+      "subcategory": "debugging-and-quality",
+      "type": "concept",
+      "description": "Giving Claude a reproducible bug, reading Java stack traces and logs, trace-based debugging, and reproducing a failure before anyone changes code.",
+      "difficulty": "intermediate",
+      "tags": [
+        "debugging",
+        "stack-traces",
+        "logs",
+        "reproduction"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "claude-code-first-session"
+      ],
+      "relatedTopics": [
+        "test-driven-bug-fixes",
+        "cc-lab-05-debug-failing-test"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "test-driven-bug-fixes",
+      "slug": "test-driven-bug-fixes",
+      "title": "Test-Driven Bug Fixes and Regression Testing",
+      "category": "claude-code-mastery",
+      "subcategory": "debugging-and-quality",
+      "type": "concept",
+      "description": "Writing the failing test first, fixing the cause, keeping regression tests honest, and catching an agent that weakens a test to make it pass.",
+      "difficulty": "intermediate",
+      "tags": [
+        "tdd",
+        "regression-tests",
+        "junit",
+        "bug-fixes"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "reproducing-bugs-logs-and-traces"
+      ],
+      "relatedTopics": [
+        "verifying-ai-generated-changes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "review-security-and-performance",
+      "slug": "review-security-and-performance",
+      "title": "Diff Inspection, Security Review and Performance Investigation",
+      "category": "claude-code-mastery",
+      "subcategory": "debugging-and-quality",
+      "type": "concept",
+      "description": "Inspecting AI-written diffs, a security review that found SQL injection in orderdesk, and investigating performance with measurements instead of guesses.",
+      "difficulty": "advanced",
+      "tags": [
+        "security-review",
+        "sql-injection",
+        "performance",
+        "diff-inspection"
+      ],
+      "estimatedMinutes": 40,
+      "order": 3,
+      "prerequisites": [
+        "test-driven-bug-fixes"
+      ],
+      "relatedTopics": [
+        "code-review-diffs-and-prs",
+        "verifying-ai-generated-changes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "verifying-ai-generated-changes",
+      "slug": "verifying-ai-generated-changes",
+      "title": "Verifying AI-Generated Changes",
+      "category": "claude-code-mastery",
+      "subcategory": "debugging-and-quality",
+      "type": "concept",
+      "description": "Evidence over plausibility: verification loops, invented APIs, tests that test nothing, silent scope creep, and a checklist before you accept a change.",
+      "difficulty": "intermediate",
+      "tags": [
+        "verification",
+        "evidence",
+        "hallucinations",
+        "checklists"
+      ],
+      "estimatedMinutes": 35,
+      "order": 4,
+      "prerequisites": [
+        "test-driven-bug-fixes"
+      ],
+      "relatedTopics": [
+        "reviewing-changes-defense-in-depth",
+        "reliable-long-running-workflows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "java-debugging-scenarios",
+      "slug": "java-debugging-scenarios",
+      "title": "Java and Spring Boot Debugging Scenarios",
+      "category": "claude-code-mastery",
+      "subcategory": "debugging-and-quality",
+      "type": "concept",
+      "description": "Seven scenarios worked with evidence: NullPointerException, transactions, a broken endpoint, incorrect SQL, a failing test, a configuration error and a concurrency defect.",
+      "difficulty": "advanced",
+      "tags": [
+        "java-debugging",
+        "spring-boot",
+        "transactions",
+        "concurrency"
+      ],
+      "estimatedMinutes": 50,
+      "order": 5,
+      "prerequisites": [
+        "reproducing-bugs-logs-and-traces"
+      ],
+      "relatedTopics": [
+        "cc-lab-15-production-failure",
+        "review-security-and-performance"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "context-engineering-large-repos",
+      "slug": "context-engineering-large-repos",
+      "title": "Context Budgeting, Large Repositories and Progressive Disclosure",
+      "category": "claude-code-mastery",
+      "subcategory": "advanced-workflows",
+      "type": "concept",
+      "description": "Budgeting context, keeping a large repository manageable with scoped instructions and focused sessions, and progressive disclosure of instructions and tools.",
+      "difficulty": "advanced",
+      "tags": [
+        "context-budget",
+        "large-repositories",
+        "progressive-disclosure",
+        "monorepo"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "compaction-compact-and-clear"
+      ],
+      "relatedTopics": [
+        "efficient-agent-workflows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "efficient-agent-workflows",
+      "slug": "efficient-agent-workflows",
+      "title": "Delegation, Tool Calls, Cost and Latency",
+      "category": "claude-code-mastery",
+      "subcategory": "advanced-workflows",
+      "type": "concept",
+      "description": "Choosing between one agent and delegation, cutting unnecessary tool calls, and the cost and latency of models, effort, subagents and teams.",
+      "difficulty": "advanced",
+      "tags": [
+        "cost",
+        "latency",
+        "delegation",
+        "tool-calls"
+      ],
+      "estimatedMinutes": 35,
+      "order": 2,
+      "prerequisites": [
+        "parallel-review-and-coordination"
+      ],
+      "relatedTopics": [
+        "reliable-long-running-workflows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "reliable-long-running-workflows",
+      "slug": "reliable-long-running-workflows",
+      "title": "Long-Running Tasks, Failure Recovery and Workflow Quality",
+      "category": "claude-code-mastery",
+      "subcategory": "advanced-workflows",
+      "type": "concept",
+      "description": "Running long tasks in checkpoints, recovering from failures, designing reliable agent workflows, and measuring quality with evidence instead of impressions.",
+      "difficulty": "advanced",
+      "tags": [
+        "long-running-tasks",
+        "failure-recovery",
+        "workflow-design",
+        "metrics"
+      ],
+      "estimatedMinutes": 40,
+      "order": 3,
+      "prerequisites": [
+        "efficient-agent-workflows"
+      ],
+      "relatedTopics": [
+        "cc-lab-16-end-to-end-workflow",
+        "cc-capstone-project"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-setup",
+      "slug": "cc-lab-setup",
+      "title": "Lab Setup: The orderdesk Project",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "The Spring Boot 4.1 sample project used by every lab and the capstone: its full source, how to build and test it, and the lab conventions.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab-setup",
+        "spring-boot",
+        "sample-project",
+        "maven"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "claude-code-installation-setup"
+      ],
+      "relatedTopics": [
+        "cc-lab-01-explore-repository",
+        "cc-capstone-project"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-01-explore-repository",
+      "slug": "cc-lab-01-explore-repository",
+      "title": "Lab 01: Explore an Unfamiliar Repository",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Use plan mode and read-only questions to map orderdesk, then check every claim Claude makes against the code.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "repository-exploration",
+        "plan-mode"
+      ],
+      "estimatedMinutes": 40,
+      "order": 2,
+      "prerequisites": [
+        "cc-lab-setup"
+      ],
+      "relatedTopics": [
+        "claude-code-first-session"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-02-install-configure",
+      "slug": "cc-lab-02-install-configure",
+      "title": "Lab 02: Install and Configure Claude Code",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Install, verify, sign in, check status and doctor output, and create a first user settings file.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "installation",
+        "settings"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "cc-lab-setup"
+      ],
+      "relatedTopics": [
+        "claude-code-installation-setup"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-03-plan-vs-implement",
+      "slug": "cc-lab-03-plan-vs-implement",
+      "title": "Lab 03: Compare Planning and Implementation Workflows",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Solve the same small task once directly and once through plan mode, and compare diffs, prompts and surprises.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "plan-mode",
+        "permission-modes"
+      ],
+      "estimatedMinutes": 40,
+      "order": 4,
+      "prerequisites": [
+        "cc-lab-01-explore-repository"
+      ],
+      "relatedTopics": [
+        "claude-modes"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-04-project-instructions",
+      "slug": "cc-lab-04-project-instructions",
+      "title": "Lab 04: Build a Useful Project Instruction File",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Turn orderdesk's one-line CLAUDE.md into a short, verifiable file with Java version, conventions, tests, migrations, secrets, build commands and a definition of done.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "claude-md",
+        "conventions"
+      ],
+      "estimatedMinutes": 45,
+      "order": 5,
+      "prerequisites": [
+        "cc-lab-setup"
+      ],
+      "relatedTopics": [
+        "writing-project-claude-md"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-05-debug-failing-test",
+      "slug": "cc-lab-05-debug-failing-test",
+      "title": "Lab 05: Debug a Failing Java Test",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Reproduce the PriceCalculatorTest failure, read the stack trace, form a hypothesis and fix the cause without weakening the test.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "debugging",
+        "junit"
+      ],
+      "estimatedMinutes": 40,
+      "order": 6,
+      "prerequisites": [
+        "cc-lab-setup"
+      ],
+      "relatedTopics": [
+        "reproducing-bugs-logs-and-traces"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-06-feature-with-tests",
+      "slug": "cc-lab-06-feature-with-tests",
+      "title": "Lab 06: Implement a Feature with Tests and Inspect the Diff",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Add the \"mark as paid\" endpoint with tests through the inspect-plan-implement-test-review workflow and read the whole diff.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "feature",
+        "tests",
+        "diff-review"
+      ],
+      "estimatedMinutes": 50,
+      "order": 7,
+      "prerequisites": [
+        "cc-lab-05-debug-failing-test"
+      ],
+      "relatedTopics": [
+        "feature-implementation-workflow"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-07-recover-unwanted-change",
+      "slug": "cc-lab-07-recover-unwanted-change",
+      "title": "Lab 07: Recover from an Unwanted Change",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Undo an unwanted edit with /rewind, see what checkpoints miss, and recover safely with Git instead of destructive commands.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "checkpoints",
+        "git-recovery"
+      ],
+      "estimatedMinutes": 35,
+      "order": 8,
+      "prerequisites": [
+        "cc-lab-setup"
+      ],
+      "relatedTopics": [
+        "checkpoints-recovery-and-worktrees"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-08-safe-permissions",
+      "slug": "cc-lab-08-safe-permissions",
+      "title": "Lab 08: Configure Safe Permissions",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Write project and local settings that allow the build, ask before pushes and dependency changes, and deny secrets, then check what loaded.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "permissions",
+        "settings"
+      ],
+      "estimatedMinutes": 40,
+      "order": 9,
+      "prerequisites": [
+        "cc-lab-setup"
+      ],
+      "relatedTopics": [
+        "permission-rules",
+        "settings-and-project-trust"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-09-create-hook",
+      "slug": "cc-lab-09-create-hook",
+      "title": "Lab 09: Create Useful Hooks",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Build a notification hook, a session-start reminder, a migration and secrets guard, a dangerous-command guard and a Java file check, and test each one.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "hooks",
+        "guardrails"
+      ],
+      "estimatedMinutes": 50,
+      "order": 10,
+      "prerequisites": [
+        "cc-lab-08-safe-permissions"
+      ],
+      "relatedTopics": [
+        "guardrail-and-automation-hooks"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-10-configure-mcp",
+      "slug": "cc-lab-10-configure-mcp",
+      "title": "Lab 10: Configure a Local MCP Server",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Run a small JDK-only MCP server over stdio, connect Claude Code to it, check its status and scope, and remove it cleanly.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "mcp",
+        "stdio"
+      ],
+      "estimatedMinutes": 45,
+      "order": 11,
+      "prerequisites": [
+        "cc-lab-setup"
+      ],
+      "relatedTopics": [
+        "configuring-mcp-servers"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-11-build-skill",
+      "slug": "cc-lab-11-build-skill",
+      "title": "Lab 11: Build a Reusable Skill",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Write a Java review skill with a precise description, arguments and dynamic context, then test when it triggers and when it should not.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "skills",
+        "code-review"
+      ],
+      "estimatedMinutes": 40,
+      "order": 12,
+      "prerequisites": [
+        "cc-lab-04-project-instructions"
+      ],
+      "relatedTopics": [
+        "writing-effective-skills"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-12-delegate-review",
+      "slug": "cc-lab-12-delegate-review",
+      "title": "Lab 12: Delegate Code Review to Specialized Subagents",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Create read-only correctness, security and test-coverage reviewers, run them in parallel on a change, and validate their findings before acting.",
+      "difficulty": "advanced",
+      "tags": [
+        "lab",
+        "subagents",
+        "code-review"
+      ],
+      "estimatedMinutes": 50,
+      "order": 13,
+      "prerequisites": [
+        "cc-lab-11-build-skill"
+      ],
+      "relatedTopics": [
+        "parallel-review-and-coordination"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-13-issue-to-proposed-fix",
+      "slug": "cc-lab-13-issue-to-proposed-fix",
+      "title": "Lab 13: Review a GitHub Issue and Prepare a Proposed Fix",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Turn the BUG-101 issue into a reproduction, a tested fix on a branch and a pull request description, without pushing anything automatically.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "issues",
+        "pull-requests"
+      ],
+      "estimatedMinutes": 45,
+      "order": 14,
+      "prerequisites": [
+        "cc-lab-05-debug-failing-test"
+      ],
+      "relatedTopics": [
+        "regression-analysis-and-issue-to-pr"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-14-ci-ai-step",
+      "slug": "cc-lab-14-ci-ai-step",
+      "title": "Lab 14: Add an AI-Assisted Step to a CI Workflow",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Keep the Maven build as the gate and add a Claude Code review job with least-privilege permissions, limits and secrets, with a local alternative.",
+      "difficulty": "advanced",
+      "tags": [
+        "lab",
+        "github-actions",
+        "ci"
+      ],
+      "estimatedMinutes": 50,
+      "order": 15,
+      "prerequisites": [
+        "cc-lab-08-safe-permissions"
+      ],
+      "relatedTopics": [
+        "claude-code-github-actions"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-15-production-failure",
+      "slug": "cc-lab-15-production-failure",
+      "title": "Lab 15: Investigate a Production-Style Spring Boot Failure",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "A release fails at startup with a schema-validation error: collect evidence, find the missing migration and fix it forward.",
+      "difficulty": "advanced",
+      "tags": [
+        "lab",
+        "spring-boot",
+        "flyway",
+        "incident"
+      ],
+      "estimatedMinutes": 45,
+      "order": 16,
+      "prerequisites": [
+        "cc-lab-05-debug-failing-test"
+      ],
+      "relatedTopics": [
+        "java-debugging-scenarios"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-lab-16-end-to-end-workflow",
+      "slug": "cc-lab-16-end-to-end-workflow",
+      "title": "Lab 16: Build an End-to-End Engineering Workflow",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Combine instructions, permissions, hooks, a skill, a reviewer subagent and CI into one workflow, then measure it on a real task.",
+      "difficulty": "advanced",
+      "tags": [
+        "lab",
+        "workflow-design",
+        "end-to-end"
+      ],
+      "estimatedMinutes": 60,
+      "order": 17,
+      "prerequisites": [
+        "cc-lab-12-delegate-review"
+      ],
+      "relatedTopics": [
+        "reliable-long-running-workflows",
+        "cc-capstone-project"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "cc-capstone-project",
+      "slug": "cc-capstone-project",
+      "title": "Capstone: Ship a Safe Fix to orderdesk",
+      "category": "claude-code-mastery",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Fix a documented bug, add a feature and regression tests, review a security issue and deliver a verified change summary — graded on evidence and safety.",
+      "difficulty": "advanced",
+      "tags": [
+        "capstone",
+        "spring-boot",
+        "security",
+        "workflow"
+      ],
+      "estimatedMinutes": 120,
+      "order": 18,
+      "prerequisites": [
+        "cc-lab-16-end-to-end-workflow"
+      ],
+      "relatedTopics": [
+        "cc-lab-setup",
+        "verifying-ai-generated-changes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "claude-code-interview-questions",
+      "slug": "claude-code-interview-questions",
+      "title": "Claude Code Interview Questions",
+      "category": "claude-code-mastery",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "How to answer Claude Code questions in interviews, and a question bank on fundamentals, comparisons, configuration and common misconceptions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "claude-code",
+        "fundamentals"
+      ],
+      "estimatedMinutes": 40,
+      "order": 1,
+      "prerequisites": [
+        "claude-modes"
+      ],
+      "relatedTopics": [
+        "claude-code-scenario-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    },
+    {
+      "id": "claude-code-scenario-interview-questions",
+      "slug": "claude-code-scenario-interview-questions",
+      "title": "Scenario, Security and Workflow Interview Questions",
+      "category": "claude-code-mastery",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Scenario questions with follow-ups: debugging, security incidents, workflow design and trade-offs for using Claude Code on a real team.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "scenarios",
+        "security",
+        "workflow-design"
+      ],
+      "estimatedMinutes": 45,
+      "order": 2,
+      "prerequisites": [
+        "claude-code-interview-questions"
+      ],
+      "relatedTopics": [
+        "cc-capstone-project"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-09"
+    }
+  ]
+}

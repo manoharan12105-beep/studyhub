@@ -550,6 +550,80 @@
           ]
         }
       ]
+    },
+    "cc-foundations": {
+      "title": "Claude Code foundations, context and instructions",
+      "include": [
+        {
+          "subject": "claude-code-mastery",
+          "modules": [
+            "foundations",
+            "context-and-sessions",
+            "instructions-and-memory"
+          ]
+        }
+      ]
+    },
+    "cc-safety": {
+      "title": "Permissions, safety and hooks",
+      "include": [
+        {
+          "subject": "claude-code-mastery",
+          "modules": [
+            "permissions-and-safety",
+            "hooks"
+          ]
+        }
+      ]
+    },
+    "cc-extensions": {
+      "title": "MCP, skills and subagents",
+      "include": [
+        {
+          "subject": "claude-code-mastery",
+          "modules": [
+            "mcp",
+            "skills",
+            "subagents"
+          ]
+        }
+      ]
+    },
+    "cc-workflows": {
+      "title": "Git, automation, debugging and advanced workflows",
+      "include": [
+        {
+          "subject": "claude-code-mastery",
+          "modules": [
+            "github-workflows",
+            "automation",
+            "debugging-and-quality",
+            "advanced-workflows"
+          ]
+        }
+      ]
+    },
+    "cc-labs": {
+      "title": "Practical labs and the capstone",
+      "include": [
+        {
+          "subject": "claude-code-mastery",
+          "modules": [
+            "labs"
+          ]
+        }
+      ]
+    },
+    "cc-interview": {
+      "title": "Claude Code interview",
+      "include": [
+        {
+          "subject": "claude-code-mastery",
+          "modules": [
+            "interview"
+          ]
+        }
+      ]
     }
   },
   "plans": [
@@ -1863,6 +1937,110 @@
             "devops-cicd",
             "devops-labs",
             "devops-interview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "claude-code-mastery",
+      "title": "Claude Code Mastery",
+      "description": "Use Claude Code safely and effectively on a Java/Spring Boot project: modes, context, instructions, permissions, hooks, MCP, skills, subagents, Git and CI workflows, debugging and verification.",
+      "category": "subject",
+      "order": 15,
+      "targetAudience": "Java backend developers and students who want to work with an AI coding agent in real projects and discuss it confidently in interviews.",
+      "prerequisites": [
+        "Basic Java and Spring Boot",
+        "Git basics: branch, commit, diff",
+        "Comfort with a terminal"
+      ],
+      "variants": [
+        {
+          "difficulty": "beginner",
+          "summary": "Beginner and intermediate lessons from first session to Git workflows, with the simulations, easy-to-medium practice and the full revision.",
+          "durationDays": 28,
+          "dailyMinutes": 75,
+          "topicLevels": [
+            "beginner",
+            "intermediate"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "cc-foundations",
+            "cc-safety",
+            "cc-extensions",
+            "cc-workflows"
+          ]
+        },
+        {
+          "difficulty": "intermediate",
+          "summary": "Every lesson, the sixteen labs and the capstone, with practice, interview questions and the interview module.",
+          "durationDays": 45,
+          "dailyMinutes": 100,
+          "topicLevels": [
+            "beginner",
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "interactive",
+            "practice",
+            "interview",
+            "revision"
+          ],
+          "revision": "full",
+          "stages": [
+            "cc-foundations",
+            "cc-safety",
+            "cc-extensions",
+            "cc-workflows",
+            "cc-labs",
+            "cc-interview"
+          ]
+        },
+        {
+          "difficulty": "advanced",
+          "summary": "Intermediate and advanced lessons and labs — hooks, MCP, subagents, automation, verification and long-running workflows — with hard questions, flashcards and the quick revision.",
+          "durationDays": 35,
+          "dailyMinutes": 105,
+          "topicLevels": [
+            "intermediate",
+            "advanced"
+          ],
+          "questionLevels": [
+            "medium",
+            "hard"
+          ],
+          "modes": [
+            "learn",
+            "practice",
+            "interview",
+            "flashcards",
+            "revision"
+          ],
+          "revision": "quick",
+          "stages": [
+            "cc-foundations",
+            "cc-safety",
+            "cc-extensions",
+            "cc-workflows",
+            "cc-labs",
+            "cc-interview"
           ]
         }
       ]

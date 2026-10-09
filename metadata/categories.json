@@ -1254,6 +1254,144 @@
           ]
         }
       ]
+    },
+    {
+      "id": "claude-code-mastery",
+      "title": "Claude Code Mastery",
+      "description": "Use Claude Code as an engineering tool: modes and permissions, context and sessions, CLAUDE.md, hooks, MCP, skills, subagents, GitHub and CI workflows, debugging and safe delivery on a Java/Spring Boot project.",
+      "order": 12,
+      "icon": "assets/icons/subjects/claude-code-mastery.svg",
+      "group": "development",
+      "catalog": "metadata/topics/claude-code-mastery.json",
+      "interactions": "metadata/interactions/claude-code-mastery.json",
+      "subcategories": [
+        {
+          "id": "foundations",
+          "title": "Foundations, Installation and Modes",
+          "description": "What Claude Code is and can access, how it differs from web and IDE assistants, installation, a first session, and the permission modes that decide what runs without asking.",
+          "order": 1
+        },
+        {
+          "id": "context-and-sessions",
+          "title": "Context Windows, Sessions and Checkpoints",
+          "description": "The context window and what consumes it, compaction, /compact and /clear, saving and resuming sessions, checkpoints, recovery and parallel work with git worktrees.",
+          "order": 2
+        },
+        {
+          "id": "instructions-and-memory",
+          "title": "Project Instructions, Rules and Memory",
+          "description": "CLAUDE.md at user, project and local scope, a useful project file for a Spring Boot repository, imports, path-scoped rules, auto memory and keeping instructions small and consistent.",
+          "order": 3
+        },
+        {
+          "id": "permissions-and-safety",
+          "title": "Permissions, Settings and Safety",
+          "description": "Allow, ask and deny rules, settings files and precedence, workspace trust, protecting secrets, dangerous commands, the sandbox and reviewing changes before you accept them.",
+          "order": 4
+        },
+        {
+          "id": "hooks",
+          "title": "Hooks and Workflow Guardrails",
+          "description": "Hook events and lifecycle, configuration, input and output, blocking and informational hooks, guardrails, automation, notifications, debugging and the limits of what hooks guarantee.",
+          "order": 5
+        },
+        {
+          "id": "mcp",
+          "title": "MCP and External Tools",
+          "description": "The Model Context Protocol, clients, servers, tools, resources and prompts, configuring servers at each scope, authentication, tool output and context, troubleshooting and trust.",
+          "order": 6
+        },
+        {
+          "id": "skills",
+          "title": "Skills, Slash Commands and Reusable Workflows",
+          "description": "How skills are discovered and loaded, SKILL.md structure, arguments and dynamic context, how custom commands became skills, and reusable review, testing, documentation and release workflows.",
+          "order": 7
+        },
+        {
+          "id": "subagents",
+          "title": "Subagents and Agent Teams",
+          "description": "Delegation and context isolation, subagent configuration and tool boundaries, parallel review with consolidated findings, experimental agent teams, and the cost and reliability trade-offs.",
+          "order": 8
+        },
+        {
+          "id": "github-workflows",
+          "title": "GitHub and Real Developer Workflows",
+          "description": "Git and branches, issues, the inspect-plan-implement-test-review workflow, code review and diffs, pull request preparation, regression analysis and the issue-to-fix-to-PR path.",
+          "order": 9
+        },
+        {
+          "id": "automation",
+          "title": "Automation and CI/CD",
+          "description": "Non-interactive Claude Code, scripting, the Claude Code GitHub Action, secrets, automated review and triage, and keeping deterministic CI and human approval gates in charge.",
+          "order": 10
+        },
+        {
+          "id": "debugging-and-quality",
+          "title": "Debugging, Testing and Engineering Quality",
+          "description": "Reproducible bugs, stack traces and logs, test-driven fixes, regression tests, security and performance review, verifying AI-generated changes and Java/Spring Boot debugging scenarios.",
+          "order": 11
+        },
+        {
+          "id": "advanced-workflows",
+          "title": "Advanced Context and Workflow Engineering",
+          "description": "Context budgeting in large repositories, progressive disclosure, delegation versus single-agent work, cost and latency, long-running tasks, failure recovery and measuring workflow quality.",
+          "order": 12
+        },
+        {
+          "id": "labs",
+          "title": "Practical Labs and Capstone",
+          "description": "Sixteen hands-on labs on the orderdesk Spring Boot project, from exploring a repository to an end-to-end workflow, and a capstone that rewards evidence, safety and correctness.",
+          "order": 13
+        },
+        {
+          "id": "interview",
+          "title": "Interview Preparation",
+          "description": "Claude Code interview questions on fundamentals, feature comparisons, security, debugging and workflow design, with scenario questions and follow-ups.",
+          "order": 14
+        }
+      ],
+      "studyModes": [
+        {
+          "id": "revision",
+          "title": "Revision",
+          "description": "Complete Claude Code revision, context and session management, subagents and agent teams, GitHub and CI/CD workflows, common failure modes and an interview quick reference.",
+          "sources": [
+            { "path": "content/claude-code-mastery/revision/complete-revision.md", "title": "Complete Claude Code Revision" },
+            { "path": "content/claude-code-mastery/revision/context-and-sessions.md", "title": "Context and Session Management" },
+            { "path": "content/claude-code-mastery/revision/subagents-and-agent-teams.md", "title": "Subagents and Agent Teams" },
+            { "path": "content/claude-code-mastery/revision/github-and-cicd-workflows.md", "title": "GitHub and CI/CD Workflows" },
+            { "path": "content/claude-code-mastery/revision/common-failure-modes.md", "title": "Common Failure Modes" },
+            { "path": "content/claude-code-mastery/revision/interview-quick-reference.md", "title": "Interview Quick Reference" }
+          ]
+        },
+        {
+          "id": "cheat-sheets",
+          "title": "Cheat Sheets",
+          "description": "One-page references for modes and permissions, CLAUDE.md and rules, hooks, MCP, skills and reusable workflows, and a security and safety checklist.",
+          "sources": [
+            { "path": "content/claude-code-mastery/revision/modes-and-permissions-cheat-sheet.md", "title": "Modes and Permissions" },
+            { "path": "content/claude-code-mastery/revision/claude-md-and-rules-cheat-sheet.md", "title": "CLAUDE.md and Rules" },
+            { "path": "content/claude-code-mastery/revision/hooks-reference.md", "title": "Hooks Reference" },
+            { "path": "content/claude-code-mastery/revision/mcp-reference.md", "title": "MCP Reference" },
+            { "path": "content/claude-code-mastery/revision/skills-and-reusable-workflows.md", "title": "Skills and Reusable Workflows" },
+            { "path": "content/claude-code-mastery/revision/security-and-safety-checklist.md", "title": "Security and Safety Checklist" }
+          ]
+        },
+        {
+          "id": "quick-revision",
+          "title": "Quick Revision",
+          "description": "Six short blocks, about ten minutes each: read all six for an hour-long revision, or only the blocks you need.",
+          "estimatedMinutes": 60,
+          "sources": [
+            { "path": "content/claude-code-mastery/revision/quick-1-fundamentals-setup-modes.md", "title": "Block 1: Fundamentals, Setup and Modes" },
+            { "path": "content/claude-code-mastery/revision/quick-2-context-sessions-memory.md", "title": "Block 2: Context, Sessions and Memory" },
+            { "path": "content/claude-code-mastery/revision/quick-3-permissions-and-hooks.md", "title": "Block 3: Permissions and Hooks" },
+            { "path": "content/claude-code-mastery/revision/quick-4-mcp-and-skills.md", "title": "Block 4: MCP and Skills" },
+            { "path": "content/claude-code-mastery/revision/quick-5-subagents-and-github.md", "title": "Block 5: Subagents and GitHub Workflows" },
+            { "path": "content/claude-code-mastery/revision/quick-6-debugging-safety-capstone.md", "title": "Block 6: Debugging, Safety and Capstone" }
+          ]
+        }
+      ]
     }
   ]
 }

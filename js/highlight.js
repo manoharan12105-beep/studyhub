@@ -123,6 +123,21 @@ const LANGUAGES = {
       ['number', String.raw`\b\d+[kmgsKMG]?\b`],
     ],
   },
+  // Markdown instruction files (Claude Code subject): CLAUDE.md, rules, SKILL.md
+  // and subagent files — HTML comments, headings and frontmatter fences,
+  // frontmatter keys, inline code, @imports and $ARGUMENTS-style placeholders,
+  // and list markers.
+  markdown: {
+    flags: 'm',
+    rules: [
+      ['comment', String.raw`<!--[\s\S]*?-->`],
+      ['keyword', String.raw`^#{1,6}[ \t][^\n]*|^---[ \t]*$`],
+      ['property', String.raw`^[a-z][a-z0-9_-]*(?=:)`],
+      ['string', String.raw`\x60[^\x60\n]+\x60`],
+      ['annotation', String.raw`(?<![\w\x60])@[\w./~-]+|\$ARGUMENTS(?:\[\d+\])?|\$\d\b|\$\{CLAUDE_[A-Z_]+\}`],
+      ['number', String.raw`^[ \t]*(?:[-*+]|\d+\.)(?=[ \t])`],
+    ],
+  },
   pseudocode: {
     flags: 'i',
     rules: [
@@ -136,6 +151,9 @@ const LANGUAGES = {
 LANGUAGES.sh = LANGUAGES.bash;
 LANGUAGES.shell = LANGUAGES.bash;
 LANGUAGES.yml = LANGUAGES.yaml;
+LANGUAGES.md = LANGUAGES.markdown;
+// Windows one-liners (installers): comments, strings and $variables read the same.
+LANGUAGES.powershell = LANGUAGES.bash;
 
 const compiled = new Map();
 function compile(language) {

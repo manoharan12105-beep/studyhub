@@ -1,9 +1,9 @@
 # StudyHub
 
-A personal study and interview-preparation platform for aptitude, data structures, algorithms, object-oriented programming, Spring Boot, DBMS and PostgreSQL, Linux, computer networks, system design, operating systems, DevOps and deployment, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
+A personal study and interview-preparation platform for aptitude, data structures, algorithms, object-oriented programming, Spring Boot, DBMS and PostgreSQL, Linux, computer networks, system design, operating systems, DevOps and deployment, Claude Code, computer science concepts, and more categories over time — built as a fully static site for GitHub Pages.
 
 > **Project status: Phase 3 — the interactive application is built.**
-> Aptitude (58 topics), Data Structures & Algorithms (113 topics), Object-Oriented Programming (75 topics), Spring Boot (91 topics), DBMS + PostgreSQL (75 topics), Linux (59 topics), Computer Networks (88 topics), System Design (82 topics), Operating Systems (38 topics) and DevOps & Deployment (42 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
+> Aptitude (58 topics), Data Structures & Algorithms (113 topics), Object-Oriented Programming (75 topics), Spring Boot (91 topics), DBMS + PostgreSQL (75 topics), Linux (59 topics), Computer Networks (88 topics), System Design (82 topics), Operating Systems (38 topics), DevOps & Deployment (42 topics) and Claude Code Mastery (68 topics) are written in Markdown with metadata, each with Revision and Quick Revision material.
 > The static app (`index.html`) adds navigation, search, progress tracking, practice and interview sessions, flashcards and interactive visualizers around that content. CS Concepts currently holds a short Excel Fundamentals module.
 
 | Phase | Scope | Status |
@@ -23,6 +23,7 @@ A personal study and interview-preparation platform for aptitude, data structure
 | 2I | Operating Systems content (fundamentals, processes and threads, CPU scheduling, synchronization, deadlocks, memory management, storage and I/O) | Done |
 | 2J | Interview preparation and study plans: 13 built-in plans (35 difficulty variants) and a custom plan builder | Done |
 | 2K | DevOps & Deployment content (Docker, Dockerfiles, networking, volumes, Compose, configuration and secrets, Linux VPS, Nginx, DNS and HTTPS, GitHub Actions CI/CD, registries, monitoring, security), 18 hands-on labs, a Spring Boot + PostgreSQL deployment project and a DevOps study plan | Done |
+| 2L | Claude Code Mastery content (modes, context and sessions, CLAUDE.md and memory, permissions and safety, hooks, MCP, skills, subagents and agent teams, Git and GitHub workflows, automation and CI/CD, debugging and verification, advanced workflows), 16 hands-on labs and a capstone around a Spring Boot sample project, and a Claude Code study plan | Done |
 
 ## Goals
 
@@ -84,6 +85,11 @@ StudyHub/
 │   │   ├── devops-foundations/ … operations/   6 subcategories, 19 lessons (Docker, Compose, configuration, VPS, Nginx, HTTPS, CI/CD, monitoring, security)
 │   │   ├── labs/                    19 topics (lab setup + 18 hands-on labs)
 │   │   ├── deployment-project/      2 topics (capstone project, deployment checklist)
+│   │   ├── interview/               2 topics (question bank, scenarios)
+│   │   └── revision/                Revision, Cheat Sheets and Quick Revision sources
+│   ├── claude-code-mastery/
+│   │   ├── foundations/ … advanced-workflows/   12 subcategories, 48 lessons (modes, context, instructions, permissions, hooks, MCP, skills, subagents, Git, CI/CD, debugging)
+│   │   ├── labs/                    18 topics (lab setup, 16 hands-on labs, capstone)
 │   │   ├── interview/               2 topics (question bank, scenarios)
 │   │   └── revision/                Revision, Cheat Sheets and Quick Revision sources
 │   ├── operating-systems/
@@ -148,11 +154,11 @@ Each topic `type` has its own lesson template, so DSA, theory, command-reference
 | `aptitude` | Formulas, shortcuts, problem patterns |
 | `reference` | Commands, tools and syntax |
 
-Programming examples are written in **Java** (Spring Boot examples use JDK 21 and Spring Boot 4.1; DBMS examples use JDBC). SQL is written for PostgreSQL 17+ and verified against a shared sample database. Linux commands and Bash scripts are verified in a throwaway practice lab on Ubuntu with GNU tools; machine-dependent output is marked as such. Computer Networks command output was captured on real Windows and Ubuntu machines (with addresses replaced by documentation ranges), and its Java programs and subnetting answers are verified by running them. System Design's Java programs are run and their output checked, and its estimates and availability numbers are recalculated. Operating Systems' Java programs are run and their output checked, and every scheduling, page-replacement, Banker's-algorithm and address-translation answer is recomputed with the same code the OS simulators use. DevOps & Deployment uses Dockerfiles, Compose and GitHub Actions YAML, Nginx configuration and Bash around a Java 21 / Spring Boot 4.1 sample application: the application, its tests, the Nginx configuration and the deploy script were run locally, the YAML files were validated against the official schemas, and each lab states whether it was tested, partly tested or is instruction only (Docker, a VPS, DNS and certificates were not available to verify). Answers to questions are hidden in collapsible `<details>` blocks, so files work as self-tests on GitHub as well as in the app.
+Programming examples are written in **Java** (Spring Boot examples use JDK 21 and Spring Boot 4.1; DBMS examples use JDBC). SQL is written for PostgreSQL 17+ and verified against a shared sample database. Linux commands and Bash scripts are verified in a throwaway practice lab on Ubuntu with GNU tools; machine-dependent output is marked as such. Computer Networks command output was captured on real Windows and Ubuntu machines (with addresses replaced by documentation ranges), and its Java programs and subnetting answers are verified by running them. System Design's Java programs are run and their output checked, and its estimates and availability numbers are recalculated. Operating Systems' Java programs are run and their output checked, and every scheduling, page-replacement, Banker's-algorithm and address-translation answer is recomputed with the same code the OS simulators use. DevOps & Deployment uses Dockerfiles, Compose and GitHub Actions YAML, Nginx configuration and Bash around a Java 21 / Spring Boot 4.1 sample application: the application, its tests, the Nginx configuration and the deploy script were run locally, the YAML files were validated against the official schemas, and each lab states whether it was tested, partly tested or is instruction only (Docker, a VPS, DNS and certificates were not available to verify). Claude Code Mastery teaches Claude Code itself (checked against v2.1.289 and the official documentation, October 2026) around a Java 21 / Spring Boot 4.1 sample project: the project builds and its tests run, hook scripts were exercised with recorded hook input, settings, skills, subagents and workflows were validated, and the CLI commands that need no model (version, MCP configuration, validation) were run; conversations with Claude are never quoted as output, and each lab states what was locally tested, partially tested, instructions only or simulated. Answers to questions are hidden in collapsible `<details>` blocks, so files work as self-tests on GitHub as well as in the app.
 
 ### Study modes
 
-Aptitude, DSA, OOP, Spring Boot, DBMS + PostgreSQL, Linux, Computer Networks, System Design, Operating Systems and DevOps & Deployment each offer at least three ways to study:
+Aptitude, DSA, OOP, Spring Boot, DBMS + PostgreSQL, Linux, Computer Networks, System Design, Operating Systems, DevOps & Deployment and Claude Code Mastery each offer at least three ways to study:
 
 | Mode | What it is | Source files |
 |------|------------|--------------|
@@ -215,6 +221,13 @@ Aptitude, DSA, OOP, Spring Boot, DBMS + PostgreSQL, Linux, Computer Networks, Sy
 | **Revision** | Complete revision, troubleshooting cheat sheet, interview traps, ports and protocols, and the deployment checklist | `content/devops/revision/` (5 sources) |
 | **Cheat Sheets** | Docker commands, Dockerfile, Docker Compose, Linux deployment, Nginx, GitHub Actions and CI/CD pipeline | `content/devops/revision/*-cheat-sheet.md` (7 sources) |
 | **Quick Revision** | Seven 10-minute blocks (DevOps and Linux, Docker, Compose and data, configuration and the server, Nginx and HTTPS, CI/CD, production troubleshooting) — 70 minutes in all | `content/devops/revision/quick-*.md` (7 sources) |
+
+| Claude Code Mastery mode | What it is | Source files |
+|--------------------------|------------|--------------|
+| **Learn** | 68 topics in 14 modules: 48 lessons from the first session and the six permission modes through hooks, MCP, skills, subagents, Git and CI/CD workflows, debugging and advanced workflows, plus lab setup, 16 hands-on labs, a capstone with a grading rubric and two interview banks, with 39 interactive exercises | `content/claude-code-mastery/<subcategory>/<topic>/` |
+| **Revision** | Complete revision, context and sessions, subagents and agent teams, GitHub and CI/CD workflows, common failure modes and an interview quick reference | `content/claude-code-mastery/revision/` (6 sources) |
+| **Cheat Sheets** | Modes and permissions, CLAUDE.md and rules, hooks, MCP, skills and reusable workflows, and a security and safety checklist | `content/claude-code-mastery/revision/` (6 sources) |
+| **Quick Revision** | Six 10-minute blocks (fundamentals and modes, context and memory, permissions and hooks, MCP and skills, subagents and GitHub, debugging and safety) — 60 minutes in all | `content/claude-code-mastery/revision/quick-*.md` (6 sources) |
 
 The modes are declared in `metadata/categories.json` (`studyModes`); the app combines each mode's source files into one view. Any category can add study modes the same way.
 

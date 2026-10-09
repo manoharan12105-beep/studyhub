@@ -3,6 +3,14 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-09-claude-code-mastery",
+      "date": "2026-10-09",
+      "title": "Claude Code Mastery",
+      "description": "68 topics in 14 modules — foundations and the six permission modes, context and sessions, CLAUDE.md and memory, permissions and safety, hooks, MCP, skills, subagents and agent teams, Git and GitHub workflows, automation and CI/CD, debugging and verification, and advanced workflows — built around a Spring Boot sample project, with 16 hands-on labs, a capstone with a grading rubric, 11 simulations and visualizers, 11 checks, 7 comparisons, 10 flashcard decks, Revision, Cheat Sheets, Quick Revision and a new Claude Code Mastery study plan.",
+      "type": "content",
+      "link": "#/c/claude-code-mastery"
+    },
+    {
       "id": "2026-10-09-knowledge-galaxy",
       "date": "2026-10-09",
       "title": "Knowledge galaxy",
