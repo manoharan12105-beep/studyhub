@@ -31,6 +31,9 @@
   --info-soft: #e8effd;
   --focus: #4f46e5;
   --mark: #fff1a8;
+  --galaxy-bg: #070b18;
+  --galaxy-nebula: #26306b;
+  --galaxy-accent: #a5b4fc;
 
   --code-bg: #f5f7fa;
   --code-text: #1f2328;
@@ -73,6 +76,31 @@
   --duration: 160ms;
 }
 
+/* Knowledge galaxy scene palette. The galaxy is always a night sky, so text and
+   bodies are the same in every theme; only --galaxy-bg, --galaxy-nebula and
+   --galaxy-accent (above, per theme) tint it. Text colours meet 4.5:1 on every
+   --galaxy-bg, and labels sit on an 82% --galaxy-bg backing over glows. */
+:root {
+  --galaxy-text: #eef1f8;
+  --galaxy-text-muted: #b3bccd;
+  --galaxy-done: #4ade80;
+  --galaxy-sun-1: #ffd98a;
+  --galaxy-sun-2: #9fd4ff;
+  --galaxy-sun-3: #ffae80;
+  --galaxy-sun-4: #dcbfff;
+  --galaxy-sun-5: #fff0c4;
+  --galaxy-planet-1: #6aa8ff;
+  --galaxy-planet-2: #f2a65a;
+  --galaxy-planet-3: #7bd389;
+  --galaxy-planet-4: #e57ab4;
+  --galaxy-planet-5: #b49bff;
+  --galaxy-planet-6: #4fd1c5;
+  --galaxy-planet-7: #f2d16b;
+  --galaxy-planet-8: #ff7f6e;
+  --galaxy-planet-9: #9fb4c7;
+  --galaxy-planet-10: #c7a17a;
+}
+
 /* Themes. Each block redefines the colour tokens only; components never name
    a theme. A theme is applied with data-theme on <html> (js/theme.js) — and on
    any element, which is how the menu's swatches preview the real colours.
@@ -106,6 +134,9 @@
   --info-soft: #152238;
   --focus: #a5abff;
   --mark: #5c4d00;
+  --galaxy-bg: #06080f;
+  --galaxy-nebula: #272d63;
+  --galaxy-accent: #aeb3ff;
   --code-bg: #11141a;
   --code-text: #e1e4ea;
   --tok-keyword: #ff7b72;
@@ -145,6 +176,9 @@
     --info-soft: #152238;
     --focus: #a5abff;
     --mark: #5c4d00;
+    --galaxy-bg: #06080f;
+    --galaxy-nebula: #272d63;
+    --galaxy-accent: #aeb3ff;
     --code-bg: #11141a;
     --code-text: #e1e4ea;
     --tok-keyword: #ff7b72;
@@ -185,6 +219,9 @@
   --info-soft: #0c2e3a;
   --focus: #7dd3fc;
   --mark: #5a4a00;
+  --galaxy-bg: #03101a;
+  --galaxy-nebula: #0c3d55;
+  --galaxy-accent: #67e8f9;
   --code-bg: #08111a;
   --code-text: #dbe7f1;
   --tok-keyword: #ff8a80;
@@ -224,6 +261,9 @@
   --info-soft: #e8effd;
   --focus: #6d28d9;
   --mark: #fff1a8;
+  --galaxy-bg: #0a0614;
+  --galaxy-nebula: #3e2266;
+  --galaxy-accent: #d8b4fe;
   --code-bg: #f8f6fc;
   --code-text: #1f1b2b;
   --tok-keyword: #c21d2b;
@@ -263,6 +303,9 @@
   --info-soft: #e9eefa;
   --focus: #b45309;
   --mark: #fde68a;
+  --galaxy-bg: #0e0904;
+  --galaxy-nebula: #4d2e0c;
+  --galaxy-accent: #fcd34d;
   --code-bg: #fbf7ef;
   --code-text: #2a2217;
   --tok-keyword: #b4231a;
@@ -302,6 +345,9 @@
   --info-soft: #102a36;
   --focus: #6ee7b7;
   --mark: #534800;
+  --galaxy-bg: #03100a;
+  --galaxy-nebula: #123f2a;
+  --galaxy-accent: #86efac;
   --code-bg: #09110e;
   --code-text: #dde9e2;
   --tok-keyword: #ff8a80;
@@ -623,6 +669,7 @@ hr { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 0; }
 .hero-tagline { font-size: var(--text-xl); color: var(--text-muted); margin: var(--space-1) 0 var(--space-5); font-weight: 500; }
 .progress-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 var(--space-3); margin-bottom: var(--space-2); }
 .stat-panels { display: grid; gap: var(--space-4); max-width: 520px; }
+.hero .stat-panels { max-width: none; }
 .stat-panel-title { margin: 0 0 var(--space-2); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
 .stat-panel-you { padding-bottom: var(--space-4); border-bottom: 1px solid var(--border); }
 .stat-row { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); margin: var(--space-3) 0 0; }
@@ -631,12 +678,8 @@ hr { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 0; }
 .stat dt { font-size: var(--text-sm); color: var(--text-muted); }
 .stat dd { margin: 0; }
 .stat-value { font-size: var(--text-xl); font-weight: 700; font-variant-numeric: tabular-nums; }
-.hero-visual { display: flex; flex-direction: column; gap: var(--space-3); min-height: 300px; height: 100%; }
-.map-stage { position: relative; flex: 1 1 auto; min-height: 300px; }
-.map-stage canvas { position: absolute; inset: 0; display: block; width: 100% !important; height: 100% !important; border-radius: var(--radius); }
-.map-stage canvas:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-.map-legend { position: absolute; left: var(--space-3); right: var(--space-3); bottom: var(--space-2); margin: 0; font-size: var(--text-xs); color: var(--text-muted); pointer-events: none; }
-.map-reset { position: absolute; top: var(--space-2); right: var(--space-2); gap: var(--space-1); }
+.galaxy-section .section-head p { flex: 1 1 100%; max-width: 70ch; }
+.galaxy { display: flex; flex-direction: column; gap: var(--space-3); }
 
 .continue-card {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4);
@@ -1228,11 +1271,38 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 .flow-status.is-ok { color: var(--success); }
 .flow-status.is-error { color: var(--danger); }
 
-/* 3D knowledge map overlay */
-.map-tooltip { position: absolute; display: flex; flex-direction: column; pointer-events: none; padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); font-size: var(--text-xs); color: var(--text-muted); white-space: nowrap; transform: translate(-50%, -130%); }
-.map-tooltip strong { color: var(--text); }
+/* 3D knowledge galaxy: the stage is a night sky in every theme (see the galaxy tokens) */
+.galaxy-stage {
+  position: relative; height: clamp(400px, 50vw, 620px); overflow: hidden; isolation: isolate;
+  border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--galaxy-bg);
+}
+.galaxy-stage canvas { position: absolute; inset: 0; display: block; width: 100% !important; height: 100% !important; touch-action: pan-y; }
+/* Inset ring: the stage clips anything drawn outside it. */
+.galaxy-stage canvas:focus-visible { outline: 2px solid var(--galaxy-accent); outline-offset: -4px; border-radius: var(--radius-lg); }
+.galaxy-labels { position: absolute; inset: 0; pointer-events: none; }
+.galaxy-label {
+  position: absolute; top: 0; left: 0; max-width: 11em; padding: 1px 6px; border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--galaxy-bg) 82%, transparent); color: var(--galaxy-text);
+  font-size: var(--text-xs); line-height: 1.3; text-align: center; cursor: pointer; pointer-events: auto; user-select: none;
+}
+.galaxy-label.is-culled { visibility: hidden; pointer-events: none; }
+.galaxy-label-name { display: block; font-weight: 600; }
+.galaxy-label-meta { display: block; color: var(--galaxy-text-muted); font-variant-numeric: tabular-nums; }
+.galaxy-label-sun { max-width: none; padding: 5px 8px; white-space: nowrap; font-size: 0.6875rem; letter-spacing: 0.09em; text-transform: uppercase; }
+.galaxy-label-sun .galaxy-label-name { font-weight: 700; }
+.galaxy-label.is-dim .galaxy-label-name { color: var(--galaxy-text-muted); font-weight: 500; }
+.galaxy-label.is-selected { box-shadow: 0 0 0 1px var(--galaxy-accent); }
+.galaxy-reset { position: absolute; top: var(--space-2); right: var(--space-2); z-index: 1; gap: var(--space-1); }
 .map-panel { padding: var(--space-4); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); animation: map-panel-in var(--duration) ease-out; }
+.map-panel-eyebrow { margin: 0; font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
 .map-panel-title { font-size: var(--text-lg); margin: 0 0 var(--space-2); outline: none; }
+.map-panel-subjects { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.map-panel-subject {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; min-height: 44px; padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); font: inherit; text-align: left; cursor: pointer;
+}
+.map-panel-subject:hover { border-color: var(--border-strong); background: var(--surface-3); }
+.map-panel-subject-title { font-weight: 600; }
 .map-panel .progress-bar { margin: var(--space-1) 0 var(--space-3); }
 .map-panel-facts { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-3); margin: 0 0 var(--space-3); font-size: var(--text-sm); }
 .map-panel-facts dt { font-size: var(--text-xs); color: var(--text-muted); }
@@ -1745,7 +1815,6 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 
 @media (max-width: 1023px) {
   .hero { grid-template-columns: 1fr; }
-  .hero-visual { display: none; }
 }
 
 @media (max-width: 900px) {
@@ -1768,6 +1837,7 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
   .page { padding: var(--space-5) var(--space-4) var(--space-7); }
   .topic-tabs, .source-bar { margin-left: calc(-1 * var(--space-4)); margin-right: calc(-1 * var(--space-4)); padding-left: var(--space-4); padding-right: var(--space-4); }
   .hero { padding: var(--space-5); }
+  .galaxy-stage { height: clamp(340px, 105vw, 420px); }
   .hero-title { font-size: var(--text-2xl); }
   .hero-tagline { font-size: var(--text-lg); }
   .page-title { font-size: var(--text-xl); }

@@ -6,15 +6,13 @@
 
 import { navigate, parse } from './router.js';
 
-const WIDE = '(min-width: 1024px)';
 export const FOCUS_EVENT = 'studyhub:map-focus';
 
 let pending = null;
 let webgl = null;
 
-/** True when the 3D map can render here (wide screen + WebGL). */
+/** True when the 3D map can render here (WebGL). Any width: phones zoom into one system at a time. */
 export function mapSupported() {
-  if (!window.matchMedia(WIDE).matches) return false;
   if (webgl === null) {
     const canvas = document.createElement('canvas');
     const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');

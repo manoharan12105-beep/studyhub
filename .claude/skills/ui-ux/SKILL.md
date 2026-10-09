@@ -41,7 +41,7 @@ Technical constraints come from [CLAUDE.md](../../../CLAUDE.md) and [docs/archit
 - Six themes via tokens: Light, Dark, Ocean, Purple, Amber, Forest. Default ("Match system") follows `prefers-color-scheme` with no attribute; choosing a theme in the header menu sets `data-theme="<id>"` on `<html>`, persisted under `studyhub:v1:theme`. List: `THEMES` in `js/theme.js`.
 - A theme is one token block in `styles.css` (`[data-theme="<id>"] { … }`) defining every token the light block defines. Never add a theme-specific rule to a component — if a component looks wrong in one theme, fix the token.
 - Apply the stored theme (and the collapsed-sidebar state) before first paint (inline script in `<head>`) to avoid a flash; a new theme id must be added there too.
-- Every theme meets contrast requirements, including code highlighting, callouts, badges and `--success`/`--warning` text on their `-soft` backgrounds. The 3D map reads `--accent`, `--success`, `--border-strong` and `--text` and rebuilds on the `studyhub:theme` event.
+- Every theme meets contrast requirements, including code highlighting, callouts, badges and `--success`/`--warning` text on their `-soft` backgrounds. The knowledge galaxy reads the `--galaxy-*` tokens (a new theme defines `--galaxy-bg`, `--galaxy-nebula` and `--galaxy-accent`) and rebuilds on the `studyhub:theme` event.
 
 ## Accessibility (non-negotiable)
 

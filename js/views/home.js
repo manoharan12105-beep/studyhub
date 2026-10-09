@@ -2,7 +2,7 @@
 // subjects, recent work, and the knowledge map.
 
 import { el, icon, formatMinutes, timeAgo, percent } from '../util.js';
-import { index, isAvailable, loadInteractions, categoriesInDisplayOrder } from '../content-loader.js';
+import { index, isAvailable, loadInteractions, categoriesInDisplayOrder, groupedCategories } from '../content-loader.js';
 import { href } from '../router.js';
 import * as engine from '../study-engine.js';
 import * as progress from '../progress.js';
@@ -22,36 +22,45 @@ export async function renderHome(main) {
   const answered = totals.practice.attempted + totals.interview.attempted + totals.checks.attempted;
 
   // Not aria-hidden: the map's canvas is keyboard-operable and its detail panel holds links.
-  const mapHost = el('div', { class: 'hero-visual' });
+  const mapHost = el('div', { class: 'galaxy' });
   const interactiveCount = el('span', { class: 'stat-value' }, '…');
 
   const hero = el('section', { class: 'hero', 'aria-labelledby': 'home-title' },
     el('div', { class: 'hero-text' },
       el('p', { class: 'eyebrow' }, 'Interview preparation, from first principles'),
       el('h1', { class: 'hero-title', id: 'home-title', tabindex: -1 }, 'StudyHub'),
-      el('p', { class: 'hero-tagline' }, 'Learn. Practice. Revise. Prepare.'),
-      el('div', { class: 'stat-panels' },
-        el('section', { class: 'stat-panel stat-panel-you', 'aria-labelledby': 'stats-you' },
-          el('h2', { class: 'stat-panel-title', id: 'stats-you' }, 'Your progress'),
-          el('div', { class: 'progress-row' },
-            el('span', {}, el('strong', {}, `${overall.completed}`), ` of ${overall.total} topics completed`),
-            el('span', { class: 'muted' }, `${overall.percent}%`)),
-          progressBar(overall.percent, 'Overall progress'),
-          el('dl', { class: 'stat-row' },
-            stat(`${overall.completed}`, overall.completed === 1 ? 'topic completed' : 'topics completed'),
-            stat(`${overall.inProgress}`, 'in progress'),
-            stat(`${answered}`, answered === 1 ? 'question answered' : 'questions answered'))),
-        el('section', { class: 'stat-panel', 'aria-labelledby': 'stats-platform' },
-          el('h2', { class: 'stat-panel-title', id: 'stats-platform' }, 'Platform'),
-          el('dl', { class: 'stat-row' },
-            stat(`${available.length}`, 'subjects'),
-            stat(`${overall.total}`, 'topics'),
-            el('div', { class: 'stat' }, el('dt', {}, 'interactive exercises'), el('dd', {}, interactiveCount)))))),
-    mapHost);
+      el('p', { class: 'hero-tagline' }, 'Learn. Practice. Revise. Prepare.')),
+    el('div', { class: 'stat-panels' },
+      el('section', { class: 'stat-panel stat-panel-you', 'aria-labelledby': 'stats-you' },
+        el('h2', { class: 'stat-panel-title', id: 'stats-you' }, 'Your progress'),
+        el('div', { class: 'progress-row' },
+          el('span', {}, el('strong', {}, `${overall.completed}`), ` of ${overall.total} topics completed`),
+          el('span', { class: 'muted' }, `${overall.percent}%`)),
+        progressBar(overall.percent, 'Overall progress'),
+        el('dl', { class: 'stat-row' },
+          stat(`${overall.completed}`, overall.completed === 1 ? 'topic completed' : 'topics completed'),
+          stat(`${overall.inProgress}`, 'in progress'),
+          stat(`${answered}`, answered === 1 ? 'question answered' : 'questions answered'))),
+      el('section', { class: 'stat-panel', 'aria-labelledby': 'stats-platform' },
+        el('h2', { class: 'stat-panel-title', id: 'stats-platform' }, 'Platform'),
+        el('dl', { class: 'stat-row' },
+          stat(`${available.length}`, 'subjects'),
+          stat(`${overall.total}`, 'topics'),
+          el('div', { class: 'stat' }, el('dt', {}, 'interactive exercises'), el('dd', {}, interactiveCount))))));
+
+  // Only where the 3D map can render; elsewhere the subject cards carry the same information.
+  const galaxy = mapSupported()
+    ? el('section', { class: 'section galaxy-section', 'aria-labelledby': 'galaxy-title' },
+      el('div', { class: 'section-head' },
+        el('h2', { id: 'galaxy-title' }, 'Knowledge galaxy'),
+        el('p', { class: 'muted small' }, 'Each sun is a library group and its planets are subjects; a planet’s ring fills as you complete topics. Select a sun to zoom into its system, or a planet to explore it. Keyboard: focus the map, then use the arrow keys.')),
+      mapHost)
+    : null;
 
   main.replaceChildren(el('div', { class: 'page page-home' },
     hero,
     continueSection(),
+    galaxy,
     planSection(),
     quickRevisionSection(available),
     attentionSection(),
@@ -69,7 +78,7 @@ export async function renderHome(main) {
     interactiveCount.textContent = String([...counts.values()].reduce((a, b) => a + b, 0));
   });
 
-  mountKnowledgeMap(mapHost, available, interactionCounts);
+  if (galaxy) mountKnowledgeMap(mapHost, interactionCounts);
   return { title: 'Dashboard' };
 }
 
@@ -253,34 +262,40 @@ function activitySection(totals) {
 }
 
 /**
- * The 3D knowledge map is an enhancement: only on wide screens with WebGL,
- * loaded after the dashboard is already usable, and never required.
+ * The 3D knowledge galaxy is an enhancement: only with WebGL, loaded after the
+ * dashboard is already usable, and never required. Its suns and planets are the
+ * sidebar's library groups and subjects (groupedCategories), so the two never disagree.
  */
-function mountKnowledgeMap(host, categories, interactionCounts) {
-  if (!mapSupported()) return;
-  const renderPanel = (subject) => mapPanel(categories.find((c) => c.id === subject.id), interactionCounts);
+function mountKnowledgeMap(host, interactionCounts) {
+  const systems = groupedCategories()
+    .map(({ group, categories }) => ({
+      id: group.id,
+      title: group.title,
+      subjects: categories.filter(isAvailable).map((c) => ({ id: c.id, title: c.title, ...engine.stats(c.topics) })),
+    }))
+    .filter((system) => system.subjects.length);
+  const renderPanel = (subject, system) => mapPanel(index.categoriesById.get(subject.id), system, interactionCounts);
+  const renderSystemPanel = (system, selectSubject) => systemPanel(system, selectSubject);
   import('../three/knowledge-map.js')
     .then((module) => {
       if (!document.body.contains(host)) return;
-      track(module.mount(host, categories.map((c) => ({
-        id: c.id,
-        title: c.title,
-        modules: c.subcategories.filter((s) => s.topics.length).map((s) => ({
-          id: s.id, title: s.title, ...engine.stats(s.topics),
-        })),
-        ...engine.stats(c.topics),
-      })), { renderPanel }));
+      track(module.mount(host, systems, { renderPanel, renderSystemPanel }));
     })
-    .catch((error) => console.warn('Knowledge map unavailable:', error));
+    .catch((error) => {
+      // No WebGL context after all (blocked, lost, out of memory): drop the section, keep the dashboard.
+      console.warn('Knowledge map unavailable:', error);
+      host.closest('.galaxy-section')?.remove();
+    });
 }
 
 /** Detail panel for the subject selected on the map — all values from progress, history and metadata. */
-function mapPanel(category, interactionCounts) {
+function mapPanel(category, system, interactionCounts) {
   const s = engine.stats(category.topics);
   const current = currentTopic(category);
   const exercises = el('dd', {}, '…');
   interactionCounts.then((counts) => { exercises.textContent = String(counts.get(category.id) ?? 0); });
   return el('div', { class: 'map-panel-body' },
+    el('p', { class: 'map-panel-eyebrow' }, system.title),
     el('h2', { class: 'map-panel-title', tabindex: -1 }, category.title),
     el('div', { class: 'progress-row small' },
       el('span', {}, el('strong', {}, `${s.completed}`), ` / ${s.total} topics completed`),
@@ -292,6 +307,24 @@ function mapPanel(category, interactionCounts) {
     el('div', { class: 'map-panel-actions' },
       current.topic ? el('a', { class: 'btn btn-primary btn-sm', href: current.href }, current.action, icon('chevronRight', 16)) : null,
       el('a', { class: 'btn btn-secondary btn-sm', href: href(['c', category.id]) }, 'Open subject')));
+}
+
+/** Panel for a selected sun: the group's combined progress and a button per subject (flies to its planet). */
+function systemPanel(system, selectSubject) {
+  const completed = system.subjects.reduce((sum, s) => sum + s.completed, 0);
+  const total = system.subjects.reduce((sum, s) => sum + s.total, 0);
+  const groupPercent = percent(completed, total);
+  return el('div', { class: 'map-panel-body' },
+    el('p', { class: 'map-panel-eyebrow' }, 'Library group'),
+    el('h2', { class: 'map-panel-title', tabindex: -1 }, system.title),
+    el('div', { class: 'progress-row small' },
+      el('span', {}, el('strong', {}, `${completed}`), ` / ${total} topics completed`),
+      el('span', { class: 'muted' }, `${groupPercent}%`)),
+    progressBar(groupPercent, `${system.title} progress`),
+    el('ul', { class: 'map-panel-subjects', role: 'list' }, system.subjects.map((s) => el('li', {},
+      el('button', { type: 'button', class: 'map-panel-subject', onClick: () => selectSubject(s.id) },
+        el('span', { class: 'map-panel-subject-title' }, s.title),
+        el('span', { class: 'muted small' }, `${s.completed} / ${s.total} topics · ${s.percent}%`))))));
 }
 
 /** The topic last opened in this subject and not finished yet, else the first unfinished one. */

@@ -3,6 +3,13 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-09-knowledge-galaxy",
+      "date": "2026-10-09",
+      "title": "Knowledge galaxy",
+      "description": "The dashboard knowledge map is now a galaxy: each library group in the sidebar is a sun and its 11 subjects are planets orbiting it, with a ring that fills as you complete topics and your progress written under every name. Select a planet to fly to it and see your next topic, or a sun to zoom into its system; it now works on phones and tablets too, with touch, and \"View in knowledge map\" in search still takes you straight to a subject.",
+      "type": "improvement"
+    },
+    {
       "id": "2026-10-09-selective-backup",
       "date": "2026-10-09",
       "title": "Choose what to back up and restore",

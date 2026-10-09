@@ -59,8 +59,9 @@ js/
     knowledge-check.js flashcards.js comparison.js   data-driven interaction types
   visualizers/<module>.js      one module per visualizer id
   simulators/<module>.js       one module per simulator id
-  three/knowledge-map.js       dashboard 3D map (Three.js, lazy): one node per available subject;
-                               click / arrow keys focus a subject and open its detail panel
+  three/knowledge-map.js       dashboard knowledge galaxy (Three.js, lazy): one sun per library group and
+                               one planet per available subject (from groupedCategories, like the sidebar);
+                               click / tap / arrow keys focus a planet or sun and open its detail panel
   map-focus.js                 search → map bridge ("View in knowledge map"); no Three.js import
   views/                       home, subject (+module), topic, toc, mode, session, lists, common;
                                layout (sidebar, drawer, header search), menu (header menu + dialogs);
@@ -224,18 +225,18 @@ StudyHub is static: progress exists only in the browser that recorded it. **Menu
 | Library | Version | Use | Loaded |
 |---------|---------|-----|--------|
 | marked | 18.0.14 | Markdown parsing | always (46 KB) |
-| three | 0.170.0 | dashboard knowledge map | lazily, only on the dashboard at ≥ 1024 px with WebGL |
+| three | 0.170.0 | dashboard knowledge galaxy | lazily, only on the dashboard, at any width, with WebGL |
 
 Vendored under `assets/vendor/<name>-<version>/` with licenses; recorded in `assets/vendor/README.md`. Syntax highlighting is in-house (`js/highlight.js`).
 
 ## 9. Accessibility and UI
 
-Semantic landmarks, skip link, one `h1` per view with focus moved to it on navigation and a polite live-region announcement, visible `:focus-visible` rings, `aria-current` in navigation, the mobile drawer makes `main` inert and closes on Esc, `<dialog>` for shortcuts, What's new and About, all state shown with text (not colour only), WCAG AA token colours in every theme, `prefers-reduced-motion` honoured (no transitions; 3D map static, camera jumps instead of flying), no horizontal page scroll at 320 px. The 3D map canvas is focusable: arrow keys / Home / End focus a subject, Esc resets the view. Shortcuts: `/` search, `Ctrl`/`⌘`+`K` quick actions, `←`/`→` previous/next topic (or question inside a session), `?` help, `Esc` close.
+Semantic landmarks, skip link, one `h1` per view with focus moved to it on navigation and a polite live-region announcement, visible `:focus-visible` rings, `aria-current` in navigation, the mobile drawer makes `main` inert and closes on Esc, `<dialog>` for shortcuts, What's new and About, all state shown with text (not colour only), WCAG AA token colours in every theme, `prefers-reduced-motion` honoured (no transitions; knowledge galaxy static, camera jumps instead of flying), no horizontal page scroll at 320 px. The knowledge galaxy canvas is focusable: ←/→ / Home / End focus a subject (planet), ↑/↓ a library group (sun), Esc resets the view; its HTML labels are `aria-hidden` (the canvas, the detail panel and the subject cards carry the same information) and never overlap — a label that does not fit is hidden until the camera zooms in. On a phone, tapping a sun zooms into its system. Without WebGL the section is not rendered and search drops "View in knowledge map". Shortcuts: `/` search, `Ctrl`/`⌘`+`K` quick actions, `←`/`→` previous/next topic (or question inside a session), `?` help, `Esc` close.
 
 ### Header menu, themes and sidebar
 
 - **Header menu** (`views/menu.js`): one ⋮ button (ARIA menu button) with three groups — *Study* (Bookmarks, Recently studied, Keyboard shortcuts), *Appearance* (Theme › — a submenu shown in the same panel, listing the theme radios) and *StudyHub* (Progress Import / Export, What's new, About). Arrow keys / Home / End move, Esc closes and returns focus (in the Theme submenu, ← or Esc goes back to Theme); choosing a theme keeps the menu open so themes can be compared. The badge on the button counts unseen updates.
-- **Themes** (`theme.js`): Light, Dark, Ocean, Purple, Amber, Forest and Match system. A theme is a token block in `styles.css` selected by `data-theme="<id>"` on `<html>`; *Match system* removes the attribute and the `prefers-color-scheme` block applies. Components only use tokens, so a new theme is one token block plus an entry in `THEMES` and in the inline head script. Changing theme dispatches `studyhub:theme`, which the 3D map listens to.
+- **Themes** (`theme.js`): Light, Dark, Ocean, Purple, Amber, Forest and Match system. A theme is a token block in `styles.css` selected by `data-theme="<id>"` on `<html>`; *Match system* removes the attribute and the `prefers-color-scheme` block applies. Components only use tokens, so a new theme is one token block plus an entry in `THEMES` and in the inline head script. Changing theme dispatches `studyhub:theme`, which the knowledge galaxy listens to (it rebuilds from the `--galaxy-*` tokens: `--galaxy-bg`, `--galaxy-nebula` and `--galaxy-accent` per theme; text and the sun/planet palettes are shared, because the galaxy is always a night sky).
 - **Sidebar** (`views/layout.js`): *Study* (Dashboard, Continue learning, Interactive lab) and *Library* — subjects grouped by `categories.json` `groups`, each a compact row with icon and `completed/total`; the active subject shows a progress bar. No topics in the sidebar (they live on subject and module pages). At ≥ 768 px it collapses to an icon rail (tooltips on hover/focus, state in `prefs.sidebarCollapsed`); below 768 px it is a drawer with a focus trap (rest of the page inert), closed by Esc, the backdrop or following a link.
 - **What's new** (`updates.js`): static changelog only — no network checks. Unseen entries since the last visit are listed in the dialog; otherwise "You're caught up" with the last visit date. `#/updates` is the full history.
 
