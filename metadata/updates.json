@@ -3,6 +3,13 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-09-selective-backup",
+      "date": "2026-10-09",
+      "title": "Choose what to back up and restore",
+      "description": "Progress Import / Export now lets you tick which of the 7 categories — progress, bookmarks, history, question results, study plans, notes and checklists — to export, and which categories in a backup to restore, with a review of what each one replaces; anything you leave unticked stays exactly as it is, and older backups still work.",
+      "type": "improvement"
+    },
+    {
       "id": "2026-10-08-devops",
       "date": "2026-10-08",
       "title": "DevOps & Deployment",

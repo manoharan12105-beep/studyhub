@@ -458,6 +458,18 @@ hr { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 0; }
 .backup-status:empty { display: none; }
 .backup-warning { margin: var(--space-3) 0 0; }
 .backup-spacer { flex: 1 1 auto; }
+/* Category picker (selective export and import) */
+.backup-picker { min-width: 0; margin: var(--space-3) 0 0; padding: 0; border: 0; }
+.backup-picker legend { margin: 0; padding: 0; }
+.backup-picker-tools { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-2) 0; }
+.backup-picker-list { display: grid; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.backup-category { padding: var(--space-2) var(--space-3); }
+.backup-category + .backup-category { border-top: 1px solid var(--border); }
+.backup-category label { cursor: pointer; overflow-wrap: anywhere; }
+.backup-category input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.backup-category-name { font-weight: 650; }
+.backup-category-detail { color: var(--text); }
+.backup-selected { margin: var(--space-2) 0 0; font-weight: 600; }
 .form-error { margin: var(--space-2) 0 0; color: var(--danger); font-size: var(--text-sm); font-weight: 600; }
 .form-error:empty { display: none; }
 @media (max-width: 480px) {

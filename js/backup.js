@@ -13,6 +13,13 @@
 // plans as they are, so older backups still restore exactly what they hold.
 // "notes" (js/notes.js) and "checklists" (interactive checklists such as
 // js/visualizers/deployment-checklist.js) work the same way.
+//
+// Selective backups: each key is a category the learner can tick on export and
+// on import (CATEGORIES). An export holds only the ticked keys; an import writes
+// only the ticked keys the backup holds. A key missing from a backup means "not
+// in this backup" (never "empty"), so it cannot be chosen and its local value is
+// never touched. A key present with an empty value is a real, empty category:
+// importing it clears that category here (the confirmation says so).
 
 import { read, writeAll } from './storage.js';
 import { isItemKey } from './plan-schedule.js';
@@ -21,8 +28,18 @@ import { cleanNote, MAX_NOTES } from './notes.js';
 const PREFIX = 'STUDYHUB-PROGRESS:';
 const FORMAT = 'studyhub-progress';
 export const VERSION = 1;
-export const ALLOWLIST = ['progress', 'bookmarks', 'history', 'questions', 'plans', 'notes', 'checklists'];
-const OPTIONAL = new Set(['plans', 'notes', 'checklists']); // absent in older backups: keep the local value
+
+/** Every category a backup can hold, in display order: the one list export and import both use. */
+export const CATEGORIES = [
+  { key: 'progress', label: 'Progress', description: 'Completed and in-progress topics' },
+  { key: 'bookmarks', label: 'Bookmarks', description: 'Saved topics' },
+  { key: 'history', label: 'History', description: 'Recently studied pages' },
+  { key: 'questions', label: 'Question results', description: 'Answers recorded in practice, interview, flashcards and knowledge checks' },
+  { key: 'plans', label: 'Study plans', description: 'Your study plans, their schedules and ticked activities' },
+  { key: 'notes', label: 'Notes', description: 'Your personal topic notes' },
+  { key: 'checklists', label: 'Checklists', description: 'Ticked items in interactive checklists' },
+];
+export const ALLOWLIST = CATEGORIES.map((c) => c.key);
 
 // Limits keep a pasted text from filling storage or freezing the page.
 const MAX_TEXT = 4_000_000;
@@ -229,38 +246,66 @@ function cleanChecklists(value, strict) {
 const CLEANERS = { progress: cleanProgress, bookmarks: cleanBookmarks, history: cleanHistory, questions: cleanQuestions, plans: cleanPlans, notes: cleanNotes, checklists: cleanChecklists };
 const EMPTY = { progress: () => ({}), bookmarks: () => [], history: () => [], questions: () => ({}), plans: () => ({ active: null, plans: [] }), notes: () => [], checklists: () => ({}) };
 
+/**
+ * Every key in the backup is checked, chosen or not: one malformed category means
+ * the text is damaged, so nothing in it is trusted. A missing key stays out of the
+ * result (not in this backup) and restore never writes it. Backups made before
+ * selective export always held progress, bookmarks, history and questions, so
+ * they read exactly as before.
+ */
 function cleanData(data, strict) {
   if (!isPlainObject(data)) throw invalid();
   if (strict && Object.keys(data).some((key) => !ALLOWLIST.includes(key))) throw invalid();
   const out = {};
   for (const key of ALLOWLIST) {
-    // A missing key is empty (restore replaces it with nothing), except keys newer
-    // than the first backups: those stay out, and restore leaves them alone.
-    if (data[key] === undefined && OPTIONAL.has(key)) continue;
-    out[key] = data[key] === undefined ? EMPTY[key]() : CLEANERS[key](data[key], strict);
+    if (data[key] !== undefined) out[key] = CLEANERS[key](data[key], strict);
   }
-  const answers = Object.values(out.questions).reduce((n, map) => n + Object.keys(map).length, 0);
-  if (Object.keys(out.progress).length + out.bookmarks.length + answers > MAX_ITEMS) throw invalid();
+  if (['progress', 'bookmarks', 'questions'].reduce((n, key) => n + count(key, out[key]), 0) > MAX_ITEMS) throw invalid();
   return out;
 }
 
 // ---- Summary ----------------------------------------------------------------------
 
-/** What a set of state holds, for the export note and the restore confirmation. */
+const COUNTERS = {
+  progress: (v) => Object.keys(v).length,
+  bookmarks: (v) => v.length,
+  history: (v) => v.length,
+  questions: (v) => Object.values(v).reduce((n, map) => n + Object.keys(map).length, 0),
+  plans: (v) => v.plans.length,
+  notes: (v) => v.length,
+  checklists: (v) => Object.values(v).reduce((n, items) => n + items.length, 0),
+};
+
+/** Number of records in one cleaned category (0 when the category is absent). */
+export function count(key, value) {
+  return value === undefined ? 0 : COUNTERS[key](value);
+}
+
+/** The categories a set of data holds, in display order. */
+export function categoriesIn(data) {
+  return CATEGORIES.filter((c) => data[c.key] !== undefined);
+}
+
+/** A copy of `data` with only the chosen keys it holds (unknown keys ignored), in display order. */
+export function pick(data, keys) {
+  const out = {};
+  for (const key of ALLOWLIST) if (keys.includes(key) && data[key] !== undefined) out[key] = data[key];
+  return out;
+}
+
+/** What a set of state holds, for the export note and the restore confirmation. Absent categories count 0. */
 export function summarize(data) {
-  const records = Object.values(data.progress);
-  const answers = Object.values(data.questions).reduce((n, map) => n + Object.keys(map).length, 0);
+  const records = Object.values(data.progress || {});
   return {
     completed: records.filter((r) => r.status === 'completed').length,
     inProgress: records.filter((r) => r.status === 'in-progress').length,
-    bookmarks: data.bookmarks.length,
-    history: data.history.length,
-    answers,
-    plans: data.plans ? data.plans.plans.length : 0,
-    plansIncluded: data.plans !== undefined,
-    notes: data.notes ? data.notes.length : 0,
-    notesIncluded: data.notes !== undefined,
-    checks: data.checklists ? Object.values(data.checklists).reduce((n, items) => n + items.length, 0) : 0,
+    bookmarks: count('bookmarks', data.bookmarks),
+    history: count('history', data.history),
+    answers: count('questions', data.questions),
+    plans: count('plans', data.plans),
+    notes: count('notes', data.notes),
+    checks: count('checklists', data.checklists),
+    categories: categoriesIn(data).map((c) => c.key),
   };
 }
 
@@ -306,8 +351,13 @@ async function pipe(bytes, stream) {
   return new Uint8Array(await out.arrayBuffer());
 }
 
-/** Build the clipboard text for this browser's progress. */
+/**
+ * Build the clipboard text. `data` holds only the categories to export, e.g.
+ * pick(currentData(), keys); at least one category is required.
+ */
 export async function createBackup(data = currentData()) {
+  data = pick(data, ALLOWLIST);
+  if (!Object.keys(data).length) throw new BackupError('Choose at least one category to export.');
   const json = JSON.stringify({ format: FORMAT, version: VERSION, exportedAt: new Date().toISOString(), data });
   const bytes = new TextEncoder().encode(json);
   const body = canCompress() ? `z.${toBase64Url(await pipe(bytes, new CompressionStream('deflate-raw')))}` : `j.${toBase64Url(bytes)}`;
@@ -343,9 +393,16 @@ export async function parseBackup(text) {
   return { data, exportedAt: backup.exportedAt, summary: summarize(data) };
 }
 
-/** Replace all allowlisted keys at once. Returns false (state untouched) if storage refused. */
-export function restore(data) {
-  const ok = writeAll(ALLOWLIST.filter((key) => data[key] !== undefined).map((key) => [key, data[key]]));
-  if (ok) document.dispatchEvent(new CustomEvent('studyhub:restored'));
+/**
+ * Replace the chosen categories in one step; every other key is left alone.
+ * `keys` defaults to every category the backup holds; a chosen key the backup
+ * does not hold is skipped, never cleared. Returns false if storage refused:
+ * writeAll then puts back the earlier value of every key it had written.
+ */
+export function restore(data, keys = ALLOWLIST) {
+  const chosen = Object.keys(pick(data, keys));
+  if (!chosen.length) throw new BackupError('Choose at least one category to import.');
+  const ok = writeAll(chosen.map((key) => [key, data[key]]));
+  if (ok) document.dispatchEvent(new CustomEvent('studyhub:restored', { detail: { keys: chosen } }));
   return ok;
 }
