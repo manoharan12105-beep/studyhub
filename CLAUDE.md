@@ -14,7 +14,7 @@ If this file and a doc disagree, fix the disagreement rather than picking one si
 
 StudyHub is a personal study and interview-preparation platform (aptitude, data structures, algorithms, object-oriented programming, CS concepts, and categories the owner adds later). The same material must teach a beginner and serve as fast interview revision.
 
-**Current phase: Phase 3 application built**, plus the UI/UX phase (header menu, six themes, What's new, grouped sidebar; see architecture §9) (content Phases 2A Aptitude, 2B DSA, 2C OOP, 2D Spring Boot, 2E DBMS + PostgreSQL, 2F Linux, 2G Computer Networks, 2H System Design, 2I Operating Systems done; CS Concepts holds the Excel Fundamentals emergency module), and Phase 2J Interview Preparation & Study Plans (built-in plans in `metadata/study-plans.json`, custom plan builder; architecture §7), and Phase 2K DevOps & Deployment (Docker → Compose → Linux VPS → Nginx → HTTPS → GitHub Actions CI/CD around a Spring Boot + PostgreSQL capstone, 18 labs, deployment checklist), and Phase 2L Claude Code Mastery (modes, context, CLAUDE.md, permissions, hooks, MCP, skills, subagents and agent teams, Git and CI/CD workflows, debugging, advanced workflows; 16 labs and a capstone around the `orderdesk` Spring Boot sample). No further content phase is planned yet. Do not write further study content unless the owner asks for that phase.
+**Current phase: Phase 3 application built**, plus the UI/UX phase (header menu, six themes, What's new, grouped sidebar, the optional StudyHub Buddy companion; see architecture §9) (content Phases 2A Aptitude, 2B DSA, 2C OOP, 2D Spring Boot, 2E DBMS + PostgreSQL, 2F Linux, 2G Computer Networks, 2H System Design, 2I Operating Systems done; CS Concepts holds the Excel Fundamentals emergency module), and Phase 2J Interview Preparation & Study Plans (built-in plans in `metadata/study-plans.json`, custom plan builder; architecture §7), and Phase 2K DevOps & Deployment (Docker → Compose → Linux VPS → Nginx → HTTPS → GitHub Actions CI/CD around a Spring Boot + PostgreSQL capstone, 18 labs, deployment checklist), and Phase 2L Claude Code Mastery (modes, context, CLAUDE.md, permissions, hooks, MCP, skills, subagents and agent teams, Git and CI/CD workflows, debugging, advanced workflows; 16 labs and a capstone around the `orderdesk` Spring Boot sample). No further content phase is planned yet. Do not write further study content unless the owner asks for that phase.
 
 ## Hard rules
 
@@ -34,16 +34,17 @@ StudyHub is a personal study and interview-preparation platform (aptitude, data 
 index.html, styles.css, app.js        application shell, styles, entry module
 js/                                   engines (content-loader, markdown-renderer, search, storage,
                                       progress, bookmarks, history, activity, notes, study-engine),
-                                      engagement/, visualizers/, simulators/, three/, views/
+                                      engagement/, visualizers/, simulators/, three/, buddy/, views/
 assets/                               icons (subjects/<id>.svg), images, vendored libraries (assets/vendor/)
 content/<category>/[<sub>/]<slug>/    topic Markdown (+ images/)
 content/<category>/revision/          sources for category study modes (reserved name)
 metadata/categories.json              groups, category + subcategory registry, study modes
 metadata/updates.json                 What's new changelog (newest first)
+metadata/buddy-facts.json             reviewed facts StudyHub Buddy may show
 metadata/study-plans.json             built-in study plans (stage templates + difficulty variants; ids only)
 metadata/topics/<category>.json       topic catalog per category
 metadata/interactions/<category>.json interaction registry per category (optional)
-metadata/schemas/                     JSON Schemas for categories, topic catalogs, interactions, updates, study plans
+metadata/schemas/                     JSON Schemas for categories, topic catalogs, interactions, updates, study plans, Buddy facts
 templates/                            lesson, companion and metadata templates
 docs/                                 content guide, architecture, visualizer registry
 .claude/skills/                       Claude skills for this project

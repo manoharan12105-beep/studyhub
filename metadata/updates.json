@@ -3,6 +3,13 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-09-studyhub-buddy",
+      "date": "2026-10-09",
+      "title": "Meet StudyHub Buddy",
+      "description": "A small optional companion now lives at the edges of the page: it walks along the bottom, climbs the sidebar — and tumbles off when you collapse it — offers optional quiz questions from topics you have studied, shares one of 68 short facts (including 24 on computer science) and cheers when you finish a topic, while staying off your content; turn it off or change its colour, eyes, accessory, movement, quiz frequency and personality under ⋮ → StudyHub Buddy.",
+      "type": "ui"
+    },
+    {
       "id": "2026-10-09-claude-code-mastery",
       "date": "2026-10-09",
       "title": "Claude Code Mastery",

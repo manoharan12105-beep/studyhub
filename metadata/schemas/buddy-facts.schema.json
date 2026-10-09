@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "buddy-facts.schema.json",
+  "title": "StudyHub Buddy facts",
+  "description": "metadata/buddy-facts.json — short, reviewed general-knowledge facts StudyHub Buddy may show. Loaded from this site only; never fetched from the internet. Every fact must be well established; leave out anything uncertain.",
+  "type": "object",
+  "required": ["schemaVersion", "facts"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "topic", "text"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "description": "Unique, permanent kebab-case id (Buddy avoids repeating ids within a session)." },
+          "topic": { "enum": ["science", "animals", "space", "nature", "inventions", "geography", "history", "mathematics", "computer-science"] },
+          "text": { "type": "string", "minLength": 10, "maxLength": 220, "description": "One or two plain sentences." }
+        }
+      }
+    }
+  }
+}

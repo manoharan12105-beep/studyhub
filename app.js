@@ -5,6 +5,7 @@
 //                      js/visualizers/, js/simulators/
 //   Study engine       js/study-engine.js over progress / bookmarks / history / activity
 //   Views              js/views/
+//   StudyHub Buddy     js/buddy/ (optional companion; header menu → StudyHub Buddy)
 
 import { loadIndex, getTopic, neighbours } from './js/content-loader.js';
 import { start, href, navigate, parse } from './js/router.js';
@@ -25,6 +26,8 @@ import { renderSearch, renderBookmarks, renderHistory, renderLab, renderUpdates 
 import { renderPlans, renderBuiltin, renderPlan } from './js/views/plans.js';
 import { renderBuilder } from './js/views/plan-builder.js';
 import { renderNotes, renderNote } from './js/views/notes.js';
+import { initBuddy } from './js/buddy/buddy.js';
+import { openBuddySettings } from './js/views/buddy-dialog.js';
 import { errorState } from './js/views/common.js';
 
 const main = document.getElementById('main');
@@ -62,6 +65,12 @@ async function boot() {
   // A progress backup was restored: redraw the sidebar and the current page from the new state.
   document.addEventListener('studyhub:restored', () => onRoute(parse(), { sameView: false }));
   start(onRoute);
+  // Last: Buddy is optional and must never delay or break the app starting.
+  try {
+    initBuddy({ onOpenSettings: openBuddySettings });
+  } catch (error) {
+    console.error('StudyHub Buddy could not start:', error);
+  }
 }
 
 /** Map a route to a view. Each view returns { title } (or null if superseded). */

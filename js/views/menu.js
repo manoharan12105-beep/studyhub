@@ -1,14 +1,16 @@
-// Header menu (⋮): Study links, theme picker, Updates and About.
+// Header menu (⋮): Study links, theme picker, StudyHub Buddy settings, Updates and About.
 // ARIA menu-button pattern: arrow keys move, Home/End jump, Esc closes and
 // returns focus to the button, Tab or a click outside closes it.
 // "Theme" opens a submenu in the same panel (drill-in, so it fits a phone):
 // Enter / Space / → open it, ← / Esc go back to "Theme".
 
-import { el, icon, announce } from '../util.js';
+import { el, svg, icon, announce } from '../util.js';
 import { index, isAvailable } from '../content-loader.js';
 import * as theme from '../theme.js';
 import * as updates from '../updates.js';
 import { openBackup } from './backup-dialog.js';
+import { openBuddySettings } from './buddy-dialog.js';
+import * as buddySettings from '../buddy/settings.js';
 
 const REPO_URL = 'https://github.com/manoharan12105-beep/studyhub';
 
@@ -122,6 +124,7 @@ function onMenuClick(event) {
   else if (item.dataset.action === 'updates') openUpdates();
   else if (item.dataset.action === 'about') openAbout();
   else if (item.dataset.action === 'backup') openBackup();
+  else if (item.dataset.action === 'buddy') openBuddySettings();
   // The menu item that opened the dialog is gone; focus returns to the ⋮ button on close.
   const opened = document.querySelector('dialog[open]');
   if (opened) opened.dataset.returnFocus = 'menu';
@@ -150,7 +153,9 @@ function buildItems() {
     el('div', { role: 'separator', class: 'menu-sep' }),
     group('menu-g-theme', 'Appearance',
       item([icon('palette', 16), 'Theme', el('span', { class: 'menu-value' }, el('span', { class: 'sr-only' }, ': '), current), el('span', { class: 'menu-chevron', 'aria-hidden': 'true' }, icon('chevronRight', 16))],
-        { 'data-action': 'theme', 'aria-haspopup': 'menu' })),
+        { 'data-action': 'theme', 'aria-haspopup': 'menu' }),
+      item([buddyIcon(), 'StudyHub Buddy', el('span', { class: 'menu-value' }, el('span', { class: 'sr-only' }, ': '), buddySettings.get().enabled ? 'On' : 'Off')],
+        { 'data-action': 'buddy', 'aria-haspopup': 'dialog' })),
     el('div', { role: 'separator', class: 'menu-sep' }),
     group('menu-g-hub', 'StudyHub',
       item([icon('transfer', 16), el('span', { class: 'menu-text' }, 'Progress Import / Export',
@@ -159,6 +164,14 @@ function buildItems() {
       item([icon('spark', 16), "What's new", fresh ? el('span', { class: 'menu-pill' }, `${fresh} new`) : null], { 'data-action': 'updates' }),
       item([icon('info', 16), 'About StudyHub'], { 'data-action': 'about' })),
   ];
+}
+
+/** Small outline of Buddy for the menu (decorative, like the other menu icons). */
+function buddyIcon() {
+  return svg('svg', {
+    viewBox: '0 0 24 24', width: 16, height: 16, fill: 'none', stroke: 'currentColor', 'stroke-width': 2,
+    'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'aria-hidden': 'true', focusable: 'false', class: 'icon',
+  }, svg('path', { d: 'M12 6c4.2 0 6.5 3 6.5 6.6S16 19 12 19s-6.5-2.8-6.5-6.4S7.8 6 12 6zM12 6c-.2-1.6.4-2.8 1.8-3.4M9.5 11.5h.01M14.5 11.5h.01M8.5 19v2M15.5 19v2' }));
 }
 
 /** The Theme submenu: Back, then one radio per theme, with a preview swatch. */

@@ -63,17 +63,26 @@ js/
                                one planet per available subject (from groupedCategories, like the sidebar);
                                click / tap / arrow keys focus a planet or sun and open its detail panel
   map-focus.js                 search → map bridge ("View in knowledge map"); no Three.js import
+  buddy/                       StudyHub Buddy, the optional companion (§9):
+    buddy.js                   lifecycle: enable/disable, listeners/timers/observers through one owner, scheduler
+    settings.js                studyhub:v1:buddy-settings (preferences only, validated field by field)
+    character.js               the SVG character, built once and posed by attribute changes
+    world.js                   surfaces measured from the real page (floor, sidebar edge), clear-spot search
+    motion.js                  state machine, elapsed-time physics, the single requestAnimationFrame loop
+    companion.js               speech bubble: quiz from practice.md, facts, encouragement after real events
   views/                       home, subject (+module), topic, toc, mode, session, lists, common;
                                layout (sidebar, drawer, header search), menu (header menu + dialogs);
                                plans (plans dashboard, built-in preview, plan page), plan-builder;
                                notes (My notes, one note, topic "Your notes", dashboard recent notes),
-                               note-dialog (note editor + delete confirmation in #note-dialog)
+                               note-dialog (note editor + delete confirmation in #note-dialog);
+                               buddy-dialog (StudyHub Buddy settings in #buddy-dialog)
 assets/
   vendor/                      marked 18.0.14, three 0.170.0 (see assets/vendor/README.md)
   icons/                       favicon; subjects/<id>.svg single-colour subject icons (CSS mask)
 metadata/
   categories.json              groups, categories, subcategories, study modes, catalog + interaction file paths
   updates.json                 What's new changelog (newest first)
+  buddy-facts.json             reviewed short facts StudyHub Buddy may show (loaded lazily, same origin)
   study-plans.json             built-in study plans: stage templates + plans with difficulty variants
   topics/<category>.json       topic catalogs
   interactions/<category>.json interaction registries
@@ -235,10 +244,20 @@ Semantic landmarks, skip link, one `h1` per view with focus moved to it on navig
 
 ### Header menu, themes and sidebar
 
-- **Header menu** (`views/menu.js`): one ⋮ button (ARIA menu button) with three groups — *Study* (Bookmarks, Recently studied, Keyboard shortcuts), *Appearance* (Theme › — a submenu shown in the same panel, listing the theme radios) and *StudyHub* (Progress Import / Export, What's new, About). Arrow keys / Home / End move, Esc closes and returns focus (in the Theme submenu, ← or Esc goes back to Theme); choosing a theme keeps the menu open so themes can be compared. The badge on the button counts unseen updates.
+- **Header menu** (`views/menu.js`): one ⋮ button (ARIA menu button) with three groups — *Study* (Bookmarks, Recently studied, Keyboard shortcuts), *Appearance* (Theme › — a submenu shown in the same panel, listing the theme radios — and StudyHub Buddy, which opens its settings dialog) and *StudyHub* (Progress Import / Export, What's new, About). Arrow keys / Home / End move, Esc closes and returns focus (in the Theme submenu, ← or Esc goes back to Theme); choosing a theme keeps the menu open so themes can be compared. The badge on the button counts unseen updates.
 - **Themes** (`theme.js`): Light, Dark, Ocean, Purple, Amber, Forest and Match system. A theme is a token block in `styles.css` selected by `data-theme="<id>"` on `<html>`; *Match system* removes the attribute and the `prefers-color-scheme` block applies. Components only use tokens, so a new theme is one token block plus an entry in `THEMES` and in the inline head script. Changing theme dispatches `studyhub:theme`, which the knowledge galaxy listens to (it rebuilds from the `--galaxy-*` tokens: `--galaxy-bg`, `--galaxy-nebula` and `--galaxy-accent` per theme; text and the sun/planet palettes are shared, because the galaxy is always a night sky).
 - **Sidebar** (`views/layout.js`): *Study* (Dashboard, Continue learning, Interactive lab) and *Library* — subjects grouped by `categories.json` `groups`, each a compact row with icon and `completed/total`; the active subject shows a progress bar. No topics in the sidebar (they live on subject and module pages). At ≥ 768 px it collapses to an icon rail (tooltips on hover/focus, state in `prefs.sidebarCollapsed`); below 768 px it is a drawer with a focus trap (rest of the page inert), closed by Esc, the backdrop or following a link.
+- **Sidebar events**: `layout.js` dispatches `studyhub:sidebar` (`detail: { collapsed, drawerOpen }`) after the sidebar collapses or expands and after the drawer opens or closes. Anything that depends on the sidebar's geometry listens for it instead of watching the DOM.
 - **What's new** (`updates.js`): static changelog only — no network checks. Unseen entries since the last visit are listed in the dialog; otherwise "You're caught up" with the last visit date. `#/updates` is the full history.
+
+### StudyHub Buddy (`js/buddy/`)
+
+An optional companion: a small SVG character that lives at the edges of the page. On by default; **⋮ → StudyHub Buddy** turns it off or customises it (colour, eyes, accessory, movement, quiz frequency, personality, facts, encouragement, quiet mode, motion). It is decorative (`aria-hidden`, never in the tab order); everything it offers is also in that dialog.
+
+- **Surfaces** (`world.js`): the *floor* is the bottom edge of the viewport across the workspace (right of the sidebar on desktop, right of the drawer while it is open on phones); the *wall* is the sidebar's right edge, climbable only while the sidebar is really there (expanded at ≥ 768 px, or the drawer open). Geometry is measured with `getBoundingClientRect`/`offsetWidth`, cached, and invalidated by events (`studyhub:sidebar`, resize, route, theme, visibility) — never measured per frame. A spot is *clear* when none of nine sample points under Buddy hits lesson text, code, tables, controls, cards, interactions or the galaxy (`document.elementsFromPoint`); Buddy rests only on clear spots, and where none exists (a phone-width lesson) it ducks half below the edge.
+- **Motion** (`motion.js`): one state machine (`ALLOWED` lists every legal transition; refused ones are counted), one `requestAnimationFrame` chain that runs only while a state needs frames, movement from elapsed time. Each state change bumps a generation number; timers made for a state die with it. If the sidebar edge disappears while Buddy is on it (collapse, drawer closed, breakpoint), Buddy slips (tilts away, reaches for the edge), falls under gravity (2300 px/s², rotation, flailing, air-righting near the floor), lands with a squash scaled by impact speed, wobbles, and walks off anything it landed on. A sidebar that expands over a resting Buddy knocks it clear. Reopening the sidebar mid-fall does not re-grip. Reduced motion (system setting or Buddy's "Always calm") replaces all of this with an instant, still placement.
+- **Companion** (`companion.js`): an optional quiz question drawn from the learner's completed (else recently studied) topics' `practice.md` through `question-parser.js` — only short multiple-choice items with a marked answer; if none fits, Buddy asks nothing. Answering records nothing. Facts come from `metadata/buddy-facts.json`. Encouragement only follows real events (one topic completed, a plan activity ticked, a return after three or more days). Prompts wait while the learner types, a dialog or the menu is open, the drawer is open, or a practice/interview/flashcard session or a form is in use; there is at most one unprompted bubble per three minutes.
+- **Lifecycle** (`buddy.js`): enabling builds everything and registers every listener, timer and observer through one owner; disabling disposes it, so nothing of Buddy keeps running. `studyhub:v1:buddy-settings` holds preferences only and is not part of the progress backup (like the theme). Load the app with `?buddy-debug` before the `#` to get `window.__studyhubBuddy` (state, traces, resource counts, a paused scheduler) for testing.
 
 ## 10. Local development
 

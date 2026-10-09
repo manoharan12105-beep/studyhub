@@ -109,6 +109,18 @@ function setCollapsed(collapsed) {
   update(PREFS, {}, (prefs) => ({ ...(prefs && typeof prefs === 'object' ? prefs : {}), sidebarCollapsed: collapsed }));
   syncToggle();
   hideTooltip();
+  notifySidebar();
+}
+
+/**
+ * The sidebar changed shape (collapsed/expanded, drawer opened/closed). Anything
+ * that depends on its geometry (StudyHub Buddy climbs its edge) listens for this
+ * instead of guessing from DOM mutations. Fired after the new state is applied.
+ */
+function notifySidebar() {
+  document.dispatchEvent(new CustomEvent('studyhub:sidebar', {
+    detail: { collapsed: isCollapsed(), drawerOpen: document.body.classList.contains('nav-open') },
+  }));
 }
 
 function syncToggle() {
@@ -181,6 +193,7 @@ function openDrawer() {
   document.getElementById('scrim').hidden = false;
   for (const node of behindDrawer()) node.inert = true;
   document.getElementById('sidebar').querySelector('a')?.focus();
+  notifySidebar();
 }
 
 export function closeDrawer(restoreFocus = true) {
@@ -190,6 +203,7 @@ export function closeDrawer(restoreFocus = true) {
   document.getElementById('scrim').hidden = true;
   for (const node of behindDrawer()) node.inert = false;
   if (restoreFocus) document.getElementById('menu-btn').focus();
+  notifySidebar();
   return true;
 }
 
