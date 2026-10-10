@@ -114,6 +114,15 @@
   --buddy-pack: #8c5a3c;
   --buddy-pack-dark: #5c3a25;
   --buddy-shadow: rgb(0 0 0 / 28%);
+  --buddy-bud: #e86a9a;
+  --buddy-petal: #ffd84d;
+  --buddy-petal-edge: #d9a514;
+  --buddy-flower-centre: #c2571a;
+  --buddy-sweat: #7cc4f2;
+  --buddy-sweat-edge: #3a8fc7;
+  --buddy-sparkle: #fff6b0;
+  --buddy-dust: rgb(150 140 125 / 55%);
+  --buddy-speed: rgb(120 120 130 / 55%);
 }
 
 /* Themes. Each block redefines the colour tokens only; components never name
@@ -1837,8 +1846,21 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 .buddy:is([data-state="idle"], [data-state="sitting"], [data-state="gripping"], [data-state="thinking"]) .buddy-svg { animation: buddy-breathe 3.4s ease-in-out infinite; }
 .buddy[data-state="sleeping"] .buddy-svg { animation: buddy-breathe 5.2s ease-in-out infinite; }
 @keyframes buddy-breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.014, 0.972); } }
-.buddy-hit { position: absolute; inset: 20% 14% 4%; border-radius: 45%; }
-.buddy.is-clickable:not(.is-peeking) .buddy-hit { pointer-events: auto; cursor: pointer; }
+.buddy-hit { position: absolute; inset: 20% 14% 4%; border-radius: 45%; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.buddy.is-clickable:not(.is-peeking) .buddy-hit { pointer-events: auto; cursor: grab; }
+/* While held, the hit area keeps receiving the captured pointer. touch-action stays auto so a swipe on Buddy still scrolls. */
+.buddy.is-dragging .buddy-hit { pointer-events: auto; cursor: grabbing; }
+.buddy.is-dragging { z-index: 37; }
+/* Speed lines behind a fast fall or throw; dust puffs from a hard landing (a pooled layer, never hit-testable). */
+.buddy-speed { position: absolute; inset: 0; display: none; pointer-events: none; }
+.buddy-speed span { position: absolute; left: 50%; width: 2px; height: 34%; border-radius: 1px; background: var(--buddy-speed); }
+.buddy-speed span:nth-child(1) { top: -30%; margin-left: -22%; }
+.buddy-speed span:nth-child(2) { top: -44%; margin-left: -1px; height: 42%; }
+.buddy-speed span:nth-child(3) { top: -30%; margin-left: 20%; }
+.buddy.is-fast .buddy-speed { display: block; }
+.buddy[data-speed="side"] .buddy-speed { transform: rotate(90deg); }
+.buddy-fx { position: fixed; inset: 0; z-index: 33; pointer-events: none; overflow: hidden; contain: strict; }
+.buddy-dust { position: absolute; left: 0; top: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--buddy-dust); opacity: 0; pointer-events: none; }
 .buddy-shadow {
   position: fixed; left: 0; top: 0; z-index: 33; width: calc(var(--buddy-size, 44px) * 0.8); height: calc(var(--buddy-size, 44px) * 0.2);
   border-radius: 50%; background: radial-gradient(closest-side, var(--buddy-shadow), transparent); pointer-events: none; will-change: transform;
@@ -1859,6 +1881,20 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 .b-stem { fill: none; stroke: var(--buddy-leaf-dark); stroke-width: 2.4; stroke-linecap: round; }
 .b-leaf { fill: var(--buddy-leaf); stroke: var(--buddy-leaf-dark); stroke-width: 1.2; }
 .b-leaf-small { opacity: 0.9; }
+/* The sprout grows with completed topics (data-growth 0…3): a second leaf, a bud, then a flower in place of the bud. */
+.b-grow-1, .b-grow-2, .b-grow-3 { display: none; transform-box: fill-box; transform-origin: 0% 100%; }
+.buddy-svg:is([data-growth="1"], [data-growth="2"], [data-growth="3"]) .b-grow-1,
+.buddy-svg[data-growth="2"] .b-grow-2,
+.buddy-svg[data-growth="3"] .b-grow-3 { display: inline; }
+.buddy.is-growing :is(.b-grow-1, .b-grow-2, .b-grow-3) { animation: buddy-grow 1.1s cubic-bezier(.3,1.5,.5,1); }
+@keyframes buddy-grow { 0% { transform: scale(0.1); opacity: 0; } 60% { opacity: 1; } 100% { transform: scale(1); } }
+.b-sepal { fill: none; stroke: var(--buddy-leaf-dark); stroke-width: 1.4; stroke-linecap: round; }
+.b-bud { fill: var(--buddy-bud); stroke: var(--buddy-leaf-dark); stroke-width: 1; }
+.b-petal { fill: var(--buddy-petal); stroke: var(--buddy-petal-edge); stroke-width: 0.8; }
+.b-flower-centre { fill: var(--buddy-flower-centre); }
+.b-sweat { fill: var(--buddy-sweat); stroke: var(--buddy-sweat-edge); stroke-width: 0.8; }
+.b-sparkle { display: none; fill: var(--buddy-sparkle); }
+.is-eyes-sparkle .b-sparkle { display: inline; }
 .b-pupil { fill: var(--buddy-eye); }
 .b-glint { fill: var(--buddy-light); }
 .b-eye-open { transform-box: fill-box; transform-origin: center; transition: transform 70ms ease; }
@@ -1866,6 +1902,8 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 .b-eye-closed { display: none; fill: none; stroke: var(--buddy-eye); stroke-width: 2.3; stroke-linecap: round; transform-box: fill-box; transform-origin: center; }
 :is(.is-eyes-closed, .is-eyes-happy) .b-eye-open { display: none; }
 :is(.is-eyes-closed, .is-eyes-happy) .b-eye-closed { display: inline; }
+.is-eyes-wink .b-eye-r .b-eye-open { display: none; }
+.is-eyes-wink .b-eye-r .b-eye-closed { display: inline; }
 .is-eyes-closed .b-eye-closed { transform: scaleY(-0.7); }
 .b-mouth-line { fill: none; stroke: var(--buddy-eye); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .b-mouth-fill { fill: var(--buddy-mouth); }
@@ -2034,7 +2072,7 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 }
 
 @media print {
-  .app-header, .sidebar, .nav-tooltip, .topic-tabs, .source-bar, .topic-footer, .reading-progress, .toc, .buddy, .buddy-shadow, .buddy-bubble { display: none !important; }
+  .app-header, .sidebar, .nav-tooltip, .topic-tabs, .source-bar, .topic-footer, .reading-progress, .toc, .buddy, .buddy-shadow, .buddy-bubble, .buddy-fx { display: none !important; }
   .layout { display: block; }
   details.reveal { break-inside: avoid; }
 }

@@ -36,6 +36,11 @@ const LINES = {
     playful: '{topic} done! High five!',
     curious: 'You finished {topic}. What will you explore next?',
   },
+  growth: {
+    gentle: '{n} topics completed — my sprout grew {what}.',
+    playful: '{n} topics done and look — {what}!',
+    curious: '{n} topics completed. Something new is growing: {what}.',
+  },
   milestone: {
     gentle: 'That’s {n} topics completed in total. Lovely, steady work.',
     playful: '{n} topics completed! Look at you go!',
@@ -265,8 +270,12 @@ export function createCompanion(deps) {
           icon(right ? 'check' : 'info', 16), line(right ? 'correct' : 'wrong', personality, { letter: item.correct })),
         explanation ? el('p', { class: 'buddy-quiz-explain' }, explanation.length > 260 ? `${explanation.slice(0, 257).trimEnd()}…` : explanation) : null,
         el('div', { class: 'buddy-bubble-actions' }, review, done));
-      if (right) deps.motion.perform('celebrate');
-      else deps.motion.perform('idle');
+      if (right && deps.settings().quiet) {
+        // Quiet mode: a small, calm reaction, and the drooping leaf perks up for a moment.
+        deps.motion.perform('pleased');
+        deps.motion.perk();
+      } else if (right) deps.motion.perform('celebrate');
+      else if (!deps.motion.perform('worry')) deps.motion.express('concerned', 1800, 2); // a sweat drop, never a scolding
       if (bubble?.contains(document.activeElement) || focus) done.focus({ preventScroll: true });
       position();
     }
@@ -305,6 +314,7 @@ export function createCompanion(deps) {
     ], { focus: userAsked, autoCloseMs: userAsked ? 0 : 14_000 });
     if (!userAsked) announce(`StudyHub Buddy: ${fact.text}`);
     deps.motion.perform('look');
+    deps.motion.express('wink', 1100, 2); // a knowing wink as the fact appears
     return true;
   }
 
@@ -319,7 +329,11 @@ export function createCompanion(deps) {
   }
 
   /** studyhub:change — compare with what was true before; only real changes count. */
-  function onDataChange(key) {
+  /**
+   * key: the storage key that changed. growth: { from, to } when the sprout's
+   * stage really rose with this change (worked out by buddy.js from the store).
+   */
+  function onDataChange(key, growth = null) {
     const s = deps.settings();
     if (key === 'progress') {
       const now = completedSet();
@@ -329,10 +343,11 @@ export function createCompanion(deps) {
       // Message first: say() only speaks while Buddy is resting, and celebrating is not resting.
       if (s.motivation) {
         const topic = getTopic(fresh[0]);
-        if (MILESTONES.includes(now.size)) say('motivation', line('milestone', s.personality, { n: now.size }));
+        if (growth) say('motivation', line('growth', s.personality, { n: completedTopicCount(), what: GROWTH_NAMES[growth.to] }));
+        else if (MILESTONES.includes(now.size)) say('motivation', line('milestone', s.personality, { n: now.size }));
         else if (topic) say('motivation', line('completed', s.personality, { topic: topic.title }));
       }
-      deps.motion.perform('celebrate');
+      deps.motion.perform('celebrate', { mood: growth ? 'sparkle' : undefined });
     } else if (key === 'plans') {
       const ticks = planTicks();
       const more = ticks > plansDone;
@@ -397,6 +412,18 @@ function explain(item) {
     .filter((text) => text && !(/^Answers?\s*:/i.test(text) && text.length <= 80))
     .join(' ')
     .replace(/^Explanation\s*:\s*/i, '');
+}
+
+const GROWTH_NAMES = ['', 'a second leaf', 'a bud', 'a flower'];
+
+/**
+ * Unique completed topics that exist in the catalogs: the number the sprout
+ * grows from. Read from the real progress store every time — no own counter.
+ */
+export function completedTopicCount() {
+  let n = 0;
+  for (const id of completedSet()) if (getTopic(id)) n++;
+  return n;
 }
 
 function completedSet() {

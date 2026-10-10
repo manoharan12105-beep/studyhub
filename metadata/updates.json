@@ -3,6 +3,13 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-10-buddy-grows",
+      "date": "2026-10-10",
+      "title": "Buddy grows with you",
+      "description": "StudyHub Buddy's sprout now grows from your completed topics — a second leaf at 10, a bud at 25 and a flower at 50 — and Buddy has become springier: its leaf and arms swing and settle as it moves, it crouches before hopping and bounces after hard landings, and you can pick it up and throw it (or use Toss Buddy in its settings). It may grab the sidebar edge on the way down, follows your mouse with its eyes, has new faces and small idle habits, yawns before napping, and in Quiet mode its leaf droops until you answer a question right.",
+      "type": "ui"
+    },
+    {
       "id": "2026-10-09-studyhub-buddy",
       "date": "2026-10-09",
       "title": "Meet StudyHub Buddy",

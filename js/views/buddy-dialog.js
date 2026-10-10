@@ -4,8 +4,9 @@
 
 import { el, announce } from '../util.js';
 import * as settings from '../buddy/settings.js';
-import { ask } from '../buddy/buddy.js';
-import { createCharacter, restPose } from '../buddy/character.js';
+import { ask, toss } from '../buddy/buddy.js';
+import { createCharacter, restPose, growthStage } from '../buddy/character.js';
+import { completedTopicCount } from '../buddy/companion.js';
 
 let preview = null;
 
@@ -70,6 +71,12 @@ function render(body) {
       ask(kind);
     });
   }
+  // The keyboard and screen-reader alternative to picking Buddy up and throwing it.
+  const tossBtn = el('button', { type: 'button', class: 'btn btn-secondary btn-sm', id: 'buddy-toss' }, 'Toss Buddy');
+  tossBtn.addEventListener('click', () => {
+    document.getElementById('buddy-dialog').close();
+    announce(toss() ? 'Buddy tossed into the air' : 'Buddy can’t be tossed right now');
+  });
   const resetBtn = el('button', { type: 'button', class: 'btn btn-ghost btn-sm', id: 'buddy-reset' }, 'Reset preferences');
   resetBtn.addEventListener('click', () => {
     settings.reset();
@@ -103,9 +110,9 @@ function render(body) {
         select('motion', 'Motion', 'Always calm: Buddy sits still, without walking or climbing (reduced motion in your system settings does the same).')),
       check('facts', 'Facts', 'Short science, nature, history and maths facts'),
       check('motivation', 'Motivational messages', 'Only after things you really did, such as completing a topic'),
-      check('quiet', 'Quiet mode', 'No unprompted messages or quizzes; Buddy mostly rests')),
+      check('quiet', 'Quiet mode', 'No unprompted messages or quizzes; Buddy mostly rests and its leaf droops')),
 
-    el('div', { class: 'dialog-actions buddy-actions' }, quizBtn, factBtn, el('span', { class: 'backup-spacer' }), resetBtn),
+    el('div', { class: 'dialog-actions buddy-actions' }, quizBtn, factBtn, tossBtn, el('span', { class: 'backup-spacer' }), resetBtn),
     el('p', { class: 'muted small buddy-note' }, 'Saved only in this browser, separately from your progress. Progress backups do not include Buddy’s settings.'));
 
   function refresh() {
@@ -113,8 +120,10 @@ function render(body) {
     stateText.textContent = now.enabled ? 'Enabled' : 'Disabled';
     quizBtn.disabled = !now.enabled;
     factBtn.disabled = !now.enabled;
+    tossBtn.disabled = !now.enabled || now.motion === 'reduced' || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     custom.value = now.color;
     preview.applyAppearance(now);
+    preview.applyGrowth(growthStage(completedTopicCount())); // the sprout as it is now, from real progress
   }
   refresh();
 }

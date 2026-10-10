@@ -18,8 +18,7 @@ export const BODY_HALF = 33;
 
 let uid = 0;
 
-// Two legs. The motion engine also writes poses for "bl"/"br" (a four-legged
-// gait it no longer needs); only the legs listed here are drawn.
+// Two legs: front-left and front-right of the body.
 const HIPS = {
   fl: { x: 39, y: 80 },
   fr: { x: 61, y: 80 },
@@ -33,7 +32,14 @@ const MOUTHS = {
   grin: { fill: 'M44.5 58 Q50 67 55.5 58 Z' },
   o: { fill: 'M50 57.4 a2.7 3.1 0 1 0 0.01 0 Z' },
   small: { fill: 'M50 59.3 a1.6 1.8 0 1 0 0.01 0 Z' },
+  yawn: { fill: 'M50 55.6 a3.8 5 0 1 0 0.01 0 Z' },
 };
+
+/** Sprout growth stages from completed topics: a second leaf, a bud, a flower. */
+export const GROWTH = [10, 25, 50];
+export function growthStage(completed) {
+  return GROWTH.filter((n) => completed >= n).length;
+}
 
 const EYE_SHAPES = {
   round: { rx: 4.7, ry: 5.7, glints: [[1.6, -2.1, 1.7]] },
@@ -45,9 +51,11 @@ export function restPose() {
   return {
     tilt: 0, pivotY: FOOT_Y, sx: 1, sy: 1, bob: 0, turn: 0,
     armL: 14, armR: 14,
-    legs: { fl: 0, fr: 0, bl: 0, br: 0 },
-    lift: { fl: 0, fr: 0, bl: 0, br: 0 },
+    legs: { fl: 0, fr: 0 },
+    lift: { fl: 0, fr: 0 },
     eyeX: 0, eyeY: 0, eyeScale: 1, eyes: 'open', mouth: 'smile', sprout: 0,
+    sweat: 0, // 0 = none, 0…1 = a sweat drop sliding down
+    blush: 0, // 0…1 = rosier cheeks
   };
 }
 
@@ -100,14 +108,23 @@ export function createCharacter() {
   parts.sprout = svg('g', { class: 'b-sprout' },
     svg('path', { class: 'b-stem', d: 'M50 22.5 Q48.5 15 52.5 9.5' }),
     svg('path', { class: 'b-leaf', d: 'M52.5 9.5 C57 3 65.5 2.5 69.5 5.5 C65.5 11 58.5 12.5 52.5 9.5 Z' }),
-    svg('path', { class: 'b-leaf b-leaf-small', d: 'M51 13.2 C47.5 8.6 42 8.2 39.6 10 C42.4 14 47 15 51 13.2 Z' }));
+    svg('path', { class: 'b-leaf b-leaf-small', d: 'M51 13.2 C47.5 8.6 42 8.2 39.6 10 C42.4 14 47 15 51 13.2 Z' }),
+    // Grows with the learner (GROWTH): a second leaf, then a bud, then a flower.
+    svg('path', { class: 'b-leaf b-grow-1', d: 'M50.4 18 C54.6 14.2 60.6 14.4 63.4 16.8 C59.6 20.6 54.4 20.8 50.4 18 Z' }),
+    svg('g', { class: 'b-grow-2' },
+      svg('path', { class: 'b-sepal', d: 'M50.4 9.6 Q52.6 7 54.8 9.6' }),
+      svg('ellipse', { class: 'b-bud', cx: 52.6, cy: 6.4, rx: 2.6, ry: 3.5 })),
+    svg('g', { class: 'b-grow-3' },
+      ...[0, 72, 144, 216, 288].map((a) => svg('ellipse', { class: 'b-petal', cx: 52.6, cy: 2.4, rx: 2.3, ry: 3.1, transform: `rotate(${a} 52.6 5.6)` })),
+      svg('circle', { class: 'b-flower-centre', cx: 52.6, cy: 5.6, r: 1.9 })));
 
   parts.mouthLine = svg('path', { class: 'b-mouth-line' });
   parts.mouthFill = svg('path', { class: 'b-mouth-fill' });
   parts.face = svg('g', { class: 'b-face' },
-    svg('ellipse', { class: 'b-cheek', cx: 30.5, cy: 58, rx: 4.6, ry: 2.7 }),
-    svg('ellipse', { class: 'b-cheek', cx: 69.5, cy: 58, rx: 4.6, ry: 2.7 }),
+    (parts.cheekL = svg('ellipse', { class: 'b-cheek', cx: 30.5, cy: 58, rx: 4.6, ry: 2.7 })),
+    (parts.cheekR = svg('ellipse', { class: 'b-cheek', cx: 69.5, cy: 58, rx: 4.6, ry: 2.7 })),
     eye('l'), eye('r'), parts.mouthLine, parts.mouthFill);
+  parts.sweat = svg('path', { class: 'b-sweat', d: 'M0 0 C2.4 3.4 3 5.4 0 6.8 C-3 5.4 -2.4 3.4 0 0 Z', opacity: 0 });
 
   parts.cap = svg('g', { class: 'b-acc-cap' },
     svg('path', { class: 'b-cap', d: 'M29.5 31 C30 15.5 70 15.5 70.5 31 Z' }),
@@ -123,7 +140,7 @@ export function createCharacter() {
 
   parts.bob = svg('g', { class: 'b-bob' },
     parts.pack,
-    parts.body, belly, rim, parts.shine, parts.sprout, parts.straps, parts.face, parts.cap, parts.bow,
+    parts.body, belly, rim, parts.shine, parts.sprout, parts.straps, parts.face, parts.sweat, parts.cap, parts.bow,
     arm('l'), arm('r'), leg('fl'), leg('fr'));
   parts.root = svg('g', { class: 'b-root' }, parts.bob);
 
@@ -166,11 +183,24 @@ export function createCharacter() {
       eyesShown = p.eyes;
       root.classList.toggle('is-eyes-closed', p.eyes === 'closed');
       root.classList.toggle('is-eyes-happy', p.eyes === 'happy');
+      root.classList.toggle('is-eyes-sparkle', p.eyes === 'sparkle');
+      root.classList.toggle('is-eyes-wink', p.eyes === 'wink'); // the right eye closes, the left stays open
     }
 
     const mouth = MOUTHS[p.mouth] || MOUTHS.smile;
     set(parts.mouthLine, 'd', mouth.line || 'M0 0');
     set(parts.mouthFill, 'd', mouth.fill || 'M0 0');
+
+    // A sweat drop slides down beside the head and fades; cheeks redden with blush.
+    const sw = p.sweat || 0;
+    set(parts.sweat, 'opacity', sw > 0 ? String(r(Math.min(1, sw * 5) * (1 - Math.max(0, sw - 0.6) / 0.4))) : '0');
+    set(parts.sweat, 'transform', `translate(${r(74 + turn * 3)} ${r(24 + sw * 10)})`);
+    const cheek = String(r(0.55 + 0.4 * (p.blush || 0)));
+    const cheekScale = `scale(${r(1 + 0.25 * (p.blush || 0))})`;
+    for (const c of [parts.cheekL, parts.cheekR]) {
+      set(c, 'opacity', cheek);
+      set(c, 'transform', `translate(${c === parts.cheekL ? 30.5 : 69.5} 58) ${cheekScale} translate(${c === parts.cheekL ? -30.5 : -69.5} -58)`);
+    }
 
     // The shine slides opposite the turn, as a fixed light would on a turning body.
     set(parts.shine, 'transform', `translate(${r(-turn * 4)} 0) rotate(-32 35 33)`);
@@ -210,12 +240,18 @@ export function createCharacter() {
     for (const side of ['l', 'r']) {
       parts[`eyeOpen_${side}`].replaceChildren(
         svg('ellipse', { class: 'b-pupil', cx: 0, cy: 0, rx: shape.rx, ry: shape.ry }),
-        ...shape.glints.map(([x, y, rad]) => svg('circle', { class: 'b-glint', cx: x, cy: y, r: rad })));
+        ...shape.glints.map(([x, y, rad]) => svg('circle', { class: 'b-glint', cx: x, cy: y, r: rad })),
+        svg('path', { class: 'b-sparkle', d: 'M1.4 -4.6 L2.2 -2.6 L4.2 -1.8 L2.2 -1 L1.4 1 L0.6 -1 L-1.4 -1.8 L0.6 -2.6 Z' }));
     }
     root.dataset.accessory = accessory;
   }
 
-  return { root, applyPose, applyAppearance };
+  /** Sprout stage 0…3 (growthStage): CSS shows the matching leaf, bud or flower. */
+  function applyGrowth(stage) {
+    root.dataset.growth = String(stage);
+  }
+
+  return { root, applyPose, applyAppearance, applyGrowth };
 }
 
 // ---- Colour --------------------------------------------------------------------

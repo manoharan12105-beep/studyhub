@@ -7,6 +7,8 @@
 //          the floor. Climbable only while the sidebar is really there: expanded
 //          on desktop, or the drawer open on phones. The 64px collapsed rail is
 //          not a climbing surface.
+//   rail   that collapsed rail's edge: something a falling or thrown Buddy can
+//          grab on the way down, then hang from or slide down.
 //
 // Geometry is read once and cached; events (sidebar, resize, route, theme…)
 // call invalidate() and the next read re-measures. Nothing here runs per frame
@@ -71,6 +73,15 @@ export function createWorld({ size, isBuddyNode }) {
         top: headerBottom + height + 10,
         bottom: floorY,
         attachX: edge + half + 1,
+      },
+      // The collapsed 64px rail: not climbed on purpose, but a falling Buddy can grab it.
+      rail: {
+        kind: 'rail',
+        valid: Boolean(sidebar) && desktop && collapsed && floorY - headerBottom > height * 3,
+        x: desktop && sidebar ? sidebar.getBoundingClientRect().right : 0,
+        top: headerBottom + height + 10,
+        bottom: floorY,
+        attachX: (desktop && sidebar ? sidebar.getBoundingClientRect().right : 0) + half + 1,
       },
     };
     return cache;

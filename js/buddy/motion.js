@@ -1,71 +1,132 @@
 // Buddy's motion: one state machine, one animation loop, simple physics.
 //
 // Body state is { x, y } = the point between Buddy's feet, in viewport pixels,
-// plus velocity, tilt and the surface it stands on (floor, wall or air).
+// plus velocity, tilt and the surface it stands on (floor, wall, rail or air).
 //
 // States and how they connect (ALLOWED below is the authority):
 //
 //   idle ─▶ walking / avoiding ─▶ (turning) ─▶ arrive
 //   idle ─▶ walking ─▶ mounting ─▶ climbing ─▶ gripping ─▶ climbing (down) ─▶ dismounting ─▶ idle
-//                                     │            └──▶ jumping (hop off) ─▶ landing ─▶ idle
-//                                     └─ support lost ─▶ slipping ─▶ falling ─▶ landing ─▶ recovering ─▶ idle
+//                                     │            └──▶ crouching ─▶ jumping (hop off) ─▶ landing
+//                                     └─ support lost ─▶ slipping ─▶ falling ─▶ landing ─▶ (rebound) ─▶ recovering ─▶ idle
+//   falling / thrown near the collapsed rail ─▶ hanging ─▶ sliding ─▶ dismounting   (or ─▶ falling again)
+//   idle ─▶ held (picked up by the pointer, swinging) ─▶ thrown ─▶ landing
 //   floor states ─ sidebar grows over Buddy ─▶ knocked ─▶ landing
-//   idle ⇄ looking · sitting · thinking · sleeping · celebrating · interacting
+//   idle ⇄ looking · sitting · thinking · celebrating · interacting · worried · waving · crouching ─▶ jumping
+//   idle ─▶ yawning ─▶ sleeping ─▶ stretching ─▶ idle
 //
-// Only states marked `frames` run the requestAnimationFrame loop; static poses
-// (idle, sitting, thinking, sleeping, gripping) cost nothing between events.
-// Each state change bumps `gen`; timers created for a state are bound to its
-// gen and are cleared on the next change, so they can never act late.
-// Movement uses elapsed time (performance.now / rAF timestamps), so it looks
-// the same at 60, 120 or 144 Hz.
+// On top of the body state, "secondary motion" makes Buddy feel alive: the
+// leaf, the arms and a little body sway are damped springs pushed by Buddy's
+// real change of velocity (they lag when it starts, whip when it lands, wobble
+// when it stops), and the eyes ease toward a gaze target. The loop runs while a
+// state needs frames OR a spring has not settled, and stops when everything is
+// still. Each state change bumps `gen`; timers made for a state die with it.
+// Movement uses elapsed time, so it looks the same at 60, 120 or 144 Hz.
 
 import { restPose } from './character.js';
 
 const G = 2300; // px/s², gravity
-const V_MAX = 1500; // px/s, terminal fall speed
+const V_MAX = 1500; // px/s, terminal fall speed (thrown Buddy may start faster)
+const THROW_MAX = 2600; // px/s
 const WALK = 58;
 const AVOID = 120;
 const ACCEL = 260;
 const CLIMB = 62;
 const CLIMB_DOWN = 64;
+const SLIDE = 85;
 const BLEND_MS = 140;
 // Impacts are instantaneous: these states start from their own pose, unblended.
-const NO_BLEND = new Set(['landing']);
+// Held and thrown also switch the pose pivot (head top ⇄ body centre); release()
+// re-anchors the position for that, so blending between pivots would jump.
+const NO_BLEND = new Set(['landing', 'held', 'thrown']);
 
 const ON_WALL = new Set(['mounting', 'climbing', 'gripping']);
-const AIRBORNE = new Set(['slipping', 'falling', 'jumping', 'knocked']);
+const ON_RAIL = new Set(['hanging', 'sliding']);
+const AIRBORNE = new Set(['slipping', 'falling', 'jumping', 'knocked', 'thrown']);
 export const RESTING = new Set(['idle', 'sitting', 'thinking', 'sleeping']);
 
-const REST_EXITS = ['idle', 'walking', 'avoiding', 'turning', 'looking', 'sitting', 'thinking', 'sleeping', 'celebrating', 'jumping', 'interacting', 'knocked'];
+const REST_EXITS = ['idle', 'walking', 'avoiding', 'turning', 'looking', 'sitting', 'thinking', 'sleeping', 'celebrating',
+  'jumping', 'interacting', 'knocked', 'crouching', 'held', 'worried', 'waving', 'yawning', 'pleased', 'inspecting', 'shifting', 'fidgeting', 'thrown'];
+const BRIEF_EXITS = ['idle', 'knocked', 'held'];
+// Idle habits: short, calm gestures from a resting pose.
+const HABITS = ['inspecting', 'shifting', 'fidgeting'];
 const ALLOWED = {
   idle: [...REST_EXITS, 'mounting'],
   looking: REST_EXITS,
   sitting: REST_EXITS,
   thinking: REST_EXITS,
-  sleeping: REST_EXITS,
-  celebrating: ['idle', 'knocked'],
-  interacting: ['idle', 'knocked'],
+  sleeping: [...REST_EXITS, 'stretching'],
+  celebrating: BRIEF_EXITS,
+  interacting: BRIEF_EXITS,
+  worried: BRIEF_EXITS,
+  waving: BRIEF_EXITS,
+  pleased: BRIEF_EXITS,
+  inspecting: BRIEF_EXITS,
+  shifting: BRIEF_EXITS,
+  fidgeting: BRIEF_EXITS,
+  yawning: ['sleeping', 'idle', 'knocked'],
+  stretching: ['idle', 'knocked'],
+  crouching: ['jumping', 'slipping', 'knocked'],
   turning: ['walking', 'avoiding', 'idle', 'knocked'],
   walking: ['idle', 'turning', 'walking', 'avoiding', 'mounting', 'knocked', 'sitting', 'looking'],
   avoiding: ['idle', 'turning', 'walking', 'avoiding', 'knocked', 'sitting', 'looking'],
   mounting: ['climbing', 'slipping'],
   climbing: ['climbing', 'gripping', 'dismounting', 'slipping'],
-  gripping: ['climbing', 'jumping', 'slipping'],
+  gripping: ['climbing', 'crouching', 'slipping'],
   dismounting: ['idle', 'knocked'],
   slipping: ['falling'],
-  falling: ['landing'],
-  jumping: ['landing'],
-  knocked: ['landing'],
-  landing: ['recovering', 'idle', 'knocked'],
+  falling: ['landing', 'hanging'],
+  jumping: ['landing', 'hanging'],
+  knocked: ['landing', 'hanging'],
+  thrown: ['landing', 'hanging'],
+  held: ['thrown'],
+  hanging: ['falling', 'sliding', 'knocked', 'climbing'], // climbing: down a sidebar edge it caught
+  sliding: ['dismounting', 'falling', 'knocked'],
+  landing: ['recovering', 'idle', 'knocked', 'jumping'],
   recovering: ['idle', 'knocked'],
 };
-// States that need per-frame updates.
+// States that always need per-frame updates.
 const FRAMES = new Set(['looking', 'turning', 'walking', 'avoiding', 'mounting', 'climbing', 'dismounting',
-  'slipping', 'falling', 'jumping', 'knocked', 'landing', 'recovering', 'celebrating', 'interacting']);
+  'slipping', 'falling', 'jumping', 'knocked', 'thrown', 'held', 'hanging', 'sliding', 'landing', 'recovering',
+  'celebrating', 'interacting', 'crouching', 'worried', 'waving', 'yawning', 'stretching', 'pleased', ...HABITS]);
+// Eyes may follow a gaze target only in these calm states.
+const GAZE_STATES = new Set(['idle', 'sitting', 'gripping']);
+// A face expression (express()) may show over these states; never over falls, throws or landings.
+const FACE_STATES = new Set(['idle', 'sitting', 'walking', 'avoiding', 'turning', 'looking', 'gripping', 'climbing', 'dismounting']);
+// Brief states and how long they last (seconds).
+const DURATION = {
+  looking: 1.9, celebrating: 1.1, interacting: 0.65, worried: 1.6, waving: 1.6, yawning: 1.4, stretching: 1.1, recovering: 0.95,
+  pleased: 0.9, inspecting: 2.2, shifting: 0.9, fidgeting: 1.3,
+};
+// Catching an edge on the way down (tryCatch): reach, odds and a cooldown between attempts.
+const REACH = 26; // px between Buddy's side and the edge at which a hand can close on it
+const CATCH_ODDS = 0.6; // an attempt is made on this share of plausible passes
+const CATCH_COOLDOWN = 8; // s (real time) between attempts
+const REACH_FIRST = 0.08; // s the arm visibly reaches out before the hand can close
+const CATCH_MAX_VY = 1150; // px/s: faster than this, the grip slips (a miss)
+const PERK_MS = 4500; // a correct answer perks a quiet, droopy leaf up for this long
 export const STATES = Object.keys(ALLOWED);
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const ease = (p) => (p < 0.5 ? 2 * p * p : 1 - ((-2 * p + 2) ** 2) / 2);
+const DEG = 180 / Math.PI;
+
+/** A damped spring around 0: x is an offset (degrees), v its velocity. */
+function spring(k, c, limit) {
+  return { x: 0, v: 0, k, c, limit };
+}
+function stepSpring(s, dt) {
+  // Semi-implicit Euler, in substeps of at most 1/120 s so a slow frame (30 Hz,
+  // or the 50 ms cap after a stall) integrates the same curve as a fast one.
+  const n = Math.ceil(dt / (1 / 120) - 1e-9);
+  const h = dt / n;
+  for (let i = 0; i < n; i++) {
+    s.v = clamp(s.v + (-s.k * s.x - s.c * s.v) * h, -s.limit * 40, s.limit * 40);
+    s.x = clamp(s.x + s.v * h, -s.limit, s.limit);
+  }
+  if (!Number.isFinite(s.x) || !Number.isFinite(s.v)) { s.x = 0; s.v = 0; }
+}
+const springStill = (s) => Math.abs(s.x) < 0.08 && Math.abs(s.v) < 1.2;
 
 /**
  * deps: { world, character, el: { container, inner, shadow }, own, isReduced(),
@@ -73,7 +134,8 @@ const ease = (p) => (p < 0.5 ? 2 * p * p : 1 - ((-2 * p + 2) ** 2) / 2);
  */
 export function createMotion(deps) {
   const { world, character, el, own } = deps;
-  const body = { x: 0, y: 0, vx: 0, vy: 0, tilt: 0, omega: 0, facing: 1, surface: 'floor', peek: false };
+  const rnd = () => (deps.random ? deps.random() : Math.random()); // tests can inject a fixed sequence
+  const body = { x: 0, y: 0, vx: 0, vy: 0, tilt: 0, omega: 0, facing: 1, surface: 'floor', peek: false, pendingRecover: false };
   let state = 'idle';
   let data = {};
   let gen = 0;
@@ -83,13 +145,31 @@ export function createMotion(deps) {
   let pose = restPose();
   let blend = null; // { from, start }
   let raf = 0;
+  let inFrame = false;
   let lastFrame = 0;
   let running = false;
   let paused = false;
   let timeScale = 1;
-  const stats = { outstandingRaf: 0, maxOutstandingRaf: 0, frames: 0, transitions: 0, invalid: 0, falls: 0, knocks: 0, forced: 0 };
+  const stats = { outstandingRaf: 0, maxOutstandingRaf: 0, frames: 0, transitions: 0, invalid: 0, falls: 0, knocks: 0, forced: 0, catches: 0, throws: 0, rebounds: 0 };
   const trace = [];
   const transitions = [];
+
+  // Secondary motion.
+  const springs = {
+    sprout: spring(120, 10, 38), // leaf: lags, whips, wobbles
+    armL: spring(150, 11, 40),
+    armR: spring(150, 11, 40),
+    sway: spring(90, 9, 9), // body lean (scrolling, stopping)
+  };
+  const gaze = { x: 0, y: 0, tx: 0, ty: 0 };
+  const measure = { valid: false, px: 0, py: 0, vx: 0, vy: 0 };
+  // Leaf rest angle (degrees): `base` eases toward the target so drooping and perking never jump.
+  const leaf = { droop: false, perkUntil: 0, base: 0 };
+  // A face layered over calm states: { kind, start, until, prio } (express()).
+  let face = null;
+  let lastCatch = -Infinity; // performance.now() of the last catch attempt
+  let missedLast = false; // after a miss, the next plausible attempt holds on
+  let speedShown = '';
 
   // ---- State changes -------------------------------------------------------------
 
@@ -124,6 +204,8 @@ export function createMotion(deps) {
     else blend = { from: { ...pose, legs: { ...pose.legs }, lift: { ...pose.lift } }, start: clock };
     if (AIRBORNE.has(next)) body.surface = 'air';
     else if (ON_WALL.has(next)) body.surface = 'wall';
+    else if (ON_RAIL.has(next)) body.surface = 'rail';
+    else if (next === 'held') body.surface = 'held';
     else body.surface = 'floor';
     if (next !== 'idle' && next !== 'sitting') body.peek = false;
     el.container.dataset.state = next;
@@ -145,6 +227,7 @@ export function createMotion(deps) {
   }
 
   const elapsed = () => (clock - stateStart) / 1000;
+  const size = () => world.get().height / 0.96;
 
   // ---- Entering states -------------------------------------------------------------
 
@@ -153,12 +236,22 @@ export function createMotion(deps) {
       body.tilt = 0;
     },
     gripping() {
-      // Hang on and look around, then climb down or hop off.
+      // Hang on and look around (and down), then climb down or hop off.
       const playful = deps.personality() === 'playful';
+      data.lookDown = 0.9 + rnd() * 0.8; // s: when Buddy peers down the edge
       stateTimer(() => {
-        if (Math.random() < (playful ? 0.6 : 0.25)) hopOffWall();
+        if (rnd() < (playful ? 0.6 : 0.25)) crouchThenJump({ vx: 150, vy: -260, omega: 40, mood: 'happy', fromWall: true, facing: 1 });
         else enter('climbing', { targetY: world.get().wall.bottom, dir: 1, then: 'dismount', phase: 0 });
-      }, 1600 + Math.random() * 1900);
+      }, 1600 + rnd() * 1900);
+    },
+    turning() {
+      // Turning round swings the leaf and hands the other way (they follow late).
+      if (!deps.isReduced()) {
+        const dir = Math.sign(body.facing - (data.from ?? -body.facing)) || body.facing;
+        springs.sprout.v += -dir * 120;
+        springs.armL.v += dir * 40;
+        springs.armR.v += -dir * 40;
+      }
     },
     slipping() {
       stats.falls++;
@@ -168,10 +261,34 @@ export function createMotion(deps) {
       body.facing = -1;
     },
     falling() {
-      body.omega = 80;
+      body.omega = data.omega ?? 80;
+      data.catchRoll = rnd();
+    },
+    thrown() {
+      data.catchRoll = rnd();
     },
     knocked() {
       stats.knocks++;
+      data.noCatch = true; // a knock always flies clear of the rail
+    },
+    crouching() {
+      if (data.fromWall) body.surface = 'wall';
+    },
+    hanging() {
+      // The hand closes on the edge where it is: Buddy's speed goes into a short
+      // stretch below that hold point (the "give"), which springs back.
+      stats.catches++;
+      data.hy = body.y;
+      data.fromX = body.x;
+      data.give = clamp((data.impact || 0) * 0.012, 2, 14);
+      body.vx = 0;
+      body.vy = 0;
+      body.facing = -1;
+      data.hold = 0.8 + rnd() * 0.5;
+      if (data.on === 'wall') body.surface = 'wall';
+    },
+    thinking() {
+      data.framesUntil = clock + 1400; // a short head-scratch, then a still "hmm" pose
     },
   };
 
@@ -180,14 +297,15 @@ export function createMotion(deps) {
   function step(dt) {
     const w = world.get();
     const t = elapsed();
+    if (DURATION[state] && t > DURATION[state]) {
+      if (state === 'recovering' || state === 'stretching') enter('idle');
+      else if (state === 'yawning') enter('sleeping');
+      else enter('idle');
+      return;
+    }
     switch (state) {
-      case 'looking':
-        if (t > 1.9) enter('idle');
-        break;
       case 'turning':
-        if (t > 0.2) {
-          enter(data.next, { target: data.target, then: data.then, v: 0, phase: 0, targetY: data.targetY });
-        }
+        if (t > 0.2) enter(data.next, { target: data.target, then: data.then, v: 0, phase: 0, targetY: data.targetY });
         break;
       case 'walking':
       case 'avoiding': {
@@ -241,6 +359,17 @@ export function createMotion(deps) {
         body.x = Math.min(w.floor.x1, body.x + 22 * dt);
         if (t > 0.28) enter('idle');
         break;
+      case 'crouching':
+        // Wind-up: look where to go, shift the weight, squash down, a beat of
+        // stillness — then spring into the jump (windupTime()).
+        if (t > windupTime()) {
+          body.vx = data.vx || 0;
+          body.vy = data.vy;
+          body.omega = data.omega || 0;
+          if (data.facing) body.facing = data.facing;
+          enter('jumping', { mood: data.mood });
+        }
+        break;
       case 'slipping': {
         // Grip lost: slide a little, tip away from the vanished edge, reach for it.
         const p = Math.min(1, t / 0.3);
@@ -252,54 +381,156 @@ export function createMotion(deps) {
         if (p >= 1) {
           body.vy = 90;
           body.vx = landingDrift(34, w);
-          enter('falling');
+          enter('falling', { fromSlip: true }); // the edge it slipped off is never re-gripped
         }
         break;
       }
       case 'falling':
       case 'jumping':
       case 'knocked':
+      case 'thrown':
         airborne(dt, w);
+        break;
+      case 'held':
+        swing(dt);
+        break;
+      case 'hanging': {
+        // Hold point on the edge; the body eases the last few px onto it (no snap)
+        // and bounces once in the arm's give.
+        const edge = data.on === 'wall' ? w.wall : w.rail;
+        body.x = edge.attachX + (data.fromX - edge.attachX) * Math.exp(-t * 30);
+        body.y = data.hy + data.give * Math.sin(Math.min(t * 9, Math.PI * 3)) * Math.exp(-t * 5);
+        if (t > data.hold) {
+          body.y = data.hy;
+          if (data.on === 'wall') {
+            // A real sidebar edge: climb down it the normal way.
+            enter('climbing', { targetY: w.wall.bottom, dir: 1, then: 'dismount', phase: 0 });
+          } else if (rnd() < 0.5) {
+            // Either the grip gives out, or Buddy slides down the rail's edge.
+            body.vx = 20;
+            body.vy = 0;
+            enter('falling', { omega: 50, noCatch: true });
+          } else enter('sliding', { phase: 0 });
+        }
+        break;
+      }
+      case 'sliding':
+        body.x = w.rail.attachX;
+        data.phase += dt * Math.PI * 2 * 1.8;
+        body.y = Math.min(w.floor.y, body.y + SLIDE * (0.6 + 0.6 * Math.max(0, Math.sin(data.phase))) * dt);
+        if (body.y >= w.floor.y - 0.5) {
+          body.y = w.floor.y;
+          enter('dismounting');
+        }
         break;
       case 'landing':
         body.tilt *= Math.exp(-dt * 25);
-        if (t > data.duration) {
-          if (data.impact > 650) enter('recovering');
-          else enter('idle');
-        }
-        break;
-      case 'recovering':
-        if (t > 0.95) enter('idle');
-        break;
-      case 'celebrating':
-        if (t > 1.1) enter('idle');
-        break;
-      case 'interacting':
-        if (t > 0.65) enter('idle');
+        if (t > data.duration) afterLanding();
         break;
       default:
         break;
     }
   }
 
+  /**
+   * After the squash: an impact above REBOUND_FROM bounces once, higher for a
+   * harder landing (capped at 260 px/s ≈ 15 px up), a little different each
+   * time. A rebound's own landing never bounces again, so it always settles.
+   */
+  function afterLanding() {
+    const REBOUND_FROM = 720;
+    if (data.impact > REBOUND_FROM && !data.rebound) {
+      stats.rebounds++;
+      const up = clamp((data.impact - REBOUND_FROM * 0.7) * 0.2, 40, 260) * (0.9 + rnd() * 0.2);
+      body.vy = -Math.min(260, up);
+      body.vx = clamp((data.drift || 0) * 0.3, -40, 40);
+      body.omega = 0;
+      body.pendingRecover = true;
+      data.lastRebound = body.vy;
+      enter('jumping', { mood: 'bounce', rebound: true });
+    } else if (data.impact > 650 || body.pendingRecover) {
+      body.pendingRecover = false;
+      enter('recovering');
+    } else enter('idle');
+  }
+
   function airborne(dt, w) {
-    body.vy = Math.min(V_MAX, body.vy + G * dt);
+    body.vy = Math.min(state === 'thrown' ? THROW_MAX : V_MAX, body.vy + G * dt);
     body.vx *= Math.exp(-dt * 0.9);
     body.x += body.vx * dt;
     body.y += body.vy * dt;
-    // Keep inside the workspace: ease back in if the floor moved under Buddy mid-air.
-    if (body.x < w.floor.x0) { body.x += (w.floor.x0 - body.x) * Math.min(1, dt * 8); body.vx = Math.max(0, body.vx); }
-    if (body.x > w.floor.x1) { body.x += (w.floor.x1 - body.x) * Math.min(1, dt * 8); body.vx = Math.min(0, body.vx); }
+    if (state === 'thrown') {
+      // A throw bounces off the edges of the workspace and off the header.
+      if (body.x < w.floor.x0 && body.vx < 0) { body.x = w.floor.x0; body.vx = -body.vx * 0.5; body.omega = -body.omega * 0.6 + 120; }
+      if (body.x > w.floor.x1 && body.vx > 0) { body.x = w.floor.x1; body.vx = -body.vx * 0.5; body.omega = -body.omega * 0.6 - 120; }
+      const ceiling = w.headerBottom + w.height;
+      if (body.y < ceiling && body.vy < 0) { body.y = ceiling; body.vy = -body.vy * 0.35; }
+    } else {
+      // Keep inside the workspace: ease back in if the floor moved under Buddy mid-air.
+      if (body.x < w.floor.x0) { body.x += (w.floor.x0 - body.x) * Math.min(1, dt * 8); body.vx = Math.max(0, body.vx); }
+      if (body.x > w.floor.x1) { body.x += (w.floor.x1 - body.x) * Math.min(1, dt * 8); body.vx = Math.min(0, body.vx); }
+    }
+    if (!Number.isFinite(body.x) || !Number.isFinite(body.y)) { stats.invalid++; placeCalmly(); return; }
+    if (tryCatch(w, dt)) return;
     const toFloor = w.floor.y - body.y;
     if (toFloor < 150 && body.vy > 0) body.tilt += (0 - body.tilt) * Math.min(1, dt * 9); // air-righting
-    else body.tilt = clamp(body.tilt + body.omega * dt, -50, 50);
+    else body.tilt = clamp(body.tilt + body.omega * dt, -60, 60);
+    // Speed lines on a fast fall (renderNow), dust when it ends hard.
     if (body.vy > 0 && body.y >= w.floor.y) {
       const impact = body.vy;
+      const drift = body.vx; // carried into a rebound, a little
       body.y = w.floor.y;
       body.vy = 0;
       body.vx = 0;
-      enter('landing', { impact, duration: impact > 650 ? 0.36 : 0.26 });
+      if (impact > 700 && !deps.isReduced()) deps.emit('dust', { x: body.x, y: body.y, impact, size: size() });
+      enter('landing', { impact, drift, duration: (impact > 650 ? 0.36 : 0.26) * (0.92 + rnd() * 0.16), rebound: Boolean(data.rebound) });
     }
+  }
+
+  /** The edge a falling Buddy could grab now: the collapsed rail, or a real sidebar edge. */
+  function grabEdge(w) {
+    if (w.rail.valid) return { on: 'rail', edge: w.rail };
+    if (w.wall.valid) return { on: 'wall', edge: w.wall };
+    return null;
+  }
+
+  /**
+   * Passing close to an edge on the way down, Buddy may reach for it. Only when
+   * the geometry allows (its side within REACH px of the edge, moving toward or
+   * along it, inside the edge's span), after reaching out for REACH_FIRST, at
+   * most once per fall and once per CATCH_COOLDOWN; on CATCH_ODDS of such
+   * passes. Too fast and the hand slips.
+   * After a miss the next plausible attempt holds, so Buddy never looks
+   * hopeless at the same edge. data.reach (0…1) drives the reaching arm.
+   */
+  function tryCatch(w, dt) {
+    data.reach = 0;
+    if (data.caught || data.rebound || data.noCatch) return false;
+    if (state !== 'falling' && state !== 'thrown') return false; // a hop or a knock never grabs
+    const target = grabEdge(w);
+    if (!target) return false;
+    if (data.fromSlip && target.on === 'wall') return false; // reopening the sidebar mid-fall does not re-grip
+    const { edge } = target;
+    const gap = body.x - w.half - edge.x; // Buddy's left side to the edge
+    const inSpan = body.y > edge.top + w.height * 0.3 && body.y < edge.bottom - w.height * 1.4;
+    if (!inSpan || gap < -4 || gap > REACH * 3 || body.vx > 80) return false;
+    if (performance.now() - lastCatch < CATCH_COOLDOWN * 1000) return false; // not trying this time: no reach either
+    if (!missedLast && (data.catchRoll ?? 1) > CATCH_ODDS) return false; // this fall, Buddy does not try
+    data.reach = Math.max(clamp(1 - (gap - REACH) / (REACH * 2), 0, 1), gap <= REACH ? 0.6 : 0); // the arm stretches out as the edge nears
+    data.reachFor = (data.reachFor || 0) + dt;
+    if (gap > REACH || data.reachFor < REACH_FIRST) return false;
+    data.caught = true;
+    lastCatch = performance.now();
+    if (body.vy > CATCH_MAX_VY && !missedLast) {
+      // Reached for it and the hand slipped: the fall goes on, with a little spin.
+      missedLast = true;
+      stats.misses = (stats.misses || 0) + 1;
+      body.omega += 90;
+      data.missedAt = clock;
+      return false;
+    }
+    missedLast = false;
+    return enter('hanging', { on: target.on, impact: Math.max(0, body.vy) });
   }
 
   /**
@@ -340,12 +571,107 @@ export function createMotion(deps) {
     else enter('idle');
   }
 
-  function hopOffWall() {
-    body.facing = 1;
-    body.vx = 150;
-    body.vy = -240;
-    body.omega = 40;
-    enter('jumping', { mood: 'happy' });
+  /** Wind-up before any jump: crouch, then launch with the given velocity. */
+  function crouchThenJump(launch) {
+    return enter('crouching', launch);
+  }
+
+  /**
+   * How long the wind-up lasts: a glance at the destination (hop off the wall,
+   * or a hop sideways), the squash, and a short held beat before take-off.
+   */
+  function windupTime() {
+    return data.fromWall ? 0.42 : Math.abs(data.vx || 0) > 1 ? 0.34 : 0.28;
+  }
+
+  // ---- Held by the pointer: a damped pendulum hanging from the grab point ----------
+
+  /**
+   * The grab point (anchor) follows the pointer; Buddy hangs from it. Its angle
+   * phi (radians, + = feet to the right) obeys a pendulum equation, driven by the
+   * anchor's acceleration: moving the pointer swings Buddy, stopping lets it settle.
+   */
+  function swing(dt) {
+    if (dt <= 0) return;
+    const S = size();
+    const length = S * 0.74; // grab point (head top) to feet
+    // The grab point trails the pointer a little (time constant 40 ms): a soft
+    // hold, not a rigid one, and fast pointer jitter is smoothed away.
+    const follow = 1 - Math.exp(-dt / 0.04);
+    data.ax += (data.tx - data.ax) * follow;
+    data.ay += (data.ty - data.ay) * follow;
+    const avx = (data.ax - data.lastAx) / dt;
+    const aAx = clamp((avx - data.avx) / dt, -25000, 25000);
+    data.avx = avx;
+    data.lastAx = data.ax;
+    data.omega += (-(G / length) * Math.sin(data.phi) - 2.6 * data.omega - (aAx / length) * Math.cos(data.phi)) * dt;
+    data.phi = clamp(data.phi + data.omega * dt, -1.4, 1.4);
+    body.x = data.ax;
+    body.y = data.ay + length;
+    body.tilt = -data.phi * DEG;
+  }
+
+  function grab(px, py) {
+    if (!running || deps.isReduced() || !(RESTING.has(state) || state === 'looking')) return false;
+    const S = size();
+    // Keep the point under the pointer where it is: the anchor is the head top.
+    const headX = body.x;
+    const headY = body.y - S * 0.74;
+    const ok = enter('held', {
+      offX: px - headX, offY: py - headY, ax: headX, ay: headY, tx: headX, ty: headY, lastAx: headX, avx: 0, phi: 0, omega: 0, samples: [],
+    });
+    if (ok) moveHold(px, py, performance.now());
+    return ok;
+  }
+
+  /**
+   * The pointer moved while holding Buddy. The hold stays inside the workspace
+   * (right of the sidebar, below the header, above the floor), so a throw always
+   * starts from a place Buddy can be. Samples keep the last 110 ms of the pointer.
+   */
+  function moveHold(px, py, time) {
+    if (state !== 'held') return;
+    const w = world.get();
+    data.tx = clamp(px - data.offX, w.floor.x0, w.floor.x1);
+    data.ty = clamp(py - data.offY, w.headerBottom + 4, w.floor.y - size() * 0.74);
+    data.samples.push({ t: time, x: data.tx, y: data.ty });
+    while (data.samples.length > 2 && time - data.samples[0].t > 110) data.samples.shift();
+    ensureLoop();
+  }
+
+  /**
+   * Velocity of the pointer over its last ~110 ms, in px/s. Zero when the
+   * pointer had stopped before letting go (last sample older than 70 ms), when
+   * there are too few samples, or when they span under 12 ms — so a slow drag
+   * ending in a still release just drops Buddy, whatever happened earlier.
+   */
+  function throwVelocity(now) {
+    const s = data.samples;
+    if (s.length < 2 || now - s[s.length - 1].t > 70) return { vx: 0, vy: 0 };
+    const recent = s.filter((p) => now - p.t <= 110);
+    if (recent.length < 2) return { vx: 0, vy: 0 };
+    const span = (recent[recent.length - 1].t - recent[0].t) / 1000;
+    if (span < 0.012) return { vx: 0, vy: 0 };
+    return { vx: (recent[recent.length - 1].x - recent[0].x) / span, vy: (recent[recent.length - 1].y - recent[0].y) / span };
+  }
+
+  /** Let go: fly off with the pointer's recent velocity and the swing's spin. */
+  function release(now = performance.now()) {
+    if (state !== 'held') return false;
+    let { vx, vy } = throwVelocity(now);
+    const speed = Math.hypot(vx, vy);
+    if (speed > THROW_MAX) { vx *= THROW_MAX / speed; vy *= THROW_MAX / speed; }
+    // Re-anchor from the head-top pivot (held) to the body-centre pivot (airborne) without a jump.
+    const S = size();
+    const theta = body.tilt / DEG;
+    body.x = data.ax - S * 0.33 * Math.sin(theta);
+    body.y = data.ay + S * 0.33 * Math.cos(theta) + S * 0.41;
+    body.vx = vx;
+    body.vy = vy;
+    body.omega = clamp(-data.omega * DEG, -500, 500);
+    body.facing = vx >= 0 ? 1 : -1;
+    stats.throws++;
+    return enter('thrown', { speed: Math.round(speed) });
   }
 
   // ---- Poses ----------------------------------------------------------------------
@@ -382,14 +708,14 @@ export function createMotion(deps) {
         const a = Math.sin(data.phase || 0);
         const c = Math.cos(data.phase || 0);
         p.turn = body.facing * 0.95;
-        // Trot: diagonal pairs move together; the lifted pair swings forward.
-        p.legs = { fl: 22 * a * k, br: 22 * a * k, fr: -22 * a * k, bl: -22 * a * k };
-        p.lift = { fl: Math.max(0, c) * 3.6 * k, br: Math.max(0, c) * 3.6 * k, fr: Math.max(0, -c) * 3.6 * k, bl: Math.max(0, -c) * 3.6 * k };
+        // Two legs step in turn; the lifted foot swings forward.
+        p.legs = { fl: 22 * a * k, fr: -22 * a * k };
+        p.lift = { fl: Math.max(0, c) * 3.6 * k, fr: Math.max(0, -c) * 3.6 * k };
         p.bob = -Math.abs(Math.sin(data.phase || 0)) * 2.6 * k;
         p.tilt = body.facing * (1.5 + 3 * k) + Math.sin((data.phase || 0) * 2) * 1.2 * k;
         p.armL = 16 + 16 * a * k;
         p.armR = 16 - 16 * a * k;
-        p.sprout = -body.facing * 9 * k + Math.sin((data.phase || 0) * 2) * 4 * k;
+        p.sprout = Math.sin((data.phase || 0) * 2) * 3 * k;
         p.mouth = state === 'avoiding' ? 'flat' : 'smile';
         break;
       }
@@ -400,7 +726,7 @@ export function createMotion(deps) {
         p.bob = -Math.sin(q * Math.PI) * 7;
         p.armL = 16 + 124 * q;
         p.armR = 16 - 136 * q;
-        p.legs = { fl: 26 * q, bl: 30 * q, fr: 14 * q, br: 18 * q };
+        p.legs = { fl: 28 * q, fr: 16 * q };
         break;
       }
       case 'climbing': {
@@ -410,23 +736,29 @@ export function createMotion(deps) {
         // Hands alternate between holds on the edge; feet push in turn.
         p.armL = 128 + 30 * s;
         p.armR = -(128 - 30 * s);
-        p.legs = { fl: 30 + 14 * s, bl: 34 - 14 * s, fr: 16 - 12 * s, br: 22 + 12 * s };
-        p.lift = { fl: Math.max(0, -s) * 4, bl: Math.max(0, s) * 4, fr: Math.max(0, s) * 3, br: Math.max(0, -s) * 3 };
+        p.legs = { fl: 32 + 14 * s, fr: 18 - 12 * s };
+        p.lift = { fl: Math.max(0, -s) * 4, fr: Math.max(0, s) * 3 };
         p.sprout = Math.sin((data.phase || 0) * 2) * 5;
         p.eyeY = data.dir < 0 ? -1.6 : 1.4;
         p.eyeX = -1.4;
         p.mouth = data.resting ? 'flat' : 'smile';
         break;
       }
-      case 'gripping':
+      case 'gripping': {
         p.turn = -0.95;
         p.tilt = -7;
         p.armL = 142;
         p.armR = -118;
-        p.legs = { fl: 32, bl: 34, fr: 18, br: 22 };
-        p.eyeX = 2.6; // looking out over the page
-        p.eyeY = -0.4;
+        p.legs = { fl: 33, fr: 20 };
+        // Looking out over the page, then a peek down the edge, then back.
+        const at = data.lookDown ?? 99;
+        const down = clamp(Math.min((t - at) / 0.3, (at + 1.3 - t) / 0.3), 0, 1);
+        p.eyeX = 2.6 * (1 - down) - 1 * down;
+        p.eyeY = -0.4 * (1 - down) + 2.8 * down;
+        p.tilt = -7 + 4 * down;
+        p.mouth = down > 0.5 ? 'o' : 'smile';
         break;
+      }
       case 'dismounting': {
         const q = ease(Math.min(1, t / 0.28));
         p.turn = -0.95 * (1 - q) + 0.45 * q;
@@ -434,6 +766,39 @@ export function createMotion(deps) {
         p.armL = 140 * (1 - q) + 14 * q;
         p.armR = -120 * (1 - q) + 14 * q;
         p.bob = -Math.sin(q * Math.PI) * 4;
+        break;
+      }
+      case 'crouching': {
+        // Phases over windupTime(): glance at the destination (first 30 %), sink
+        // and load the legs (to 75 %), then hold still for a beat.
+        const T = windupTime();
+        const look = Math.min(1, t / (T * 0.3));
+        const q = ease(clamp((t - T * 0.2) / (T * 0.55), 0, 1));
+        const dir = data.fromWall ? 1 : Math.sign(data.vx || 0);
+        const hold = t > T * 0.75 ? Math.sin((t - T * 0.75) * 60) * 0.006 : 0; // a tiny quiver of held tension
+        if (data.fromWall) {
+          p.turn = -0.95 + 0.5 * look; // looks over its shoulder at the landing spot
+          p.tilt = -7 - 6 * q;
+          p.armL = 142 - 10 * q;
+          p.armR = -118 + 30 * q;
+          p.legs = { fl: 33 + 16 * q, fr: 20 + 16 * q };
+          p.eyeX = 3 * look;
+          p.eyeY = 1.2 * look;
+        } else {
+          p.armL = 14 + 22 * q; // arms swing back for the push
+          p.armR = 14 + 22 * q;
+          p.legs = { fl: 22 * q, fr: -22 * q };
+          p.turn = dir ? dir * 0.8 : (data.facing || body.facing) * 0.4;
+          p.tilt = dir * 5 * q; // weight shifts toward the jump
+          p.eyeX = dir * 2.4 * look;
+          p.eyeY = -1.6 * look; // looking up at where it is going
+        }
+        p.sy = 1 - 0.18 * q + hold;
+        p.sx = 1 + 0.13 * q - hold;
+        p.bob = 2.4 * q;
+        p.eyeScale = 1 - 0.08 * q;
+        p.mouth = q > 0.5 ? 'flat' : 'smile';
+        p.sprout = -6 * q; // the leaf bends with the squat, then whips on take-off
         break;
       }
       case 'slipping': {
@@ -444,7 +809,7 @@ export function createMotion(deps) {
         // The near hand still grabs at where the edge was; the other flails.
         p.armL = 150 + 18 * q + Math.sin(t * 42) * 9 * q;
         p.armR = -110 + 190 * q;
-        p.legs = { fl: 30 + Math.sin(t * 34) * 22 * q, bl: 30 - Math.sin(t * 30) * 20 * q, fr: 10 + Math.sin(t * 38) * 18 * q, br: 18 };
+        p.legs = { fl: 30 + Math.sin(t * 34) * 22 * q, fr: 10 + Math.sin(t * 38) * 18 * q };
         p.eyeScale = 1 + 0.2 * q;
         p.eyeX = -2.5;
         p.mouth = 'o';
@@ -453,24 +818,80 @@ export function createMotion(deps) {
       }
       case 'falling':
       case 'jumping':
-      case 'knocked': {
+      case 'knocked':
+      case 'thrown': {
         const w = world.get();
         const near = clamp(1 - (w.floor.y - body.y) / 150, 0, 1); // preparing to land
-        const happy = state === 'jumping';
+        const happy = state === 'jumping' && data.mood !== 'bounce';
+        const bounce = data.mood === 'bounce';
+        const thrown = state === 'thrown';
         p.pivotY = 55;
         p.tilt = body.tilt;
         p.turn = body.facing * 0.3 * (1 - near);
-        const flail = happy ? 0.25 : 1;
-        p.armL = (happy ? 150 : 140) * (1 - near) + 88 * near + Math.sin(t * 26) * 20 * flail * (1 - near);
-        p.armR = (happy ? 150 : 140) * (1 - near) + 88 * near + Math.sin(t * 26 + 1.7) * 20 * flail * (1 - near);
+        const flail = happy || bounce ? 0.25 : 1;
+        const up = bounce ? 70 : happy ? 150 : 140;
+        p.armL = up * (1 - near) + 88 * near + Math.sin(t * 26) * 20 * flail * (1 - near);
+        p.armR = up * (1 - near) + 88 * near + Math.sin(t * 26 + 1.7) * 20 * flail * (1 - near);
         const kick = Math.sin(t * 22) * 18 * flail * (1 - near);
-        p.legs = { fl: 14 + kick, fr: -14 - kick, bl: 18 - kick, br: -18 + kick };
+        p.legs = { fl: 14 + kick, fr: -14 - kick };
+        if (data.reach > 0) {
+          // An edge within reach: the near hand stretches out toward it, the face turns to it.
+          p.armL = p.armL * (1 - data.reach) + 172 * data.reach;
+          p.turn = p.turn * (1 - data.reach) - 0.7 * data.reach;
+          p.eyeX = -2.5 * data.reach;
+        }
+        if (data.missedAt && clock - data.missedAt < 500) {
+          // The hand slipped: an empty grab and a startled face.
+          p.armL = 150 + Math.sin(t * 40) * 16;
+        }
         const stretch = Math.min(0.1, Math.max(0, body.vy) / 9000);
         p.sy = 1 + stretch;
         p.sx = 1 / Math.sqrt(1 + stretch);
-        p.eyeScale = happy ? 1 : 1.18;
-        p.mouth = happy ? 'grin' : near > 0.4 ? 'wobble' : 'o';
-        p.sprout = clamp(-body.vy / 40, -26, 26);
+        p.eyeScale = data.missedAt && clock - data.missedAt < 500 ? 1.25 : happy ? 1 : 1.18;
+        p.mouth = happy || (thrown && t > 0.25 && near < 0.4) ? 'grin' : bounce || near > 0.4 ? 'wobble' : 'o';
+        p.eyes = thrown && t > 0.25 && near < 0.4 ? 'happy' : 'open';
+        break;
+      }
+      case 'held': {
+        const swingRate = Math.abs(data.omega || 0);
+        p.pivotY = 22;
+        p.tilt = body.tilt;
+        p.turn = 0;
+        // Arms up toward the hand that holds Buddy; legs dangle and lag the swing.
+        p.armL = 128 + Math.sin(t * 9) * 8;
+        p.armR = 128 + Math.sin(t * 9 + 1.3) * 8;
+        p.legs = { fl: clamp(data.omega * 6, -30, 30) + 6, fr: clamp(data.omega * 6, -30, 30) - 6 };
+        p.lift = { fl: 0, fr: 0 };
+        p.sy = 1.04;
+        p.sx = 0.98;
+        p.eyes = t > 0.35 && swingRate > 1.5 ? 'happy' : 'open';
+        p.eyeScale = t < 0.35 ? 1.15 : 1;
+        p.mouth = t < 0.35 ? 'o' : 'grin';
+        break;
+      }
+      case 'hanging': {
+        p.pivotY = 24;
+        p.turn = -0.6;
+        p.tilt = 6 + 14 * Math.exp(-2.5 * t) * Math.sin(t * 8);
+        p.armL = 168; // the near hand holds the rail
+        p.armR = 60 + Math.sin(t * 12) * 18;
+        const kick = Math.sin(t * 10) * 16 * Math.exp(-1.2 * t);
+        p.legs = { fl: 8 + kick, fr: -8 - kick };
+        p.mouth = t < 0.35 ? 'o' : 'wobble';
+        p.eyeScale = t < 0.35 ? 1.15 : 1;
+        p.eyeX = -2;
+        p.eyeY = -1.5;
+        break;
+      }
+      case 'sliding': {
+        const s = Math.sin(data.phase || 0);
+        p.turn = -0.95;
+        p.tilt = -6;
+        p.armL = 150 + 20 * s;
+        p.armR = -(140 - 20 * s);
+        p.legs = { fl: 30 + 10 * s, fr: 20 - 10 * s };
+        p.eyeY = 1.4;
+        p.mouth = 'flat';
         break;
       }
       case 'landing': {
@@ -480,13 +901,12 @@ export function createMotion(deps) {
         p.sy = 1 - k * spring;
         p.sx = 1 + k * spring * 0.75;
         const s = (spring * k) / 0.3;
-        p.legs = { fl: 34 * s, fr: -34 * s, bl: 24 * s, br: -24 * s };
+        p.legs = { fl: 34 * s, fr: -34 * s };
         p.armL = 70 + 30 * s;
         p.armR = 70 + 30 * s;
         p.tilt = body.tilt;
         p.eyes = k > 0.14 && q < 0.4 ? 'closed' : 'open';
         p.mouth = q < 0.5 ? 'flat' : 'wobble';
-        p.sprout = 18 * spring;
         break;
       }
       case 'recovering': {
@@ -504,23 +924,30 @@ export function createMotion(deps) {
       }
       case 'sitting':
         p.bob = 5;
-        p.legs = { fl: 62, fr: -62, bl: 40, br: -40 };
-        p.lift = { fl: 2, fr: 2, bl: 0, br: 0 };
+        p.legs = { fl: 62, fr: -62 };
+        p.lift = { fl: 2, fr: 2 };
         p.armL = 8;
         p.armR = 8;
         p.turn = body.facing * 0.25;
         break;
       case 'thinking':
-        p.armR = -78; // hand to chin
-        p.eyeX = -2;
-        p.eyeY = -2.6;
+        if (t < 1.4) {
+          // Scratch the head, then settle into a hand-on-chin "hmm".
+          p.armR = -(150 + Math.sin(t * 16) * 12);
+          p.eyeX = 1.6;
+          p.eyeY = -2.2;
+        } else {
+          p.armR = -78;
+          p.eyeX = -2;
+          p.eyeY = -2.6;
+        }
         p.mouth = 'flat';
         p.sprout = -8;
         p.turn = -0.3;
         break;
       case 'sleeping':
         p.bob = 5;
-        p.legs = { fl: 62, fr: -62, bl: 40, br: -40 };
+        p.legs = { fl: 62, fr: -62 };
         p.armL = 6;
         p.armR = 6;
         p.eyes = 'closed';
@@ -528,13 +955,38 @@ export function createMotion(deps) {
         p.sprout = 12;
         p.turn = 0;
         break;
+      case 'yawning': {
+        const q = Math.min(1, t / 1.4);
+        const open = Math.sin(Math.min(1, q / 0.8) * Math.PI);
+        p.mouth = open > 0.3 ? 'yawn' : 'small';
+        p.eyes = q > 0.18 ? 'closed' : 'open';
+        p.armL = 14 + 100 * open;
+        p.armR = 14 + 100 * open;
+        p.sy = 1 + 0.04 * open;
+        p.bob = 5 * Math.max(0, (q - 0.75) / 0.25); // settles down to sleep
+        p.legs = { fl: 62 * Math.max(0, (q - 0.75) / 0.25), fr: -62 * Math.max(0, (q - 0.75) / 0.25) };
+        p.turn = 0;
+        break;
+      }
+      case 'stretching': {
+        const q = Math.min(1, t / 1.1);
+        const up = Math.sin(Math.min(1, q / 0.85) * Math.PI);
+        p.armL = 14 + 156 * up;
+        p.armR = 14 + 156 * up;
+        p.sy = 1 + 0.08 * up;
+        p.sx = 1 - 0.04 * up;
+        p.eyes = q < 0.5 ? 'closed' : 'open';
+        p.mouth = q < 0.5 ? 'small' : 'smile';
+        p.turn = 0;
+        break;
+      }
       case 'celebrating': {
         const hop = Math.abs(Math.sin(Math.min(1, t / 1.1) * Math.PI * 2));
         p.bob = -hop * 9;
         p.sy = 1 + hop * 0.04;
         p.armL = 160 + Math.sin(t * 18) * 14;
         p.armR = 160 + Math.sin(t * 18 + 1) * 14;
-        p.eyes = 'happy';
+        p.eyes = data.mood === 'sparkle' ? 'sparkle' : 'happy';
         p.mouth = 'grin';
         p.sprout = Math.sin(t * 20) * 12;
         p.turn = 0;
@@ -548,6 +1000,70 @@ export function createMotion(deps) {
         p.armL = 70;
         p.armR = 70;
         p.turn = 0;
+        p.blush = 1;
+        break;
+      case 'worried':
+        p.sweat = Math.min(1, t / 1.6);
+        p.mouth = 'wobble';
+        p.eyeScale = 0.92;
+        p.eyeY = 1.2;
+        p.armR = -(140 + Math.sin(t * 14) * 10); // scratching the head
+        p.turn = 0.2;
+        break;
+      case 'pleased': {
+        // A small, calm "yes!": a nod, a happy squint, a hint of blush (quiet mode's celebration).
+        const q = Math.min(1, t / 0.9);
+        p.bob = -Math.sin(q * Math.PI) * 2.5;
+        p.tilt = Math.sin(q * Math.PI * 2) * 2;
+        p.eyes = 'happy';
+        p.mouth = 'smile';
+        p.blush = Math.sin(q * Math.PI) * 0.8;
+        p.armL = 14 + 18 * Math.sin(q * Math.PI);
+        p.armR = 14 + 18 * Math.sin(q * Math.PI);
+        p.turn = 0.1;
+        break;
+      }
+      case 'inspecting': {
+        // Looks one way, the other, then down at the floor beside its feet.
+        const k = t < 0.7 ? -1 : t < 1.4 ? 1 : 0;
+        const down = clamp((t - 1.4) / 0.25, 0, 1) * clamp((2.2 - t) / 0.25, 0, 1);
+        p.turn = k * 0.85;
+        p.eyeX = k * 2.8;
+        p.eyeY = -0.4 * (1 - down) + 2.6 * down;
+        p.tilt = k * 2 + body.facing * 4 * down;
+        p.mouth = down > 0.5 ? 'small' : 'smile';
+        p.armR = k > 0 ? -60 : 14; // a hand shading the eyes as it looks
+        break;
+      }
+      case 'shifting': {
+        // Weight from foot to foot: a little shuffle to a comfier stance.
+        const q = Math.min(1, t / 0.9);
+        const a = Math.sin(q * Math.PI * 2);
+        p.tilt = a * 3;
+        p.lift = { fl: Math.max(0, a) * 3, fr: Math.max(0, -a) * 3 };
+        p.legs = { fl: 6 * a, fr: 6 * a };
+        p.bob = -Math.abs(a) * 1.2;
+        break;
+      }
+      case 'fidgeting': {
+        // One hand reaches up and straightens the leaf, which wobbles back.
+        const q = Math.min(1, t / 1.3);
+        const reach = Math.sin(Math.min(1, q / 0.7) * Math.PI);
+        p.armR = -(14 + 150 * reach);
+        p.eyeY = -2.2 * reach;
+        p.eyeX = 0.8 * reach;
+        p.sprout = Math.sin(t * 14) * 6 * reach;
+        p.mouth = 'small';
+        p.turn = -0.15;
+        break;
+      }
+      case 'waving':
+        p.armR = 150 + Math.sin(t * 13) * 28; // right hand up, waving
+        p.armL = 18;
+        p.eyes = t < 0.8 ? 'happy' : 'open';
+        p.mouth = 'grin';
+        p.turn = 0.1;
+        p.bob = -Math.abs(Math.sin(t * 6.5)) * 2;
         break;
       default:
         break;
@@ -563,43 +1079,154 @@ export function createMotion(deps) {
     const from = blend.from;
     const mix = (a, b) => a + (b - a) * k;
     const out = { ...target, legs: {}, lift: {} };
-    for (const key of ['tilt', 'pivotY', 'sx', 'sy', 'bob', 'turn', 'armL', 'armR', 'eyeX', 'eyeY', 'eyeScale', 'sprout']) out[key] = mix(from[key], target[key]);
-    for (const leg of ['fl', 'fr', 'bl', 'br']) {
-      out.legs[leg] = mix(from.legs[leg], target.legs[leg]);
-      out.lift[leg] = mix(from.lift[leg], target.lift[leg]);
+    for (const key of ['tilt', 'pivotY', 'sx', 'sy', 'bob', 'turn', 'armL', 'armR', 'eyeX', 'eyeY', 'eyeScale', 'sprout', 'sweat', 'blush']) out[key] = mix(from[key] ?? 0, target[key] ?? 0);
+    for (const leg of ['fl', 'fr']) {
+      out.legs[leg] = mix(from.legs[leg] ?? 0, target.legs[leg] ?? 0);
+      out.lift[leg] = mix(from.lift[leg] ?? 0, target.lift[leg] ?? 0);
     }
     return out;
+  }
+
+  // ---- Secondary motion: springs and gaze ---------------------------------------------
+
+  /**
+   * Push the springs with Buddy's real change of velocity this frame. Big jumps
+   * in position (resize, re-placement) are ignored: they are not motion.
+   */
+  function updateSecondary(dt) {
+    if (deps.isReduced()) {
+      for (const s of Object.values(springs)) { s.x = 0; s.v = 0; }
+      gaze.x = 0;
+      gaze.y = 0;
+      return;
+    }
+    if (dt > 0) {
+      const dx = body.x - measure.px;
+      const dy = body.y - measure.py;
+      if (!measure.valid || Math.abs(dx) > 70 || Math.abs(dy) > 90) {
+        measure.valid = true;
+        measure.vx = 0;
+        measure.vy = 0;
+      } else {
+        const vx = dx / dt;
+        const vy = dy / dt;
+        const dvx = clamp(vx - measure.vx, -900, 900);
+        const dvy = clamp(vy - measure.vy, -1600, 1600);
+        // Speeding up to the right leaves the leaf and hands behind (to the left);
+        // a sudden stop of downward motion (a landing) whips the leaf and flings the arms.
+        const stop = dvy < 0 && measure.vy > 200 ? -dvy : 0;
+        springs.sprout.v += -dvx * 0.9 + stop * 0.12;
+        springs.armL.v += dvx * 0.35 + stop * 0.09;
+        springs.armR.v += -dvx * 0.35 + stop * 0.09;
+        if (body.surface === 'floor') springs.sway.v += -dvx * 0.08;
+        // Yanked up or down by the pointer: the leaf flexes against the vertical pull too.
+        if (state === 'held') springs.sprout.v += -dvy * 0.08;
+        measure.vx = vx;
+        measure.vy = vy;
+      }
+      measure.px = body.x;
+      measure.py = body.y;
+      for (const s of Object.values(springs)) stepSpring(s, dt);
+      const g = Math.min(1, dt * 9);
+      gaze.x += (gaze.tx - gaze.x) * g;
+      gaze.y += (gaze.ty - gaze.y) * g;
+    }
+  }
+
+  function secondarySettled() {
+    const still = Object.values(springs).every(springStill);
+    const gazeDone = Math.abs(gaze.tx - gaze.x) < 0.05 && Math.abs(gaze.ty - gaze.y) < 0.05;
+    if (still) for (const s of Object.values(springs)) { s.x = 0; s.v = 0; }
+    if (gazeDone) { gaze.x = gaze.tx; gaze.y = gaze.ty; }
+    return still && gazeDone;
+  }
+
+  /** Leaf rest angle target: droops in quiet mode unless it recently perked up. */
+  const leafTarget = () => (leaf.droop && performance.now() > leaf.perkUntil ? 30 : 0);
+  /** Ease leaf.base toward its target (snaps under reduced motion). */
+  function updateLeaf(dt) {
+    const target = leafTarget();
+    if (deps.isReduced()) leaf.base = target;
+    else leaf.base += (target - leaf.base) * Math.min(1, dt * 4);
+    if (Math.abs(target - leaf.base) < 0.2) leaf.base = target;
+  }
+
+  // Faces layered over calm states (express()). Values override the state's own face.
+  const FACES = {
+    happy: { eyes: 'happy', mouth: 'grin' },
+    pleased: { eyes: 'happy', mouth: 'smile', blush: 0.5 },
+    sparkle: { eyes: 'sparkle', mouth: 'grin' },
+    concerned: { mouth: 'wobble', eyeY: 1.2, eyeScale: 0.92, sweat: 'slide' },
+    surprised: { mouth: 'o', eyeScale: 1.25 },
+    wink: { eyes: 'wink', mouth: 'grin' },
+    curious: { mouth: 'small', eyeScale: 1.1, eyeY: -0.8, tilt: 4 },
+    thinking: { mouth: 'flat', eyeX: -1.6, eyeY: -2.2 },
+    sleepy: { mouth: 'small', eyeScale: 0.62, eyeY: 1 },
+    blush: { mouth: 'smile', blush: 1 },
+    greeting: { eyes: 'happy', mouth: 'grin' },
+  };
+  function applyFace(p) {
+    if (!face || !FACE_STATES.has(state)) return;
+    if (performance.now() >= face.until) { face = null; return; }
+    const f = FACES[face.kind];
+    for (const [key, value] of Object.entries(f)) {
+      if (key === 'sweat') p.sweat = Math.min(1, (performance.now() - face.start) / 1600);
+      else if (key === 'tilt' || key === 'eyeX' || key === 'eyeY') p[key] += value;
+      else p[key] = value;
+    }
   }
 
   // ---- Rendering -------------------------------------------------------------------
 
   function renderNow() {
     if (!running) return;
-    pose = blended(targetPose());
+    const p = blended(targetPose());
+    applyFace(p);
+    p.sprout += springs.sprout.x + leaf.base;
+    p.armL += springs.armL.x;
+    p.armR += springs.armR.x;
+    if (body.surface === 'floor' && !AIRBORNE.has(state)) p.tilt += springs.sway.x;
+    if (GAZE_STATES.has(state)) {
+      p.eyeX += gaze.x;
+      p.eyeY += gaze.y;
+    }
+    pose = p;
     character.applyPose(pose);
     const w = world.get();
-    const size = w.height / 0.96;
-    const px = Math.round((body.x - size / 2) * 10) / 10;
+    const S = w.height / 0.96;
+    const px = Math.round((body.x - S / 2) * 10) / 10;
     const py = Math.round((body.y - w.height) * 10) / 10;
     el.container.style.transform = `translate3d(${px}px, ${py}px, 0)`;
     el.container.classList.toggle('is-peeking', body.peek);
     el.container.classList.toggle('is-sleeping', state === 'sleeping');
+    const speed = AIRBORNE.has(state) && !deps.isReduced() && Math.hypot(body.vx, body.vy) > 900 ? (Math.abs(body.vx) > Math.abs(body.vy) ? 'side' : 'down') : '';
+    if (speed !== speedShown) {
+      speedShown = speed;
+      el.container.classList.toggle('is-fast', speed !== '');
+      el.container.dataset.speed = speed;
+    }
+    el.container.classList.toggle('is-held', state === 'held');
     el.container.dataset.surface = body.surface;
 
     // Contact shadow: on the floor under Buddy (smaller and fainter the higher it is),
-    // or against the sidebar edge while climbing.
+    // or against the edge Buddy holds (sidebar or rail).
     const shadow = el.shadow;
-    if (body.surface === 'wall') {
-      shadow.style.transform = `translate3d(${Math.round(w.wall.x - size * 0.2)}px, ${Math.round(body.y - w.height * 0.62)}px, 0) rotate(90deg) scale(0.62, 0.8)`;
+    if (body.surface === 'wall' || body.surface === 'rail') {
+      const edgeX = body.surface === 'rail' ? w.rail.x : w.wall.x;
+      shadow.style.transform = `translate3d(${Math.round(edgeX - S * 0.2)}px, ${Math.round(body.y - w.height * 0.62)}px, 0) rotate(90deg) scale(0.62, 0.8)`;
       shadow.style.opacity = '0.55';
     } else {
       const h = Math.max(0, w.floor.y - body.y);
       const s = Math.max(0.3, 1 - h / 380) * (pose.sx || 1);
-      shadow.style.transform = `translate3d(${Math.round(body.x - size * 0.4)}px, ${Math.round(w.floor.y - size * 0.1)}px, 0) scale(${s.toFixed(3)}, ${s.toFixed(3)})`;
+      shadow.style.transform = `translate3d(${Math.round(body.x - S * 0.4)}px, ${Math.round(w.floor.y - S * 0.1)}px, 0) scale(${s.toFixed(3)}, ${s.toFixed(3)})`;
       shadow.style.opacity = body.peek ? '0' : String(Math.max(0.15, 1 - h / 300).toFixed(2));
     }
     if (deps.debug) {
-      trace.push({ t: Math.round(clock), s: state, x: Math.round(body.x * 10) / 10, y: Math.round(body.y * 10) / 10, vy: Math.round(body.vy), tilt: Math.round(pose.tilt * 10) / 10, sy: Math.round(pose.sy * 1000) / 1000, armL: Math.round(pose.armL) });
+      trace.push({
+        t: Math.round(clock), s: state, x: Math.round(body.x * 10) / 10, y: Math.round(body.y * 10) / 10, vy: Math.round(body.vy),
+        tilt: Math.round(pose.tilt * 10) / 10, sy: Math.round(pose.sy * 1000) / 1000, armL: Math.round(pose.armL),
+        sp: Math.round(springs.sprout.x * 10) / 10, sw: Math.round(pose.sweat * 100) / 100,
+      });
       if (trace.length > 6000) trace.shift();
     }
   }
@@ -607,12 +1234,20 @@ export function createMotion(deps) {
   // ---- The loop -----------------------------------------------------------------------
 
   function needsFrames() {
-    return running && !paused && (FRAMES.has(state) || blend !== null);
+    if (!running || paused) return false;
+    if (FRAMES.has(state) || blend !== null || clock < (data.framesUntil || 0)) return true;
+    if (leaf.base !== leafTarget() && !deps.isReduced()) return true;
+    if (face && face.kind === 'concerned' && FACE_STATES.has(state) && performance.now() - face.start < 1700) return true; // the sweat drop slides
+    return !deps.isReduced() && !secondarySettled();
   }
 
   function ensureLoop() {
-    if (raf || !needsFrames()) return;
+    // Inside a frame (a state change during step) the frame itself requests the
+    // next one; restarting here would reset the measured velocity mid-motion and
+    // swallow the very change of speed (a landing) that should push the springs.
+    if (raf || inFrame || !needsFrames()) return;
     lastFrame = performance.now();
+    measure.valid = false; // the last measured velocity is stale after a pause
     request();
   }
 
@@ -630,9 +1265,19 @@ export function createMotion(deps) {
     lastFrame = now;
     clock += dt * 1000;
     stats.frames++;
-    step(dt);
-    if (!running) return;
-    renderNow();
+    inFrame = true;
+    try {
+      step(dt);
+      if (!running) return;
+      if (!Number.isFinite(body.x) || !Number.isFinite(body.y)) { stats.invalid++; placeCalmly(); }
+      else {
+        updateSecondary(dt);
+        updateLeaf(dt);
+        renderNow();
+      }
+    } finally {
+      inFrame = false;
+    }
     if (needsFrames() && !raf) request();
   }
 
@@ -654,7 +1299,9 @@ export function createMotion(deps) {
       placeCalmly();
       return;
     }
-    if (ON_WALL.has(state)) {
+    if (state === 'held') return; // the pointer decides where Buddy is
+    const onWall = ON_WALL.has(state) || (state === 'crouching' && data.fromWall);
+    if (onWall) {
       if (!w.wall.valid) {
         if (state === 'mounting') body.y = Math.min(body.y, w.floor.y);
         enter('slipping');
@@ -662,6 +1309,25 @@ export function createMotion(deps) {
       }
       body.x = w.wall.attachX;
       body.y = clamp(body.y, w.wall.top, w.wall.bottom);
+    } else if (state === 'hanging' && data.on === 'wall') {
+      if (!w.wall.valid) {
+        body.vx = 20;
+        body.vy = 0;
+        enter('falling', { omega: 50, noCatch: true });
+        return;
+      }
+    } else if (ON_RAIL.has(state)) {
+      if (!w.rail.valid) {
+        // The rail grew back into a full sidebar (or vanished): get knocked clear, or fall.
+        if (w.floor.roomy && body.x < w.floor.x0) knockTo(w.floor.x0 + w.half * 1.5, w);
+        else {
+          body.vx = 20;
+          body.vy = 0;
+          enter('falling', { omega: 50, noCatch: true });
+        }
+        return;
+      }
+      if (state === 'sliding') body.x = w.rail.attachX;
     } else if (!AIRBORNE.has(state)) {
       body.y = w.floor.y; // the floor carries Buddy (e.g. the window got shorter)
       if (body.x < w.floor.x0 - 1 && w.floor.roomy) {
@@ -710,11 +1376,11 @@ export function createMotion(deps) {
     const w = world.get();
     const reduced = deps.isReduced();
     const resting = RESTING.has(state) || state === 'looking';
-    if (!resting && !['sleep', 'wake'].includes(kind)) return false;
-    if (reduced && !['sit', 'think', 'sleep', 'wake', 'idle'].includes(kind)) return false;
+    if (!resting && !['sleep', 'wake', 'pleased'].includes(kind)) return false;
+    if (reduced && !['sit', 'think', 'sleep', 'wake', 'idle', 'pleased'].includes(kind)) return false;
     switch (kind) {
       case 'wander': {
-        const spot = world.clearSpot(options.x ?? (w.floor.x0 + Math.random() * (w.floor.x1 - w.floor.x0)));
+        const spot = world.clearSpot(options.x ?? (w.floor.x0 + rnd() * (w.floor.x1 - w.floor.x0)));
         if (!spot.clear) return false;
         return go(spot.x);
       }
@@ -739,26 +1405,62 @@ export function createMotion(deps) {
       }
       case 'climb': {
         if (!w.wall.valid) return false;
-        const targetY = world.climbTarget(options.fraction ?? 0.45 + Math.random() * 0.4);
+        const targetY = world.climbTarget(options.fraction ?? 0.45 + rnd() * 0.4);
         return go(w.wall.attachX, { then: 'mount', targetY });
       }
       case 'look': return enter('looking', { surprised: Boolean(options.surprised) });
       case 'sit': return reduced ? (force('sitting'), true) : enter('sitting');
       case 'think': return reduced ? (force('thinking'), true) : enter('thinking');
       case 'sleep':
-        if (state === 'sleeping') return true;
-        return resting ? (reduced ? (force('sleeping'), true) : enter('sleeping')) : false;
-      case 'wake': return state === 'sleeping' ? (reduced ? (force('idle'), true) : enter('idle')) : false;
+        if (state === 'sleeping' || state === 'yawning') return true;
+        if (!resting) return false;
+        if (reduced) { force('sleeping'); return true; }
+        return enter('yawning'); // yawn first, then sleep
+      case 'wake':
+        if (state === 'yawning') return enter('idle'); // input during the yawn: never mind sleeping
+        if (state !== 'sleeping') return false;
+        if (reduced) { force('idle'); return true; }
+        return enter('stretching'); // stretch, then idle
       case 'idle': return state === 'idle' || (reduced ? (force('idle'), true) : enter('idle'));
-      case 'celebrate': return enter('celebrating');
+      case 'celebrate': return enter('celebrating', { mood: options.mood });
       case 'interact': return enter('interacting');
-      case 'hop':
-        body.vx = 0;
-        body.vy = -330;
-        body.omega = 0;
-        return enter('jumping', { mood: 'happy' });
+      case 'worry': return enter('worried');
+      case 'wave': return enter('waving');
+      case 'hop': {
+        // Straight up, or a short hop sideways onto clear floor (about 50 px).
+        const side = rnd() < 0.5 ? -1 : 1;
+        const spot = world.clearSpot(body.x + side * 50);
+        const dx = spot.clear && Math.abs(spot.x - body.x) <= 70 ? spot.x - body.x : 0;
+        const flight = (2 * 330) / G;
+        const vx = dx / ((1 - Math.exp(-0.9 * flight)) / 0.9);
+        return crouchThenJump({ vx, vy: -330, omega: 0, mood: 'happy', facing: dx ? Math.sign(dx) : undefined });
+      }
+      case 'pleased':
+        // A correct answer can arrive mid-walk: then only the face changes.
+        if (reduced || !resting) { express('pleased', 1500, 2); return true; }
+        return enter('pleased');
+      case 'inspect': return enter('inspecting');
+      case 'shift': return enter('shifting');
+      case 'fidget': return enter('fidgeting');
       default: return false;
     }
+  }
+
+  /**
+   * Show a face for `ms` over calm states. A face with a lower priority than the
+   * one showing is ignored (user interaction 3 > learning event 2 > glance 1).
+   * Physical states never show it: drags, falls and landings keep their own
+   * faces (FACE_STATES), so physical safety always wins.
+   */
+  function express(kind, ms = 1600, prio = 2) {
+    if (!running || !FACES[kind]) return false;
+    const now = performance.now();
+    if (face && now < face.until && face.prio > prio) return false;
+    face = { kind, start: now, until: now + ms, prio };
+    own.setTimeout(() => { if (face && performance.now() >= face.until) { face = null; renderNow(); } }, ms + 20);
+    renderNow();
+    ensureLoop();
+    return true;
   }
 
   /** Put Buddy somewhere sensible without animation (start, re-enable, reduced motion). */
@@ -771,7 +1473,13 @@ export function createMotion(deps) {
     body.vy = 0;
     body.tilt = 0;
     body.peek = !spot.clear;
+    body.pendingRecover = false;
     blend = null;
+    for (const s of Object.values(springs)) { s.x = 0; s.v = 0; }
+    gaze.x = 0;
+    gaze.y = 0;
+    gaze.tx = 0;
+    gaze.ty = 0;
     force(deps.isReduced() ? 'sitting' : 'idle');
   }
 
@@ -800,12 +1508,78 @@ export function createMotion(deps) {
     reconcile,
     perform,
     placeCalmly,
+    grab,
+    moveHold,
+    release,
+    /** The pointer was lost mid-drag (cancel, tab hidden): just let go. */
+    drop() {
+      if (state !== 'held') return false;
+      data.samples = [];
+      return release();
+    },
     /** Leave the wall the slow way (e.g. search results opened over Buddy). */
     climbDown() {
       if (state !== 'climbing' && state !== 'gripping') return false;
       if (state === 'climbing' && data.dir > 0) return true;
       return enter('climbing', { targetY: world.get().wall.bottom, dir: 1, then: 'dismount', phase: 0 });
     },
+    /** A push from outside (fast page scroll): Buddy sways like a passenger. */
+    nudge(amount) {
+      if (!running || deps.isReduced() || body.surface !== 'floor' || state === 'held') return;
+      springs.sway.v += clamp(amount, -60, 60);
+      springs.sprout.v += clamp(amount, -60, 60) * 1.6;
+      ensureLoop();
+    },
+    /** Where the eyes look in calm states, in eye units (±3); null = straight ahead. */
+    setGaze(gx, gy) {
+      const tx = gx == null || deps.isReduced() ? 0 : clamp(gx, -3, 3);
+      const ty = gy == null || deps.isReduced() ? 0 : clamp(gy, -3, 3);
+      if (Math.abs(tx - gaze.tx) < 0.15 && Math.abs(ty - gaze.ty) < 0.15) return;
+      gaze.tx = tx;
+      gaze.ty = ty;
+      if (deps.isReduced()) { gaze.x = 0; gaze.y = 0; }
+      ensureLoop();
+    },
+    /** Quiet mode droops the leaf; perk() lifts it (with a boing) for PERK_MS. */
+    setLeafDroop(droop) {
+      if (leaf.droop === droop) return;
+      leaf.droop = droop;
+      if (deps.isReduced()) leaf.base = leafTarget(); // no frames run: apply at once
+      renderNow();
+      ensureLoop();
+    },
+    perk() {
+      leaf.perkUntil = performance.now() + PERK_MS;
+      own.setTimeout(() => { // ease back down when the perk ends (at once under reduced motion)
+        if (deps.isReduced()) { leaf.base = leafTarget(); renderNow(); } else ensureLoop();
+      }, PERK_MS + 20);
+      if (deps.isReduced()) leaf.base = leafTarget();
+      if (!deps.isReduced()) springs.sprout.v -= 160;
+      renderNow();
+      ensureLoop();
+    },
+    refresh() {
+      renderNow();
+      ensureLoop();
+    },
+    express,
+    /**
+     * The button alternative to throwing: a gentle toss up and to the roomier
+     * side from where Buddy stands. Only from a resting state, never reduced.
+     */
+    toss() {
+      if (!running || deps.isReduced() || !(RESTING.has(state) || state === 'looking')) return false;
+      const w = world.get();
+      const room = body.x - w.floor.x0 > w.floor.x1 - body.x ? -1 : 1;
+      body.vx = room * (160 + rnd() * 120);
+      body.vy = -(620 + rnd() * 160);
+      body.omega = room * (200 + rnd() * 160);
+      body.facing = room;
+      stats.throws++;
+      return enter('thrown', { speed: Math.round(Math.hypot(body.vx, body.vy)), tossed: true });
+    },
+    /** Test hook: walk to x on the floor (whatever is under it). */
+    walkTo: (x) => (RESTING.has(state) || state === 'looking') && go(x),
     /** Test hook: put Buddy on the sidebar edge and start climbing from `fromFraction` up to `toFraction`. */
     climbFromWall(fromFraction = 0, toFraction = 0.9) {
       const w = world.get();
@@ -817,21 +1591,38 @@ export function createMotion(deps) {
       force('climbing', { targetY: w.wall.bottom - span * toFraction, dir: -1, then: 'grip', phase: 0 });
       return true;
     },
+    /** Test hook: start a fall at (x, y) with the given velocity (as if thrown). */
+    launch(x, y, vx, vy) {
+      if (deps.isReduced()) return false;
+      body.x = x;
+      body.y = y;
+      body.vx = vx;
+      body.vy = vy;
+      body.omega = 0;
+      force('thrown', {});
+      return true;
+    },
     setTimeScale(k) { timeScale = clamp(k, 0.02, 4); },
     get state() { return state; },
     get body() { return body; },
     isResting: () => RESTING.has(state),
-    isOnWall: () => ON_WALL.has(state),
+    isOnWall: () => ON_WALL.has(state) || ON_RAIL.has(state),
     isAirborne: () => AIRBORNE.has(state),
+    isHeld: () => state === 'held',
+    /** Calm enough for idle habits: resting on the floor. */
+    isCalm: () => RESTING.has(state) && body.surface === 'floor',
     /** Buddy's body box now: the same box the world uses to judge spots. */
     box: () => world.boxAt(body.x, body.y),
     snapshot() {
       const w = world.get();
       return {
         state, gen, x: body.x, y: body.y, vx: body.vx, vy: body.vy, tilt: pose.tilt, sx: pose.sx, sy: pose.sy,
-        surface: body.surface, support: ON_WALL.has(state) ? 'sidebar-edge' : AIRBORNE.has(state) ? null : 'floor',
+        surface: body.surface, support: ON_WALL.has(state) ? 'sidebar-edge' : ON_RAIL.has(state) ? 'rail' : AIRBORNE.has(state) ? null : state === 'held' ? 'pointer' : 'floor',
         facing: body.facing, peek: body.peek, loopRunning: Boolean(raf), stateTimers: stateTimers.size, ...stats,
-        floor: { ...w.floor }, wall: { ...w.wall },
+        springs: Object.fromEntries(Object.entries(springs).map(([k, s]) => [k, Math.round(s.x * 100) / 100])),
+        gaze: { x: Math.round(gaze.x * 100) / 100, y: Math.round(gaze.y * 100) / 100 }, leafDroop: leaf.droop && performance.now() > leaf.perkUntil,
+        leafBase: Math.round(leaf.base * 10) / 10, face: face && performance.now() < face.until ? face.kind : null, reach: data.reach || 0, speed: speedShown,
+        floor: { ...w.floor }, wall: { ...w.wall }, rail: { ...w.rail },
       };
     },
     trace,
