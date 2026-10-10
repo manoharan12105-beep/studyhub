@@ -3,6 +3,14 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-10-git-github-mastery",
+      "date": "2026-10-10",
+      "title": "Git & GitHub Mastery",
+      "description": "96 topics in 21 modules — version control fundamentals, the three areas, history and inspection, branching, merging and conflicts, rebasing, undoing and reflog recovery, remotes, GitHub collaboration and security, pull requests, team workflows, tags and releases, Git internals, bisect, hooks, worktrees and submodules, a troubleshooting playbook and a Java project workflow — built around the gradebook Maven project, with 412 interview questions, 384 practice items, 12 hands-on labs and a mastery assessment, a command explorer, a repository state simulator, a branch and merge visualizer, command prediction exercises, 6 troubleshooting simulations, 12 checks, 7 flashcard decks, 7 comparisons, Revision, Cheat Sheets and Quick Revision.",
+      "type": "content",
+      "link": "#/c/git-github"
+    },
+    {
       "id": "2026-10-10-buddy-feelings-studio",
       "date": "2026-10-10",
       "title": "Buddy has feelings — and a customization studio",

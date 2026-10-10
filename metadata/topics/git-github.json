@@ -1,0 +1,3238 @@
+{
+  "$schema": "../schemas/topics.schema.json",
+  "schemaVersion": 1,
+  "category": "git-github",
+  "topics": [
+    {
+      "id": "what-is-version-control",
+      "slug": "what-is-version-control",
+      "title": "What Is Version Control?",
+      "category": "git-github",
+      "subcategory": "vcs-fundamentals",
+      "type": "concept",
+      "description": "What a version control system records, the problems it solves for individuals and teams, and why manual backup folders fail.",
+      "difficulty": "beginner",
+      "tags": [
+        "version-control",
+        "history",
+        "commits",
+        "backups"
+      ],
+      "estimatedMinutes": 15,
+      "order": 1,
+      "prerequisites": [],
+      "relatedTopics": [
+        "centralized-vs-distributed-vcs",
+        "git-and-github-introduction"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "centralized-vs-distributed-vcs",
+      "slug": "centralized-vs-distributed-vcs",
+      "title": "Centralized vs Distributed Version Control",
+      "category": "git-github",
+      "subcategory": "vcs-fundamentals",
+      "type": "concept",
+      "description": "Centralized systems such as SVN versus distributed systems such as Git: where history lives, offline work, speed, branching and failure modes.",
+      "difficulty": "beginner",
+      "tags": [
+        "centralized-vcs",
+        "distributed-vcs",
+        "svn",
+        "git"
+      ],
+      "estimatedMinutes": 15,
+      "order": 2,
+      "prerequisites": [
+        "what-is-version-control"
+      ],
+      "relatedTopics": [
+        "git-and-github-introduction",
+        "git-collaboration-workflows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-and-github-introduction",
+      "slug": "git-and-github-introduction",
+      "title": "Git and GitHub: What They Are",
+      "category": "git-github",
+      "subcategory": "vcs-fundamentals",
+      "type": "concept",
+      "description": "Git as a distributed version control tool, GitHub as a hosting and collaboration platform, Git vs GitHub, GitLab and Bitbucket, and Git's role in a team.",
+      "difficulty": "beginner",
+      "tags": [
+        "git",
+        "github",
+        "gitlab",
+        "bitbucket",
+        "git-vs-github"
+      ],
+      "estimatedMinutes": 15,
+      "order": 3,
+      "prerequisites": [
+        "what-is-version-control"
+      ],
+      "relatedTopics": [
+        "creating-github-repositories",
+        "pull-requests-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "installing-git",
+      "slug": "installing-git",
+      "title": "Installing Git and Getting Help",
+      "category": "git-github",
+      "subcategory": "vcs-fundamentals",
+      "type": "concept",
+      "description": "Install Git on Windows, macOS and Linux, verify it with git --version, and use git help, git <command> -h and the built-in guides.",
+      "difficulty": "beginner",
+      "tags": [
+        "installation",
+        "git-version",
+        "git-help"
+      ],
+      "estimatedMinutes": 15,
+      "order": 4,
+      "prerequisites": [
+        "git-and-github-introduction"
+      ],
+      "relatedTopics": [
+        "git-configuration",
+        "git-practice-lab"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-practice-lab",
+      "slug": "git-practice-lab",
+      "title": "The Git Practice Lab and the gradebook Project",
+      "category": "git-github",
+      "subcategory": "vcs-fundamentals",
+      "type": "reference",
+      "description": "The disposable practice folder, the gradebook Java project, the setup script and the safety rules that every example and lab in this subject assumes.",
+      "difficulty": "beginner",
+      "tags": [
+        "practice-lab",
+        "setup",
+        "gradebook",
+        "safety"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "installing-git"
+      ],
+      "relatedTopics": [
+        "git-configuration",
+        "maven-repository-setup"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-configuration",
+      "slug": "git-configuration",
+      "title": "Git Configuration: Levels, Identity and Defaults",
+      "category": "git-github",
+      "subcategory": "configuration-and-repositories",
+      "type": "concept",
+      "description": "System, global and local configuration and their precedence, user.name and user.email, the default branch, the editor and --show-origin.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-config",
+        "configuration",
+        "identity",
+        "default-branch"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "installing-git"
+      ],
+      "relatedTopics": [
+        "creating-repositories",
+        "archive-and-aliases"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "creating-repositories",
+      "slug": "creating-repositories",
+      "title": "Creating Repositories: git init, git clone and the .git Directory",
+      "category": "git-github",
+      "subcategory": "configuration-and-repositories",
+      "type": "concept",
+      "description": "Create a repository with git init, copy one with git clone, what the .git directory holds, bare repositories and shallow clones.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-init",
+        "git-clone",
+        "dot-git",
+        "bare-repository"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "git-configuration"
+      ],
+      "relatedTopics": [
+        "gitignore-and-tracking",
+        "remotes-and-origin",
+        "git-object-model"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "gitignore-and-tracking",
+      "slug": "gitignore-and-tracking",
+      "title": ".gitignore and Tracking Files",
+      "category": "git-github",
+      "subcategory": "configuration-and-repositories",
+      "type": "concept",
+      "description": "Tracked, untracked and ignored files, .gitignore patterns and their limits, git check-ignore, and untracking a committed file with git rm --cached.",
+      "difficulty": "beginner",
+      "tags": [
+        "gitignore",
+        "untracked",
+        "check-ignore",
+        "rm-cached"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "creating-repositories"
+      ],
+      "relatedTopics": [
+        "git-status-and-add",
+        "maven-repository-setup",
+        "secrets-in-git-history"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "three-areas-of-git",
+      "slug": "three-areas-of-git",
+      "title": "The Three Areas of Git and File States",
+      "category": "git-github",
+      "subcategory": "basic-workflow",
+      "type": "concept",
+      "description": "Working directory, staging area and repository; untracked, modified, staged and committed states; the complete edit-stage-commit cycle.",
+      "difficulty": "beginner",
+      "tags": [
+        "working-directory",
+        "staging-area",
+        "index",
+        "file-states"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "creating-repositories"
+      ],
+      "relatedTopics": [
+        "git-status-and-add",
+        "git-diff",
+        "index-internals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "git-repo-state-simulator",
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-status-and-add",
+      "slug": "git-status-and-add",
+      "title": "git status and git add",
+      "category": "git-github",
+      "subcategory": "basic-workflow",
+      "type": "concept",
+      "description": "Read long and short status with branch information, and choose between git add <path>, ., -u, -A, -n and -p.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-status",
+        "git-add",
+        "add-patch",
+        "staging"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "three-areas-of-git"
+      ],
+      "relatedTopics": [
+        "git-diff",
+        "git-restore"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-diff",
+      "slug": "git-diff",
+      "title": "git diff: Unstaged, Staged and Committed Changes",
+      "category": "git-github",
+      "subcategory": "basic-workflow",
+      "type": "concept",
+      "description": "Read unified diffs and hunk headers; compare the working directory, index, HEAD, commits and branches; --stat, --name-only and paths.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-diff",
+        "staged",
+        "hunk",
+        "diff-stat"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "three-areas-of-git"
+      ],
+      "relatedTopics": [
+        "git-commit",
+        "git-show-and-comparing",
+        "ranges-and-ancestry"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-commit",
+      "slug": "git-commit",
+      "title": "git commit: Recording Snapshots",
+      "category": "git-github",
+      "subcategory": "basic-workflow",
+      "type": "concept",
+      "description": "Create commits with -m, the editor and -a, read the commit output, credit another author and fix the last commit with --amend.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-commit",
+        "commit-a",
+        "amend",
+        "author"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "git-status-and-add"
+      ],
+      "relatedTopics": [
+        "commit-messages-and-atomic-commits",
+        "commits-and-history-graph",
+        "rewriting-history-safely"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "commit-messages-and-atomic-commits",
+      "slug": "commit-messages-and-atomic-commits",
+      "title": "Commit Messages and Atomic Commits",
+      "category": "git-github",
+      "subcategory": "basic-workflow",
+      "type": "concept",
+      "description": "Subject and body conventions, explaining why, trailers such as Fixes #12 and Co-authored-by, and keeping one logical, buildable change per commit.",
+      "difficulty": "beginner",
+      "tags": [
+        "commit-messages",
+        "atomic-commits",
+        "conventional-commits",
+        "trailers"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "git-commit"
+      ],
+      "relatedTopics": [
+        "interactive-rebase",
+        "pull-requests-fundamentals",
+        "git-bisect"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-rm-and-mv",
+      "slug": "git-rm-and-mv",
+      "title": "git rm and git mv: Deleting and Renaming Files",
+      "category": "git-github",
+      "subcategory": "basic-workflow",
+      "type": "concept",
+      "description": "Delete and untrack files with git rm, rename with git mv, how Git detects renames by similarity, and following a file with log --follow.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-rm",
+        "git-mv",
+        "rename-detection",
+        "log-follow"
+      ],
+      "estimatedMinutes": 15,
+      "order": 6,
+      "prerequisites": [
+        "git-commit"
+      ],
+      "relatedTopics": [
+        "gitignore-and-tracking",
+        "git-log"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "commits-and-history-graph",
+      "slug": "commits-and-history-graph",
+      "title": "Commits, Hashes and the History Graph",
+      "category": "git-github",
+      "subcategory": "history-and-inspection",
+      "type": "concept",
+      "description": "What a commit contains, how its hash is computed, parents, merge and root commits, and reading history as a directed acyclic graph.",
+      "difficulty": "beginner",
+      "tags": [
+        "commits",
+        "commit-hash",
+        "parent-commit",
+        "dag",
+        "merge-commit"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "git-commit"
+      ],
+      "relatedTopics": [
+        "git-log",
+        "head-and-relative-references",
+        "git-object-model"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "git-branch-visualizer",
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-log",
+      "slug": "git-log",
+      "title": "git log: Reading and Filtering History",
+      "category": "git-github",
+      "subcategory": "history-and-inspection",
+      "type": "concept",
+      "description": "One-line and graph views, filtering by author, date, message and path, the date-only filter trap, formats, --first-parent and --no-merges.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-log",
+        "oneline",
+        "graph",
+        "author",
+        "since"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "commits-and-history-graph"
+      ],
+      "relatedTopics": [
+        "git-show-and-comparing",
+        "git-blame",
+        "searching-code-and-history"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-show-and-comparing",
+      "slug": "git-show-and-comparing",
+      "title": "git show and Comparing Commits and Branches",
+      "category": "git-github",
+      "subcategory": "history-and-inspection",
+      "type": "concept",
+      "description": "Inspect one commit or a file at any commit, compare commits with git diff, and compare branches with .., ... and tip-to-tip diffs.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-show",
+        "compare-commits",
+        "compare-branches",
+        "three-dot-diff"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "git-log",
+        "git-diff"
+      ],
+      "relatedTopics": [
+        "ranges-and-ancestry",
+        "reviewing-pull-requests"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-blame",
+      "slug": "git-blame",
+      "title": "git blame: Who Changed This Line and Why",
+      "category": "git-github",
+      "subcategory": "history-and-inspection",
+      "type": "concept",
+      "description": "Read blame output, limit it to lines or a Java method, see through reformatting with -w, -M, -C and ignore-revs, and investigate fairly.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-blame",
+        "line-history",
+        "ignore-revs",
+        "investigation"
+      ],
+      "estimatedMinutes": 15,
+      "order": 4,
+      "prerequisites": [
+        "git-log"
+      ],
+      "relatedTopics": [
+        "git-show-and-comparing",
+        "git-bisect"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "head-and-relative-references",
+      "slug": "head-and-relative-references",
+      "title": "HEAD and Relative Commit References",
+      "category": "git-github",
+      "subcategory": "history-and-inspection",
+      "type": "concept",
+      "description": "HEAD as a pointer to the current branch, ~ and ^ for ancestors and merge parents, @{u}, branch@{n}, rev:path and git rev-parse.",
+      "difficulty": "intermediate",
+      "tags": [
+        "head",
+        "relative-refs",
+        "tilde-caret",
+        "rev-parse"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "commits-and-history-graph"
+      ],
+      "relatedTopics": [
+        "detached-head",
+        "refs-and-head-internals",
+        "git-reset"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "branches-fundamentals",
+      "slug": "branches-fundamentals",
+      "title": "Branches: Movable Pointers to Commits",
+      "category": "git-github",
+      "subcategory": "branching-and-merging",
+      "type": "concept",
+      "description": "What a branch really is, why creating one is instant, and listing, creating, renaming and safely deleting branches with git branch.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-branch",
+        "branch-refs",
+        "delete-branch",
+        "branch-naming"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "commits-and-history-graph"
+      ],
+      "relatedTopics": [
+        "git-switch-and-checkout",
+        "merging-branches",
+        "git-reflog"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "git-branch-visualizer",
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-switch-and-checkout",
+      "slug": "git-switch-and-checkout",
+      "title": "git switch and git checkout",
+      "category": "git-github",
+      "subcategory": "branching-and-merging",
+      "type": "concept",
+      "description": "Switch and create branches with git switch, the two jobs of git checkout and why Git split them, and what happens to uncommitted changes.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-switch",
+        "git-checkout",
+        "uncommitted-changes",
+        "detach"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "branches-fundamentals"
+      ],
+      "relatedTopics": [
+        "git-restore",
+        "detached-head",
+        "git-stash"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "merging-branches",
+      "slug": "merging-branches",
+      "title": "Merging Branches: Fast-Forward and Three-Way Merges",
+      "category": "git-github",
+      "subcategory": "branching-and-merging",
+      "type": "concept",
+      "description": "git merge, fast-forward versus three-way merges, the merge base, merge commits with two parents, --no-ff, --ff-only and --squash.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-merge",
+        "fast-forward",
+        "three-way-merge",
+        "merge-base"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "git-switch-and-checkout"
+      ],
+      "relatedTopics": [
+        "merge-conflicts",
+        "git-rebase",
+        "merging-pull-requests"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "git-branch-visualizer",
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "merge-conflicts",
+      "slug": "merge-conflicts",
+      "title": "Merge Conflicts: Markers, Resolution and Aborting",
+      "category": "git-github",
+      "subcategory": "branching-and-merging",
+      "type": "concept",
+      "description": "Why conflicts happen, reading conflict markers and the zdiff3 base, resolving and marking resolved, --ours/--theirs, aborting and index stages.",
+      "difficulty": "intermediate",
+      "tags": [
+        "merge-conflict",
+        "conflict-markers",
+        "zdiff3",
+        "merge-abort"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "merging-branches"
+      ],
+      "relatedTopics": [
+        "git-rebase",
+        "troubleshooting-conflicts-and-files",
+        "git-lab-04-merge-conflict"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "working-with-feature-branches",
+      "slug": "working-with-feature-branches",
+      "title": "Working with Feature Branches",
+      "category": "git-github",
+      "subcategory": "branching-and-merging",
+      "type": "concept",
+      "description": "The everyday feature-branch routine, ahead/behind counts, keeping a branch current by merging main in or rebasing, and branch naming conventions.",
+      "difficulty": "intermediate",
+      "tags": [
+        "feature-branch",
+        "ahead-behind",
+        "update-branch",
+        "naming"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "merging-branches"
+      ],
+      "relatedTopics": [
+        "git-rebase",
+        "git-collaboration-workflows",
+        "git-lab-03-feature-branch-merge"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-rebase",
+      "slug": "git-rebase",
+      "title": "git rebase and Rebase vs Merge",
+      "category": "git-github",
+      "subcategory": "rebasing-and-rewriting",
+      "type": "concept",
+      "description": "How rebase replays commits onto a new base, resolving per-commit conflicts with continue, skip and abort, the ours/theirs swap, and choosing rebase or merge.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-rebase",
+        "rebase-vs-merge",
+        "rebase-conflicts",
+        "linear-history"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "merging-branches",
+        "merge-conflicts"
+      ],
+      "relatedTopics": [
+        "interactive-rebase",
+        "rewriting-history-safely",
+        "git-lab-05-rebase-feature-branch"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "git-branch-visualizer",
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "interactive-rebase",
+      "slug": "interactive-rebase",
+      "title": "Interactive Rebase: Reorder, Squash, Reword, Edit",
+      "category": "git-github",
+      "subcategory": "rebasing-and-rewriting",
+      "type": "concept",
+      "description": "Read the rebase todo list; pick, reword, edit, squash, fixup, drop and exec; reorder commits; and tidy branches with --fixup and --autosquash.",
+      "difficulty": "advanced",
+      "tags": [
+        "interactive-rebase",
+        "squash",
+        "fixup",
+        "autosquash",
+        "reword"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "git-rebase"
+      ],
+      "relatedTopics": [
+        "commit-messages-and-atomic-commits",
+        "rewriting-history-safely"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "detached-head",
+      "slug": "detached-head",
+      "title": "Detached HEAD",
+      "category": "git-github",
+      "subcategory": "rebasing-and-rewriting",
+      "type": "concept",
+      "description": "What detached HEAD is, how you get there, committing while detached, the warning when leaving, and rescuing commits with a branch or the reflog.",
+      "difficulty": "intermediate",
+      "tags": [
+        "detached-head",
+        "head",
+        "rescue-commits",
+        "reflog"
+      ],
+      "estimatedMinutes": 15,
+      "order": 3,
+      "prerequisites": [
+        "head-and-relative-references",
+        "git-switch-and-checkout"
+      ],
+      "relatedTopics": [
+        "git-reflog",
+        "troubleshooting-commits-and-branches"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "rewriting-history-safely",
+      "slug": "rewriting-history-safely",
+      "title": "Rewriting History Safely",
+      "category": "git-github",
+      "subcategory": "rebasing-and-rewriting",
+      "type": "concept",
+      "description": "Which commands rewrite history, the safety ladder from local to shared branches, --force-with-lease, coordinated rewrites and what teammates do after a force-push.",
+      "difficulty": "advanced",
+      "tags": [
+        "rewrite-history",
+        "force-push",
+        "force-with-lease",
+        "amend",
+        "shared-branches"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "git-rebase"
+      ],
+      "relatedTopics": [
+        "git-revert",
+        "push-rejection-and-divergence",
+        "secrets-in-git-history"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-restore",
+      "slug": "git-restore",
+      "title": "git restore: Discard Edits, Unstage, Restore from Any Commit",
+      "category": "git-github",
+      "subcategory": "undoing-and-recovery",
+      "type": "concept",
+      "description": "Discard unstaged edits, unstage files, and bring back a file from any commit without moving the branch — and why discarded edits are gone for good.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-restore",
+        "unstage",
+        "discard-changes",
+        "restore-source"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "three-areas-of-git"
+      ],
+      "relatedTopics": [
+        "git-reset",
+        "git-switch-and-checkout",
+        "git-lab-06-undo-staged-change"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-reset",
+      "slug": "git-reset",
+      "title": "git reset: Soft, Mixed and Hard",
+      "category": "git-github",
+      "subcategory": "undoing-and-recovery",
+      "type": "concept",
+      "description": "How reset moves the branch, the index and the working directory in soft, mixed and hard mode, common uses, --keep, and recovering with the reflog.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-reset",
+        "soft-reset",
+        "mixed-reset",
+        "hard-reset",
+        "orig-head"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "git-restore",
+        "head-and-relative-references"
+      ],
+      "relatedTopics": [
+        "git-revert",
+        "git-reflog",
+        "safe-recovery-workflows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "git-branch-visualizer",
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-revert",
+      "slug": "git-revert",
+      "title": "git revert and Reset vs Revert",
+      "category": "git-github",
+      "subcategory": "undoing-and-recovery",
+      "type": "concept",
+      "description": "Undo shared commits by adding reverting commits, revert merges with -m 1, revert the revert, and choose between reset and revert.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-revert",
+        "reset-vs-revert",
+        "revert-merge",
+        "undo-pushed-commit"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "git-reset"
+      ],
+      "relatedTopics": [
+        "rewriting-history-safely",
+        "github-releases"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "git-branch-visualizer",
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-reflog",
+      "slug": "git-reflog",
+      "title": "git reflog: Recovering Lost Commits and Branches",
+      "category": "git-github",
+      "subcategory": "undoing-and-recovery",
+      "type": "concept",
+      "description": "Read the reflog, recover commits after reset, rebase, detached HEAD or branch deletion, find unreachable commits with fsck, and know the limits.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-reflog",
+        "recovery",
+        "deleted-branch",
+        "fsck",
+        "lost-commits"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "git-reset"
+      ],
+      "relatedTopics": [
+        "detached-head",
+        "safe-recovery-workflows",
+        "git-lab-07-reflog-recovery"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-cherry-pick",
+      "slug": "git-cherry-pick",
+      "title": "git cherry-pick: Copying Individual Commits",
+      "category": "git-github",
+      "subcategory": "undoing-and-recovery",
+      "type": "concept",
+      "description": "Copy one commit's change onto another branch, record its origin with -x, resolve cherry-pick conflicts, pick ranges and know when to merge instead.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-cherry-pick",
+        "backport",
+        "hotfix",
+        "wrong-branch"
+      ],
+      "estimatedMinutes": 20,
+      "order": 5,
+      "prerequisites": [
+        "merge-conflicts"
+      ],
+      "relatedTopics": [
+        "git-revert",
+        "troubleshooting-commits-and-branches",
+        "github-releases"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "git-branch-visualizer",
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-stash",
+      "slug": "git-stash",
+      "title": "git stash: Shelving Work in Progress",
+      "category": "git-github",
+      "subcategory": "undoing-and-recovery",
+      "type": "concept",
+      "description": "Save uncommitted work, include untracked files, list and inspect stashes, apply vs pop, resolve conflicts when applying, and stash branch.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-stash",
+        "stash-pop",
+        "stash-apply",
+        "work-in-progress"
+      ],
+      "estimatedMinutes": 20,
+      "order": 6,
+      "prerequisites": [
+        "git-switch-and-checkout"
+      ],
+      "relatedTopics": [
+        "safe-recovery-workflows",
+        "git-lab-08-stash-and-switch"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "safe-recovery-workflows",
+      "slug": "safe-recovery-workflows",
+      "title": "Safe Recovery Workflows and Destructive Commands",
+      "category": "git-github",
+      "subcategory": "undoing-and-recovery",
+      "type": "concept",
+      "description": "Classify commands by what they can destroy, the inspect-backup-act-verify routine, git clean with dry runs, and safer alternatives to destructive commands.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-clean",
+        "destructive-commands",
+        "recovery",
+        "safety"
+      ],
+      "estimatedMinutes": 20,
+      "order": 7,
+      "prerequisites": [
+        "git-reset",
+        "git-stash"
+      ],
+      "relatedTopics": [
+        "git-reflog",
+        "diagnosing-repository-state",
+        "git-practice-lab"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "remotes-and-origin",
+      "slug": "remotes-and-origin",
+      "title": "Remotes, origin and Remote-Tracking Branches",
+      "category": "git-github",
+      "subcategory": "remote-repositories",
+      "type": "concept",
+      "description": "Local versus remote repositories, what origin is, adding, renaming and removing remotes, refspecs, and remote-tracking branches such as origin/main.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-remote",
+        "origin",
+        "remote-tracking-branch",
+        "refspec"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "creating-repositories",
+        "branches-fundamentals"
+      ],
+      "relatedTopics": [
+        "git-fetch-and-pull",
+        "git-push-and-upstream",
+        "https-and-ssh-remotes"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "git-repo-state-simulator",
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-fetch-and-pull",
+      "slug": "git-fetch-and-pull",
+      "title": "git fetch and git pull",
+      "category": "git-github",
+      "subcategory": "remote-repositories",
+      "type": "concept",
+      "description": "What fetch and pull change, fast-forward pulls, divergent branches, pull --rebase versus merge versus --ff-only, and configuring pull.rebase.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-fetch",
+        "git-pull",
+        "pull-rebase",
+        "divergent-branches"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "remotes-and-origin"
+      ],
+      "relatedTopics": [
+        "git-push-and-upstream",
+        "git-rebase",
+        "push-rejection-and-divergence"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": "git-repo-state-simulator",
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-push-and-upstream",
+      "slug": "git-push-and-upstream",
+      "title": "git push and Upstream Tracking",
+      "category": "git-github",
+      "subcategory": "remote-repositories",
+      "type": "concept",
+      "description": "First push with -u, upstream branches and git branch -vv, auto-tracking a teammate's branch, deleting remote branches, pruning and pushing tags.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-push",
+        "upstream",
+        "branch-vv",
+        "delete-remote-branch",
+        "prune"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "remotes-and-origin"
+      ],
+      "relatedTopics": [
+        "push-rejection-and-divergence",
+        "pull-requests-fundamentals",
+        "git-lab-02-push-to-remote"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "push-rejection-and-divergence",
+      "slug": "push-rejection-and-divergence",
+      "title": "Push Rejection, Divergence and Force-with-Lease",
+      "category": "git-github",
+      "subcategory": "remote-repositories",
+      "type": "concept",
+      "description": "Fetch-first and non-fast-forward rejections, synchronising diverged branches, --force versus --force-with-lease with real rejections, and the lease's blind spot.",
+      "difficulty": "intermediate",
+      "tags": [
+        "push-rejected",
+        "non-fast-forward",
+        "force-with-lease",
+        "divergence"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "git-push-and-upstream",
+        "git-fetch-and-pull"
+      ],
+      "relatedTopics": [
+        "rewriting-history-safely",
+        "troubleshooting-remotes-and-push",
+        "branch-protection-and-code-ownership"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "creating-github-repositories",
+      "slug": "creating-github-repositories",
+      "title": "Creating a GitHub Repository and Writing a README",
+      "category": "git-github",
+      "subcategory": "github-fundamentals",
+      "type": "concept",
+      "description": "Create a GitHub repository, choose public or private, connect an existing local repository, avoid unrelated histories, and write a useful README.",
+      "difficulty": "beginner",
+      "tags": [
+        "github",
+        "create-repository",
+        "readme",
+        "visibility"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "remotes-and-origin"
+      ],
+      "relatedTopics": [
+        "navigating-github-repositories",
+        "git-lab-02-push-to-remote"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "navigating-github-repositories",
+      "slug": "navigating-github-repositories",
+      "title": "Navigating a GitHub Repository: Code, History, Branches, Releases and Settings",
+      "category": "git-github",
+      "subcategory": "github-fundamentals",
+      "type": "concept",
+      "description": "GitHub's Code, Commits, Blame and Compare views, branches, tags and releases pages, key repository settings, watching, starring and permalinks.",
+      "difficulty": "beginner",
+      "tags": [
+        "github",
+        "repository-settings",
+        "permalink",
+        "watch-star"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "creating-github-repositories"
+      ],
+      "relatedTopics": [
+        "github-issues-and-discussions",
+        "git-blame",
+        "github-releases"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "github-issues-and-discussions",
+      "slug": "github-issues-and-discussions",
+      "title": "GitHub Issues and Discussions",
+      "category": "git-github",
+      "subcategory": "github-fundamentals",
+      "type": "concept",
+      "description": "Write actionable bug reports, organise with labels, assignees, milestones and templates, close issues with Fixes #N, and when to use Discussions.",
+      "difficulty": "beginner",
+      "tags": [
+        "github-issues",
+        "bug-report",
+        "labels",
+        "discussions"
+      ],
+      "estimatedMinutes": 15,
+      "order": 3,
+      "prerequisites": [
+        "navigating-github-repositories"
+      ],
+      "relatedTopics": [
+        "pull-requests-fundamentals",
+        "open-source-contribution"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "forks-permissions-and-security",
+      "slug": "forks-permissions-and-security",
+      "title": "Forks vs Clones, Permissions and Repository Security",
+      "category": "git-github",
+      "subcategory": "github-fundamentals",
+      "type": "concept",
+      "description": "Forking versus cloning, the fork-and-upstream setup, GitHub repository roles and least privilege, and the basic security practices for any repository.",
+      "difficulty": "intermediate",
+      "tags": [
+        "fork",
+        "clone",
+        "permissions",
+        "least-privilege",
+        "repository-security"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "creating-github-repositories"
+      ],
+      "relatedTopics": [
+        "open-source-contribution",
+        "branch-protection-and-code-ownership",
+        "secrets-in-git-history"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "https-and-ssh-remotes",
+      "slug": "https-and-ssh-remotes",
+      "title": "HTTPS and SSH Remotes",
+      "category": "git-github",
+      "subcategory": "authentication-and-security",
+      "type": "concept",
+      "description": "HTTPS and SSH remote URLs, how each authenticates, choosing between them, switching with git remote set-url, and never embedding credentials in URLs.",
+      "difficulty": "beginner",
+      "tags": [
+        "https",
+        "ssh",
+        "remote-url",
+        "authentication"
+      ],
+      "estimatedMinutes": 15,
+      "order": 1,
+      "prerequisites": [
+        "remotes-and-origin"
+      ],
+      "relatedTopics": [
+        "ssh-keys-for-github",
+        "tokens-and-credential-managers"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "ssh-keys-for-github",
+      "slug": "ssh-keys-for-github",
+      "title": "SSH Keys for GitHub",
+      "category": "git-github",
+      "subcategory": "authentication-and-security",
+      "type": "concept",
+      "description": "Public and private keys, generating an Ed25519 key with a passphrase, ssh-agent, adding the key to GitHub, testing with ssh -T and key hygiene.",
+      "difficulty": "intermediate",
+      "tags": [
+        "ssh-keys",
+        "ed25519",
+        "ssh-agent",
+        "ssh-keygen"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "https-and-ssh-remotes"
+      ],
+      "relatedTopics": [
+        "tokens-and-credential-managers",
+        "ssh-protocol"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "tokens-and-credential-managers",
+      "slug": "tokens-and-credential-managers",
+      "title": "Personal Access Tokens and Credential Managers",
+      "category": "git-github",
+      "subcategory": "authentication-and-security",
+      "type": "concept",
+      "description": "Personal access tokens, fine-grained versus classic, least privilege and expiry, credential helpers and Git Credential Manager, and authentication failures.",
+      "difficulty": "intermediate",
+      "tags": [
+        "personal-access-token",
+        "credential-manager",
+        "least-privilege",
+        "authentication-failure"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "https-and-ssh-remotes"
+      ],
+      "relatedTopics": [
+        "secrets-in-git-history",
+        "troubleshooting-remotes-and-push"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "secrets-in-git-history",
+      "slug": "secrets-in-git-history",
+      "title": "Secrets in Git History: Prevention, Response and Remediation",
+      "category": "git-github",
+      "subcategory": "authentication-and-security",
+      "type": "concept",
+      "description": "Why a deleted secret stays in history, preventing leaks, revoking and rotating first, and history remediation with git filter-repo or BFG.",
+      "difficulty": "intermediate",
+      "tags": [
+        "secrets",
+        "credential-rotation",
+        "filter-repo",
+        "push-protection",
+        "secret-scanning"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "gitignore-and-tracking"
+      ],
+      "relatedTopics": [
+        "rewriting-history-safely",
+        "writing-git-hooks",
+        "configuration-and-secrets"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "pull-requests-fundamentals",
+      "slug": "pull-requests-fundamentals",
+      "title": "Pull Requests: Creating and Describing Changes",
+      "category": "git-github",
+      "subcategory": "pull-requests-and-review",
+      "type": "concept",
+      "description": "What a pull request is, branch-based versus fork-based PRs, opening one, writing a description reviewers can act on, draft PRs and keeping PRs healthy.",
+      "difficulty": "beginner",
+      "tags": [
+        "pull-request",
+        "pr-description",
+        "draft-pr",
+        "code-review"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "git-push-and-upstream"
+      ],
+      "relatedTopics": [
+        "reviewing-pull-requests",
+        "merging-pull-requests",
+        "code-review-diffs-and-prs"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "reviewing-pull-requests",
+      "slug": "reviewing-pull-requests",
+      "title": "Reviewing Pull Requests and Addressing Reviews",
+      "category": "git-github",
+      "subcategory": "pull-requests-and-review",
+      "type": "concept",
+      "description": "Review a PR systematically, check it out locally, write useful comments and suggestions, choose a verdict, and respond to reviews as the author.",
+      "difficulty": "intermediate",
+      "tags": [
+        "code-review",
+        "review-comments",
+        "suggested-changes",
+        "review-etiquette"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "pull-requests-fundamentals"
+      ],
+      "relatedTopics": [
+        "merging-pull-requests",
+        "java-pull-request-review",
+        "git-lab-10-review-teammate-diff"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "merging-pull-requests",
+      "slug": "merging-pull-requests",
+      "title": "Merging Pull Requests: Merge Commit, Squash and Rebase",
+      "category": "git-github",
+      "subcategory": "pull-requests-and-review",
+      "type": "concept",
+      "description": "GitHub's three merge methods with the real history each produces, choosing one, approvals and required checks as merge gates, and cleaning up.",
+      "difficulty": "intermediate",
+      "tags": [
+        "merge-commit",
+        "squash-merge",
+        "rebase-merge",
+        "merge-gates"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "pull-requests-fundamentals",
+        "git-rebase"
+      ],
+      "relatedTopics": [
+        "branch-protection-and-code-ownership",
+        "merging-branches",
+        "git-revert"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "open-source-contribution",
+      "slug": "open-source-contribution",
+      "title": "Contributing to Open Source: Forks, Upstream and Sync",
+      "category": "git-github",
+      "subcategory": "pull-requests-and-review",
+      "type": "concept",
+      "description": "The fork workflow with origin and upstream remotes, synchronising a fork, the upstream-tracking trap, and contributing in a way maintainers accept.",
+      "difficulty": "intermediate",
+      "tags": [
+        "open-source",
+        "fork",
+        "upstream",
+        "sync-fork"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "forks-permissions-and-security",
+        "pull-requests-fundamentals"
+      ],
+      "relatedTopics": [
+        "git-collaboration-workflows",
+        "git-lab-09-fork-and-pull-request"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-collaboration-workflows",
+      "slug": "git-collaboration-workflows",
+      "title": "Collaboration Workflows: Centralized, Feature-Branch and Forking",
+      "category": "git-github",
+      "subcategory": "team-workflows",
+      "type": "concept",
+      "description": "The centralized, feature-branch and forking workflows, who uses each, their trade-offs for review, access and risk, and choosing one for a team.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-workflow",
+        "feature-branch-workflow",
+        "forking-workflow",
+        "centralized-workflow"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "pull-requests-fundamentals"
+      ],
+      "relatedTopics": [
+        "gitflow-and-trunk-based",
+        "branch-protection-and-code-ownership"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "gitflow-and-trunk-based",
+      "slug": "gitflow-and-trunk-based",
+      "title": "Gitflow and Trunk-Based Development",
+      "category": "git-github",
+      "subcategory": "team-workflows",
+      "type": "concept",
+      "description": "Gitflow's develop, feature, release and hotfix branches versus trunk-based development with short-lived branches and feature flags, and when each fits.",
+      "difficulty": "intermediate",
+      "tags": [
+        "gitflow",
+        "trunk-based-development",
+        "feature-flags",
+        "release-branches"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "git-collaboration-workflows"
+      ],
+      "relatedTopics": [
+        "semantic-versioning",
+        "cd-automated-deployment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "branch-protection-and-code-ownership",
+      "slug": "branch-protection-and-code-ownership",
+      "title": "Branch Protection and Code Ownership",
+      "category": "git-github",
+      "subcategory": "team-workflows",
+      "type": "concept",
+      "description": "Protect main with required pull requests, approvals, status checks and no force pushes; CODEOWNERS; merge queues; and server-side versus client-side controls.",
+      "difficulty": "intermediate",
+      "tags": [
+        "branch-protection",
+        "rulesets",
+        "codeowners",
+        "required-checks"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "merging-pull-requests"
+      ],
+      "relatedTopics": [
+        "git-hooks-fundamentals",
+        "push-rejection-and-divergence",
+        "ci-with-github-actions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "team-coordination-practices",
+      "slug": "team-coordination-practices",
+      "title": "Coordinating a Team: Shared Files, Accidental Pushes and Safe Reviews",
+      "category": "git-github",
+      "subcategory": "team-workflows",
+      "type": "concept",
+      "description": "Reduce conflicts on shared files, coordinate refactors, undo an accidental push with revert, and test a teammate's branch safely with a worktree.",
+      "difficulty": "intermediate",
+      "tags": [
+        "team-collaboration",
+        "merge-conflicts",
+        "accidental-push",
+        "worktree"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "git-collaboration-workflows",
+        "git-revert"
+      ],
+      "relatedTopics": [
+        "git-worktrees",
+        "secrets-in-git-history",
+        "java-feature-branch-workflow"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-tags",
+      "slug": "git-tags",
+      "title": "Lightweight and Annotated Tags",
+      "category": "git-github",
+      "subcategory": "tags-and-releases",
+      "type": "concept",
+      "description": "Create, inspect, list, push, delete and (carefully) move lightweight and annotated tags; git describe; why published release tags must never move.",
+      "difficulty": "beginner",
+      "tags": [
+        "git-tag",
+        "annotated-tag",
+        "lightweight-tag",
+        "push-tags",
+        "git-describe"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "git-push-and-upstream"
+      ],
+      "relatedTopics": [
+        "semantic-versioning",
+        "github-releases",
+        "git-object-model"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "semantic-versioning",
+      "slug": "semantic-versioning",
+      "title": "Semantic Versioning and Pre-Releases",
+      "category": "git-github",
+      "subcategory": "tags-and-releases",
+      "type": "concept",
+      "description": "MAJOR.MINOR.PATCH rules, what counts as a breaking change, pre-release and build metadata, sorting version tags correctly in Git, and Maven SNAPSHOT versions.",
+      "difficulty": "beginner",
+      "tags": [
+        "semver",
+        "versioning",
+        "pre-release",
+        "version-sort",
+        "maven-version"
+      ],
+      "estimatedMinutes": 15,
+      "order": 2,
+      "prerequisites": [
+        "git-tags"
+      ],
+      "relatedTopics": [
+        "github-releases",
+        "gitflow-and-trunk-based"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "github-releases",
+      "slug": "github-releases",
+      "title": "GitHub Releases, Release Notes and Rollback Planning",
+      "category": "git-github",
+      "subcategory": "tags-and-releases",
+      "type": "concept",
+      "description": "Git tags versus GitHub Releases, gathering and writing release notes, publishing a Java release with its JAR, and planning rollbacks and hotfixes.",
+      "difficulty": "intermediate",
+      "tags": [
+        "github-release",
+        "release-notes",
+        "rollback",
+        "hotfix"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "git-tags",
+        "semantic-versioning"
+      ],
+      "relatedTopics": [
+        "git-revert",
+        "cd-automated-deployment",
+        "git-lab-11-tag-and-release"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-object-model",
+      "slug": "git-object-model",
+      "title": "The Git Object Model: Blobs, Trees, Commits and Tags",
+      "category": "git-github",
+      "subcategory": "git-internals",
+      "type": "concept",
+      "description": "Blobs, trees, commits and annotated tags, content-addressed storage, cat-file, ls-tree, rev-parse and hash-object, and why history changes cascade.",
+      "difficulty": "advanced",
+      "tags": [
+        "git-internals",
+        "blob",
+        "tree",
+        "content-addressed",
+        "cat-file"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "commits-and-history-graph"
+      ],
+      "relatedTopics": [
+        "refs-and-head-internals",
+        "index-internals",
+        "packfiles-and-storage"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "refs-and-head-internals",
+      "slug": "refs-and-head-internals",
+      "title": "References and HEAD Internals",
+      "category": "git-github",
+      "subcategory": "git-internals",
+      "type": "concept",
+      "description": "Refs for branches, tags, remote-tracking branches and stash, HEAD as a symbolic ref, packed-refs, name resolution and ref plumbing commands.",
+      "difficulty": "advanced",
+      "tags": [
+        "refs",
+        "symbolic-ref",
+        "packed-refs",
+        "show-ref",
+        "head"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "git-object-model",
+        "head-and-relative-references"
+      ],
+      "relatedTopics": [
+        "branches-fundamentals",
+        "git-reflog"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "index-internals",
+      "slug": "index-internals",
+      "title": "The Index: How the Staging Area Works",
+      "category": "git-github",
+      "subcategory": "git-internals",
+      "type": "concept",
+      "description": "What the index stores, exactly what git add and git commit do, building a commit with write-tree and commit-tree, conflict stages and status speed.",
+      "difficulty": "advanced",
+      "tags": [
+        "index",
+        "staging-area",
+        "write-tree",
+        "commit-tree",
+        "plumbing"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "git-object-model",
+        "three-areas-of-git"
+      ],
+      "relatedTopics": [
+        "merge-conflicts",
+        "refs-and-head-internals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "packfiles-and-storage",
+      "slug": "packfiles-and-storage",
+      "title": "Snapshots, Packfiles and Storage Efficiency",
+      "category": "git-github",
+      "subcategory": "git-internals",
+      "type": "concept",
+      "description": "Loose objects and packfiles, delta compression measured on a real repository, git gc and cruft packs, expiry rules, and why snapshots stay small.",
+      "difficulty": "advanced",
+      "tags": [
+        "packfiles",
+        "delta-compression",
+        "git-gc",
+        "count-objects",
+        "snapshots"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "git-object-model"
+      ],
+      "relatedTopics": [
+        "git-reflog",
+        "sparse-checkout-and-lfs"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "searching-code-and-history",
+      "slug": "searching-code-and-history",
+      "title": "Searching Code and History: git grep, log -S, log -G and Word Diffs",
+      "category": "git-github",
+      "subcategory": "advanced-inspection",
+      "type": "concept",
+      "description": "Search tracked files in any commit with git grep, find when code appeared or changed with -S and -G (and why they differ), and read word diffs.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-grep",
+        "pickaxe",
+        "log-s",
+        "log-g",
+        "word-diff"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "git-log"
+      ],
+      "relatedTopics": [
+        "ranges-and-ancestry",
+        "git-bisect",
+        "secrets-in-git-history"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "ranges-and-ancestry",
+      "slug": "ranges-and-ancestry",
+      "title": "Ranges and Ancestry: .., ..., merge-base and --is-ancestor",
+      "category": "git-github",
+      "subcategory": "advanced-inspection",
+      "type": "concept",
+      "description": "Two-dot and three-dot ranges in log and diff, merge bases, --is-ancestor, branch and tag --contains, and counting commits between points.",
+      "difficulty": "intermediate",
+      "tags": [
+        "ranges",
+        "ancestry",
+        "merge-base",
+        "is-ancestor",
+        "contains"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "git-show-and-comparing"
+      ],
+      "relatedTopics": [
+        "git-bisect",
+        "github-releases"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-bisect",
+      "slug": "git-bisect",
+      "title": "git bisect: Finding the Commit That Broke Something",
+      "category": "git-github",
+      "subcategory": "advanced-inspection",
+      "type": "concept",
+      "description": "Binary search over history with git bisect: a manual session and an automated bisect run with a Java check script, exit codes, skip and reset.",
+      "difficulty": "advanced",
+      "tags": [
+        "git-bisect",
+        "binary-search",
+        "regression",
+        "bisect-run"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "ranges-and-ancestry"
+      ],
+      "relatedTopics": [
+        "git-blame",
+        "commit-messages-and-atomic-commits",
+        "java-pull-request-review"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "archive-and-aliases",
+      "slug": "archive-and-aliases",
+      "title": "git archive, Useful Aliases and Efficient Investigation",
+      "category": "git-github",
+      "subcategory": "advanced-inspection",
+      "type": "concept",
+      "description": "Export clean snapshots with git archive, define everyday and shell aliases safely, and follow a repeatable routine for investigating repositories.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-archive",
+        "aliases",
+        "investigation",
+        "productivity"
+      ],
+      "estimatedMinutes": 15,
+      "order": 4,
+      "prerequisites": [
+        "git-log"
+      ],
+      "relatedTopics": [
+        "searching-code-and-history",
+        "git-configuration"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-hooks-fundamentals",
+      "slug": "git-hooks-fundamentals",
+      "title": "Git Hooks: Client-Side, Server-Side and Their Limits",
+      "category": "git-github",
+      "subcategory": "git-hooks",
+      "type": "concept",
+      "description": "What hooks are and when each runs, client-side versus server-side hooks, sharing hooks with core.hooksPath, --no-verify, and why hooks are not enforcement.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-hooks",
+        "pre-commit",
+        "pre-push",
+        "core-hookspath"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "git-commit"
+      ],
+      "relatedTopics": [
+        "writing-git-hooks",
+        "branch-protection-and-code-ownership",
+        "hooks-fundamentals"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "writing-git-hooks",
+      "slug": "writing-git-hooks",
+      "title": "Writing Git Hooks: pre-commit, commit-msg and pre-push",
+      "category": "git-github",
+      "subcategory": "git-hooks",
+      "type": "concept",
+      "description": "Tested hooks that block debug output and likely secrets in staged lines, enforce message rules and stop direct pushes to main, plus CI as the real gate.",
+      "difficulty": "advanced",
+      "tags": [
+        "pre-commit",
+        "commit-msg",
+        "pre-push",
+        "secret-scanning",
+        "hook-scripts"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "git-hooks-fundamentals"
+      ],
+      "relatedTopics": [
+        "secrets-in-git-history",
+        "commit-messages-and-atomic-commits",
+        "ci-with-github-actions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-submodules",
+      "slug": "git-submodules",
+      "title": "Git Submodules",
+      "category": "git-github",
+      "subcategory": "specialized-workflows",
+      "type": "concept",
+      "description": "What a submodule pins, adding, cloning and updating submodules, the local-file transport restriction, common mistakes, and simpler alternatives such as Maven dependencies.",
+      "difficulty": "advanced",
+      "tags": [
+        "submodules",
+        "gitmodules",
+        "gitlink",
+        "recurse-submodules"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "remotes-and-origin",
+        "git-object-model"
+      ],
+      "relatedTopics": [
+        "git-worktrees",
+        "sparse-checkout-and-lfs"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-worktrees",
+      "slug": "git-worktrees",
+      "title": "Git Worktrees: Several Branches Checked Out at Once",
+      "category": "git-github",
+      "subcategory": "specialized-workflows",
+      "type": "concept",
+      "description": "Add, list, remove and prune linked worktrees, the one-branch-per-worktree rule, and when a worktree beats stashing or a second clone.",
+      "difficulty": "intermediate",
+      "tags": [
+        "git-worktree",
+        "parallel-work",
+        "hotfix",
+        "review"
+      ],
+      "estimatedMinutes": 15,
+      "order": 2,
+      "prerequisites": [
+        "git-switch-and-checkout"
+      ],
+      "relatedTopics": [
+        "git-stash",
+        "team-coordination-practices",
+        "checkpoints-recovery-and-worktrees"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "sparse-checkout-and-lfs",
+      "slug": "sparse-checkout-and-lfs",
+      "title": "Sparse Checkout, Partial Clone and Large-File Storage",
+      "category": "git-github",
+      "subcategory": "specialized-workflows",
+      "type": "concept",
+      "description": "Sparse checkout in cone mode, blobless partial clones with on-demand fetching, Git LFS pointer files, and when each technique is justified.",
+      "difficulty": "advanced",
+      "tags": [
+        "sparse-checkout",
+        "partial-clone",
+        "git-lfs",
+        "large-files",
+        "monorepo"
+      ],
+      "estimatedMinutes": 20,
+      "order": 3,
+      "prerequisites": [
+        "creating-repositories",
+        "packfiles-and-storage"
+      ],
+      "relatedTopics": [
+        "git-submodules",
+        "troubleshooting-remotes-and-push"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "diagnosing-repository-state",
+      "slug": "diagnosing-repository-state",
+      "title": "Diagnosing Repository State Before Changing It",
+      "category": "git-github",
+      "subcategory": "troubleshooting",
+      "type": "concept",
+      "description": "Read-only diagnosis with status, branch -vv, remote -v, stash list, log graph and reflog; recognising in-progress operations; mapping symptoms to fixes.",
+      "difficulty": "intermediate",
+      "tags": [
+        "troubleshooting",
+        "diagnosis",
+        "git-status",
+        "in-progress-operations"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "git-reflog"
+      ],
+      "relatedTopics": [
+        "safe-recovery-workflows",
+        "troubleshooting-commits-and-branches",
+        "git-lab-12-diagnose-broken-repository"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "troubleshooting-commits-and-branches",
+      "slug": "troubleshooting-commits-and-branches",
+      "title": "Troubleshooting Commits and Branches",
+      "category": "git-github",
+      "subcategory": "troubleshooting",
+      "type": "reference",
+      "description": "Fix commits on the wrong branch, files staged or committed by mistake, deleted branches, detached-HEAD work and wrong commit authors, pushed or not.",
+      "difficulty": "intermediate",
+      "tags": [
+        "troubleshooting",
+        "wrong-branch",
+        "wrong-author",
+        "deleted-branch",
+        "detached-head"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "diagnosing-repository-state",
+        "git-reset"
+      ],
+      "relatedTopics": [
+        "git-reflog",
+        "git-cherry-pick",
+        "detached-head"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "troubleshooting-remotes-and-push",
+      "slug": "troubleshooting-remotes-and-push",
+      "title": "Troubleshooting Remotes and Pushes",
+      "category": "git-github",
+      "subcategory": "troubleshooting",
+      "type": "reference",
+      "description": "Rejected pushes, missing remote branches, wrong upstreams, authentication failures, large-file rejections, diverged histories and recovering from a force push.",
+      "difficulty": "intermediate",
+      "tags": [
+        "troubleshooting",
+        "push-rejected",
+        "authentication",
+        "large-files",
+        "force-push"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "diagnosing-repository-state",
+        "push-rejection-and-divergence"
+      ],
+      "relatedTopics": [
+        "https-and-ssh-remotes",
+        "tokens-and-credential-managers",
+        "branch-protection-and-code-ownership"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "troubleshooting-conflicts-and-files",
+      "slug": "troubleshooting-conflicts-and-files",
+      "title": "Troubleshooting Conflicts, Ignored Files and Line Endings",
+      "category": "git-github",
+      "subcategory": "troubleshooting",
+      "type": "reference",
+      "description": "Methodical merge and rebase conflict handling, finding why a file is ignored, and diagnosing and fixing line-ending diffs with .gitattributes.",
+      "difficulty": "intermediate",
+      "tags": [
+        "troubleshooting",
+        "merge-conflict",
+        "rebase-conflict",
+        "gitignore",
+        "line-endings"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "merge-conflicts",
+        "gitignore-and-tracking"
+      ],
+      "relatedTopics": [
+        "git-rebase",
+        "git-diff"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "maven-repository-setup",
+      "slug": "maven-repository-setup",
+      "title": "Setting Up a Maven Project Repository",
+      "category": "git-github",
+      "subcategory": "java-project-workflow",
+      "type": "concept",
+      "description": "Put a Maven Java project under Git: what to track and ignore, a Java/Maven/IDE .gitignore, committing the Maven wrapper with its executable bit, and line endings.",
+      "difficulty": "beginner",
+      "tags": [
+        "maven",
+        "java",
+        "gitignore",
+        "maven-wrapper",
+        "project-setup"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "gitignore-and-tracking"
+      ],
+      "relatedTopics": [
+        "java-feature-branch-workflow",
+        "git-practice-lab",
+        "spring-boot-repository-collaboration"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "java-feature-branch-workflow",
+      "slug": "java-feature-branch-workflow",
+      "title": "Java Feature Branches, Meaningful Commits and Conflicts in Java Code",
+      "category": "git-github",
+      "subcategory": "java-project-workflow",
+      "type": "concept",
+      "description": "Develop a Java feature in buildable commits, resolve a real conflict in Java source (shared braces, imports, POM) and prove it with the Maven build.",
+      "difficulty": "intermediate",
+      "tags": [
+        "java",
+        "feature-branch",
+        "merge-conflict",
+        "maven-build",
+        "atomic-commits"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "maven-repository-setup",
+        "merge-conflicts"
+      ],
+      "relatedTopics": [
+        "java-pull-request-review",
+        "team-coordination-practices"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "java-pull-request-review",
+      "slug": "java-pull-request-review",
+      "title": "Reviewing Java Pull Requests, Recovering a Broken Commit and Tagging a Release",
+      "category": "git-github",
+      "subcategory": "java-project-workflow",
+      "type": "concept",
+      "description": "Review Java PRs with Git and a checklist, revert a commit that broke the Maven build on main, and tag a release whose POM version matches.",
+      "difficulty": "intermediate",
+      "tags": [
+        "java",
+        "code-review",
+        "broken-build",
+        "revert",
+        "release-tag"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "java-feature-branch-workflow",
+        "git-revert",
+        "git-tags"
+      ],
+      "relatedTopics": [
+        "reviewing-pull-requests",
+        "git-bisect",
+        "github-releases"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "spring-boot-repository-collaboration",
+      "slug": "spring-boot-repository-collaboration",
+      "title": "Spring Boot Repository Collaboration, Configuration Secrets and Interview-Ready Repositories",
+      "category": "git-github",
+      "subcategory": "java-project-workflow",
+      "type": "concept",
+      "description": "Committed placeholders versus ignored local profiles and .env files, team configuration rules, history scans, and preparing a repository for interviews.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-boot",
+        "configuration",
+        "secrets",
+        "portfolio",
+        "interview-preparation"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "maven-repository-setup",
+        "secrets-in-git-history"
+      ],
+      "relatedTopics": [
+        "configuration-and-secrets",
+        "creating-github-repositories"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-interview-fundamentals",
+      "slug": "git-interview-fundamentals",
+      "title": "Git Interview Questions: Fundamentals",
+      "category": "git-github",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Beginner Git interview questions — version control, Git vs GitHub, the three areas, commits, branches, HEAD, remotes and conflicts — with structured model answers.",
+      "difficulty": "beginner",
+      "tags": [
+        "interview",
+        "git-basics",
+        "git-vs-github",
+        "fundamentals"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "three-areas-of-git",
+        "branches-fundamentals"
+      ],
+      "relatedTopics": [
+        "git-interview-command-comparisons",
+        "what-is-version-control"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-interview-command-comparisons",
+      "slug": "git-interview-command-comparisons",
+      "title": "Git Interview Questions: Command Comparisons",
+      "category": "git-github",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "fetch vs pull, merge vs rebase, reset vs revert, restore vs reset, switch vs checkout, stash apply vs pop, clone vs fork, tag vs release and more.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "fetch-vs-pull",
+        "merge-vs-rebase",
+        "reset-vs-revert",
+        "comparisons"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "git-interview-fundamentals"
+      ],
+      "relatedTopics": [
+        "git-interview-advanced",
+        "git-rebase",
+        "git-revert"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-interview-advanced",
+      "slug": "git-interview-advanced",
+      "title": "Git Interview Questions: Advanced — Internals, History Rewriting and Recovery",
+      "category": "git-github",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "Object model, hash changes on rebase, reflog recovery, force-with-lease internals, three-way merges, packfiles, bisect, worktrees and what git commit does internally.",
+      "difficulty": "advanced",
+      "tags": [
+        "interview",
+        "git-internals",
+        "reflog",
+        "history-rewriting",
+        "force-with-lease"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "git-interview-command-comparisons",
+        "git-object-model"
+      ],
+      "relatedTopics": [
+        "git-interview-scenarios",
+        "git-reflog"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-interview-scenarios",
+      "slug": "git-interview-scenarios",
+      "title": "Git Interview Questions: Scenarios and Troubleshooting",
+      "category": "git-github",
+      "subcategory": "interview",
+      "type": "concept",
+      "description": "What-would-you-do questions: lost commits, wrong branch, pushed secrets, rejected and forced pushes, broken main, bisecting, workflow choices and team setup.",
+      "difficulty": "intermediate",
+      "tags": [
+        "interview",
+        "scenarios",
+        "troubleshooting",
+        "recovery",
+        "team-workflow"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "git-interview-command-comparisons"
+      ],
+      "relatedTopics": [
+        "diagnosing-repository-state",
+        "troubleshooting-remotes-and-push"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-lab-01-first-repository",
+      "slug": "git-lab-01-first-repository",
+      "title": "Lab 01 — Create a Repository and Make Meaningful Commits",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Turn gradebook into a repository with a .gitignore and three focused commits, using status, diff and staging deliberately. Tested.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "git-init",
+        "commits",
+        "staging"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "git-practice-lab",
+        "git-commit"
+      ],
+      "relatedTopics": [
+        "git-lab-02-push-to-remote",
+        "commit-messages-and-atomic-commits"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-lab-02-push-to-remote",
+      "slug": "git-lab-02-push-to-remote",
+      "title": "Lab 02 — Add a Remote and Push the Project",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Publish gradebook to a stand-in remote, set the upstream, verify with a fresh clone and push a follow-up commit. Partly tested.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "git-remote",
+        "git-push",
+        "upstream"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "git-lab-01-first-repository",
+        "git-push-and-upstream"
+      ],
+      "relatedTopics": [
+        "creating-github-repositories"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-lab-03-feature-branch-merge",
+      "slug": "git-lab-03-feature-branch-merge",
+      "title": "Lab 03 — Create a Feature Branch and Merge It",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Develop ClassReport on a branch, fast-forward merge it, then produce and read a three-way merge and clean up branches. Tested.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "feature-branch",
+        "fast-forward",
+        "three-way-merge"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "merging-branches"
+      ],
+      "relatedTopics": [
+        "git-lab-04-merge-conflict",
+        "working-with-feature-branches"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-lab-04-merge-conflict",
+      "slug": "git-lab-04-merge-conflict",
+      "title": "Lab 04 — Resolve a Deliberately Created Merge Conflict",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Create a real conflict on the B threshold, read markers with and without the base, abort once, then resolve and record the decision. Tested.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "merge-conflict",
+        "zdiff3",
+        "merge-abort"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "merge-conflicts"
+      ],
+      "relatedTopics": [
+        "git-lab-05-rebase-feature-branch"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-lab-05-rebase-feature-branch",
+      "slug": "git-lab-05-rebase-feature-branch",
+      "title": "Lab 05 — Rebase a Feature Branch Safely",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Rebase a pushed feature branch with a backup, prove only the base changed with range-diff, and publish with --force-with-lease. Tested.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "git-rebase",
+        "range-diff",
+        "force-with-lease"
+      ],
+      "estimatedMinutes": 30,
+      "order": 5,
+      "prerequisites": [
+        "git-rebase",
+        "rewriting-history-safely"
+      ],
+      "relatedTopics": [
+        "git-lab-07-reflog-recovery"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-lab-06-undo-staged-change",
+      "slug": "git-lab-06-undo-staged-change",
+      "title": "Lab 06 — Undo Staged and Unstaged Changes",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "After an overly broad git add, unstage a personal file, discard a debug edit, commit only the intended change and restore a file from history. Tested.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "git-restore",
+        "unstage",
+        "discard-changes"
+      ],
+      "estimatedMinutes": 20,
+      "order": 6,
+      "prerequisites": [
+        "git-restore"
+      ],
+      "relatedTopics": [
+        "git-lab-08-stash-and-switch"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-lab-07-reflog-recovery",
+      "slug": "git-lab-07-reflog-recovery",
+      "title": "Lab 07 — Recover Commits with the Reflog",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Lose two commits with reset --hard and a branch with branch -D on purpose, then recover both from the reflog. Tested.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "git-reflog",
+        "reset-hard",
+        "recovery"
+      ],
+      "estimatedMinutes": 20,
+      "order": 7,
+      "prerequisites": [
+        "git-reflog"
+      ],
+      "relatedTopics": [
+        "git-lab-12-diagnose-broken-repository"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-lab-08-stash-and-switch",
+      "slug": "git-lab-08-stash-and-switch",
+      "title": "Lab 08 — Stash Work and Switch Branches for a Hotfix",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Shelve unfinished work including a new file, fix an urgent issue on main, and restore the work exactly as it was. Tested.",
+      "difficulty": "beginner",
+      "tags": [
+        "lab",
+        "git-stash",
+        "hotfix",
+        "switch"
+      ],
+      "estimatedMinutes": 20,
+      "order": 8,
+      "prerequisites": [
+        "git-stash"
+      ],
+      "relatedTopics": [
+        "git-worktrees"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-lab-09-fork-and-pull-request",
+      "slug": "git-lab-09-fork-and-pull-request",
+      "title": "Lab 09 — Fork a Repository and Prepare a Pull Request",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Set up origin and upstream remotes, sync a fork with the original project and push a focused contribution branch for a PR. Partly tested.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "fork",
+        "upstream",
+        "pull-request"
+      ],
+      "estimatedMinutes": 30,
+      "order": 9,
+      "prerequisites": [
+        "open-source-contribution"
+      ],
+      "relatedTopics": [
+        "git-lab-10-review-teammate-diff"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-lab-10-review-teammate-diff",
+      "slug": "git-lab-10-review-teammate-diff",
+      "title": "Lab 10 — Review a Teammate's Diff",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Review a teammate's branch with log and three-dot diffs, find an integer-division bug, confirm it in a worktree build and write the review. Tested.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "code-review",
+        "worktree",
+        "three-dot-diff"
+      ],
+      "estimatedMinutes": 25,
+      "order": 10,
+      "prerequisites": [
+        "reviewing-pull-requests",
+        "git-worktrees"
+      ],
+      "relatedTopics": [
+        "java-pull-request-review"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-lab-11-tag-and-release",
+      "slug": "git-lab-11-tag-and-release",
+      "title": "Lab 11 — Tag a Version and Prepare a Release",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Release gradebook 1.0.0: version the POM, annotated tag, build from the tag, push, next SNAPSHOT, release notes and a release candidate. Partly tested.",
+      "difficulty": "intermediate",
+      "tags": [
+        "lab",
+        "git-tag",
+        "release",
+        "semver"
+      ],
+      "estimatedMinutes": 25,
+      "order": 11,
+      "prerequisites": [
+        "git-tags",
+        "github-releases"
+      ],
+      "relatedTopics": [
+        "java-pull-request-review"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-lab-12-diagnose-broken-repository",
+      "slug": "git-lab-12-diagnose-broken-repository",
+      "title": "Lab 12 — Diagnose and Repair a Broken Java Repository",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "reference",
+      "description": "Diagnose an interrupted rebase, a forgotten stash and a build-breaking commit with read-only commands, then repair without rewriting main. Tested.",
+      "difficulty": "advanced",
+      "tags": [
+        "lab",
+        "troubleshooting",
+        "diagnosis",
+        "revert",
+        "rebase"
+      ],
+      "estimatedMinutes": 40,
+      "order": 12,
+      "prerequisites": [
+        "diagnosing-repository-state"
+      ],
+      "relatedTopics": [
+        "git-mastery-assessment"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    },
+    {
+      "id": "git-mastery-assessment",
+      "slug": "git-mastery-assessment",
+      "title": "Git & GitHub Mastery Assessment",
+      "category": "git-github",
+      "subcategory": "labs",
+      "type": "concept",
+      "description": "A 32-question assessment across commands, concepts, troubleshooting and team workflows, with a rubric linking every weak area to lessons and labs.",
+      "difficulty": "advanced",
+      "tags": [
+        "assessment",
+        "capstone",
+        "mastery",
+        "interview-preparation"
+      ],
+      "estimatedMinutes": 60,
+      "order": 13,
+      "prerequisites": [
+        "git-lab-12-diagnose-broken-repository"
+      ],
+      "relatedTopics": [
+        "git-interview-scenarios",
+        "git-interview-advanced"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-10"
+    }
+  ]
+}

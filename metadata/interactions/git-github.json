@@ -1,0 +1,497 @@
+{
+  "$schema": "../schemas/interactions.schema.json",
+  "schemaVersion": 1,
+  "category": "git-github",
+  "interactions": [
+    {
+      "id": "git-command-explorer",
+      "type": "visualizer",
+      "title": "Git command explorer",
+      "description": "Search 46 commands by name or purpose, filter by category and safety class, and open any card for syntax, options, an example, its effect and a common mistake.",
+      "topics": [
+        { "topic": "installing-git", "after": "Getting Help" },
+        { "topic": "safe-recovery-workflows", "after": "Choosing the Least Destructive Undo", "options": { "category": "Recovery" } },
+        { "topic": "archive-and-aliases", "after": "An Efficient Investigation Routine", "options": { "category": "Inspection" } }
+      ]
+    },
+    {
+      "id": "git-repo-state-simulator",
+      "type": "simulator",
+      "title": "Repository state simulator",
+      "description": "Edit, stage, commit, branch, merge, fetch, pull and push, and watch the working directory, staging area, local repository and remote change. Refused actions show Git's reason and change nothing.",
+      "topics": [
+        { "topic": "three-areas-of-git", "after": "The Complete Edit–Stage–Commit Cycle" },
+        { "topic": "git-status-and-add", "after": "Choosing the Right git add", "options": { "actions": ["edit:App.java", "edit:README.md", "create:Student.java"] } },
+        { "topic": "remotes-and-origin", "after": "Adding and Inspecting Remotes", "options": { "actions": ["team"] } },
+        { "topic": "git-fetch-and-pull", "after": "When Both Sides Have Commits", "options": { "actions": ["edit:App.java", "add:all", "commit", "team"] } }
+      ]
+    },
+    {
+      "id": "git-branch-visualizer",
+      "type": "visualizer",
+      "title": "Branch and merge visualizer",
+      "description": "Step through branching, fast-forward and three-way merges, a conflict, rebase, cherry-pick, reset vs revert, detached HEAD and fetch/pull. Faded commits are unreachable — only the reflog remembers them.",
+      "topics": [
+        { "topic": "commits-and-history-graph", "after": "How It Works", "options": { "scenario": "three-way" } },
+        { "topic": "branches-fundamentals", "after": "How It Works", "options": { "scenario": "create-branch" } },
+        { "topic": "merging-branches", "after": "Forcing or Forbidding Fast-Forward", "options": { "scenario": "fast-forward" } },
+        { "topic": "merge-conflicts", "after": "Conflict Markers", "options": { "scenario": "conflict" } },
+        { "topic": "git-rebase", "after": "How It Works", "options": { "scenario": "rebase" } },
+        { "topic": "detached-head", "after": "Keeping the Work", "options": { "scenario": "detached-head" } },
+        { "topic": "git-reset", "after": "Recovering from a Reset", "options": { "scenario": "reset-revert" } },
+        { "topic": "git-revert", "after": "How It Works", "options": { "scenario": "reset-revert" } },
+        { "topic": "git-cherry-pick", "after": "How It Works", "options": { "scenario": "cherry-pick" } },
+        { "topic": "git-fetch-and-pull", "after": "How It Works", "options": { "scenario": "fetch-pull" } }
+      ]
+    },
+    {
+      "id": "git-command-predictor",
+      "type": "visualizer",
+      "title": "Predict the command",
+      "description": "Look at the starting commit graph, predict what the command does, then compare with the resulting graph. Includes the classic traps: fetch vs pull, reset vs revert, rebase copies.",
+      "topics": [
+        { "topic": "git-interview-command-comparisons", "after": "The Comparison Framework" },
+        { "topic": "git-reset", "after": "Common Uses", "options": { "questions": [2, 3] } },
+        { "topic": "git-fetch-and-pull", "after": "Pull vs Pull --rebase", "options": { "questions": [4, 5] } },
+        { "topic": "merging-branches", "after": "After the Merge", "options": { "questions": [0, 1] } },
+        { "topic": "git-rebase", "after": "Rebase vs Merge", "options": { "questions": [6, 7] } }
+      ]
+    },
+    {
+      "id": "git-push-rejected-decision",
+      "type": "simulator",
+      "module": "git-troubleshooting-simulator",
+      "title": "Troubleshoot: rejected push",
+      "description": "Choose each next command after a rejected push. Dangerous shortcuts explain what they would destroy.",
+      "topics": [
+        { "topic": "push-rejection-and-divergence", "after": "Synchronising Safely: a Checklist", "options": { "scenario": "push-rejected" } },
+        { "topic": "troubleshooting-remotes-and-push", "after": "Scenario 1: git push Rejected", "options": { "scenario": "push-rejected" } }
+      ]
+    },
+    {
+      "id": "git-lost-commits-decision",
+      "type": "simulator",
+      "module": "git-troubleshooting-simulator",
+      "title": "Troubleshoot: commits lost after a reset",
+      "description": "Recover from an accidental git reset --hard by inspecting before acting.",
+      "topics": [
+        { "topic": "git-reflog", "after": "Other Recoveries", "options": { "scenario": "lost-commits" } },
+        { "topic": "safe-recovery-workflows", "after": "Practising Safely", "options": { "scenario": "lost-commits" } },
+        { "topic": "git-interview-scenarios", "after": "The Scenario Answer Skeleton", "options": { "scenario": "lost-commits" } }
+      ]
+    },
+    {
+      "id": "git-wrong-branch-decision",
+      "type": "simulator",
+      "module": "git-troubleshooting-simulator",
+      "title": "Troubleshoot: committed on the wrong branch",
+      "description": "Move an unpushed commit from main to the branch where it belongs, in the safe order.",
+      "topics": [
+        { "topic": "troubleshooting-commits-and-branches", "after": "Scenario 1: Committed to the Wrong Branch", "options": { "scenario": "wrong-branch" } }
+      ]
+    },
+    {
+      "id": "git-secret-pushed-decision",
+      "type": "simulator",
+      "module": "git-troubleshooting-simulator",
+      "title": "Troubleshoot: a secret reached GitHub",
+      "description": "Respond to a pushed password in the right order: rotate, investigate, then clean up.",
+      "topics": [
+        { "topic": "secrets-in-git-history", "after": "Response: the Order Matters", "options": { "scenario": "secret-pushed" } }
+      ]
+    },
+    {
+      "id": "git-detached-work-decision",
+      "type": "simulator",
+      "module": "git-troubleshooting-simulator",
+      "title": "Troubleshoot: commits made in detached HEAD",
+      "description": "Keep work made while detached before you switch away.",
+      "topics": [
+        { "topic": "detached-head", "after": "Detached HEAD You Didn't Ask For", "options": { "scenario": "detached-work" } },
+        { "topic": "troubleshooting-commits-and-branches", "after": "Scenario 5: Work Made in Detached HEAD", "options": { "scenario": "detached-work" } }
+      ]
+    },
+    {
+      "id": "git-force-pushed-decision",
+      "type": "simulator",
+      "module": "git-troubleshooting-simulator",
+      "title": "Troubleshoot: someone force-pushed main",
+      "description": "Find the lost tip in a remote-tracking reflog and restore it with a lease.",
+      "topics": [
+        { "topic": "troubleshooting-remotes-and-push", "after": "Scenario 7: Accidental Force Push", "options": { "scenario": "force-pushed" } }
+      ]
+    },
+    {
+      "id": "git-vcs-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: version control, Git and GitHub",
+      "topics": [{ "topic": "git-and-github-introduction", "after": "Git's Role in a Software Team" }],
+      "questions": [
+        { "prompt": "Which statement about Git and GitHub is correct?", "options": ["Git needs a GitHub account to work", "GitHub hosts Git repositories and adds pull requests, issues and Actions", "Pull requests are stored in the Git history", "GitLab is an alternative to Git"], "answer": 1, "explanation": "Git is the version control tool and works offline; GitHub is a hosting and collaboration platform. GitLab and Bitbucket are alternatives to GitHub, not to Git." },
+        { "prompt": "In a distributed system such as Git, where does the complete history live?", "options": ["Only on the central server", "In every clone", "Only on the machine of the person who created the repository", "In GitHub's database only"], "answer": 1, "explanation": "Every clone contains the full history up to its last fetch, so most operations are local and history survives the loss of any one copy." },
+        { "prompt": "Priya committed yesterday but never pushed. Her laptop is stolen. What did the team lose?", "options": ["Nothing — commits are shared automatically", "The commits she never pushed", "The whole GitHub repository", "Only her uncommitted changes"], "answer": 1, "explanation": "Committing is local. Only pushed commits exist on the shared remote; unpushed commits (and any uncommitted work) were only on her laptop." }
+      ]
+    },
+    {
+      "id": "git-config-ignore-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: configuration and .gitignore",
+      "topics": [{ "topic": "gitignore-and-tracking", "after": "Untracking an Accidentally Committed File" }],
+      "questions": [
+        { "prompt": "~/.gitconfig sets user.email = a@example.com and the repository's .git/config sets b@example.com. Which email do new commits in this repository use?", "options": ["a@example.com", "b@example.com", "Both", "Neither — Git asks each time"], "answer": 1, "explanation": "Local configuration overrides global, which overrides system." },
+        { "prompt": "target/ was committed last week. You add target/ to .gitignore. What happens?", "options": ["Git deletes target/ from history", "Git stops tracking target/ automatically", "Nothing changes for target/ until you run git rm -r --cached target/", "The next commit fails"], "answer": 2, "explanation": ".gitignore only affects untracked files. Untrack with git rm -r --cached, then commit; old commits still contain the files." },
+        { "prompt": "Which rules keep logs/README.md tracked while ignoring everything else in logs/?", "options": ["logs/ then !logs/README.md", "logs/* then !logs/README.md", "!logs/README.md then logs/", "*.md then logs/"], "answer": 1, "explanation": "If the directory itself is ignored (logs/), Git never looks inside, so a negation can't re-include a file. Ignore the contents (logs/*) instead." },
+        { "prompt": "Which command shows the exact .gitignore line that ignores a file?", "options": ["git status --ignored", "git check-ignore -v <path>", "git ls-files", "git diff --ignored"], "answer": 1, "explanation": "git check-ignore -v prints the source file, line number and pattern for each ignored path." }
+      ]
+    },
+    {
+      "id": "git-basic-workflow-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: staging and committing",
+      "topics": [{ "topic": "git-commit", "after": "Fixing the Last Commit" }],
+      "questions": [
+        { "prompt": "git status -s shows MM App.java. What will git commit record for App.java?", "options": ["The latest version on disk", "The staged version", "Nothing — the file is in conflict", "Both versions"], "answer": 1, "explanation": "MM means staged, then modified again. A commit records the index; the newer edit stays unstaged." },
+        { "prompt": "You created Student.java and edited App.java, then ran git commit -am \"Add Student\". What is committed?", "options": ["Both files", "Only App.java", "Only Student.java", "Nothing"], "answer": 1, "explanation": "-a stages modified and deleted tracked files only; the new file remains untracked." },
+        { "prompt": "Which command shows exactly what the next commit will contain?", "options": ["git diff", "git diff --staged", "git log -p", "git show"], "answer": 1, "explanation": "git diff compares the working directory with the index (unstaged changes); --staged compares the index with HEAD." },
+        { "prompt": "Which is the best commit subject?", "options": ["fixed stuff", "Updated GradeCalculator.java and its test file because of the issue", "Reject an empty marks list in average()", "WIP"], "answer": 2, "explanation": "Imperative, specific and short; it describes the change, not the files." }
+      ]
+    },
+    {
+      "id": "git-history-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: history and references",
+      "topics": [{ "topic": "head-and-relative-references", "after": "git rev-parse" }],
+      "questions": [
+        { "prompt": "HEAD is a merge commit. Which reference names the tip of the branch that was merged in?", "options": ["HEAD~2", "HEAD^2", "HEAD~1", "HEAD@{2}"], "answer": 1, "explanation": "^2 selects the second parent of a merge; ~n walks first parents." },
+        { "prompt": "Run at 18:00, git log --since=\"2026-10-04\" misses a commit made at 09:30 on 4 October. Why?", "options": ["--since excludes the start date", "A date without a time uses the current time of day", "--since uses UTC only", "The commit has no date"], "answer": 1, "explanation": "Git's date parser fills a missing time with the current time. Write --since=\"2026-10-04 00:00\"." },
+        { "prompt": "Which command lists the commits on feature that main doesn't have?", "options": ["git log main...feature", "git log feature..main", "git log main..feature", "git diff main feature"], "answer": 2, "explanation": "A..B selects commits reachable from B but not from A." },
+        { "prompt": "What does a commit object store?", "options": ["A diff against the parent and the branch name", "A tree, parent ids, author, committer and message", "Only changed files", "The list of branches containing it"], "answer": 1, "explanation": "A commit points to a full snapshot (tree) and its parents; branch names are separate refs." }
+      ]
+    },
+    {
+      "id": "git-branching-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: branches, merges and conflicts",
+      "topics": [{ "topic": "merge-conflicts", "after": "Other Kinds of Conflict" }],
+      "questions": [
+        { "prompt": "During a merge you resolved the file and removed the markers. What marks it resolved?", "options": ["git merge --continue alone", "git add <file>", "git commit --amend", "git restore <file>"], "answer": 1, "explanation": "git add replaces the index's base/ours/theirs stages with your resolved version; then commit (or merge --continue)." },
+        { "prompt": "Which command returns the repository to its state before a conflicted merge started?", "options": ["git reset --soft", "git merge --abort", "git revert -m 1", "git stash pop"], "answer": 1, "explanation": "git merge --abort reconstructs the pre-merge state." },
+        { "prompt": "git branch -d feature/x says \"not fully merged\". What does that protect?", "options": ["The remote branch", "Commits that exist only on feature/x", "Your uncommitted changes", "The main branch"], "answer": 1, "explanation": "-d refuses when the branch has commits not merged into the current branch; -D would strand them (recoverable via the reflog for a while)." },
+        { "prompt": "A merge completes without conflicts. Is the result guaranteed to compile?", "options": ["Yes, Git checks the code", "No — changes on different lines can still be incompatible", "Only for Java files", "Only with --no-ff"], "answer": 1, "explanation": "Git merges text, not meaning. Build and test after every merge; CI on pull requests catches semantic conflicts." }
+      ]
+    },
+    {
+      "id": "git-rewriting-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: rebasing and rewriting history",
+      "topics": [{ "topic": "rewriting-history-safely", "after": "Merge or Rebase: Practical Rules" }],
+      "questions": [
+        { "prompt": "During git rebase main, git checkout --theirs File.java keeps which version?", "options": ["main's version", "Your feature commit's version", "The merge base", "The last commit on origin"], "answer": 1, "explanation": "In a rebase, ours is the new base (main plus replayed commits) and theirs is the commit being replayed — your work." },
+        { "prompt": "After amending a pushed commit on your own PR branch, git status shows [ahead 1, behind 1]. What should you run?", "options": ["git pull", "git push --force-with-lease", "git push --force on main", "git reset --hard origin/<branch>"], "answer": 1, "explanation": "Pulling would merge the old commit back. Since the branch is yours, replace it with a lease that refuses if someone else pushed." },
+        { "prompt": "Which commit should never be rewritten without team agreement?", "options": ["Your unpushed local commit", "A commit on your own PR branch nobody else uses", "A commit on main that teammates have pulled", "A commit in a stash"], "answer": 2, "explanation": "Rewriting shared history leaves teammates with diverged copies; add a revert instead." },
+        { "prompt": "In an interactive rebase, which command melds a commit into the one above it and discards its message?", "options": ["squash", "fixup", "reword", "edit"], "answer": 1, "explanation": "fixup combines and keeps only the previous message; squash lets you edit the combined message." }
+      ]
+    },
+    {
+      "id": "git-undo-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: undoing and recovering work",
+      "topics": [{ "topic": "git-reflog", "after": "What the Reflog Cannot Recover" }],
+      "questions": [
+        { "prompt": "After an accidental git reset --hard HEAD~2 on a clean tree, how do you get the commits back?", "options": ["git revert HEAD~2", "git reset --hard HEAD@{1}", "git fetch", "They are gone"], "answer": 1, "explanation": "The reflog's HEAD@{1} is where HEAD was before the reset; resetting to it restores the branch." },
+        { "prompt": "Which loss can the reflog NOT undo?", "options": ["A branch deleted with -D", "Commits removed by reset --hard", "Unstaged edits overwritten by git restore", "The pre-rebase version of a branch"], "answer": 2, "explanation": "Unstaged edits were never stored as objects or commits, so nothing in Git remembers them." },
+        { "prompt": "Which command undoes a commit that is already on the shared main branch?", "options": ["git reset --hard <commit>~1", "git revert <commit>", "git commit --amend", "git branch -D main"], "answer": 1, "explanation": "revert adds a new commit with the inverse change, so history isn't rewritten and everyone can pull normally." },
+        { "prompt": "git stash pop reports a conflict. What happens to the stash entry?", "options": ["It is dropped", "It is kept until you drop it", "It is converted into a commit", "It is pushed to the remote"], "answer": 1, "explanation": "pop drops the stash only if it applied cleanly; after a conflict it is kept." }
+      ]
+    },
+    {
+      "id": "git-remotes-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: remotes",
+      "topics": [{ "topic": "push-rejection-and-divergence", "after": "--force vs --force-with-lease" }],
+      "questions": [
+        { "prompt": "What does git fetch change?", "options": ["Your current branch and files", "Remote-tracking branches such as origin/main", "The remote's branches", "Your staging area"], "answer": 1, "explanation": "Fetch downloads objects and updates origin/*; it never moves your branches or touches your files." },
+        { "prompt": "git push prints \"! [rejected] main -> main (fetch first)\". What is the safe response?", "options": ["git push --force", "Fetch, integrate (rebase or merge), test, then push", "Delete the remote branch", "git reset --hard origin/main"], "answer": 1, "explanation": "The remote has commits you don't. Integrating them keeps your teammate's work; forcing would erase it." },
+        { "prompt": "When does --force-with-lease refuse a push?", "options": ["Always on main", "When the remote branch moved since your remote-tracking ref last saw it", "When you have uncommitted changes", "When the branch has no upstream"], "answer": 1, "explanation": "It replaces the branch only if it still points where origin/<branch> says. A background fetch can refresh that ref, so pin the expected commit when in doubt." },
+        { "prompt": "Why aren't tags pushed by a plain git push?", "options": ["Tags can't be pushed", "Push sends the current branch by default; tags are pushed explicitly or with --follow-tags", "Tags are pushed automatically", "Only lightweight tags exist"], "answer": 1, "explanation": "Push tags with git push origin v1.0.0 or --follow-tags (annotated tags on pushed commits)." }
+      ]
+    },
+    {
+      "id": "git-github-security-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: GitHub, authentication and secrets",
+      "topics": [{ "topic": "secrets-in-git-history", "after": "History Remediation Overview" }],
+      "questions": [
+        { "prompt": "A database password was pushed to a public repository. What comes first?", "options": ["git rm --cached the file", "Rewrite history with git filter-repo", "Rotate (change) the password", "Make the repository private"], "answer": 2, "explanation": "The value may already be copied; only rotation makes it useless. Clean-up comes after." },
+        { "prompt": "GitHub rejects your account password over HTTPS. What should you use?", "options": ["A personal access token, browser sign-in or SSH", "Your password again with --force", "A different email", "Nothing — HTTPS is disabled"], "answer": 0, "explanation": "Password authentication for Git operations was removed in 2021." },
+        { "prompt": "Which file do you add to GitHub's SSH keys settings?", "options": ["~/.ssh/id_ed25519", "~/.ssh/id_ed25519.pub", "~/.ssh/known_hosts", "~/.ssh/config"], "answer": 1, "explanation": "Only the public key (.pub) is shared; the private key never leaves your machine." },
+        { "prompt": "Fork vs clone — which statement is correct?", "options": ["Both are Git commands", "A fork is a server-side copy under your account; a clone is a local copy", "A clone lives on GitHub", "Forking requires write access"], "answer": 1, "explanation": "Forking is a GitHub feature used to contribute without write access; cloning is Git copying a repository locally." }
+      ]
+    },
+    {
+      "id": "git-collaboration-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: pull requests and team workflows",
+      "topics": [{ "topic": "branch-protection-and-code-ownership", "after": "Client-Side vs Server-Side" }],
+      "questions": [
+        { "prompt": "Why does git branch -d fail after a squash merge on GitHub?", "options": ["The PR wasn't merged", "Squash created a new commit; the branch's commits aren't ancestors of main", "Branch protection blocks it", "Squash deletes the branch automatically"], "answer": 1, "explanation": "Confirm the PR merged, then delete with -D." },
+        { "prompt": "What reliably prevents unreviewed code reaching main?", "options": ["A pre-commit hook", "Branch protection requiring PRs, approvals and status checks", "A rule in CONTRIBUTING.md", "Using rebase"], "answer": 1, "explanation": "Only server-side rules apply to every push and merge; hooks can be skipped." },
+        { "prompt": "Which workflow suits a team deploying several times a day?", "options": ["Gitflow with release branches", "Trunk-based development with short-lived branches", "Centralized SVN", "Long-lived feature branches"], "answer": 1, "explanation": "Frequent small integration into an always-releasable main fits continuous delivery; Gitflow suits scheduled, versioned releases." },
+        { "prompt": "In a CODEOWNERS file, which line wins when several match?", "options": ["The first matching line", "The last matching line", "The most specific path regardless of order", "All of them equally"], "answer": 1, "explanation": "Later lines override earlier ones, so put general rules first." }
+      ]
+    },
+    {
+      "id": "git-internals-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: Git internals",
+      "topics": [{ "topic": "packfiles-and-storage", "after": "Why Git Is Efficient at Snapshots" }],
+      "questions": [
+        { "prompt": "Which object type stores a file's name?", "options": ["blob", "tree", "commit", "tag"], "answer": 1, "explanation": "Trees list names, modes and object ids; blobs hold only contents." },
+        { "prompt": "Two files with identical contents are committed. How many blobs are stored?", "options": ["Two", "One", "None — Git stores diffs", "Depends on the file names"], "answer": 1, "explanation": "Objects are content-addressed: same content, same id, stored once." },
+        { "prompt": "Where is a branch stored?", "options": ["As a commit object", "As a ref: refs/heads/<name> (or a line in packed-refs) holding a commit id", "Inside every commit", "Only on the remote"], "answer": 1, "explanation": "Branches are refs outside the object database; that's why they are cheap." },
+        { "prompt": "What does git add do internally?", "options": ["Creates a commit", "Writes a blob and updates the index entry", "Moves the branch", "Sends objects to the remote"], "answer": 1, "explanation": "The commit is built later from the index with write-tree and commit-tree." }
+      ]
+    },
+    {
+      "id": "git-advanced-tools-check",
+      "type": "knowledge-check",
+      "title": "Check yourself: search, bisect, hooks and specialised workflows",
+      "topics": [{ "topic": "git-bisect", "after": "Useful Subcommands" }],
+      "questions": [
+        { "prompt": "Which command finds every commit that changed a line matching return .B. — including edits that keep the count the same?", "options": ["git log -S \"return 'B'\"", "git log -G \"return .B.\"", "git log --grep \"return 'B'\"", "git grep \"return 'B'\""], "answer": 1, "explanation": "-S only reports changes in the number of occurrences; -G matches added or removed lines." },
+        { "prompt": "In git bisect run, which exit code means \"skip this commit\"?", "options": ["0", "1", "125", "255"], "answer": 2, "explanation": "0 is good, 1–127 except 125 is bad, 125 skips, and codes above 127 abort." },
+        { "prompt": "Why can't local hooks enforce team rules?", "options": ["Hooks only run on Linux", "They aren't cloned automatically and can be skipped with --no-verify", "Hooks can't read staged files", "GitHub deletes them"], "answer": 1, "explanation": "Enforcement belongs on the server: branch protection, required CI checks, push protection." },
+        { "prompt": "You cloned a repository and libs/rubric is empty. What do you run?", "options": ["git pull", "git submodule update --init --recursive", "git sparse-checkout disable", "git lfs pull"], "answer": 1, "explanation": "Submodules aren't checked out by a plain clone (use --recurse-submodules next time)." }
+      ]
+    },
+    {
+      "id": "git-command-syntax-flashcards",
+      "type": "flashcards",
+      "title": "Flashcards: command syntax",
+      "topics": [{ "topic": "git-status-and-add", "after": "Staging Part of a File: git add -p" }],
+      "cards": [
+        { "front": "Stage only selected hunks of a file", "back": "git add -p <file>" },
+        { "front": "Unstage a file, keep the edits", "back": "git restore --staged <file>" },
+        { "front": "Discard unstaged edits to a file (irreversible)", "back": "git restore <file>" },
+        { "front": "Bring back a file from another commit", "back": "git restore --source=<commit> <file>" },
+        { "front": "Create a branch and switch to it", "back": "git switch -c <name>" },
+        { "front": "First push of a new branch, setting its upstream", "back": "git push -u origin <branch>" },
+        { "front": "Show branches with upstream and ahead/behind", "back": "git branch -vv" },
+        { "front": "Compact history graph of all branches", "back": "git log --oneline --graph --decorate --all" },
+        { "front": "Who last changed lines 10–20?", "back": "git blame -L 10,20 <file>" },
+        { "front": "Stash everything including new files, with a label", "back": "git stash push -u -m \"<message>\"" },
+        { "front": "Delete a branch on the remote", "back": "git push origin --delete <branch>" },
+        { "front": "Annotated release tag", "back": "git tag -a v1.0.0 -m \"<message>\"" }
+      ]
+    },
+    {
+      "id": "git-differences-flashcards",
+      "type": "flashcards",
+      "title": "Flashcards: command differences",
+      "topics": [{ "topic": "git-interview-command-comparisons", "after": "The Comparison Framework" }],
+      "cards": [
+        { "front": "fetch vs pull", "back": "fetch updates origin/* only; pull = fetch + merge/rebase into the current branch." },
+        { "front": "merge vs rebase", "back": "merge adds a merge commit and keeps history; rebase replays commits on a new base with new ids (private branches only)." },
+        { "front": "reset vs revert", "back": "reset moves the branch back (rewrites); revert adds an undoing commit (safe on shared branches)." },
+        { "front": "restore vs reset", "back": "restore changes files and the index, never a branch; reset <commit> moves the branch." },
+        { "front": "switch vs checkout", "back": "checkout switches branches AND restores files; Git 2.23 split these into switch and restore." },
+        { "front": "stash apply vs pop", "back": "Both re-apply; pop then drops the stash (only if there was no conflict)." },
+        { "front": "clone vs fork", "back": "clone = local copy (Git); fork = copy under your GitHub account (platform)." },
+        { "front": "tag vs GitHub Release", "back": "A tag is a Git ref copied with clones; a Release is GitHub data on a tag: notes, assets, flags." },
+        { "front": "--force vs --force-with-lease", "back": "--force overwrites unconditionally; the lease refuses if the remote moved since your last fetch." },
+        { "front": "git diff vs git diff --staged", "back": "Unstaged changes (working vs index) vs staged changes (index vs HEAD)." },
+        { "front": "log -S vs log -G", "back": "-S: commits changing the count of a string; -G: commits adding/removing lines matching a regex." },
+        { "front": "rm vs rm --cached", "back": "rm deletes the file and stages it; --cached untracks but keeps the file on disk." }
+      ]
+    },
+    {
+      "id": "git-terminology-flashcards",
+      "type": "flashcards",
+      "title": "Flashcards: Git terminology",
+      "topics": [{ "topic": "three-areas-of-git", "after": "File States" }],
+      "cards": [
+        { "front": "Working directory", "back": "The files on disk that you edit." },
+        { "front": "Index (staging area)", "back": "The proposed snapshot for the next commit." },
+        { "front": "HEAD", "back": "What you have checked out — normally a pointer to the current branch." },
+        { "front": "Detached HEAD", "back": "HEAD points directly at a commit, not a branch; new commits belong to no branch." },
+        { "front": "Remote-tracking branch", "back": "origin/main: your local record of the remote branch at the last fetch, pull or push." },
+        { "front": "Upstream", "back": "The remote branch a local branch tracks (git push -u sets it)." },
+        { "front": "Merge base", "back": "The best common ancestor of two branches; used by three-way merges and three-dot diffs." },
+        { "front": "Fast-forward", "back": "Moving a branch pointer forward because the other branch already contains it — no merge commit." },
+        { "front": "Bare repository", "back": "A repository with no working tree, as used on servers." },
+        { "front": "Reflog", "back": "Local log of where HEAD and branches pointed; used to recover lost commits." }
+      ]
+    },
+    {
+      "id": "git-merge-strategies-flashcards",
+      "type": "flashcards",
+      "title": "Flashcards: merging and integration",
+      "topics": [{ "topic": "merging-pull-requests", "after": "Choosing a Method" }],
+      "cards": [
+        { "front": "When is a merge a fast-forward?", "back": "When the current branch has no commits the other branch lacks — the pointer just moves." },
+        { "front": "What does --no-ff do?", "back": "Always creates a merge commit, even when a fast-forward is possible." },
+        { "front": "What does --ff-only do?", "back": "Refuses to merge unless it can fast-forward." },
+        { "front": "GitHub: Create a merge commit", "back": "All PR commits plus a two-parent merge commit; full history; revert with -m 1." },
+        { "front": "GitHub: Squash and merge", "back": "One new commit for the whole PR; clean main; Git doesn't see the branch as merged." },
+        { "front": "GitHub: Rebase and merge", "back": "Each PR commit re-created on top of the base; linear history; new commit ids." },
+        { "front": "Conflict markers", "back": "<<<<<<< HEAD (ours) … ======= … >>>>>>> branch (theirs); ||||||| base with zdiff3." },
+        { "front": "Ours/theirs during a rebase", "back": "Swapped: ours = the new base, theirs = your commit being replayed." }
+      ]
+    },
+    {
+      "id": "git-recovery-flashcards",
+      "type": "flashcards",
+      "title": "Flashcards: recovery techniques",
+      "topics": [{ "topic": "safe-recovery-workflows", "after": "Common Destructive-Command Mistakes" }],
+      "cards": [
+        { "front": "Undo an accidental reset --hard (commits)", "back": "git reflog, then git reset --hard HEAD@{1} (or ORIG_HEAD)." },
+        { "front": "Recover a branch deleted with -D", "back": "git branch <name> <hash> — hash from the deletion message or git reflog." },
+        { "front": "Keep commits made in detached HEAD", "back": "git switch -c <name> (or git branch <name> <hash> after leaving)." },
+        { "front": "Undo a pushed commit", "back": "git revert <hash> and push." },
+        { "front": "Undo a rebase you just finished", "back": "git reset --hard ORIG_HEAD." },
+        { "front": "Move an unpushed commit off main", "back": "git branch <new>; git reset --hard HEAD~1; git switch <new>." },
+        { "front": "Before any destructive command", "back": "Inspect (status, log --graph, stash list), back up (branch or stash), then act." },
+        { "front": "What can't be recovered?", "back": "Uncommitted edits overwritten by reset --hard/restore, untracked files removed by git clean." },
+        { "front": "Find unreachable commits without the reflog", "back": "git fsck --unreachable --no-reflogs" },
+        { "front": "Recover after someone force-pushed", "back": "git reflog show origin/main → origin/main@{1}; push it back with --force-with-lease." }
+      ]
+    },
+    {
+      "id": "git-internals-flashcards",
+      "type": "flashcards",
+      "title": "Flashcards: Git internals",
+      "topics": [{ "topic": "git-object-model", "after": "Why Changing History Changes Every Hash" }],
+      "cards": [
+        { "front": "The four object types", "back": "blob (contents), tree (directory: names, modes, ids), commit (tree, parents, metadata), annotated tag." },
+        { "front": "Content addressing", "back": "An object's id is a hash of its type, size and content; identical content is stored once." },
+        { "front": "Why rebasing changes ids", "back": "A commit's hash includes its parent id; new parent → new id for it and every descendant." },
+        { "front": "Inspect an object", "back": "git cat-file -t / -s / -p <object>" },
+        { "front": "List a commit's snapshot", "back": "git ls-tree -r <commit>" },
+        { "front": "Build a commit by hand", "back": "git write-tree → git commit-tree <tree> -p HEAD → git update-ref refs/heads/<branch> <id>" },
+        { "front": "Loose objects vs packfiles", "back": "Loose = one file per object; packs bundle objects with delta compression (git gc)." },
+        { "front": "Index stages 1, 2, 3", "back": "During a conflict: base, ours, theirs. git add collapses them to stage 0." }
+      ]
+    },
+    {
+      "id": "git-interview-flashcards",
+      "type": "flashcards",
+      "title": "Flashcards: interview one-liners",
+      "topics": [{ "topic": "git-interview-fundamentals", "after": "How to Answer Git Questions" }],
+      "cards": [
+        { "front": "What is Git?", "back": "A distributed version control system recording snapshots as commits; every clone has the full history." },
+        { "front": "Git vs GitHub", "back": "Git is the tool; GitHub hosts Git repositories and adds PRs, reviews, issues, Actions." },
+        { "front": "Why a staging area?", "back": "To build focused commits deliberately, even from parts of a file." },
+        { "front": "What is a branch?", "back": "A movable pointer to a commit." },
+        { "front": "Golden rule of rebasing", "back": "Don't rebase commits that others may have based work on." },
+        { "front": "Secret pushed — first step?", "back": "Rotate the credential; history clean-up never replaces rotation." },
+        { "front": "How to find the commit that broke something", "back": "git bisect between a known good and bad commit (bisect run to automate)." },
+        { "front": "First thing to do when Git looks broken", "back": "Inspect read-only: git status, log --graph, branch -vv, stash list, reflog." }
+      ]
+    },
+    {
+      "id": "fetch-vs-pull-comparison",
+      "type": "comparison",
+      "title": "git fetch vs git pull",
+      "description": "Hide the cells and recall what each command changes.",
+      "topics": [{ "topic": "git-fetch-and-pull", "after": "Step-by-Step Example — Start of the Day" }],
+      "columns": ["git fetch", "git pull"],
+      "rows": [
+        { "aspect": "Downloads new commits", "cells": ["Yes", "Yes (it runs fetch first)"] },
+        { "aspect": "Moves origin/* refs", "cells": ["Yes", "Yes"] },
+        { "aspect": "Moves your current branch", "cells": ["No", "Yes — fast-forward, merge or rebase"] },
+        { "aspect": "Changes your working files", "cells": ["No", "Yes"] },
+        { "aspect": "Can cause conflicts", "cells": ["No", "Yes"] },
+        { "aspect": "Use when", "cells": ["You want to look before integrating", "You're ready to integrate the upstream now"] }
+      ]
+    },
+    {
+      "id": "merge-vs-rebase-comparison",
+      "type": "comparison",
+      "title": "Merge vs rebase",
+      "description": "Recall how each integrates work and when each is safe.",
+      "topics": [{ "topic": "git-rebase", "after": "Resolving Rebase Conflicts" }],
+      "columns": ["git merge", "git rebase"],
+      "rows": [
+        { "aspect": "What happens", "cells": ["Joins histories with a merge commit (or fast-forwards)", "Replays your commits on top of the new base"] },
+        { "aspect": "Existing commits", "cells": ["Unchanged", "Replaced by new commits with new ids"] },
+        { "aspect": "History shape", "cells": ["Shows parallel development", "Linear"] },
+        { "aspect": "Conflicts resolved", "cells": ["Once", "Possibly once per replayed commit"] },
+        { "aspect": "Safe on shared branches", "cells": ["Yes", "No, unless coordinated"] },
+        { "aspect": "Undo", "cells": ["Reset before pushing, or revert -m 1", "git reset --hard ORIG_HEAD or the reflog"] }
+      ]
+    },
+    {
+      "id": "reset-vs-revert-comparison",
+      "type": "comparison",
+      "title": "git reset vs git revert",
+      "description": "Recall which one rewrites history and when to use each.",
+      "topics": [{ "topic": "git-revert", "after": "Reset vs Revert" }],
+      "columns": ["git reset", "git revert"],
+      "rows": [
+        { "aspect": "How it undoes", "cells": ["Moves the branch pointer back", "Adds a commit with the inverse change"] },
+        { "aspect": "History", "cells": ["Rewritten", "Preserved"] },
+        { "aspect": "Undo one commit in the middle", "cells": ["No (drops everything after it)", "Yes"] },
+        { "aspect": "Safe after pushing", "cells": ["No", "Yes"] },
+        { "aspect": "Typical use", "cells": ["Tidying unpushed local work", "Undoing a bad commit on main"] }
+      ]
+    },
+    {
+      "id": "undo-commands-comparison",
+      "type": "comparison",
+      "title": "restore vs reset vs checkout vs switch",
+      "description": "Which command changes files, which moves branches?",
+      "topics": [{ "topic": "git-restore", "after": "restore vs reset vs checkout vs revert" }],
+      "columns": ["git restore", "git reset", "git checkout", "git switch"],
+      "rows": [
+        { "aspect": "Moves a branch", "cells": ["Never", "Yes (reset <commit>)", "No (changes HEAD)", "No (changes HEAD)"] },
+        { "aspect": "Changes files", "cells": ["Yes — paths you name", "--hard: all tracked files", "Yes (branch switch or -- <path>)", "Yes (to match the branch)"] },
+        { "aspect": "Unstage a file", "cells": ["restore --staged <file>", "reset <file>", "—", "—"] },
+        { "aspect": "Main risk", "cells": ["Discards unstaged edits", "--hard discards uncommitted work", "checkout <file> silently discards edits", "Forced switch discards edits"] },
+        { "aspect": "Introduced", "cells": ["Git 2.23", "Always", "Always", "Git 2.23"] }
+      ]
+    },
+    {
+      "id": "force-push-comparison",
+      "type": "comparison",
+      "title": "--force vs --force-with-lease",
+      "description": "Recall what each checks before replacing a remote branch.",
+      "topics": [{ "topic": "rewriting-history-safely", "after": "--force vs --force-with-lease" }],
+      "columns": ["--force", "--force-with-lease"],
+      "rows": [
+        { "aspect": "Replaces the remote branch", "cells": ["Always", "Only if it's still where origin/<branch> says"] },
+        { "aspect": "If a teammate pushed meanwhile", "cells": ["Their commits are removed silently", "Rejected as stale info"] },
+        { "aspect": "Weak spot", "cells": ["No check at all", "A background fetch refreshes the lease"] },
+        { "aspect": "Stronger form", "cells": ["—", "--force-with-lease=<ref>:<sha> or --force-if-includes"] },
+        { "aspect": "Use on", "cells": ["Avoid", "Your own branches after a rewrite"] }
+      ]
+    },
+    {
+      "id": "tag-vs-release-comparison",
+      "type": "comparison",
+      "title": "Git tag vs GitHub Release",
+      "description": "Recall what lives in Git and what lives on GitHub.",
+      "topics": [{ "topic": "github-releases", "after": "Tagging a Stable Java Version" }],
+      "columns": ["Git tag", "GitHub Release"],
+      "rows": [
+        { "aspect": "Lives in", "cells": ["The repository (refs/tags)", "GitHub's platform data"] },
+        { "aspect": "Contains", "cells": ["A pointer (plus message for annotated tags)", "Tag + notes + assets + pre-release/latest flags"] },
+        { "aspect": "Copied by git clone", "cells": ["Yes", "No"] },
+        { "aspect": "Created with", "cells": ["git tag -a, then git push origin <tag>", "Releases page, gh release create or CI"] }
+      ]
+    },
+    {
+      "id": "clone-vs-fork-comparison",
+      "type": "comparison",
+      "title": "Clone vs fork",
+      "description": "Recall where each copy lives and why forks exist.",
+      "topics": [{ "topic": "forks-permissions-and-security", "after": "Permissions" }],
+      "columns": ["Clone", "Fork"],
+      "rows": [
+        { "aspect": "Where the copy lives", "cells": ["Your computer", "Your GitHub account"] },
+        { "aspect": "Made by", "cells": ["git clone", "GitHub (web or gh repo fork)"] },
+        { "aspect": "Write access to the original needed to push", "cells": ["Yes", "No — you push to the fork"] },
+        { "aspect": "Typical use", "cells": ["Team members working on a shared repository", "Contributing to projects you can't push to"] }
+      ]
+    }
+  ]
+}

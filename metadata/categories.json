@@ -1392,6 +1392,72 @@
           ]
         }
       ]
+    },
+    {
+      "id": "git-github",
+      "title": "Git & GitHub Mastery",
+      "description": "Version control from first commit to Git internals: the three areas, branching, merging and rebasing, undoing and recovering work, remotes, GitHub pull requests and collaboration, troubleshooting and Java project workflows.",
+      "order": 13,
+      "icon": "assets/icons/subjects/git-github.svg",
+      "group": "development",
+      "catalog": "metadata/topics/git-github.json",
+      "interactions": "metadata/interactions/git-github.json",
+      "subcategories": [
+        { "id": "vcs-fundamentals", "title": "Version Control Fundamentals", "description": "What version control solves, centralized and distributed systems, Git and GitHub and how they differ, installing Git and the practice lab used by every example.", "order": 1 },
+        { "id": "configuration-and-repositories", "title": "Configuration and Repository Creation", "description": "Configuration levels and identity, git init and git clone, what lives in .git, .gitignore and untracking files that should never have been committed.", "order": 2 },
+        { "id": "basic-workflow", "title": "The Three Areas and Basic Workflow", "description": "Working directory, staging area and repository; file states; git status, add, diff, commit, rm and mv; meaningful messages and atomic commits.", "order": 3 },
+        { "id": "history-and-inspection", "title": "Commit History and Inspection", "description": "Commits, hashes and parents, history as a graph, git log filters, git show, comparing commits and branches, git blame, HEAD and relative references.", "order": 4 },
+        { "id": "branching-and-merging", "title": "Branching and Merging", "description": "Branches as movable references, git branch and git switch, fast-forward and three-way merges, merge conflicts and the everyday feature-branch routine.", "order": 5 },
+        { "id": "rebasing-and-rewriting", "title": "Rebasing and History Rewriting", "description": "What rebase does, rebase versus merge, interactive rebase, detached HEAD and the rules that keep rewriting history safe.", "order": 6 },
+        { "id": "undoing-and-recovery", "title": "Undoing Changes and Recovering Work", "description": "git restore, reset and revert, the reflog, cherry-pick, stash, and safe recovery habits for every destructive command.", "order": 7 },
+        { "id": "remote-repositories", "title": "Remote Repositories", "description": "Remotes and origin, remote-tracking branches, fetch, pull and push, upstream tracking, push rejection, divergence and force-with-lease.", "order": 8 },
+        { "id": "github-fundamentals", "title": "GitHub Fundamentals", "description": "Creating and navigating GitHub repositories, README files, issues and discussions, forks versus clones, permissions and basic repository security.", "order": 9 },
+        { "id": "authentication-and-security", "title": "GitHub Authentication and Security", "description": "HTTPS and SSH remotes, SSH keys, personal access tokens and credential managers, and what to do when a secret reaches Git history.", "order": 10 },
+        { "id": "pull-requests-and-review", "title": "Pull Requests and Code Review", "description": "Creating and describing pull requests, reviewing and addressing reviews, merge strategies on GitHub and contributing to open-source projects.", "order": 11 },
+        { "id": "team-workflows", "title": "Team Collaboration Workflows", "description": "Centralized, feature-branch and forking workflows, Gitflow and trunk-based development, branch protection, code ownership and coordinating a team.", "order": 12 },
+        { "id": "tags-and-releases", "title": "Tags, Releases and Versioning", "description": "Lightweight and annotated tags, semantic versioning, GitHub Releases and planning a rollback.", "order": 13 },
+        { "id": "git-internals", "title": "Git Internals", "description": "The object database, blobs, trees, commits and tags, references and HEAD, the index, packfiles and why Git stores snapshots.", "order": 14 },
+        { "id": "advanced-inspection", "title": "Advanced Inspection and Search", "description": "git grep and pickaxe searches, range notation and ancestry, git bisect for finding the commit that broke something, git archive and aliases.", "order": 15 },
+        { "id": "git-hooks", "title": "Git Hooks and Automation Basics", "description": "Client-side and server-side hooks, pre-commit, commit-msg and pre-push scripts, preventing committed secrets and why local hooks are not enforcement.", "order": 16 },
+        { "id": "specialized-workflows", "title": "Submodules, Worktrees and Specialized Workflows", "description": "Submodules, worktrees, sparse checkout, partial clone and large-file storage, and when a simpler alternative is better.", "order": 17 },
+        { "id": "troubleshooting", "title": "Git Troubleshooting Playbook", "description": "Diagnose before you fix: rejected pushes, conflicts, detached HEAD, wrong-branch commits, lost branches, authentication, large files, line endings and accidental force pushes.", "order": 18 },
+        { "id": "java-project-workflow", "title": "Java Project Git Workflow", "description": "A Maven project under Git from the first commit: .gitignore, feature branches, conflicts in Java code, reviews, releases, Spring Boot configuration and secrets.", "order": 19 },
+        { "id": "interview", "title": "Git Interview Preparation", "description": "Beginner, intermediate and advanced Git interview questions, command comparisons, internals and scenario questions with follow-ups.", "order": 20 },
+        { "id": "labs", "title": "Practical Labs and Capstone", "description": "Twelve hands-on labs on the gradebook sample project, from a first repository to diagnosing a broken one, and a mastery assessment.", "order": 21 }
+      ],
+      "studyModes": [
+        {
+          "id": "revision",
+          "title": "Revision",
+          "description": "A thirty-minute revision of the concepts interviewers probe most, every command comparison table, and troubleshooting decision trees that start with inspection.",
+          "estimatedMinutes": 50,
+          "sources": [
+            { "path": "content/git-github/revision/30-minute-revision.md", "title": "Thirty-Minute Revision" },
+            { "path": "content/git-github/revision/command-comparisons.md", "title": "Command Comparisons" },
+            { "path": "content/git-github/revision/troubleshooting-decision-trees.md", "title": "Troubleshooting Decision Trees" }
+          ]
+        },
+        {
+          "id": "cheat-sheets",
+          "title": "Cheat Sheets",
+          "description": "Categorised command references with safety markers: everyday commands, branching, remotes and GitHub, and recovery, investigation and advanced tools.",
+          "sources": [
+            { "path": "content/git-github/revision/quick-reference-everyday.md", "title": "Everyday Commands" },
+            { "path": "content/git-github/revision/quick-reference-branching-remotes.md", "title": "Branching, Remotes and GitHub" },
+            { "path": "content/git-github/revision/quick-reference-recovery-advanced.md", "title": "Recovery and Advanced Tools" }
+          ]
+        },
+        {
+          "id": "quick-revision",
+          "title": "Quick Revision",
+          "description": "Twenty minutes of command drills with hidden answers, then a ten-minute final sheet of distinctions, traps and one-breath answers.",
+          "estimatedMinutes": 30,
+          "sources": [
+            { "path": "content/git-github/revision/20-minute-command-drills.md", "title": "20-Minute Command Drills" },
+            { "path": "content/git-github/revision/10-minute-final-revision.md", "title": "10-Minute Final Revision" }
+          ]
+        }
+      ]
     }
   ]
 }
