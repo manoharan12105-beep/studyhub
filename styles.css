@@ -123,6 +123,27 @@
   --buddy-sparkle: #fff6b0;
   --buddy-dust: rgb(150 140 125 / 55%);
   --buddy-speed: rgb(120 120 130 / 55%);
+  --buddy-tear: #8fd3ff;
+  --buddy-star: #ffd23f;
+  --buddy-star-dark: #c98a0c;
+  --buddy-glasses: #2f3440;
+  --buddy-band: #7b5cd6;
+  --buddy-band-dark: #4f37a0;
+  --buddy-scarf: #d9483b;
+  --buddy-scarf-dark: #9b2a20;
+  --buddy-acc-petal: #f27aa6;
+  --buddy-acc-petal-dark: #b8456f;
+  --buddy-grad: #2b2f45;
+  --buddy-grad-dark: #171a2b;
+  --buddy-beanie: #3c7fd1;
+  --buddy-beanie-dark: #24548f;
+  --buddy-blossom: #ffc4dc;
+  --buddy-sunhat: #f2d388;
+  --buddy-sunhat-dark: #b8964a;
+  --buddy-maple: #e0632a;
+  --buddy-maple-dark: #9c3a12;
+  --buddy-dew: #bfe8ff;
+  --buddy-ladybug: #e23b3b;
 }
 
 /* Themes. Each block redefines the colour tokens only; components never name
@@ -1910,7 +1931,17 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 .b-cheek { fill: var(--buddy-cheek); opacity: 0.6; }
 .buddy-svg:not([data-accessory="cap"]) .b-acc-cap,
 .buddy-svg:not([data-accessory="bow"]) .b-acc-bow,
-.buddy-svg:not([data-accessory="backpack"]) .b-acc-backpack { display: none; }
+.buddy-svg:not([data-accessory="glasses"]) .b-acc-glasses,
+.buddy-svg:not([data-accessory="headband"]) .b-acc-headband,
+.buddy-svg:not([data-accessory="flower"]) .b-acc-flower,
+.buddy-svg:not([data-accessory="star"]) .b-acc-star,
+.buddy-svg:not([data-accessory="gradcap"]) .b-acc-gradcap,
+.buddy-svg:not([data-accessory="seasonal"]) .b-acc-seasonal,
+.buddy-svg:not([data-extra="backpack"]) .b-acc-backpack,
+.buddy-svg:not([data-extra="scarf"]) .b-acc-scarf { display: none; }
+.b-acc-seasonal > g { display: none; }
+.buddy-svg[data-season="winter"] .b-season-winter, .buddy-svg[data-season="spring"] .b-season-spring,
+.buddy-svg[data-season="summer"] .b-season-summer, .buddy-svg[data-season="autumn"] .b-season-autumn { display: inline; }
 .b-cap { fill: var(--buddy-cap); stroke: var(--buddy-cap-dark); stroke-width: 1.4; }
 .b-cap-brim, .b-cap-button { fill: var(--buddy-cap-dark); }
 .b-bow { fill: var(--buddy-bow); stroke: var(--buddy-bow-dark); stroke-width: 1.2; }
@@ -1918,6 +1949,55 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 .b-pack { fill: var(--buddy-pack); stroke: var(--buddy-pack-dark); stroke-width: 1.6; }
 .b-pack-pocket { fill: var(--buddy-pack-dark); }
 .b-strap { fill: none; stroke: var(--buddy-pack-dark); stroke-width: 3.4; stroke-linecap: round; }
+/* V3 accessories (colours follow the learner's accent when one is chosen: set inline by character.js) */
+.b-lens { fill: var(--buddy-light); fill-opacity: 0.14; stroke: var(--buddy-glasses); stroke-width: 1.5; }
+.b-glasses-bridge { fill: none; stroke: var(--buddy-glasses); stroke-width: 1.5; stroke-linecap: round; }
+.b-band { fill: none; stroke: var(--buddy-band); stroke-width: 4.2; stroke-linecap: round; }
+.b-band-knot { fill: var(--buddy-band-dark); }
+.b-acc-petal { fill: var(--buddy-acc-petal); stroke: var(--buddy-acc-petal-dark); stroke-width: 0.7; }
+.b-acc-flower-centre { fill: var(--buddy-petal); }
+.b-star-clip { fill: var(--buddy-star); stroke: var(--buddy-star-dark); stroke-width: 1; stroke-linejoin: round; }
+.b-grad-board { fill: var(--buddy-grad); stroke: var(--buddy-grad-dark); stroke-width: 1; stroke-linejoin: round; }
+.b-grad-base { fill: var(--buddy-grad-dark); }
+.b-grad-tassel { fill: none; stroke: var(--buddy-star); stroke-width: 1.3; stroke-linecap: round; }
+.b-grad-tassel-end { fill: var(--buddy-star); }
+.b-scarf { fill: var(--buddy-scarf); stroke: var(--buddy-scarf-dark); stroke-width: 1.1; stroke-linejoin: round; }
+.b-scarf-stripe { fill: none; stroke: var(--buddy-light); stroke-width: 1.2; opacity: 0.7; }
+.b-beanie { fill: var(--buddy-beanie); stroke: var(--buddy-beanie-dark); stroke-width: 1.2; }
+.b-beanie-rim { fill: var(--buddy-beanie-dark); }
+.b-beanie-pom { fill: var(--buddy-light); stroke: var(--buddy-beanie-dark); stroke-width: 0.8; }
+.b-blossom { fill: var(--buddy-blossom); stroke: var(--buddy-acc-petal-dark); stroke-width: 0.4; }
+.b-blossom-centre { fill: var(--buddy-petal); }
+.b-sunhat, .b-sunhat-brim { fill: var(--buddy-sunhat); stroke: var(--buddy-sunhat-dark); stroke-width: 1; }
+.b-sunhat-band { fill: none; stroke: var(--buddy-bow); stroke-width: 2; }
+.b-maple { fill: var(--buddy-maple); stroke: var(--buddy-maple-dark); stroke-width: 0.8; stroke-linejoin: round; }
+/* Leaf details (cosmetic; the growth leaf, bud and flower are separate and follow real progress only) */
+.b-leaf-vein { display: none; fill: none; stroke: var(--buddy-leaf-dark); stroke-width: 0.7; stroke-linecap: round; opacity: 0.8; }
+.has-leaf-vein .b-leaf-vein { display: inline; }
+.b-leaf-dew, .b-leaf-ladybug { display: none; }
+.buddy-svg[data-leaf-detail="dew"] .b-leaf-dew, .buddy-svg[data-leaf-detail="ladybug"] .b-leaf-ladybug { display: inline; }
+.b-leaf-dew circle { fill: var(--buddy-dew); stroke: var(--buddy-sweat-edge); stroke-width: 0.4; }
+.b-leaf-dew .b-dew-glint { fill: var(--buddy-light); stroke: none; }
+.b-ladybug { fill: var(--buddy-ladybug); }
+.b-ladybug-line { stroke: var(--buddy-eye); stroke-width: 0.5; }
+.b-ladybug-dot, .b-ladybug-head { fill: var(--buddy-eye); }
+/* Body proportion "fluffy": a soft, dotted fur edge */
+.buddy-svg[data-body="fluffy"] .b-body { stroke-dasharray: 0.1 3; stroke-width: 3.6; stroke-linecap: round; }
+/* Feelings (js/buddy/emotion.js): brows, tears, dizzy swirls, a watery line, sleepy lids, orbiting stars */
+.b-brow { display: none; fill: none; stroke: var(--buddy-eye); stroke-width: 1.9; stroke-linecap: round; }
+.has-brows .b-brow { display: inline; }
+.b-tear { fill: var(--buddy-tear); stroke: var(--buddy-sweat-edge); stroke-width: 0.5; }
+.b-eye-swirl { display: none; fill: none; stroke: var(--buddy-eye); stroke-width: 1.3; stroke-linecap: round; }
+.is-eyes-dizzy :is(.b-eye-open, .b-eye-closed) { display: none; }
+.is-eyes-dizzy .b-eye-swirl { display: inline; }
+.b-tearline { display: none; fill: none; stroke: var(--buddy-tear); stroke-width: 1.4; stroke-linecap: round; }
+.is-eyes-teary .b-tearline { display: inline; }
+.b-lid { fill: none; stroke: var(--buddy-eye); stroke-width: 2; stroke-linecap: round; }
+.b-star { fill: var(--buddy-star); stroke: var(--buddy-star-dark); stroke-width: 0.6; stroke-linejoin: round; }
+/* Paused: no breathing (optional motion); Rescue: a short fade-in where Buddy now stands */
+.buddy.is-paused .buddy-svg { animation: none; }
+.buddy.is-rescued .buddy-svg { animation: buddy-rescued 420ms ease-out; }
+@keyframes buddy-rescued { from { opacity: 0; } to { opacity: 1; } }
 
 /* Speech bubble */
 .buddy-bubble {
@@ -1994,9 +2074,67 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 .buddy-color-input { width: 100%; height: 38px; padding: 2px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); background: var(--surface); cursor: pointer; }
 .buddy-color-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .buddy-note { margin: var(--space-3) 0 0; }
+/* Customization studio (V3): preview feelings, quick actions, section tabs (they wrap — one scroll area only) */
+#buddy-dialog { width: min(600px, calc(100vw - 32px)); }
+#buddy-dialog .buddy-preview { width: 64px; height: 64px; }
+.buddy-feelings { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: var(--space-3) 0 0; }
+.buddy-feelings-label { font-size: var(--text-xs); font-weight: 700; color: var(--text-muted); }
+.buddy-feel {
+  min-height: 30px; padding: 2px 10px; border: 1px solid var(--border-strong); border-radius: 99px;
+  background: var(--surface); color: var(--text); font-size: var(--text-xs); font-weight: 600; cursor: pointer;
+}
+.buddy-feel:hover { border-color: var(--accent); }
+.buddy-feel[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-text); box-shadow: inset 0 0 0 1px var(--accent); }
+.buddy-feel:focus-visible, .buddy-tab:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.buddy-quick { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: var(--space-3) 0 0; padding: var(--space-3); border: 1px solid var(--border); border-radius: var(--radius); }
+.buddy-quick [hidden] { display: none; }
+.buddy-pause-status { font-size: var(--text-xs); font-weight: 600; color: var(--text-muted); }
+.buddy-pause-status:empty { display: none; }
+.buddy-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: var(--space-4) 0 var(--space-3); padding-bottom: var(--space-3); border-bottom: 1px solid var(--border); }
+.buddy-tab {
+  min-height: 34px; padding: 0 var(--space-3); border: 1px solid var(--border); border-radius: 99px;
+  background: var(--surface-2); color: var(--text-muted); font-size: var(--text-sm); font-weight: 600; cursor: pointer;
+}
+.buddy-tab:hover { color: var(--text); border-color: var(--border-strong); }
+.buddy-tab[aria-selected="true"] { background: var(--accent-soft); color: var(--accent-text); border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.buddy-panel:focus { outline: none; }
+.buddy-group + .buddy-group { margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border); }
+.buddy-group-title { margin: 0 0 var(--space-3); font-size: var(--text-sm); font-weight: 700; }
+.buddy-group > .field-hint { display: block; margin: 0 0 var(--space-2); }
+.buddy-level { margin: 0 0 var(--space-3); padding: 0; border: 0; min-width: 0; }
+.buddy-level legend { padding: 0; margin-bottom: var(--space-1); font-size: var(--text-sm); font-weight: 600; }
+.buddy-level .field-hint { display: block; margin-top: var(--space-1); }
+.buddy-seg { display: inline-flex; flex-wrap: wrap; gap: 3px; padding: 3px; border-radius: var(--radius); background: var(--surface-2); }
+.buddy-seg-input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
+.buddy-seg-label { min-height: 32px; display: inline-flex; align-items: center; padding: 0 var(--space-3); border-radius: var(--radius-sm); color: var(--text-muted); font-size: var(--text-sm); font-weight: 600; cursor: pointer; }
+.buddy-seg-input:checked + .buddy-seg-label { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm), inset 0 0 0 1px var(--accent); }
+.buddy-seg-input:focus-visible + .buddy-seg-label { outline: 2px solid var(--focus); outline-offset: 1px; }
+.buddy-range { width: 100%; accent-color: var(--accent); }
+.buddy-range-value { font-weight: 500; color: var(--text-muted); }
+.buddy-swatch { display: inline-flex; border-radius: 99px; overflow: hidden; border: 1px solid var(--border-strong); }
+.buddy-swatch span { display: block; width: 8px; height: 16px; }
+.buddy-chip-custom { display: inline-flex; align-items: center; min-height: 32px; padding: 2px 10px; border: 1px dashed var(--border-strong); border-radius: 99px; font-size: var(--text-sm); color: var(--text-muted); }
+.buddy-chip-custom.is-active { border-style: solid; border-color: var(--accent); background: var(--accent-soft); color: var(--accent-text); font-weight: 650; }
+.buddy-accent-row { padding: 0 0 2px; }
+.buddy-accent-row label { font-size: var(--text-sm); font-weight: 600; }
+.buddy-color-input:disabled { opacity: 0.5; cursor: not-allowed; }
+.buddy-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-3); }
+.buddy-status:empty { display: none; }
+.buddy-status { margin: var(--space-2) 0 0; }
+.buddy-profiles { display: grid; gap: var(--space-2); margin: 0 0 var(--space-3); padding: 0; list-style: none; }
+.buddy-profile { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); padding: var(--space-2) var(--space-3); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.buddy-profile .input { flex: 1 1 140px; min-width: 0; }
+.buddy-profile-name { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
+.buddy-profile-tag { padding: 1px 6px; border-radius: 99px; background: var(--surface-3); font-size: var(--text-xs); font-weight: 600; color: var(--text-muted); }
+.buddy-profile-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.buddy-profile-new { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-2); }
+.buddy-profile-new .field { flex: 1 1 180px; }
 @media (max-width: 480px) {
   .buddy-switch { grid-template-columns: auto minmax(0, 1fr); }
   .buddy-switch-control { grid-column: 1 / -1; flex-direction: row; gap: var(--space-2); }
+  .buddy-tab { padding: 0 var(--space-2); font-size: var(--text-xs); }
+  .buddy-quick { gap: 6px; padding: var(--space-2); }
+  .buddy-quick .btn-sm { padding: 0 var(--space-2); }
 }
 
 /* ---------- 9. Responsive & motion ---------- */

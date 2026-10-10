@@ -3,6 +3,13 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-10-buddy-feelings-studio",
+      "date": "2026-10-10",
+      "title": "Buddy has feelings — and a customization studio",
+      "description": "StudyHub Buddy now reacts to what really happens: spin it while holding it and it gets dizzy and wobbles, drop it from high up and it is frightened on the way down and may cry briefly until a pat comforts it, tap or stroke it for a happy reaction, it balances at the edge of the floor, smiles at your correct practice answers and gets quieter while you take quizzes, practise or type; its studio under ⋮ → StudyHub Buddy offers 9 palettes or your own colours, 5 eye styles, 5 body shapes, 4 leaf shapes, 10 accessories, 6 personalities, motion presets, switches for every effect, up to 8 saved profiles, Surprise Me, and Pause (5 or 30 minutes) and Rescue Buddy.",
+      "type": "ui"
+    },
+    {
       "id": "2026-10-10-buddy-grows",
       "date": "2026-10-10",
       "title": "Buddy grows with you",

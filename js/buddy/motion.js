@@ -14,6 +14,13 @@
 //   floor states ─ sidebar grows over Buddy ─▶ knocked ─▶ landing
 //   idle ⇄ looking · sitting · thinking · celebrating · interacting · worried · waving · crouching ─▶ jumping
 //   idle ─▶ yawning ─▶ sleeping ─▶ stretching ─▶ idle
+//   landing / recovering ─▶ wobbling (dizzy: unsteady steps) ─▶ idle · sitting
+//   landing / recovering / walking ─▶ balancing (at the real end of the floor) ─▶ idle
+//   idle ─▶ petted (a gentle pat) ─▶ idle
+//
+// Feelings (emotion.js) are a separate dimension: motion.js asks for a face to
+// draw over its own pose (renderNow), but the body — position, velocity,
+// collisions, landings — belongs to this module alone.
 //
 // On top of the body state, "secondary motion" makes Buddy feel alive: the
 // leaf, the arms and a little body sway are damped springs pushed by Buddy's
@@ -24,6 +31,7 @@
 // Movement uses elapsed time, so it looks the same at 60, 120 or 144 Hz.
 
 import { restPose } from './character.js';
+import { createSpinMeter, FEAR_HEIGHT } from './emotion.js';
 
 const G = 2300; // px/s², gravity
 const V_MAX = 1500; // px/s, terminal fall speed (thrown Buddy may start faster)
@@ -46,7 +54,8 @@ const AIRBORNE = new Set(['slipping', 'falling', 'jumping', 'knocked', 'thrown']
 export const RESTING = new Set(['idle', 'sitting', 'thinking', 'sleeping']);
 
 const REST_EXITS = ['idle', 'walking', 'avoiding', 'turning', 'looking', 'sitting', 'thinking', 'sleeping', 'celebrating',
-  'jumping', 'interacting', 'knocked', 'crouching', 'held', 'worried', 'waving', 'yawning', 'pleased', 'inspecting', 'shifting', 'fidgeting', 'thrown'];
+  'jumping', 'interacting', 'knocked', 'crouching', 'held', 'worried', 'waving', 'yawning', 'pleased', 'inspecting', 'shifting', 'fidgeting', 'thrown',
+  'wobbling', 'balancing', 'petted'];
 const BRIEF_EXITS = ['idle', 'knocked', 'held'];
 // Idle habits: short, calm gestures from a resting pose.
 const HABITS = ['inspecting', 'shifting', 'fidgeting'];
@@ -64,12 +73,15 @@ const ALLOWED = {
   inspecting: BRIEF_EXITS,
   shifting: BRIEF_EXITS,
   fidgeting: BRIEF_EXITS,
+  petted: BRIEF_EXITS,
+  wobbling: [...BRIEF_EXITS, 'sitting'],
+  balancing: [...BRIEF_EXITS, 'sitting'],
   yawning: ['sleeping', 'idle', 'knocked'],
   stretching: ['idle', 'knocked'],
   crouching: ['jumping', 'slipping', 'knocked'],
   turning: ['walking', 'avoiding', 'idle', 'knocked'],
-  walking: ['idle', 'turning', 'walking', 'avoiding', 'mounting', 'knocked', 'sitting', 'looking'],
-  avoiding: ['idle', 'turning', 'walking', 'avoiding', 'knocked', 'sitting', 'looking'],
+  walking: ['idle', 'turning', 'walking', 'avoiding', 'mounting', 'knocked', 'sitting', 'looking', 'balancing'],
+  avoiding: ['idle', 'turning', 'walking', 'avoiding', 'knocked', 'sitting', 'looking', 'balancing'],
   mounting: ['climbing', 'slipping'],
   climbing: ['climbing', 'gripping', 'dismounting', 'slipping'],
   gripping: ['climbing', 'crouching', 'slipping'],
@@ -82,13 +94,17 @@ const ALLOWED = {
   held: ['thrown'],
   hanging: ['falling', 'sliding', 'knocked', 'climbing'], // climbing: down a sidebar edge it caught
   sliding: ['dismounting', 'falling', 'knocked'],
-  landing: ['recovering', 'idle', 'knocked', 'jumping'],
-  recovering: ['idle', 'knocked'],
+  landing: ['recovering', 'idle', 'knocked', 'jumping', 'wobbling', 'balancing'],
+  recovering: ['idle', 'knocked', 'wobbling', 'balancing'],
 };
 // States that always need per-frame updates.
 const FRAMES = new Set(['looking', 'turning', 'walking', 'avoiding', 'mounting', 'climbing', 'dismounting',
   'slipping', 'falling', 'jumping', 'knocked', 'thrown', 'held', 'hanging', 'sliding', 'landing', 'recovering',
-  'celebrating', 'interacting', 'crouching', 'worried', 'waving', 'yawning', 'stretching', 'pleased', ...HABITS]);
+  'celebrating', 'interacting', 'crouching', 'worried', 'waving', 'yawning', 'stretching', 'pleased', 'petted', 'wobbling', 'balancing', ...HABITS]);
+// Nonessential gestures a learner's click may cut short (only when they allow it in settings).
+export const INTERRUPTIBLE = new Set([...HABITS, 'looking', 'waving', 'pleased', 'celebrating', 'interacting', 'petted', 'worried']);
+// Calm poses on which a feeling may also move the arms and lean the body (never the position).
+const EMOTION_CALM = new Set(['idle', 'sitting', 'thinking', 'looking']);
 // Eyes may follow a gaze target only in these calm states.
 const GAZE_STATES = new Set(['idle', 'sitting', 'gripping']);
 // A face expression (express()) may show over these states; never over falls, throws or landings.
@@ -96,8 +112,10 @@ const FACE_STATES = new Set(['idle', 'sitting', 'walking', 'avoiding', 'turning'
 // Brief states and how long they last (seconds).
 const DURATION = {
   looking: 1.9, celebrating: 1.1, interacting: 0.65, worried: 1.6, waving: 1.6, yawning: 1.4, stretching: 1.1, recovering: 0.95,
-  pleased: 0.9, inspecting: 2.2, shifting: 0.9, fidgeting: 1.3,
+  pleased: 0.9, inspecting: 2.2, shifting: 0.9, fidgeting: 1.3, petted: 1.15, balancing: 1.3,
 };
+const WOBBLE_STEP = 12; // px: the most a dizzy Buddy's uneven steps may carry it
+const NEAR_EDGE_COOLDOWN = 10_000; // ms between near-miss balancing reactions
 // Catching an edge on the way down (tryCatch): reach, odds and a cooldown between attempts.
 const REACH = 26; // px between Buddy's side and the edge at which a hand can close on it
 const CATCH_ODDS = 0.6; // an attempt is made on this share of plausible passes
@@ -130,12 +148,22 @@ const springStill = (s) => Math.abs(s.x) < 0.08 && Math.abs(s.v) < 1.2;
 
 /**
  * deps: { world, character, el: { container, inner, shadow }, own, isReduced(),
- *         personality(), emit(event, detail), debug }
+ *         personality(), emit(event, detail), debug,
+ *         tuning(): { speed, jumps, catching, nearMiss, dizzy, fear, throwOn, speedLines, particles, expression },
+ *         emotion: { overlay(pose, ctx), animating(), current() } }
+ * tuning() only scales optional movement (walking, climbing speed) and switches
+ * optional reactions; gravity, collisions and throw limits are fixed here.
  */
 export function createMotion(deps) {
   const { world, character, el, own } = deps;
   const rnd = () => (deps.random ? deps.random() : Math.random()); // tests can inject a fixed sequence
-  const body = { x: 0, y: 0, vx: 0, vy: 0, tilt: 0, omega: 0, facing: 1, surface: 'floor', peek: false, pendingRecover: false };
+  const DEFAULT_TUNING = { speed: 1, jumps: 1, catching: true, nearMiss: true, dizzy: true, fear: true, throwOn: true, speedLines: true, particles: true, expression: 1 };
+  const tune = () => ({ ...DEFAULT_TUNING, ...(deps.tuning ? deps.tuning() : {}) });
+  // apexY: the highest point (smallest y) of the current fall; pendingAfter: what a landing settles into;
+  // dizzy: how dizzy a spin left Buddy when it was let go (0 = not at all).
+  const body = { x: 0, y: 0, vx: 0, vy: 0, tilt: 0, omega: 0, facing: 1, surface: 'floor', peek: false, pendingRecover: false, apexY: 0, pendingAfter: null, dizzy: 0 };
+  let lastNearEdge = -Infinity;
+  let lastFall = null; // { height, impact, at } of the last real landing (tests and buddy.js)
   let state = 'idle';
   let data = {};
   let gen = 0;
@@ -202,6 +230,8 @@ export function createMotion(deps) {
     if (transitions.length > 400) transitions.shift();
     if (deps.isReduced() || NO_BLEND.has(next)) blend = null;
     else blend = { from: { ...pose, legs: { ...pose.legs }, lift: { ...pose.lift } }, start: clock };
+    // A new fall starts measuring its height from here (a rebound or a hop measures its own).
+    if (AIRBORNE.has(next) && !AIRBORNE.has(previous)) body.apexY = body.y;
     if (AIRBORNE.has(next)) body.surface = 'air';
     else if (ON_WALL.has(next)) body.surface = 'wall';
     else if (ON_RAIL.has(next)) body.surface = 'rail';
@@ -237,10 +267,10 @@ export function createMotion(deps) {
     },
     gripping() {
       // Hang on and look around (and down), then climb down or hop off.
-      const playful = deps.personality() === 'playful';
+      const playful = ['playful', 'energetic'].includes(deps.personality());
       data.lookDown = 0.9 + rnd() * 0.8; // s: when Buddy peers down the edge
       stateTimer(() => {
-        if (rnd() < (playful ? 0.6 : 0.25)) crouchThenJump({ vx: 150, vy: -260, omega: 40, mood: 'happy', fromWall: true, facing: 1 });
+        if (rnd() < Math.min(0.85, (playful ? 0.6 : 0.25) * tune().jumps)) crouchThenJump({ vx: 150, vy: -260, omega: 40, mood: 'happy', fromWall: true, facing: 1 });
         else enter('climbing', { targetY: world.get().wall.bottom, dir: 1, then: 'dismount', phase: 0 });
       }, 1600 + rnd() * 1900);
     },
@@ -290,6 +320,17 @@ export function createMotion(deps) {
     thinking() {
       data.framesUntil = clock + 1400; // a short head-scratch, then a still "hmm" pose
     },
+    wobbling() {
+      // Dizzy after a spin: unsteady, a few uneven steps toward the roomier side, then steady.
+      const w = world.get();
+      data.dir = body.x - w.floor.x0 > w.floor.x1 - body.x ? -1 : 1;
+      data.moved = 0;
+      data.duration = clamp(data.duration || 1.8, 0.8, 3.2);
+    },
+    balancing() {
+      // At the real end of the floor: arms out, a lean over the edge, a corrective step back.
+      data.moved = 0;
+    },
   };
 
   // ---- Per-frame steps -------------------------------------------------------------
@@ -297,9 +338,11 @@ export function createMotion(deps) {
   function step(dt) {
     const w = world.get();
     const t = elapsed();
-    if (DURATION[state] && t > DURATION[state]) {
-      if (state === 'recovering' || state === 'stretching') enter('idle');
+    const limit = state === 'wobbling' ? data.duration : DURATION[state];
+    if (limit && t > limit) {
+      if (state === 'recovering') settle();
       else if (state === 'yawning') enter('sleeping');
+      else if (state === 'wobbling' && data.then === 'sit') enter('sitting');
       else enter('idle');
       return;
     }
@@ -315,7 +358,8 @@ export function createMotion(deps) {
         }
         const target = clamp(data.target, w.floor.x0, w.floor.x1);
         const dist = Math.abs(target - body.x);
-        const vmax = state === 'avoiding' ? AVOID : WALK;
+        // The learner's speed preference scales optional walks only; getting out of the way stays brisk.
+        const vmax = state === 'avoiding' ? AVOID : WALK * clamp(tune().speed, 0.6, 1.4);
         data.v = Math.min(vmax, (data.v || 0) + ACCEL * dt, Math.sqrt(2 * ACCEL * dist));
         const dir = Math.sign(target - body.x);
         if (dir && dir !== body.facing) {
@@ -345,7 +389,8 @@ export function createMotion(deps) {
         // Every third reach, a short rest: weight shifts, then the next pull.
         const resting = data.dir < 0 && cycle > 0 && cycle % 3 === 0 && (data.phase % (Math.PI * 2)) < 1.4;
         data.resting = resting;
-        const speed = data.dir < 0 ? CLIMB * (0.25 + 1.4 * Math.max(0, Math.sin(data.phase))) : CLIMB_DOWN * (0.5 + 0.8 * Math.max(0, Math.sin(data.phase)));
+        const pace = clamp(tune().speed, 0.6, 1.4);
+        const speed = (data.dir < 0 ? CLIMB * (0.25 + 1.4 * Math.max(0, Math.sin(data.phase))) : CLIMB_DOWN * (0.5 + 0.8 * Math.max(0, Math.sin(data.phase)))) * pace;
         if (!resting) body.y += data.dir * speed * dt;
         body.y = clamp(body.y, w.wall.top, w.wall.bottom);
         if (data.dir < 0 && body.y <= data.targetY + 0.5) enter('gripping');
@@ -427,9 +472,41 @@ export function createMotion(deps) {
         body.tilt *= Math.exp(-dt * 25);
         if (t > data.duration) afterLanding();
         break;
+      case 'wobbling': {
+        // Uneven steps: moving only on the "down" half of each sway, at most WOBBLE_STEP px in all,
+        // and never past the end of the floor.
+        const stepping = t < data.duration * 0.6 && Math.sin(t * 6.5) > 0;
+        if (stepping && data.moved < WOBBLE_STEP) {
+          const dx = data.dir * 16 * dt;
+          const next = clamp(body.x + dx, w.floor.x0, w.floor.x1);
+          data.moved += Math.abs(next - body.x);
+          body.x = next;
+        }
+        break;
+      }
+      case 'balancing':
+        // One corrective step back from the edge (a few px), early in the wobble.
+        if (t < 0.4 && data.moved < 5) {
+          const next = clamp(body.x - data.dir * 14 * dt, w.floor.x0, w.floor.x1);
+          data.moved += Math.abs(next - body.x);
+          body.x = next;
+        }
+        break;
       default:
         break;
     }
+  }
+
+  /**
+   * What a landing (or its recovery) settles into: a planned wobble or balance
+   * (set at touchdown from real signals), else idle.
+   */
+  function settle() {
+    const after = body.pendingAfter;
+    body.pendingAfter = null;
+    if (after?.kind === 'wobble') enter('wobbling', { duration: after.duration, then: after.then });
+    else if (after?.kind === 'balance') enter('balancing', { dir: after.dir });
+    else enter('idle');
   }
 
   /**
@@ -451,7 +528,7 @@ export function createMotion(deps) {
     } else if (data.impact > 650 || body.pendingRecover) {
       body.pendingRecover = false;
       enter('recovering');
-    } else enter('idle');
+    } else settle();
   }
 
   function airborne(dt, w) {
@@ -471,7 +548,9 @@ export function createMotion(deps) {
       if (body.x > w.floor.x1) { body.x += (w.floor.x1 - body.x) * Math.min(1, dt * 8); body.vx = Math.min(0, body.vx); }
     }
     if (!Number.isFinite(body.x) || !Number.isFinite(body.y)) { stats.invalid++; placeCalmly(); return; }
+    body.apexY = Math.min(body.apexY, body.y);
     if (tryCatch(w, dt)) return;
+    noticeFall(w);
     const toFloor = w.floor.y - body.y;
     if (toFloor < 150 && body.vy > 0) body.tilt += (0 - body.tilt) * Math.min(1, dt * 9); // air-righting
     else body.tilt = clamp(body.tilt + body.omega * dt, -60, 60);
@@ -479,11 +558,67 @@ export function createMotion(deps) {
     if (body.vy > 0 && body.y >= w.floor.y) {
       const impact = body.vy;
       const drift = body.vx; // carried into a rebound, a little
+      const height = Math.max(0, w.floor.y - body.apexY);
       body.y = w.floor.y;
       body.vy = 0;
       body.vx = 0;
       if (impact > 700 && !deps.isReduced()) deps.emit('dust', { x: body.x, y: body.y, impact, size: size() });
+      const first = !data.rebound;
+      const feared = Boolean(data.fearful);
+      const from = state;
+      if (first) {
+        planSettle(w, drift);
+        lastFall = { height: Math.round(height), impact: Math.round(impact), at: Math.round(clock), feared };
+      }
       enter('landing', { impact, drift, duration: (impact > 650 ? 0.36 : 0.26) * (0.92 + rnd() * 0.16), rebound: Boolean(data.rebound) });
+      // Height and impact are reported separately (after touchdown): buddy.js decides how Buddy feels about each.
+      if (first) deps.emit('landed', { height, impact, size: size(), feared, from });
+    }
+  }
+
+  /**
+   * While coming down, notice how far the fall is: past 3 Buddy-heights a startle,
+   * and once the drop from the top of this fall to the floor is FEAR_HEIGHT or
+   * more, fear (arms reach up; buddy.js shows the face). Only real falls and
+   * throws — a hop or a rebound is never frightening. Once per fall.
+   */
+  function noticeFall(w) {
+    if (body.vy <= 0 || data.rebound || state === 'jumping') return;
+    const S = size();
+    const dropped = body.y - body.apexY;
+    const total = w.floor.y - body.apexY;
+    if (!data.startled && dropped > S * 3) {
+      data.startled = true;
+      deps.emit('startle', { height: total });
+    }
+    if (!data.fearful && tune().fear && total >= FEAR_HEIGHT * S && dropped > S * 0.8) {
+      data.fearful = true;
+      deps.emit('fear', { height: total });
+    }
+  }
+
+  /**
+   * Decide at touchdown what the landing settles into, from real signals only:
+   * dizzy from a spin → a wobble; landing at the very end of the floor while
+   * still drifting toward it, or on a floor barely wider than Buddy → balancing.
+   */
+  function planSettle(w, drift) {
+    body.pendingAfter = null;
+    const t = tune();
+    if (body.dizzy >= 1 && t.dizzy) {
+      body.pendingAfter = { kind: 'wobble', duration: 1.2 + Math.min(1.6, body.dizzy) * 0.8, then: body.dizzy > 1.3 ? 'sit' : 'idle' };
+      body.dizzy = 0;
+      return;
+    }
+    body.dizzy = 0;
+    if (!t.nearMiss || performance.now() - lastNearEdge < NEAR_EDGE_COOLDOWN) return;
+    const reach = w.half * 0.6;
+    const atLeft = body.x - w.floor.x0 < reach && drift < -60;
+    const atRight = w.floor.x1 - body.x < reach && drift > 60;
+    if (atLeft || atRight || w.floor.narrow) {
+      lastNearEdge = performance.now();
+      const dir = atLeft ? -1 : atRight ? 1 : (Math.sign(drift) || body.facing);
+      body.pendingAfter = { kind: 'balance', dir };
     }
   }
 
@@ -505,7 +640,7 @@ export function createMotion(deps) {
    */
   function tryCatch(w, dt) {
     data.reach = 0;
-    if (data.caught || data.rebound || data.noCatch) return false;
+    if (data.caught || data.rebound || data.noCatch || !tune().catching) return false;
     if (state !== 'falling' && state !== 'thrown') return false; // a hop or a knock never grabs
     const target = grabEdge(w);
     if (!target) return false;
@@ -527,10 +662,13 @@ export function createMotion(deps) {
       stats.misses = (stats.misses || 0) + 1;
       body.omega += 90;
       data.missedAt = clock;
+      deps.emit('catch-miss', { vy: body.vy });
       return false;
     }
     missedLast = false;
-    return enter('hanging', { on: target.on, impact: Math.max(0, body.vy) });
+    const caught = enter('hanging', { on: target.on, impact: Math.max(0, body.vy) });
+    if (caught) deps.emit('caught', { on: target.on });
+    return caught;
   }
 
   /**
@@ -609,6 +747,22 @@ export function createMotion(deps) {
     body.x = data.ax;
     body.y = data.ay + length;
     body.tilt = -data.phi * DEG;
+    // A pointer held still: the dizziness ebbs (only real samples can raise it).
+    const lastSample = data.samples[data.samples.length - 1];
+    if (!lastSample || performance.now() - lastSample.t > 120) noteSpin(data.spin.decay(dt));
+  }
+
+  /** Report the spin meter's verdict: dizzy on, refreshed while it lasts, and off. */
+  function noteSpin(spin) {
+    const wasDizzy = data.dizzy;
+    data.dizzy = spin.dizzy;
+    data.spinLevel = spin.level;
+    if (!tune().dizzy) return;
+    const now = performance.now();
+    if (spin.dizzy && (!wasDizzy || now - (data.spinSent || 0) > 400)) {
+      data.spinSent = now;
+      deps.emit('spin', { level: spin.level, dizzy: true });
+    } else if (!spin.dizzy && wasDizzy) deps.emit('spin', { level: spin.level, dizzy: false });
   }
 
   function grab(px, py) {
@@ -617,8 +771,11 @@ export function createMotion(deps) {
     // Keep the point under the pointer where it is: the anchor is the head top.
     const headX = body.x;
     const headY = body.y - S * 0.74;
+    body.pendingAfter = null;
+    body.dizzy = 0;
     const ok = enter('held', {
       offX: px - headX, offY: py - headY, ax: headX, ay: headY, tx: headX, ty: headY, lastAx: headX, avx: 0, phi: 0, omega: 0, samples: [],
+      spin: createSpinMeter(), dizzy: false, spinLevel: 0,
     });
     if (ok) moveHold(px, py, performance.now());
     return ok;
@@ -636,6 +793,9 @@ export function createMotion(deps) {
     data.ty = clamp(py - data.offY, w.headerBottom + 4, w.floor.y - size() * 0.74);
     data.samples.push({ t: time, x: data.tx, y: data.ty });
     while (data.samples.length > 2 && time - data.samples[0].t > 110) data.samples.shift();
+    // Spin is measured from the pointer itself (not the clamped hold point), so a spin
+    // pressed against the edge of the workspace still counts as the circle it is.
+    noteSpin(data.spin.push(px, py, time));
     ensureLoop();
   }
 
@@ -658,9 +818,11 @@ export function createMotion(deps) {
   /** Let go: fly off with the pointer's recent velocity and the swing's spin. */
   function release(now = performance.now()) {
     if (state !== 'held') return false;
-    let { vx, vy } = throwVelocity(now);
+    // Throwing switched off: letting go just drops Buddy (same physics, no launch speed).
+    let { vx, vy } = tune().throwOn ? throwVelocity(now) : { vx: 0, vy: 0 };
     const speed = Math.hypot(vx, vy);
     if (speed > THROW_MAX) { vx *= THROW_MAX / speed; vy *= THROW_MAX / speed; }
+    body.dizzy = data.dizzy && tune().dizzy ? Math.max(1, data.spinLevel || 1) : 0;
     // Re-anchor from the head-top pivot (held) to the body-centre pivot (airborne) without a jump.
     const S = size();
     const theta = body.tilt / DEG;
@@ -684,7 +846,54 @@ export function createMotion(deps) {
     switch (state) {
       case 'idle':
         p.tilt = 0;
+        if (world.get().floor.narrow) { p.armL = 34; p.armR = 34; } // a narrow ledge: arms a little out for balance
         break;
+      case 'petted': {
+        // A gentle pat: eyes close, Buddy leans into the hand, the leaf wags — a few variants.
+        const q = Math.min(1, t / 1.15);
+        const swell = Math.sin(q * Math.PI);
+        const v = data.variant || 'nuzzle';
+        p.eyes = v === 'giggle' ? 'happy' : q < 0.85 ? 'closed' : 'open';
+        p.mouth = v === 'giggle' ? 'grin' : 'smile';
+        p.blush = swell;
+        p.turn = 0;
+        p.sprout = Math.sin(t * 15) * (v === 'leafwag' ? 16 : 8) * swell;
+        if (v === 'nuzzle') p.tilt = (data.side || 1) * 7 * swell;
+        else if (v === 'giggle') { p.bob = -Math.abs(Math.sin(t * 14)) * 2.4 * swell; p.armL = 40; p.armR = 40; }
+        else if (v === 'leafwag') { p.bob = -2 * swell; p.armL = 14 + 20 * swell; p.armR = 14 + 20 * swell; }
+        else p.sx = 1 + Math.sin(t * 26) * 0.04 * (1 - q); // wiggle
+        break;
+      }
+      case 'wobbling': {
+        const T = data.duration || 1.8;
+        const decay = Math.max(0, 1 - t / T);
+        const s = Math.sin(t * 6.5);
+        p.tilt = s * 10 * decay;
+        p.pivotY = 94;
+        p.armL = 60 + Math.sin(t * 6.5 + 1) * 25 * decay;
+        p.armR = 60 - Math.sin(t * 6.5 + 1) * 25 * decay;
+        p.lift = { fl: Math.max(0, s) * 3.2 * decay, fr: Math.max(0, -s) * 2 * decay }; // uneven steps
+        p.legs = { fl: 10 * s * decay, fr: -6 * s * decay };
+        p.mouth = 'wobble';
+        p.turn = (data.dir || 1) * 0.3;
+        break;
+      }
+      case 'balancing': {
+        // Overbalanced toward the edge, then caught: arms out flapping, a corrective foot.
+        const dir = data.dir || 1;
+        const e = Math.exp(-2.6 * t);
+        p.tilt = dir * 11 * e * Math.cos(t * 8);
+        p.pivotY = 94;
+        p.armL = 100 + Math.sin(t * 16) * 22 * e;
+        p.armR = 100 - Math.sin(t * 16) * 22 * e;
+        p.lift = dir > 0 ? { fl: 0, fr: 4 * e } : { fl: 4 * e, fr: 0 };
+        p.eyeScale = 1 + 0.15 * e;
+        p.eyeX = dir * 2.2 * e;
+        p.eyeY = 1.4 * e; // a glance down over the edge
+        p.mouth = t < 0.6 ? 'o' : 'smile';
+        p.turn = -dir * 0.3;
+        break;
+      }
       case 'looking': {
         const k = t < 0.6 ? -1 : t < 1.3 ? 1 : 0;
         p.eyeX = k * 3.2;
@@ -704,7 +913,7 @@ export function createMotion(deps) {
       case 'walking':
       case 'avoiding': {
         const vmax = state === 'avoiding' ? AVOID : WALK;
-        const k = (data.v || 0) / vmax;
+        const k = Math.min(1.25, (data.v || 0) / vmax);
         const a = Math.sin(data.phase || 0);
         const c = Math.cos(data.phase || 0);
         p.turn = body.facing * 0.95;
@@ -843,6 +1052,30 @@ export function createMotion(deps) {
         if (data.missedAt && clock - data.missedAt < 500) {
           // The hand slipped: an empty grab and a startled face.
           p.armL = 150 + Math.sin(t * 40) * 16;
+        }
+        if (data.fearful && !data.reach && near < 0.5) {
+          // A long way down: both arms reach up, legs kick faster.
+          p.armL = 165 + Math.sin(t * 34) * 10;
+          p.armR = 165 + Math.sin(t * 34 + 1.4) * 10;
+          p.legs = { fl: 14 + Math.sin(t * 30) * 24, fr: -14 - Math.sin(t * 30) * 24 };
+        }
+        // Throw awareness: the eyes lead along the flight; a fast spin tucks the limbs in;
+        // a hard landing coming up gets braced for (arms out, knees soft). Pose only — the
+        // flight itself is never changed for effect.
+        const v = Math.hypot(body.vx, body.vy);
+        if (!data.reach && v > 250) {
+          p.eyeX += clamp(body.vx / 500, -2, 2) * (1 - near);
+          p.eyeY += clamp(body.vy / 600, -2, 2) * (1 - near);
+        }
+        if (thrown && Math.abs(body.omega) > 300 && near < 0.3) {
+          p.armL = 60 + Math.sin(t * 20) * 8;
+          p.armR = 60 + Math.sin(t * 20 + 1) * 8;
+          p.legs = { fl: 26, fr: -26 };
+        }
+        if (near > 0.4 && body.vy > 1000) {
+          p.armL = 100;
+          p.armR = 100;
+          p.legs = { fl: 18, fr: -18 };
         }
         const stretch = Math.min(0.1, Math.max(0, body.vy) / 9000);
         p.sy = 1 + stretch;
@@ -1181,7 +1414,15 @@ export function createMotion(deps) {
   function renderNow() {
     if (!running) return;
     const p = blended(targetPose());
-    applyFace(p);
+    const feeling = deps.emotion?.current();
+    if (feeling) {
+      // A feeling replaces a passing face; it draws only the face (and, when calm, arms and a lean).
+      const t = tune();
+      deps.emotion.overlay(p, {
+        calm: EMOTION_CALM.has(state) && body.surface === 'floor', airborne: AIRBORNE.has(state) || state === 'held',
+        reduced: deps.isReduced(), particles: t.particles, expression: t.expression,
+      });
+    } else applyFace(p);
     p.sprout += springs.sprout.x + leaf.base;
     p.armL += springs.armL.x;
     p.armR += springs.armR.x;
@@ -1199,7 +1440,7 @@ export function createMotion(deps) {
     el.container.style.transform = `translate3d(${px}px, ${py}px, 0)`;
     el.container.classList.toggle('is-peeking', body.peek);
     el.container.classList.toggle('is-sleeping', state === 'sleeping');
-    const speed = AIRBORNE.has(state) && !deps.isReduced() && Math.hypot(body.vx, body.vy) > 900 ? (Math.abs(body.vx) > Math.abs(body.vy) ? 'side' : 'down') : '';
+    const speed = AIRBORNE.has(state) && !deps.isReduced() && tune().speedLines && Math.hypot(body.vx, body.vy) > 900 ? (Math.abs(body.vx) > Math.abs(body.vy) ? 'side' : 'down') : '';
     if (speed !== speedShown) {
       speedShown = speed;
       el.container.classList.toggle('is-fast', speed !== '');
@@ -1238,6 +1479,7 @@ export function createMotion(deps) {
     if (FRAMES.has(state) || blend !== null || clock < (data.framesUntil || 0)) return true;
     if (leaf.base !== leafTarget() && !deps.isReduced()) return true;
     if (face && face.kind === 'concerned' && FACE_STATES.has(state) && performance.now() - face.start < 1700) return true; // the sweat drop slides
+    if (deps.emotion?.animating()) return true; // a feeling with moving parts (swirl, tears, tremble)
     return !deps.isReduced() && !secondarySettled();
   }
 
@@ -1376,6 +1618,11 @@ export function createMotion(deps) {
     const w = world.get();
     const reduced = deps.isReduced();
     const resting = RESTING.has(state) || state === 'looking';
+    if (kind === 'interrupt') {
+      // The learner reached for Buddy mid-habit: a nonessential gesture ends at once.
+      if (!INTERRUPTIBLE.has(state)) return false;
+      return reduced ? (force('idle'), true) : enter('idle');
+    }
     if (!resting && !['sleep', 'wake', 'pleased'].includes(kind)) return false;
     if (reduced && !['sit', 'think', 'sleep', 'wake', 'idle', 'pleased'].includes(kind)) return false;
     switch (kind) {
@@ -1442,6 +1689,9 @@ export function createMotion(deps) {
       case 'inspect': return enter('inspecting');
       case 'shift': return enter('shifting');
       case 'fidget': return enter('fidgeting');
+      case 'pet': return enter('petted', { variant: options.variant, side: options.side });
+      case 'balance': return enter('balancing', { dir: options.dir || body.facing });
+      case 'wobble': return enter('wobbling', { duration: options.duration, then: options.then });
       default: return false;
     }
   }
@@ -1474,6 +1724,9 @@ export function createMotion(deps) {
     body.tilt = 0;
     body.peek = !spot.clear;
     body.pendingRecover = false;
+    body.pendingAfter = null;
+    body.dizzy = 0;
+    body.omega = 0;
     blend = null;
     for (const s of Object.values(springs)) { s.x = 0; s.v = 0; }
     gaze.x = 0;
@@ -1508,6 +1761,19 @@ export function createMotion(deps) {
     reconcile,
     perform,
     placeCalmly,
+    /**
+     * Rescue: whatever Buddy was doing (held, flying, stuck mid-climb), stop it
+     * and stand it on a clear spot of the floor measured now, near `preferredX`.
+     * The caller has already let go of any pointer. Never a fixed coordinate.
+     */
+    rescue(preferredX) {
+      if (!running) return false;
+      stats.rescues = (stats.rescues || 0) + 1;
+      world.invalidate();
+      const w = world.get();
+      placeCalmly(Number.isFinite(preferredX) ? preferredX : clamp(body.x, w.floor.x0, w.floor.x1));
+      return true;
+    },
     grab,
     moveHold,
     release,
@@ -1559,6 +1825,8 @@ export function createMotion(deps) {
       ensureLoop();
     },
     refresh() {
+      // Inside a frame (a feeling changed in response to a step) the frame renders anyway.
+      if (inFrame) return;
       renderNow();
       ensureLoop();
     },
@@ -1623,6 +1891,8 @@ export function createMotion(deps) {
         gaze: { x: Math.round(gaze.x * 100) / 100, y: Math.round(gaze.y * 100) / 100 }, leafDroop: leaf.droop && performance.now() > leaf.perkUntil,
         leafBase: Math.round(leaf.base * 10) / 10, face: face && performance.now() < face.until ? face.kind : null, reach: data.reach || 0, speed: speedShown,
         floor: { ...w.floor }, wall: { ...w.wall }, rail: { ...w.rail },
+        apexY: body.apexY, lastFall, pendingAfter: body.pendingAfter?.kind || null, carriedDizzy: body.dizzy,
+        spin: state === 'held' ? { level: data.spinLevel || 0, dizzy: Boolean(data.dizzy) } : null, fearful: Boolean(data.fearful), variant: data.variant || null,
       };
     },
     trace,

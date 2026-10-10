@@ -15,6 +15,7 @@ import { parseQuestions } from '../engagement/question-parser.js';
 import { href } from '../router.js';
 import { read } from '../storage.js';
 import * as history from '../history.js';
+import * as plans from '../plans.js';
 
 const FACTS_URL = 'metadata/buddy-facts.json';
 const MILESTONES = [5, 10, 25, 50, 75, 100, 150, 200, 300, 400, 500];
@@ -56,19 +57,30 @@ const LINES = {
     playful: 'Hey, welcome back! Last time it was {topic}.',
     curious: 'Welcome back! Still curious about {topic}?',
   },
+  welcomePlan: {
+    gentle: 'Welcome back. Your plan “{plan}” is waiting: {done} of {total} done.',
+    playful: 'Welcome back! “{plan}” is at {done} of {total} — shall we carry on?',
+    curious: 'Welcome back! What’s next in “{plan}”? {done} of {total} done so far.',
+  },
   factIntro: { gentle: 'A small fact', playful: 'Fun fact!', curious: 'Did you know?' },
   noQuiz: 'I couldn’t find a multiple-choice question from the topics you’ve studied yet. Complete a topic with a practice set and ask me again.',
   menu: 'Hi! What would you like?',
 };
 
+// The newer personalities speak in the voice of the nearest original one.
+const TONE = { sleepy: 'gentle', energetic: 'playful', custom: 'playful' };
+
 function line(name, personality, values = {}) {
   const entry = LINES[name];
-  const text = typeof entry === 'string' ? entry : entry[personality] || entry.playful;
+  const text = typeof entry === 'string' ? entry : entry[TONE[personality] || personality] || entry.playful;
   return text.replace(/\{(\w+)\}/g, (_, key) => values[key] ?? '');
 }
 
 /**
  * deps: { motion, own, settings(), isActive(), canPrompt(), anchorBox(), onOpenSettings(),
+ *         react(kind, detail) — how Buddy shows a learning moment (buddy.js applies the
+ *           learner's celebration settings and study focus),
+ *         blocked(rect) — how much essential UI a rect would cover (bubble placement),
  *         memory: { asked: Set, facts: Set, welcomed } — kept for the whole page session,
  *         so turning Buddy off and on does not repeat questions or facts }
  */
@@ -141,15 +153,27 @@ export function createCompanion(deps) {
     const width = bubble.offsetWidth;
     const height = bubble.offsetHeight;
     const cx = (box.left + box.right) / 2;
-    let left = Math.round(Math.min(vw - width - 8, Math.max(8, cx - width / 2)));
-    let top = Math.round(box.top - height - 12);
-    let side = 'above';
-    if (top < headerBottom + 8) {
-      // No room above (Buddy high on the sidebar): sit to its right instead.
-      left = Math.round(Math.min(vw - width - 8, box.right + 12));
-      top = Math.round(Math.max(headerBottom + 8, Math.min(vh - height - 8, box.top - 8)));
-      side = 'beside';
+    const fitX = (x) => Math.round(Math.min(vw - width - 8, Math.max(8, x)));
+    const fitY = (y) => Math.round(Math.max(headerBottom + 8, Math.min(vh - height - 8, y)));
+    // Candidate places, in order of preference: above Buddy, then beside it (right, left).
+    const candidates = [
+      { left: fitX(cx - width / 2), top: Math.round(box.top - height - 12), side: 'above' },
+      { left: fitX(box.right + 12), top: fitY(box.top - height * 0.6), side: 'beside' },
+      { left: fitX(box.left - width - 12), top: fitY(box.top - height * 0.6), side: 'beside' },
+    ].filter((c) => c.top >= headerBottom + 8);
+    if (!candidates.length) candidates.push({ left: fitX(box.right + 12), top: fitY(box.top - 8), side: 'beside' });
+    // Prefer one that covers no essential control (search, menus, quiz choices, editors…);
+    // otherwise the one that covers least. The bubble is always dismissible either way.
+    let best = candidates[0];
+    if (deps.blocked) {
+      let bestHits = Infinity;
+      for (const c of candidates) {
+        const hits = deps.blocked({ left: c.left, top: c.top, right: c.left + width, bottom: c.top + height });
+        if (hits < bestHits) { best = c; bestHits = hits; }
+        if (hits === 0) break;
+      }
     }
+    const { left, top, side } = best;
     bubble.style.left = `${left}px`;
     bubble.style.top = `${top}px`;
     bubble.dataset.side = side;
@@ -270,12 +294,7 @@ export function createCompanion(deps) {
           icon(right ? 'check' : 'info', 16), line(right ? 'correct' : 'wrong', personality, { letter: item.correct })),
         explanation ? el('p', { class: 'buddy-quiz-explain' }, explanation.length > 260 ? `${explanation.slice(0, 257).trimEnd()}…` : explanation) : null,
         el('div', { class: 'buddy-bubble-actions' }, review, done));
-      if (right && deps.settings().quiet) {
-        // Quiet mode: a small, calm reaction, and the drooping leaf perks up for a moment.
-        deps.motion.perform('pleased');
-        deps.motion.perk();
-      } else if (right) deps.motion.perform('celebrate');
-      else if (!deps.motion.perform('worry')) deps.motion.express('concerned', 1800, 2); // a sweat drop, never a scolding
+      deps.react(right ? 'quiz-correct' : 'quiz-wrong'); // a small cheer, or a sweat drop — never a scolding
       if (bubble?.contains(document.activeElement) || focus) done.focus({ preventScroll: true });
       position();
     }
@@ -347,7 +366,7 @@ export function createCompanion(deps) {
         else if (MILESTONES.includes(now.size)) say('motivation', line('milestone', s.personality, { n: now.size }));
         else if (topic) say('motivation', line('completed', s.personality, { topic: topic.title }));
       }
-      deps.motion.perform('celebrate', { mood: growth ? 'sparkle' : undefined });
+      deps.react('completed', { growth: Boolean(growth), milestone: MILESTONES.includes(now.size) });
     } else if (key === 'plans') {
       const ticks = planTicks();
       const more = ticks > plansDone;
@@ -356,18 +375,41 @@ export function createCompanion(deps) {
     }
   }
 
-  /** Once per page load: a gentle welcome after a break of three days or more. */
+  /**
+   * Once per page load: a gentle welcome after a break of three days or more,
+   * with a way back in — the active study plan if it is unfinished (from the
+   * real plan record), else the last topic studied. Dismissible; never repeated.
+   */
   function maybeWelcome() {
     if (deps.memory.welcomed || !deps.settings().motivation) return false;
     deps.memory.welcomed = true;
     const last = history.list()[0];
     const at = last ? Date.parse(last.at) : NaN;
     if (Number.isNaN(at) || Date.now() - at < 3 * 24 * 3600 * 1000) return false;
+    const personality = deps.settings().personality;
+    const plan = unfinishedPlan();
+    if (plan) {
+      const go = el('a', { class: 'btn btn-secondary btn-sm', href: href(['plans', 'p', plan.record.id]) }, 'Open my plan');
+      go.addEventListener('click', () => close({ restoreFocus: false }));
+      return say('motivation', line('welcomePlan', personality, { plan: plan.record.title, done: plan.summary.done, total: plan.summary.total }), { action: go });
+    }
     const topic = last.kind === 'topic' ? getTopic(last.id) : null;
     if (!topic) return false;
     const go = el('a', { class: 'btn btn-secondary btn-sm', href: href(['t', topic.id]) }, 'Continue');
     go.addEventListener('click', () => close({ restoreFocus: false }));
-    return say('motivation', line('welcome', deps.settings().personality, { topic: topic.title }), { action: go });
+    return say('motivation', line('welcome', personality, { topic: topic.title }), { action: go });
+  }
+
+  /** The active plan when it exists, has items and is not finished; else null. Never throws. */
+  function unfinishedPlan() {
+    try {
+      const record = plans.activePlan();
+      if (!record) return null;
+      const summary = plans.summarize(record);
+      return summary.total > 0 && !summary.finished ? { record, summary } : null;
+    } catch {
+      return null;
+    }
   }
 
   /** Buddy was clicked or tapped: a tiny menu of things it can do. */

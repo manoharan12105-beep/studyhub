@@ -19,15 +19,24 @@ import { BODY_HALF, FOOT_Y } from './character.js';
 const DESKTOP = window.matchMedia('(min-width: 768px)');
 
 // Things Buddy must never sit on top of. Any of these under its body counts as
-// "in the way" (lesson text, code, tables, every control, the knowledge map…).
-const ESSENTIAL = [
+// "in the way" (lesson text, code, tables, every control, search results, menus,
+// dialogs, quiz choices, the notes editor, study-plan controls, visualizers and
+// simulators, backup controls, the knowledge map…). Any element can opt in with
+// data-buddy-avoid.
+export const ESSENTIAL = [
   'a', 'button', 'input', 'textarea', 'select', 'summary', 'label', '[contenteditable]',
   '[role="button"]', '[role="option"]', '[role="slider"]', '[role="tab"]', '[role="menuitem"]',
+  '[role="listbox"]', '[role="menu"]', '[role="dialog"]', '[role="alert"]', '[role="status"]:not(.sr-only)', 'dialog', 'form',
   'p', 'li', 'dt', 'dd', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'pre', 'code', 'kbd', 'table',
   'img', 'canvas', 'video', 'figure', 'details', '.btn', '.card', '.interaction', '.quiz', '.galaxy-stage',
+  '.search-results', '[data-buddy-avoid]',
 ].join(',');
 
-export function createWorld({ size, isBuddyNode }) {
+/**
+ * size(): Buddy's box in px. shape(): { sx, sy } of the body-proportion preset,
+ * so the collision box matches what is drawn (character.js BODY_SHAPES).
+ */
+export function createWorld({ size, isBuddyNode, shape = () => ({ sx: 1, sy: 1 }) }) {
   let cache = null;
 
   function measure() {
@@ -35,7 +44,8 @@ export function createWorld({ size, isBuddyNode }) {
     const vw = root.clientWidth; // excludes a classic scrollbar
     const vh = window.innerHeight;
     const scale = size() / 100;
-    const half = BODY_HALF * scale;
+    const { sx, sy } = shape();
+    const half = BODY_HALF * scale * sx;
     const header = document.getElementById('app-header')?.getBoundingClientRect();
     const headerBottom = header ? Math.max(0, header.bottom) : 0;
     const sidebar = document.getElementById('sidebar');
@@ -64,7 +74,9 @@ export function createWorld({ size, isBuddyNode }) {
 
     cache = {
       vw, vh, scale, half, height, headerBottom, desktop, collapsed, drawerOpen,
-      floor: { kind: 'floor', y: floorY, x0, x1: Math.max(x0, x1), roomy: x1 >= x0 },
+      bodyTop: height * 0.82 * sy, // feet to the top of the drawn body (the box Buddy occupies)
+      // narrow: the floor is barely wider than Buddy (a phone with the drawer open): it balances there.
+      floor: { kind: 'floor', y: floorY, x0, x1: Math.max(x0, x1), roomy: x1 >= x0, narrow: x1 >= x0 && x1 - x0 < half * 6 },
       wall: {
         kind: 'wall',
         valid: wallValid && floorY - headerBottom > height * 3,
@@ -98,7 +110,7 @@ export function createWorld({ size, isBuddyNode }) {
   /** Buddy's box (viewport px) when its feet are at (x, y) on the floor. */
   function boxAt(x, y) {
     const w = get();
-    return { left: x - w.half, right: x + w.half, top: y - w.height * 0.82, bottom: y - 2 };
+    return { left: x - w.half, right: x + w.half, top: y - w.bodyTop, bottom: y - 2 };
   }
 
   /**
@@ -146,13 +158,13 @@ export function createWorld({ size, isBuddyNode }) {
 
   /** A height on the wall to climb to whose column covers as little as possible. */
   function climbTarget(preferredFraction) {
-    const { wall, half, height } = get();
+    const { wall, half, bodyTop } = get();
     const span = wall.bottom - wall.top;
     const candidates = [preferredFraction, 0.5, 0.7, 0.35, 0.85, 0.2].map((f) => wall.bottom - span * f);
     let best = candidates[0];
     let bestHits = Infinity;
     for (const y of candidates) {
-      const hits = obstruction({ left: wall.attachX - half, right: wall.attachX + half, top: y - height * 0.82, bottom: y - 2 });
+      const hits = obstruction({ left: wall.attachX - half, right: wall.attachX + half, top: y - bodyTop, bottom: y - 2 });
       if (hits < bestHits) { best = y; bestHits = hits; }
       if (hits === 0) break;
     }

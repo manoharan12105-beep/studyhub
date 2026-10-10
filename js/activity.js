@@ -18,6 +18,8 @@ export function recordResult(topicId, kind, item, result) {
     map[topicId][`${kind}:${item}`] = { r: result, t: new Date().toISOString() };
     return map;
   });
+  // Tell listeners (StudyHub Buddy) only the kind of attempt and its result — no topic, question or answer.
+  document.dispatchEvent(new CustomEvent('studyhub:result', { detail: { kind, result } }));
 }
 
 export function getResult(topicId, kind, item) {
