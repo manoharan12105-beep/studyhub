@@ -3,6 +3,14 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-12-spring-ai",
+      "date": "2026-10-12",
+      "title": "Spring AI in Spring Boot",
+      "description": "70 Spring AI 2.0 topics in 9 new Spring Boot modules — foundations, ChatClient, prompts and conversations, tools and advisors, embeddings and RAG, production engineering, advanced topics (multimodal, MCP, agents, human approval), 3 step-by-step projects and interview preparation with a final assessment and project checklist — with 386 interview questions, 344 practice items, offline runnable Java examples, 24 checks, 6 flashcard decks, 8 comparisons and a Spring AI Revision mode with a quick reference and three 30-minute paths.",
+      "type": "content",
+      "link": "#/c/spring-boot"
+    },
+    {
       "id": "2026-10-12-buddy-personality-delight",
       "date": "2026-10-12",
       "title": "Buddy has more personality",

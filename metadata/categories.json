@@ -296,7 +296,7 @@
     {
       "id": "spring-boot",
       "title": "Spring Boot",
-      "description": "Spring and Spring Boot for backend interviews: the container and DI, REST APIs, JPA and transactions, security and JWT, and production practice.",
+      "description": "Spring and Spring Boot for backend interviews: the container and DI, REST APIs, JPA and transactions, security and JWT, production practice and Spring AI.",
       "order": 5,
       "icon": "assets/icons/subjects/spring-boot.svg",
       "group": "development",
@@ -392,6 +392,60 @@
           "title": "Interview Preparation",
           "description": "Interview question banks by area, scenario and debugging questions, architecture, tricky behaviour and project-based questions.",
           "order": 15
+        },
+        {
+          "id": "spring-ai-foundations",
+          "title": "Spring AI: Foundations",
+          "description": "What Spring AI is, LLM basics for developers, the architecture and core abstractions, models and providers, versions, setup, configuration and secrets, a practice lab and a first application.",
+          "order": 16
+        },
+        {
+          "id": "spring-ai-chat-client",
+          "title": "Spring AI: ChatClient",
+          "description": "The ChatClient fluent API and builder, messages and roles, prompt templates, call vs stream, responses and errors, structured output, output validation and REST service design.",
+          "order": 17
+        },
+        {
+          "id": "spring-ai-prompts-and-memory",
+          "title": "Spring AI: Prompts and Conversations",
+          "description": "Instruction design, few-shot prompting, chat memory, conversation ids and isolation, memory storage, long conversations and prompt injection.",
+          "order": 18
+        },
+        {
+          "id": "spring-ai-tools-and-advisors",
+          "title": "Spring AI: Tools and Advisors",
+          "description": "Tool calling with @Tool, registration, the tool-calling loop, tool validation and authorization, the Advisors API, memory and RAG advisors, ordering and reusable behaviours.",
+          "order": 19
+        },
+        {
+          "id": "spring-ai-rag",
+          "title": "Spring AI: Embeddings and RAG",
+          "description": "Embeddings and similarity, the VectorStore abstraction, ingestion, chunking, metadata filters, retrieval quality, RAG architecture, grounding and citations, pgvector and RAG evaluation.",
+          "order": 20
+        },
+        {
+          "id": "spring-ai-production",
+          "title": "Spring AI: Production Engineering",
+          "description": "Resilience and provider errors, tokens and cost, model portability, safe logging, observability, testing, evaluation, security, caching and streaming UX, and deployment.",
+          "order": 21
+        },
+        {
+          "id": "spring-ai-advanced",
+          "title": "Spring AI: Advanced",
+          "description": "Multimodal input, image and audio models, MCP, agentic workflows, human approval for sensitive tools and when not to use an LLM.",
+          "order": 22
+        },
+        {
+          "id": "spring-ai-projects",
+          "title": "Spring AI: Projects",
+          "description": "Three step-by-step projects: a study assistant, a document Q&A service with RAG and a tool-calling service with validation and memory.",
+          "order": 23
+        },
+        {
+          "id": "spring-ai-interview",
+          "title": "Spring AI: Interview Preparation",
+          "description": "Spring AI interview question banks on core APIs, RAG and production, plus a final assessment and project checklist.",
+          "order": 24
         }
       ],
       "studyModes": [
@@ -423,6 +477,18 @@
             { "path": "content/spring-boot/revision/quick-production-and-advanced.md", "title": "Production and Advanced" },
             { "path": "content/spring-boot/revision/quick-annotations.md", "title": "Annotations" },
             { "path": "content/spring-boot/revision/quick-interview-traps.md", "title": "Last-Minute Traps" }
+          ]
+        },
+        {
+          "id": "spring-ai-revision",
+          "title": "Spring AI Revision",
+          "description": "Spring AI 2.0 quick reference, a 30-minute API revision path, a 30-minute concept path and a 30-minute interview and troubleshooting path.",
+          "estimatedMinutes": 90,
+          "sources": [
+            { "path": "content/spring-boot/revision/spring-ai-quick-reference.md", "title": "Quick Reference" },
+            { "path": "content/spring-boot/revision/spring-ai-revision-path.md", "title": "30-Minute API Revision" },
+            { "path": "content/spring-boot/revision/spring-ai-concept-revision.md", "title": "30-Minute Concept Revision" },
+            { "path": "content/spring-boot/revision/spring-ai-interview-troubleshooting.md", "title": "30-Minute Interview and Troubleshooting" }
           ]
         }
       ]

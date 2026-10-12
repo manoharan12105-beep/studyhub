@@ -2982,6 +2982,2426 @@
       "visualizer": null,
       "status": "published",
       "updated": "2026-10-04"
+    },
+    {
+      "id": "spring-ai-introduction",
+      "slug": "spring-ai-introduction",
+      "title": "What Is Spring AI?",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-foundations",
+      "type": "concept",
+      "description": "What Spring AI is, where it fits in the Spring ecosystem, its building blocks, and what the framework does versus the model provider.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-ai",
+        "llm",
+        "ai-integration",
+        "chat-client"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "spring-boot-introduction"
+      ],
+      "relatedTopics": [
+        "spring-ai-architecture",
+        "llm-apps-vs-traditional-apps",
+        "first-spring-ai-application"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "llm-apps-vs-traditional-apps",
+      "slug": "llm-apps-vs-traditional-apps",
+      "title": "Traditional Applications vs LLM-Powered Applications",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-foundations",
+      "type": "concept",
+      "description": "Deterministic code versus probabilistic model output, what to delegate to an LLM, new failure modes and the deterministic shell around the model.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-ai",
+        "llm",
+        "architecture",
+        "determinism"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "spring-ai-introduction"
+      ],
+      "relatedTopics": [
+        "when-not-to-use-an-llm",
+        "ai-output-validation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "llm-fundamentals-for-developers",
+      "slug": "llm-fundamentals-for-developers",
+      "title": "LLMs, Tokens, Context Windows, Temperature and Hallucinations",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-foundations",
+      "type": "concept",
+      "description": "How LLMs generate text, tokens and their cost, context windows, temperature and sampling, and engineering techniques against hallucinations.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-ai",
+        "llm",
+        "tokens",
+        "context-window",
+        "temperature",
+        "hallucination"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "spring-ai-introduction"
+      ],
+      "relatedTopics": [
+        "token-usage-and-cost-control",
+        "rag-architecture",
+        "long-conversation-management"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-architecture",
+      "slug": "spring-ai-architecture",
+      "title": "Spring AI Architecture and Core Abstractions",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-foundations",
+      "type": "concept",
+      "description": "The layers of a Spring AI call, the shared Model/request/response design, Prompt and ChatResponse, and ChatModel versus ChatClient.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "chat-model",
+        "chat-client",
+        "prompt",
+        "architecture"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "spring-ai-introduction"
+      ],
+      "relatedTopics": [
+        "chatclient-fluent-api",
+        "spring-ai-models-and-providers",
+        "spring-ai-advisors-api"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-models-and-providers",
+      "slug": "spring-ai-models-and-providers",
+      "title": "Chat Models, Embedding Models and Model Providers",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-foundations",
+      "type": "concept",
+      "description": "Chat versus embedding models, provider starters, flat 2.0 model properties, selecting providers with spring.ai.model.* and provider capabilities.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-ai",
+        "chat-model",
+        "embedding-model",
+        "openai",
+        "ollama",
+        "providers"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "spring-ai-architecture"
+      ],
+      "relatedTopics": [
+        "model-selection-and-portability",
+        "embeddings-and-semantic-similarity",
+        "spring-ai-configuration-and-secrets"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-versions-and-compatibility",
+      "slug": "spring-ai-versions-and-compatibility",
+      "title": "Spring AI Versions and Compatibility (1.x vs 2.x)",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-foundations",
+      "type": "concept",
+      "description": "Spring AI 2.0 with Spring Boot 4 versus 1.1 with Boot 3, the BOM, and the 1.x to 2.0 breaking changes you meet in code and interviews.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "versions",
+        "compatibility",
+        "upgrade",
+        "bom"
+      ],
+      "estimatedMinutes": 20,
+      "order": 6,
+      "prerequisites": [
+        "spring-ai-introduction"
+      ],
+      "relatedTopics": [
+        "spring-ai-project-setup",
+        "spring-ai-architecture"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-project-setup",
+      "slug": "spring-ai-project-setup",
+      "title": "Project Setup: Spring Initializr, BOM and Starters",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-foundations",
+      "type": "concept",
+      "description": "Generating a Spring Boot 4.1 project with Spring AI, the BOM, model starters, feature modules for RAG, memory, readers and MCP, and disabling unused models.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-ai",
+        "maven",
+        "bom",
+        "starters",
+        "initializr"
+      ],
+      "estimatedMinutes": 25,
+      "order": 7,
+      "prerequisites": [
+        "spring-boot-starters-and-maven"
+      ],
+      "relatedTopics": [
+        "spring-ai-versions-and-compatibility",
+        "spring-ai-practice-lab"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-configuration-and-secrets",
+      "slug": "spring-ai-configuration-and-secrets",
+      "title": "API Keys, Configuration Properties and Secret Management",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-foundations",
+      "type": "concept",
+      "description": "Supplying API keys from the environment, spring.ai property groups, profiles per environment, validated AI settings and keeping secrets safe.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-ai",
+        "api-key",
+        "configuration",
+        "secrets",
+        "profiles"
+      ],
+      "estimatedMinutes": 25,
+      "order": 8,
+      "prerequisites": [
+        "externalized-configuration"
+      ],
+      "relatedTopics": [
+        "spring-profiles",
+        "production-configuration",
+        "spring-ai-deployment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-practice-lab",
+      "slug": "spring-ai-practice-lab",
+      "title": "Spring AI Practice Lab (Offline Models)",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-foundations",
+      "type": "reference",
+      "description": "The studyai practice project with a scripted ChatModel and a toy EmbeddingModel, so every lesson example runs offline and repeatably.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-ai",
+        "practice-lab",
+        "testing",
+        "offline"
+      ],
+      "estimatedMinutes": 20,
+      "order": 9,
+      "prerequisites": [
+        "spring-ai-project-setup"
+      ],
+      "relatedTopics": [
+        "testing-ai-services",
+        "first-spring-ai-application"
+      ],
+      "files": [
+        "content.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "first-spring-ai-application",
+      "slug": "first-spring-ai-application",
+      "title": "Your First Spring AI Application",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-foundations",
+      "type": "concept",
+      "description": "A complete POST /api/explain endpoint: configuration, a service owning a ChatClient, a validated DTO, a thin controller and an offline run.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-ai",
+        "chat-client",
+        "rest",
+        "first-application"
+      ],
+      "estimatedMinutes": 30,
+      "order": 10,
+      "prerequisites": [
+        "spring-ai-configuration-and-secrets",
+        "spring-ai-practice-lab"
+      ],
+      "relatedTopics": [
+        "chatclient-fluent-api",
+        "spring-ai-rest-service-design",
+        "project-study-assistant"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "chatclient-fluent-api",
+      "slug": "chatclient-fluent-api",
+      "title": "ChatClient and Its Fluent API",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-chat-client",
+      "type": "concept",
+      "description": "Building requests with prompt(), system(), user(), messages(), options(), advisors() and tools(), terminal methods, lazy execution and per-request overrides.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-ai",
+        "chat-client",
+        "fluent-api",
+        "chat-options"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "spring-ai-architecture"
+      ],
+      "relatedTopics": [
+        "chatclient-builder-and-defaults",
+        "spring-ai-responses-and-errors",
+        "spring-ai-call-vs-stream"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "chatclient-builder-and-defaults",
+      "slug": "chatclient-builder-and-defaults",
+      "title": "ChatClient.Builder, Auto-Configuration and Defaults",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-chat-client",
+      "type": "concept",
+      "description": "The prototype-scoped auto-configured builder, default system text, options, advisors and tools, several ChatClient beans, customizers and mutate().",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "chat-client",
+        "auto-configuration",
+        "defaults"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "chatclient-fluent-api",
+        "auto-configuration"
+      ],
+      "relatedTopics": [
+        "spring-ai-prompt-templates",
+        "reusable-ai-behaviours"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-messages-and-roles",
+      "slug": "spring-ai-messages-and-roles",
+      "title": "System, User, Assistant and Tool Messages",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-chat-client",
+      "type": "concept",
+      "description": "The four message roles, what belongs in system versus user messages, building message lists, and how history, few-shot examples and tool results appear.",
+      "difficulty": "beginner",
+      "tags": [
+        "spring-ai",
+        "messages",
+        "system-message",
+        "prompt"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "chatclient-fluent-api"
+      ],
+      "relatedTopics": [
+        "spring-ai-chat-memory",
+        "few-shot-prompting",
+        "tool-calling-loop"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-prompt-templates",
+      "slug": "spring-ai-prompt-templates",
+      "title": "Prompt Templates and Dynamic Inputs",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-chat-client",
+      "type": "concept",
+      "description": "Placeholders and param(), PromptTemplate, versioned prompt files as resources, JSON in templates with custom delimiters, and template validation errors.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "prompt-template",
+        "string-template",
+        "prompt-files"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "chatclient-fluent-api"
+      ],
+      "relatedTopics": [
+        "prompt-instruction-design",
+        "chatclient-builder-and-defaults"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-call-vs-stream",
+      "slug": "spring-ai-call-vs-stream",
+      "title": "call() vs stream(): Blocking and Streaming Responses",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-chat-client",
+      "type": "concept",
+      "description": "Blocking calls versus Flux streams, Server-Sent Events from Spring MVC, lazy subscription, what streaming cannot do, mid-stream errors and cancellation.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "streaming",
+        "flux",
+        "server-sent-events"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "chatclient-fluent-api"
+      ],
+      "relatedTopics": [
+        "ai-caching-latency-streaming",
+        "spring-ai-rest-service-design"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-responses-and-errors",
+      "slug": "spring-ai-responses-and-errors",
+      "title": "Response Extraction, Metadata and Error Handling",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-chat-client",
+      "type": "concept",
+      "description": "ChatResponse anatomy, finish reasons, usage and rate limits, truncated and empty answers, provider and Spring AI exceptions, and mapping failures to HTTP.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "chat-response",
+        "finish-reason",
+        "error-handling",
+        "exceptions"
+      ],
+      "estimatedMinutes": 30,
+      "order": 6,
+      "prerequisites": [
+        "chatclient-fluent-api",
+        "global-exception-handling"
+      ],
+      "relatedTopics": [
+        "ai-resilience-and-provider-errors",
+        "token-usage-and-cost-control"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-structured-output",
+      "slug": "spring-ai-structured-output",
+      "title": "Structured Output: Mapping Responses to Records",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-chat-client",
+      "type": "concept",
+      "description": "entity() with records and generic types, the generated JSON Schema, validateSchema() self-correction, provider-native structured output and parsing failures.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "structured-output",
+        "entity",
+        "json-schema",
+        "bean-output-converter"
+      ],
+      "estimatedMinutes": 30,
+      "order": 7,
+      "prerequisites": [
+        "chatclient-fluent-api"
+      ],
+      "relatedTopics": [
+        "ai-output-validation",
+        "few-shot-prompting"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "ai-output-validation",
+      "slug": "ai-output-validation",
+      "title": "Validating AI Output: DTOs, Constraints and Business Rules",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-chat-client",
+      "type": "concept",
+      "description": "Shape, field-constraint and business-rule checks on parsed output, Bean Validation for AI results, bounded re-asking with feedback, and fallbacks.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "validation",
+        "bean-validation",
+        "structured-output"
+      ],
+      "estimatedMinutes": 25,
+      "order": 8,
+      "prerequisites": [
+        "spring-ai-structured-output",
+        "bean-validation"
+      ],
+      "relatedTopics": [
+        "tool-validation-and-authorization",
+        "human-approval-for-tools"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-rest-service-design",
+      "slug": "spring-ai-rest-service-design",
+      "title": "Designing the Controller, Service and REST Endpoint",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-chat-client",
+      "type": "concept",
+      "description": "Controller, application service and AI gateway layers, request limits, status codes for AI failures, transactions and virtual threads, and MockMvc tests.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "rest",
+        "service-layer",
+        "problem-detail",
+        "mockmvc"
+      ],
+      "estimatedMinutes": 30,
+      "order": 9,
+      "prerequisites": [
+        "first-spring-ai-application",
+        "rest-api-best-practices"
+      ],
+      "relatedTopics": [
+        "spring-ai-responses-and-errors",
+        "transactional-pitfalls",
+        "project-study-assistant"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "prompt-instruction-design",
+      "slug": "prompt-instruction-design",
+      "title": "Instruction Design and Context Management",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-prompts-and-memory",
+      "type": "concept",
+      "description": "System instructions with role, task, constraints and output format, delimiters between instructions and data, token-budgeted context and versioned prompts.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "prompt-engineering",
+        "system-prompt",
+        "context-window"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "spring-ai-messages-and-roles",
+        "spring-ai-prompt-templates"
+      ],
+      "relatedTopics": [
+        "few-shot-prompting",
+        "long-conversation-management",
+        "prompt-injection-and-untrusted-input"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "few-shot-prompting",
+      "slug": "few-shot-prompting",
+      "title": "Few-Shot Prompting and Output Formats",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-prompts-and-memory",
+      "type": "concept",
+      "description": "Zero-shot versus few-shot prompts, examples as user/assistant message pairs, few-shot versus format descriptions and structured output, and example pitfalls.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "prompt-engineering",
+        "few-shot",
+        "output-format"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "prompt-instruction-design"
+      ],
+      "relatedTopics": [
+        "spring-ai-structured-output",
+        "ai-evaluation-and-regression"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-chat-memory",
+      "slug": "spring-ai-chat-memory",
+      "title": "Chat Memory: Stateless Models and Application-Managed History",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-prompts-and-memory",
+      "type": "concept",
+      "description": "Why models are stateless, chat memory versus chat history, ChatMemory, MessageWindowChatMemory and MessageChatMemoryAdvisor, and memory without ChatClient.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "chat-memory",
+        "advisors",
+        "conversation"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "chatclient-fluent-api"
+      ],
+      "relatedTopics": [
+        "conversation-ids-and-isolation",
+        "chat-memory-storage",
+        "chat-memory-advisors"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "conversation-ids-and-isolation",
+      "slug": "conversation-ids-and-isolation",
+      "title": "Conversation IDs and Session Isolation",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-prompts-and-memory",
+      "type": "concept",
+      "description": "Conversation ids as the security boundary of memory, building them on the server from the authenticated user, and safe listing and deletion.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "chat-memory",
+        "conversation-id",
+        "security",
+        "multi-tenancy"
+      ],
+      "estimatedMinutes": 20,
+      "order": 4,
+      "prerequisites": [
+        "spring-ai-chat-memory",
+        "authentication-architecture"
+      ],
+      "relatedTopics": [
+        "chat-memory-storage",
+        "ai-application-security"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "chat-memory-storage",
+      "slug": "chat-memory-storage",
+      "title": "Chat Memory Storage: In-Memory, JDBC and Redis",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-prompts-and-memory",
+      "type": "concept",
+      "description": "ChatMemory versus ChatMemoryRepository, the in-memory, JDBC, Redis, Cassandra, Neo4j and MongoDB stores, JDBC schema setup and its limits.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "chat-memory",
+        "jdbc",
+        "redis",
+        "persistence"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "spring-ai-chat-memory"
+      ],
+      "relatedTopics": [
+        "conversation-ids-and-isolation",
+        "long-conversation-management",
+        "caching-and-redis"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "long-conversation-management",
+      "slug": "long-conversation-management",
+      "title": "Long Conversations: Windows, Summaries and Context Limits",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-prompts-and-memory",
+      "type": "concept",
+      "description": "Why long chats get slow and expensive, window sizing and whole-turn eviction, summarising older turns, retrieval over past messages and new conversations.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "chat-memory",
+        "context-window",
+        "summarization",
+        "tokens"
+      ],
+      "estimatedMinutes": 25,
+      "order": 6,
+      "prerequisites": [
+        "spring-ai-chat-memory"
+      ],
+      "relatedTopics": [
+        "chat-memory-storage",
+        "token-usage-and-cost-control",
+        "prompt-instruction-design"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "prompt-injection-and-untrusted-input",
+      "slug": "prompt-injection-and-untrusted-input",
+      "title": "Prompt Injection and Untrusted Input",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-prompts-and-memory",
+      "type": "concept",
+      "description": "Direct and indirect prompt injection, untrusted text as fenced template parameters, output checks against exfiltration, and containing injection by design.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "prompt-injection",
+        "security",
+        "owasp",
+        "untrusted-input"
+      ],
+      "estimatedMinutes": 30,
+      "order": 7,
+      "prerequisites": [
+        "spring-ai-prompt-templates",
+        "prompt-instruction-design"
+      ],
+      "relatedTopics": [
+        "ai-application-security",
+        "tool-validation-and-authorization",
+        "human-approval-for-tools"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "tool-calling-fundamentals",
+      "slug": "tool-calling-fundamentals",
+      "title": "Tool Calling Fundamentals",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-tools-and-advisors",
+      "type": "concept",
+      "description": "How a model requests a tool and the application runs it, the messages exchanged in each round, and when tool calling is the right design.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "tool-calling",
+        "function-calling",
+        "chatclient"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "chatclient-fluent-api"
+      ],
+      "relatedTopics": [
+        "spring-ai-tool-annotation",
+        "tool-calling-loop",
+        "mcp-with-spring-ai"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-tool-annotation",
+      "slug": "spring-ai-tool-annotation",
+      "title": "Defining Tools with @Tool and @ToolParam",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-tools-and-advisors",
+      "type": "concept",
+      "description": "The @Tool and @ToolParam attributes, the JSON schema generated from method signatures, supported and unsupported types, and ToolContext.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "tool-calling",
+        "annotations",
+        "json-schema",
+        "tool-context"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "tool-calling-fundamentals"
+      ],
+      "relatedTopics": [
+        "tool-registration-and-descriptions",
+        "tool-validation-and-authorization"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "tool-registration-and-descriptions",
+      "slug": "tool-registration-and-descriptions",
+      "title": "Registering Tools: Per-Call, Defaults, Beans and Functions",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-tools-and-advisors",
+      "type": "concept",
+      "description": "Per-call and default tools, FunctionToolCallback and MethodToolCallback, ToolCallback beans, the 2.0 removal of toolNames and resolution fallback.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "tool-calling",
+        "function-tool-callback",
+        "migration"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "spring-ai-tool-annotation"
+      ],
+      "relatedTopics": [
+        "tool-calling-loop",
+        "tool-validation-and-authorization",
+        "mcp-with-spring-ai"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "tool-calling-loop",
+      "slug": "tool-calling-loop",
+      "title": "The Tool-Calling Loop: Errors, Limits and Direct Returns",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-tools-and-advisors",
+      "type": "concept",
+      "description": "ToolCallingAdvisor and ToolCallingManager, tool exceptions sent to the model, per-tool and total call limits, returnDirect output, and a user-controlled loop.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "tool-calling",
+        "advisors",
+        "error-handling",
+        "limits"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "tool-calling-fundamentals",
+        "spring-ai-tool-annotation"
+      ],
+      "relatedTopics": [
+        "tool-validation-and-authorization",
+        "advisor-ordering-and-transformations",
+        "human-approval-for-tools"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "tool-validation-and-authorization",
+      "slug": "tool-validation-and-authorization",
+      "title": "Validating and Authorising Tool Calls",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-tools-and-advisors",
+      "type": "concept",
+      "description": "Tool arguments as untrusted input, identity through ToolContext, ownership checks inside tools, safe exception messages and confirmation for writes.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "tool-calling",
+        "security",
+        "authorization",
+        "validation"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "spring-ai-tool-annotation",
+        "authorization-and-method-security"
+      ],
+      "relatedTopics": [
+        "prompt-injection-and-untrusted-input",
+        "human-approval-for-tools",
+        "ai-application-security"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-advisors-api",
+      "slug": "spring-ai-advisors-api",
+      "title": "The Advisors API",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-tools-and-advisors",
+      "type": "concept",
+      "description": "Advisors as interceptors around ChatClient calls, BaseAdvisor before/after, CallAdvisor and StreamAdvisor, the advisor context and short-circuiting.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "advisors",
+        "interceptors",
+        "chatclient"
+      ],
+      "estimatedMinutes": 25,
+      "order": 6,
+      "prerequisites": [
+        "chatclient-fluent-api",
+        "filters-and-interceptors"
+      ],
+      "relatedTopics": [
+        "advisor-ordering-and-transformations",
+        "chat-memory-advisors",
+        "reusable-ai-behaviours"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "chat-memory-advisors",
+      "slug": "chat-memory-advisors",
+      "title": "Chat Memory Advisors",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-tools-and-advisors",
+      "type": "concept",
+      "description": "MessageChatMemoryAdvisor versus VectorStoreChatMemoryAdvisor, memory inside and outside the tool loop, long-term memory in the system prompt, and 2.0 removals.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "advisors",
+        "chat-memory",
+        "vector-store",
+        "tool-calling"
+      ],
+      "estimatedMinutes": 25,
+      "order": 7,
+      "prerequisites": [
+        "spring-ai-chat-memory",
+        "spring-ai-advisors-api"
+      ],
+      "relatedTopics": [
+        "chat-memory-storage",
+        "advisor-ordering-and-transformations",
+        "rag-vs-memory-vs-fine-tuning"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "question-answer-advisor",
+      "slug": "question-answer-advisor",
+      "title": "QuestionAnswerAdvisor: RAG in One Advisor",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-tools-and-advisors",
+      "type": "concept",
+      "description": "Retrieval with QuestionAnswerAdvisor, the exact augmented prompt, topK, similarity threshold and filter expressions, empty contexts and its limits.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "rag",
+        "advisors",
+        "vector-store",
+        "retrieval"
+      ],
+      "estimatedMinutes": 25,
+      "order": 8,
+      "prerequisites": [
+        "spring-ai-advisors-api"
+      ],
+      "relatedTopics": [
+        "vectorstore-abstraction",
+        "vector-metadata-filtering",
+        "rag-architecture"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "advisor-ordering-and-transformations",
+      "slug": "advisor-ordering-and-transformations",
+      "title": "Advisor Ordering and Transformations",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-tools-and-advisors",
+      "type": "concept",
+      "description": "Advisor order as a stack, built-in default orders and the tool loop boundary, guardrail placement, and request and response transformations.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "advisors",
+        "ordering",
+        "tool-calling"
+      ],
+      "estimatedMinutes": 25,
+      "order": 9,
+      "prerequisites": [
+        "spring-ai-advisors-api"
+      ],
+      "relatedTopics": [
+        "chat-memory-advisors",
+        "tool-calling-loop",
+        "reusable-ai-behaviours"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "reusable-ai-behaviours",
+      "slug": "reusable-ai-behaviours",
+      "title": "Reusable AI Behaviours: Shared Builders, Customizers and Advisors",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-tools-and-advisors",
+      "type": "concept",
+      "description": "Organisation-wide AI behaviour with ChatClientBuilderCustomizer, cloned base builders and reusable advisors, and SafeGuardAdvisor as a first guardrail.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "advisors",
+        "chatclient",
+        "guardrails",
+        "architecture"
+      ],
+      "estimatedMinutes": 20,
+      "order": 10,
+      "prerequisites": [
+        "spring-ai-advisors-api",
+        "chatclient-builder-and-defaults"
+      ],
+      "relatedTopics": [
+        "advisor-ordering-and-transformations",
+        "ai-application-security"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "embeddings-and-semantic-similarity",
+      "slug": "embeddings-and-semantic-similarity",
+      "title": "Embeddings and Semantic Similarity",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-rag",
+      "type": "concept",
+      "description": "Embeddings as vectors of meaning, cosine similarity and distance, the EmbeddingModel API and configuration, and the rules for dimensions and re-embedding.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "embeddings",
+        "cosine-similarity",
+        "vectors"
+      ],
+      "estimatedMinutes": 25,
+      "order": 1,
+      "prerequisites": [
+        "spring-ai-models-and-providers"
+      ],
+      "relatedTopics": [
+        "vectorstore-abstraction",
+        "retrieval-quality"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "vectorstore-abstraction",
+      "slug": "vectorstore-abstraction",
+      "title": "Vector Stores: The VectorStore Abstraction",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-rag",
+      "type": "concept",
+      "description": "What a vector store does, add, similaritySearch and delete, SearchRequest defaults, SimpleVectorStore for tests, and choosing a production store.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "vector-store",
+        "similarity-search",
+        "rag"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "embeddings-and-semantic-similarity"
+      ],
+      "relatedTopics": [
+        "pgvector-with-spring-ai",
+        "vector-metadata-filtering",
+        "question-answer-advisor"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "document-ingestion-pipeline",
+      "slug": "document-ingestion-pipeline",
+      "title": "The Document Ingestion Pipeline (ETL)",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-rag",
+      "type": "concept",
+      "description": "DocumentReader, DocumentTransformer and DocumentWriter, readers for Markdown, PDF, HTML and office files, metadata enrichment and idempotent re-ingestion.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "etl",
+        "ingestion",
+        "document-readers",
+        "rag"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "vectorstore-abstraction"
+      ],
+      "relatedTopics": [
+        "text-splitting-and-chunking",
+        "vector-metadata-filtering",
+        "async-and-scheduling"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "text-splitting-and-chunking",
+      "slug": "text-splitting-and-chunking",
+      "title": "Text Splitting and Chunking",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-rag",
+      "type": "concept",
+      "description": "Why documents are chunked, how TokenTextSplitter cuts text and its defaults, choosing chunk sizes, and recognising chunking failures.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "chunking",
+        "token-text-splitter",
+        "rag"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "document-ingestion-pipeline"
+      ],
+      "relatedTopics": [
+        "retrieval-quality",
+        "token-usage-and-cost-control"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "vector-metadata-filtering",
+      "slug": "vector-metadata-filtering",
+      "title": "Metadata Filtering in Vector Search",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-rag",
+      "type": "concept",
+      "description": "Filter expressions and FilterExpressionBuilder, per-request filters through advisors, tenancy and permissions, filtered deletion and filter injection.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "vector-store",
+        "filters",
+        "multi-tenancy",
+        "security"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "vectorstore-abstraction"
+      ],
+      "relatedTopics": [
+        "question-answer-advisor",
+        "conversation-ids-and-isolation",
+        "ai-application-security"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "retrieval-quality",
+      "slug": "retrieval-quality",
+      "title": "Retrieval Quality: Measuring and Improving Search",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-rag",
+      "type": "concept",
+      "description": "Hit rate and MRR on a labelled question set, tuning topK and thresholds, query transformers, multi-query expansion, post-processing, hybrid search and re-ranking.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "rag",
+        "retrieval",
+        "evaluation",
+        "re-ranking"
+      ],
+      "estimatedMinutes": 30,
+      "order": 6,
+      "prerequisites": [
+        "vectorstore-abstraction",
+        "text-splitting-and-chunking"
+      ],
+      "relatedTopics": [
+        "rag-architecture",
+        "rag-evaluation-and-failures"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "rag-architecture",
+      "slug": "rag-architecture",
+      "title": "RAG Architecture with RetrievalAugmentationAdvisor",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-rag",
+      "type": "concept",
+      "description": "Ingestion and question-answering halves of RAG, the modular RetrievalAugmentationAdvisor, follow-up questions with memory, empty context, order and executor.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "rag",
+        "advisors",
+        "retrieval-augmentation"
+      ],
+      "estimatedMinutes": 35,
+      "order": 7,
+      "prerequisites": [
+        "question-answer-advisor",
+        "retrieval-quality"
+      ],
+      "relatedTopics": [
+        "rag-grounding-and-citations",
+        "chat-memory-advisors",
+        "project-document-qa"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "rag-grounding-and-citations",
+      "slug": "rag-grounding-and-citations",
+      "title": "Grounding and Citations",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-rag",
+      "type": "concept",
+      "description": "Grounded answers, labelling passages with a document formatter, validating cited ids in code, and showing sources from metadata.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "rag",
+        "citations",
+        "grounding",
+        "hallucination"
+      ],
+      "estimatedMinutes": 25,
+      "order": 8,
+      "prerequisites": [
+        "rag-architecture"
+      ],
+      "relatedTopics": [
+        "rag-evaluation-and-failures",
+        "ai-output-validation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "pgvector-with-spring-ai",
+      "slug": "pgvector-with-spring-ai",
+      "title": "pgvector with Spring AI",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-rag",
+      "type": "concept",
+      "description": "The pgvector store starter, table, index and distance defaults, the SQL it runs, schema migrations and validation, and dimension and index pitfalls.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "pgvector",
+        "postgresql",
+        "vector-store",
+        "hnsw"
+      ],
+      "estimatedMinutes": 25,
+      "order": 9,
+      "prerequisites": [
+        "vectorstore-abstraction"
+      ],
+      "relatedTopics": [
+        "vector-metadata-filtering",
+        "connection-pooling-hikaricp",
+        "spring-ai-deployment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "rag-evaluation-and-failures",
+      "slug": "rag-evaluation-and-failures",
+      "title": "RAG Evaluation and Failure Modes",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-rag",
+      "type": "concept",
+      "description": "A stage-by-stage failure taxonomy, RelevancyEvaluator and FactCheckingEvaluator, strict judge verdict parsing, and an evaluation loop.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "rag",
+        "evaluation",
+        "llm-as-judge",
+        "testing"
+      ],
+      "estimatedMinutes": 30,
+      "order": 10,
+      "prerequisites": [
+        "rag-architecture"
+      ],
+      "relatedTopics": [
+        "retrieval-quality",
+        "ai-evaluation-and-regression",
+        "testing-ai-services"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "rag-vs-memory-vs-fine-tuning",
+      "slug": "rag-vs-memory-vs-fine-tuning",
+      "title": "RAG vs Memory vs Tools vs Fine-Tuning",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-rag",
+      "type": "concept",
+      "description": "Prompt, chat memory, RAG, tools and fine-tuning compared by freshness, citations, access control and cost, and how to combine them in one client.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "rag",
+        "chat-memory",
+        "tool-calling",
+        "fine-tuning",
+        "architecture"
+      ],
+      "estimatedMinutes": 20,
+      "order": 11,
+      "prerequisites": [
+        "rag-architecture",
+        "spring-ai-chat-memory",
+        "tool-calling-fundamentals"
+      ],
+      "relatedTopics": [
+        "when-not-to-use-an-llm",
+        "chat-memory-advisors"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "ai-resilience-and-provider-errors",
+      "slug": "ai-resilience-and-provider-errors",
+      "title": "Resilience: Retries, Timeouts and Fallbacks",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-production",
+      "type": "concept",
+      "description": "Transient versus permanent provider failures, retry layers in Spring AI 2.0, Spring Framework 7 @Retryable and @ConcurrencyLimit, timeouts and fallback models.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "resilience",
+        "retry",
+        "timeouts",
+        "fallback"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "spring-ai-responses-and-errors",
+        "resilience-patterns"
+      ],
+      "relatedTopics": [
+        "model-selection-and-portability",
+        "spring-proxies"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "token-usage-and-cost-control",
+      "slug": "token-usage-and-cost-control",
+      "title": "Token Usage and Cost Control",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-production",
+      "type": "concept",
+      "description": "Where input tokens come from, reading usage and estimating tokens, output limits, per-user budgets in an advisor, and reducing cost without losing quality.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "tokens",
+        "cost",
+        "budgets",
+        "advisors"
+      ],
+      "estimatedMinutes": 25,
+      "order": 2,
+      "prerequisites": [
+        "llm-fundamentals-for-developers",
+        "spring-ai-advisors-api"
+      ],
+      "relatedTopics": [
+        "spring-ai-observability",
+        "long-conversation-management",
+        "ai-caching-latency-streaming"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "model-selection-and-portability",
+      "slug": "model-selection-and-portability",
+      "title": "Model Selection, Routing and Portability",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-production",
+      "type": "concept",
+      "description": "Choosing models per task, routing behind a gateway, what Spring AI makes portable and what it does not, and how request options replace client defaults.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "models",
+        "routing",
+        "portability",
+        "chat-options"
+      ],
+      "estimatedMinutes": 25,
+      "order": 3,
+      "prerequisites": [
+        "spring-ai-models-and-providers",
+        "chatclient-builder-and-defaults"
+      ],
+      "relatedTopics": [
+        "ai-resilience-and-provider-errors",
+        "token-usage-and-cost-control"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "ai-logging-and-sensitive-data",
+      "slug": "ai-logging-and-sensitive-data",
+      "title": "Logging AI Calls Without Leaking Sensitive Data",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-production",
+      "type": "concept",
+      "description": "What to log for AI calls, Spring AI content-logging switches and their defaults, a redacting audit advisor, pseudonymous ids, and personal data across the system.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "logging",
+        "privacy",
+        "pii",
+        "security"
+      ],
+      "estimatedMinutes": 25,
+      "order": 4,
+      "prerequisites": [
+        "spring-logging",
+        "spring-ai-advisors-api"
+      ],
+      "relatedTopics": [
+        "spring-ai-observability",
+        "ai-application-security",
+        "conversation-ids-and-isolation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-observability",
+      "slug": "spring-ai-observability",
+      "title": "Observability: Metrics and Traces for AI Calls",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-production",
+      "type": "concept",
+      "description": "The observations Spring AI creates, reading a tool-calling trace, token usage metrics, Actuator and OpenTelemetry setup, and dashboards and alerts.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "observability",
+        "micrometer",
+        "tracing",
+        "metrics"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "actuator-and-monitoring",
+        "spring-ai-advisors-api"
+      ],
+      "relatedTopics": [
+        "token-usage-and-cost-control",
+        "ai-logging-and-sensitive-data"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "testing-ai-services",
+      "slug": "testing-ai-services",
+      "title": "Testing AI Services",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-production",
+      "type": "concept",
+      "description": "Unit tests with a stub ChatModel for prompts, parsing and fallbacks, testing tools and advisors directly, integration tests with local models, and evaluation layers.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "testing",
+        "junit",
+        "testcontainers",
+        "stubs"
+      ],
+      "estimatedMinutes": 30,
+      "order": 6,
+      "prerequisites": [
+        "spring-ai-practice-lab",
+        "chatclient-fluent-api"
+      ],
+      "relatedTopics": [
+        "ai-evaluation-and-regression",
+        "ai-output-validation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "ai-evaluation-and-regression",
+      "slug": "ai-evaluation-and-regression",
+      "title": "AI Evaluation and Regression Testing",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-production",
+      "type": "concept",
+      "description": "Building evaluation sets with checkable properties, baseline versus candidate comparisons, judges and human review, and release gates.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "evaluation",
+        "regression-testing",
+        "llm-as-judge",
+        "quality"
+      ],
+      "estimatedMinutes": 25,
+      "order": 7,
+      "prerequisites": [
+        "testing-ai-services"
+      ],
+      "relatedTopics": [
+        "rag-evaluation-and-failures",
+        "few-shot-prompting"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "ai-application-security",
+      "slug": "ai-application-security",
+      "title": "AI Application Security",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-production",
+      "type": "concept",
+      "description": "The OWASP Top 10 for LLM Applications mapped to Spring defences, improper output handling, excessive agency, and a release security checklist.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "security",
+        "owasp",
+        "prompt-injection",
+        "output-handling"
+      ],
+      "estimatedMinutes": 30,
+      "order": 8,
+      "prerequisites": [
+        "prompt-injection-and-untrusted-input",
+        "tool-validation-and-authorization"
+      ],
+      "relatedTopics": [
+        "security-filter-chain",
+        "vector-metadata-filtering",
+        "human-approval-for-tools"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "ai-caching-latency-streaming",
+      "slug": "ai-caching-latency-streaming",
+      "title": "Caching, Latency and Streaming",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-production",
+      "type": "concept",
+      "description": "Where AI latency comes from, a safe answer-cache advisor, semantic versus prompt caching, and streaming answers to the browser.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "caching",
+        "latency",
+        "streaming",
+        "performance"
+      ],
+      "estimatedMinutes": 25,
+      "order": 9,
+      "prerequisites": [
+        "spring-ai-call-vs-stream",
+        "spring-cache-abstraction"
+      ],
+      "relatedTopics": [
+        "token-usage-and-cost-control",
+        "caching-and-redis"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-deployment",
+      "slug": "spring-ai-deployment",
+      "title": "Deploying Spring AI Applications",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-production",
+      "type": "concept",
+      "description": "Secrets, pinned models, timeouts, virtual threads, shared state across instances, health from recent calls, graceful shutdown, kill switches and rollout.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "deployment",
+        "production",
+        "health-checks",
+        "configuration"
+      ],
+      "estimatedMinutes": 25,
+      "order": 10,
+      "prerequisites": [
+        "production-configuration",
+        "docker-deployment"
+      ],
+      "relatedTopics": [
+        "spring-ai-observability",
+        "ai-resilience-and-provider-errors",
+        "pgvector-with-spring-ai"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "multimodal-input",
+      "slug": "multimodal-input",
+      "title": "Multimodal Input: Images and Files in Prompts",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-advanced",
+      "type": "concept",
+      "description": "Sending images with text through Media, validating uploads, structured output from images, and provider limits, cost and privacy.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "multimodal",
+        "vision",
+        "media",
+        "uploads"
+      ],
+      "estimatedMinutes": 20,
+      "order": 1,
+      "prerequisites": [
+        "chatclient-fluent-api",
+        "spring-ai-structured-output"
+      ],
+      "relatedTopics": [
+        "image-and-audio-models",
+        "file-upload-multipart"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "image-and-audio-models",
+      "slug": "image-and-audio-models",
+      "title": "Image, Transcription and Speech Models",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-advanced",
+      "type": "concept",
+      "description": "ImageModel, TranscriptionModel and TextToSpeechModel, a voice tutor built on interfaces, provider configuration, and media cost and storage.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "image-generation",
+        "speech-to-text",
+        "text-to-speech"
+      ],
+      "estimatedMinutes": 20,
+      "order": 2,
+      "prerequisites": [
+        "spring-ai-models-and-providers"
+      ],
+      "relatedTopics": [
+        "multimodal-input",
+        "model-selection-and-portability"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "mcp-with-spring-ai",
+      "slug": "mcp-with-spring-ai",
+      "title": "MCP with Spring AI: Servers and Clients",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-advanced",
+      "type": "concept",
+      "description": "The Model Context Protocol, @McpTool servers over streamable HTTP, MCP clients feeding ChatClient, security, protocol configuration and trust.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "mcp",
+        "tool-calling",
+        "integration",
+        "security"
+      ],
+      "estimatedMinutes": 35,
+      "order": 3,
+      "prerequisites": [
+        "tool-calling-fundamentals",
+        "tool-registration-and-descriptions"
+      ],
+      "relatedTopics": [
+        "ai-application-security",
+        "agentic-workflows"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "agentic-workflows",
+      "slug": "agentic-workflows",
+      "title": "Agentic Workflows and Agents",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-advanced",
+      "type": "concept",
+      "description": "Workflows versus agents, chaining, routing, parallelisation, orchestrator-workers and evaluator-optimizer patterns, and the controls agents need.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "agents",
+        "workflows",
+        "patterns",
+        "tool-calling"
+      ],
+      "estimatedMinutes": 30,
+      "order": 4,
+      "prerequisites": [
+        "tool-calling-loop",
+        "spring-ai-structured-output"
+      ],
+      "relatedTopics": [
+        "human-approval-for-tools",
+        "when-not-to-use-an-llm",
+        "mcp-with-spring-ai"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "human-approval-for-tools",
+      "slug": "human-approval-for-tools",
+      "title": "Human Approval for Tool Actions",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-advanced",
+      "type": "concept",
+      "description": "Request-then-approve tools, separation of duties, re-validation and exactly-once execution, and choosing user confirmation, staff approval or policy.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "human-in-the-loop",
+        "tool-calling",
+        "security",
+        "approval"
+      ],
+      "estimatedMinutes": 25,
+      "order": 5,
+      "prerequisites": [
+        "tool-validation-and-authorization"
+      ],
+      "relatedTopics": [
+        "agentic-workflows",
+        "ai-application-security",
+        "transactional-annotation"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "when-not-to-use-an-llm",
+      "slug": "when-not-to-use-an-llm",
+      "title": "When Not to Use an LLM",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-advanced",
+      "type": "concept",
+      "description": "Tasks where code, queries, search or rules beat a model, deterministic-first and hybrid designs, and how to judge whether an AI feature is worth it.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "architecture",
+        "design-decisions",
+        "determinism"
+      ],
+      "estimatedMinutes": 20,
+      "order": 6,
+      "prerequisites": [
+        "llm-apps-vs-traditional-apps"
+      ],
+      "relatedTopics": [
+        "agentic-workflows",
+        "rag-vs-memory-vs-fine-tuning"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "project-study-assistant",
+      "slug": "project-study-assistant",
+      "title": "Project 1: Study Assistant",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-projects",
+      "type": "concept",
+      "description": "A study assistant service with a system prompt, per-learner chat memory, validated quiz questions as structured output, a REST controller and offline tests.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "project",
+        "chat-memory",
+        "structured-output"
+      ],
+      "estimatedMinutes": 45,
+      "order": 1,
+      "prerequisites": [
+        "chatclient-builder-and-defaults",
+        "spring-ai-chat-memory",
+        "spring-ai-structured-output"
+      ],
+      "relatedTopics": [
+        "project-document-qa",
+        "testing-ai-services"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "project-document-qa",
+      "slug": "project-document-qa",
+      "title": "Project 2: Document Q&A with RAG",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-projects",
+      "type": "concept",
+      "description": "Ingest documents with metadata, answer with RetrievalAugmentationAdvisor, return sources, refuse unknown questions and move to pgvector.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "project",
+        "rag",
+        "vector-store",
+        "citations"
+      ],
+      "estimatedMinutes": 50,
+      "order": 2,
+      "prerequisites": [
+        "rag-architecture",
+        "text-splitting-and-chunking"
+      ],
+      "relatedTopics": [
+        "project-study-assistant",
+        "rag-grounding-and-citations",
+        "pgvector-with-spring-ai"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "project-tool-calling-service",
+      "slug": "project-tool-calling-service",
+      "title": "Project 3: Tool-Calling Enrolment Service",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-projects",
+      "type": "concept",
+      "description": "An assistant that enrols learners through tools: identity from ToolContext, validation and audit in a service, idempotent writes and chat memory.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "project",
+        "tool-calling",
+        "security",
+        "chat-memory"
+      ],
+      "estimatedMinutes": 45,
+      "order": 3,
+      "prerequisites": [
+        "tool-validation-and-authorization",
+        "chat-memory-advisors"
+      ],
+      "relatedTopics": [
+        "project-document-qa",
+        "human-approval-for-tools"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-core-interview-questions",
+      "slug": "spring-ai-core-interview-questions",
+      "title": "Spring AI Interview Questions: Core",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-interview",
+      "type": "concept",
+      "description": "Interview questions on Spring AI abstractions, ChatClient, options, structured output, memory, tools, advisors, streaming, testing and 2.0 upgrades.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "interview",
+        "chatclient",
+        "advisors",
+        "tool-calling"
+      ],
+      "estimatedMinutes": 30,
+      "order": 1,
+      "prerequisites": [
+        "chatclient-fluent-api",
+        "tool-calling-loop"
+      ],
+      "relatedTopics": [
+        "spring-ai-rag-interview-questions",
+        "spring-ai-final-assessment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-rag-interview-questions",
+      "slug": "spring-ai-rag-interview-questions",
+      "title": "Spring AI Interview Questions: RAG",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-interview",
+      "type": "concept",
+      "description": "Interview questions on embeddings, chunking, QA and RAG advisors, thresholds, filters, citations, evaluation, pgvector and RAG versus alternatives.",
+      "difficulty": "intermediate",
+      "tags": [
+        "spring-ai",
+        "interview",
+        "rag",
+        "embeddings",
+        "vector-store"
+      ],
+      "estimatedMinutes": 30,
+      "order": 2,
+      "prerequisites": [
+        "rag-architecture"
+      ],
+      "relatedTopics": [
+        "spring-ai-core-interview-questions",
+        "spring-ai-production-interview-questions"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-production-interview-questions",
+      "slug": "spring-ai-production-interview-questions",
+      "title": "Spring AI Interview Questions: Production",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-interview",
+      "type": "concept",
+      "description": "Interview questions on retries, cost, logging, observability, testing, OWASP LLM risks, MCP troubleshooting, agents and deployment.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "interview",
+        "production",
+        "security",
+        "observability"
+      ],
+      "estimatedMinutes": 30,
+      "order": 3,
+      "prerequisites": [
+        "ai-resilience-and-provider-errors",
+        "spring-ai-observability"
+      ],
+      "relatedTopics": [
+        "spring-ai-rag-interview-questions",
+        "spring-ai-final-assessment"
+      ],
+      "files": [
+        "content.md",
+        "interview-questions.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "spring-ai-final-assessment",
+      "slug": "spring-ai-final-assessment",
+      "title": "Spring AI Final Assessment and Project Checklist",
+      "category": "spring-boot",
+      "subcategory": "spring-ai-interview",
+      "type": "concept",
+      "description": "A 20-question assessment across all Spring AI modules with a scoring rubric, plus a production checklist for any Spring AI project.",
+      "difficulty": "advanced",
+      "tags": [
+        "spring-ai",
+        "assessment",
+        "checklist",
+        "interview"
+      ],
+      "estimatedMinutes": 40,
+      "order": 4,
+      "prerequisites": [
+        "spring-ai-core-interview-questions"
+      ],
+      "relatedTopics": [
+        "project-study-assistant",
+        "project-document-qa",
+        "project-tool-calling-service"
+      ],
+      "files": [
+        "content.md",
+        "practice.md"
+      ],
+      "visualizer": null,
+      "status": "published",
+      "updated": "2026-10-12"
     }
   ]
 }
