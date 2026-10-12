@@ -106,6 +106,9 @@ export function restPose() {
     tears: 0, tearPhase: 0, // 0…1 tears showing; how far down they have run
     swirl: 0, // degrees: dizzy eyes spin
     starA: 0, starO: 0, // orbiting stars: angle (degrees) and opacity
+    // Accessories Buddy fiddles with (accessory-aware fidgets): glasses nudged up or down
+    // (viewBox units), a hat tipped (degrees), the grad-cap tassel swung and the scarf tail tugged (degrees).
+    glassesY: 0, hatTip: 0, tassel: 0, scarfTug: 0,
   };
 }
 
@@ -218,8 +221,11 @@ export function createCharacter() {
   parts.gradcap = svg('g', { class: 'b-acc-gradcap' },
     svg('path', { class: 'b-grad-base', d: 'M36.5 24.5 L36.5 30.5 Q50 36 63.5 30.5 L63.5 24.5 Z' }),
     svg('path', { class: 'b-grad-board', d: 'M28 22.5 L50 14 L72 22.5 L50 31 Z' }),
-    svg('path', { class: 'b-grad-tassel', d: 'M50 22.5 L67 25 L67 33' }),
-    svg('circle', { class: 'b-grad-tassel-end', cx: 67, cy: 34, r: 1.6 }));
+    svg('path', { class: 'b-grad-tassel', d: 'M50 22.5 L67 25' }),
+    // The hanging part swings about the board's corner (pose.tassel).
+    (parts.tassel = svg('g', { class: 'b-grad-tassel-hang' },
+      svg('path', { class: 'b-grad-tassel', d: 'M67 25 L67 33' }),
+      svg('circle', { class: 'b-grad-tassel-end', cx: 67, cy: 34, r: 1.6 }))));
   parts.seasonal = svg('g', { class: 'b-acc-seasonal' },
     svg('g', { class: 'b-season-winter' },
       svg('path', { class: 'b-beanie', d: 'M30 31 C30 11.5 70 11.5 70 31 Z' }),
@@ -240,8 +246,10 @@ export function createCharacter() {
     svg('path', { class: 'b-strap', d: 'M73 36 Q78 54 75.5 71' }));
   parts.scarf = svg('g', { class: 'b-acc-scarf' },
     svg('path', { class: 'b-scarf', d: 'M19.5 63.5 Q50 74 80.5 63.5 L80.5 69.5 Q50 80 19.5 69.5 Z' }),
-    svg('path', { class: 'b-scarf', d: 'M64.5 71.5 L69.5 85 L62 85.5 L59.5 73 Z' }),
-    svg('path', { class: 'b-scarf-stripe', d: 'M63.2 79.5 L68.3 79' }));
+    // The loose end swings about where it leaves the wrap (pose.scarfTug).
+    (parts.scarfTail = svg('g', { class: 'b-scarf-tail' },
+      svg('path', { class: 'b-scarf', d: 'M64.5 71.5 L69.5 85 L62 85.5 L59.5 73 Z' }),
+      svg('path', { class: 'b-scarf-stripe', d: 'M63.2 79.5 L68.3 79' }))));
   parts.stars = svg('g', { class: 'b-stars', opacity: 0 }, (parts.star0 = star()), (parts.star1 = star()), (parts.star2 = star()));
 
   parts.bob = svg('g', { class: 'b-bob' },
@@ -351,8 +359,14 @@ export function createCharacter() {
     set(parts.shine, 'transform', `translate(${r(-turn * 4)} 0) rotate(-32 35 33)`);
     set(parts.sprout, 'transform', `rotate(${r(p.sprout)} 50 23)`);
     const flip = turn < -0.2 ? 'translate(100 0) scale(-1 1)' : '';
-    set(parts.cap, 'transform', flip);
+    // A hat tipped by the hand pivots on the head (about the crown's base).
+    const tip = p.hatTip ? ` rotate(${r(p.hatTip)} 50 30)` : '';
+    set(parts.cap, 'transform', `${flip}${tip}`);
     set(parts.gradcap, 'transform', flip);
+    set(parts.seasonal, 'transform', tip.trim());
+    set(parts.tassel, 'transform', p.tassel ? `rotate(${r(p.tassel)} 67 25)` : '');
+    set(parts.scarfTail, 'transform', p.scarfTug ? `rotate(${r(p.scarfTug)} 62 72)` : '');
+    set(parts.glasses, 'transform', p.glassesY ? `translate(0 ${r(p.glassesY)})` : '');
 
     // In a 3/4 view the far arm is behind the body (moved only when the side changes).
     const far = turn < -0.5 ? 'r' : turn > 0.5 ? 'l' : null;

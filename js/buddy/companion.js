@@ -412,15 +412,18 @@ export function createCompanion(deps) {
     }
   }
 
-  /** Buddy was clicked or tapped: a tiny menu of things it can do. */
-  function showMenu() {
+  /**
+   * A tiny menu of things Buddy can do (its Menu button, or a click while petting is off).
+   * focus: opened from the keyboard — focus moves into it and it stays until dismissed.
+   */
+  function showMenu({ focus = false } = {}) {
     const quiz = el('button', { type: 'button', class: 'btn btn-secondary btn-sm' }, 'Quiz me');
     const fact = el('button', { type: 'button', class: 'btn btn-secondary btn-sm' }, 'Tell me a fact');
     const settingsBtn = el('button', { type: 'button', class: 'btn btn-ghost btn-sm' }, 'Buddy settings');
     quiz.addEventListener('click', () => offerQuiz({ userAsked: true }));
     fact.addEventListener('click', () => showFact({ userAsked: true }));
     settingsBtn.addEventListener('click', () => { close({ restoreFocus: false }); deps.onOpenSettings(); });
-    open('menu', [el('p', {}, LINES.menu), el('div', { class: 'buddy-bubble-actions' }, quiz, fact, settingsBtn)], { autoCloseMs: 12_000 });
+    open('menu', [el('p', {}, LINES.menu), el('div', { class: 'buddy-bubble-actions' }, quiz, fact, settingsBtn)], { focus, autoCloseMs: focus ? 0 : 12_000 });
   }
 
   return {

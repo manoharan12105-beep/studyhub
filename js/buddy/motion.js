@@ -16,7 +16,11 @@
 //   idle ─▶ yawning ─▶ sleeping ─▶ stretching ─▶ idle
 //   landing / recovering ─▶ wobbling (dizzy: unsteady steps) ─▶ idle · sitting
 //   landing / recovering / walking ─▶ balancing (at the real end of the floor) ─▶ idle
-//   idle ─▶ petted (a gentle pat) ─▶ idle
+//   idle ─▶ petted (a gentle pat) ─▶ petted (the next pat of a streak) ─▶ idle · sitting (a melt)
+//
+// Habits vary each time from seeded choices made on entry (which side first,
+// how many glances, the pace, a head tilt; which accessory a fidget handles),
+// so the injected random source makes them reproducible in tests.
 //
 // Feelings (emotion.js) are a separate dimension: motion.js asks for a face to
 // draw over its own pose (renderNow), but the body — position, velocity,
@@ -73,7 +77,7 @@ const ALLOWED = {
   inspecting: BRIEF_EXITS,
   shifting: BRIEF_EXITS,
   fidgeting: BRIEF_EXITS,
-  petted: BRIEF_EXITS,
+  petted: [...BRIEF_EXITS, 'petted', 'sitting'], // the next pat of a streak; a melt ends sitting
   wobbling: [...BRIEF_EXITS, 'sitting'],
   balancing: [...BRIEF_EXITS, 'sitting'],
   yawning: ['sleeping', 'idle', 'knocked'],
@@ -114,6 +118,14 @@ const DURATION = {
   looking: 1.9, celebrating: 1.1, interacting: 0.65, worried: 1.6, waving: 1.6, yawning: 1.4, stretching: 1.1, recovering: 0.95,
   pleased: 0.9, inspecting: 2.2, shifting: 0.9, fidgeting: 1.3, petted: 1.15, balancing: 1.3,
 };
+// A state's entry may set data.limit to vary its own length (seeded habits, fidget and pat variants).
+// Fidgets match what Buddy wears (deps.wearing): seconds each takes.
+const FIDGET_S = { leaf: 1.3, glasses: 1.4, cap: 1.5, tassel: 1.7, flower: 1.8, scarf: 1.4 };
+const MELT_S = 1.8; // a long pat streak: Buddy melts into a sit
+const PLACE_SPEED = 140; // px/s: let go slower than this, close to the floor, and Buddy was placed, not dropped
+const PLACE_HEIGHT = 1.3; // Buddy heights above the floor that still count as "placed"
+const BUMP_SPEED = 250; // px/s into a workspace edge or the header before a thrown Buddy winces
+const BUMP_FACE_MS = 240;
 const WOBBLE_STEP = 12; // px: the most a dizzy Buddy's uneven steps may carry it
 const NEAR_EDGE_COOLDOWN = 10_000; // ms between near-miss balancing reactions
 // Catching an edge on the way down (tryCatch): reach, odds and a cooldown between attempts.
@@ -128,6 +140,20 @@ export const STATES = Object.keys(ALLOWED);
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const ease = (p) => (p < 0.5 ? 2 * p * p : 1 - ((-2 * p + 2) ** 2) / 2);
 const DEG = 180 / Math.PI;
+
+/**
+ * Glances (-1 = one side … 1 = the other) spread evenly over [0, end), each
+ * easing in from the last over 0.15 s; after `end`, back to the front.
+ */
+function glance(seq, t, end) {
+  const seg = end / seq.length;
+  const done = t >= end;
+  const i = done ? seq.length : Math.floor(t / seg);
+  const cur = done ? 0 : seq[i];
+  const prev = i === 0 ? 0 : seq[i - 1];
+  const start = done ? end : i * seg;
+  return prev + (cur - prev) * ease(Math.min(1, (t - start) / 0.15));
+}
 
 /** A damped spring around 0: x is an offset (degrees), v its velocity. */
 function spring(k, c, limit) {
@@ -150,7 +176,8 @@ const springStill = (s) => Math.abs(s.x) < 0.08 && Math.abs(s.v) < 1.2;
  * deps: { world, character, el: { container, inner, shadow }, own, isReduced(),
  *         personality(), emit(event, detail), debug,
  *         tuning(): { speed, jumps, catching, nearMiss, dizzy, fear, throwOn, speedLines, particles, expression },
- *         emotion: { overlay(pose, ctx), animating(), current() } }
+ *         emotion: { overlay(pose, ctx), animating(), current() },
+ *         wearing(): { glasses, cap, hat, gradcap, flower, scarf } — what Buddy has on now (fidgets) }
  * tuning() only scales optional movement (walking, climbing speed) and switches
  * optional reactions; gravity, collisions and throw limits are fixed here.
  */
@@ -198,6 +225,7 @@ export function createMotion(deps) {
   let lastCatch = -Infinity; // performance.now() of the last catch attempt
   let missedLast = false; // after a miss, the next plausible attempt holds on
   let speedShown = '';
+  let lastFidget = ''; // the accessory fidget just done (the next one picks another when it can)
 
   // ---- State changes -------------------------------------------------------------
 
@@ -320,6 +348,35 @@ export function createMotion(deps) {
     thinking() {
       data.framesUntil = clock + 1400; // a short head-scratch, then a still "hmm" pose
     },
+    looking() {
+      // Which side first, two or three glances, the pace, and now and then a curious head tilt to finish.
+      const first = rnd() < 0.5 ? -1 : 1;
+      const glances = rnd() < 0.35 ? 3 : 2;
+      data.seq = Array.from({ length: glances }, (_, i) => (i % 2 ? -first : first));
+      data.limit = DURATION.looking * (0.85 + rnd() * 0.3) * (glances === 3 ? 1.2 : 1);
+      data.tilt = rnd() < 0.35 ? (rnd() < 0.5 ? -1 : 1) * (3 + rnd() * 3) : 0;
+    },
+    inspecting() {
+      // Both ways (either side first), then usually a look at the floor beside its feet — or a tilt instead.
+      const first = rnd() < 0.5 ? -1 : 1;
+      data.seq = [first, -first];
+      data.limit = DURATION.inspecting * (0.85 + rnd() * 0.3);
+      data.down = rnd() < 0.75;
+      data.tilt = !data.down || rnd() < 0.3 ? first * (3 + rnd() * 3) : 0;
+    },
+    fidgeting() {
+      // Fiddle with something Buddy really wears (most of the time), else straighten the leaf.
+      const w = deps.wearing ? deps.wearing() : {};
+      let options = ['glasses', 'gradcap', 'flower', 'scarf'].filter((k) => w[k]).map((k) => (k === 'gradcap' ? 'tassel' : k));
+      if (w.cap || w.hat) options.push('cap');
+      if (options.length > 1) options = options.filter((v) => v !== lastFidget);
+      data.variant = options.length && rnd() < 0.75 ? options[Math.floor(rnd() * options.length) % options.length] : 'leaf';
+      lastFidget = data.variant;
+      data.limit = FIDGET_S[data.variant];
+    },
+    petted() {
+      if (data.variant === 'melt') data.limit = MELT_S;
+    },
     wobbling() {
       // Dizzy after a spin: unsteady, a few uneven steps toward the roomier side, then steady.
       const w = world.get();
@@ -338,11 +395,11 @@ export function createMotion(deps) {
   function step(dt) {
     const w = world.get();
     const t = elapsed();
-    const limit = state === 'wobbling' ? data.duration : DURATION[state];
+    const limit = state === 'wobbling' ? data.duration : (data.limit ?? DURATION[state]);
     if (limit && t > limit) {
       if (state === 'recovering') settle();
       else if (state === 'yawning') enter('sleeping');
-      else if (state === 'wobbling' && data.then === 'sit') enter('sitting');
+      else if ((state === 'wobbling' && data.then === 'sit') || (state === 'petted' && data.variant === 'melt')) enter('sitting');
       else enter('idle');
       return;
     }
@@ -538,10 +595,16 @@ export function createMotion(deps) {
     body.y += body.vy * dt;
     if (state === 'thrown') {
       // A throw bounces off the edges of the workspace and off the header.
-      if (body.x < w.floor.x0 && body.vx < 0) { body.x = w.floor.x0; body.vx = -body.vx * 0.5; body.omega = -body.omega * 0.6 + 120; }
-      if (body.x > w.floor.x1 && body.vx > 0) { body.x = w.floor.x1; body.vx = -body.vx * 0.5; body.omega = -body.omega * 0.6 - 120; }
+      let bump = 0; // how fast it hit (for the wince only; the bounce itself is unchanged)
+      if (body.x < w.floor.x0 && body.vx < 0) { bump = -body.vx; body.x = w.floor.x0; body.vx = -body.vx * 0.5; body.omega = -body.omega * 0.6 + 120; }
+      if (body.x > w.floor.x1 && body.vx > 0) { bump = body.vx; body.x = w.floor.x1; body.vx = -body.vx * 0.5; body.omega = -body.omega * 0.6 - 120; }
       const ceiling = w.headerBottom + w.height;
-      if (body.y < ceiling && body.vy < 0) { body.y = ceiling; body.vy = -body.vy * 0.35; }
+      if (body.y < ceiling && body.vy < 0) { bump = Math.max(bump, -body.vy); body.y = ceiling; body.vy = -body.vy * 0.35; }
+      if (bump > BUMP_SPEED && clock - (data.bumpAt ?? -Infinity) > 400) {
+        data.bumpAt = clock; // a brief wince in the pose (targetPose), at most every 400 ms
+        stats.bumps = (stats.bumps || 0) + 1;
+        deps.emit('bump', { speed: Math.round(bump) });
+      }
     } else {
       // Keep inside the workspace: ease back in if the floor moved under Buddy mid-air.
       if (body.x < w.floor.x0) { body.x += (w.floor.x0 - body.x) * Math.min(1, dt * 8); body.vx = Math.max(0, body.vx); }
@@ -566,13 +629,16 @@ export function createMotion(deps) {
       const first = !data.rebound;
       const feared = Boolean(data.fearful);
       const from = state;
+      const placed = Boolean(data.placed);
+      const tossed = Boolean(data.tossed);
       if (first) {
         planSettle(w, drift);
         lastFall = { height: Math.round(height), impact: Math.round(impact), at: Math.round(clock), feared };
       }
       enter('landing', { impact, drift, duration: (impact > 650 ? 0.36 : 0.26) * (0.92 + rnd() * 0.16), rebound: Boolean(data.rebound) });
       // Height and impact are reported separately (after touchdown): buddy.js decides how Buddy feels about each.
-      if (first) deps.emit('landed', { height, impact, size: size(), feared, from });
+      // placed: let go slowly just above the floor (release); tossed: the Toss Buddy button.
+      if (first) deps.emit('landed', { height, impact, size: size(), feared, from, placed, tossed });
     }
   }
 
@@ -833,7 +899,10 @@ export function createMotion(deps) {
     body.omega = clamp(-data.omega * DEG, -500, 500);
     body.facing = vx >= 0 ? 1 : -1;
     stats.throws++;
-    return enter('thrown', { speed: Math.round(speed) });
+    // Set down gently (slow, feet close to the floor) rather than dropped or thrown: same physics,
+    // only how Buddy feels about the landing differs (buddy.js).
+    const placed = speed < PLACE_SPEED && world.get().floor.y - body.y < S * PLACE_HEIGHT;
+    return enter('thrown', { speed: Math.round(speed), placed });
   }
 
   // ---- Poses ----------------------------------------------------------------------
@@ -850,9 +919,28 @@ export function createMotion(deps) {
         break;
       case 'petted': {
         // A gentle pat: eyes close, Buddy leans into the hand, the leaf wags — a few variants.
-        const q = Math.min(1, t / 1.15);
+        // The last of a long streak "melts": eyes shut, cheeks glowing, Buddy sinks into a sit.
+        const T = data.limit || DURATION.petted;
+        const q = Math.min(1, t / T);
         const swell = Math.sin(q * Math.PI);
         const v = data.variant || 'nuzzle';
+        if (v === 'melt') {
+          const sink = ease(Math.min(1, q / 0.55));
+          p.eyes = 'closed';
+          p.mouth = 'smile';
+          p.blush = 1;
+          p.turn = 0;
+          p.sy = 1 - 0.05 * sink;
+          p.sx = 1 + 0.035 * sink;
+          p.bob = 5 * sink;
+          p.legs = { fl: 62 * sink, fr: -62 * sink };
+          p.lift = { fl: 2 * sink, fr: 2 * sink };
+          p.armL = 14 - 6 * sink;
+          p.armR = 14 - 6 * sink;
+          p.tilt = (data.side || 1) * 5 * Math.sin(Math.min(1, q / 0.7) * Math.PI);
+          p.sprout = 8 * sink + Math.sin(t * 5) * 3 * (1 - q);
+          break;
+        }
         p.eyes = v === 'giggle' ? 'happy' : q < 0.85 ? 'closed' : 'open';
         p.mouth = v === 'giggle' ? 'grin' : 'smile';
         p.blush = swell;
@@ -895,12 +983,21 @@ export function createMotion(deps) {
         break;
       }
       case 'looking': {
-        const k = t < 0.6 ? -1 : t < 1.3 ? 1 : 0;
+        // The seeded glances (ENTER.looking) over the first ~70 %, then back to the front, maybe tilting.
+        const T = data.limit || DURATION.looking;
+        const end = T * 0.7;
+        const k = glance(data.seq || [-1, 1], t, end);
         p.eyeX = k * 3.2;
         p.eyeY = -0.6;
         p.turn = k * 0.8;
         p.mouth = data.surprised ? 'o' : 'smile';
         p.sprout = k * -6;
+        if (data.tilt) {
+          const q = clamp((t - end) / 0.25, 0, 1) * clamp((T - t) / 0.2, 0, 1);
+          p.tilt += data.tilt * q;
+          p.eyeScale *= 1 + 0.06 * q;
+          if (q > 0.3 && !data.surprised) p.mouth = 'small';
+        }
         break;
       }
       case 'turning': {
@@ -1083,6 +1180,14 @@ export function createMotion(deps) {
         p.eyeScale = data.missedAt && clock - data.missedAt < 500 ? 1.25 : happy ? 1 : 1.18;
         p.mouth = happy || (thrown && t > 0.25 && near < 0.4) ? 'grin' : bounce || near > 0.4 ? 'wobble' : 'o';
         p.eyes = thrown && t > 0.25 && near < 0.4 ? 'happy' : 'open';
+        if (data.bumpAt !== undefined && clock - data.bumpAt < BUMP_FACE_MS) {
+          // Bonk: a wince off the edge of the workspace or the header (pose only).
+          p.eyes = 'closed';
+          p.mouth = 'wobble';
+          p.eyeScale = 1;
+          p.sx *= 0.95;
+          p.sy *= 1.03;
+        }
         break;
       }
       case 'held': {
@@ -1257,15 +1362,19 @@ export function createMotion(deps) {
         break;
       }
       case 'inspecting': {
-        // Looks one way, the other, then down at the floor beside its feet.
-        const k = t < 0.7 ? -1 : t < 1.4 ? 1 : 0;
-        const down = clamp((t - 1.4) / 0.25, 0, 1) * clamp((2.2 - t) / 0.25, 0, 1);
+        // Looks one way, the other (seeded: either side first), then usually down at the floor
+        // beside its feet — or a curious head tilt instead.
+        const T = data.limit || DURATION.inspecting;
+        const end = T * 0.64;
+        const k = glance(data.seq || [-1, 1], t, end);
+        const after = clamp((t - end) / 0.25, 0, 1) * clamp((T - t) / 0.25, 0, 1);
+        const down = data.down === false ? 0 : after;
         p.turn = k * 0.85;
         p.eyeX = k * 2.8;
         p.eyeY = -0.4 * (1 - down) + 2.6 * down;
-        p.tilt = k * 2 + body.facing * 4 * down;
-        p.mouth = down > 0.5 ? 'small' : 'smile';
-        p.armR = k > 0 ? -60 : 14; // a hand shading the eyes as it looks
+        p.tilt = k * 2 + body.facing * 4 * down + (data.tilt || 0) * after;
+        p.mouth = down > 0.5 || (data.tilt && after > 0.5) ? 'small' : 'smile';
+        p.armR = k > 0.5 ? -60 : 14; // a hand shading the eyes as it looks
         break;
       }
       case 'shifting': {
@@ -1279,15 +1388,63 @@ export function createMotion(deps) {
         break;
       }
       case 'fidgeting': {
-        // One hand reaches up and straightens the leaf, which wobbles back.
-        const q = Math.min(1, t / 1.3);
+        // One hand reaches for something Buddy wears (ENTER.fidgeting): the leaf by default.
+        // Arm angles: negative armR swings the near hand across, toward the face and head.
+        const v = data.variant || 'leaf';
+        const T = data.limit || FIDGET_S.leaf;
+        const q = Math.min(1, t / T);
         const reach = Math.sin(Math.min(1, q / 0.7) * Math.PI);
-        p.armR = -(14 + 150 * reach);
-        p.eyeY = -2.2 * reach;
-        p.eyeX = 0.8 * reach;
-        p.sprout = Math.sin(t * 14) * 6 * reach;
-        p.mouth = 'small';
+        const beat = (a, b) => Math.sin(clamp((q - a) / (b - a), 0, 1) * Math.PI); // a bump between a and b
         p.turn = -0.15;
+        p.mouth = 'small';
+        if (v === 'glasses') {
+          // A finger to the lens, a push up, a blink.
+          p.armR = -(14 + 101 * reach);
+          p.glassesY = -1.3 * beat(0.3, 0.62);
+          if (q > 0.4 && q < 0.5) p.eyes = 'closed';
+          p.eyeY = -0.6 * reach;
+          if (q > 0.6) p.mouth = 'smile';
+        } else if (v === 'cap') {
+          // A tip of the hat, with a little nod.
+          p.armR = -(14 + 154 * reach);
+          p.hatTip = -9 * beat(0.3, 0.78);
+          p.bob = -1.5 * beat(0.35, 0.75);
+          p.eyes = q > 0.4 && q < 0.7 ? 'happy' : 'open';
+          p.mouth = q > 0.35 ? 'smile' : 'small';
+        } else if (v === 'tassel') {
+          // A flick of the tassel, then watching it swing.
+          const t0 = T * 0.38;
+          const dt0 = Math.max(0, t - t0);
+          p.armR = -(14 + 136 * reach);
+          p.tassel = t > t0 ? 28 * Math.exp(-4.5 * dt0) * Math.sin(dt0 * 13) : 0;
+          p.eyeX = 1.6;
+          p.eyeY = -2;
+          p.mouth = t > t0 && t < t0 + 0.35 ? 'o' : t > t0 ? 'grin' : 'small';
+        } else if (v === 'flower') {
+          // The hand lifts the flower closer; a long, happy sniff.
+          const sniff = beat(0.3, 0.8);
+          p.armR = -(14 + 151 * reach);
+          p.tilt = 4 * reach;
+          p.eyeX = 1.5 * (1 - sniff);
+          p.eyeY = -1.6 * (1 - sniff);
+          if (sniff > 0.35) p.eyes = 'closed';
+          p.blush = 0.6 * sniff;
+          p.mouth = sniff > 0.35 ? 'smile' : 'small';
+        } else if (v === 'scarf') {
+          // A couple of tugs to straighten the scarf's loose end.
+          p.armR = -(14 + 26 * reach);
+          p.scarfTug = 9 * Math.sin(t * 14) * reach;
+          p.bob = -0.8 * Math.abs(Math.sin(t * 14)) * reach;
+          p.eyeX = 1;
+          p.eyeY = 2.2 * reach;
+          p.mouth = 'flat';
+        } else {
+          // Straightens the leaf, which wobbles back.
+          p.armR = -(14 + 150 * reach);
+          p.eyeY = -2.2 * reach;
+          p.eyeX = 0.8 * reach;
+          p.sprout = Math.sin(t * 14) * 6 * reach;
+        }
         break;
       }
       case 'waving':
@@ -1312,7 +1469,8 @@ export function createMotion(deps) {
     const from = blend.from;
     const mix = (a, b) => a + (b - a) * k;
     const out = { ...target, legs: {}, lift: {} };
-    for (const key of ['tilt', 'pivotY', 'sx', 'sy', 'bob', 'turn', 'armL', 'armR', 'eyeX', 'eyeY', 'eyeScale', 'sprout', 'sweat', 'blush']) out[key] = mix(from[key] ?? 0, target[key] ?? 0);
+    for (const key of ['tilt', 'pivotY', 'sx', 'sy', 'bob', 'turn', 'armL', 'armR', 'eyeX', 'eyeY', 'eyeScale', 'sprout', 'sweat', 'blush',
+      'glassesY', 'hatTip', 'tassel', 'scarfTug']) out[key] = mix(from[key] ?? 0, target[key] ?? 0);
     for (const leg of ['fl', 'fr']) {
       out.legs[leg] = mix(from.legs[leg] ?? 0, target.legs[leg] ?? 0);
       out.lift[leg] = mix(from.lift[leg] ?? 0, target.lift[leg] ?? 0);
@@ -1623,7 +1781,8 @@ export function createMotion(deps) {
       if (!INTERRUPTIBLE.has(state)) return false;
       return reduced ? (force('idle'), true) : enter('idle');
     }
-    if (!resting && !['sleep', 'wake', 'pleased'].includes(kind)) return false;
+    const nextPat = kind === 'pet' && state === 'petted'; // the next pat of a streak follows on directly
+    if (!resting && !nextPat && !['sleep', 'wake', 'pleased'].includes(kind)) return false;
     if (reduced && !['sit', 'think', 'sleep', 'wake', 'idle', 'pleased'].includes(kind)) return false;
     switch (kind) {
       case 'wander': {
@@ -1674,9 +1833,9 @@ export function createMotion(deps) {
       case 'worry': return enter('worried');
       case 'wave': return enter('waving');
       case 'hop': {
-        // Straight up, or a short hop sideways onto clear floor (about 50 px).
+        // Straight up, or a short hop sideways onto clear floor (about 50 px). inPlace: always straight up.
         const side = rnd() < 0.5 ? -1 : 1;
-        const spot = world.clearSpot(body.x + side * 50);
+        const spot = options.inPlace ? { clear: false } : world.clearSpot(body.x + side * 50);
         const dx = spot.clear && Math.abs(spot.x - body.x) <= 70 ? spot.x - body.x : 0;
         const flight = (2 * 330) / G;
         const vx = dx / ((1 - Math.exp(-0.9 * flight)) / 0.9);
@@ -1893,6 +2052,7 @@ export function createMotion(deps) {
         floor: { ...w.floor }, wall: { ...w.wall }, rail: { ...w.rail },
         apexY: body.apexY, lastFall, pendingAfter: body.pendingAfter?.kind || null, carriedDizzy: body.dizzy,
         spin: state === 'held' ? { level: data.spinLevel || 0, dizzy: Boolean(data.dizzy) } : null, fearful: Boolean(data.fearful), variant: data.variant || null,
+        habit: { seq: data.seq || null, tilt: data.tilt || 0, down: data.down ?? null, limit: data.limit ?? null }, placed: Boolean(data.placed), bumpAt: data.bumpAt ?? null,
       };
     },
     trace,

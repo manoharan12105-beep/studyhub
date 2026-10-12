@@ -3,6 +3,13 @@
   "schemaVersion": 1,
   "updates": [
     {
+      "id": "2026-10-12-buddy-personality-delight",
+      "date": "2026-10-12",
+      "title": "Buddy has more personality",
+      "description": "StudyHub Buddy's feelings now flow into each other — relief after a scare or when it catches the sidebar edge, contentment after a cuddle, pride after a real celebration — a few pats in a row build up until it melts into a happy sit (a tap now pats Buddy and shows a small Menu button for its menu), it fiddles with what it wears (pushing up its glasses, tipping its cap, flicking its graduation tassel, sniffing its flower, tugging its scarf), looks around a little differently each time and sometimes simply stays still, nods when you set it down gently, lands in its own way after a fun toss in each of its 6 personalities, holds back quiz offers and facts for a minute while you scroll a lesson, and with Minimal motion its breathing animation stops too.",
+      "type": "ui"
+    },
+    {
       "id": "2026-10-10-git-github-mastery",
       "date": "2026-10-10",
       "title": "Git & GitHub Mastery",

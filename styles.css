@@ -1891,6 +1891,29 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 .buddy-zzz span + span { left: 7px; top: -6px; font-size: 0.6rem; animation-delay: 1.3s; }
 .buddy.is-sleeping .buddy-zzz { display: block; }
 @keyframes buddy-z { 0% { transform: translate(0, 5px); opacity: 0; } 30% { opacity: 1; } 100% { transform: translate(6px, -10px); opacity: 0; } }
+/* Buddy's own Motion setting gates these CSS effects too (JS sets the classes): .is-reduced is
+   Minimal motion, or a system request for less motion under Follow system / Gentle — no breathing,
+   still z's. .is-full-motion is the learner's explicit "Full": breathing and z's continue even when
+   the system asks for less (the global reduced-motion rule below would otherwise stop them). */
+.buddy.is-reduced .buddy-svg, .buddy.is-reduced .buddy-zzz span { animation: none; }
+.buddy.is-reduced .buddy-zzz span { opacity: 0.85; }
+.buddy.is-reduced .buddy-inner { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .buddy.is-full-motion:is([data-state="idle"], [data-state="sitting"], [data-state="gripping"], [data-state="thinking"]) .buddy-svg {
+    animation-duration: 3.4s !important; animation-iteration-count: infinite !important;
+  }
+  .buddy.is-full-motion[data-state="sleeping"] .buddy-svg { animation-duration: 5.2s !important; animation-iteration-count: infinite !important; }
+  .buddy.is-full-motion .buddy-zzz span { animation-duration: 2.6s !important; animation-iteration-count: infinite !important; }
+}
+/* The Menu button beside Buddy after a tap (a tap itself pats Buddy). A real, focusable button. */
+.buddy-menu-chip {
+  position: fixed; left: 0; top: 0; z-index: 36; min-width: 44px; min-height: 32px; padding: 0 var(--space-3);
+  border: 1px solid var(--border-strong); border-radius: 99px; background: var(--surface); color: var(--text);
+  font: 650 var(--text-xs) var(--font-sans); box-shadow: var(--shadow-sm); cursor: pointer;
+}
+.buddy-menu-chip:hover { border-color: var(--accent); color: var(--accent-text); }
+.buddy-menu-chip:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.buddy-menu-chip[hidden] { display: none; }
 
 /* Character parts (js/buddy/character.js) */
 .b-body { stroke: var(--buddy-outline); stroke-width: 2; }
@@ -2270,7 +2293,7 @@ details.reveal > :nth-child(2) { margin-top: var(--space-3); }
 }
 
 @media print {
-  .app-header, .sidebar, .nav-tooltip, .topic-tabs, .source-bar, .topic-footer, .reading-progress, .toc, .buddy, .buddy-shadow, .buddy-bubble, .buddy-fx { display: none !important; }
+  .app-header, .sidebar, .nav-tooltip, .topic-tabs, .source-bar, .topic-footer, .reading-progress, .toc, .buddy, .buddy-shadow, .buddy-bubble, .buddy-fx, .buddy-menu-chip { display: none !important; }
   .layout { display: block; }
   details.reveal { break-inside: avoid; }
 }

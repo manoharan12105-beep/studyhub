@@ -153,6 +153,41 @@ export const PERSONALITIES = {
   custom: {},
 };
 
+/**
+ * How each personality *reacts* (the presets above only set how often and how
+ * big). Code constants, never stored. Physics never reads them: gravity,
+ * collisions, catching and throws are the same for every personality.
+ *   affection   0…1  a long pat streak melts it sooner, and the afterglow lasts longer
+ *   curiosity   0…1  glances may come closer together (look/inspect share one cooldown)
+ *   resilience  0…1  relief after a scare is shorter
+ *   stay        weight of the "just stay still" idle choice
+ *   pets        reactions for the 1st, 2nd, 3rd pat of a streak (then it melts)
+ *   landing     after a fun (medium, not scary) throw: 'again' (a happy hop), 'lookback'
+ *               (looks back where it flew from), 'relieved' (a phew) or 'dazed' (a sleepy blink)
+ * Custom has no preset: its traits come from the learner's own levels (traitsOf).
+ */
+export const TRAITS = {
+  gentle: { affection: 0.9, curiosity: 0.3, resilience: 0.5, stay: 2.2, pets: ['nuzzle', 'leafwag', 'nuzzle'], landing: 'relieved' },
+  playful: { affection: 0.6, curiosity: 0.5, resilience: 0.8, stay: 0.7, pets: ['giggle', 'leafwag', 'wiggle'], landing: 'again' },
+  curious: { affection: 0.5, curiosity: 0.95, resilience: 0.6, stay: 0.8, pets: ['nuzzle', 'wiggle', 'leafwag'], landing: 'lookback' },
+  sleepy: { affection: 0.8, curiosity: 0.2, resilience: 0.4, stay: 2.8, pets: ['nuzzle', 'nuzzle', 'leafwag'], landing: 'dazed' },
+  energetic: { affection: 0.6, curiosity: 0.6, resilience: 0.9, stay: 0.4, pets: ['wiggle', 'giggle', 'leafwag'], landing: 'again' },
+};
+
+/** The traits in effect: a preset's, or for Custom, derived from the learner's levels. */
+export function traitsOf(s = get()) {
+  if (TRAITS[s.personality]) return TRAITS[s.personality];
+  const lvl = (field, [lo, mid, hi]) => (s[field] === 'low' ? lo : s[field] === 'high' ? hi : mid);
+  return {
+    affection: lvl('petting', [0.5, 0.7, 0.9]),
+    curiosity: lvl('curiosity', [0.3, 0.55, 0.9]),
+    resilience: lvl('recovery', [0.8, 0.6, 0.4]), // a longer recovery time = slower to shake things off
+    stay: s.movement === 'low' ? 2.2 : s.movement === 'high' ? 0.5 : 1.2,
+    pets: ['nuzzle', 'leafwag', 'giggle'],
+    landing: s.jumps === 'high' ? 'again' : s.jumps === 'low' ? 'relieved' : 'lookback',
+  };
+}
+
 const HEX = /^#[0-9a-f]{6}$/i;
 const listeners = new Set();
 let current = null;

@@ -9,6 +9,9 @@
 //
 // Buddy is decorative (aria-hidden) and never in the tab order. Everything it
 // offers is also reachable from the header menu → StudyHub Buddy dialog.
+// A tap pats Buddy; its menu is a separate, real button ("Menu") that appears
+// beside Buddy for a few seconds after a tap, so affection and commands never
+// get in each other's way (and a press-and-move still picks Buddy up).
 //
 // Privacy: Buddy notices only *that* the learner is typing or using a control
 // (the focused element's kind, key presses' timing) — never what is typed, and
@@ -21,7 +24,7 @@ import { el, isTypingTarget } from '../util.js';
 import { parse } from '../router.js';
 import { onExternalChange } from '../storage.js';
 import * as settings from './settings.js';
-import { createCharacter, growthStage, BODY_SHAPES } from './character.js';
+import { createCharacter, growthStage, seasonOf, BODY_SHAPES } from './character.js';
 import { createWorld } from './world.js';
 import { createMotion, RESTING, INTERRUPTIBLE } from './motion.js';
 import { createCompanion, completedTopicCount } from './companion.js';
@@ -37,16 +40,23 @@ const QUIZ_INTERVAL = { occasionally: 16, balanced: 8, frequently: 3.5 }; // min
 const FACT_INTERVAL = { occasionally: 15, balanced: 9, frequently: 5 }; // minutes
 const SPONTANEOUS_GAP = 3 * 60_000; // at most one unprompted bubble per 3 minutes
 const SLEEP_AFTER = 4 * 60_000;
+// The "stay" weight (just staying still, on purpose) comes from the personality's traits (settings.TRAITS).
 const ACTIVITY_WEIGHTS = {
   gentle: { wander: 3, sit: 4, look: 2, climb: 1, hop: 0.3, think: 0.6, inspect: 1, shift: 1.5, fidget: 1 },
-  playful: { wander: 3, sit: 1.5, look: 1.5, climb: 3, hop: 2, think: 0.4, inspect: 1, shift: 0.8, fidget: 1.4 },
-  curious: { wander: 3, sit: 1, look: 4, climb: 2.5, hop: 0.6, think: 1.5, inspect: 2.5, shift: 0.8, fidget: 0.8 },
+  playful: { wander: 3, sit: 1.5, look: 1.5, climb: 3, hop: 2, think: 0.4, inspect: 1, shift: 0.8, fidget: 2.2 },
+  curious: { wander: 3, sit: 1, look: 3.4, climb: 2.5, hop: 0.6, think: 1.5, inspect: 2.5, shift: 0.8, fidget: 0.8 },
   sleepy: { wander: 1.5, sit: 5, look: 1, climb: 0.4, hop: 0.2, think: 0.8, inspect: 0.6, shift: 1.5, fidget: 0.6, doze: 3 },
-  energetic: { wander: 4, sit: 0.8, look: 1.5, climb: 3, hop: 2.5, think: 0.3, inspect: 1, shift: 0.6, fidget: 1.6 },
+  energetic: { wander: 5, sit: 0.5, look: 1.5, climb: 3.5, hop: 2.5, think: 0.3, inspect: 1, shift: 0.6, fidget: 1.2 },
   custom: { wander: 3, sit: 2.5, look: 2, climb: 2, hop: 1, think: 0.8, inspect: 1.2, shift: 1, fidget: 1 },
 };
-// Quiet mode (and active study) keeps only small, calm habits (no wandering, climbing or hopping).
-const QUIET_ACTIVITIES = new Set(['sit', 'shift', 'fidget', 'think', 'doze']);
+// Quiet mode (and active study) keeps only small, calm habits (no wandering, climbing, hopping or glances).
+const QUIET_ACTIVITIES = new Set(['sit', 'shift', 'fidget', 'think', 'doze', 'stay']);
+// Less repetition: each time a kind appears among the last RECENT choices, its weight is multiplied by this.
+const RECENT = 6;
+const RECENT_DECAY = 0.35;
+// Looking around and inspecting are one "glance" family with a shared gap (shorter for curious personalities).
+const GLANCE_KINDS = new Set(['look', 'inspect']);
+const GLANCE_GAP = 45_000;
 // Idle habits: seconds before the same habit may come again.
 const HABIT_COOLDOWN = { inspect: 60, shift: 30, fidget: 45, think: 40, hop: 25, doze: 50 };
 const HABIT_KINDS = new Set(['inspect', 'shift', 'fidget', 'think', 'hop', 'doze']);
@@ -63,8 +73,13 @@ const GAZE_RANGE = { low: 160, balanced: 240, high: 320 }; // px: the eyes follo
 const DUST_POOL = 8; // reused dust particles
 // Petting: a pointer stroked back and forth over Buddy (no button pressed), or a tap.
 const STROKE_REVERSALS = { low: 3, balanced: 2, high: 1 };
-const PAT_VARIANTS = ['nuzzle', 'leafwag', 'giggle', 'wiggle'];
-const PAT_COOLDOWN = 2500; // ms: pats closer than this get a smaller reaction
+// A pat streak: pats less than STREAK_GAP apart build up (traits.pets, then a melt);
+// pats closer than PAT_MIN_GAP are one pat (a fast stroke or a double click).
+const STREAK_GAP = 6000;
+const PAT_MIN_GAP = 700;
+const MENU_CHIP_MS = 5000; // the Menu button stays this long after a tap (longer while focused)
+const READ_QUIET = 60_000; // after scrolling a lesson, no unprompted quiz offers, facts or welcomes for this long
+const PROUD_WINDOW = 5000; // a celebration's pride shows when it ends (if it ends within this)
 
 /** A level ("low" | "balanced" | "high") as one of three numbers. */
 const by = (level, [lo, mid, hi]) => (level === 'low' ? lo : level === 'high' ? hi : mid);
@@ -193,7 +208,11 @@ function enable() {
   const fx = el('div', { class: 'buddy-fx', 'aria-hidden': 'true' });
   const dust = Array.from({ length: DUST_POOL }, () => el('span', { class: 'buddy-dust' }));
   fx.append(...dust);
-  document.body.append(shadow, fx, container);
+  // Buddy's menu: a real button (keyboard- and screen-reader-usable) shown beside Buddy for a
+  // few seconds after a tap, so a tap can be a pat. The menu is also in the StudyHub Buddy dialog.
+  const menuChip = el('button', { type: 'button', class: 'buddy-menu-chip', 'aria-label': 'Open Buddy’s menu' }, 'Menu');
+  menuChip.hidden = true;
+  document.body.append(shadow, fx, container, menuChip);
   function applySize() {
     for (const node of [container, shadow, fx]) node.style.setProperty('--buddy-size', `${size()}px`);
   }
@@ -215,16 +234,34 @@ function enable() {
   const isReduced = () => current.motion === 'minimal' || (current.motion !== 'full' && systemReduced);
   const gentleMotion = () => current.motion === 'gentle';
   const isPaused = () => settings.isPaused(current);
+  /** The CSS effects (breathing, the sleep z's) follow Buddy's own motion setting, not only the system's. */
+  function applyMotionClass() {
+    container.classList.toggle('is-reduced', isReduced());
+    container.classList.toggle('is-full-motion', current.motion === 'full');
+  }
+  applyMotionClass();
+  const traits = () => settings.traitsOf(current);
+  /** What Buddy wears right now, for accessory fidgets (nothing while accessories are hidden). */
+  function wearing() {
+    const on = f().accessories;
+    const head = on ? current.accessory : 'none';
+    const season = seasonOf();
+    return {
+      glasses: head === 'glasses', cap: head === 'cap', gradcap: head === 'gradcap', flower: head === 'flower',
+      hat: head === 'seasonal' && (season === 'winter' || season === 'summer'), // a beanie or sun hat to tip
+      scarf: on && current.extra === 'scarf',
+    };
+  }
   let companion = null;
   let motion = null;
-  const isBuddyNode = (node) => container.contains(node) || node === shadow || Boolean(companion?.element()?.contains(node));
+  const isBuddyNode = (node) => container.contains(node) || node === shadow || node === menuChip || Boolean(companion?.element()?.contains(node));
   const world = createWorld({ size, isBuddyNode, shape });
-  let satForCry = false; // Buddy sat down for a cry: it stands up again when the feeling is over
+  let satForCry = false; // Buddy sat down for a cry: it stands up again when the tears are over (relief may follow)
   const emotion = createEmotion({
     own, isReduced,
     onChange: () => {
       motion?.refresh();
-      if (satForCry && !emotion.current()) {
+      if (satForCry && !['frightened', 'crying'].includes(emotion.current())) {
         satForCry = false;
         if (motion.state === 'sitting') motion.perform('idle');
       }
@@ -239,6 +276,7 @@ function enable() {
     debug: DEBUG,
     random: () => random(),
     emotion,
+    wearing,
     tuning: () => ({
       speed: by(current.speed, [0.8, 1, 1.2]) * (gentleMotion() ? 0.85 : 1),
       jumps: by(current.jumps, [0.4, 1, 1.5]) * (gentleMotion() ? 0.3 : 1),
@@ -349,15 +387,24 @@ function enable() {
 
   const habitAt = {}; // kind → Date.now() of its last run
   let lastActivity = '';
+  let recent = []; // the last RECENT choices, newest last
+  let lastGlanceAt = -Infinity; // Date.now() of the last look or inspect (shared gap)
+  let lastPetAt = -Infinity; // Date.now() of the last pat: a petted Buddy likes to stay put a while
+  /** The shared gap between glances: shorter for a curious personality, much longer during active study. */
+  const glanceGap = (study) => GLANCE_GAP * Math.max(0.8, 1.4 - traits().curiosity) * (study ? 3 : 1);
   /**
    * Weighted random choice of the next idle activity. A habit on cooldown, or
-   * the activity just done, is left out, so Buddy never repeats itself. The
-   * learner's levels (jumps, curiosity), motion preset, feature switches and
-   * active study all shape the weights; nothing here can move Buddy unsafely.
+   * the activity just done, is left out, and every recent choice makes a kind
+   * less likely again, so Buddy rarely repeats itself; "stay" (staying still on
+   * purpose) is a real choice. The learner's levels (jumps, curiosity), the
+   * personality's traits, motion preset, feature switches and active study all
+   * shape the weights; nothing here can move Buddy unsafely.
    */
   function chooseActivity(now = Date.now()) {
     const w = world.get();
+    const study = studying();
     const weights = { ...(ACTIVITY_WEIGHTS[current.personality] || ACTIVITY_WEIGHTS.playful) };
+    weights.stay = traits().stay * (study ? 2 : 1) * (now - lastPetAt < 20_000 ? 2 : 1);
     const curiosity = by(current.curiosity, [0.5, 1, 1.7]);
     for (const kind of ['look', 'inspect', 'climb']) if (weights[kind]) weights[kind] *= curiosity;
     if (weights.hop) weights.hop *= by(current.jumps, [0.3, 1, 2]) * (gentleMotion() ? 0.2 : 1);
@@ -367,7 +414,9 @@ function enable() {
     if (!f().habits) for (const kind of HABIT_KINDS) delete weights[kind];
     if (!f().glances) delete weights.look;
     for (const [kind, cooldown] of Object.entries(HABIT_COOLDOWN)) if (now - (habitAt[kind] ?? -Infinity) < cooldown * 1000) delete weights[kind];
-    if (current.quiet || studying()) for (const kind of Object.keys(weights)) if (!QUIET_ACTIVITIES.has(kind)) delete weights[kind];
+    if (now - lastGlanceAt < glanceGap(study)) for (const kind of GLANCE_KINDS) delete weights[kind];
+    if (current.quiet || study) for (const kind of Object.keys(weights)) if (!QUIET_ACTIVITIES.has(kind)) delete weights[kind];
+    for (const kind of Object.keys(weights)) weights[kind] *= RECENT_DECAY ** recent.filter((k) => k === kind).length;
     if (Object.keys(weights).length > 1) delete weights[lastActivity];
     if (!Object.keys(weights).length) return 'sit';
     const total = Object.values(weights).reduce((a, b) => a + b, 0);
@@ -380,19 +429,25 @@ function enable() {
   }
   function commitActivity(kind, now) {
     lastActivity = kind;
+    recent = [...recent, kind].slice(-RECENT);
     if (kind === 'climb') lastClimb = now;
     if (kind in HABIT_COOLDOWN) habitAt[kind] = now;
+    if (GLANCE_KINDS.has(kind)) lastGlanceAt = now;
   }
   function pickActivity() {
     const kind = chooseActivity();
-    commitActivity(kind, Date.now());
+    const now = Date.now();
+    commitActivity(kind, now);
+    if (kind === 'stay') return; // stillness, on purpose: the pose Buddy is in now simply continues
     if (kind === 'doze') {
       // Sleepy: a heavy-lidded moment, sitting down.
       if (motion.perform('sit')) emotion.feel('sleepy', { ms: 3500 });
       return;
     }
     const options = kind === 'wander' ? { x: wanderTarget() } : {};
-    if (!motion.perform(kind, options) && !current.quiet && f().glances) motion.perform('look');
+    if (motion.perform(kind, options)) return;
+    // Not possible right now (e.g. no clear spot to wander to): a glance instead, if one is due.
+    if (!current.quiet && f().glances && !studying() && now - lastGlanceAt >= glanceGap(false) && motion.perform('look')) lastGlanceAt = now;
   }
 
   /** Where to wander: anywhere, or within the part of the floor the learner prefers Buddy to rest in. */
@@ -404,9 +459,9 @@ function enable() {
     return floor.x0 + random() * span;
   }
 
-  /** Optional prompts, each with its own cooldown and a shared gap. */
+  /** Optional prompts, each with its own cooldown and a shared gap. Never while the learner is reading a lesson. */
   function maybePrompt() {
-    if (!canPrompt({ spontaneous: true })) return false;
+    if (!canPrompt({ spontaneous: true }) || reading()) return false;
     const now = Date.now();
     if (now - companion.lastSpontaneous() < SPONTANEOUS_GAP) return false;
     if (now - lastQuiz > QUIZ_INTERVAL[current.quiz] * 60_000) {
@@ -427,6 +482,20 @@ function enable() {
   function userBusy() {
     return Date.now() - lastKey < 8000 || isTypingTarget(document.activeElement);
   }
+
+  // ---- Reading: scrolling a lesson means the learner is reading it ----
+  // Only *that* the page scrolled on a lesson route is noted — never what is on it.
+  let lastReadAt = -Infinity;
+  /** A lesson route: a topic (any tab) or a category study mode (Revision, Quick Revision…). */
+  function onLessonRoute() {
+    const [first, , third] = parse().segments;
+    return first === 't' || (first === 'c' && third === 'm');
+  }
+  /**
+   * Read a lesson in the last READ_QUIET: then nothing unprompted (quiz offers, facts, welcomes).
+   * Messages about things the learner just did (a completed topic) and answer reactions still show.
+   */
+  const reading = () => Date.now() - lastReadAt < READ_QUIET;
 
   // ---- Focus-aware study: quieter while the learner is working ----
 
@@ -511,10 +580,10 @@ function enable() {
       case 'completed':
         if (!on) return;
         if (level === 'low') {
-          motion.perform('pleased');
+          celebrate('pleased');
           motion.perk();
         } else {
-          motion.perform('celebrate', { mood: detail.growth || detail.milestone || level === 'high' ? 'sparkle' : undefined });
+          celebrate('celebrate', { mood: detail.growth || detail.milestone || level === 'high' ? 'sparkle' : undefined });
           if (level === 'high') motion.perk();
         }
         return;
@@ -522,9 +591,9 @@ function enable() {
         if (!on) { emotion.feel('happy', { ms: 1200 }); return; }
         if (level === 'low') {
           // Quiet mode: a small, calm reaction, and the drooping leaf perks up for a moment.
-          motion.perform('pleased');
+          celebrate('pleased');
           motion.perk();
-        } else motion.perform('celebrate');
+        } else celebrate('celebrate');
         return;
       case 'quiz-wrong':
         if (!motion.perform('worry')) motion.express('concerned', 1800, 2); // a sweat drop, never a scolding
@@ -540,6 +609,19 @@ function enable() {
     }
   }
 
+  /**
+   * A celebration for something real (a completed topic, Buddy's question answered right),
+   * then quiet pride once the gesture ends (state change → 'proud' in onMotionEvent). If
+   * Buddy cannot gesture now (mid-walk), the pride shows on its face straight away.
+   */
+  let proudUntil = 0;
+  function celebrate(kind, options) {
+    const before = motion.state;
+    const ok = motion.perform(kind, options);
+    if (ok && motion.state !== before) proudUntil = Date.now() + PROUD_WINDOW;
+    else emotion.feel('proud', { ms: 2600 });
+  }
+
   // ---- Falls, spins and catches: feelings from what physically happened ----
 
   let pendingCry = false;
@@ -553,14 +635,30 @@ function enable() {
    * very long or ended hard — may bring a short, bounded cry; a hard impact alone
    * dazes (stars) or startles; a small hop is nothing. Dizziness from a spin wins.
    */
-  function reactToLanding({ height, impact, size: S }) {
+  /**
+   * What a landing settles into once Buddy stands again (onMotionEvent, on reaching idle):
+   * 'placed' (a satisfied nod), 'again' (a happy hop on the spot), 'lookback' (a look back).
+   */
+  let pendingRest = null;
+  /** How long relief lasts after a scare: shorter for a resilient personality, scaled by the recovery level. */
+  const reliefMs = (base) => base * (1.6 - 0.6 * traits().resilience) * recoveryScale();
+
+  function reactToLanding({ height, impact, size: S, feared, from, placed }) {
     const c = classifyFall(height, impact, S);
-    lastLanding = { ...c, heightPx: Math.round(height), impactPx: Math.round(impact) };
+    lastLanding = { ...c, heightPx: Math.round(height), impactPx: Math.round(impact), placed: Boolean(placed), style: null };
     const rec = recoveryScale();
     const emo = emotionScale();
+    const relief = (base) => ({ kind: 'relieved', ms: reliefMs(base), intensity: emo });
     pendingCry = false;
+    pendingRest = null;
     if (motion.body.pendingAfter?.kind === 'wobble') {
-      emotion.feel('dizzy', { ms: (motion.body.pendingAfter.duration + 0.9) * 1000 * rec, intensity: emo });
+      emotion.feel('dizzy', { ms: (motion.body.pendingAfter.duration + 0.9) * 1000 * rec, intensity: emo, then: relief(1000) });
+      return;
+    }
+    // Set down gently by the learner (slow, close to the floor): a small, satisfied nod — not a fall.
+    if (placed && c.height === 'hop' && c.impact === 'soft') {
+      lastLanding.style = 'placed';
+      pendingRest = 'placed';
       return;
     }
     if (c.height === 'high' && f().fear) {
@@ -568,12 +666,43 @@ function enable() {
       pendingCry = cry;
       emotion.feel('frightened', {
         ms: 1300 * rec, intensity: emo,
-        then: cry ? { kind: 'crying', ms: 3400 * rec * Math.min(1.2, emo), intensity: emo } : null,
+        then: cry ? { kind: 'crying', ms: 3400 * rec * Math.min(1.2, emo), intensity: emo, then: relief(1800) } : relief(1500),
       });
       return;
     }
-    if (c.impact === 'severe' && f().dizzy) emotion.feel('dizzy', { ms: 1500 * rec, intensity: 0.8 }); // dazed: stars from a hard knock
-    else if (c.impact === 'hard' || c.height === 'moderate') emotion.feel('surprised', { ms: 1100 * rec, intensity: emo });
+    if (c.impact === 'severe' && f().dizzy) {
+      emotion.feel('dizzy', { ms: 1500 * rec, intensity: 0.8, then: relief(900) }); // dazed: stars from a hard knock
+      return;
+    }
+    // A fun throw (the learner's or Toss Buddy): far enough to feel, not scary, not hard.
+    // How Buddy takes it is its personality's (traits.landing).
+    const fun = from === 'thrown' && !feared && c.heights >= 1.5 && c.height !== 'high' && (c.impact === 'soft' || c.impact === 'firm');
+    if (fun) {
+      const style = traits().landing;
+      lastLanding.style = style;
+      if (style === 'again' || style === 'lookback') pendingRest = style;
+      else if (style === 'dazed') emotion.feel('surprised', { ms: 700, intensity: emo, then: { kind: 'sleepy', ms: 1600 } });
+      else emotion.feel('surprised', { ms: 800, intensity: emo, then: relief(1100) });
+      return;
+    }
+    if (c.impact === 'hard' || c.height === 'moderate') emotion.feel('surprised', { ms: 1100 * rec, intensity: emo, then: relief(900) });
+  }
+
+  /** Buddy stands again after a landing: show what the landing settled into (pendingRest). */
+  function afterLandingRest() {
+    const kind = pendingRest;
+    pendingRest = null;
+    if (!kind || isPaused() || !motion.isCalm()) return;
+    if (kind === 'placed') {
+      if (!motion.perform('pleased')) emotion.feel('content', { ms: 1500 });
+    } else if (kind === 'again') {
+      // "Again!": a wink-grin, and (when Buddy may hop) a happy hop on the spot. Never in quiet mode or while studying.
+      emotion.feel('playful', { ms: 1600 });
+      if (!current.quiet && !studying() && current.jumps !== 'low' && !isReduced()) motion.perform('hop', { inPlace: true });
+    } else if (kind === 'lookback') {
+      emotion.feel('curious', { ms: 1500 });
+      if (f().glances && !isReduced()) motion.perform('look');
+    }
   }
 
   // ---- Obstruction ----
@@ -622,9 +751,25 @@ function enable() {
   function onMotionEvent(type, detail) {
     if (type === 'state') {
       // The click area turns off on every change and back on once the new spot is verified clear —
-      // except a short gesture on the same spot the learner may cut short (interrupt setting).
-      const keep = current.interact.interrupt && INTERRUPTIBLE.has(detail.to) && RESTING.has(detail.from) && container.classList.contains('is-clickable');
+      // except a short gesture on the same spot the learner may cut short (interrupt setting), and
+      // a pat (and the next pats of a streak), which also happen on the same, already verified spot.
+      const gesture = current.interact.interrupt && INTERRUPTIBLE.has(detail.to) && RESTING.has(detail.from);
+      const patting = detail.to === 'petted' && (RESTING.has(detail.from) || detail.from === 'petted');
+      const keep = (gesture || patting) && container.classList.contains('is-clickable');
       if (!keep) container.classList.remove('is-clickable');
+      // The Menu button belongs to a Buddy standing still beside it.
+      if (!RESTING.has(detail.to) && !['petted', 'stretching', 'pleased'].includes(detail.to)) hideMenuChip();
+      // Feelings that follow a gesture once it is over.
+      if (detail.from === 'petted' && detail.to !== 'petted' && pendingContent) {
+        emotion.feel('content', { ms: pendingContent });
+        pendingContent = 0;
+      }
+      if ((detail.from === 'celebrating' || detail.from === 'pleased') && Date.now() < proudUntil) {
+        proudUntil = 0;
+        emotion.feel('proud', { ms: 2600 });
+      }
+      if (detail.to === 'held') pendingRest = null; // picked up again: that landing is forgotten
+      if (detail.to === 'idle' && pendingRest && ['landing', 'recovering', 'balancing', 'wobbling'].includes(detail.from)) afterLandingRest();
       if (detail.to === 'slipping' || detail.to === 'knocked') companion?.close({ restoreFocus: false });
       if (detail.from === 'recovering' || detail.from === 'landing' || detail.from === 'dismounting' || detail.from === 'walking') checkSpot(60);
       else if (RESTING.has(detail.to)) checkSpot(250);
@@ -644,6 +789,8 @@ function enable() {
     if (type === 'fear' && f().fear) emotion.feel('frightened', { ms: 4000, intensity: emotionScale() });
     if (type === 'startle' && !emotion.current()) emotion.feel('surprised', { ms: 900, intensity: emotionScale() });
     if (type === 'catch-miss') emotion.feel('surprised', { ms: 800 });
+    // Caught an edge on the way down: the fright turns into relief ("phew").
+    if (type === 'caught') emotion.relieve(reliefMs(1300));
     if (type === 'spin' && detail.dizzy && f().dizzy) emotion.feel('dizzy', { ms: 2600 * recoveryScale(), intensity: Math.min(1.5, detail.level) });
   }
 
@@ -679,6 +826,7 @@ function enable() {
   // ---- Environment ----
 
   function environmentChanged() {
+    hideMenuChip(); // it was placed for the old layout
     world.invalidate();
     motion.reconcile();
     if (companion.isOpen()) companion.position();
@@ -765,6 +913,7 @@ function enable() {
   let lastScrollY = window.scrollY;
   own.listen(window, 'scroll', () => {
     noteInput({ type: 'scroll' }); // reading a long lesson counts as being here
+    if (onLessonRoute()) lastReadAt = Date.now();
     checkSpot(250);
     const dy = window.scrollY - lastScrollY;
     lastScrollY = window.scrollY;
@@ -799,7 +948,9 @@ function enable() {
     });
     own.listen(search, 'input', () => {
       own.clearTimeout(searchTimer);
-      searchTimer = own.setTimeout(() => { checkSearch(); glanceAt(search, 1200); }, 400); // once typing pauses, never per keystroke
+      // Once typing pauses (never per keystroke): step out of the results' way. No more glances —
+      // typing is active study, and one glance when the box gained focus is enough.
+      searchTimer = own.setTimeout(checkSearch, 400);
     });
   }
   let searchTimer = 0;
@@ -821,7 +972,7 @@ function enable() {
   // Dialogs (modal, in the top layer above Buddy) and the header menu: Buddy's bubble steps aside.
   const overlays = own.observe(new MutationObserver(() => {
     const blocking = document.querySelector('dialog[open]') || !document.getElementById('app-menu-list')?.hidden;
-    if (blocking) endDrag();
+    if (blocking) { endDrag(); hideMenuChip(); }
     if (blocking && companion.isOpen() && !document.getElementById('buddy-dialog')?.open) companion.close({ restoreFocus: false });
     if (!blocking) checkSpot(200); // a dialog or the menu closed: look again where Buddy sits
     if (blocking && (motion.isResting() || motion.state === 'looking') && motion.state !== 'sitting' && !isReduced()) motion.perform('sit');
@@ -832,6 +983,7 @@ function enable() {
 
   const onMotionPreference = () => {
     endDrag();
+    applyMotionClass();
     if (isReduced()) motion.placeCalmly(motion.body.x);
     else {
       motion.placeCalmly(motion.body.x);
@@ -919,33 +1071,112 @@ function enable() {
 
   // ---- Petting: a tap, or a gentle stroke back and forth over Buddy ----
 
-  let lastPat = 0;
-  let lastVariant = '';
+  let lastPat = -Infinity;
+  let streak = 0; // pats in the current streak (each less than STREAK_GAP after the last)
+  let pendingContent = 0; // ms of contentment to feel when the pat gesture ends (a streak of 2+)
+  /** A long streak melts Buddy: at this pat (affectionate personalities melt sooner). */
+  const meltAt = () => { const a = traits().affection; return a >= 0.8 ? 3 : a >= 0.55 ? 4 : 5; };
+  const contentMs = () => Math.round(3000 + 5000 * traits().affection); // the afterglow, 3–8 s
   /**
-   * A gentle pat. Comforts a frightened, crying or dizzy Buddy that has landed;
-   * otherwise a small happy reaction that varies (never the same twice running),
-   * and a smaller one when pats come close together. Returns what happened.
+   * A gentle pat. Wakes a sleeping Buddy (the normal stretch); comforts a
+   * frightened, crying or dizzy one that has landed; otherwise builds a bounded
+   * streak: the personality's reactions for the first pats (traits.pets), then a
+   * "melt" into a contented sit, then only a content face — never more. A streak
+   * of two or more leaves a short content afterglow. Returns what happened.
    */
   function pat({ side = 1 } = {}) {
-    if (!f().petting || isPaused() || !motion.isResting()) return null;
+    if (!f().petting || isPaused()) return null;
     const now = Date.now();
+    if (motion.state === 'sleeping' || motion.state === 'yawning') {
+      // Being petted is the learner being here: wake up the normal way and stay awake.
+      lastInput = now;
+      lastPat = now;
+      streak = 0;
+      motion.perform('wake');
+      scheduleNext(randomInterval());
+      return 'woke';
+    }
+    const continuing = motion.state === 'petted';
+    if (!motion.isResting() && !continuing) return null;
+    if (now - lastPat < PAT_MIN_GAP) return 'same'; // one pat, not two (a quick stroke, a double click)
+    lastPetAt = now;
     if (emotion.canSoothe()) {
       pendingCry = false;
-      emotion.comfort(1700 * recoveryScale());
-      if (!isReduced()) motion.perform('pet', { variant: 'nuzzle', side });
       lastPat = now;
+      streak = 1;
+      emotion.comfort(1700 * recoveryScale(), { kind: 'content', ms: contentMs() });
+      if (!isReduced()) motion.perform('pet', { variant: 'nuzzle', side });
       return 'comforted';
     }
-    if (now - lastPat < PAT_COOLDOWN || isReduced()) {
-      lastPat = now;
-      emotion.feel(random() < 0.5 ? 'happy' : 'playful', { ms: 900 });
+    streak = now - lastPat < STREAK_GAP ? streak + 1 : 1;
+    lastPat = now;
+    const melt = meltAt();
+    if (isReduced()) {
+      // A still face for each pat (no gesture); a long streak shows contentment.
+      emotion.feel(streak >= melt ? 'content' : streak > 1 ? 'playful' : 'happy', { ms: streak >= melt ? contentMs() : 900 });
       return 'face';
     }
-    lastPat = now;
-    const options = PAT_VARIANTS.filter((v) => v !== lastVariant);
-    lastVariant = options[Math.floor(random() * options.length) % options.length];
-    return motion.perform('pet', { variant: lastVariant, side }) ? 'petted' : null;
+    if (streak > melt) {
+      // Already melted: it just stays content (bounded — no more gestures).
+      emotion.feel('content', { ms: contentMs() });
+      return 'content';
+    }
+    const pets = traits().pets;
+    const variant = streak === melt ? 'melt' : pets[(streak - 1) % pets.length];
+    if (!motion.perform('pet', { variant, side })) return null;
+    if (streak >= 2) pendingContent = variant === 'melt' ? contentMs() + 2000 : contentMs();
+    return variant === 'melt' ? 'melted' : 'petted';
   }
+
+  // ---- The Menu button (beside Buddy after a tap) ----
+
+  let chipTimer = 0;
+  function hideMenuChip() {
+    own.clearTimeout(chipTimer);
+    chipTimer = 0;
+    if (menuChip.hidden) return;
+    const hadFocus = document.activeElement === menuChip;
+    menuChip.hidden = true;
+    if (hadFocus) document.getElementById('main')?.focus?.({ preventScroll: true });
+  }
+  /** Show the Menu button above Buddy (or beside it), wherever it covers the least. */
+  function showMenuChip() {
+    if (companion.isOpen() || document.querySelector('dialog[open]')) return;
+    menuChip.hidden = false;
+    const b = motion.box();
+    const w = menuChip.offsetWidth;
+    const h = menuChip.offsetHeight;
+    const vw = document.documentElement.clientWidth;
+    const headerBottom = document.getElementById('app-header')?.getBoundingClientRect().bottom || 0;
+    const fitX = (x) => Math.round(Math.min(vw - w - 8, Math.max(8, x)));
+    const fitY = (y) => Math.round(Math.max(headerBottom + 4, Math.min(window.innerHeight - h - 4, y)));
+    const candidates = [
+      { left: fitX((b.left + b.right) / 2 - w / 2), top: fitY(b.top - h - 8) },
+      { left: fitX(b.right + 6), top: fitY(b.top) },
+      { left: fitX(b.left - w - 6), top: fitY(b.top) },
+    ];
+    let best = candidates[0];
+    let bestHits = Infinity;
+    for (const c of candidates) {
+      const hits = world.obstruction({ left: c.left, top: c.top, right: c.left + w, bottom: c.top + h });
+      if (hits < bestHits) { best = c; bestHits = hits; }
+      if (hits === 0) break;
+    }
+    menuChip.style.left = `${best.left}px`;
+    menuChip.style.top = `${best.top}px`;
+    own.clearTimeout(chipTimer);
+    chipTimer = document.activeElement === menuChip ? 0 : own.setTimeout(hideMenuChip, MENU_CHIP_MS);
+  }
+  own.listen(menuChip, 'click', (event) => {
+    // From the keyboard (Enter/Space give detail 0) the menu takes focus; a pointer leaves focus where it is.
+    const fromKeyboard = event.detail === 0;
+    hideMenuChip();
+    companion.showMenu({ focus: fromKeyboard });
+  });
+  // While focused (keyboard) it stays; leaving it lets it go a moment later.
+  own.listen(menuChip, 'focus', () => { own.clearTimeout(chipTimer); chipTimer = 0; });
+  own.listen(menuChip, 'blur', () => { own.clearTimeout(chipTimer); chipTimer = own.setTimeout(hideMenuChip, 1500); });
+  own.listen(menuChip, 'keydown', (event) => { if (event.key === 'Escape') { event.stopPropagation(); hideMenuChip(); } });
   // Strokes: mouse or pen moving over Buddy with no button pressed (touch has no hover).
   let stroke = null; // { x, dir, travel, reversals, start }
   own.listen(hit, 'pointermove', (event) => {
@@ -998,6 +1229,7 @@ function enable() {
     drag.held = true;
     suppressClick = true;
     companion.close({ restoreFocus: false });
+    hideMenuChip();
     container.classList.add('is-dragging');
     try { hit.setPointerCapture(drag.id); } catch { /* the pointer is already gone */ }
     if (event) motion.moveHold(event.clientX, event.clientY, event.timeStamp);
@@ -1042,17 +1274,25 @@ function enable() {
   own.listen(window, 'blur', () => endDrag());
   own.listen(document, 'keydown', (event) => { if (event.key === 'Escape' && drag) endDrag(); });
 
+  // A tap (click) is a pat; the Menu button that appears beside Buddy opens its menu. With
+  // petting switched off a tap opens the menu directly, as before. The pointerdown before a
+  // tap on a sleeping Buddy has already woken it (noteInput): the tap then offers the menu.
   own.listen(hit, 'click', (event) => {
     if (suppressClick) { suppressClick = false; return; } // the press was a drag
-    if (motion.state === 'stretching') { companion.showMenu(); return; }
-    if (INTERRUPTIBLE.has(motion.state) && current.interact.interrupt) motion.perform('interrupt');
-    if (!motion.isResting()) return;
-    if (f().petting) {
-      const b = motion.box();
-      // Comforting takes the tap: the menu waits for the next one.
-      if (pat({ side: event.clientX < (b.left + b.right) / 2 ? -1 : 1 }) === 'comforted') return;
-    } else motion.perform('interact');
-    companion.showMenu();
+    if (!f().petting) {
+      if (motion.state === 'stretching') { companion.showMenu(); return; }
+      if (INTERRUPTIBLE.has(motion.state) && current.interact.interrupt) motion.perform('interrupt');
+      if (!motion.isResting()) return;
+      motion.perform('interact');
+      companion.showMenu();
+      return;
+    }
+    if (motion.state === 'stretching') { showMenuChip(); return; }
+    // A habit gives way to the pat (not a pat in progress: that continues the streak).
+    if (motion.state !== 'petted' && INTERRUPTIBLE.has(motion.state) && current.interact.interrupt) motion.perform('interrupt');
+    const b = motion.box();
+    pat({ side: event.clientX < (b.left + b.right) / 2 ? -1 : 1 });
+    showMenuChip(); // also when no pat was possible (paused, mid-habit): the menu is always one more tap away
   });
 
   // ---- Rescue: from any state to a stable pose on a clear spot ----
@@ -1076,7 +1316,7 @@ function enable() {
   }
 
   instance = {
-    own, motion, world, companion, character, container, shadow, fx, emotion,
+    own, motion, world, companion, character, container, shadow, fx, emotion, menuChip,
     rescue: rescueNow,
     update(next, previous) {
       current = next;
@@ -1088,6 +1328,7 @@ function enable() {
         environmentChanged(); // the collision box changed with the body
         checkSpot(200);
       }
+      applyMotionClass();
       if (next.motion !== previous.motion && isReduced() !== reducedBefore) onMotionPreference();
       if (next.quiet && !previous.quiet && companion.isOpen() && companion.kind() !== 'quiz') companion.close({ restoreFocus: false });
       if (!next.features.bubbles && previous.features.bubbles && companion.isOpen() && !['quiz', 'menu', 'info'].includes(companion.kind())) companion.close({ restoreFocus: false });
@@ -1107,10 +1348,14 @@ function enable() {
       growing: container.classList.contains('is-growing'), lastActivity,
       emotion: emotion.snapshot(), studying: studying(), studySignal: studySignal(), paused: isPaused(), pauseTimer: Boolean(pauseTimer),
       lastLanding, pendingCry, rememberedSpot: sessionMemory.spot, clickable: container.classList.contains('is-clickable'),
+      // V3.1
+      streak, pendingContent, pendingRest, recent: recent.slice(), reading: reading(), lastInputAgo: Date.now() - lastInput,
+      menuChip: !menuChip.hidden, motionClass: { reduced: container.classList.contains('is-reduced'), full: container.classList.contains('is-full-motion') },
+      traits: traits(), wearing: wearing(),
     }),
     /** Tests: the next n choices, `gapMs` apart, without performing them (scheduler state is restored). */
     planActivities(n, gapMs) {
-      const saved = { habitAt: { ...habitAt }, lastActivity, lastClimb };
+      const saved = { habitAt: { ...habitAt }, lastActivity, lastClimb, recent: recent.slice(), lastGlanceAt };
       const out = [];
       let now = Date.now();
       for (let i = 0; i < n; i++, now += gapMs) {
@@ -1122,6 +1367,8 @@ function enable() {
       Object.assign(habitAt, saved.habitAt);
       lastActivity = saved.lastActivity;
       lastClimb = saved.lastClimb;
+      recent = saved.recent;
+      lastGlanceAt = saved.lastGlanceAt;
       return out;
     },
     pat: (side) => pat({ side }),
@@ -1132,7 +1379,16 @@ function enable() {
       lastInput -= ms;
       lastKey -= ms;
       lastStudyAt -= ms;
+      lastReadAt -= ms;
     },
+    /** Tests: pretend the last quiz offer and fact were `ms` longer ago (so the next prompt is due). */
+    agePrompts(ms) {
+      lastQuiz -= ms;
+      lastFact -= ms;
+    },
+    /** Tests: as if the learner scrolled a lesson just now (when on a lesson route). */
+    noteReading: () => { if (onLessonRoute()) lastReadAt = Date.now(); return reading(); },
+    maybePrompt: () => maybePrompt(),
   };
 
   motion.start(sessionMemory.spot !== null || current.rest !== 'bottom' ? preferredX() : undefined);
@@ -1140,20 +1396,22 @@ function enable() {
   scheduleBlink();
   applyPause();
   // A welcome after a long break, once the first page has rendered.
-  own.setTimeout(() => { if (canPrompt({ spontaneous: true })) companion.maybeWelcome(); }, 2500);
+  own.setTimeout(() => { if (canPrompt({ spontaneous: true }) && !reading()) companion.maybeWelcome(); }, 2500);
 }
 
 function disable() {
   if (!instance) return;
   lifetime.disables++;
-  const { own, motion, companion, container, shadow, fx } = instance;
+  const { own, motion, companion, container, shadow, fx, menuChip } = instance;
   instance = null; // first: anything still in flight sees Buddy as gone
   companion.destroy();
   motion.stop();
+  if (menuChip.contains(document.activeElement)) document.getElementById('main')?.focus?.({ preventScroll: true });
   own.dispose();
   container.remove();
   shadow.remove();
   fx.remove();
+  menuChip.remove();
 }
 
 // ---- Test instrumentation (only with ?buddy-debug) -------------------------------------
@@ -1161,14 +1419,14 @@ function disable() {
 function debugApi() {
   return {
     snapshot() {
-      if (!instance) return { enabled: false, lifetime: { ...lifetime }, domNodes: document.querySelectorAll('.buddy, .buddy-shadow, .buddy-bubble, .buddy-fx').length };
+      if (!instance) return { enabled: false, lifetime: { ...lifetime }, domNodes: document.querySelectorAll('.buddy, .buddy-shadow, .buddy-bubble, .buddy-fx, .buddy-menu-chip').length };
       return {
         enabled: true,
         ...instance.motion.snapshot(),
         resources: instance.own.counts(),
         bubble: instance.companion.kind(),
         lifetime: { ...lifetime },
-        domNodes: document.querySelectorAll('.buddy, .buddy-shadow, .buddy-bubble, .buddy-fx').length,
+        domNodes: document.querySelectorAll('.buddy, .buddy-shadow, .buddy-bubble, .buddy-fx, .buddy-menu-chip').length,
         ...instance.debug(),
       };
     },
@@ -1216,5 +1474,9 @@ function debugApi() {
     pause: (ms) => settings.pause(ms),
     preferredX: (o) => instance?.preferredX(o),
     ageInput: (ms) => instance?.ageInput(ms),
+    // V3.1: reading-aware quiet, the scheduler's prompt step.
+    noteReading: () => instance?.noteReading(),
+    agePrompts: (ms) => instance?.agePrompts(ms),
+    maybePrompt: () => instance?.maybePrompt(),
   };
 }

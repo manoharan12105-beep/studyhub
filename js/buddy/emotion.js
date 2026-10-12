@@ -16,21 +16,31 @@
 // Every emotion has a bounded duration and its own cooldown, so nothing loops,
 // flickers or retriggers. Durations end on their own; nothing ever waits for
 // the learner to act.
+//
+// Continuity: strong feelings hand over to a calmer one instead of snapping
+// back to neutral (the `then` chain): fear → relief, tears → relief, dizziness
+// → relief, comfort → contentment. Every link is bounded and the last link
+// never has a follow-on, so a chain always ends.
 
 const RANK = {
   dizzy: 4, frightened: 4, crying: 4,
   comforted: 5, surprised: 5, playful: 5,
-  happy: 6, proud: 6, empathetic: 6,
-  curious: 7, thinking: 7,
+  happy: 6, proud: 6, empathetic: 6, relieved: 6,
+  curious: 7, thinking: 7, content: 7,
   sleepy: 8,
 };
 export const EMOTIONS = ['neutral', ...Object.keys(RANK)];
 /** Emotions a gentle pat can soothe (once Buddy has landed). */
 const SOOTHABLE = new Set(['frightened', 'crying', 'dizzy']);
-/** Emotions whose face moves (swirl, tremble, tears): they need animation frames. */
-const ANIMATED = new Set(['dizzy', 'frightened', 'crying', 'comforted']);
+/** Emotions a lucky escape (catching an edge) turns into relief. */
+const RELIEVABLE = new Set(['frightened', 'surprised', 'dizzy']);
+/** Emotions whose face moves (swirl, tremble, tears, a long exhale): they need animation frames. */
+const ANIMATED = new Set(['dizzy', 'frightened', 'crying', 'comforted', 'relieved']);
 // Seconds before the same emotion may be felt again (refreshing the one showing is always allowed).
-const COOLDOWN = { surprised: 3, happy: 2, proud: 6, empathetic: 4, curious: 8, thinking: 6, sleepy: 20, playful: 6, comforted: 1, crying: 12, frightened: 2, dizzy: 1 };
+const COOLDOWN = {
+  surprised: 3, happy: 2, proud: 6, empathetic: 4, curious: 8, thinking: 6, sleepy: 20, playful: 6, comforted: 1, crying: 12, frightened: 2, dizzy: 1,
+  relieved: 1, content: 2,
+};
 
 /**
  * deps: { own, now(): ms, onChange() (redraw), isReduced() }
@@ -72,10 +82,13 @@ export function createEmotion(deps) {
     }
     const duration = Math.max(200, Math.min(12_000, ms));
     lastAt[kind] = t;
-    if (refresh && !then) {
-      // Still feeling it: extend (never shorten), keep the start so the animation stays continuous.
-      active.until = Math.max(active.until, t + duration);
-      active.intensity = Math.max(active.intensity, intensity);
+    if (refresh) {
+      // Still feeling it: keep the start so the animation stays continuous. A plain refresh
+      // extends (never shortens); one that plans a follow-on sets the time left, as a new
+      // feeling would (a landing decides how much longer a mid-air fright lasts).
+      active.until = then ? t + duration : Math.max(active.until, t + duration);
+      active.intensity = Math.max(active.intensity, clampIntensity(intensity));
+      if (then) active.then = then;
     } else {
       active = { kind, start: t, until: t + duration, intensity: clampIntensity(intensity), then };
     }
@@ -87,12 +100,29 @@ export function createEmotion(deps) {
     return true;
   }
 
-  /** A gentle pat: fear, tears or dizziness give way to comfort. False when there is nothing to soothe. */
-  function comfort(ms = 1600) {
+  /**
+   * A gentle pat: fear, tears or dizziness give way to comfort (and `then`, a
+   * calmer afterglow). False when there is nothing to soothe.
+   */
+  function comfort(ms = 1600, then = null) {
     if (!active || !SOOTHABLE.has(active.kind)) return false;
     active.cancelled = true; // the planned follow-on (e.g. fear → tears) is skipped
     active = null;
-    return feel('comforted', { ms, force: true });
+    return feel('comforted', { ms, force: true, then });
+  }
+
+  /**
+   * A lucky escape (an edge caught on the way down): a fright, a startle or
+   * dizziness turns straight into relief; otherwise relief shows if nothing
+   * more important is showing. Tears are never cut short this way.
+   */
+  function relieve(ms = 1400) {
+    if (active && RELIEVABLE.has(active.kind)) {
+      active.cancelled = true;
+      active = null;
+      return feel('relieved', { ms, force: true });
+    }
+    return feel('relieved', { ms });
   }
 
   function clear() {
@@ -120,6 +150,7 @@ export function createEmotion(deps) {
   return {
     feel,
     comfort,
+    relieve,
     clear,
     current,
     overlay,
@@ -238,6 +269,30 @@ export function emotionPose(p, kind, ctx = {}) {
       p.eyes = 'wink';
       p.mouth = 'grin';
       p.brows = 'happy';
+      break;
+    case 'relieved': {
+      // "Phew": eyes close for a long exhale (the body sinks a little), then a soft smile.
+      const exhale = move && phase < 0.45;
+      const breath = exhale ? Math.sin((phase / 0.45) * Math.PI) : 0;
+      p.eyes = exhale ? 'closed' : 'open';
+      p.mouth = exhale ? 'small' : 'smile';
+      p.brows = exhale ? 'worried' : 'happy';
+      p.blush = Math.max(p.blush || 0, 0.45 * Math.min(1, k) * fade);
+      p.eyeY += exhale ? 0.5 : 0;
+      if (calm) {
+        p.sy *= 1 - 0.035 * breath * k;
+        p.armL = Math.min(p.armL, 10);
+        p.armR = Math.min(p.armR, 10);
+      }
+      break;
+    }
+    case 'content':
+      // Quiet happiness: softened eyes (they still blink), a small smile, warm cheeks.
+      p.eyeScale *= 0.86;
+      p.eyeY += 0.5;
+      p.mouth = 'smile';
+      p.brows = 'happy';
+      p.blush = Math.max(p.blush || 0, 0.6 * Math.min(1, k + 0.2) * fade);
       break;
     default:
       break;

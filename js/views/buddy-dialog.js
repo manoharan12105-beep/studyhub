@@ -31,14 +31,15 @@ const SECTIONS = [
   ['accessibility', 'Accessibility'],
   ['profiles', 'Profiles'],
 ];
-const FEELINGS = [['neutral', 'Calm'], ['happy', 'Happy'], ['curious', 'Curious'], ['dizzy', 'Dizzy'], ['frightened', 'Frightened'], ['crying', 'Crying'], ['comforted', 'Comforted'], ['sleepy', 'Sleepy']];
+const FEELINGS = [['neutral', 'Calm'], ['happy', 'Happy'], ['curious', 'Curious'], ['proud', 'Proud'], ['content', 'Content'], ['relieved', 'Relieved'],
+  ['dizzy', 'Dizzy'], ['frightened', 'Frightened'], ['crying', 'Crying'], ['comforted', 'Comforted'], ['sleepy', 'Sleepy']];
 const PERSONALITY_HINTS = {
-  gentle: 'Subtle movement, soft expressions, fewer optional reactions and prompts.',
-  playful: 'Varied idle habits, playful faces and bouncier (still bounded) reactions.',
-  curious: 'Looks around more and explores safe surfaces such as the sidebar edge.',
-  sleepy: 'Rests and yawns more, with sleepy expressions.',
-  energetic: 'Livelier idle poses and bigger celebrations for real learning milestones.',
-  custom: 'Your own mix: every control below and in the other sections is yours to set.',
+  gentle: 'Subtle movement, soft expressions, fewer optional reactions and prompts. Melts quickly when petted; a toss earns a relieved “phew”.',
+  playful: 'Varied idle habits, playful faces and bouncier (still bounded) reactions. Giggles when petted and hops for “again!” after a fun toss.',
+  curious: 'Looks around more and explores safe surfaces such as the sidebar edge. After a toss it looks back to where it flew from.',
+  sleepy: 'Rests, stays still and yawns more, with sleepy expressions. Melts quickly when petted; a toss leaves it dozy.',
+  energetic: 'Livelier idle poses and bigger celebrations for real learning milestones. Shakes off scares fastest and hops after a fun toss.',
+  custom: 'Your own mix: every control below and in the other sections is yours to set. Its reactions follow your petting, curiosity, recovery and jumping levels.',
 };
 const MOTION_HINTS = {
   system: 'Full movement, but calm whenever your device asks for reduced motion.',
@@ -324,7 +325,7 @@ function render(body) {
       check('interact.throw', 'Throw Buddy', 'Off: letting go just drops it'),
       check('interact.toss', 'Toss button', 'The “Toss Buddy” button above')),
     section('Petting',
-      check('features.petting', 'Petting reactions', 'A tap, or stroking back and forth over Buddy; a pat comforts it after a scare'),
+      check('features.petting', 'Petting reactions', 'A tap, or stroking back and forth over Buddy. A few pats in a row build up to a contented melt; a pat comforts it after a scare. After a tap, a small Menu button beside Buddy opens its menu (off: a tap opens the menu directly)'),
       level('petting', 'Petting sensitivity', 'High: one stroke is enough'),
       check('interact.interrupt', 'Clicks interrupt idle habits', 'Buddy stops a small gesture when you reach for it')));
 
